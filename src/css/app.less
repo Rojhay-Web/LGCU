@@ -1,4 +1,7 @@
 @mobile-device: ~"(max-width: 770px)";
+/* Header Sizes */
+@headerHeightBottom: 50px;
+
 /* Color Themes */
 @color1: rgba(21, 18, 128,1);
 .color1(@prop,@val){ @{prop}: rgba(21, 18, 128,@val) !important; }
@@ -21,10 +24,17 @@ body, html {
 *:focus { outline: none;}
 
 .app-body {
-    background-image: linear-gradient(to right, rgba(80, 78, 153,1) , rgba(80, 78, 153,0.7) 90%);
-    padding: 5% 5% 0;
+    background-image: linear-gradient(to right, rgba(80, 78, 153,0.7) , rgba(80, 78, 153,0.3) 90%);
+    padding: calc(100vh - @headerHeightBottom) 3% 0;
 }
-
+.app-header-body {
+    position: fixed; //absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+    z-index: 0;
+}
 .app-inner-body {
     width: 100%;
     min-height: 100vh;
@@ -34,8 +44,10 @@ body, html {
     -webkit-box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);     
 
-    margin-bottom: 20px;
+    margin-bottom:20px;
     background: @color3;
+    position: relative;
+    z-index: 2;
 }
 
 .footer {
