@@ -1,0 +1,29 @@
+/* Color Themes */
+/* Fonts */
+body,
+html {
+  margin: 0px !important;
+  color: #000000;
+  height: 100%;
+  font-size: 14px;
+}
+*:focus {
+  outline: none;
+}
+.app-body {
+  background-image: linear-gradient(to right, #504e99, rgba(80, 78, 153, 0.7) 90%);
+  padding: 5% 5% 0;
+}
+.app-inner-body {
+  width: 100%;
+  min-height: 100vh;
+  height: 500vh;
+  -moz-box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+  margin-bottom: 20px;
+  background: #504e99;
+}
+.footer {
+  padding: 30px 2%;
+}
