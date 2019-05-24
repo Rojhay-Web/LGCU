@@ -1,5 +1,21 @@
 import React, { Component } from 'react';
 
+/* Header */
+class UCHeader extends Component{
+    constructor(props) {
+        super(props);
+    }
+
+    componentDidMount(){}
+
+    render(){        
+        return(
+            <div>UC Header</div>
+        );
+    }
+}
+
+/* Body */
 class UC extends Component{
     constructor(props) {
         super(props);
@@ -14,4 +30,4 @@ class UC extends Component{
     }
 }
 
-export default UC;
+export {UC, UCHeader};

@@ -1,6 +1,9 @@
 @mobile-device: ~"(max-width: 770px)";
 /* Header Sizes */
-@headerHeightBottom: 50px;
+@navHeightMiniBottom: 49px;
+
+@navHeightTop: 31px;
+@navHeightBottom: 89px;
 
 /* Color Themes */
 @color1: rgba(21, 18, 128,1);
@@ -15,6 +18,9 @@
 /* Fonts */
 @font-size: 14px;
 
+/* Styles */
+@import "home.less";
+
 body, html { 
     margin: 0px !important;
     color: rgba(0,0,0,1);
@@ -25,7 +31,7 @@ body, html {
 
 .app-body {
     background-image: linear-gradient(to right, rgba(80, 78, 153,0.7) , rgba(80, 78, 153,0.3) 90%);
-    padding: calc(100vh - @headerHeightBottom) 3% 0;
+    padding: calc(100vh - @navHeightMiniBottom) 3% 0;
 }
 .app-header-body {
     position: fixed; //absolute;
@@ -34,6 +40,25 @@ body, html {
     height: 100vh;
     width: 100%;
     z-index: 0;
+
+    .header-cover {
+        position: absolute;
+        z-index: 2;
+        top:0;
+        left:0;
+        width: 100%;
+        height: 100%;
+        opacity:0;
+        background-image: linear-gradient(to right, rgba(133,131,184,1) , rgba(202,202,224,1) 100%);
+
+        &.appear { opacity:1; animation: background-appear 0.5s; }
+    }
+    
+    .headerCard {
+        width: 100%;
+        height: calc(100vh - @navHeightTop);
+        margin-top:@navHeightTop;
+    }
 }
 .app-inner-body {
     width: 100%;
@@ -52,4 +77,111 @@ body, html {
 
 .footer {
     padding: 30px 2%;
+}
+
+.app-nav {
+    z-index: 100;  
+    position: fixed; 
+    left:0; top:0;
+    width: 100%;
+
+    .navbar {
+        width: 100%;
+        &.nav-top {
+            padding:0px;
+            justify-content: flex-end;
+            .nav-item {
+                padding: 5px 20px;
+                color: rgba(255,255,255,1) !important;
+                border-left: 1px solid rgba(255,255,255,0.5); 
+                font-weight: bold;  
+                transition: .5s all ease-in-out;
+                &:hover { background: rgba(255,255,255,0.2); text-decoration: none;}
+                .c2 { color: @color2;}             
+            }           
+        }
+
+        &.nav-bottom {                                   
+            .navbar-brand {
+                height: 75px;
+                display: flex;
+                flex-direction: row;
+                color: rgba(255,255,255,1);
+                img { height: 100%;}
+                .textLogo { padding-left: 7px; padding-top: 7px; }
+            }
+            .collapse {
+                justify-content: flex-end;
+                .collapse-container { display: flex; }
+                .nav-item {
+                    color: rgba(0,0,0,1);
+                    font-weight: bold; 
+                    text-transform: uppercase;
+                    transition: .5s all ease-in-out;
+                    &:hover { color: rgba(255,255,255,1); text-decoration: none;}
+                }
+            }
+        }        
+    }
+
+    &.full-nav {               
+        .nav-top {
+            padding-left: calc(3% + 14px);
+            padding-right: calc(3% + 14px);
+        }
+        .nav-bottom { 
+            background-image: linear-gradient(rgba(255,255,255,0.5) , rgba(0,0,0,0) 70%); 
+            padding-left: calc(3% + 14px);
+            padding-right: calc(3% + 14px);
+
+            .collapse-container { display: none !important; } 
+        }
+    }
+    &.page-nav {
+        padding: 0px 3%;        
+        .nav-bottom { 
+            position: relative;
+            overflow: hidden;
+            height: @navHeightBottom;
+            background: rgba(255,255,255,0.5);
+            .collapse-container { animation: page-nav-slide 0.7s;}
+        }
+    }    
+}
+
+.inner-nav {        
+    .nav-bottom { 
+        background: rgba(255,255,255,0.5); 
+        .collapse {
+            justify-content: flex-end;
+            .nav-item {
+                color: rgba(0,0,0,1);
+                font-weight: bold; 
+                text-transform: uppercase;
+                transition: .5s all ease-in-out;
+                &:hover { color: rgba(255,255,255,1); text-decoration: none;}
+            }
+        }
+    }
+
+    &.hidden-nav { opacity: 0; }
+}
+
+/* Animation key frames */
+@keyframes page-nav-slide {
+    from {
+        margin-top: @navHeightBottom;
+    }
+    to {
+        margin-top: 0;
+    }
+}
+
+@keyframes background-appear {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }

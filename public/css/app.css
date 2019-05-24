@@ -1,6 +1,54 @@
 /* Header Sizes */
 /* Color Themes */
 /* Fonts */
+/* Styles */
+.homeHeader .header-card-container {
+  width: 100%;
+  height: 100%;
+}
+.homeHeader .header-card-container .cardImg {
+  position: relative;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+}
+.homeHeader .header-card-container .cardImg:before {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(to right, #151280, #257728 90%);
+  opacity: 0.5;
+}
+.homeHeader .header-card-container .cardImg img {
+  object-fit: cover;
+  width: 100%;
+  min-height: 100%;
+  -webkit-filter: grayscale(70%);
+  /* Safari 6.0 - 9.0 */
+  filter: grayscale(70%);
+}
+.homeHeader .header-card-container .frontInfo {
+  position: absolute;
+  top: 40%;
+  left: 7%;
+  color: #ffffff;
+  transform: translate(-7%, -40%);
+  width: 50%;
+  z-index: 2;
+  padding: 5%;
+}
+.homeHeader .header-card-container .frontInfo h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+.homeHeader .header-card-container .frontInfo h1 span {
+  display: block;
+}
+.homeHeader .header-card-container .frontInfo p {
+  font-size: 1.5rem;
+}
 body,
 html {
   margin: 0px !important;
@@ -13,7 +61,7 @@ html {
 }
 .app-body {
   background-image: linear-gradient(to right, rgba(80, 78, 153, 0.7), rgba(80, 78, 153, 0.3) 90%);
-  padding: calc(100vh - 50px) 3% 0;
+  padding: calc(100vh - 49px) 3% 0;
 }
 .app-header-body {
   position: fixed;
@@ -22,6 +70,25 @@ html {
   height: 100vh;
   width: 100%;
   z-index: 0;
+}
+.app-header-body .header-cover {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  background-image: linear-gradient(to right, #8583b8, #cacae0 100%);
+}
+.app-header-body .header-cover.appear {
+  opacity: 1;
+  animation: background-appear 0.5s;
+}
+.app-header-body .headerCard {
+  width: 100%;
+  height: calc(100vh - 31px);
+  margin-top: 31px;
 }
 .app-inner-body {
   width: 100%;
@@ -37,4 +104,121 @@ html {
 }
 .footer {
   padding: 30px 2%;
+}
+.app-nav {
+  z-index: 100;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+}
+.app-nav .navbar {
+  width: 100%;
+}
+.app-nav .navbar.nav-top {
+  padding: 0px;
+  justify-content: flex-end;
+}
+.app-nav .navbar.nav-top .nav-item {
+  padding: 5px 20px;
+  color: #ffffff !important;
+  border-left: 1px solid rgba(255, 255, 255, 0.5);
+  font-weight: bold;
+  transition: 0.5s all ease-in-out;
+}
+.app-nav .navbar.nav-top .nav-item:hover {
+  background: rgba(255, 255, 255, 0.2);
+  text-decoration: none;
+}
+.app-nav .navbar.nav-top .nav-item .c2 {
+  color: #257728;
+}
+.app-nav .navbar.nav-bottom .navbar-brand {
+  height: 75px;
+  display: flex;
+  flex-direction: row;
+  color: #ffffff;
+}
+.app-nav .navbar.nav-bottom .navbar-brand img {
+  height: 100%;
+}
+.app-nav .navbar.nav-bottom .navbar-brand .textLogo {
+  padding-left: 7px;
+  padding-top: 7px;
+}
+.app-nav .navbar.nav-bottom .collapse {
+  justify-content: flex-end;
+}
+.app-nav .navbar.nav-bottom .collapse .collapse-container {
+  display: flex;
+}
+.app-nav .navbar.nav-bottom .collapse .nav-item {
+  color: #000000;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: 0.5s all ease-in-out;
+}
+.app-nav .navbar.nav-bottom .collapse .nav-item:hover {
+  color: #ffffff;
+  text-decoration: none;
+}
+.app-nav.full-nav .nav-top {
+  padding-left: calc(3% + 14px);
+  padding-right: calc(3% + 14px);
+}
+.app-nav.full-nav .nav-bottom {
+  background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(0, 0, 0, 0) 70%);
+  padding-left: calc(3% + 14px);
+  padding-right: calc(3% + 14px);
+}
+.app-nav.full-nav .nav-bottom .collapse-container {
+  display: none !important;
+}
+.app-nav.page-nav {
+  padding: 0px 3%;
+}
+.app-nav.page-nav .nav-bottom {
+  position: relative;
+  overflow: hidden;
+  height: 89px;
+  background: rgba(255, 255, 255, 0.5);
+}
+.app-nav.page-nav .nav-bottom .collapse-container {
+  animation: page-nav-slide 0.7s;
+}
+.inner-nav .nav-bottom {
+  background: rgba(255, 255, 255, 0.5);
+}
+.inner-nav .nav-bottom .collapse {
+  justify-content: flex-end;
+}
+.inner-nav .nav-bottom .collapse .nav-item {
+  color: #000000;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: 0.5s all ease-in-out;
+}
+.inner-nav .nav-bottom .collapse .nav-item:hover {
+  color: #ffffff;
+  text-decoration: none;
+}
+.inner-nav.hidden-nav {
+  opacity: 0;
+}
+/* Animation key frames */
+@keyframes page-nav-slide {
+  from {
+    margin-top: 89px;
+  }
+  to {
+    margin-top: 0;
+  }
+}
+@keyframes background-appear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
