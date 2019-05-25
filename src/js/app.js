@@ -97,7 +97,31 @@ class App extends Component{
 
                     {/* Footer */}
                     <div className="footer">
-                        <div>Footer</div>
+                        <div className="footer-section">
+                            <div className="footer-logo">
+                                <img className="headerLogo" src={logo}/>
+                                <div className="textLogo">
+                                    <div className="logoLine">Lenkeson Global</div>
+                                    <div className="logoLine">Christian University</div>
+                                </div>
+                            </div>
+                            <div class="footer-info">704.953.1609</div>
+                            <div class="footer-info">info@lenkesongcu.org</div>
+                        </div>
+                        <div className="footer-section">
+                            <div className="footer-link-section">
+                                <Link className="footer-link" to="/">Admissions</Link>
+                                <Link className="footer-link" to="/">Academics</Link>
+                                <Link className="footer-link" to="/">Donate</Link>
+                                <Link className="footer-link" to="/">Apply</Link>
+                                <Link className="footer-link" to="/">Contact Us</Link>
+                                <Link className="footer-link" to="/">myLGCU</Link>
+                            </div>
+                        </div>
+
+                        <div className="footer-section full">
+                            <p className="nonDiscrimination">Lenkeson Global Christian University is a Christ-centered institution of higher learning and is committed to provide cutting-edge academic education to men and women without discriminating against any individual on the basis of gender, race, color, religion, national origin, and intellectually and physically challenged individuals. However, the university reserves the right to refuse admission to persons or hire faculty or staff who do not support its values. LGCU is an equal opportunity employer.</p>
+                        </div>
                     </div>
                 </div>
             </Router>

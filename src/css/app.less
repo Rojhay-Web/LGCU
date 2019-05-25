@@ -17,15 +17,21 @@
 
 /* Fonts */
 @font-size: 14px;
+@import url('https://fonts.googleapis.com/css?family=Alike|Reem+Kufi|Yantramanav:100,300,400,700,900');
 
 /* Styles */
 @import "home.less";
+
 
 body, html { 
     margin: 0px !important;
     color: rgba(0,0,0,1);
     height: 100%;
     font-size: @font-size;
+
+    //font-family: 'Alike', serif;
+    //font-family: 'Reem Kufi', sans-serif;
+    font-family: 'Yantramanav', sans-serif;
 }
 *:focus { outline: none;}
 
@@ -34,7 +40,7 @@ body, html {
     padding: calc(100vh - @navHeightMiniBottom) 3% 0;
 }
 .app-header-body {
-    position: fixed; //absolute;
+    position: fixed;
     top: 0;
     left: 0;
     height: 100vh;
@@ -43,7 +49,7 @@ body, html {
 
     .header-cover {
         position: absolute;
-        z-index: 2;
+        z-index: 1;
         top:0;
         left:0;
         width: 100%;
@@ -51,7 +57,7 @@ body, html {
         opacity:0;
         background-image: linear-gradient(to right, rgba(133,131,184,1) , rgba(202,202,224,1) 100%);
 
-        &.appear { opacity:1; animation: background-appear 0.5s; }
+        &.appear { z-index: 3; opacity:1; animation: background-appear 0.5s; }
     }
     
     .headerCard {
@@ -73,10 +79,56 @@ body, html {
     background: @color3;
     position: relative;
     z-index: 2;
+
+    .inner-page-body {
+        margin: 20px 0px;
+    }
 }
 
 .footer {
+    position: relative;
     padding: 30px 2%;
+    display: flex;
+    flex-direction: row;
+    color: rgba(255,255,255,1);
+    justify-content: space-between;
+    flex-wrap: wrap;
+    font-family: 'Reem Kufi', sans-serif;
+
+    .footer-section {
+        width: 40%;
+        &.full { width: 100%;}
+        .footer-logo {
+            height: 75px;
+            display: flex;
+            flex-direction: row;
+            margin-bottom: 20px;
+
+            img { height: 100%;}
+            .textLogo { padding-left: 7px; padding-top: 7px; font-size: 21px; }
+        }
+        .footer-info {
+            font-size: 1.2rem;
+            margin-left: 7px;
+        }
+        .footer-link-section {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            .footer-link { 
+                width: 33%; 
+                padding: 10px;
+                color: rgba(255,255,255,1);
+                font-size: 1.5rem;
+            }
+        }
+
+        .nonDiscrimination {
+            font-size: 1rem;
+            margin-top: 30px;
+            color: rgba(100,100,100,1);
+        }
+    }
 }
 
 .app-nav {
@@ -107,8 +159,9 @@ body, html {
                 display: flex;
                 flex-direction: row;
                 color: rgba(255,255,255,1);
+                font-family: 'Reem Kufi', sans-serif;
                 img { height: 100%;}
-                .textLogo { padding-left: 7px; padding-top: 7px; }
+                .textLogo { padding-left: 10px; padding-top: 7px; font-size: 21px; line-height: 25px; }
             }
             .collapse {
                 justify-content: flex-end;
@@ -143,7 +196,8 @@ body, html {
             position: relative;
             overflow: hidden;
             height: @navHeightBottom;
-            background: rgba(255,255,255,0.5);
+            background: rgba(255,255,255,0.7);
+            .navbar-brand { color: rgba(0,0,0,1); }
             .collapse-container { animation: page-nav-slide 0.7s;}
         }
     }    
@@ -165,6 +219,55 @@ body, html {
     }
 
     &.hidden-nav { opacity: 0; }
+}
+/* Attributes */
+.lrgTitle {
+    position: relative;
+    color: rgba(255,255,255,1);
+    font-size: 3rem;
+    font-weight: 100;
+    margin-top: 6rem;
+
+    &:before {
+        position:absolute;
+        top:-3.5rem;
+        left: 20px;
+        color: rgba(200,200,200,0.2);
+        font-weight: 400;
+        content: attr(data-text);
+        font-size: 6rem;
+    }
+
+    &.ctr { 
+        text-align: center;
+        &:before { left: 50%; transform: translateX(-50%); }
+    }
+}
+
+.lBtn {
+    padding: 5px 15px;
+    color: rgba(255,255,255,1);
+    background: rgba(100,100,100,1);
+    font-size: 1.2rem;
+    font-weight: 100; 
+    margin-top: 15px;
+    border-radius: 0;
+    -moz-box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+
+    .btn-icon { font-size: 1.1rem; padding-left: 7px; transition: 0.5s all ease-in-out; }
+
+    &:hover { 
+        color: rgba(255,255,255,1) !important; 
+        text-decoration: none;
+        .btn-icon { padding-left: 14px; }
+    }
+
+    &.c1 { background: @color1;}
+    &.c2 { background: @color2;}
+    &.c3 { background: @color3;}
+    &.white { background: rgba(255,255,255,0); border: 1px solid rgba(255,255,255,1);}
 }
 
 /* Animation key frames */
