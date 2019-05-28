@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from 'react-responsive-carousel';
 
 /* Images */
 import back1 from '../../assets/temp/back1.jpeg';
@@ -62,6 +64,13 @@ class Home extends Component{
                 {value:35, valueSub:"%", text:"of the college student population are veterans, working parents and perpetual students." },
                 {value:1.09, valueSub:"Million", text:"international students are enrolled in United States colleges" },
                 {value:33, valueSub:"%", text:"of all college students are taking at least one course online" }
+            ],
+            testimonials: [
+                {name:"Jane Doe", title:"Student", text:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."},
+                {name:"John Smith", title:"Student", text:"Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."},
+                {name:"Tim Plane", title:"Teacher", text:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."},
+                {name:"Mark Jackson", title:"Student", text:"Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."},
+                {name:"Michael Wilson", title:"Alumni", text:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."}
             ]
         }
 
@@ -151,6 +160,16 @@ class Home extends Component{
                                 <a href="/" className="lBtn c2"><span>Contact Us</span><i className="btn-icon fas fa-at"></i></a>
                             </div>
                         </div>
+                    </div>
+                </section>
+
+                <section className="home-section alternate">
+                    <div className="section-container">
+                        <Carousel className="testimonial-carousel" showThumbs={false} showStatus={false} interval={7000} infiniteLoop autoPlay>
+                            {this.state.testimonials.map((item,i) =>
+                                <div className="testimonial-item"></div>
+                            )}
+                        </Carousel>
                     </div>
                 </section>
             </div>
