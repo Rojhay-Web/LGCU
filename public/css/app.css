@@ -92,10 +92,16 @@
   font-size: 1.5rem;
   margin-bottom: 30px;
 }
+.homePage .home-section {
+  position: relative;
+  overflow: hidden;
+}
 .homePage .home-section + .home-section {
   margin-top: 50px;
 }
 .homePage .home-section .section-container {
+  position: relative;
+  z-index: 5;
   padding: 10px 5%;
 }
 .homePage .home-section .section-container .lrgTitle {
@@ -143,6 +149,7 @@
 .homePage .home-section .section-container .studyTabs .tabContent {
   padding: 50px 20px 30px;
   font-size: 1.5rem;
+  line-height: 3rem;
   color: #ffffff;
   font-weight: 100;
   display: flex;
@@ -165,7 +172,7 @@
 .homePage .home-section .section-container .facts-container {
   display: flex;
   flex-direction: row;
-  padding: 50px 0px;
+  padding: 70px 7%;
 }
 .homePage .home-section .section-container .facts-container .factItem {
   padding: 30px 20px;
@@ -176,7 +183,7 @@
   flex-direction: column;
 }
 .homePage .home-section .section-container .facts-container .factItem .item-number .number {
-  font-size: 100px;
+  font-size: 75px;
   font-weight: 300;
   line-height: 100px;
 }
@@ -207,7 +214,7 @@
   border: 2px solid #ffffff;
 }
 .homePage .home-section .section-container .split-section .multi-img-container .sm {
-  width: 30%;
+  width: 40%;
   position: absolute;
   right: 0;
   bottom: 0;
@@ -221,6 +228,57 @@
   font-size: 1.8rem;
   color: #ffffff;
   font-weight: 100;
+}
+.homePage .home-section .section-container .testimonial-carousel .carousel .slider-wrapper .slider .slide {
+  background: rgba(0, 0, 0, 0);
+}
+.homePage .home-section .section-container .testimonial-carousel .carousel .control-arrow:hover {
+  background: rgba(0, 0, 0, 0) !important;
+}
+.homePage .home-section .section-container .testimonial-carousel .carousel .control-arrow:hover:before {
+  color: #151280 !important;
+}
+.homePage .home-section .section-container .testimonial-carousel .testimonial-item {
+  text-align: center;
+  padding: 30px 10% 70px;
+  font-family: 'Reem Kufi', sans-serif;
+}
+.homePage .home-section .section-container .testimonial-carousel .testimonial-item p {
+  font-size: 1.7rem;
+}
+.homePage .home-section .section-container .testimonial-carousel .testimonial-item .testimonial-title {
+  font-size: 1rem;
+  color: #151280;
+  font-weight: bold;
+}
+.homePage .home-section .section-container .testimonial-carousel .testimonial-item .testimonial-title span {
+  font-style: italic;
+}
+.homePage .home-section .back-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 100%;
+  object-fit: cover;
+  opacity: 0.2;
+  min-height: 100%;
+}
+.homePage .home-section .back-img:after {
+  content: '';
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0.2;
+  background: #ffffff;
+}
+.homePage .home-section .back-img img {
+  width: 110%;
+  min-height: 100%;
+  -webkit-filter: grayscale(70%);
+  filter: grayscale(70%);
 }
 .homePage .home-section.alternate {
   background: rgba(255, 255, 255, 0.7);
@@ -282,7 +340,6 @@ html {
 }
 .app-inner-body .inner-page-body {
   margin: 20px 0px;
-  padding-bottom: 50px;
 }
 .footer {
   position: relative;
@@ -463,6 +520,24 @@ html {
 .lrgTitle.ctr:before {
   left: 50%;
   transform: translateX(-50%);
+}
+.lrgTitle.c1 {
+  color: #151280;
+}
+.lrgTitle.c1:before {
+  color: rgba(21, 18, 128, 0.2) !important;
+}
+.lrgTitle.c2 {
+  color: #257728;
+}
+.lrgTitle.c2:before {
+  color: rgba(37, 119, 40, 0.2) !important;
+}
+.lrgTitle.c3 {
+  color: #504e99;
+}
+.lrgTitle.c3:before {
+  color: rgba(80, 78, 153, 0.2) !important;
 }
 .lBtn {
   padding: 5px 15px;

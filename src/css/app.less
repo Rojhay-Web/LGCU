@@ -82,7 +82,7 @@ body, html {
 
     .inner-page-body {
         margin: 20px 0px;
-        padding-bottom: 50px;
+        //padding-bottom: 50px;
     }
 }
 
@@ -243,6 +243,9 @@ body, html {
         text-align: center;
         &:before { left: 50%; transform: translateX(-50%); }
     }
+    &.c1 { color:@color1; &:before { .color1(color, 0.2);}}
+    &.c2 { color:@color2; &:before { .color2(color, 0.2);}}
+    &.c3 { color:@color3; &:before { .color3(color, 0.2);}}
 }
 
 .lBtn {

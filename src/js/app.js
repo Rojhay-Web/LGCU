@@ -105,8 +105,8 @@ class App extends Component{
                                     <div className="logoLine">Christian University</div>
                                 </div>
                             </div>
-                            <div class="footer-info">704.953.1609</div>
-                            <div class="footer-info">info@lenkesongcu.org</div>
+                            <div className="footer-info">704.953.1609</div>
+                            <div className="footer-info">info@lenkesongcu.org</div>
                         </div>
                         <div className="footer-section">
                             <div className="footer-link-section">
