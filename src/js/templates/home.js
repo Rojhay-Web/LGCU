@@ -63,7 +63,7 @@ class Home extends Component{
                 {title:"Theology & Biblical Studies", icon:"fas fa-bible", img:img1, link:"/", description:"The School of Theology and Biblical Studies is designed to prepare men and women in the disciplines of biblical and theological studies by equipping them with the necessary tools to become transformative servant-leaders in local church ministries, the marketplace, global and strategic missions. "}
             ],
             facts:[
-                {value:35, valueSub:"%", text:"Of the college student population are veterans, working parents and perpetual students." },
+                {value:35, valueSub:"%", text:"Of the college student population is veterans, working parents and perpetual students." },
                 {value:1.09, valueSub:"Million", text:"International students are enrolled in United States colleges" },
                 {value:33, valueSub:"%", text:"Of all college students are taking at least one course online" }
             ],
@@ -97,11 +97,45 @@ class Home extends Component{
     render(){        
         return(
             <div className="inner-page-body homePage">
-                <section className="home-section">
+                {/*<section className="home-section">
                     <div className="section-container">
                         <h2 className="lrgTitle" data-text="About LGCU">About LGCU</h2>
                         <p className="section-txt">Lenkeson Global Christian University is a leading online higher learning institution, established to meet the academic and professional needs of college traditional age and working adults, to award associate, baccalaureate, master's, and doctorate degrees.</p>
                     </div>
+                </section>*/}
+                <section className="home-section">
+                    <div className="section-container">
+                        <div className="split-section">
+                            <div className="multi-img-container">
+                                <img className="multi-img lrg" src={img1} />
+                                <img className="multi-img sm" src={img2} />
+                            </div>
+
+                            <div className="split-content">
+                                <h2 className="lrgTitle" data-text="Why LGCU">Why LGCU</h2>
+                                <p>At LGCU, learners and faculty are engaged in academic and professional learning that is centered on developing and empowering working professionals to succeed in church ministries and other professional fields.</p>
+                                <a href="/" className="lBtn c2"><span>Contact Us</span><i className="btn-icon fas fa-at"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section className="home-section alternate patterned">
+                    <div className="section-container">
+                        <div className="facts-container">
+                            {this.state.facts.map((item,i) => (
+                                <div className="factItem" key={i}>
+                                    <div className="item-number">
+                                        <span className="number">{item.value}</span>
+                                        <span className="itemSub">{item.valueSub}</span>
+                                    </div>
+                                    <div className="item-text">
+                                        <p>{item.text}</p>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>                    
                 </section>
 
                 <section className="home-section">
@@ -128,48 +162,13 @@ class Home extends Component{
                             </div>
                         </div>
                     </div>
-                </section>
-
-                <section className="home-section alternate">
+                </section>               
+                
+                <section className="home-section alternate patterned">
                     <div className="section-container">
-                        <div className="facts-container">
-                            {this.state.facts.map((item,i) => (
-                                <div className="factItem" key={i}>
-                                    <div className="item-number">
-                                        <span className="number">{item.value}</span>
-                                        <span className="itemSub">{item.valueSub}</span>
-                                    </div>
-                                    <div className="item-text">
-                                        <p>{item.text}</p>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>                    
-                </section>
+                        <h2 className="lrgTitle ctr c2" data-text="Testimonials">Testimonials</h2>
 
-                <section className="home-section">
-                    <div className="section-container">
-                        <div className="split-section">
-                            <div className="multi-img-container">
-                                <img className="multi-img lrg" src={img1} />
-                                <img className="multi-img sm" src={img2} />
-                            </div>
-
-                            <div className="split-content">
-                                <h2 className="lrgTitle" data-text="Why LGCU">Why LGCU</h2>
-                                <p>At LGCU, learners and faculty are engaged in academic and professional learning that is centered on developing and empowering working professionals to succeed in church ministries and other professional fields.</p>
-                                <a href="/" className="lBtn c2"><span>Contact Us</span><i className="btn-icon fas fa-at"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <section className="home-section alternate">
-                    <div className="section-container">
-                        <h2 className="lrgTitle ctr c1" data-text="Testimonials">Testimonials</h2>
-
-                        <Carousel className="testimonial-carousel" showThumbs={false} showStatus={false} interval={7000} infiniteLoop>
+                        <Carousel className="testimonial-carousel" showThumbs={false} showStatus={false} interval={7000} infiniteLoop autoPlay>
                             {this.state.testimonials.map((item,i) =>
                                 <div className="testimonial-item" key={i}>
                                     <p>"{item.text}"</p>
@@ -178,7 +177,7 @@ class Home extends Component{
                             )}
                         </Carousel>
                     </div>
-                    <div className="back-img"><img src={back4}/></div>
+                    {/*<div className="back-img"><img src={back4}/></div>*/}
                 </section>
             </div>
         );
