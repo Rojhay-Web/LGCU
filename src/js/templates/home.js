@@ -5,6 +5,9 @@ import React, { Component } from 'react';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 
+/* Components */
+import TABS from './components/tabs';
+
 /* Images */
 import logo from '../../assets/LGCULogo.png';
 
@@ -170,7 +173,7 @@ class Home extends Component{
                     <div className="section-container">
                         <h2 className="lrgTitle ctr" data-text="Areas Of Study">Areas Of Study</h2>
 
-                        <div className="studyTabs">
+                        {/*<div className="studyTabs">
                             <div className="tabPanel">                                
                                 {this.state.studyAreas.map((item,i) => (
                                     <div className={"tabItem" + (this.state.selectedId == i ? " selected" : "")} key={i} onClick={() => this.changeStudyArea(i)}>
@@ -188,7 +191,8 @@ class Home extends Component{
                                 </div>
                                 <div className="img-container"><img src={this.state.studyAreas[this.state.selectedId].img} /></div>
                             </div>
-                        </div>
+                        </div>*/}
+                        <TABS list={this.state.studyAreas} />
                     </div>
                 </section>               
                 
