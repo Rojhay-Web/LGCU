@@ -168,6 +168,9 @@
   height: 100%;
   object-fit: cover;
   border: 2px solid #ffffff;
+  -moz-box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
 }
 .homePage .home-section .section-container .studyTabs .tabContent .content-info {
   flex: 1;
@@ -216,13 +219,21 @@
   width: 100%;
   object-fit: cover;
   border: 2px solid #ffffff;
+  transform: scaleX(-1);
+  -moz-box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
 }
 .homePage .home-section .section-container .split-section .multi-img-container .sm {
   width: 40%;
   position: absolute;
   right: 0;
   bottom: 0;
+  background: #ffffff;
   border: 2px solid #ffffff;
+  -moz-box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
 }
 .homePage .home-section .section-container .split-section .split-content {
   margin-left: 30px;

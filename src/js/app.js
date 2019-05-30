@@ -135,16 +135,12 @@ class App extends Component{
 
             if(height <= 95) { 
                 if(!this.state.navChange){               
-                    this.setState({navChange: true }, () =>{
-                        console.log("In Change");
-                    });
+                    this.setState({navChange: true });
                 }
             }
             else {
                 if(this.state.navChange){
-                    this.setState({navChange: false }, () =>{
-                        console.log("Out Change");
-                    });
+                    this.setState({navChange: false });
                 }
             }
         }
@@ -154,10 +150,10 @@ class App extends Component{
     }
 
     componentDidMount(){
-        window.addEventListener('scroll', this.listenToScroll)
+        window.addEventListener('scroll', this.listenToScroll);
     }
     componentWillUnmount() {
-        window.removeEventListener('scroll', this.listenToScroll)
+        window.removeEventListener('scroll', this.listenToScroll);
     }
 }
 
