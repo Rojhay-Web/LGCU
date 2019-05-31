@@ -189,7 +189,10 @@
                     p { font-size: 1.8rem; color: rgba(255,255,255,1); font-weight: 100; margin-bottom: 20px; line-height: 3.2rem;}
                 }
 
-                @media @mobile-device { flex-direction: column; }
+                @media @mobile-device { 
+                    flex-direction: column;
+                    .split-content { p { font-size: 1.5rem; line-height: 2.4rem; }}
+                }
             }
 
             .testimonial-carousel {

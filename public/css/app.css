@@ -281,6 +281,10 @@
   .homePage .home-section .section-container .split-section {
     flex-direction: column;
   }
+  .homePage .home-section .section-container .split-section .split-content p {
+    font-size: 1.5rem;
+    line-height: 2.4rem;
+  }
 }
 .homePage .home-section .section-container .testimonial-carousel .carousel .slider-wrapper .slider .slide {
   background: rgba(0, 0, 0, 0);
@@ -372,19 +376,22 @@ html {
   outline: none;
 }
 .app-body {
+  position: relative;
+  z-index: 900;
   background-image: linear-gradient(to right, rgba(80, 78, 153, 0.7), rgba(80, 78, 153, 0.3) 90%);
   padding: calc(100vh - 49px) 3% 0;
 }
 @media (max-width: 770px) {
   .app-body {
     padding: 0px;
+    width: 100%;
   }
 }
 .app-header-body {
   position: fixed;
   top: 0;
   left: 0;
-  height: calc(100vh - 31px);
+  height: 100vh;
   width: 100%;
   z-index: 0;
 }
@@ -411,6 +418,7 @@ html {
 @media (max-width: 770px) {
   .app-header-body {
     position: relative;
+    height: calc(100vh - 31px);
   }
 }
 .app-inner-body {
@@ -530,6 +538,15 @@ html {
   font-size: 21px;
   line-height: 25px;
 }
+.app-nav .navbar.nav-bottom .navbar-toggler {
+  color: #ffffff;
+  font-size: 24px;
+  padding-right: 0px;
+  padding-left: 0px;
+}
+.app-nav .navbar.nav-bottom .navbar-toggler:focus {
+  outline: none !important;
+}
 .app-nav .navbar.nav-bottom .collapse {
   justify-content: flex-end;
 }
@@ -537,26 +554,50 @@ html {
   display: flex;
 }
 .app-nav .navbar.nav-bottom .collapse .nav-item {
-  color: #000000;
-  font-weight: bold;
+  color: #ffffff;
+  font-size: 1.15rem;
   text-transform: uppercase;
   transition: 0.5s all ease-in-out;
+  position: relative;
+}
+.app-nav .navbar.nav-bottom .collapse .nav-item:after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  margin-top: 1px;
+  transition: 0.5s all ease-in-out;
+  opacity: 0;
+  background-color: #ffffff;
 }
 .app-nav .navbar.nav-bottom .collapse .nav-item:hover {
-  color: #ffffff;
   text-decoration: none;
+}
+.app-nav .navbar.nav-bottom .collapse .nav-item:hover:after {
+  width: 100%;
+  opacity: 1;
 }
 .app-nav.full-nav .nav-top {
   padding-left: calc(3% + 14px);
   padding-right: calc(3% + 14px);
 }
 .app-nav.full-nav .nav-bottom {
-  background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(0, 0, 0, 0) 70%);
   padding-left: calc(3% + 14px);
   padding-right: calc(3% + 14px);
 }
 .app-nav.full-nav .nav-bottom .collapse-container {
   display: none !important;
+}
+@media (max-width: 770px) {
+  .app-nav.full-nav .nav-top {
+    padding: 0px;
+  }
+  .app-nav.full-nav .nav-bottom {
+    background: rgba(50, 50, 50, 0.2);
+    padding: 0.5rem 1rem;
+  }
 }
 .app-nav.page-nav {
   padding: 0px 3%;
@@ -565,10 +606,10 @@ html {
   position: relative;
   overflow: hidden;
   height: 89px;
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(50, 50, 50, 0.2);
 }
 .app-nav.page-nav .nav-bottom .navbar-brand {
-  color: #000000;
+  color: #ffffff;
 }
 .app-nav.page-nav .nav-bottom .collapse-container {
   animation: page-nav-slide 0.7s;
@@ -579,20 +620,36 @@ html {
   }
 }
 .inner-nav .nav-bottom {
-  background: rgba(255, 255, 255, 0.5);
+  background: #343a40;
 }
 .inner-nav .nav-bottom .collapse {
   justify-content: flex-end;
 }
 .inner-nav .nav-bottom .collapse .nav-item {
-  color: #000000;
-  font-weight: bold;
+  color: #ffffff;
+  font-size: 1.15rem;
   text-transform: uppercase;
   transition: 0.5s all ease-in-out;
+  position: relative;
+}
+.inner-nav .nav-bottom .collapse .nav-item:after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  margin-top: 1px;
+  transition: 0.5s all ease-in-out;
+  opacity: 0;
+  background-color: #ffffff;
 }
 .inner-nav .nav-bottom .collapse .nav-item:hover {
-  color: #ffffff;
   text-decoration: none;
+}
+.inner-nav .nav-bottom .collapse .nav-item:hover:after {
+  width: 100%;
+  opacity: 1;
 }
 .inner-nav.hidden-nav {
   opacity: 0;
@@ -665,7 +722,7 @@ html {
 .lBtn .btn-icon {
   font-size: 1.1rem;
   padding-left: 7px;
-  transition: 0.5s all ease-in-out;
+  transition: 0.3s all ease-in-out;
 }
 .lBtn:hover {
   color: #ffffff !important;
@@ -715,7 +772,7 @@ html {
   color: #504e99;
   border-color: #9696c8;
 }
-.tab .tabs .tabItem:hover {
+.tab .tabs .tabItem:hover:not(.current) {
   color: #c8c8c8;
   border-color: #c8c8c8;
 }
@@ -741,6 +798,7 @@ html {
   }
   .tab .tabs .tabItem .studyicon {
     margin-bottom: 2px;
+    font-size: 2rem;
   }
 }
 .tab .tab-content {
@@ -801,6 +859,75 @@ html {
   .tab .tab-content {
     padding-top: 20px;
     line-height: 2rem;
+  }
+}
+/* Icon Overwrite */
+.fa-times:before {
+  content: "\00d7" !important;
+}
+/* Mobile Nav */
+.noscroll {
+  overflow: hidden;
+}
+.nav-body {
+  position: relative;
+  overflow-x: hidden;
+}
+.sidenav-container {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 100vw;
+  z-index: 1001;
+  width: 100vw;
+  height: 100vh;
+  background: #343a40;
+  transition: 0.5s all ease-in-out;
+  padding: 89px 15% 20px;
+  color: #ffffff;
+}
+.sidenav-container .nav-close {
+  position: absolute;
+  top: 40px;
+  right: 20px;
+  font-size: 40px;
+  opacity: 0;
+  color: #ffffff;
+}
+.sidenav-container .sidenav-section {
+  display: flex;
+  flex-direction: column;
+}
+.sidenav-container .sidenav-section .sidenav-link {
+  font-size: 25px;
+  color: #ffffff !important;
+}
+.sidenav-container .sidenav-section .sidenav-header-link {
+  border: 3px solid rgba(255, 255, 255, 0.5);
+  text-align: center;
+  display: block;
+  padding: 2px;
+  font-size: 20px;
+  color: #ffffff !important;
+}
+.sidenav-container .sidenav-section .sidenav-header-link + .sidenav-header-link {
+  margin-top: 7px;
+}
+.sidenav-container .sidenav-section + .sidenav-section {
+  margin-top: 40px;
+}
+.sidenav-container.active {
+  left: 0;
+}
+.sidenav-container.active .nav-close {
+  animation-name: background-appear;
+  animation-duration: 1.5s;
+  animation-delay: 0.7s;
+  animation-fill-mode: forwards;
+}
+@media (max-width: 770px) {
+  .sidenav-container {
+    display: block;
   }
 }
 /* Animation key frames */
