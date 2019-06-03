@@ -1,0 +1,115 @@
+{
+    "Undergraduate Studies":{
+        "colorTheme":"",
+        "description":"",
+        "degrees":{
+            "associates":[
+                {"title":"Accounting"},
+                {"title":"Business Administration"},
+                {"title":"Child Development Education"},
+                {"title":"Computer Information Systems"},
+                {"title":"Criminal Justice"},
+                {"title":"Education"},
+                {"title":"Psychology"}
+            ],
+            "bachelors":[
+                {"title":"Accounting"},
+                {"title":"Business Administration"},
+                {"title":"Child Development Education"},
+                {"title":"Computer Information Systems"},
+                {"title":"Criminal Justice"},
+                {"title":"Education"},
+                {"title":"Psychology"},
+                {"title":"Secondary Education"},
+                {"title":"Spanish and Latino Studies"},
+                {"title":"Special Education"}
+            ]
+        }
+    },
+    "Theology and Biblical Studies":{
+        "colorTheme":"",
+        "description":"",
+        "degrees":{
+            "associates":[
+                {"title":"Biblical Studies"}
+            ],
+            "bachelors":[
+                {"title":"Theological and Biblical Studies"}
+            ],
+            "masters":[
+                {"title":"Religious Education"},
+                {"title":"Theological Studies"}
+            ]
+        }
+    },
+    "Business Administration":{
+        "colorTheme":"",
+        "description":"",
+        "degrees":{
+            "bachelors":[
+                {"title":"Accounting"},
+                {"title":"Business Administration"},
+                {"title":"Finance"},
+                {"title":"Human Resource Management"},
+                {"title":"International Business"},
+                {"title":"Marketing"}
+            ],
+            "masters":[
+                {"title":"Accounting"},
+                {"title":"Finance"},
+                {"title":"Human Resource Management"},
+                {"title":"International Business"},
+                {"title":"Marketing"}
+            ],
+            "doctorate":[
+                {"title":"Finance"},
+                {"title":"Human Resource Management"},
+                {"title":"International Business"},
+                {"title":"Marketing"}
+            ]
+        }
+    },
+    "Education":{
+        "colorTheme":"",
+        "description":"",
+        "degrees":{
+            "masters":[
+                {"title":"Curriculum and Instruction"},
+                {"title":"Educational Leadership and Supervision"},
+                {"title":"English as a Second Language (ESL)"},
+                {"title":"Secondary Education"},
+                {"title":"Special Education"}
+            ],
+            "doctorate":[                
+                {"title":"Adult Teaching and Learning", "degreeTitle":"Doctor of Education"},
+                {"title":"Child Development", "degreeTitle":"Doctor of Education"},
+                {"title":"Curriculum and Instruction", "degreeTitle":"Doctor of Education"},
+                {"title":"Educational Leadership", "degreeTitle":"Doctor of Education"},
+                {"title":"English as a Second Language (ESL)", "degreeTitle":"Doctor of Education"},
+                {"title":"Secondary Education", "degreeTitle":"Doctor of Education"},
+                {"title":"Special Education", "degreeTitle":"Doctor of Education"},
+                {"title":"Higher Education Leadership", "degreeTitle":"Doctor of Education"},
+                {"title":"Adult Teaching and Learning", "degreeTitle":"Doctor of Philosophy"},
+                {"title":"Child Development", "degreeTitle":"Doctor of Philosophy"},
+                {"title":"Curriculum and Instruction", "degreeTitle":"Doctor of Philosophy"},
+                {"title":"Educational Leadership", "degreeTitle":"Doctor of Philosophy"},
+                {"title":"English as a Second Language (ESL)", "degreeTitle":"Doctor of Philosophy"},
+                {"title":"Secondary Education", "degreeTitle":"Doctor of Philosophy"},
+                {"title":"Special Education", "degreeTitle":"Doctor of Philosophy"},
+                {"title":"Higher Education and Community College Leadership", "degreeTitle":"Doctor of Philosophy"}
+            ]
+        }
+    },
+    "Global and Strategic Leadership":{
+        "colorTheme":"",
+        "description":"",
+        "degrees":{
+            "masters":[
+                {"title":"Organizational Development and Leadership", "concentrations":["International Business Concentration","Marketing Concentration", "Human Resource Management"]}
+            ],
+            "doctorate":[
+                {"title":"Global and Strategic Leadership", "specialization":["Entrepreneurship Specialization","Marketing Specialization","Business Leadership Specialization","International Business Specialization","Human Resource Management Specialization","Finance Specializations"]}
+            ]
+        }
+    }
+}
