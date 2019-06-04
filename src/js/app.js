@@ -3,8 +3,9 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Sidebar from "react-sidebar";
 
 /* Components */
-import { Home, HomeHeader } from './templates/home2';
+import { Home, HomeHeader } from './templates/home';
 import { UC, UCHeader } from './templates/uc';
+import {Academics, AcademicsHeader} from './templates/academics';
 
 /* Styles */
 import "../css/app.less";
@@ -14,7 +15,7 @@ import logo from '../assets/LGCULogo.png';
 
 const routes = [
     {path:"/about", component:UC, headerComponent:UCHeader},
-    {path:"/academics", component:UC, headerComponent:UCHeader},
+    {path:"/academics", component:Academics, headerComponent:AcademicsHeader},
     {path:"/admissions", component:UC, headerComponent:UCHeader},
     {path:"/faculty", component:UC, headerComponent:UCHeader},
     {path:"/tuition", component:UC, headerComponent:UCHeader}

@@ -364,6 +364,20 @@
   background-attachment: fixed;
   background-size: cover;
 }
+.academicHeader {
+  position: relative;
+  z-index: 2;
+  background: #dcdcdc;
+}
+.academicHeader .header-section {
+  padding: 10px 5%;
+}
+.academicHeader .header-section.header-title .solid-back span {
+  background: rgba(37, 119, 40, 0.7) !important;
+}
+.academicHeader .header-section.header-title .backImg:before {
+  background-color: rgba(37, 119, 40, 0.2) !important;
+}
 body,
 html {
   margin: 0px !important;
@@ -654,6 +668,68 @@ html {
 .inner-nav.hidden-nav {
   opacity: 0;
 }
+.sub-page .header-section:first-of-type {
+  padding-top: calc(89px + 20px);
+}
+.sub-page .header-section.header-title {
+  position: relative;
+  overflow: hidden;
+  color: #ffffff;
+  text-align: center;
+  font-family: 'Reem Kufi', sans-serif;
+  padding-bottom: 100px;
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), #dcdcdc 100%);
+}
+.sub-page .header-section.header-title h1 {
+  position: relative;
+  z-index: 1;
+  font-size: 5rem;
+  margin-bottom: 30px;
+}
+.sub-page .header-section.header-title .solid-back {
+  position: relative;
+  z-index: 1;
+  font-size: 1.5rem;
+}
+.sub-page .header-section.header-title .solid-back span {
+  display: inline-block;
+  background: #257728;
+  padding: 7px 21px;
+}
+.sub-page .header-section.header-title .solid-back span + span {
+  margin-top: 1.5rem;
+}
+.sub-page .header-section.header-title .backImg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  object-fit: cover;
+  overflow: hidden;
+}
+.sub-page .header-section.header-title .backImg:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23323233' fill-opacity='0.4' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
+}
+.sub-page .header-section.header-title .backImg img {
+  width: 100%;
+}
+.sub-page .header-section.header-title .btn-container {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.sub-page .header-section.header-title .btn-container .lBtn + .lBtn {
+  margin-left: 20px;
+}
 /* Attributes */
 .lrgTitle {
   position: relative;
@@ -743,6 +819,19 @@ html {
 .lBtn.white {
   background: rgba(255, 255, 255, 0);
   border: 1px solid #ffffff;
+}
+.lBtn.clear {
+  background: rgba(0, 0, 0, 0);
+  transition: 0.3s all ease-in-out;
+}
+.lBtn.clear.t1:hover {
+  background: rgba(21, 18, 128, 0.7) !important;
+}
+.lBtn.clear.t2:hover {
+  background: rgba(37, 119, 40, 0.7) !important;
+}
+.lBtn.clear.t3:hover {
+  background: rgba(80, 78, 153, 0.7) !important;
 }
 /* Tabs */
 .tab {

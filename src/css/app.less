@@ -21,6 +21,7 @@
 
 /* Styles */
 @import "home.less";
+@import "academics.less";
 
 
 body, html { 
@@ -273,6 +274,66 @@ body, html {
 
     &.hidden-nav { opacity: 0; }
 }
+
+.sub-page {
+    .header-section{
+        &:first-of-type { padding-top: calc(@navHeightBottom + 20px);}
+        &.header-title {
+            position: relative; 
+            overflow: hidden;
+            color: rgba(255,255,255,1);
+            text-align: center;            
+            font-family: 'Reem Kufi', sans-serif;        
+            padding-bottom: 100px;
+            background-image: linear-gradient(to bottom, rgba(0,0,0,0) , rgba(220,220,220,1) 100%);
+
+            h1 { position: relative; z-index: 1; font-size: 5rem; margin-bottom: 30px; }   
+            .solid-back { 
+                position: relative; 
+                z-index: 1; 
+                font-size: 1.5rem; 
+                span { 
+                    display: inline-block; 
+                    background: @color2; 
+                    padding: 7px 21px;
+                    &+span { margin-top: 1.5rem; }
+                }
+            }
+
+            .backImg { 
+                position: absolute;
+                top:0;
+                left: 0;
+                z-index: -1;
+                width: 100%;
+                object-fit: cover;
+                overflow: hidden;
+                &:before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-color: rgba(0, 0, 0, 0.2);                    
+                    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23323233' fill-opacity='0.4' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");                    
+                }                
+                img { width: 100%;}
+            }
+
+            .btn-container {
+                margin-top: 30px;
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+
+                .lBtn {
+                    &+.lBtn { margin-left: 20px; }
+                }
+            }
+        }
+    }
+}
 /* Attributes */
 .lrgTitle {
     position: relative;
@@ -329,6 +390,14 @@ body, html {
     &.c2 { background: @color2;}
     &.c3 { background: @color3;}
     &.white { background: rgba(255,255,255,0); border: 1px solid rgba(255,255,255,1);}
+
+    &.clear {
+        background: rgba(0,0,0,0);
+        transition: 0.3s all ease-in-out;
+        &.t1 { &:hover { .color1(background, 0.7); }}
+        &.t2 { &:hover { .color2(background, 0.7); }}
+        &.t3 { &:hover { .color3(background, 0.7); }}
+    }
 }
 
 /* Tabs */
