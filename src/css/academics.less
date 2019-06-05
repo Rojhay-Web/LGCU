@@ -21,7 +21,7 @@
 .academicsPage {
     background: rgba(255,255,255,1);
     .academic-section {
-        padding: 20px 0px;
+        padding: @navHeightBottom 0px 20px;
         p { font-size: 1.8rem; font-weight:100; line-height: 3.2rem; color: @color1; }
         &.findDegree {
             display: inline-block;
@@ -30,8 +30,7 @@
 
             .degree-container {
                 .full-list-container {
-                    padding: 10px 0px;
-                    text-align: left;
+                    padding: 10px 0px;                    
                     .list-title { color: @color1;}
                     .list-container {
                         display: block;
@@ -43,19 +42,113 @@
                             color: rgba(52,58,64,1);
                             opacity: 0.4;
                             font-size: 1.3rem; 
+                            margin: 0px 7px 14px;
                             text-transform: capitalize;
                             transition: 0.5s all ease-in-out;
                             cursor: pointer;
 
+                            span { margin-left: 5px; }
+
                             &:hover, &.active { background: rgba(52,58,64,1); color: rgba(255,255,255,1); opacity: 0.7;}
                             &.active { opacity: 1;}
-                            &+.filterBtn { margin-left: 15px; }
+                            /*&+.filterBtn { margin-left: 15px; }*/
 
                             &.t1 { color: @theme1; border-color: @theme1; &:hover, &.active { background: @theme1; color: rgba(255,255,255,1);}}
                             &.t2 { color: @theme2; border-color: @theme2; &:hover, &.active { background: @theme2; color: rgba(255,255,255,1);}}
                             &.t3 { color: @theme3; border-color: @theme3; &:hover, &.active { background: @theme3; color: rgba(255,255,255,1);}}
                             &.t4 { color: @theme4; border-color: @theme4; &:hover, &.active { background: @theme4; color: rgba(255,255,255,1);}}
                             &.t5 { color: @theme5; border-color: @theme5; &:hover, &.active { background: @theme5; color: rgba(255,255,255,1);}}
+                        }
+                    }
+                }
+                .result-search-container { position: relative;}
+
+                .results-search {
+                    position: absolute;
+                    z-index: 3;
+                    top: -17px;
+                    left: 50%;
+                    transform:translateX(-50%);                    
+                    border: 2px solid;
+                    display: inline-flex;
+                    overflow: hidden;
+                    .color1(border-color, 0.1);
+                    background: rgba(255,255,255,1); 
+                    padding: 5px 15px;
+                    border-radius: 5px;
+                    width:30%;
+                    .color1(color,1);
+                    i { display: flex; flex-direction: column; justify-content: center; }
+                    input { padding: 0 7px; border: none; flex:1; font-size: 1.2rem; line-height: 1.2rem;}
+
+                    @media @mobile-device { width: 80%; }
+                }
+
+                .results-list {
+                    border: 2px solid;
+                    .color1(border-color, 0.1);                    
+                    border-radius: 5px;
+                    padding: 40px 10px 10px;
+                    max-height: 500px;
+                    margin-top:20px;
+                    overflow: auto;
+                    position: relative;
+                    
+                    .results-container {
+                        display: flex;
+                        flex-direction: row;
+                        flex-wrap: wrap;
+                        
+                        .result-message {
+                            font-size: 1.5rem;
+                            text-align: center;
+                            font-style: italic;
+                            font-weight: 700;
+                            width: 100%;
+                            .color1(color, 0.7);
+                        }
+                        .result-item {
+                            display: inline-flex;
+                            flex-direction: row;
+                            padding: 5px 12px;
+                            margin: 0px 10px 20px 0px;
+                            text-align: left;                            
+                            border-radius: 5px;
+                            -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.2);
+                            -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.2);
+                            box-shadow: 0 3px 7px rgba(0, 0, 0, 0.2);
+                            transition: 0.5s all ease-in-out;
+                            cursor: pointer;
+
+                            .result-icon {
+                                width: 32px;
+                                height: 32px;
+                                border-radius: 50%;
+                                background: rgba(100,100,100,1);
+                                &.t1 { background: @theme1; }
+                                &.t2 { background: @theme2; }
+                                &.t3 { background: @theme3; }
+                                &.t4 { background: @theme4; }
+                                &.t5 { background: @theme5; }
+                            }
+
+                            .item-info-container {
+                                display: flex;
+                                flex-direction: column;
+                                text-transform: capitalize;
+                                padding-left:5px;
+                                flex: 1;
+                                .degree-title { font-weight: 900; font-size: 1rem; line-height: 1rem;}
+                                .major-title { font-weight: 300; font-size: 1.2rem; line-height: 1.5rem;}
+                            }
+
+                            &:hover {
+                                &.t1 { .theme1(background, 0.3); }
+                                &.t2 { .theme2(background, 0.3); }
+                                &.t3 { .theme3(background, 0.3); }
+                                &.t4 { .theme4(background, 0.3); }
+                                &.t5 { .theme5(background, 0.3); }
+                            }
                         }
                     }
                 }

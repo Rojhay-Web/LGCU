@@ -82,22 +82,22 @@
                 {"title":"Special Education"}
             ],
             "doctorate":[                
-                {"title":"Adult Teaching and Learning", "degreeTitle":"Doctor of Education"},
-                {"title":"Child Development", "degreeTitle":"Doctor of Education"},
-                {"title":"Curriculum and Instruction", "degreeTitle":"Doctor of Education"},
-                {"title":"Educational Leadership", "degreeTitle":"Doctor of Education"},
-                {"title":"English as a Second Language (ESL)", "degreeTitle":"Doctor of Education"},
-                {"title":"Secondary Education", "degreeTitle":"Doctor of Education"},
-                {"title":"Special Education", "degreeTitle":"Doctor of Education"},
-                {"title":"Higher Education Leadership", "degreeTitle":"Doctor of Education"},
-                {"title":"Adult Teaching and Learning", "degreeTitle":"Doctor of Philosophy"},
-                {"title":"Child Development", "degreeTitle":"Doctor of Philosophy"},
-                {"title":"Curriculum and Instruction", "degreeTitle":"Doctor of Philosophy"},
-                {"title":"Educational Leadership", "degreeTitle":"Doctor of Philosophy"},
-                {"title":"English as a Second Language (ESL)", "degreeTitle":"Doctor of Philosophy"},
-                {"title":"Secondary Education", "degreeTitle":"Doctor of Philosophy"},
-                {"title":"Special Education", "degreeTitle":"Doctor of Philosophy"},
-                {"title":"Higher Education and Community College Leadership", "degreeTitle":"Doctor of Philosophy"}
+                {"title":"Adult Teaching and Learning", "degreeTitle":"Education"},
+                {"title":"Child Development", "degreeTitle":"Education"},
+                {"title":"Curriculum and Instruction", "degreeTitle":"Education"},
+                {"title":"Educational Leadership", "degreeTitle":"Education"},
+                {"title":"English as a Second Language (ESL)", "degreeTitle":"Education"},
+                {"title":"Secondary Education", "degreeTitle":"Education"},
+                {"title":"Special Education", "degreeTitle":"Education"},
+                {"title":"Higher Education Leadership", "degreeTitle":"Education"},
+                {"title":"Adult Teaching and Learning", "degreeTitle":"Philosophy"},
+                {"title":"Child Development", "degreeTitle":"Philosophy"},
+                {"title":"Curriculum and Instruction", "degreeTitle":"Philosophy"},
+                {"title":"Educational Leadership", "degreeTitle":"Philosophy"},
+                {"title":"English as a Second Language (ESL)", "degreeTitle":"Philosophy"},
+                {"title":"Secondary Education", "degreeTitle":"Philosophy"},
+                {"title":"Special Education", "degreeTitle":"Philosophy"},
+                {"title":"Higher Education and Community College Leadership", "degreeTitle":"Philosophy"}
             ]
         }
     },

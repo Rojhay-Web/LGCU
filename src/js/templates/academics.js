@@ -30,7 +30,7 @@ class AcademicsHeader extends Component{
 
                     <div className="btn-container">
                         <a href="#" className="lBtn clear t1"><span>View Areas Of Study</span><i className="btn-icon fas fa-arrow-right"></i></a>
-                        <a href="#" className="lBtn clear t1"><span>Find Your Degree</span><i className="btn-icon fas fa-search"></i></a>
+                        <a href="#findDegree" className="lBtn clear t1"><span>Find Your Degree</span><i className="btn-icon fas fa-search"></i></a>
                     </div>
                 </div>                
             </div>
@@ -53,7 +53,7 @@ class Academics extends Component{
     render(){        
         return(
             <div className="inner-page-body academicsPage">
-                <section className="academic-section findDegree">
+                <section className="academic-section findDegree" id="findDegree">
                     <h2 className="lrgTitle ctr c1" data-text="Find Your Degree">Find Your Degree</h2>
                     <div className="section-container">
                         <p>Lenkeson Global Christian University is a leading online higher learning institution, established to meet the academic and professional needs of college traditional age and working adults. With an array of majors and degrees find the LGCU program that is for you.</p>
