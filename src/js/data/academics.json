@@ -1,7 +1,8 @@
 {
     "Undergraduate Studies":{
-        "colorTheme":"",
+        "colorTheme":"t1",
         "description":"",
+        "icon":"",
         "degrees":{
             "associates":[
                 {"title":"Accounting"},
@@ -27,7 +28,7 @@
         }
     },
     "Theology and Biblical Studies":{
-        "colorTheme":"",
+        "colorTheme":"t2",
         "description":"",
         "degrees":{
             "associates":[
@@ -43,7 +44,7 @@
         }
     },
     "Business Administration":{
-        "colorTheme":"",
+        "colorTheme":"t3",
         "description":"",
         "degrees":{
             "bachelors":[
@@ -70,7 +71,7 @@
         }
     },
     "Education":{
-        "colorTheme":"",
+        "colorTheme":"t4",
         "description":"",
         "degrees":{
             "masters":[
@@ -101,7 +102,7 @@
         }
     },
     "Global and Strategic Leadership":{
-        "colorTheme":"",
+        "colorTheme":"t5",
         "description":"",
         "degrees":{
             "masters":[

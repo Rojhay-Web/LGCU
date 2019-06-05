@@ -15,6 +15,23 @@
 @color3: rgba(80, 78, 153,1);
 .color3(@prop,@val){ @{prop}: rgba(80, 78, 153,@val) !important; }
 
+/* Theme Colors */
+/* https://digitalsynopsis.com/design/beautiful-color-gradient-palettes/*/
+@theme1: rgba(106,171,156,1);
+.theme1(@prop,@val){ @{prop}: rgba(106,171,156,@val) !important; }
+
+@theme2: rgba(250,146,132,1);
+.theme2(@prop,@val){ @{prop}: rgba(250,146,132,@val) !important; }
+
+@theme3: rgba(224,108,120,1);
+.theme3(@prop,@val){ @{prop}: rgba(224,108,120,@val) !important; }
+
+@theme4: rgba(88,116,220,1);
+.theme4(@prop,@val){ @{prop}: rgba(88,116,220,@val) !important; }
+
+@theme5: rgba(56,67,120,1);
+.theme5(@prop,@val){ @{prop}: rgba(56,67,120,@val) !important; }
+
 /* Fonts */
 @font-size: 14px;
 @import url('https://fonts.googleapis.com/css?family=Alike|Reem+Kufi|Yantramanav:100,300,400,700,900');
@@ -87,8 +104,8 @@ body, html {
     z-index: 2;
 
     .inner-page-body {
-        margin: 20px 0px;
-        //padding-bottom: 50px;
+        margin: 0px 0px 20px;
+        .section-container { padding: 10px 5%;}
     }
 }
 

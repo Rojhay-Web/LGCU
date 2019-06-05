@@ -3,6 +3,12 @@ import React, { Component } from 'react';
 /* Images */
 import back1 from '../../assets/temp/img4.jpeg';
 
+/* Data */
+import academicData from '../data/academics.json';
+
+/* Components */
+import FindDegree from './components/findDegree';
+
 /* Header */
 class AcademicsHeader extends Component{
     constructor(props) {
@@ -36,13 +42,25 @@ class AcademicsHeader extends Component{
 class Academics extends Component{
     constructor(props) {
         super(props);
+        this.state = {
+        }
     }
 
-    componentDidMount(){ window.scrollTo(0, 0); }
+    componentDidMount(){ 
+        window.scrollTo(0, 0);
+    }
 
     render(){        
         return(
-            <div>Academics</div>
+            <div className="inner-page-body academicsPage">
+                <section className="academic-section findDegree">
+                    <h2 className="lrgTitle ctr c1" data-text="Find Your Degree">Find Your Degree</h2>
+                    <div className="section-container">
+                        <p>Lenkeson Global Christian University is a leading online higher learning institution, established to meet the academic and professional needs of college traditional age and working adults. With an array of majors and degrees find the LGCU program that is for you.</p>
+                        <FindDegree academicData={academicData} />
+                    </div>
+                </section>
+            </div>
         );
     }
 }

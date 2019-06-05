@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import Sidebar from "react-sidebar";
+//import Sidebar from "react-sidebar";
 
 /* Components */
 import { Home, HomeHeader } from './templates/home';

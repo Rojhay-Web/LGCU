@@ -7,14 +7,59 @@
         padding: 10px 5%;
         &.header-title {
             .solid-back {
-                span { 
-                    //background: @color2;
-                    .color2(background, 0.7);
+                span {
+                    .color3(background, 0.7);
                 }
             }
             .backImg {
-                &:before {.color2(background-color, 0.2);}
+                &:before {.color3(background-color, 0.3);}
             }            
+        }
+    }
+}
+
+.academicsPage {
+    background: rgba(255,255,255,1);
+    .academic-section {
+        padding: 20px 0px;
+        p { font-size: 1.8rem; font-weight:100; line-height: 3.2rem; color: @color1; }
+        &.findDegree {
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+
+            .degree-container {
+                .full-list-container {
+                    padding: 10px 0px;
+                    text-align: left;
+                    .list-title { color: @color1;}
+                    .list-container {
+                        display: block;
+                        padding:10px 0px;
+                        .filterBtn { 
+                            display: inline-block;
+                            padding: 4px 10px;
+                            border: 1px solid rgba(52,58,64,1);
+                            color: rgba(52,58,64,1);
+                            opacity: 0.4;
+                            font-size: 1.3rem; 
+                            text-transform: capitalize;
+                            transition: 0.5s all ease-in-out;
+                            cursor: pointer;
+
+                            &:hover, &.active { background: rgba(52,58,64,1); color: rgba(255,255,255,1); opacity: 0.7;}
+                            &.active { opacity: 1;}
+                            &+.filterBtn { margin-left: 15px; }
+
+                            &.t1 { color: @theme1; border-color: @theme1; &:hover, &.active { background: @theme1; color: rgba(255,255,255,1);}}
+                            &.t2 { color: @theme2; border-color: @theme2; &:hover, &.active { background: @theme2; color: rgba(255,255,255,1);}}
+                            &.t3 { color: @theme3; border-color: @theme3; &:hover, &.active { background: @theme3; color: rgba(255,255,255,1);}}
+                            &.t4 { color: @theme4; border-color: @theme4; &:hover, &.active { background: @theme4; color: rgba(255,255,255,1);}}
+                            &.t5 { color: @theme5; border-color: @theme5; &:hover, &.active { background: @theme5; color: rgba(255,255,255,1);}}
+                        }
+                    }
+                }
+            }
         }
     }
 }
