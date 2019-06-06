@@ -71,6 +71,43 @@
                 font-weight: 100;
             }
 
+            .slide-maze {
+                display: flex;
+                flex-direction: column;
+                color: rgba(255,255,255,1);
+                margin-top: 30px;
+                .maze-lvl { 
+                    flex:1;
+                    display: flex;
+                    flex-direction: row;
+                    .lvl-vertical { 
+                        width: 33.334%;
+                        .academicSlider { 
+                            height: 100%;
+                            .slider-container { height: 50%;}
+                        }
+                    }
+                    .lvl-horizontal { 
+                        flex:1;
+                        flex-direction: column;
+                        .academicSlider {
+                            height: 50%;
+                        }
+                    }
+                }
+
+                .link { 
+                    color: rgba(255,255,255,1) !important;
+                    border-color: rgba(255,255,255,1);
+                    &:hover { color: rgba(255,255,255,1) !important;}
+                }
+
+                .left { .img-slider { &:before { border-right: 50px solid @color3; }} }
+                .right { .img-slider { &:before { border-left: 50px solid @color3; }} }
+                .bottom { .img-slider { &:before { border-top: 50px solid @color3; }} }
+                .top { .img-slider { &:before { border-bottom: 50px solid @color3; }} }
+            }
+
             .studyTabs {
                 padding: 10px 0px;
                 .tabPanel {
@@ -120,7 +157,7 @@
                     .content-info { flex: 1; }
                 }
             }
-
+            
             .facts-container {
                 display: flex;
                 flex-direction: row;

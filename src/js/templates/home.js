@@ -5,8 +5,12 @@ import React, { Component, useState, useEffect } from 'react';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 
+/* Data */
+import academicData from '../data/academics.json';
+
 /* Components */
 import TABS from './components/tabs';
+import AcademicSlider from './components/academicSlider';
 
 /* Images */
 import logo from '../../assets/LGCULogo.png';
@@ -59,7 +63,8 @@ class HomeHeader extends Component{
 
 /* Body */
 function Home(props){
-       
+    
+    const [academicList, setAcademicList] = useState([]);
     const [counter, setCounter] = useState(false);
     const [imgprops, setIProps] = useSpring(() => ({ xys: [0, 0, 1], config: { mass: 5, tension: 350, friction: 40 } }))
 
@@ -97,14 +102,34 @@ function Home(props){
         }
     }
     
-    useEffect(() => window.scrollTo(0, 0), []);
-    useEffect(() => window.addEventListener('scroll', listenToScroll), []);
+    function buildDataList(){
+        try {
+            var tmpList = Object.keys(academicData);
+            var retList = [{"title":"LGCU Schools", "colorTheme":"c2", "description":"Lorem Ipsem", "img":"img1.jpeg"}];
+            tmpList.forEach(function(item){ retList.push(academicData[item]); });
 
-    function componentWillUnmount() {
-        window.removeEventListener('scroll', listenToScroll);
+            setAcademicList(retList);
+        }
+        catch(ex){
+            console.log("Error building data list: ",ex);
+        }
     }
+
+    /*useEffect(() => {         
+        window.addEventListener('scroll', listenToScroll);
+        window.scrollTo(0, 0);
+        buildDataList();
+
+        return function cleanup(){ 
+            window.removeEventListener('scroll', listenToScroll);
+        };
+    });*/
+
+    useEffect(() => window.scrollTo(0, 0), []);
+    useEffect(() => buildDataList(), []);
+    useEffect(() => window.addEventListener('scroll', listenToScroll), []);    
+    //function componentWillUnmount() { window.removeEventListener('scroll', listenToScroll); }
     
-    //const calc = (x, y) => [-(y - window.innerHeight / 2) / 20, (x - window.innerWidth / 2) / 20, 0.9];   
     function calc(x,y){
         var container = document.getElementById("imgSplit");
         return [-(y - container.offsetHeight / 2) / 20, (x - container.offsetWidth / 2) / 20, 0.9];
@@ -153,7 +178,30 @@ function Home(props){
             <section className="home-section">
                 <div className="section-container">
                     <h2 className="lrgTitle ctr" data-text="Areas Of Study">Areas Of Study</h2>                        
-                    <TABS list={studyAreas} />
+                    {/* <TABS list={studyAreas} /> */}
+                    {/* Slide Maze */}
+                    {academicList.length == 6 && 
+                        <div className="slide-maze">
+                            <div className="maze-lvl">
+                                <div className="lvl-horizontal">
+                                    <AcademicSlider academicInfo={academicList[0]} direction={"right"} theme={"solo"}/>
+                                    <AcademicSlider academicInfo={academicList[1]} direction={"left"} theme={"solo"}/>
+                                </div>
+                                <div className="lvl-vertical">
+                                    <AcademicSlider academicInfo={academicList[2]} direction={"bottom"} theme={"solo"}/>
+                                </div>
+                            </div>
+                            <div className="maze-lvl">
+                                <div className="lvl-vertical">
+                                    <AcademicSlider academicInfo={academicList[3]} direction={"bottom"} theme={"solo"}/>
+                                </div>
+                                <div className="lvl-horizontal">
+                                    <AcademicSlider academicInfo={academicList[4]} direction={"left"} theme={"solo"}/>
+                                    <AcademicSlider academicInfo={academicList[5]} direction={"right"} theme={"solo"}/>
+                                </div>
+                            </div>
+                        </div>
+                    }
                 </div>
             </section> 
 

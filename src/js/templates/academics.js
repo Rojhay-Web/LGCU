@@ -8,6 +8,7 @@ import academicData from '../data/academics.json';
 
 /* Components */
 import FindDegree from './components/findDegree';
+import AcademicSlider from './components/academicSlider';
 
 /* Header */
 class AcademicsHeader extends Component{
@@ -29,7 +30,7 @@ class AcademicsHeader extends Component{
                     </div>
 
                     <div className="btn-container">
-                        <a href="#" className="lBtn clear t1"><span>View Areas Of Study</span><i className="btn-icon fas fa-arrow-right"></i></a>
+                        <a href="#viewArea" className="lBtn clear t1"><span>View Areas Of Study</span><i className="btn-icon fas fa-arrow-right"></i></a>
                         <a href="#findDegree" className="lBtn clear t1"><span>Find Your Degree</span><i className="btn-icon fas fa-search"></i></a>
                     </div>
                 </div>                
@@ -43,11 +44,14 @@ class Academics extends Component{
     constructor(props) {
         super(props);
         this.state = {
+            academicList:[]
         }
+        this.buildDataList = this.buildDataList.bind(this);
     }
 
     componentDidMount(){ 
         window.scrollTo(0, 0);
+        this.buildDataList();
     }
 
     render(){        
@@ -60,8 +64,27 @@ class Academics extends Component{
                         <FindDegree academicData={academicData} />
                     </div>
                 </section>
+
+                <section className="academic-section viewArea" id="viewArea">
+                    <h2 className="lrgTitle ctr c1" data-text="Schools of Study">Schools of Study</h2>
+
+                    <div className="section-container area-container">
+                        {this.state.academicList.map((item,i) => (
+                            <AcademicSlider key={i} academicInfo={academicData[item]} direction={(i%2 == 0 ? "right" : "left")} theme={academicData[item].colorTheme}/>
+                        ))}                        
+                    </div>
+                </section>
             </div>
         );
+    }
+
+    buildDataList(){
+        try {
+            this.setState({academicList: Object.keys(academicData)});
+        }
+        catch(ex){
+            console.log("Error building data list: ",ex);
+        }
     }
 }
 

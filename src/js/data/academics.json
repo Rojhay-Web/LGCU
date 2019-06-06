@@ -1,8 +1,10 @@
 {
     "Undergraduate Studies":{
+        "title":"Undergraduate Studies",
         "colorTheme":"t1",
-        "description":"",
+        "description":"The School of Undergraduate Studies is designed to equip traditional college age students, adult learners, and working professionals, individuals who are first time college students, either returning to college, or pursuing studies in their professional fields that they may be effective in their specific location in the labor market or church ministries.",
         "icon":"",
+        "img":"img5.jpeg",
         "degrees":{
             "associates":[
                 {"title":"Accounting"},
@@ -28,8 +30,11 @@
         }
     },
     "Theology and Biblical Studies":{
+        "title":"Theology and Biblical Studies",
         "colorTheme":"t2",
-        "description":"",
+        "description":"The School of Theology and Biblical Studies is designed to prepare men and women in the disciplines of biblical and theological studies by equipping them with the necessary tools to become transformative servant-leaders in local church ministries, the marketplace, global and strategic missions. ",
+        "icon":"",
+        "img":"img4.jpeg",
         "degrees":{
             "associates":[
                 {"title":"Biblical Studies"}
@@ -44,8 +49,11 @@
         }
     },
     "Business Administration":{
+        "title":"Business Administration",
         "colorTheme":"t3",
-        "description":"",
+        "description":"The School of Business Administration is designed to prepare men and women to become innovators, business leaders, and problem-solvers in the twenty-first century. ",
+        "icon":"",
+        "img":"img2.jpeg",
         "degrees":{
             "bachelors":[
                 {"title":"Accounting"},
@@ -71,8 +79,11 @@
         }
     },
     "Education":{
+        "title":"Education",
         "colorTheme":"t4",
-        "description":"",
+        "description":"The School of Education is designed to develop current and emerging educators and school leaders to meet the educational challenges of the twenty-first century. Learners are equipped with academic and educational tools to deliver state- of- the- art instructional information using diverse teaching and learning methods through constructionist processes.",
+        "icon":"",
+        "img":"img1.jpeg",
         "degrees":{
             "masters":[
                 {"title":"Curriculum and Instruction"},
@@ -102,8 +113,11 @@
         }
     },
     "Global and Strategic Leadership":{
+        "title":"Global and Strategic Leadership",
         "colorTheme":"t5",
-        "description":"",
+        "description":"The School of Global and Strategic Leadership is designed to equip organizational leaders with the necessary tools to respond to the challenges that require transformational changes and strategic leadership to succeed in the twenty-first century.",
+        "icon":"",
+        "img":"img3.jpeg",
         "degrees":{
             "masters":[
                 {"title":"Organizational Development and Leadership", "concentrations":["International Business Concentration","Marketing Concentration", "Human Resource Management"]}
