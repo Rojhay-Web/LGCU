@@ -94,6 +94,11 @@
                             height: 50%;
                         }
                     }
+
+                    @media @mobile-device {
+                        flex-direction: column;
+                        .lvl-vertical { width: 100%; }
+                    }
                 }
 
                 .link { 
@@ -106,6 +111,19 @@
                 .right { .img-slider { &:before { border-left: 50px solid @color3; }} }
                 .bottom { .img-slider { &:before { border-top: 50px solid @color3; }} }
                 .top { .img-slider { &:before { border-bottom: 50px solid @color3; }} }
+
+                @media @mobile-device {
+                    .left, .right, .bottom, .top {
+                        .img-slider {
+                            &:before { 
+                                border-right: 50px solid transparent;
+                                border-left: 50px solid transparent;
+                                border-top: 50px solid transparent;
+                                border-bottom: 50px solid @color3;
+                            }
+                        }
+                    }
+                }
             }
 
             .studyTabs {
@@ -200,7 +218,6 @@
                         width: 100%; 
                         object-fit: cover; 
                         border: 2px solid rgba(255,255,255,1);
-                        transform: scaleX(-1);
                         -moz-box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
                         -webkit-box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
                         box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);

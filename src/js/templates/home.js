@@ -20,6 +20,11 @@ import back1 from '../../assets/temp/back1.jpeg';
 import back2 from '../../assets/temp/back2.jpeg';
 import back3 from '../../assets/temp/back3.jpeg';
 import back4 from '../../assets/temp/back4.jpeg';
+import back5 from '../../assets/temp/back5.jpeg';
+import back6 from '../../assets/temp/back6.jpeg';
+import back7 from '../../assets/temp/back7.jpeg';
+import back8 from '../../assets/temp/back8.jpeg';
+import back9 from '../../assets/temp/back9.jpeg';
 
 import img1 from '../../assets/temp/img1.jpeg';
 import img2 from '../../assets/temp/img2.jpeg';
@@ -41,7 +46,7 @@ class HomeHeader extends Component{
         return(
             <div className="headerCard homeHeader">
                 <div className="header-card-container">
-                    <div className="cardImg"><img src={back0}/></div>
+                    <div className="cardImg"><img src={back9}/></div>
 
                     <div className="frontInfo">
                         <h1>
@@ -68,13 +73,6 @@ function Home(props){
     const [counter, setCounter] = useState(false);
     const [imgprops, setIProps] = useSpring(() => ({ xys: [0, 0, 1], config: { mass: 5, tension: 350, friction: 40 } }))
 
-    const studyAreas = [                
-            {title:"Undergraduate Studies", icon:"fas fa-user-graduate", img:img5, link:"/", description:"The School of Undergraduate Studies is designed to equip traditional college age students, adult learners, and working professionals, individuals who are first time college students, either returning to college, or pursuing studies in their professional fields that they may be effective in their specific location in the labor market or church ministries."},
-                {title:"Business Administration", icon:"fas fa-briefcase", img:img2, link:"/", description:"The School of Business Administration is designed to prepare men and women to become innovators, business leaders, and problem-solvers in the twenty-first century. "},
-                {title:"Education", icon:"fas fa-university", img:img3, link:"/", description:"The School of Education is designed to develop current and emerging educators and school leaders to meet the educational challenges of the twenty-first century. Learners are equipped with academic and educational tools to deliver state- of- the- art instructional information using diverse teaching and learning methods through constructionist processes."},
-                {title:"Global & Strategic Leadership", icon:"fas fa-globe-americas", img:img4, link:"/", description:"The School of Global and Strategic Leadership is designed to equip organizational leaders with the necessary tools to respond to the challenges that require transformational changes and strategic leadership to succeed in the twenty-first century."},
-                {title:"Theology & Biblical Studies", icon:"fas fa-bible", img:img1, link:"/", description:"The School of Theology and Biblical Studies is designed to prepare men and women in the disciplines of biblical and theological studies by equipping them with the necessary tools to become transformative servant-leaders in local church ministries, the marketplace, global and strategic missions. "}
-    ];
     const facts = [
                 {value: 35, decimal:false, valueSub:"%", text:"Of the college student population is veterans, working parents and perpetual students." },
                 {value: 1.09, decimal:true, valueSub:"Million", text:"International students are enrolled in United States colleges" },
@@ -105,7 +103,7 @@ function Home(props){
     function buildDataList(){
         try {
             var tmpList = Object.keys(academicData);
-            var retList = [{"title":"LGCU Schools", "colorTheme":"c2", "description":"Lorem Ipsem", "img":"img1.jpeg"}];
+            var retList = [{"title":"LGCU Schools", "colorTheme":"c2", "description":"Developing and empowering adult learners through twenty-first century virtual academic education to successfully transform and lead organizations with integrity in a diverse society.", "img":"img4.jpeg"}];
             tmpList.forEach(function(item){ retList.push(academicData[item]); });
 
             setAcademicList(retList);
@@ -142,7 +140,7 @@ function Home(props){
                 <div className="section-container">
                     <div className="split-section" id="imgSplit">
                         <animated.div className="multi-img-container" onMouseMove={({ clientX: x, clientY: y }) => setIProps({ xys: calc(x, y) })} onMouseLeave={() => setIProps({ xys: [0, 0, 1] })} style={{ transform: imgprops.xys.interpolate(trans) }}>
-                            <img className="multi-img lrg" src={back1} />
+                            <img className="multi-img lrg" src={back7} />
                             <img className="multi-img sm" src={img1} />
                         </animated.div>
 
@@ -178,7 +176,6 @@ function Home(props){
             <section className="home-section">
                 <div className="section-container">
                     <h2 className="lrgTitle ctr" data-text="Areas Of Study">Areas Of Study</h2>                        
-                    {/* <TABS list={studyAreas} /> */}
                     {/* Slide Maze */}
                     {academicList.length == 6 && 
                         <div className="slide-maze">

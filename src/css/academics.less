@@ -13,7 +13,14 @@
             }
             .backImg {
                 &:before {.color3(background-color, 0.3);}
-            }            
+            }
+            
+            @media @mobile-device { 
+                .btn-container { 
+                    flex-direction: column !important;
+                    .lBtn + .lBtn { margin-left: 0 !important;}
+                }
+            }
         }
     }
 }

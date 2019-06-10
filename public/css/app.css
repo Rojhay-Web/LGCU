@@ -157,6 +157,14 @@
 .homePage .home-section .section-container .slide-maze .maze-lvl .lvl-horizontal .academicSlider {
   height: 50%;
 }
+@media (max-width: 770px) {
+  .homePage .home-section .section-container .slide-maze .maze-lvl {
+    flex-direction: column;
+  }
+  .homePage .home-section .section-container .slide-maze .maze-lvl .lvl-vertical {
+    width: 100%;
+  }
+}
 .homePage .home-section .section-container .slide-maze .link {
   color: #ffffff !important;
   border-color: #ffffff;
@@ -175,6 +183,17 @@
 }
 .homePage .home-section .section-container .slide-maze .top .img-slider:before {
   border-bottom: 50px solid #504e99;
+}
+@media (max-width: 770px) {
+  .homePage .home-section .section-container .slide-maze .left .img-slider:before,
+  .homePage .home-section .section-container .slide-maze .right .img-slider:before,
+  .homePage .home-section .section-container .slide-maze .bottom .img-slider:before,
+  .homePage .home-section .section-container .slide-maze .top .img-slider:before {
+    border-right: 50px solid transparent;
+    border-left: 50px solid transparent;
+    border-top: 50px solid transparent;
+    border-bottom: 50px solid #504e99;
+  }
 }
 .homePage .home-section .section-container .studyTabs {
   padding: 10px 0px;
@@ -293,7 +312,6 @@
   width: 100%;
   object-fit: cover;
   border: 2px solid #ffffff;
-  transform: scaleX(-1);
   -moz-box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
   -webkit-box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
@@ -425,6 +443,14 @@
 }
 .academicHeader .header-section.header-title .backImg:before {
   background-color: rgba(80, 78, 153, 0.3) !important;
+}
+@media (max-width: 770px) {
+  .academicHeader .header-section.header-title .btn-container {
+    flex-direction: column !important;
+  }
+  .academicHeader .header-section.header-title .btn-container .lBtn + .lBtn {
+    margin-left: 0 !important;
+  }
 }
 .academicsPage {
   background: #ffffff;
@@ -1339,6 +1365,9 @@ html {
   border-left: 50px solid #ffffff;
   border-bottom: 50px solid transparent;
 }
+.academicSlider.right:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
 .academicSlider.right:hover .img-slider {
   left: calc(100% - 0px);
 }
@@ -1358,6 +1387,9 @@ html {
   border-top: 50px solid transparent;
   border-right: 50px solid #ffffff;
   border-bottom: 50px solid transparent;
+}
+.academicSlider.left:hover {
+  background: rgba(255, 255, 255, 0.3);
 }
 .academicSlider.left:hover .img-slider {
   right: calc(100% - 0px);
@@ -1380,21 +1412,34 @@ html {
   border-top: 50px solid #ffffff;
   border-right: 50px solid transparent;
 }
+.academicSlider.bottom:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
 .academicSlider.bottom:hover .img-slider {
   top: calc(100% - 0px);
 }
 @media (max-width: 770px) {
-  .academicSlider {
+  .academicSlider.bottom,
+  .academicSlider.left,
+  .academicSlider.right {
     flex-direction: column-reverse;
   }
-  .academicSlider .slider-container {
+  .academicSlider.bottom .slider-container,
+  .academicSlider.left .slider-container,
+  .academicSlider.right .slider-container {
     flex-direction: column;
   }
-  .academicSlider .slider-container .img-slider {
+  .academicSlider.bottom .slider-container .img-slider,
+  .academicSlider.left .slider-container .img-slider,
+  .academicSlider.right .slider-container .img-slider {
     left: 0;
     top: 0;
+    overflow: hidden;
   }
-  .academicSlider .slider-container .img-slider:before {
+  .academicSlider.bottom .slider-container .img-slider:before,
+  .academicSlider.left .slider-container .img-slider:before,
+  .academicSlider.right .slider-container .img-slider:before {
+    top: initial;
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
@@ -1402,7 +1447,16 @@ html {
     border-bottom: 50px solid #ffffff;
     border-right: 50px solid transparent;
   }
-  .academicSlider:hover .img-slider {
+  .academicSlider.bottom .slider-container .img-slider img,
+  .academicSlider.left .slider-container .img-slider img,
+  .academicSlider.right .slider-container .img-slider img {
+    height: 100%;
+    width: initial;
+    min-width: 100%;
+  }
+  .academicSlider.bottom:hover .img-slider,
+  .academicSlider.left:hover .img-slider,
+  .academicSlider.right:hover .img-slider {
     top: 0;
   }
 }
