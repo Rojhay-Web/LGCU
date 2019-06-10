@@ -39,6 +39,7 @@
 /* Styles */
 @import "home.less";
 @import "academics.less";
+@import "studyArea.less";
 
 
 body, html { 
@@ -338,16 +339,6 @@ body, html {
                 img { width: 100%;}
             }
 
-            .btn-container {
-                margin-top: 30px;
-                display: flex;
-                flex-direction: row;
-                justify-content: center;
-
-                .lBtn {
-                    &+.lBtn { margin-left: 20px; }
-                }
-            }
         }
     }
 }
@@ -367,6 +358,7 @@ body, html {
         font-weight: 400;
         content: attr(data-text);
         font-size: 6rem;
+        white-space: nowrap;
     }
 
     &.ctr { 
@@ -380,6 +372,17 @@ body, html {
     @media @mobile-device { 
         &:before { font-size: 3.5rem; top: -2.5rem; }
         &.ctr { &:before { width: 100%; left: 0; transform: none;}}
+    }
+}
+
+.btn-container {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    .lBtn {
+        &+.lBtn { margin-left: 20px; }
     }
 }
 

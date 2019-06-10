@@ -181,7 +181,7 @@ function Home(props){
                         <div className="slide-maze">
                             <div className="maze-lvl">
                                 <div className="lvl-horizontal">
-                                    <AcademicSlider academicInfo={academicList[0]} direction={"right"} theme={"solo"}/>
+                                    <AcademicSlider academicInfo={academicList[0]} direction={"right"} theme={"solo"} displayLink={false}/>
                                     <AcademicSlider academicInfo={academicList[1]} direction={"left"} theme={"solo"}/>
                                 </div>
                                 <div className="lvl-vertical">
@@ -204,7 +204,7 @@ function Home(props){
 
             <section className="home-section alternate patterned">
                 <div className="section-container">
-                    <h2 className="lrgTitle ctr c2" data-text="Testimonials">Testimonials</h2>
+                    <h2 className="lrgTitle ctr c1" data-text="Testimonials">Testimonials</h2>
 
                     <Carousel className="testimonial-carousel" showThumbs={false} showStatus={false} interval={7000} infiniteLoop autoPlay>
                         {testimonials.map((item,i) =>

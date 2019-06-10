@@ -125,7 +125,7 @@ class FindDegree extends Component{
                 var tmpArea = [];
 
                 areaInit.forEach(function(item){
-                    tmpArea.push({title:item, colorTheme: self.props.academicData[item].colorTheme, status: false });
+                    tmpArea.push({ idLink:item, title:self.props.academicData[item].title, colorTheme: self.props.academicData[item].colorTheme, status: false });
                     var degreeInit = Object.keys(self.props.academicData[item].degrees);
                     degreeInit.forEach(function(dItem){
                         degreeKey[dItem] = true;
@@ -155,7 +155,7 @@ class FindDegree extends Component{
             activeDegreeFilter = ((!activeDegreeFilter || activeDegreeFilter.length <= 0) && activeAreaFilter.length > 0 ? this.state.degreeList : activeDegreeFilter);
 
             activeAreaFilter.forEach(function(area){
-                var tmpArea = self.props.academicData[area.title];
+                var tmpArea = self.props.academicData[area.idLink];
                 activeDegreeFilter.forEach(function(degree){
                     var tmpDegree = tmpArea.degrees[degree.title];
                     if(tmpDegree){

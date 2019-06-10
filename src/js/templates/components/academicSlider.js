@@ -6,11 +6,16 @@ class AcademicSlider extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            academicInfo: this.props.academicInfo
+            academicInfo: this.props.academicInfo,
+            titleLink:""
         }
+
+        this.sliderLink = this.sliderLink.bind(this);
     }
 
-    componentDidMount(){ }
+    componentDidMount(){ 
+        this.sliderLink(this.props.academicInfo.title);
+    }
 
     render(){        
         return(
@@ -18,7 +23,9 @@ class AcademicSlider extends Component{
                 <div className="slider-container title">
                     <h1>{this.state.academicInfo.title}</h1>
                     <div className="lBtn-group">
-                        <a href="/" className="lBtn link"><span>Learn More</span><i className="btn-icon fas fa-graduation-cap"/></a>
+                        {this.props.displayLink != false &&
+                            <a href={"/studyarea" + this.state.titleLink} className="lBtn link"><span>Learn More</span><i className="btn-icon fas fa-graduation-cap"/></a>
+                        }
                     </div>
                 </div>
                 <div className="slider-container info">
@@ -29,6 +36,19 @@ class AcademicSlider extends Component{
                 </div>
             </div>
         );
+    }
+
+    sliderLink(title){
+        var ret = "";
+        try {
+            ret = "/"+title.replace(/([&\/\\()])/g,"_").split(' ').join("").toLowerCase();
+        }
+        catch(ex){
+            console.log("Error Building Link Title: ", ex);
+            ret = "";
+        }
+
+        this.setState({titleLink: ret });
     }
 }
 

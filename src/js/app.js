@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { Home, HomeHeader } from './templates/home';
 import { UC, UCHeader } from './templates/uc';
 import {Academics, AcademicsHeader} from './templates/academics';
+import {StudyArea, StudyAreaHeader} from './templates/studyArea';
 
 /* Styles */
 import "../css/app.less";
@@ -16,10 +17,12 @@ import logo from '../assets/LGCULogo.png';
 const routes = [
     {path:"/about", component:UC, headerComponent:UCHeader},
     {path:"/academics", component:Academics, headerComponent:AcademicsHeader},
+    {path:"/studyarea/:studyArea?", component:StudyArea, headerComponent:StudyAreaHeader},
     {path:"/admissions", component:UC, headerComponent:UCHeader},
     {path:"/faculty", component:UC, headerComponent:UCHeader},
     {path:"/tuition", component:UC, headerComponent:UCHeader}
 ];
+
 
 const HeaderRoutes = route => (
     <Route path={route.path} render={props => ( <route.headerComponent {...props} />)} />
@@ -28,6 +31,33 @@ const HeaderRoutes = route => (
 const SiteRoutes = route => (
     <Route path={route.path} render={props => ( <route.component {...props} />)} />
 );
+
+
+/*
+const HeaderRoutes = route => (
+    <div> 
+        {route.subPages ?        
+            <span>
+                <Route exact path={route.path} component={route.headerComponent} />            
+                {route.subPages.map((subroute, i) => <SiteRoutes key={i} {...subroute} />)}
+            </span>           
+            : <Route path={route.path} render={props => ( <route.headerComponent {...props} />)} />
+        }     
+    </div>
+);
+
+const SiteRoutes = route => (
+    <div> 
+        {route.subPages ?        
+            <span>
+                <Route exact path={route.path} component={route.component} />            
+                {route.subPages.map((subroute, i) => <SiteRoutes key={i} {...subroute} />)}
+            </span>           
+            : <Route path={route.path} render={props => ( <route.component {...props} />)} />
+        }     
+    </div>
+);
+*/
 
 function MobileNav(props){
 
