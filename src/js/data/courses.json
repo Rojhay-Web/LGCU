@@ -1,0 +1,69 @@
+{
+    "courses":[
+        {"section":"ANTH", "id":110, "title":"Cultural Anthropology", "credits":3},
+
+        {"section":"BIOL", "id":105, "title":"General Biology", "credit":3},
+        {"section":"BSC", "id":203, "title":"Intro to Biblical Studies", "credit":3},
+        {"section":"BSC", "id":205, "title":"Old Testament Studies I", "credit":3},
+        {"section":"BSC", "id":207, "title":"Old Testament Studies II", "credit":3},
+        {"section":"BSC", "id":209, "title":"New Testament Studies I", "credit":3},
+        {"section":"BSC", "id":211, "title":"New Testament Studies II", "credit":3},
+        {"section":"BSC", "id":213, "title":"Christian Ethics", "credit":3},
+        {"section":"BSC", "id":215, "title":"Biblical Interpretation Studies", "credit":3},
+
+        {"section":"CIS", "id":107, "title":"Computer Information System", "credit":3},
+        
+        {"section":"ENG", "id":101, "title":"English Composition I", "credit":3},
+        {"section":"ENG", "id":102, "title":"English Composition II", "credit":3},
+        {"section":"ENG", "id":117, "title":"Public Speaking and Research", "credit":3},
+        {"section":"ENG", "id":118, "title":"Group and Team Communication", "credit":3},
+
+        {"section":"GRE", "id":307, "title":"Introduction to New Testament Greek", "credit":3},
+
+        {"section":"HEB", "id":307, "title":"Introduction To Old Testament Hebrew", "credit":3},
+        {"section":"HIST", "id":122, "title":"Global History I", "credit":3},
+        {"section":"HIST", "id":123, "title":"Global History II", "credit":3},
+
+        {"section":"MTH", "id":160, "title":"College Algebra", "credit":3},
+        {"section":"MTH", "id":161, "title":"College Algebra", "credit":3},
+
+        {"section":"PSY", "id":101, "title":"Intro to Psychology", "credit":3},
+        {"section":"POLS", "id":101, "title":"Introduction to Political Science", "credit":3},
+
+        {"section":"SOC", "id":101, "title":"Intro to Sociology", "credit":3},
+        {"section":"SOC", "id":217, "title":"Cultural Diversity", "credit":3},
+
+        
+        {"section":"", "id":0, "title":"", "credit":3},
+        {"section":"", "id":0, "title":"", "credit":3},
+        {"section":"", "id":0, "title":"", "credit":3},
+        {"section":"", "id":0, "title":"", "credit":3},
+        {"section":"", "id":0, "title":"", "credit":3},
+        {"section":"", "id":0, "title":"", "credit":3},
+        {"section":"", "id":0, "title":"", "credit":3},
+        {"section":"", "id":0, "title":"", "credit":3},
+        {"section":"", "id":0, "title":"", "credit":3},
+        {"section":"", "id":0, "title":"", "credit":3},
+        {"section":"", "id":0, "title":"", "credit":3},
+        {"section":"", "id":0, "title":"", "credit":3},
+        {"section":"", "id":0, "title":"", "credit":3},
+        {"section":"", "id":0, "title":"", "credit":3},
+        {"section":"", "id":0, "title":"", "credit":3},
+        {"section":"", "id":0, "title":"", "credit":3},
+        {"section":"", "id":0, "title":"", "credit":3},
+        {"section":"", "id":0, "title":"", "credit":3},
+        {"section":"", "id":0, "title":"", "credit":3},
+        {"section":"", "id":0, "title":"", "credit":3},
+        {"section":"", "id":0, "title":"", "credit":3},
+        {"section":"", "id":0, "title":"", "credit":3},
+        {"section":"", "id":0, "title":"", "credit":3},
+        {"section":"", "id":0, "title":"", "credit":3},
+        {"section":"", "id":0, "title":"", "credit":3},
+        {"section":"", "id":0, "title":"", "credit":3},
+        {"section":"", "id":0, "title":"", "credit":3},
+        {"section":"", "id":0, "title":"", "credit":3},
+        {"section":"", "id":0, "title":"", "credit":3},
+        {"section":"", "id":0, "title":"", "credit":3},
+        {"section":"", "id":0, "title":"", "credit":3}
+    ]
+}

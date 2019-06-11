@@ -39,14 +39,14 @@
         "img":"img12.jpeg",
         "degrees":{
             "associates":[
-                {"id":"", "title":"Biblical Studies"}
+                {"id":"AS-BBS", "title":"Biblical Studies"}
             ],
             "bachelors":[
-                {"id":"", "title":"Theological and Biblical Studies"}
+                {"id":"BA-THBBS", "title":"Theological and Biblical Studies"}
             ],
             "masters":[
-                {"id":"", "title":"Religious Education"},
-                {"id":"", "title":"Theological Studies"}
+                {"id":"MA-REDU", "title":"Religious Education"},
+                {"id":"MA-THST", "title":"Theological Studies"}
             ]
         }
     },
@@ -59,25 +59,25 @@
         "img":"img8.jpeg",
         "degrees":{
             "bachelors":[
-                {"id":"", "title":"Accounting"},
-                {"id":"", "title":"Business Administration"},
-                {"id":"", "title":"Finance"},
-                {"id":"", "title":"Human Resource Management"},
-                {"id":"", "title":"International Business"},
-                {"id":"", "title":"Marketing"}
+                {"id":"BA-ACC", "title":"Accounting"},
+                {"id":"BA-BA", "title":"Business Administration"},
+                {"id":"BA-FI", "title":"Finance"},
+                {"id":"BA-HRM", "title":"Human Resource Management"},
+                {"id":"BA-IBU", "title":"International Business"},
+                {"id":"BA-MAR", "title":"Marketing"}
             ],
             "masters":[
-                {"id":"", "title":"Accounting"},
-                {"id":"", "title":"Finance"},
-                {"id":"", "title":"Human Resource Management"},
-                {"id":"", "title":"International Business"},
-                {"id":"", "title":"Marketing"}
+                {"id":"MA-ACC", "title":"Accounting"},
+                {"id":"MA-FI", "title":"Finance"},
+                {"id":"MA-HRM", "title":"Human Resource Management"},
+                {"id":"MA-IBU", "title":"International Business"},
+                {"id":"MA-MAR", "title":"Marketing"}
             ],
             "doctorate":[
-                {"id":"", "title":"Finance"},
-                {"id":"", "title":"Human Resource Management"},
-                {"id":"", "title":"International Business"},
-                {"id":"", "title":"Marketing"}
+                {"id":"PHD-FI", "title":"Finance"},
+                {"id":"PHD-HRM", "title":"Human Resource Management"},
+                {"id":"PHD-IBU", "title":"International Business"},
+                {"id":"PHD-MAR", "title":"Marketing"}
             ]
         }
     },
@@ -90,29 +90,30 @@
         "img":"img7.jpeg",
         "degrees":{
             "masters":[
-                {"id":"", "title":"Curriculum and Instruction"},
-                {"id":"", "title":"Educational Leadership and Supervision"},
-                {"id":"", "title":"English as a Second Language (ESL)"},
-                {"id":"", "title":"Secondary Education"},
-                {"id":"", "title":"Special Education"}
+                {"id":"MA-CURI", "title":"Curriculum & Instruction"},
+                {"id":"MA-EDULS", "title":"Educational Leadership & Supervision"},
+                {"id":"MA-ESL", "title":"English As A Second Language (ESL)"},
+                {"id":"MA-SCEDU", "title":"Secondary Education"},
+                {"id":"MA-SPEDU", "title":"Special Education"}
             ],
             "doctorate":[                
-                {"id":"", "title":"Adult Teaching and Learning", "degreeTitle":"Education"},
-                {"id":"", "title":"Child Development", "degreeTitle":"Education"},
-                {"id":"", "title":"Curriculum and Instruction", "degreeTitle":"Education"},
-                {"id":"", "title":"Educational Leadership", "degreeTitle":"Education"},
-                {"id":"", "title":"English as a Second Language (ESL)", "degreeTitle":"Education"},
-                {"id":"", "title":"Secondary Education", "degreeTitle":"Education"},
-                {"id":"", "title":"Special Education", "degreeTitle":"Education"},
-                {"id":"", "title":"Higher Education Leadership", "degreeTitle":"Education"},
-                {"id":"", "title":"Adult Teaching and Learning", "degreeTitle":"Philosophy"},
-                {"id":"", "title":"Child Development", "degreeTitle":"Philosophy"},
-                {"id":"", "title":"Curriculum and Instruction", "degreeTitle":"Philosophy"},
-                {"id":"", "title":"Educational Leadership", "degreeTitle":"Philosophy"},
-                {"id":"", "title":"English as a Second Language (ESL)", "degreeTitle":"Philosophy"},
-                {"id":"", "title":"Secondary Education", "degreeTitle":"Philosophy"},
-                {"id":"", "title":"Special Education", "degreeTitle":"Philosophy"},
-                {"id":"", "title":"Higher Education and Community College Leadership", "degreeTitle":"Philosophy"}
+                {"id":"PHD-E-ATL", "title":"Adult Teaching & Learning", "degreeTitle":"Education"},
+                {"id":"PHD-E-CHDEV", "title":"Child Development", "degreeTitle":"Education"},
+                {"id":"PHD-E-CURI", "title":"Curriculum & Instruction", "degreeTitle":"Education"},
+                {"id":"PHD-E-EDUL", "title":"Educational Leadership", "degreeTitle":"Education"},
+                {"id":"PHD-E-ESL", "title":"English As A Second Language (ESL)", "degreeTitle":"Education"},
+                {"id":"PHD-E-SCEDU", "title":"Secondary Education", "degreeTitle":"Education"},
+                {"id":"PHD-E-SPEDU", "title":"Special Education", "degreeTitle":"Education"},
+                {"id":"PHD-E-HEDUL", "title":"Higher Education Leadership", "degreeTitle":"Education"},
+
+                {"id":"PHD-P-ATL", "title":"Adult Teaching & Learning", "degreeTitle":"Philosophy"},
+                {"id":"PHD-P-CDDEV", "title":"Child Development", "degreeTitle":"Philosophy"},
+                {"id":"PHD-P-CURI", "title":"Curriculum & Instruction", "degreeTitle":"Philosophy"},
+                {"id":"PHD-P-EDUL", "title":"Educational Leadership", "degreeTitle":"Philosophy"},
+                {"id":"PHD-P-ESL", "title":"English As A Second Language (ESL)", "degreeTitle":"Philosophy"},
+                {"id":"PHD-P-SCEDU", "title":"Secondary Education", "degreeTitle":"Philosophy"},
+                {"id":"PHD-P-SPEDU", "title":"Special Education", "degreeTitle":"Philosophy"},
+                {"id":"PHD-P-HEDUCCL", "title":"Higher Education & Community College Leadership", "degreeTitle":"Philosophy"}
             ]
         }
     },
@@ -125,10 +126,10 @@
         "img":"img9.jpeg",
         "degrees":{
             "masters":[
-                {"id":"", "title":"Organizational Development and Leadership", "concentrations":["International Business Concentration","Marketing Concentration", "Human Resource Management"]}
+                {"id":"MA-ODL", "title":"Organizational Development and Leadership", "concentrations":["International Business Concentration","Marketing Concentration", "Human Resource Management"]}
             ],
             "doctorate":[
-                {"id":"", "title":"Global and Strategic Leadership", "specialization":["Entrepreneurship Specialization","Marketing Specialization","Business Leadership Specialization","International Business Specialization","Human Resource Management Specialization","Finance Specializations"]}
+                {"id":"PHD-GSL", "title":"Global and Strategic Leadership", "specialization":["Entrepreneurship Specialization","Marketing Specialization","Business Leadership Specialization","International Business Specialization","Human Resource Management Specialization","Finance Specializations"]}
             ]
         }
     }
