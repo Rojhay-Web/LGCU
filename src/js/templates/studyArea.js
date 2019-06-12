@@ -6,14 +6,19 @@ import back1 from '../../assets/temp/img4.jpeg';
 /* Data */
 import academicData from '../data/academics.json';
 
+/* Components */
+import SchoolSub from './components/schoolSubPage';
+import MajorSub from './components/majorSubPage';
+
 /* Header */
 class StudyAreaHeader extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            displayValue: false,
+            displayValue: 0,
             valid: false,
-            data:{}
+            data:{},
+            majorData:{}
         }
 
         this.loadData = this.loadData.bind(this);
@@ -25,10 +30,13 @@ class StudyAreaHeader extends Component{
 
     render(){        
         return(
-            <div className="headerCard academicHeader sub-page">
+            <div className="headerCard studyHeader sub-page">
                 <div className="header-title header-section">
                     <div className="backImg"><img src={"../images/tmp/"+this.state.data.img} /></div>
-                    <h1>{"The School of " + this.state.data.title}</h1>                    
+                    
+                    <div className="lrg-title">{(this.state.majorData ? this.state.majorData.title : "")}</div>  
+                    <div className={(this.state.majorData.title ? "sub-title": "lrg-title")}>{"The School of " + this.state.data.title}</div>  
+
                     <div className="solid-back">
                         <span>{this.state.data.description}</span>
                     </div>
@@ -38,14 +46,29 @@ class StudyAreaHeader extends Component{
     }
 
     loadData(){
-        try {
-            var tmpData = academicData;
-
+        try {            
             if(this.props.match.params.studyArea && (this.props.match.params.studyArea in academicData)){
-                this.setState({ displayValue:true, valid:true, data: academicData[this.props.match.params.studyArea]});
+                let params = new URLSearchParams(this.props.location.search);
+                var majorId = params.get("majorId");
+                var tmpArea = academicData[this.props.match.params.studyArea];
+                var tmpMajor = [];
+                var displayNum = 1;
+                var displayValid = true;
+
+                if(majorId != null){
+                    var degreeList = Object.keys(tmpArea.degrees);
+                    for(var i =0; i < degreeList.length; i++){
+                        tmpMajor = tmpArea.degrees[degreeList[i]].filter(function(item){  return item.id == majorId; });
+                        if(tmpMajor != null) { displayNum = 2; tmpMajor = tmpMajor[0]; break; }
+                    }
+                    
+                    displayValid = (tmpMajor != null && tmpMajor.length > 0);
+                }
+
+                this.setState({ displayValue:displayNum, valid:displayValid, data: tmpArea, majorData: tmpMajor});
             }
             else {
-                this.setState({ displayValue:true, valid:false });
+                this.setState({ displayValue:1, valid:false });
             }
         }
         catch(ex){
@@ -60,9 +83,11 @@ class StudyArea extends Component{
         super(props);
 
         this.state = {
-            displayValue: false,
+            displayValue: 0,
             valid: false,
-            data:{degreeList:[]}
+            data:{degreeList:[]},
+            majorData:{},
+            baseUrl:""
         }
 
         this.loadData = this.loadData.bind(this);
@@ -75,41 +100,20 @@ class StudyArea extends Component{
 
     render(){        
         return(
-            <div className="inner-page-body studyPage">
-                <section className="studyArea-section">
-                    <h2 className="lrgTitle ctr" data-text="About Our School">About Our School</h2>
-                    <div className="section-container">
-                        <p>{this.state.data.fullDescription}</p>
-                    </div>
-                </section>
-
-                <section className="studyArea-section alternate patterned">
-                    <div className="section-container">
-                        <h2 className="lrgTitle ctr c2" data-text="Take The Next Step">Take The Next Step</h2>
-
-                        <div className="btn-container">
-                            <a href="/" className="lBtn clear t2"><span>Request More Information</span><i className="btn-icon fas fa-info-circle"></i></a>
-                            <a href="/" className="lBtn c2"><span>Apply</span><i className="btn-icon far fa-edit"></i></a>
-                        </div>
-                    </div>                    
-                </section>
-
-                <section className="studyArea-section">
-                    <h2 className="lrgTitle ctr" data-text="Degrees & Majors">Degrees & Majors</h2>
-                    <div className="section-container">
-                        {this.state.data.degreeList.map((item,i) => (
-                            <div className="degreeSection" key={i}>
-                                <h3 className="degreeTitle">{item}</h3>
-                                {this.state.data.degrees[item].map((major,j) => (
-                                    <a href="/" key={j} className="majorLink">
-                                        <i className="fas fa-chevron-right" />
-                                        <span>{major.title}</span>
-                                    </a>
-                                ))}
-                            </div>
-                        ))}
-                    </div>
-                </section>
+            <div className="study-container">
+                {(() => {
+                    switch(this.state.displayValue){
+                        case 0:
+                            return <span>Loading...</span>;
+                        case 1:
+                            return <SchoolSub data={this.state.data} baseUrl={this.state.baseUrl} />;
+                        case 2:
+                            return <MajorSub majorData={this.state.majorData} />;
+                        default:
+                            return <div>Invalid Param</div>;
+                    }
+                })()}
+                
             </div>
         );
     }
@@ -120,16 +124,33 @@ class StudyArea extends Component{
                 var tmpData = academicData[this.props.match.params.studyArea];
                 tmpData.degreeList = Object.keys(tmpData.degrees);
 
-                this.setState({ displayValue:true, valid:true, data: tmpData});
+                var areaUrlTitle = tmpData.title.replace(/([&\/\\()])/g,"_").split(' ').join("").toLowerCase();
+                var baseUrl = "/studyarea/"+areaUrlTitle;
+                
+                let params = new URLSearchParams(this.props.location.search);
+                var majorId = params.get("majorId");
+                var tmpArea = academicData[this.props.match.params.studyArea];
+                var tmpMajor = [];
+                var displayNum = 1;
+
+                if(majorId != null){
+                    
+                    for(var i =0; i < tmpData.degreeList.length; i++){
+                        tmpMajor = tmpArea.degrees[tmpData.degreeList[i]].filter(function(item){  return item.id == majorId; });
+                        if(tmpMajor.length > 0) { displayNum = 2; tmpMajor = tmpMajor[0]; break; }
+                    }                                     
+                }
+
+                this.setState({ displayValue:displayNum, data: tmpData, baseUrl:baseUrl, majorData: tmpMajor});
             }
             else {
-                this.setState({ displayValue:true, valid:false });
+                this.setState({ displayValue:-1 });
             }
         }
         catch(ex){
             console.log("Error Loading Data: ", ex);
         }
-    }
+    }   
 }
 
 export {StudyArea, StudyAreaHeader};

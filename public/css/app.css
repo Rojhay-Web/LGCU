@@ -620,6 +620,8 @@
   -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.2);
   -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.2);
   box-shadow: 0 3px 7px rgba(0, 0, 0, 0.2);
+  color: initial;
+  text-decoration: none;
   transition: 0.5s all ease-in-out;
   cursor: pointer;
 }
@@ -704,6 +706,41 @@
 .academicsPage .academic-section.patterned .section-container {
   position: relative;
   z-index: 2;
+}
+.studyHeader {
+  position: relative;
+  z-index: 2;
+  background: #dcdcdc;
+}
+.studyHeader .header-section {
+  padding: 10px 5%;
+}
+.studyHeader .header-section.header-title .lrg-title {
+  position: relative;
+  z-index: 1;
+  font-size: 5rem;
+  /*margin-bottom: 30px;*/
+}
+.studyHeader .header-section.header-title .sub-title {
+  position: relative;
+  z-index: 1;
+  font-size: 2rem;
+  margin-bottom: 30px;
+  color: #504e99;
+}
+.studyHeader .header-section.header-title .solid-back span {
+  background: rgba(80, 78, 153, 0.7) !important;
+}
+.studyHeader .header-section.header-title .backImg:before {
+  background-color: rgba(80, 78, 153, 0.3) !important;
+}
+@media (max-width: 770px) {
+  .studyHeader .header-section.header-title .btn-container {
+    flex-direction: column !important;
+  }
+  .studyHeader .header-section.header-title .btn-container .lBtn + .lBtn {
+    margin-left: 0 !important;
+  }
 }
 .studyPage {
   padding-bottom: 30px;

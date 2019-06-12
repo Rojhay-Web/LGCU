@@ -1,3 +1,40 @@
+.studyHeader {
+    position: relative;
+    z-index: 2;
+    background: rgba(220,220,220,1);
+
+    .header-section {
+        padding: 10px 5%;
+        &.header-title {
+            .lrg-title { position: relative; z-index: 1; font-size: 5rem; /*margin-bottom: 30px;*/}
+            
+            .sub-title { 
+                position: relative; 
+                z-index: 1; 
+                font-size: 2rem;
+                margin-bottom: 30px;
+                color: @color3;
+            }
+
+            .solid-back {
+                span {
+                    .color3(background, 0.7);
+                }
+            }
+            .backImg {
+                &:before {.color3(background-color, 0.3);}
+            }
+            
+            @media @mobile-device { 
+                .btn-container { 
+                    flex-direction: column !important;
+                    .lBtn + .lBtn { margin-left: 0 !important;}
+                }
+            }
+        }
+    }
+}
+
 .studyPage {
     padding-bottom: 30px;
     .studyArea-section {

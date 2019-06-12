@@ -30,8 +30,8 @@ class AcademicsHeader extends Component{
                     </div>
 
                     <div className="btn-container">
-                        <a href="#viewArea" className="lBtn clear t1"><span>View Areas Of Study</span><i className="btn-icon fas fa-arrow-right"></i></a>
-                        <a href="#findDegree" className="lBtn clear t1"><span>Find Your Degree</span><i className="btn-icon fas fa-search"></i></a>
+                        <a href="/academics#viewArea" className="lBtn clear t1"><span>View Areas Of Study</span><i className="btn-icon fas fa-arrow-right"></i></a>
+                        <a href="/academics#findDegree" className="lBtn clear t1"><span>Find Your Degree</span><i className="btn-icon fas fa-search"></i></a>
                     </div>
                 </div>                
             </div>

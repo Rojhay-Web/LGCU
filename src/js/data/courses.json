@@ -1,69 +1,1934 @@
 {
-    "courses":[
-        {"section":"ANTH", "id":110, "title":"Cultural Anthropology", "credits":3},
-
-        {"section":"BIOL", "id":105, "title":"General Biology", "credit":3},
-        {"section":"BSC", "id":203, "title":"Intro to Biblical Studies", "credit":3},
-        {"section":"BSC", "id":205, "title":"Old Testament Studies I", "credit":3},
-        {"section":"BSC", "id":207, "title":"Old Testament Studies II", "credit":3},
-        {"section":"BSC", "id":209, "title":"New Testament Studies I", "credit":3},
-        {"section":"BSC", "id":211, "title":"New Testament Studies II", "credit":3},
-        {"section":"BSC", "id":213, "title":"Christian Ethics", "credit":3},
-        {"section":"BSC", "id":215, "title":"Biblical Interpretation Studies", "credit":3},
-
-        {"section":"CIS", "id":107, "title":"Computer Information System", "credit":3},
-        
-        {"section":"ENG", "id":101, "title":"English Composition I", "credit":3},
-        {"section":"ENG", "id":102, "title":"English Composition II", "credit":3},
-        {"section":"ENG", "id":117, "title":"Public Speaking and Research", "credit":3},
-        {"section":"ENG", "id":118, "title":"Group and Team Communication", "credit":3},
-
-        {"section":"GRE", "id":307, "title":"Introduction to New Testament Greek", "credit":3},
-
-        {"section":"HEB", "id":307, "title":"Introduction To Old Testament Hebrew", "credit":3},
-        {"section":"HIST", "id":122, "title":"Global History I", "credit":3},
-        {"section":"HIST", "id":123, "title":"Global History II", "credit":3},
-
-        {"section":"MTH", "id":160, "title":"College Algebra", "credit":3},
-        {"section":"MTH", "id":161, "title":"College Algebra", "credit":3},
-
-        {"section":"PSY", "id":101, "title":"Intro to Psychology", "credit":3},
-        {"section":"POLS", "id":101, "title":"Introduction to Political Science", "credit":3},
-
-        {"section":"SOC", "id":101, "title":"Intro to Sociology", "credit":3},
-        {"section":"SOC", "id":217, "title":"Cultural Diversity", "credit":3},
-
-        
-        {"section":"", "id":0, "title":"", "credit":3},
-        {"section":"", "id":0, "title":"", "credit":3},
-        {"section":"", "id":0, "title":"", "credit":3},
-        {"section":"", "id":0, "title":"", "credit":3},
-        {"section":"", "id":0, "title":"", "credit":3},
-        {"section":"", "id":0, "title":"", "credit":3},
-        {"section":"", "id":0, "title":"", "credit":3},
-        {"section":"", "id":0, "title":"", "credit":3},
-        {"section":"", "id":0, "title":"", "credit":3},
-        {"section":"", "id":0, "title":"", "credit":3},
-        {"section":"", "id":0, "title":"", "credit":3},
-        {"section":"", "id":0, "title":"", "credit":3},
-        {"section":"", "id":0, "title":"", "credit":3},
-        {"section":"", "id":0, "title":"", "credit":3},
-        {"section":"", "id":0, "title":"", "credit":3},
-        {"section":"", "id":0, "title":"", "credit":3},
-        {"section":"", "id":0, "title":"", "credit":3},
-        {"section":"", "id":0, "title":"", "credit":3},
-        {"section":"", "id":0, "title":"", "credit":3},
-        {"section":"", "id":0, "title":"", "credit":3},
-        {"section":"", "id":0, "title":"", "credit":3},
-        {"section":"", "id":0, "title":"", "credit":3},
-        {"section":"", "id":0, "title":"", "credit":3},
-        {"section":"", "id":0, "title":"", "credit":3},
-        {"section":"", "id":0, "title":"", "credit":3},
-        {"section":"", "id":0, "title":"", "credit":3},
-        {"section":"", "id":0, "title":"", "credit":3},
-        {"section":"", "id":0, "title":"", "credit":3},
-        {"section":"", "id":0, "title":"", "credit":3},
-        {"section":"", "id":0, "title":"", "credit":3},
-        {"section":"", "id":0, "title":"", "credit":3}
-    ]
+    "ACCT_105": {
+        "section": "ACCT",
+        "id": 105,
+        "title": "Principles of Accounting II",
+        "credit": 3
+    },
+    "ACCT_215": {
+        "section": "ACCT",
+        "id": 215,
+        "title": "International Accounting",
+        "credit": 3
+    },
+    "ACCT_310": {
+        "section": "ACCT",
+        "id": 310,
+        "title": "Principles of Accounting II",
+        "credit": 4
+    },
+    "ACCT_315": {
+        "section": "ACCT",
+        "id": 315,
+        "title": "International Accounting",
+        "credit": 4
+    },
+    "ACCT_341": {
+        "section": "ACCT",
+        "id": 341,
+        "title": "Advanced Accounting Principles",
+        "credit": 3
+    },
+    "ACCT_342": {
+        "section": "ACCT",
+        "id": 342,
+        "title": "Accounting for Critical Decision Making",
+        "credit": 3
+    },
+    "ACCT_350": {
+        "section": "ACCT",
+        "id": 350,
+        "title": "International Accounting I",
+        "credit": 3
+    },
+    "ACCT_460": {
+        "section": "ACCT",
+        "id": 460,
+        "title": "International Accounting II",
+        "credit": 3
+    },
+    "ACCT_470": {
+        "section": "ACCT",
+        "id": 470,
+        "title": "Field Experience",
+        "credit": 3
+    },
+    "ACCT_505": {
+        "section": "ACCT",
+        "id": 505,
+        "title": "Principles of Accounting",
+        "credit": 3
+    },
+    "ACCT_515": {
+        "section": "ACCT",
+        "id": 515,
+        "title": "International Relations",
+        "credit": 3
+    },
+    "ANTH_110": {
+        "section": "ANTH",
+        "id": 110,
+        "title": "Cultural Anthropology",
+        "credit": 3
+    },
+    "BIOL_105": {
+        "section": "BIOL",
+        "id": 105,
+        "title": "General Biology",
+        "credit": 3
+    },
+    "BIO_105": {
+        "section": "BIO",
+        "id": 105,
+        "title": "General Biology",
+        "credit": 3
+    },
+    "BSC_203": {
+        "section": "BSC",
+        "id": 203,
+        "title": "Intro to Biblical Studies",
+        "credit": 3
+    },
+    "BSC_205": {
+        "section": "BSC",
+        "id": 205,
+        "title": "Old Testament Studies I",
+        "credit": 3
+    },
+    "BSC_207": {
+        "section": "BSC",
+        "id": 207,
+        "title": "Old Testament Studies II",
+        "credit": 3
+    },
+    "BSC_209": {
+        "section": "BSC",
+        "id": 209,
+        "title": "New Testament Studies I",
+        "credit": 3
+    },
+    "BSC_211": {
+        "section": "BSC",
+        "id": 211,
+        "title": "New Testament Studies II",
+        "credit": 3
+    },
+    "BSC_213": {
+        "section": "BSC",
+        "id": 213,
+        "title": "Christian Ethics",
+        "credit": 3
+    },
+    "BSC_215": {
+        "section": "BSC",
+        "id": 215,
+        "title": "Biblical Interpretation Studies",
+        "credit": 3
+    },
+    "BSC_217": {
+        "section": "BSC",
+        "id": 217,
+        "title": "Clinical Pastoral Education",
+        "credit": 3
+    },
+    "BSC_241": {
+        "section": "BSC",
+        "id": 241,
+        "title": "Church History I",
+        "credit": 3
+    },
+    "BSC_301": {
+        "section": "BSC",
+        "id": 301,
+        "title": "Spiritual Formation",
+        "credit": 3
+    },
+    "BSC_401": {
+        "section": "BSC",
+        "id": 401,
+        "title": "Systematic Theology",
+        "credit": 3
+    },
+    "BSC_417": {
+        "section": "BSC",
+        "id": 417,
+        "title": "Systematic Theology I",
+        "credit": 3
+    },
+    "BUSL_203": {
+        "section": "BUSL",
+        "id": 203,
+        "title": "Business Literature",
+        "credit": 3
+    },
+    "BUSL_323": {
+        "section": "BUSL",
+        "id": 323,
+        "title": "Business Literature",
+        "credit": 4
+    },
+    "BUSM_225": {
+        "section": "BUSM",
+        "id": 225,
+        "title": "Business Management",
+        "credit": 3
+    },
+    "BUSM_325": {
+        "section": "BUSM",
+        "id": 325,
+        "title": "Business Management",
+        "credit": 4
+    },
+    "BUSN_217": {
+        "section": "BUSN",
+        "id": 217,
+        "title": "International Business",
+        "credit": 3
+    },
+    "BUSN_221": {
+        "section": "BUSN",
+        "id": 221,
+        "title": "Professional Writing",
+        "credit": 3
+    },
+    "BUSN_298": {
+        "section": "BUSN",
+        "id": 298,
+        "title": "Field Experience",
+        "credit": 3
+    },
+    "BUSN_317": {
+        "section": "BUSN",
+        "id": 317,
+        "title": "International Business",
+        "credit": 4
+    },
+    "BUSN_321": {
+        "section": "BUSN",
+        "id": 321,
+        "title": "Professional Writing",
+        "credit": 4
+    },
+    "BUSN_470": {
+        "section": "BUSN",
+        "id": 470,
+        "title": "Field Experience",
+        "credit": 6
+    },
+    "BUSN_517": {
+        "section": "BUSN",
+        "id": 517,
+        "title": "International Business",
+        "credit": 3
+    },
+    "BUSN_553": {
+        "section": "BUSN",
+        "id": 553,
+        "title": "Professional Writing",
+        "credit": 3
+    },
+    "BUSN_558": {
+        "section": "BUSN",
+        "id": 558,
+        "title": "Business Literature",
+        "credit": 3
+    },
+    "BUSN_559": {
+        "section": "BUSN",
+        "id": 559,
+        "title": "Business Management",
+        "credit": 3
+    },
+    "BUSN_570": {
+        "section": "BUSN",
+        "id": 570,
+        "title": "Field Experience",
+        "credit": 3
+    },
+    "CDE_110": {
+        "section": "CDE",
+        "id": 110,
+        "title": "Intro to Child Development Education",
+        "credit": 3
+    },
+    "CDE_113": {
+        "section": "CDE",
+        "id": 113,
+        "title": "Teacher Parent Child Relations",
+        "credit": 3
+    },
+    "CDE_115": {
+        "section": "CDE",
+        "id": 115,
+        "title": "History and Trends in CDE",
+        "credit": 3
+    },
+    "CDE_117": {
+        "section": "CDE",
+        "id": 117,
+        "title": "Cultural Diversity",
+        "credit": 3
+    },
+    "CDE_121": {
+        "section": "CDE",
+        "id": 121,
+        "title": "Language Arts",
+        "credit": 3
+    },
+    "CDE_123": {
+        "section": "CDE",
+        "id": 123,
+        "title": "Program Planning I",
+        "credit": 3
+    },
+    "CDE_131": {
+        "section": "CDE",
+        "id": 131,
+        "title": "Child Healthcare and Nutrition",
+        "credit": 3
+    },
+    "CDE_211": {
+        "section": "CDE",
+        "id": 211,
+        "title": "Career Growth and Dev",
+        "credit": 3
+    },
+    "CDE_217": {
+        "section": "CDE",
+        "id": 217,
+        "title": "Children’s Lit",
+        "credit": 3
+    },
+    "CDE_223": {
+        "section": "CDE",
+        "id": 223,
+        "title": "Practicum",
+        "credit": 3
+    },
+    "CDE_225": {
+        "section": "CDE",
+        "id": 225,
+        "title": "Child Development Educational Admin I",
+        "credit": 3
+    },
+    "CDE_227": {
+        "section": "CDE",
+        "id": 227,
+        "title": "Child Development Educational Admin II",
+        "credit": 3
+    },
+    "CDE_321": {
+        "section": "CDE",
+        "id": 321,
+        "title": "Practicum I",
+        "credit": 6
+    },
+    "CDE_323": {
+        "section": "CDE",
+        "id": 323,
+        "title": "Practicum II",
+        "credit": 6
+    },
+    "CED_301": {
+        "section": "CED",
+        "id": 301,
+        "title": "Intro to Christian Education",
+        "credit": 3
+    },
+    "CED_303": {
+        "section": "CED",
+        "id": 303,
+        "title": "Intro to Christian Counseling",
+        "credit": 3
+    },
+    "CED_307": {
+        "section": "CED",
+        "id": 307,
+        "title": "Advanced Christian Counseling",
+        "credit": 3
+    },
+    "CED_309": {
+        "section": "CED",
+        "id": 309,
+        "title": "Music in Christian Education",
+        "credit": 3
+    },
+    "CED_311": {
+        "section": "CED",
+        "id": 311,
+        "title": "Christian Education Development",
+        "credit": 3
+    },
+    "CED_315": {
+        "section": "CED",
+        "id": 315,
+        "title": "Christian Education Curriculum",
+        "credit": 3
+    },
+    "CED_317": {
+        "section": "CED",
+        "id": 317,
+        "title": "Program Planning",
+        "credit": 3
+    },
+    "CED_319": {
+        "section": "CED",
+        "id": 319,
+        "title": "Christian Education Administration",
+        "credit": 3
+    },
+    "CED_411": {
+        "section": "CED",
+        "id": 411,
+        "title": "413 Practicum I and II",
+        "credit": 6
+    },
+    "CED_413": {
+        "section": "CED",
+        "id": 413,
+        "title": "Practicum II",
+        "credit": 6
+    },
+    "CED_503": {
+        "section": "CED",
+        "id": 503,
+        "title": "Advanced Christian Counseling",
+        "credit": 3
+    },
+    "CHAM_241": {
+        "section": "CHAM",
+        "id": 241,
+        "title": "Church Administration I",
+        "credit": 3
+    },
+    "CHAM_243": {
+        "section": "CHAM",
+        "id": 243,
+        "title": "Church Administration II",
+        "credit": 3
+    },
+    "CHAM_541": {
+        "section": "CHAM",
+        "id": 541,
+        "title": "Church Administration I",
+        "credit": 3
+    },
+    "CHAM_560": {
+        "section": "CHAM",
+        "id": 560,
+        "title": "Church Administration II",
+        "credit": 3
+    },
+    "CHM_301": {
+        "section": "CHM",
+        "id": 301,
+        "title": "Intro to Church Ministries",
+        "credit": 3
+    },
+    "CHM_317": {
+        "section": "CHM",
+        "id": 317,
+        "title": "Homiletics",
+        "credit": 3
+    },
+    "CHM_321": {
+        "section": "CHM",
+        "id": 321,
+        "title": "Pulpit Ministries",
+        "credit": 3
+    },
+    "CHM_327": {
+        "section": "CHM",
+        "id": 327,
+        "title": "Clinical Pastoral Education",
+        "credit": 3
+    },
+    "CHM_331": {
+        "section": "CHM",
+        "id": 331,
+        "title": "Pastoral Leadership I",
+        "credit": 3
+    },
+    "CHM_333": {
+        "section": "CHM",
+        "id": 333,
+        "title": "Pastoral Leadership II",
+        "credit": 3
+    },
+    "CHM_337": {
+        "section": "CHM",
+        "id": 337,
+        "title": "Marriage and Family",
+        "credit": 3
+    },
+    "CHM_345": {
+        "section": "CHM",
+        "id": 345,
+        "title": "Practicum I",
+        "credit": 3
+    },
+    "CHM_347": {
+        "section": "CHM",
+        "id": 347,
+        "title": "Practicum II",
+        "credit": 3
+    },
+    "CHM_501": {
+        "section": "CHM",
+        "id": 501,
+        "title": "Intro to Church Ministries",
+        "credit": 3
+    },
+    "CHM_517": {
+        "section": "CHM",
+        "id": 517,
+        "title": "Homiletics",
+        "credit": 3
+    },
+    "CHM_521": {
+        "section": "CHM",
+        "id": 521,
+        "title": "Pulpit Ministries",
+        "credit": 3
+    },
+    "CHM_527": {
+        "section": "CHM",
+        "id": 527,
+        "title": "Clinical Pastoral Education",
+        "credit": 3
+    },
+    "CHM_537": {
+        "section": "CHM",
+        "id": 537,
+        "title": "Marriage and Family",
+        "credit": 3
+    },
+    "CHM_570": {
+        "section": "CHM",
+        "id": 570,
+        "title": "Practicum or Professional Portfolio",
+        "credit": 3
+    },
+    "CHS_520": {
+        "section": "CHS",
+        "id": 520,
+        "title": "Church History",
+        "credit": 3
+    },
+    "CIS_107": {
+        "section": "CIS",
+        "id": 107,
+        "title": "Computer Information System",
+        "credit": 3
+    },
+    "CIS_301": {
+        "section": "CIS",
+        "id": 301,
+        "title": "Foundations of Computer Information System I",
+        "credit": 3
+    },
+    "CIS_303": {
+        "section": "CIS",
+        "id": 303,
+        "title": "Foundations of Computer Information System II",
+        "credit": 3
+    },
+    "CIS_341": {
+        "section": "CIS",
+        "id": 341,
+        "title": "Forensic Analysis",
+        "credit": 3
+    },
+    "CIS_401": {
+        "section": "CIS",
+        "id": 401,
+        "title": "Computer Analysis and Design I",
+        "credit": 3
+    },
+    "CIS_403": {
+        "section": "CIS",
+        "id": 403,
+        "title": "Computer Analysis and Design II",
+        "credit": 3
+    },
+    "CIS_405": {
+        "section": "CIS",
+        "id": 405,
+        "title": "Structuring Data Information",
+        "credit": 3
+    },
+    "CIS_407": {
+        "section": "CIS",
+        "id": 407,
+        "title": "Database Management Systems",
+        "credit": 3
+    },
+    "CIS_411": {
+        "section": "CIS",
+        "id": 411,
+        "title": "Web Development",
+        "credit": 6
+    },
+    "CIS_413": {
+        "section": "CIS",
+        "id": 413,
+        "title": "Telecommunication Information Systems",
+        "credit": 6
+    },
+    "CIS_415": {
+        "section": "CIS",
+        "id": 415,
+        "title": "Software Engineering",
+        "credit": 6
+    },
+    "CIS_417": {
+        "section": "CIS",
+        "id": 417,
+        "title": "Software Engineering II",
+        "credit": 6
+    },
+    "CMJ_201": {
+        "section": "CMJ",
+        "id": 201,
+        "title": "Introduction to Criminal Justice",
+        "credit": 3
+    },
+    "CMJ_203": {
+        "section": "CMJ",
+        "id": 203,
+        "title": "Criminology Studies",
+        "credit": 3
+    },
+    "CMJ_211": {
+        "section": "CMJ",
+        "id": 211,
+        "title": "Correctional Procedures",
+        "credit": 3
+    },
+    "CMJ_227": {
+        "section": "CMJ",
+        "id": 227,
+        "title": "Criminal Law I",
+        "credit": 3
+    },
+    "CMJ_229": {
+        "section": "CMJ",
+        "id": 229,
+        "title": "Criminal Law II",
+        "credit": 3
+    },
+    "CMJ_331": {
+        "section": "CMJ",
+        "id": 331,
+        "title": "Research in Criminal Justice",
+        "credit": 3
+    },
+    "CMJ_340": {
+        "section": "CMJ",
+        "id": 340,
+        "title": "Ethical and Behavioral Issues in Criminal Justice",
+        "credit": 3
+    },
+    "CMJ_343": {
+        "section": "CMJ",
+        "id": 343,
+        "title": "Criminal Investigation",
+        "credit": 3
+    },
+    "CMJ_345": {
+        "section": "CMJ",
+        "id": 345,
+        "title": "Constitutional Law",
+        "credit": 3
+    },
+    "CMJ_347": {
+        "section": "CMJ",
+        "id": 347,
+        "title": "Multicultural Issues in Criminal Justice",
+        "credit": 3
+    },
+    "CMJ_430": {
+        "section": "CMJ",
+        "id": 430,
+        "title": "Principles of Law Enforcement Administration",
+        "credit": 3
+    },
+    "CMJ_431": {
+        "section": "CMJ",
+        "id": 431,
+        "title": "State & National Homeland Security",
+        "credit": 3
+    },
+    "CMJ_433": {
+        "section": "CMJ",
+        "id": 433,
+        "title": "Principles of Correctional Administration",
+        "credit": 3
+    },
+    "CSC_500": {
+        "section": "CSC",
+        "id": 500,
+        "title": "Foundations of Christian Schools",
+        "credit": 3
+    },
+    "CSC_501": {
+        "section": "CSC",
+        "id": 501,
+        "title": "Philosophy of Christian Education",
+        "credit": 3
+    },
+    "CSC_510": {
+        "section": "CSC",
+        "id": 510,
+        "title": "Christian Schools Curriculum & Design",
+        "credit": 3
+    },
+    "CSC_515": {
+        "section": "CSC",
+        "id": 515,
+        "title": "Issues and Trends in Christian Education",
+        "credit": 3
+    },
+    "CSC_520": {
+        "section": "CSC",
+        "id": 520,
+        "title": "Assessment and Evaluation of Christian Curriculum",
+        "credit": 3
+    },
+    "CSC_525": {
+        "section": "CSC",
+        "id": 525,
+        "title": "Classroom Management",
+        "credit": 3
+    },
+    "CSC_530": {
+        "section": "CSC",
+        "id": 530,
+        "title": "Teaching and Learning Theory",
+        "credit": 3
+    },
+    "DBA_823": {
+        "section": "DBA",
+        "id": 823,
+        "title": "Investment Analysis",
+        "credit": 4
+    },
+    "DBA_824": {
+        "section": "DBA",
+        "id": 824,
+        "title": "Advanced Corporate Finance",
+        "credit": 4
+    },
+    "DBA_826": {
+        "section": "DBA",
+        "id": 826,
+        "title": "Financial Institutions and Banking",
+        "credit": 4
+    },
+    "DBA_827": {
+        "section": "DBA",
+        "id": 827,
+        "title": "Advanced Business Ethics",
+        "credit": 4
+    },
+    "DBA_828": {
+        "section": "DBA",
+        "id": 828,
+        "title": "Conflict Management in Human Resources",
+        "credit": 4
+    },
+    "DBA_830": {
+        "section": "DBA",
+        "id": 830,
+        "title": "Principles of Team Management",
+        "credit": 4
+    },
+    "DBA_831": {
+        "section": "DBA",
+        "id": 831,
+        "title": "International Business",
+        "credit": 4
+    },
+    "DBA_832": {
+        "section": "DBA",
+        "id": 832,
+        "title": "International Trade",
+        "credit": 4
+    },
+    "DBA_834": {
+        "section": "DBA",
+        "id": 834,
+        "title": "International Economics",
+        "credit": 4
+    },
+    "DBA_837": {
+        "section": "DBA",
+        "id": 837,
+        "title": "Leadership Development",
+        "credit": 4
+    },
+    "DBA_839": {
+        "section": "DBA",
+        "id": 839,
+        "title": "Leading in a Diverse Society",
+        "credit": 4
+    },
+    "DBA_840": {
+        "section": "DBA",
+        "id": 840,
+        "title": "Global Business Leadership",
+        "credit": 4
+    },
+    "DBA_841": {
+        "section": "DBA",
+        "id": 841,
+        "title": "Advanced Marketing Management",
+        "credit": 4
+    },
+    "DBA_843": {
+        "section": "DBA",
+        "id": 843,
+        "title": "Strategic Marketing Research",
+        "credit": 4
+    },
+    "DBA_846": {
+        "section": "DBA",
+        "id": 846,
+        "title": "Global Marketing Management",
+        "credit": 4
+    },
+    "ECON_328": {
+        "section": "ECON",
+        "id": 328,
+        "title": "Economic Theory",
+        "credit": 4
+    },
+    "ECON_329": {
+        "section": "ECON",
+        "id": 329,
+        "title": "Economic Policy",
+        "credit": 4
+    },
+    "EDU_300": {
+        "section": "EDU",
+        "id": 300,
+        "title": "Foundations of American Education",
+        "credit": 3
+    },
+    "EDU_303": {
+        "section": "EDU",
+        "id": 303,
+        "title": "Fundamentals of Secondary Education",
+        "credit": 3
+    },
+    "EDU_306": {
+        "section": "EDU",
+        "id": 306,
+        "title": "Teaching and Learning Theory",
+        "credit": 3
+    },
+    "EDU_310": {
+        "section": "EDU",
+        "id": 310,
+        "title": "Issues and Trends in Education",
+        "credit": 3
+    },
+    "EDU_315": {
+        "section": "EDU",
+        "id": 315,
+        "title": "Educational Technology",
+        "credit": 3
+    },
+    "EDU_320": {
+        "section": "EDU",
+        "id": 320,
+        "title": "Educational Technology",
+        "credit": 3
+    },
+    "EDU_340": {
+        "section": "EDU",
+        "id": 340,
+        "title": "Multicultural Perspectives in Education",
+        "credit": 3
+    },
+    "EDU_355": {
+        "section": "EDU",
+        "id": 355,
+        "title": "Special Learner Educational Intervention",
+        "credit": 3
+    },
+    "EDU_360": {
+        "section": "EDU",
+        "id": 360,
+        "title": "Education of the Special Learner",
+        "credit": 3
+    },
+    "EDU_370": {
+        "section": "EDU",
+        "id": 370,
+        "title": "Classroom Management",
+        "credit": 3
+    },
+    "EDU_400": {
+        "section": "EDU",
+        "id": 400,
+        "title": "Educational Psychology",
+        "credit": 3
+    },
+    "EDU_410": {
+        "section": "EDU",
+        "id": 410,
+        "title": "Content Area Reading",
+        "credit": 3
+    },
+    "EDU_415": {
+        "section": "EDU",
+        "id": 415,
+        "title": "Adolescence Literature",
+        "credit": 3
+    },
+    "EDU_417": {
+        "section": "EDU",
+        "id": 417,
+        "title": "Linguistics in Education",
+        "credit": 3
+    },
+    "EDU_420": {
+        "section": "EDU",
+        "id": 420,
+        "title": "Curriculum Design and Evaluation",
+        "credit": 3
+    },
+    "EDU_421": {
+        "section": "EDU",
+        "id": 421,
+        "title": "Assessment and Evaluation",
+        "credit": 3
+    },
+    "EDU_423": {
+        "section": "EDU",
+        "id": 423,
+        "title": "Psychology of Reading",
+        "credit": 3
+    },
+    "EDU_430": {
+        "section": "EDU",
+        "id": 430,
+        "title": "School Law",
+        "credit": 3
+    },
+    "EDU_450": {
+        "section": "EDU",
+        "id": 450,
+        "title": "School/Parent/Student Relations",
+        "credit": 3
+    },
+    "EDU_460": {
+        "section": "EDU",
+        "id": 460,
+        "title": "Content Area Teaching",
+        "credit": 3
+    },
+    "EDU_470": {
+        "section": "EDU",
+        "id": 470,
+        "title": "Educational Research",
+        "credit": 3
+    },
+    "EDU_473": {
+        "section": "EDU",
+        "id": 473,
+        "title": "Processes of Learning",
+        "credit": 3
+    },
+    "EDU_474": {
+        "section": "EDU",
+        "id": 474,
+        "title": "Portfolio Development",
+        "credit": 3
+    },
+    "EDU_480": {
+        "section": "EDU",
+        "id": 480,
+        "title": "Practicum",
+        "credit": 6
+    },
+    "ENG_101": {
+        "section": "ENG",
+        "id": 101,
+        "title": "English Composition I",
+        "credit": 3
+    },
+    "ENG_102": {
+        "section": "ENG",
+        "id": 102,
+        "title": "English Composition II",
+        "credit": 3
+    },
+    "ENG_117": {
+        "section": "ENG",
+        "id": 117,
+        "title": "Public Speaking and Research",
+        "credit": 3
+    },
+    "ENG_118": {
+        "section": "ENG",
+        "id": 118,
+        "title": "Group and Team communication",
+        "credit": 3
+    },
+    "ETS_703": {
+        "section": "ETS",
+        "id": 703,
+        "title": "Issues and Trends in Entrepreneurship",
+        "credit": 6
+    },
+    "ETS_740": {
+        "section": "ETS",
+        "id": 740,
+        "title": "Strategic Administration & Management",
+        "credit": 6
+    },
+    "ETS_760": {
+        "section": "ETS",
+        "id": 760,
+        "title": "Issues and Trends in Global Entrepreneurship",
+        "credit": 6
+    },
+    "FINA_340": {
+        "section": "FINA",
+        "id": 340,
+        "title": "Corporate Finance",
+        "credit": 3
+    },
+    "FINA_341": {
+        "section": "FINA",
+        "id": 341,
+        "title": "Investment Analysis",
+        "credit": 3
+    },
+    "FINA_342": {
+        "section": "FINA",
+        "id": 342,
+        "title": "Advanced Corporate Finance",
+        "credit": 3
+    },
+    "FINA_350": {
+        "section": "FINA",
+        "id": 350,
+        "title": "Advanced Marketing Research",
+        "credit": 3
+    },
+    "FINA_460": {
+        "section": "FINA",
+        "id": 460,
+        "title": "Financial Institutions and Banking",
+        "credit": 3
+    },
+    "FINA_470": {
+        "section": "FINA",
+        "id": 470,
+        "title": "Field Experience",
+        "credit": 3
+    },
+    "GRE_307": {
+        "section": "GRE",
+        "id": 307,
+        "title": "Introduction to New Testament Greek",
+        "credit": 3
+    },
+    "GSM_301": {
+        "section": "GSM",
+        "id": 301,
+        "title": "Introduction to Global Missions",
+        "credit": 3
+    },
+    "GSM_303": {
+        "section": "GSM",
+        "id": 303,
+        "title": "Survey of the Book of Acts",
+        "credit": 3
+    },
+    "GSM_305": {
+        "section": "GSM",
+        "id": 305,
+        "title": "Ethnicity and Diversity",
+        "credit": 3
+    },
+    "GSM_307": {
+        "section": "GSM",
+        "id": 307,
+        "title": "Multicultural Counseling",
+        "credit": 3
+    },
+    "GSM_311": {
+        "section": "GSM",
+        "id": 311,
+        "title": "Ministry of Intercession",
+        "credit": 3
+    },
+    "GSM_321": {
+        "section": "GSM",
+        "id": 321,
+        "title": "Christian Strategic Leadership",
+        "credit": 3
+    },
+    "GSM_327": {
+        "section": "GSM",
+        "id": 327,
+        "title": "Bible Study Methods",
+        "credit": 3
+    },
+    "GSM_331": {
+        "section": "GSM",
+        "id": 331,
+        "title": "Global Theological Views",
+        "credit": 3
+    },
+    "GSM_441": {
+        "section": "GSM",
+        "id": 441,
+        "title": "Practicum I",
+        "credit": 6
+    },
+    "GSM_443": {
+        "section": "GSM",
+        "id": 443,
+        "title": "Practicum II",
+        "credit": 6
+    },
+    "GSM_511": {
+        "section": "GSM",
+        "id": 511,
+        "title": "No TITLE",
+        "credit": -1
+    },
+    "GSM_513": {
+        "section": "GSM",
+        "id": 513,
+        "title": "NO TITLE",
+        "credit": -1
+    },
+    "GSM_515": {
+        "section": "GSM",
+        "id": 515,
+        "title": "NO TITLE",
+        "credit": -1
+    },
+    "GSM_517": {
+        "section": "GSM",
+        "id": 517,
+        "title": "",
+        "credit": -1
+    },
+    "GSM_519": {
+        "section": "GSM",
+        "id": 519,
+        "title": "World Languages",
+        "credit": 15
+    },
+    "HEB_307": {
+        "section": "HEB",
+        "id": 307,
+        "title": "Introduction to Old Testament Hebrew",
+        "credit": 3
+    },
+    "HIST_122": {
+        "section": "HIST",
+        "id": 122,
+        "title": "Global History I",
+        "credit": 3
+    },
+    "HIST_123": {
+        "section": "HIST",
+        "id": 123,
+        "title": "Global History II",
+        "credit": 3
+    },
+    "HRM_341": {
+        "section": "HRM",
+        "id": 341,
+        "title": "Advanced Business Ethics",
+        "credit": 3
+    },
+    "HRM_342": {
+        "section": "HRM",
+        "id": 342,
+        "title": "Conflict Management in Human Resources",
+        "credit": 3
+    },
+    "HRM_350": {
+        "section": "HRM",
+        "id": 350,
+        "title": "Principles of Team Management",
+        "credit": 3
+    },
+    "HRM_460": {
+        "section": "HRM",
+        "id": 460,
+        "title": "Management Assessment & Evaluation",
+        "credit": 3
+    },
+    "HRM_470": {
+        "section": "HRM",
+        "id": 470,
+        "title": "Field Experience",
+        "credit": 3
+    },
+    "HRM_600": {
+        "section": "HRM",
+        "id": 600,
+        "title": "Advanced Business Ethics",
+        "credit": 3
+    },
+    "HRM_601": {
+        "section": "HRM",
+        "id": 601,
+        "title": "Conflict Management in Human Resources",
+        "credit": 3
+    },
+    "HRM_610": {
+        "section": "HRM",
+        "id": 610,
+        "title": "Principles of Team Management",
+        "credit": 3
+    },
+    "HRM_620": {
+        "section": "HRM",
+        "id": 620,
+        "title": "Management Assessment & Evaluation",
+        "credit": 3
+    },
+    "INTB_341": {
+        "section": "INTB",
+        "id": 341,
+        "title": "International Business",
+        "credit": 3
+    },
+    "INTB_342": {
+        "section": "INTB",
+        "id": 342,
+        "title": "International Trade",
+        "credit": 3
+    },
+    "INTB_350": {
+        "section": "INTB",
+        "id": 350,
+        "title": "International Economics",
+        "credit": 3
+    },
+    "INTB_460": {
+        "section": "INTB",
+        "id": 460,
+        "title": "International Finance",
+        "credit": 3
+    },
+    "INTB_470": {
+        "section": "INTB",
+        "id": 470,
+        "title": "Field Experience",
+        "credit": 3
+    },
+    "INTB_600": {
+        "section": "INTB",
+        "id": 600,
+        "title": "International Business",
+        "credit": 3
+    },
+    "INTB_601": {
+        "section": "INTB",
+        "id": 601,
+        "title": "International Trade",
+        "credit": 3
+    },
+    "INTB_610": {
+        "section": "INTB",
+        "id": 610,
+        "title": "International Economics",
+        "credit": 3
+    },
+    "INTB_620": {
+        "section": "INTB",
+        "id": 620,
+        "title": "International Finance",
+        "credit": 3
+    },
+    "LEAD_341": {
+        "section": "LEAD",
+        "id": 341,
+        "title": "Leadership Development",
+        "credit": 3
+    },
+    "LEAD_342": {
+        "section": "LEAD",
+        "id": 342,
+        "title": "Leading in a Diverse Society",
+        "credit": 3
+    },
+    "LEAD_350": {
+        "section": "LEAD",
+        "id": 350,
+        "title": "Leading in Critical Negotiations",
+        "credit": 3
+    },
+    "LEAD_460": {
+        "section": "LEAD",
+        "id": 460,
+        "title": "Global Business Leadership",
+        "credit": 3
+    },
+    "LEAD_470": {
+        "section": "LEAD",
+        "id": 470,
+        "title": "Field Experience",
+        "credit": 3
+    },
+    "LEAD_543": {
+        "section": "LEAD",
+        "id": 543,
+        "title": "Leadership Development",
+        "credit": 3
+    },
+    "LEAD_547": {
+        "section": "LEAD",
+        "id": 547,
+        "title": "Global Leadership",
+        "credit": 3
+    },
+    "LEAD_600": {
+        "section": "LEAD",
+        "id": 600,
+        "title": "Research Methods and Technology",
+        "credit": 3
+    },
+    "LEAD_605": {
+        "section": "LEAD",
+        "id": 605,
+        "title": "Developmental Leadership: Theory and Application",
+        "credit": 3
+    },
+    "LEAD_610": {
+        "section": "LEAD",
+        "id": 610,
+        "title": "Servant Leadership: Reflection and Evaluations",
+        "credit": 3
+    },
+    "LEAD_615": {
+        "section": "LEAD",
+        "id": 615,
+        "title": "Coaching and Mentoring in the 21st Century",
+        "credit": 3
+    },
+    "LEAD_620": {
+        "section": "LEAD",
+        "id": 620,
+        "title": "Leadership Styles: Analytical Thinking and Assessment",
+        "credit": 3
+    },
+    "LEAD_640": {
+        "section": "LEAD",
+        "id": 640,
+        "title": "Organizational Development: Consulting, Change and Interventions",
+        "credit": 3
+    },
+    "LEAD_670": {
+        "section": "LEAD",
+        "id": 670,
+        "title": "Global Leadership: Current Issues, Renewal and Reevaluations",
+        "credit": 3
+    },
+    "LEAD_680": {
+        "section": "LEAD",
+        "id": 680,
+        "title": "Leadership Practicum: Internship or Capstone Project",
+        "credit": 3
+    },
+    "LEAD_700": {
+        "section": "LEAD",
+        "id": 700,
+        "title": "Doctoral Writing in Strategic Leadership",
+        "credit": 3
+    },
+    "LEAD_701": {
+        "section": "LEAD",
+        "id": 701,
+        "title": "Quantitative Research Methodology",
+        "credit": 3
+    },
+    "LEAD_702": {
+        "section": "LEAD",
+        "id": 702,
+        "title": "Qualitative Research Methodology",
+        "credit": 3
+    },
+    "LEAD_740": {
+        "section": "LEAD",
+        "id": 740,
+        "title": "Theories of Leadership",
+        "credit": 3
+    },
+    "LEAD_780": {
+        "section": "LEAD",
+        "id": 780,
+        "title": "Innovation and Transformational Leadership",
+        "credit": 3
+    },
+    "LEAD_820": {
+        "section": "LEAD",
+        "id": 820,
+        "title": "The Leader as Consultant and Change Agent",
+        "credit": 3
+    },
+    "LEAD_870": {
+        "section": "LEAD",
+        "id": 870,
+        "title": "The Dynamics of Advanced Strategic Leadership",
+        "credit": 3
+    },
+    "LEAD_876": {
+        "section": "LEAD",
+        "id": 876,
+        "title": "Global Leadership",
+        "credit": 3
+    },
+    "LEAD_890": {
+        "section": "LEAD",
+        "id": 890,
+        "title": "Seminar: Issues and Trends in Global Leadership Research",
+        "credit": 2
+    },
+    "LEAD_900": {
+        "section": "LEAD",
+        "id": 900,
+        "title": "Doctoral Comprehensive Examination",
+        "credit": 0
+    },
+    "LEAD_901": {
+        "section": "LEAD",
+        "id": 901,
+        "title": "Dissertation Research I",
+        "credit": 4
+    },
+    "LEAD_902": {
+        "section": "LEAD",
+        "id": 902,
+        "title": "Dissertation Research II",
+        "credit": 4
+    },
+    "LEAD_903": {
+        "section": "LEAD",
+        "id": 903,
+        "title": "Dissertation Research III",
+        "credit": 4
+    },
+    "LEAD_904": {
+        "section": "LEAD",
+        "id": 904,
+        "title": "Dissertation Research IV",
+        "credit": 4
+    },
+    "MKTG_122": {
+        "section": "MKTG",
+        "id": 122,
+        "title": "Principles of Marketing",
+        "credit": 3
+    },
+    "MKTG_320": {
+        "section": "MKTG",
+        "id": 320,
+        "title": "Principles of Marketing",
+        "credit": 4
+    },
+    "MKTG_341": {
+        "section": "MKTG",
+        "id": 341,
+        "title": "Advanced Marketing Management",
+        "credit": 3
+    },
+    "MKTG_342": {
+        "section": "MKTG",
+        "id": 342,
+        "title": "Strategic Marketing Research",
+        "credit": 3
+    },
+    "MKTG_350": {
+        "section": "MKTG",
+        "id": 350,
+        "title": "Global Marketing Management",
+        "credit": 3
+    },
+    "MKTG_460": {
+        "section": "MKTG",
+        "id": 460,
+        "title": "Successful Portfolio Management",
+        "credit": 3
+    },
+    "MKTG_470": {
+        "section": "MKTG",
+        "id": 470,
+        "title": "Field Experience",
+        "credit": 3
+    },
+    "MKTG_550": {
+        "section": "MKTG",
+        "id": 550,
+        "title": "Principles of Marketing",
+        "credit": 3
+    },
+    "MKTG_600": {
+        "section": "MKTG",
+        "id": 600,
+        "title": "Advanced Marketing Management",
+        "credit": 3
+    },
+    "MKTG_601": {
+        "section": "MKTG",
+        "id": 601,
+        "title": "Strategic Marketing Research",
+        "credit": 3
+    },
+    "MKTG_610": {
+        "section": "MKTG",
+        "id": 610,
+        "title": "Global Marketing Management",
+        "credit": 3
+    },
+    "MKTG_620": {
+        "section": "MKTG",
+        "id": 620,
+        "title": "Successful Portfolio Management",
+        "credit": 3
+    },
+    "MTH_160": {
+        "section": "MTH",
+        "id": 160,
+        "title": "College Algebra I",
+        "credit": 3
+    },
+    "MTH_161": {
+        "section": "MTH",
+        "id": 161,
+        "title": "College Algebra II",
+        "credit": 3
+    },
+    "NTG_531": {
+        "section": "NTG",
+        "id": 531,
+        "title": "New Testament Greek I",
+        "credit": 3
+    },
+    "NTG_532": {
+        "section": "NTG",
+        "id": 532,
+        "title": "New Testament Greek II",
+        "credit": 3
+    },
+    "NTG_533": {
+        "section": "NTG",
+        "id": 533,
+        "title": "New Testament Greek Exegesis",
+        "credit": 3
+    },
+    "NTS_516": {
+        "section": "NTS",
+        "id": 516,
+        "title": "New Testament Studies I",
+        "credit": 3
+    },
+    "NTS_517": {
+        "section": "NTS",
+        "id": 517,
+        "title": "New Testament Studies II",
+        "credit": 3
+    },
+    "OTH_541": {
+        "section": "OTH",
+        "id": 541,
+        "title": "Old Testament Hebrew I",
+        "credit": 3
+    },
+    "OTH_542": {
+        "section": "OTH",
+        "id": 542,
+        "title": "Old Testament Hebrew II",
+        "credit": 3
+    },
+    "OTH_543": {
+        "section": "OTH",
+        "id": 543,
+        "title": "Old Testament Hebrew Exegesis",
+        "credit": 3
+    },
+    "OTS_513": {
+        "section": "OTS",
+        "id": 513,
+        "title": "Old Testament Studies I",
+        "credit": 3
+    },
+    "OTS_514": {
+        "section": "OTS",
+        "id": 514,
+        "title": "Old Testament Studies II",
+        "credit": 3
+    },
+    "POLS_101": {
+        "section": "POLS",
+        "id": 101,
+        "title": "Introduction to Political Science",
+        "credit": 3
+    },
+    "PSY_101": {
+        "section": "PSY",
+        "id": 101,
+        "title": "Intro to Psychology",
+        "credit": 3
+    },
+    "PSY_303": {
+        "section": "PSY",
+        "id": 303,
+        "title": "History of Psychology",
+        "credit": 3
+    },
+    "PSY_305": {
+        "section": "PSY",
+        "id": 305,
+        "title": "Human Development",
+        "credit": 3
+    },
+    "PSY_307": {
+        "section": "PSY",
+        "id": 307,
+        "title": "Educational Psychology",
+        "credit": 3
+    },
+    "PSY_312": {
+        "section": "PSY",
+        "id": 312,
+        "title": "Developmental Psychology",
+        "credit": 3
+    },
+    "PSY_315": {
+        "section": "PSY",
+        "id": 315,
+        "title": "Child Psychology",
+        "credit": 3
+    },
+    "PSY_341": {
+        "section": "PSY",
+        "id": 341,
+        "title": "Principles of Counseling",
+        "credit": 3
+    },
+    "PSY_401": {
+        "section": "PSY",
+        "id": 401,
+        "title": "Personality Theories",
+        "credit": 3
+    },
+    "PSY_413": {
+        "section": "PSY",
+        "id": 413,
+        "title": "Child Psychology",
+        "credit": 3
+    },
+    "PSY_415": {
+        "section": "PSY",
+        "id": 415,
+        "title": "Research in Psychology",
+        "credit": 3
+    },
+    "PSY_417": {
+        "section": "PSY",
+        "id": 417,
+        "title": "Adolescence Psychology",
+        "credit": 3
+    },
+    "PSY_423": {
+        "section": "PSY",
+        "id": 423,
+        "title": "Social Psychology",
+        "credit": 3
+    },
+    "PSY_425": {
+        "section": "PSY",
+        "id": 425,
+        "title": "Psychology of Learning",
+        "credit": 3
+    },
+    "PSY_431": {
+        "section": "PSY",
+        "id": 431,
+        "title": "Psychology of Anatomy and Physiology",
+        "credit": 3
+    },
+    "PSY_433": {
+        "section": "PSY",
+        "id": 433,
+        "title": "Abnormal Psychology",
+        "credit": 3
+    },
+    "PSY_435": {
+        "section": "PSY",
+        "id": 435,
+        "title": "Positive Psychology",
+        "credit": 3
+    },
+    "PSY_439": {
+        "section": "PSY",
+        "id": 439,
+        "title": "Field Experience I",
+        "credit": 3
+    },
+    "PSY_441": {
+        "section": "PSY",
+        "id": 441,
+        "title": "Field Experience II",
+        "credit": 3
+    },
+    "PTC_529": {
+        "section": "PTC",
+        "id": 529,
+        "title": "Pastoral Care",
+        "credit": 3
+    },
+    "PTL_531": {
+        "section": "PTL",
+        "id": 531,
+        "title": "Pastoral Leadership I",
+        "credit": 3
+    },
+    "PTL_533": {
+        "section": "PTL",
+        "id": 533,
+        "title": "Pastoral Leadership II",
+        "credit": 3
+    },
+    "SOC_101": {
+        "section": "SOC",
+        "id": 101,
+        "title": "Intro to Sociology",
+        "credit": 3
+    },
+    "SOC_217": {
+        "section": "SOC",
+        "id": 217,
+        "title": "Cultural Diversity",
+        "credit": 3
+    },
+    "SOC_223": {
+        "section": "SOC",
+        "id": 223,
+        "title": "Cultural Diversity",
+        "credit": 3
+    },
+    "SPA_101": {
+        "section": "SPA",
+        "id": 101,
+        "title": "Elementary Spanish I",
+        "credit": 3
+    },
+    "SPA_102": {
+        "section": "SPA",
+        "id": 102,
+        "title": "Elementary Spanish II",
+        "credit": 3
+    },
+    "SPA_201": {
+        "section": "SPA",
+        "id": 201,
+        "title": "Intermediate Spanish I",
+        "credit": 3
+    },
+    "SPA_202": {
+        "section": "SPA",
+        "id": 202,
+        "title": "Intermediate Spanish II",
+        "credit": 3
+    },
+    "SPA_217": {
+        "section": "SPA",
+        "id": 217,
+        "title": "Spanish Literature Survey",
+        "credit": 3
+    },
+    "SPA_219": {
+        "section": "SPA",
+        "id": 219,
+        "title": "Spanish Conversation and Writing",
+        "credit": 3
+    },
+    "SPA_231": {
+        "section": "SPA",
+        "id": 231,
+        "title": "Survey of Latino-American Literature",
+        "credit": 3
+    },
+    "SPA_241": {
+        "section": "SPA",
+        "id": 241,
+        "title": "Advanced Spanish Grammar",
+        "credit": 3
+    },
+    "SPA_301": {
+        "section": "SPA",
+        "id": 301,
+        "title": "Phonetics",
+        "credit": 3
+    },
+    "SPA_321": {
+        "section": "SPA",
+        "id": 321,
+        "title": "Business Spanish for Learners",
+        "credit": 3
+    },
+    "SPA_331": {
+        "section": "SPA",
+        "id": 331,
+        "title": "South and Central American Civilization",
+        "credit": 3
+    },
+    "SPA_341": {
+        "section": "SPA",
+        "id": 341,
+        "title": "Mexican Civilization",
+        "credit": 3
+    },
+    "SPA_343": {
+        "section": "SPA",
+        "id": 343,
+        "title": "Hispanic Caribbean Countries Civilization",
+        "credit": 3
+    },
+    "SPA_347": {
+        "section": "SPA",
+        "id": 347,
+        "title": "Research Methods",
+        "credit": 3
+    },
+    "SPA_351": {
+        "section": "SPA",
+        "id": 351,
+        "title": "Spanish Theatre",
+        "credit": 3
+    },
+    "SPA_353": {
+        "section": "SPA",
+        "id": 353,
+        "title": "Spanish Film",
+        "credit": 3
+    },
+    "SPA_355": {
+        "section": "SPA",
+        "id": 355,
+        "title": "Multicultural Perspectives of Hispanic Immigrants",
+        "credit": 3
+    },
+    "SPA_370": {
+        "section": "SPA",
+        "id": 370,
+        "title": "Issues and Trends in Spanish Pedagogy",
+        "credit": 3
+    },
+    "SPA_371": {
+        "section": "SPA",
+        "id": 371,
+        "title": "Issues and Trends in Spanish Andragogy",
+        "credit": 3
+    },
+    "SPA_380": {
+        "section": "SPA",
+        "id": 380,
+        "title": "Professional Writing for Spanish Learners",
+        "credit": 3
+    },
+    "SPA_410": {
+        "section": "SPA",
+        "id": 410,
+        "title": "Research and Statistics",
+        "credit": 3
+    },
+    "SPA_430": {
+        "section": "SPA",
+        "id": 430,
+        "title": "Critical Issues in Second Language Acquisition",
+        "credit": 3
+    },
+    "SPA_440": {
+        "section": "SPA",
+        "id": 440,
+        "title": "Practicum I",
+        "credit": 3
+    },
+    "SPA_441": {
+        "section": "SPA",
+        "id": 441,
+        "title": "Practicum II",
+        "credit": 3
+    },
+    "SPA_470": {
+        "section": "SPA",
+        "id": 470,
+        "title": "Mexico/Canada/USA Relations",
+        "credit": 3
+    },
+    "SPF_511": {
+        "section": "SPF",
+        "id": 511,
+        "title": "Spiritual Formation",
+        "credit": 3
+    },
+    "TESL_475": {
+        "section": "TESL",
+        "id": 475,
+        "title": "Second Language Acquisition",
+        "credit": 3
+    },
+    "TESL_476": {
+        "section": "TESL",
+        "id": 476,
+        "title": "ESL Teaching Methods",
+        "credit": 3
+    },
+    "THE_550": {
+        "section": "THE",
+        "id": 550,
+        "title": "Ethics and Theology",
+        "credit": 3
+    },
+    "THE_551": {
+        "section": "THE",
+        "id": 551,
+        "title": "Old Testament Theology",
+        "credit": 3
+    },
+    "THE_553": {
+        "section": "THE",
+        "id": 553,
+        "title": "New Testament Theology",
+        "credit": 3
+    },
+    "THE_557": {
+        "section": "THE",
+        "id": 557,
+        "title": "Pastoral Theology",
+        "credit": 3
+    },
+    "THE_561": {
+        "section": "THE",
+        "id": 561,
+        "title": "Systematic Theology I",
+        "credit": 3
+    },
+    "THE_562": {
+        "section": "THE",
+        "id": 562,
+        "title": "Systematic Theology II",
+        "credit": 3
+    },
+    "THE_640": {
+        "section": "THE",
+        "id": 640,
+        "title": "Capstone Project",
+        "credit": 6
+    }
 }

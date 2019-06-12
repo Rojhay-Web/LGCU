@@ -65,7 +65,7 @@ class FindDegree extends Component{
                         <div className="results-list">                          
                             <div className="results-container">
                                 {filteredResults.map((item,i) =>(
-                                    <div className={"result-item " + item.theme } key={i}>
+                                    <a href={item.url} className={"result-item " + item.theme } key={i}>
                                         <div className={"result-icon " + item.theme} />
                                         <div className="item-info-container">
                                             <div className="degree-title"><span>{item.degree}</span> <span>{(item.degreeTitle ? "of "+ item.degreeTitle : "")}</span></div>
@@ -74,7 +74,7 @@ class FindDegree extends Component{
                                                 <span className="major-title">{item.title}</span>
                                             </div>
                                         </div>                                
-                                    </div>
+                                    </a>
                                 ))}
 
                                 {filteredResults.length == 0 && <div className="result-message">Sorry we did not return any results for that search.</div>}
@@ -160,18 +160,21 @@ class FindDegree extends Component{
                     var tmpDegree = tmpArea.degrees[degree.title];
                     if(tmpDegree){
                         tmpDegree.forEach(function(major){
+                            var areaUrlTitle = area.title.replace(/([&\/\\()])/g,"_").split(' ').join("").toLowerCase();
+                            var url = "/studyarea/"+areaUrlTitle+"?majorId="+major.id;
+
                             if(major.concentrations && major.concentrations.length > 0){
                                 major.concentrations.forEach(function(concentration) {
-                                    retList.push({title:major.title, subtitle:concentration, theme:area.colorTheme, degree: degree.title, area: area.title});
+                                    retList.push({title:major.title, subtitle:concentration.title, theme:area.colorTheme, degree: degree.title, area: area.title, url: url});
                                 });
                             }
 
                             if(major.specialization && major.specialization.length > 0){
                                 major.specialization.forEach(function(specialization) {
-                                    retList.push({title:major.title, subtitle:specialization, theme:area.colorTheme, degree: degree.title, area: area.title});
+                                    retList.push({title:major.title, subtitle:specialization.title, theme:area.colorTheme, degree: degree.title, area: area.title, url: url});
                                 });
                             }                            
-                            retList.push({title:major.title, degreeTitle: major.degreeTitle, theme:area.colorTheme, degree: degree.title, area: area.title});                                                      
+                            retList.push({title:major.title, degreeTitle: major.degreeTitle, theme:area.colorTheme, degree: degree.title, area: area.title, url: url});                                                      
                         });
                     }
                 });
