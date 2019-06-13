@@ -17,7 +17,7 @@
                 {"id":"AS-PSY", "title":"Psychology","courses":[]}
             ],
             "bachelors":[
-                {"id":"BA-ACC", "title":"Accounting" },
+                {"id":"BA-ACC", "title":"Accounting", "courses":[] },
                 {"id":"BA-BA", "title":"Business Administration", "courses":[
                     {"subtitle":"General Education Courses: 45 credits","courses":["ANTH_110","CIS_107", "ENG_101","ENG_102","MTH_160","MTH_161","BIOL_105","SOC_101","HIST_122","HIST_123","PSY_101","ENG_117","ENG_118","POLS_101","SOC_217"]},
                     {"subtitle":"Required Business Core Courses: 45 credits","courses":["ACCT_310","ACCT_315","BUSN_317","MKTG_320","BUSN_321","BUSL_323","BUSM_325","ECON_328","ECON_329","FINA_340","BUSN_470"]},

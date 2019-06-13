@@ -16,9 +16,9 @@ class StudyAreaHeader extends Component{
         super(props);
         this.state = {
             displayValue: 0,
-            valid: false,
             data:{},
-            majorData:{}
+            majorData:{},
+            baseUrl:""
         }
 
         this.loadData = this.loadData.bind(this);
@@ -40,6 +40,22 @@ class StudyAreaHeader extends Component{
                     <div className="solid-back">
                         <span>{this.state.data.description}</span>
                     </div>
+
+                    <div className="acCrumb">
+                        <a href="/academics" className="acCrumb-item acCrumb-link">Academics</a>
+
+                        <span className="acCrumb-item">/</span>
+                        {(!this.state.majorData.title ?
+                        <span className="acCrumb-item acCrumb-link acCrumb-active">{this.state.data.title}</span>
+                        :<a href={this.state.baseUrl} className="acCrumb-item acCrumb-link">{this.state.data.title}</a> )}
+
+                        {this.state.majorData.title &&
+                            <div className="acCrumb-item optional-link">
+                                <span className="acCrumb-item">/</span>
+                                <span className="acCrumb-item acCrumb-active">{this.state.majorData.title}</span>
+                            </div>
+                        }
+                    </div>
                 </div>                
             </div>
         );
@@ -53,19 +69,21 @@ class StudyAreaHeader extends Component{
                 var tmpArea = academicData[this.props.match.params.studyArea];
                 var tmpMajor = [];
                 var displayNum = 1;
-                var displayValid = true;
+
+                var areaUrlTitle = tmpArea.title.replace(/([&\/\\()])/g,"_").split(' ').join("").toLowerCase();
+                var baseUrl = "/studyarea/"+areaUrlTitle;
 
                 if(majorId != null){
                     var degreeList = Object.keys(tmpArea.degrees);
                     for(var i =0; i < degreeList.length; i++){
                         tmpMajor = tmpArea.degrees[degreeList[i]].filter(function(item){  return item.id == majorId; });
-                        if(tmpMajor != null) { displayNum = 2; tmpMajor = tmpMajor[0]; break; }
+                        if(tmpMajor.length > 0) { 
+                            displayNum = 2; tmpMajor = tmpMajor[0]; break;
+                        }
                     }
-                    
-                    displayValid = (tmpMajor != null && tmpMajor.length > 0);
                 }
 
-                this.setState({ displayValue:displayNum, valid:displayValid, data: tmpArea, majorData: tmpMajor});
+                this.setState({ displayValue:displayNum, data: tmpArea, majorData: tmpMajor, baseUrl:baseUrl});
             }
             else {
                 this.setState({ displayValue:1, valid:false });
