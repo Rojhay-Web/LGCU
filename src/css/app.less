@@ -40,6 +40,7 @@
 @import "home.less";
 @import "academics.less";
 @import "studyArea.less";
+@import "admissions.less";
 
 
 body, html { 
@@ -88,7 +89,12 @@ body, html {
         margin-top:@navHeightTop;
     }
 
-    @media @mobile-device { position: relative; height: calc(100vh - 31px);}
+    @media @mobile-device { 
+        position: relative; 
+        min-height: calc(100vh - 31px); 
+        height: initial;
+        .headerCard { height: 100%;}
+    }
 }
 .app-inner-body {
     width: 100%;
@@ -338,7 +344,7 @@ body, html {
                 }                
                 img { width: 100%;}
             }
-
+            @media @mobile-device { background-image: linear-gradient(to bottom, rgba(0,0,0,0) , rgba(220,220,220,1) 25%); }
         }
     }
 }
@@ -429,7 +435,11 @@ body, html {
         &.t1 { &:hover { .color1(background, 0.7); }}
         &.t2 { &:hover { .color2(background, 0.7); }}
         &.t3 { &:hover { .color3(background, 0.7); }}
+
+        @media @mobile-device { color: rgba(100,100,100,1); }
     }
+
+    @media @mobile-device { font-size: 1rem; }
 }
 
 /* Tabs */

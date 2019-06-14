@@ -852,6 +852,28 @@
 .studyPage .course-section .course-table tr:nth-child(even) {
   background: rgba(200, 200, 200, 0.3);
 }
+.admissionsHeader {
+  position: relative;
+  z-index: 2;
+  background: #dcdcdc;
+}
+.admissionsHeader .header-section {
+  padding: 10px 5%;
+}
+.admissionsHeader .header-section.header-title .solid-back span {
+  background: rgba(37, 119, 40, 0.7) !important;
+}
+.admissionsHeader .header-section.header-title .backImg:before {
+  background-color: rgba(37, 119, 40, 0.3) !important;
+}
+@media (max-width: 770px) {
+  .admissionsHeader .header-section.header-title .btn-container {
+    flex-direction: column !important;
+  }
+  .admissionsHeader .header-section.header-title .btn-container .lBtn + .lBtn {
+    margin-left: 0 !important;
+  }
+}
 body,
 html {
   margin: 0px !important;
@@ -906,7 +928,11 @@ html {
 @media (max-width: 770px) {
   .app-header-body {
     position: relative;
-    height: calc(100vh - 31px);
+    min-height: calc(100vh - 31px);
+    height: initial;
+  }
+  .app-header-body .headerCard {
+    height: 100%;
   }
 }
 .app-inner-body {
@@ -1198,6 +1224,11 @@ html {
 .sub-page .header-section.header-title .backImg img {
   width: 100%;
 }
+@media (max-width: 770px) {
+  .sub-page .header-section.header-title {
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), #dcdcdc 25%);
+  }
+}
 /* Attributes */
 .lrgTitle {
   position: relative;
@@ -1323,6 +1354,16 @@ html {
 }
 .lBtn.clear.t3:hover {
   background: rgba(80, 78, 153, 0.7) !important;
+}
+@media (max-width: 770px) {
+  .lBtn.clear {
+    color: #646464;
+  }
+}
+@media (max-width: 770px) {
+  .lBtn {
+    font-size: 1rem;
+  }
 }
 /* Tabs */
 .tab {
