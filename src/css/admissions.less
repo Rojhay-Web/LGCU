@@ -28,4 +28,48 @@
 .admissionsPage {
     background: rgba(255,255,255,1);
 
+    .admissions-section {
+        padding: @navHeightBottom 0px 50px;
+        position: relative;
+        overflow: hidden;
+
+        &.c1 { background: @color1; }
+        &.c2 { background: @color2; }
+        &.c3 { background: @color3; }
+
+        .international {
+            color: @color1;
+            font-size: 1.3rem;
+            .number-list {
+                display: flex;
+                margin: 20px 0px;
+                font-size: 2rem; 
+                .number { 
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    text-align: center;
+                    width: 42px;
+                    height: 42px;
+                    border: 1px solid rgba(255,255,255,1);
+                    color: rgba(255,255,255,1);
+                    background: @color1;
+                    border-radius: 50%;                    
+                    margin-right: 7px;
+                }
+                .info { 
+                    flex:1;
+                    span { font-size: .9rem; font-weight: bold;}
+                }
+            }
+
+            .address-info {
+                margin: 10px 0px 30px;
+                font-weight: bold;
+                span { display: block;}
+            }
+        }
+
+        @media @mobile-device { .lrgTitle { padding: 0px 5%; &:before { white-space: initial; opacity: 0.3; }}}
+    }
 }
