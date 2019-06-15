@@ -143,8 +143,8 @@ class App extends Component{
                             </div>
                             <div className="footer-section">
                                 <div className="footer-link-section">
-                                    <Link className="footer-link" to="/">Admissions</Link>
-                                    <Link className="footer-link" to="/">Academics</Link>
+                                    <Link className="footer-link" to="/admissions">Admissions</Link>
+                                    <Link className="footer-link" to="/academics">Academics</Link>
                                     <Link className="footer-link" to="/">Donate</Link>
                                     <Link className="footer-link" to="/">Apply</Link>
                                     <Link className="footer-link" to="/">Contact Us</Link>

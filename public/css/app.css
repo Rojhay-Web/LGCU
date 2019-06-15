@@ -1355,6 +1355,16 @@ html {
 .btn-container .lBtn + .lBtn {
   margin-left: 20px;
 }
+@media (max-width: 770px) {
+  .btn-container .lBtn + .lBtn {
+    margin-left: 0;
+  }
+}
+@media (max-width: 770px) {
+  .btn-container {
+    flex-direction: column;
+  }
+}
 .lBtn {
   padding: 5px 15px;
   color: #ffffff;
@@ -1425,7 +1435,7 @@ html {
 }
 @media (max-width: 770px) {
   .lBtn {
-    font-size: 1rem;
+    text-align: center;
   }
 }
 /* Tabs */
@@ -1657,6 +1667,9 @@ html {
   color: #151280;
 }
 .info-slider .info-slider-container .slider-card.base .line-split {
+  border-color: #151280;
+}
+.info-slider .info-slider-container .slider-card.base .number {
   border-color: #151280;
 }
 .info-slider .info-slider-container .slider-card.dark {

@@ -388,8 +388,9 @@ body, html {
     justify-content: center;
 
     .lBtn {
-        &+.lBtn { margin-left: 20px; }
+        &+.lBtn { margin-left: 20px; @media @mobile-device { margin-left:0;}}
     }
+    @media @mobile-device { flex-direction: column; }
 }
 
 .lBtn {
@@ -439,7 +440,7 @@ body, html {
         @media @mobile-device { color: rgba(100,100,100,1); }
     }
 
-    @media @mobile-device { font-size: 1rem; }
+    @media @mobile-device { text-align: center; }
 }
 
 /* Tabs */
@@ -609,7 +610,7 @@ body, html {
                 justify-content: center;
             }
 
-            &.base { background: rgba(230,230,230,1); color: @color1; .line-split { border-color: @color1; } }
+            &.base { background: rgba(230,230,230,1); color: @color1; .line-split { border-color: @color1; } .number { border-color: @color1; } }
             &.dark { background: rgba(100,100,100,1); }
             &.light { background: rgba(150,150,150,1); }
             &.c1 { background: @color1;}
