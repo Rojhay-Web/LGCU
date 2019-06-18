@@ -440,7 +440,7 @@ body, html {
         @media @mobile-device { color: rgba(100,100,100,1); }
     }
 
-    @media @mobile-device { text-align: center; }
+    @media @mobile-device { text-align: center; display: block; }
 }
 
 /* Tabs */
@@ -531,8 +531,8 @@ body, html {
 .info-slider {
     position: relative;    
     width: 100%;
-    margin: 30px 0px;    
-    @media @mobile-device { padding: 0px 5%; }
+    margin: 30px 0px;   
+    @media @mobile-device { margin-bottom: 0px; }     
     .info-slider-container {
         width: 100%;
         white-space: nowrap;
@@ -541,7 +541,7 @@ body, html {
         padding-left: 130px;
         scroll-behavior: smooth;
 
-        @media @mobile-device { white-space: initial; padding: 0;  flex-direction: column; }
+        @media @mobile-device {  white-space: initial; padding: 0;  flex-direction: column; }
 
         .slider-card {
             position: relative;
@@ -746,8 +746,8 @@ body, html {
             }
         }
         &:hover { 
-            background:rgba(255,255,255,0.3);
-            .img-slider { left: calc(100% - 0px); }
+            background:rgba(255,255,255,0.3);            
+            .img-slider { left: calc(100% - 0px); &:before { border-left: 50px solid rgba(133,131,184,1) !important;} }
         }
     }
 
@@ -769,7 +769,7 @@ body, html {
         }
         &:hover { 
             background:rgba(255,255,255,0.3);
-            .img-slider { right: calc(100% - 0px); }
+            .img-slider { right: calc(100% - 0px); &:before { border-right: 50px solid rgba(133,131,184,1) !important;}}
         }
     }
 
@@ -792,7 +792,7 @@ body, html {
         }
         &:hover { 
             background:rgba(255,255,255,0.3);
-            .img-slider { top: calc(100% - 0px); }
+            .img-slider { top: calc(100% - 0px); &:before { border-top: 50px solid rgba(133,131,184,1) !important;}}
         }
     }
     
@@ -810,15 +810,18 @@ body, html {
                         bottom: 0;
                         left: 50%;
                         transform: translateX(-50%); 
-                        border-left: 50px solid transparent;
+                        border-left: 50px solid transparent !important;
                         border-bottom: 50px solid rgba(255,255,255,1);
-                        border-right: 50px solid transparent;
+                        border-right: 50px solid transparent !important;
+                        border-top: 50px solid transparent !important;
                     }
                     img { height: 100%; width: initial;  min-width: 100%;}
                 }
             }
 
-            &:hover { .img-slider { top: 0; }}
+            &:hover { 
+                .img-slider { top: 0; &:before { border-bottom: 50px solid rgba(133,131,184,1) !important; } }
+            }
         }
     }
 }

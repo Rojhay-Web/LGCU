@@ -96,7 +96,7 @@
 }
 @media (max-width: 770px) {
   .homeHeader .header-card-container .frontInfo {
-    width: 80%;
+    width: 100%;
     top: 70%;
     transform: translate(-7%, -70%);
   }
@@ -346,6 +346,9 @@
 @media (max-width: 770px) {
   .homePage .home-section .section-container .split-section {
     flex-direction: column;
+  }
+  .homePage .home-section .section-container .split-section .split-content {
+    margin-left: 0;
   }
   .homePage .home-section .section-container .split-section .split-content p {
     font-size: 1.5rem;
@@ -928,6 +931,9 @@
   display: block;
 }
 @media (max-width: 770px) {
+  .admissionsPage .admissions-section {
+    padding-bottom: 0;
+  }
   .admissionsPage .admissions-section .lrgTitle {
     padding: 0px 5%;
   }
@@ -1436,6 +1442,7 @@ html {
 @media (max-width: 770px) {
   .lBtn {
     text-align: center;
+    display: block;
   }
 }
 /* Tabs */
@@ -1563,7 +1570,7 @@ html {
 }
 @media (max-width: 770px) {
   .info-slider {
-    padding: 0px 5%;
+    margin-bottom: 0px;
   }
 }
 .info-slider .info-slider-container {
@@ -1858,6 +1865,9 @@ html {
 .academicSlider.right:hover .img-slider {
   left: calc(100% - 0px);
 }
+.academicSlider.right:hover .img-slider:before {
+  border-left: 50px solid #8583b8 !important;
+}
 .academicSlider.left {
   flex-direction: row-reverse;
 }
@@ -1880,6 +1890,9 @@ html {
 }
 .academicSlider.left:hover .img-slider {
   right: calc(100% - 0px);
+}
+.academicSlider.left:hover .img-slider:before {
+  border-right: 50px solid #8583b8 !important;
 }
 .academicSlider.bottom {
   flex-direction: column;
@@ -1904,6 +1917,9 @@ html {
 }
 .academicSlider.bottom:hover .img-slider {
   top: calc(100% - 0px);
+}
+.academicSlider.bottom:hover .img-slider:before {
+  border-top: 50px solid #8583b8 !important;
 }
 @media (max-width: 770px) {
   .academicSlider.bottom,
@@ -1930,9 +1946,10 @@ html {
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    border-left: 50px solid transparent;
+    border-left: 50px solid transparent !important;
     border-bottom: 50px solid #ffffff;
-    border-right: 50px solid transparent;
+    border-right: 50px solid transparent !important;
+    border-top: 50px solid transparent !important;
   }
   .academicSlider.bottom .slider-container .img-slider img,
   .academicSlider.left .slider-container .img-slider img,
@@ -1945,6 +1962,11 @@ html {
   .academicSlider.left:hover .img-slider,
   .academicSlider.right:hover .img-slider {
     top: 0;
+  }
+  .academicSlider.bottom:hover .img-slider:before,
+  .academicSlider.left:hover .img-slider:before,
+  .academicSlider.right:hover .img-slider:before {
+    border-bottom: 50px solid #8583b8 !important;
   }
 }
 /* Icon Overwrite */

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-//import Sidebar from "react-sidebar";
+import { createBrowserHistory } from 'history';
 
 /* Components */
 import { Home, HomeHeader } from './templates/home';
@@ -14,6 +14,9 @@ import "../css/app.less";
 
 /* Images */
 import logo from '../assets/LGCULogo.png';
+
+const history = createBrowserHistory();
+
 
 const routes = [
     {path:"/about", component:UC, headerComponent:UCHeader},
@@ -33,8 +36,7 @@ const SiteRoutes = route => (
     <Route path={route.path} render={props => ( <route.component {...props} />)} />
 );
 
-function MobileNav(props){
-
+function MobileNav(props){       
     return (
         <div className={"sidenav-container" + (props.sidebarOpen ? " active": "")}>
             <div className="nav-close" onClick={() => props.setSidebarDisplay(false)}><i className="fas fa-times"></i></div>
@@ -67,9 +69,8 @@ class App extends Component{
     }
 
     render(){     
-        return(
+        return(            
             <Router>
-                {/*<Sidebar sidebar={<MobileNav setSidebarDisplay={this.setSidebarDisplay}/>} open={this.state.sidebarOpen} pullRight={true} onSetOpen={this.setSidebarDisplay} styles={{ sidebar: { background: "rgba(52,58,64,0.95)", zIndex: 1000, width: "100vw" }, content:{ display: "flex"} }}>*/}
                 <div className="nav-body">
                     <MobileNav setSidebarDisplay={this.setSidebarDisplay} sidebarOpen={this.state.sidebarOpen}/>
                     <div className="app-body">
@@ -157,8 +158,7 @@ class App extends Component{
                             </div>
                         </div>
                     </div>
-                </div>    
-                {/*</Sidebar>*/}
+                </div>  
             </Router>
         )
     }
@@ -191,11 +191,17 @@ class App extends Component{
     }
 
     componentDidMount(){
-        window.addEventListener('scroll', this.listenToScroll);
+        var self = this;
+        window.addEventListener('scroll', this.listenToScroll); 
+        self.unlisten = history.listen(location => {            
+            console.log("location changed");
+            //self.setSidebarDisplay(false);
+        });                     
     }
     componentWillUnmount() {
         window.removeEventListener('scroll', this.listenToScroll);
-    }
+        this.unlisten();
+    }    
 }
 
 export default App;
