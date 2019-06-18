@@ -97,8 +97,8 @@
 @media (max-width: 770px) {
   .homeHeader .header-card-container .frontInfo {
     width: 100%;
-    top: 70%;
-    transform: translate(-7%, -70%);
+    bottom: 0;
+    transform: translate(-7%, 0%);
   }
   .homeHeader .header-card-container .frontInfo h1 {
     font-size: 1.5rem;

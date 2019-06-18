@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { Router, Route, Link } from "react-router-dom";
 import { createBrowserHistory } from 'history';
 
 /* Components */
@@ -15,8 +15,7 @@ import "../css/app.less";
 /* Images */
 import logo from '../assets/LGCULogo.png';
 
-const history = createBrowserHistory();
-
+const history = createBrowserHistory(); 
 
 const routes = [
     {path:"/about", component:UC, headerComponent:UCHeader},
@@ -70,7 +69,7 @@ class App extends Component{
 
     render(){     
         return(            
-            <Router>
+            <Router history={history}>
                 <div className="nav-body">
                     <MobileNav setSidebarDisplay={this.setSidebarDisplay} sidebarOpen={this.state.sidebarOpen}/>
                     <div className="app-body">
@@ -192,10 +191,10 @@ class App extends Component{
 
     componentDidMount(){
         var self = this;
-        window.addEventListener('scroll', this.listenToScroll); 
-        self.unlisten = history.listen(location => {            
-            console.log("location changed");
-            //self.setSidebarDisplay(false);
+        window.addEventListener('scroll', this.listenToScroll);
+        
+        self.unlisten = history.listen(location => { 
+            if(self.sidebarOpen) { self.setSidebarDisplay(false); }
         });                     
     }
     componentWillUnmount() {
