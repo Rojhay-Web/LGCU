@@ -34,7 +34,10 @@ class StudyAreaHeader extends Component{
                 <div className="header-title header-section">
                     <div className="backImg"><img src={"../images/tmp/"+this.state.data.img} /></div>
                     
-                    <div className="lrg-title">{(this.state.majorData ? this.state.majorData.title : "")}</div>  
+                    <div className="lrg-title">
+                        <span>{(this.state.majorData ? this.state.majorData.title : "")}</span>
+                        {(this.state.majorData && this.state.majorData.degreeTitle) && <span className="subText">({this.state.majorData.degreeTitle})</span>}
+                    </div>  
                     <div className={(this.state.majorData.title ? "sub-title": "lrg-title")}>{"The School of " + this.state.data.title}</div>  
 
                     <div className="solid-back">

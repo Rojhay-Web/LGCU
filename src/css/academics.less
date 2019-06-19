@@ -171,6 +171,13 @@
             margin-top: 30px; 
             .academicSlider {
                 min-height: 400px;
+                &.right { 
+                    &:hover { .img-slider { &:before { border-left: 50px solid rgba(255,255,255,1) !important;} }}
+                }
+
+                &.left { 
+                    &:hover { .img-slider { &:before { border-right: 50px solid rgba(255,255,255,1) !important;} }}
+                }
             }
         }
 

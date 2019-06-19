@@ -6,7 +6,12 @@
     .header-section {
         padding: 10px 5%;
         &.header-title {
-            .lrg-title { position: relative; z-index: 1; font-size: 5rem; /*margin-bottom: 30px;*/}
+            .lrg-title { 
+                position: relative; 
+                z-index: 1; 
+                font-size: 5rem; 
+                .subText { font-size: 3rem; margin-left: 7px; color: rgba(230,230,230,0.9); }
+            }
             
             .sub-title { 
                 position: relative; 
@@ -82,6 +87,7 @@
                 &:hover { text-decoration: none; span { margin-left: 14px; }}
             }
 
+            .subText { font-size: .9rem; color: rgba(200,200,200,0.7);}
             &+.degreeSection { margin-top: 15px; }
         }
 
@@ -119,7 +125,18 @@
     }
 
     .course-section {
-        .course-title { margin: 20px 0px 5px; font-weight: 300; font-size: 2rem;}
+        &.noCourseData {
+            font-size: 2rem;
+            text-align: center;
+            font-weight: 100;
+            a { color: rgba(230,230,230,1); text-decoration: underline; }
+        }
+        .course-title { 
+            margin: 20px 0px 5px; 
+            font-weight: 300; 
+            font-size: 2rem;            
+        }
+        .concentrations-title { margin-top: 8rem; }
         .course-table {
             min-width: 70%;
             tr {
@@ -129,6 +146,7 @@
                     background:rgba(200,200,200,0.3);
                 }
             }
+            @media @mobile-device { width: 100%; }
         }
     }
 }

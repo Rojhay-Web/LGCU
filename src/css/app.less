@@ -41,6 +41,7 @@
 @import "academics.less";
 @import "studyArea.less";
 @import "admissions.less";
+@import "faculty.less";
 
 
 body, html { 
@@ -59,7 +60,7 @@ body, html {
     position: relative;
     z-index: 900;
     background-image: linear-gradient(to right, rgba(80, 78, 153,0.7) , rgba(80, 78, 153,0.3) 90%);
-    padding: calc(100vh - @navHeightMiniBottom) 3% 0;
+    padding: calc(100vh - @navHeightMiniBottom) 2% 0;
     @media @mobile-device { padding: 0px; width: 100%;}
 }
 .app-header-body {
@@ -141,6 +142,12 @@ body, html {
         .footer-info {
             font-size: 1.2rem;
             margin-left: 7px;
+        }
+        .footer-space {
+            content: '';
+            border-bottom: 2px solid rgba(255,255,255,0.2);
+            margin: 5px 7px;
+            width: 200px;
         }
         .footer-link-section {
             display: flex;
@@ -236,28 +243,28 @@ body, html {
 
     &.full-nav {               
         .nav-top {
-            padding-left: calc(3% + 14px);
-            padding-right: calc(3% + 14px);
+            padding-left: 2%;
+            padding-right: 2%;
         }
         .nav-bottom { 
             //background-image: linear-gradient(rgba(50,50,50,0.5) , rgba(0,0,0,0) 70%); 
-            padding-left: calc(3% + 14px);
-            padding-right: calc(3% + 14px);
+            padding-left: calc(2% + 14px);
+            padding-right: calc(2% + 14px);
 
             .collapse-container { display: none !important; } 
         }
         @media @mobile-device { 
             .nav-top {padding: 0px; }
-            .nav-bottom { background:rgba(50,50,50,0.2); padding:.5rem 1rem; }
+            .nav-bottom { background:rgba(50,50,50,0.5); padding:.5rem 1rem; }
          }
     }
     &.page-nav {
-        padding: 0px 3%;        
+        padding: 0px 2%;        
         .nav-bottom { 
             position: relative;
             overflow: hidden;
             height: @navHeightBottom;
-            background: rgba(50,50,50,0.2);
+            background: rgba(50,50,50,0.5);
             .navbar-brand { color: rgba(255,255,255,1); }
             .collapse-container { animation: page-nav-slide 0.7s;}
         }
@@ -365,6 +372,10 @@ body, html {
         content: attr(data-text);
         font-size: 6rem;
         white-space: nowrap;
+    }
+
+    &.sub { 
+        &:before { font-size: 4.5rem; top: -2.5rem;}
     }
 
     &.ctr { 
@@ -597,15 +608,21 @@ body, html {
                     border-left: 50px solid rgba(230,230,230,1);
                     border-bottom: 50px solid transparent;
                 }
-                img { height: 100%; }
+                img { 
+                    height: 100%;
+                    min-width: 100%;
+                    &.full { height: initial; min-height: 100%; object-fit: cover; min-width: 100%;}
+                }
 
                 &.light { &:before { border-left: 50px solid rgba(150,150,150,1);}}
                 &.dark { &:before { border-left: 50px solid rgba(100,100,100,1);}}
+                &.c1 { &:before { border-left: 50px solid @color1;}}
+                &.c2 { &:before { border-left: 50px solid @color2}}
             }
             &.title {  
                 display: flex;
                 font-size: 2rem;
-                //text-align: center;        
+                text-align: center;        
                 flex-direction: column;
                 justify-content: center;
             }

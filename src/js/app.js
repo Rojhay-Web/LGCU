@@ -8,6 +8,7 @@ import { UC, UCHeader } from './templates/uc';
 import { Academics, AcademicsHeader } from './templates/academics';
 import { StudyArea, StudyAreaHeader } from './templates/studyArea';
 import { Admissions, AdmissionsHeader } from './templates/admissions';
+import { Faculty, FacultyHeader } from './templates/faculty';
 
 /* Styles */
 import "../css/app.less";
@@ -22,7 +23,7 @@ const routes = [
     {path:"/academics", component:Academics, headerComponent:AcademicsHeader},
     {path:"/studyarea/:studyArea?", component:StudyArea, headerComponent:StudyAreaHeader},
     {path:"/admissions", component:Admissions, headerComponent:AdmissionsHeader},
-    {path:"/faculty", component:UC, headerComponent:UCHeader},
+    {path:"/faculty", component:Faculty, headerComponent:FacultyHeader},
     {path:"/tuition", component:UC, headerComponent:UCHeader}
 ];
 
@@ -138,6 +139,9 @@ class App extends Component{
                                         <div className="logoLine">Christian University</div>
                                     </div>
                                 </div>
+                                <div className="footer-info">P.O. Box 121199</div>
+                                <div className="footer-info">Clermont, Florida 34712</div>
+                                <div className="footer-space"></div>
                                 <div className="footer-info">704.953.1609</div>
                                 <div className="footer-info">info@lenkesongcu.org</div>
                             </div>
