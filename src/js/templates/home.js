@@ -15,22 +15,12 @@ import AcademicSlider from './components/academicSlider';
 /* Images */
 import logo from '../../assets/LGCULogo.png';
 
-import back0 from '../../assets/temp/back0.jpeg';
-import back1 from '../../assets/temp/back1.jpeg';
-import back2 from '../../assets/temp/back2.jpeg';
-import back3 from '../../assets/temp/back3.jpeg';
-import back4 from '../../assets/temp/back4.jpeg';
-import back5 from '../../assets/temp/back5.jpeg';
-import back6 from '../../assets/temp/back6.jpeg';
+
 import back7 from '../../assets/temp/back7.jpeg';
-import back8 from '../../assets/temp/back8.jpeg';
 import back9 from '../../assets/temp/back9.jpeg';
 
 import img1 from '../../assets/temp/img1.jpeg';
-import img2 from '../../assets/temp/img2.jpeg';
-import img3 from '../../assets/temp/img3.jpeg';
-import img4 from '../../assets/temp/img4.jpeg';
-import img5 from '../../assets/temp/img5.jpeg';
+import img8 from '../../assets/temp/img8.jpeg';
 
 
 
@@ -141,7 +131,7 @@ function Home(props){
                     <div className="split-section" id="imgSplit">
                         <animated.div className="multi-img-container" onMouseMove={({ clientX: x, clientY: y }) => setIProps({ xys: calc(x, y) })} onMouseLeave={() => setIProps({ xys: [0, 0, 1] })} style={{ transform: imgprops.xys.interpolate(trans) }}>
                             <img className="multi-img lrg" src={back7} />
-                            <img className="multi-img sm" src={img1} />
+                            <img className="multi-img sm" src={img8} />
                         </animated.div>
 
                         <div className="split-content">

@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 /* Images */
 import back1 from '../../assets/temp/back10.jpeg';
 import defaultProfile from '../../assets/no-user.jpg';
+import sLawrenceImg from '../../assets/SJLawrence.png';
 
 /* Header */
 class FacultyHeader extends Component{
@@ -61,36 +62,44 @@ class Faculty extends Component{
                 <section className="faculty-section alternate">
                     <div className="info-slider">
                             <div className="info-slider-container" ref={this.slide1}>
-                                <div className="slider-card title base">
-                                    <h1 className="name">Dr. David Duren</h1>
-                                    <div className="title">Dean & Vice-President School of Business Administration, Finance & Staff Recruitment</div>
-                                </div>
-                                <div className="slider-card img">
-                                    <img className="full" src={defaultProfile} />
-                                </div>
-                                
-                                <div className="slider-card title c2">
-                                    <h1 className="name">Dr. Leonel Bernal</h1>
-                                    <div className="title">Dean & Vice-President School of Theology and Biblical Studies, Institutional Advancement & Student Enrollment</div>
-                                </div>
-                                <div className="slider-card img c2">
-                                    <img className="full" src={defaultProfile} />
+                                <div className="slider-vertical">
+                                    <div className="slider-card title base">
+                                        <h1 className="name">Dr. David Duren</h1>
+                                        <div className="title">Dean & Vice-President School of Business Administration, Finance & Staff Recruitment</div>
+                                    </div>
+                                    <div className="slider-card img">
+                                        <img src={defaultProfile} />
+                                    </div>
                                 </div>
 
-                                <div className="slider-card title light">
-                                    <h1 className="name">Mrs. Anita Stevenson</h1>
-                                    <div className="title">Dean of Academic Affairs, Student Services and Doctoral Residency</div>
+                                <div className="slider-vertical flip">
+                                    <div className="slider-card title c2">
+                                        <h1 className="name">Dr. Leonel Bernal</h1>
+                                        <div className="title">Dean & Vice-President School of Theology and Biblical Studies, Institutional Advancement & Student Enrollment</div>
+                                    </div>
+                                    <div className="slider-card img c2">
+                                        <img src={defaultProfile} />
+                                    </div>
                                 </div>
-                                <div className="slider-card img light">
-                                    <img className="full" src={defaultProfile} />
+
+                                <div className="slider-vertical">
+                                    <div className="slider-card title light">
+                                        <h1 className="name">Mrs. Anita Stevenson</h1>
+                                        <div className="title">Dean of Academic Affairs, Student Services and Doctoral Residency</div>
+                                    </div>
+                                    <div className="slider-card img light">
+                                        <img src={defaultProfile} />
+                                    </div>
                                 </div>
-                                
-                                <div className="slider-card title base">
-                                    <h1 className="name">Mr. Stuart Lawrence</h1>
-                                    <div className="title">University Registrar/Director of Admissions and Enrollment</div>
-                                </div>
-                                <div className="slider-card img">
-                                    <img className="full" src={defaultProfile} />
+
+                                <div className="slider-vertical flip">
+                                    <div className="slider-card title base">
+                                        <h1 className="name">Mr. Stuart Lawrence</h1>
+                                        <div className="title">University Registrar/Director of Admissions and Enrollment</div>
+                                    </div>
+                                    <div className="slider-card img">
+                                        <img src={sLawrenceImg} />
+                                    </div>
                                 </div>
                                 <div className="slider-close"/>
                             </div>
@@ -104,7 +113,7 @@ class Faculty extends Component{
                     <h2 className="lrgTitle ctr" data-text="Board of Directors">Board of Directors</h2>
                     <div className="section-container">
                         <div className="indProfile">
-                            <img src={defaultProfile} />
+                            <img src={sLawrenceImg} />
                             <div className="info title">Executive Board Member</div>
                             <div className="info name">MSGT Stuart J. Lawrence</div>
                             <div className="info">MSgt Stuart J. Lawrence is currently a Political-Military Analyst and Senior Non Commissioned Officer on the Europe Eurasia Regional Center’s 1-A Branch, for Europe, Eurasia regional Center, Intelligence Directorate, DIA HQ, Washington DC.</div>
@@ -124,7 +133,7 @@ class Faculty extends Component{
                                     <div className="title">Board Member</div>
                                 </div>
                                 <div className="slider-card img">
-                                    <img className="full" src={defaultProfile} />
+                                    <img src={defaultProfile} />
                                 </div>
                                 
                                 <div className="slider-card title c1">
@@ -132,7 +141,7 @@ class Faculty extends Component{
                                     <div className="title">Board Member</div>                                    
                                 </div>
                                 <div className="slider-card img c1">
-                                    <img className="full" src={defaultProfile} />
+                                    <img src={defaultProfile} />
                                 </div>
 
                                 <div className="slider-card title light">
@@ -140,7 +149,7 @@ class Faculty extends Component{
                                     <div className="title">Board Member</div>
                                 </div>
                                 <div className="slider-card img light">
-                                    <img className="full" src={defaultProfile} />
+                                    <img src={defaultProfile} />
                                 </div>                               
                                 
                                 <div className="slider-close"/>

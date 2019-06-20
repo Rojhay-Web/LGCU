@@ -154,8 +154,8 @@ class StudyArea extends Component{
                 var tmpMajor = [];
                 var displayNum = 1;
 
-                if(majorId != null){
-                    
+                if(majorId != null){ 
+                    /*displayNum = -1;*/
                     for(var i =0; i < tmpData.degreeList.length; i++){
                         tmpMajor = tmpArea.degrees[tmpData.degreeList[i]].filter(function(item){  return item.id == majorId; });
                         if(tmpMajor.length > 0) { displayNum = 2; tmpMajor = tmpMajor[0]; break; }
