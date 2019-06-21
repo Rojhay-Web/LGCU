@@ -5,10 +5,22 @@
         "title": "Principles of Accounting II",
         "credit": 3
     },
+    "ACCT_201": {
+        "section": "ACCT",
+        "id": 201,
+        "title": "Intro to Accounting",
+        "credit": 3
+    },
     "ACCT_215": {
         "section": "ACCT",
         "id": 215,
         "title": "International Accounting",
+        "credit": 3
+    },
+    "ACCT_217": {
+        "section": "ACCT",
+        "id": 217,
+        "title": "Principles of Accounting II",
         "credit": 3
     },
     "ACCT_310": {
@@ -16,6 +28,18 @@
         "id": 310,
         "title": "Principles of Accounting II",
         "credit": 4
+    },
+    "ACCT_311": {
+        "section": "ACCT",
+        "id": 311,
+        "title": "Intermediate Accounting I",
+        "credit": 3
+    },
+    "ACCT_312": {
+        "section": "ACCT",
+        "id": 312,
+        "title": "Intermediate Accounting II",
+        "credit": 3
     },
     "ACCT_315": {
         "section": "ACCT",
@@ -191,6 +215,12 @@
         "title": "Professional Writing",
         "credit": 3
     },
+    "BUSN_240": {
+        "section": "BUSN",
+        "id": 240,
+        "title": "Business Writing",
+        "credit": 3
+    },
     "BUSN_298": {
         "section": "BUSN",
         "id": 298,
@@ -208,6 +238,24 @@
         "id": 321,
         "title": "Professional Writing",
         "credit": 4
+    },
+    "BUSN_323": {
+        "section": "BUSN",
+        "id": 323,
+        "title": "Business Law",
+        "credit": 3
+    },
+    "BUSN_325": {
+        "section": "BUSN",
+        "id": 325,
+        "title": "Principles of Management",
+        "credit": 3
+    },
+    "BUSN_380": {
+        "section": "BUSN",
+        "id": 380,
+        "title": "Field Experience",
+        "credit": 3
     },
     "BUSN_470": {
         "section": "BUSN",
@@ -796,6 +844,12 @@
         "id": 846,
         "title": "Global Marketing Management",
         "credit": 4
+    },
+    "ECON_221": {
+        "section": "ECON",
+        "id": 221,
+        "title": "Macroeconomics",
+        "credit": 3
     },
     "ECON_328": {
         "section": "ECON",

@@ -9,6 +9,7 @@ import { Academics, AcademicsHeader } from './templates/academics';
 import { StudyArea, StudyAreaHeader } from './templates/studyArea';
 import { Admissions, AdmissionsHeader } from './templates/admissions';
 import { Faculty, FacultyHeader } from './templates/faculty';
+import { Tuition, TuitionHeader } from './templates/tuition';
 
 /* Styles */
 import "../css/app.less";
@@ -24,7 +25,7 @@ const routes = [
     {path:"/studyarea/:studyArea?", component:StudyArea, headerComponent:StudyAreaHeader},
     {path:"/admissions", component:Admissions, headerComponent:AdmissionsHeader},
     {path:"/faculty", component:Faculty, headerComponent:FacultyHeader},
-    {path:"/tuition", component:UC, headerComponent:UCHeader}
+    {path:"/tuition", component:Tuition, headerComponent:TuitionHeader}
 ];
 
 

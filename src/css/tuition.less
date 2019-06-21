@@ -1,0 +1,64 @@
+.tuitionHeader {
+    position: relative;
+    z-index: 2;
+    background: rgba(220,220,220,1);
+
+    .header-section {
+        padding: 10px 5%;
+        &.header-title {
+            .solid-back {
+                span {
+                    .color3(background, 0.7);
+                }
+            }
+            .backImg {
+                &:before {.color3(background-color, 0.3);}
+            }
+            
+            @media @mobile-device { 
+                .btn-container { 
+                    flex-direction: column !important;
+                    .lBtn + .lBtn { margin-left: 0 !important;}
+                }
+            }
+        }
+    }
+}
+
+.tuitionPage {
+    .tuition-section { 
+        color: rgba(255,255,255,1);
+        font-size: 1.3rem;
+        font-weight: 300;
+        overflow: auto;
+        padding: 40px 0px;
+
+        h3 { margin-top: 20px;}
+        h3, h4 { text-align: center; }
+        .tuition-table {
+            width: 100%;
+            margin-bottom: 10px;
+            tr {
+                background: rgba(255,255,255,0.3);
+                td,th { padding: 5px 7px; font-size: 1.2rem; text-align: center; }
+                &:nth-child(even) { background:rgba(200,200,200,0.3); }
+                &.full-row { .color1(background, 0.7);}
+                &.header { .color2(background, 0.9);}
+            }            
+        }
+        
+        .img { width: 40%; margin-right: 30px; margin-bottom:30px; float: left; img { width: 100%; height: 100%; object-fit: cover;}}
+        .special-note { font-style: italic; font-size: 1rem;}
+
+        &.alternate { 
+            background: rgba(255,255,255,1);
+            color: @color3;
+            .tuition-table {                
+                tr {
+                    th { color: rgba(255,255,255,1);}
+                    &.full-row { color: rgba(255,255,255,1);}
+                }
+            }
+        }
+    }
+}

@@ -8,7 +8,10 @@
         "img":"img6.jpeg",
         "degrees":{
             "associates":[
-                {"id":"AS-ACC", "title":"Accounting", "courses":[]},
+                {"id":"AS-ACC", "title":"Accounting", "courses":[
+                    {"subtitle":"General Education Courses: 39 credits", "courses":["ENG_101","MTH_160","MTH_161","BIOL_105","SOC_101","HIST_122","HIST_123", "ENG_102","PSY_101","ENG_117","ENG_118","ANTH_110","CIS_107","SOC_223"]},
+                    {"subtitle":"Major: 30 credits", "courses":["ACCT_201","ACCT_215","ACCT_217","ACCT_311","BUSN_240","BUSN_323","BUSN_325","ECON_221","BUSN_380"]}                    
+                ]},
                 {"id":"AS-BA", "title":"Business Administration","courses":[]},
                 {"id":"AS-CDE", "title":"Child Development Education","courses":[]},
                 {"id":"AS-CIS", "title":"Computer Information Systems","courses":[]},
