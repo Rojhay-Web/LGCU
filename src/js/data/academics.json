@@ -12,12 +12,28 @@
                     {"subtitle":"General Education Courses: 39 credits", "courses":["ENG_101","MTH_160","MTH_161","BIOL_105","SOC_101","HIST_122","HIST_123", "ENG_102","PSY_101","ENG_117","ENG_118","ANTH_110","CIS_107","SOC_223"]},
                     {"subtitle":"Major: 30 credits", "courses":["ACCT_201","ACCT_215","ACCT_217","ACCT_311","BUSN_240","BUSN_323","BUSN_325","ECON_221","BUSN_380"]}                    
                 ]},
-                {"id":"AS-BA", "title":"Business Administration","courses":[]},
-                {"id":"AS-CDE", "title":"Child Development Education","courses":[]},
-                {"id":"AS-CIS", "title":"Computer Information Systems","courses":[]},
-                {"id":"AS-CJ", "title":"Criminal Justice","courses":[]},
-                {"id":"AS-EDU", "title":"Education","courses":[]},
-                {"id":"AS-PSY", "title":"Psychology","courses":[]}
+                {"id":"AS-BA", "title":"Business Administration","courses":[
+                    {"subtitle":"General Education Courses: 39 credits", "courses":["ENG_101","ACCT_201","MTH_122","BIOL_107","BUSN_315","BUSN_210","SOC_101","ENG_102","ENG_110","SOC_223","REL_227","ACCT_217","ACCT_315","BUSN_317","PYS_101","PSY_210","HIS_115","PED_112","BUS_327","CIS_107","MKTG_340","COM_118","BUSN_303","BUSN_329","BUSN_380"]}
+                ]},
+                {"id":"AS-CDE", "title":"Child Development Education","courses":[
+                    {"subtitle":"General Education Courses (39)","courses":["ENG_101","MTH_160","BIOL_107","SOC_101","HIST_117","ENG_102","PSY_101","ENG_110","ENG_201","GOV_110","COM_118","PED_112","CIS_107","SOC_223","REL_227","CDE_110","CDE_123","CDE_113","CDE_115","CDE_117","CDE_121","CDE_131","CDE_211","CDE_217","CDE_223"]}
+                ]},
+                {"id":"AS-CIS", "title":"Computer Information Systems","courses":[
+                    {"subtitle":"General Education Courses (39)","courses":["ENG_101","MTH_118","BIOL_107","SOC_101","HIST_117","ENG_102","PSY_101","ENG_110","ENG_201","GOV_110","COM_118","PED_112","SOC_223","REL_227","CIS_107"]},
+                    {"subtitle":"Required Degree Courses and Credits (30)","courses":["CIS_301","CIS_303","CIS_401","CIS_403","CIS_405","CIS_407","CIS_411","CIS_413","CIS_415","CIS_417"]}
+                ]},
+                {"id":"AS-CJ", "title":"Criminal Justice","courses":[
+                    {"subtitle":"General Education Courses (39)","courses":["ENG_101","MTH_118","BIOL_107","SOC_101","HIST_117","ENG_102","PSY_101","ENG_110","ENG_201","GOV_110","COM_118","PED_112","CIS_107","SOC_223","REL_227"]},
+                    {"subtitle":"Required Degree Courses and Credits (30)","courses":["CMJ_201","CMJ_203","CMJ_211","CMJ_227","CMJ_331","CMJ_340","CMJ_345","CMJ_347","CMJ_430","CMJ_433"]}
+                ]},
+                {"id":"AS-EDU", "title":"Education","courses":[
+                    {"subtitle":"General Education Courses (39)","courses":["ENG_101","MTH_118","BIOL_107","SOC_101","HIST_117","ENG_102","PSY_101","ENG_110","ENG_201","GOV_110","COM_118","PED_112","CIS_107","SOC_223","REL_227"]},
+                    {"subtitle":"Required Degree Credit Courses (30)","courses":["EDU_201","EDU_203","EDU_217","EDU_221","EDU_225","EDU_231","EDU_233","EDU_235","EDU_321","EDU_323"]}
+                ]},
+                {"id":"AS-PSY", "title":"Psychology","courses":[
+                    {"subtitle":"General Education Courses (39)","courses":["ENG_101","MTH_118","BIOL_107","SOC_101","HIST_117","ENG_102","PSY_101","ENG_201","GOV_110","COM_118","PED_112","CIS_107","REL_227"]},
+                    {"subtitle":"Required Degree Credit Courses (30)","courses":["PSY_413","PSY_415","PSY_417","PSY_423","PSY_401","PSY_341","PSY_431","PSY_425","PSY_437","PSY_439"]}
+                ]}
             ],
             "bachelors":[
                 {"id":"BA-ACC", "title":"Accounting", "courses":[] },
@@ -85,7 +101,16 @@
                 {"id":"AS-BBS", "title":"Biblical Studies","courses":[]}
             ],
             "bachelors":[
-                {"id":"BA-THBBS", "title":"Theological and Biblical Studies","courses":[]}
+                {"id":"BA-THBBS", "title":"Theological and Biblical Studies","courses":[
+                    {"subtitle":"General Education Courses (45)","courses":["ENG_101","MTH_118","BIOL_107","SOC_101","HIST_117","ENG_102","PSY_101","ENG_110","ENG_201","GOV_110","COM_118","PED_112","CIS_107","SOC_223","REL_227"]},
+                    {"subtitle":"Required Core Courses (33 credits)","courses":["BSC_203","BSC_205","BSC_207","HEB_307","BSC_209","BSC_211","GRE_307","BSC_213","BSC_215","BSC_217","BSC_241","BSC_301","BSC_417"]},
+                    {"subtitle":"Majors 30-36 credits","courses":[]}
+                ], "concentrations":[
+                    {"subtitle":"Christian Education","courses":["CED_301","CED_303","CED_307","CED_309","CED_311","CED_315","CED_317","CED_319","CED_411","CED_413"]},
+                    {"subtitle":"Child Development Education","courses":["CDE_110","CDE_123","CDE_113","CDE_115","CDE_117","CDE_121","CDE_131","CDE_211","CDE_217","CDE_223"]},
+                    {"subtitle":"Church Business Administration","courses":["ACCT_105","ACCT_215","BUSN_217","CHAM_241","MKTG_122","BUSN_221","BUSL_203","BUSM_225","CHAM_243","BUSN_298"]},
+                    {"subtitle":"Church Ministries","courses":["CHM_301","CED_303","CHM_317","CHM_321","CHM_327","CHM_331","CHM_333","CHM_337","CHM_345","CHM_347"]}
+                ]}
             ],
             "masters":[
                 {"id":"MA-REDU", "title":"Religious Education","courses":[]},
@@ -102,12 +127,20 @@
         "img":"img8.jpeg",
         "degrees":{
             "bachelors":[
-                {"id":"BA-ACC", "title":"Accounting","courses":[]},
-                {"id":"BA-BA", "title":"Business Administration","courses":[]},
-                {"id":"BA-FI", "title":"Finance","courses":[]},
-                {"id":"BA-HRM", "title":"Human Resource Management","courses":[]},
-                {"id":"BA-IBU", "title":"International Business","courses":[]},
-                {"id":"BA-MAR", "title":"Marketing","courses":[]}
+                {"id":"BA-BA", "title":"Business Administration",
+                    "courses":[
+                        {"subtitle":"General Education Courses (45)","courses":["ENG_101","MTH_118","BIOL_107","SOC_101","HIST_117","ENG_102","PSY_101","ENG_110","ENG_201","GOV_110","COM_118","PED_112","CIS_107","SOC_223","REL_227"]},
+                        {"subtitle":"Required Business Core Courses (45)","courses":["ACCT_310","ACCT_315","BUSN_317","MKTG_320","BUSN_321","BUSL_323","BUSM_325","ECON_328","ECON_329","FINA_340","BUSN_470"]},
+                        {"subtitle":"Elective Courses (15hours) or Professional Portfolio Credit (15 hours)","courses":[]},
+                        {"subtitle":"BSBA Concentrations (15 hours)","courses":[]}
+                    ], "concentrations":[
+                        {"subtitle":"Accounting Concentration","courses":["ACCT_341","ACCT_342","ACCT_350","ACCT_460","ACCT_470"]},
+                        {"subtitle":"Finance Concentration","courses":["FINA_341","FINA_342","FINA_350","FINA_460","FINA_470"]},
+                        {"subtitle":"Human Resource Management","courses":["HRM_341","HRM_342","HRM_350","HRM_460","HRM_470"]},
+                        {"subtitle":"International Business Concentration","courses":["INTB_341","INTB_342","INTB_350","INTB_460","INTB_470"]},
+                        {"subtitle":"Leadership Concentration","courses":["LEAD_341","LEAD_342","LEAD_350","LEAD_460","LEAD_470"]},
+                        {"subtitle":"Marketing Concentration","courses":["MKTG_341","MKTG_342","MKTG_350","MKTG_460","MKTG_470"]}
+                ]}
             ],
             "masters":[
                 {"id":"MA-ACC", "title":"Accounting","courses":[]},

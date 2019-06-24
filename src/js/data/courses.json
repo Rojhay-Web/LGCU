@@ -101,9 +101,9 @@
         "title": "General Biology",
         "credit": 3
     },
-    "BIO_105": {
-        "section": "BIO",
-        "id": 105,
+    "BIOL_107": {
+        "section": "BIOL",
+        "id": 107,
         "title": "General Biology",
         "credit": 3
     },
@@ -203,6 +203,12 @@
         "title": "Business Management",
         "credit": 4
     },
+    "BUSN_210": {
+        "section": "BUSN",
+        "id": 210,
+        "title": "Business Math",
+        "credit": 3
+    },
     "BUSN_217": {
         "section": "BUSN",
         "id": 217,
@@ -227,6 +233,18 @@
         "title": "Field Experience",
         "credit": 3
     },
+    "BUSN_303": {
+        "section": "BUSN",
+        "id": 303,
+        "title": "Business Literature",
+        "credit": 3
+    },
+    "BUSN_315": {
+        "section": "BUSN",
+        "id": 315,
+        "title": "Principles of Business",
+        "credit": 3
+    },
     "BUSN_317": {
         "section": "BUSN",
         "id": 317,
@@ -248,7 +266,19 @@
     "BUSN_325": {
         "section": "BUSN",
         "id": 325,
-        "title": "Principles of Management",
+        "title": "Principles of Management I",
+        "credit": 3
+    },
+    "BUSN_327": {
+        "section": "BUSN",
+        "id": 327,
+        "title": "Principles of Management II",
+        "credit": 3
+    },
+    "BUSN_329": {
+        "section": "BUSN",
+        "id": 329,
+        "title": "Business Management",
         "credit": 3
     },
     "BUSN_380": {
@@ -713,6 +743,12 @@
         "title": "Principles of Correctional Administration",
         "credit": 3
     },
+    "COM_118": {
+        "section": "COM",
+        "id": 118,
+        "title": "Public Speaking",
+        "credit": 3
+    },
     "CSC_500": {
         "section": "CSC",
         "id": 500,
@@ -863,6 +899,54 @@
         "title": "Economic Policy",
         "credit": 4
     },
+    "EDU_201": {
+        "section": "EDU",
+        "id": 201,
+        "title": "Intro to Education",
+        "credit": 3
+    },
+    "EDU_203": {
+        "section": "EDU",
+        "id": 203,
+        "title": "Foundations of American Education                                   ",
+        "credit": 3
+    },
+    "EDU_217": {
+        "section": "EDU",
+        "id": 217,
+        "title": "Psychology of Education",
+        "credit": 3
+    },
+    "EDU_221": {
+        "section": "EDU",
+        "id": 221,
+        "title": "Technology for Educators",
+        "credit": 3
+    },
+    "EDU_225": {
+        "section": "EDU",
+        "id": 225,
+        "title": "Classroom Management",
+        "credit": 3
+    },
+    "EDU_231": {
+        "section": "EDU",
+        "id": 231,
+        "title": "Successful Classroom Collaboration",
+        "credit": 3
+    },
+    "EDU_233": {
+        "section": "EDU",
+        "id": 233,
+        "title": "Multiculturalism in the Classroom ",
+        "credit": 3
+    },
+    "EDU_235": {
+        "section": "EDU",
+        "id": 235,
+        "title": "Exceptionalities in the Classroom",
+        "credit": 3
+    },
     "EDU_300": {
         "section": "EDU",
         "id": 300,
@@ -897,6 +981,18 @@
         "section": "EDU",
         "id": 320,
         "title": "Educational Technology",
+        "credit": 3
+    },
+    "EDU_321": {
+        "section": "EDU",
+        "id": 321,
+        "title": "Research in Elementary or Sec Ed",
+        "credit": 3
+    },
+    "EDU_323": {
+        "section": "EDU",
+        "id": 323,
+        "title": "Practicum",
         "credit": 3
     },
     "EDU_340": {
@@ -1019,6 +1115,12 @@
         "title": "English Composition II",
         "credit": 3
     },
+    "ENG_110": {
+        "section": "ENG",
+        "id": 110,
+        "title": "Professional Writing",
+        "credit": 3
+    },
     "ENG_117": {
         "section": "ENG",
         "id": 117,
@@ -1029,6 +1131,12 @@
         "section": "ENG",
         "id": 118,
         "title": "Group and Team communication",
+        "credit": 3
+    },
+    "ENG_201": {
+        "section": "ENG",
+        "id": 201,
+        "title": "Intro to Literature",
         "credit": 3
     },
     "ETS_703": {
@@ -1083,6 +1191,12 @@
         "section": "FINA",
         "id": 470,
         "title": "Field Experience",
+        "credit": 3
+    },
+    "GOV_110": {
+        "section": "GOV",
+        "id": 110,
+        "title": "US Government",
         "credit": 3
     },
     "GRE_307": {
@@ -1185,6 +1299,18 @@
         "section": "HEB",
         "id": 307,
         "title": "Introduction to Old Testament Hebrew",
+        "credit": 3
+    },
+    "HIST_115": {
+        "section": "HIST",
+        "id": 115,
+        "title": "US History II",
+        "credit": 3
+    },
+    "HIST_117": {
+        "section": "HIST",
+        "id": 117,
+        "title": "US History",
         "credit": 3
     },
     "HIST_122": {
@@ -1493,6 +1619,12 @@
         "title": "Principles of Marketing",
         "credit": 4
     },
+    "MKTG_340": {
+        "section": "MKTG",
+        "id": 340,
+        "title": "Principles of Marketing",
+        "credit": 3
+    },
     "MKTG_341": {
         "section": "MKTG",
         "id": 341,
@@ -1551,6 +1683,18 @@
         "section": "MKTG",
         "id": 620,
         "title": "Successful Portfolio Management",
+        "credit": 3
+    },
+    "MTH_118": {
+        "section": "MTH",
+        "id": 118,
+        "title": "College Math                                                                           ",
+        "credit": 3
+    },
+    "MTH_122": {
+        "section": "MTH",
+        "id": 122,
+        "title": "College Math",
         "credit": 3
     },
     "MTH_160": {
@@ -1625,6 +1769,18 @@
         "title": "Old Testament Studies II",
         "credit": 3
     },
+    "PED_112": {
+        "section": "PED",
+        "id": 112,
+        "title": "Wellness and Fitness",
+        "credit": 3
+    },
+    "PHIL_101": {
+        "section": "PHIL",
+        "id": 101,
+        "title": "Intro to Philosophy",
+        "credit": 3
+    },
     "POLS_101": {
         "section": "POLS",
         "id": 101,
@@ -1635,6 +1791,18 @@
         "section": "PSY",
         "id": 101,
         "title": "Intro to Psychology",
+        "credit": 3
+    },
+    "PSY_210": {
+        "section": "PSY",
+        "id": 210,
+        "title": "Psychology of Business",
+        "credit": 3
+    },
+    "PSY_243": {
+        "section": "PSY",
+        "id": 243,
+        "title": "Adult Teaching and Learning",
         "credit": 3
     },
     "PSY_303": {
@@ -1727,6 +1895,12 @@
         "title": "Positive Psychology",
         "credit": 3
     },
+    "PSY_437": {
+        "section": "PSY",
+        "id": 437,
+        "title": "Field Experience",
+        "credit": null
+    },
     "PSY_439": {
         "section": "PSY",
         "id": 439,
@@ -1755,6 +1929,12 @@
         "section": "PTL",
         "id": 533,
         "title": "Pastoral Leadership II",
+        "credit": 3
+    },
+    "REL_227": {
+        "section": "REL",
+        "id": 227,
+        "title": "Phenomenon of Religions",
         "credit": 3
     },
     "SOC_101": {
