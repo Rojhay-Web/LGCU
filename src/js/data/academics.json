@@ -43,13 +43,13 @@
                     {"subtitle":"BSBA Concentration: 15 credits","courses":[]}
                     ],
                     "concentrations":[
-                        {"title":"Accounting", "courses":["ACCT_341","ACCT_342","ACCT_350","ACCT_460","ACCT_470"]},
-                        {"title":"Finance", "courses":["FINA_341","FINA_342","FINA_350","FINA_460","FINA_470"]},
-                        {"title":"Human Resource", "courses":["HRM_341","HRM_342","HRM_350","HRM_460","HRM_470"]},
-                        {"title":"International Business", "courses":["INTB_341", "INTB_342","INTB_350","INTB_460","INTB_470"]},
-                        {"title":"Leadership", "courses":["LEAD_341","LEAD_342","LEAD_350","LEAD_460","LEAD_470"]},
-                        {"title":"Marketing", "courses":["MKTG_341","MKTG_342","MKTG_350","MKTG_460","MKTG_470"]}
-                    ]},
+                        {"title":"Accounting Concentrations", "courses":["ACCT_341","ACCT_342","ACCT_350","ACCT_460","ACCT_470"]},
+                        {"title":"Finance Concentrations", "courses":["FINA_341","FINA_342","FINA_350","FINA_460","FINA_470"]},
+                        {"title":"Human Resource Concentrations", "courses":["HRM_341","HRM_342","HRM_350","HRM_460","HRM_470"]},
+                        {"title":"International Business Concentrations", "courses":["INTB_341", "INTB_342","INTB_350","INTB_460","INTB_470"]},
+                        {"title":"Leadership Concentrations", "courses":["LEAD_341","LEAD_342","LEAD_350","LEAD_460","LEAD_470"]},
+                        {"title":"Marketing Concentrations", "courses":["MKTG_341","MKTG_342","MKTG_350","MKTG_460","MKTG_470"]}
+                ]},
                 {"id":"BA-CDE", "title":"Child Development Education","courses":[
                     {"subtitle":"General Education Courses: 45 credits","courses":["ANTH_110","CIS_107", "ENG_101","ENG_102","MTH_160","MTH_161","BIOL_105","SOC_101","HIST_122","HIST_123","PSY_101","ENG_117","ENG_118","POLS_101","SOC_217"]},
                     {"subtitle":"Required Credit Courses: 45 credits","courses":["CDE_110","CDE_123","CDE_113","CDE_115","CDE_117","CDE_121","CDE_131","CDE_211","CDE_217","CDE_321","CDE_323","CDE_225","CDE_227"]},
@@ -106,15 +106,30 @@
                     {"subtitle":"Required Core Courses (33 credits)","courses":["BSC_203","BSC_205","BSC_207","HEB_307","BSC_209","BSC_211","GRE_307","BSC_213","BSC_215","BSC_217","BSC_241","BSC_301","BSC_417"]},
                     {"subtitle":"Majors 30-36 credits","courses":[]}
                 ], "concentrations":[
-                    {"subtitle":"Christian Education","courses":["CED_301","CED_303","CED_307","CED_309","CED_311","CED_315","CED_317","CED_319","CED_411","CED_413"]},
-                    {"subtitle":"Child Development Education","courses":["CDE_110","CDE_123","CDE_113","CDE_115","CDE_117","CDE_121","CDE_131","CDE_211","CDE_217","CDE_223"]},
-                    {"subtitle":"Church Business Administration","courses":["ACCT_105","ACCT_215","BUSN_217","CHAM_241","MKTG_122","BUSN_221","BUSL_203","BUSM_225","CHAM_243","BUSN_298"]},
-                    {"subtitle":"Church Ministries","courses":["CHM_301","CED_303","CHM_317","CHM_321","CHM_327","CHM_331","CHM_333","CHM_337","CHM_345","CHM_347"]}
+                    {"title":"Christian Education","courses":["CED_301","CED_303","CED_307","CED_309","CED_311","CED_315","CED_317","CED_319","CED_411","CED_413"]},
+                    {"title":"Child Development Education","courses":["CDE_110","CDE_123","CDE_113","CDE_115","CDE_117","CDE_121","CDE_131","CDE_211","CDE_217","CDE_223"]},
+                    {"title":"Church Business Administration","courses":["ACCT_105","ACCT_215","BUSN_217","CHAM_241","MKTG_122","BUSN_221","BUSL_203","BUSM_225","CHAM_243","BUSN_298"]},
+                    {"title":"Church Ministries","courses":["CHM_301","CED_303","CHM_317","CHM_321","CHM_327","CHM_331","CHM_333","CHM_337","CHM_345","CHM_347"]}
                 ]}
             ],
             "masters":[
-                {"id":"MA-REDU", "title":"Religious Education","courses":[]},
-                {"id":"MA-THST", "title":"Theological Studies","courses":[]}
+                {"id":"MA-REDU", "title":"Religious Education","courses":[
+                    {"subtitle":"Education Foundation Courses (15 hours)","courses":["EDU_500","EDU_501","EDU_503","EDU_510","EDU_520"]},
+                    {"subtitle":"Child Development Education","courses":["CDE_510","CDE_523","CDE_526","CDE_535","CDE_537","CDE_539","CDE_541","CDE_545","CDE_549","CDE_560","CDE_570"]},
+                    {"subtitle":"Christian Education","courses":["CED_501","CED_503","CED_507","CED_509","CED_511","CED_515","CED_517","CED_519","CED_560","CED_570"]},
+                    {"subtitle":"Christian Schools Curriculum (36 hours)","courses":["CSC_500","CSC_501","EDU_503","EDU_510","CSC_511","CSC_515","EDU_520","CSC_523","CSC_525","CSC_530","CSC_540","CSC_545","EDU_520"]},
+                    {"subtitle":"Christian Schools Administration","courses":["LEAD_520","CSAD_525","CSAD_528","CSAD_530","CSAD_533","CSAD_535","CSAD_540","CSAD_542","CSAD_590"]},
+                    {"subtitle":"Church Business Administration & Developmental Leadership","courses":["ACCT_505","ACCT_515","BUSN_517","CHAM_541","LEAD_520","LEAD_543","LEAD_547","MKTG_550","BUSN_553","BUSN_558","BUSN_559","CHAM_560","BUSN_570"]}
+                ]},
+                {"id":"MA-THST", "title":"Theological Studies","courses":[
+                    {"subtitle":"Biblical Languages (18 hours)","courses":["NTG_531","NTG_532","NTG_533","OTH_541","OTH_542","OTH_543"]},
+                    {"subtitle":"Foundational Courses (18 hours)","courses":["SPF_511","OTS_513","OTS_514","NTS_516","NTS_517","CHS_520"]},
+                    {"subtitle":"Theological Courses (18 hours)","courses":["THE_550","THE_551","THE_553","THE_557","THE_561","THE_562","THE_640"]},
+                    {"subtitle":"Church Business Administration (36 hours)","courses":["ACCT_505","ACCT_515","BUSN_517","CHAM_541","LEAD_543","LEAD_547","MKTG_550","BUSN_553","BUSN_558","BUSN_559","CHAM_560","BUSN_570"]}
+                ], "concentrations":[
+                    {"title":"Church Ministries Concentration","courses":["CHM_501","CED_503","CHM_517","CHM_521","CHM_527","LEAD_543","LEAD_547","PTC_529","PTL_531","PTL_533","CHM_537","CHM_570"]},
+                    {"title":"Global and Strategic Missions Concentration","courses":["GSM_501","GSM_503","GSM_505","GSM_507","GSM_511","GSM_521","GSM_527","GSM_531","LEAD_547","GSM_590"]}
+                ]}
             ]
         }
     },
@@ -134,26 +149,39 @@
                         {"subtitle":"Elective Courses (15hours) or Professional Portfolio Credit (15 hours)","courses":[]},
                         {"subtitle":"BSBA Concentrations (15 hours)","courses":[]}
                     ], "concentrations":[
-                        {"subtitle":"Accounting Concentration","courses":["ACCT_341","ACCT_342","ACCT_350","ACCT_460","ACCT_470"]},
-                        {"subtitle":"Finance Concentration","courses":["FINA_341","FINA_342","FINA_350","FINA_460","FINA_470"]},
-                        {"subtitle":"Human Resource Management","courses":["HRM_341","HRM_342","HRM_350","HRM_460","HRM_470"]},
-                        {"subtitle":"International Business Concentration","courses":["INTB_341","INTB_342","INTB_350","INTB_460","INTB_470"]},
-                        {"subtitle":"Leadership Concentration","courses":["LEAD_341","LEAD_342","LEAD_350","LEAD_460","LEAD_470"]},
-                        {"subtitle":"Marketing Concentration","courses":["MKTG_341","MKTG_342","MKTG_350","MKTG_460","MKTG_470"]}
+                        {"title":"Accounting Concentration","courses":["ACCT_341","ACCT_342","ACCT_350","ACCT_460","ACCT_470"]},
+                        {"title":"Finance Concentration","courses":["FINA_341","FINA_342","FINA_350","FINA_460","FINA_470"]},
+                        {"title":"Human Resource Management","courses":["HRM_341","HRM_342","HRM_350","HRM_460","HRM_470"]},
+                        {"title":"International Business Concentration","courses":["INTB_341","INTB_342","INTB_350","INTB_460","INTB_470"]},
+                        {"title":"Leadership Concentration","courses":["LEAD_341","LEAD_342","LEAD_350","LEAD_460","LEAD_470"]},
+                        {"title":"Marketing Concentration","courses":["MKTG_341","MKTG_342","MKTG_350","MKTG_460","MKTG_470"]}
                 ]}
             ],
             "masters":[
-                {"id":"MA-ACC", "title":"Accounting","courses":[]},
-                {"id":"MA-FI", "title":"Finance","courses":[]},
-                {"id":"MA-HRM", "title":"Human Resource Management","courses":[]},
-                {"id":"MA-IBU", "title":"International Business","courses":[]},
-                {"id":"MA-MAR", "title":"Marketing","courses":[]}
+                {"id":"MA-BA", "title":"Accounting","courses":[
+                    {"subtitle":"Required Core Credits (27 hours)","courses":["MBA_510","MBA_511","MBA_520","MBA_530","MBA_534","MBA_541","MBA_550","MBA_560","MBA_580"]},
+                    {"subtitle":"MBA Concentrations (15 hours)","courses":[]}
+                ], "concentration":[
+                    {"title":"Accounting Concentration","courses":["ACCT_600","ACCT_601","ACCT_610","ACCT_620","ACCT_670"]},
+                    {"title":"Finance Concentration","courses":["FINA_600","FINA_601","FINA_610","FINA_620","FINA_670"]},
+                    {"title":"Human Resource Management","courses":["HRM_600","HRM_601","HRM_610","HRM_620","HRM_670"]},
+                    {"title":"International Business Concentration","courses":["INTB_600","INTB_601","INTB_610","INTB_620","INTB_670"]},
+                    {"title":"Leadership Concentration","courses":["LEAD_600","LEAD_601","LEAD_610","LEAD_620","LEAD_670"]},
+                    {"title":"Marketing Concentration","courses":["MKTG_600","MKTG_601","MKTG_610","MKTG_620","MKTG_670"]}
+                ]}                
             ],
             "doctorate":[
-                {"id":"PHD-FI", "title":"Finance","courses":[]},
-                {"id":"PHD-HRM", "title":"Human Resource Management","courses":[]},
-                {"id":"PHD-IBU", "title":"International Business","courses":[]},
-                {"id":"PHD-MAR", "title":"Marketing","courses":[]}
+                {"id":"PHD-BA", "title":"Business Administration","courses":[
+                    {"subtitle":"Doctoral Foundation Courses (12 hours)","courses":["DBA_700","DBA_701","DBA_702"]},
+                    {"subtitle":"Required Core Courses (24 hours)","courses":["DBA_703","DBA_708","DBA_710","DBA_718","DBA_720","DBA_721"]},
+                    {"subtitle":"Comprehensive Examination and Dissertation Research","courses":["DBA_900","DBA_901","DBA_902","DBA_903","DBA_904"]}
+                ], "concentration":[
+                    {"title":"Finance Concentration","courses":["DBA_823","DBA_824","DBA_826"]},
+                    {"title":"Human Resource Management Concentration","courses":["DBA_827","DBA_828","DBA_830"]},
+                    {"title":"International Business Concentration","courses":["DBA_831","DBA_832","DBA_834"]},
+                    {"title":"Leadership Concentration","courses":["DBA_837","DBA_839","DBA_840"]},
+                    {"title":"Marketing Concentration","courses":["DBA_841","DBA_843","DBA_846"]}
+                ]}               
             ]
         }
     },
@@ -166,30 +194,80 @@
         "img":"img7.jpeg",
         "degrees":{
             "masters":[
-                {"id":"MA-CURI", "title":"Curriculum & Instruction","courses":[]},
-                {"id":"MA-EDULS", "title":"Educational Leadership & Supervision","courses":[]},
-                {"id":"MA-ESL", "title":"English As A Second Language (ESL)","courses":[]},
-                {"id":"MA-SCEDU", "title":"Secondary Education","courses":[]},
-                {"id":"MA-SPEDU", "title":"Special Education","courses":[]}
+                {"id":"MA-CURI", "title":"Curriculum & Instruction","courses":[
+                    {"subtitle":"Education Foundation Courses (15 hours)","courses":["EDU_500","EDU_501","EDU_503","EDU_510","EDU_520"]},
+                    {"subtitle":"Required Core Courses (27 hours)","courses":["EDU_540","EDU_560","EDU_570","EDU_580","EDU_600","EDU_610","EDU_620","EDU_640","EDU_680"]}
+                ]},
+                {"id":"MA-EDULS", "title":"Educational Leadership & Supervision","courses":[
+                    {"subtitle":"Education Foundation Courses (15 hours)","courses":["EDU_500","EDU_501","EDU_503","EDU_510","EDU_520"]},
+                    {"subtitle":"Required Core Courses (24)","courses":["LEAD_537","EADM_610","EADM_611","EADM_615","EADM_620","EADM_630","EADM_630","EADM_640","EADM_670"]}
+                ]},
+                {"id":"MA-ESL", "title":"English As A Second Language (ESL)","courses":[
+                    {"subtitle":"Education Foundation Courses (15 hours)","courses":["EDU_500","EDU_501","EDU_503","EDU_510","EDU_520"]},
+                    {"subtitle":"Required Core Courses (24 credit hours)","courses":["TESL_500","TESL_506","TESL_511","TESL_515","TESL_520","TESL_525","TESL_540","TESL_590"]}
+                ]},
+                {"id":"MA-SCEDU", "title":"Secondary Education","courses":[
+                    {"subtitle":"Education Foundation Courses (15 hours)","courses":["EDU_500","EDU_501","EDU_503","EDU_510","EDU_520"]},
+                    {"subtitle":"Required Core Courses (21)","courses":["EDU_540","EDU_570","EDU_600","EDU_610","EDU_620","EDU_630","EDU_680"]}
+                ]},
+                {"id":"MA-SPEDU", "title":"Special Education","courses":[
+                    {"subtitle":"Education Foundation Courses (15 hours)","courses":["EDU_500","EDU_501","EDU_503","EDU_510","EDU_520"]},
+                    {"subtitle":"Required Degree Core Courses (24)","courses":["EDU_530","EDU_540","EDU_570","EDU_600","EDU_610","EDU_620","EDU_630","EDU_680"]}
+                ]}
             ],
             "doctorate":[                
                 {"id":"PHD-E-ATL", "title":"Adult Teaching & Learning", "degreeTitle":"Education","courses":[]},
-                {"id":"PHD-E-CHDEV", "title":"Child Development", "degreeTitle":"Education","courses":[]},
+                {"id":"PHD-E-CHDEV", "title":"Child Development", "degreeTitle":"Education","courses":[
+                    {"subtitle":"Doctoral Foundation Courses (12 hours)","courses":["EDU_700","EDU_701","EDU_702"]},
+                    {"subtitle":"Required Credit Courses (33)","courses":["CDE_740","CDE_760","CDE_780","CDE_800","CDE_820","CDE_840","CDE_843","CDE_845","CDE_849","CDE_860","CDE_890"]},
+                    {"subtitle":"Comprehensive Examination and Dissertation Research","courses":["EDU_900","EDU_901","EDU_902","EDU_903","EDU_904"]}
+                ]},
                 {"id":"PHD-E-CURI", "title":"Curriculum & Instruction", "degreeTitle":"Education","courses":[]},
-                {"id":"PHD-E-EDUL", "title":"Educational Leadership", "degreeTitle":"Education","courses":[]},
-                {"id":"PHD-E-ESL", "title":"English As A Second Language (ESL)", "degreeTitle":"Education","courses":[]},
-                {"id":"PHD-E-SCEDU", "title":"Secondary Education", "degreeTitle":"Education","courses":[]},
-                {"id":"PHD-E-SPEDU", "title":"Special Education", "degreeTitle":"Education","courses":[]},
+                {"id":"PHD-E-EDUL", "title":"Educational Leadership", "degreeTitle":"Education","courses":[
+                    {"subtitle":"Doctoral Foundation Courses (12 hours)","courses":["EDU_700","EDU_701","EDU_702"]},
+                    {"subtitle":"Required Specialization Courses (33 hours)","courses":["LEAD_720","EADM_740","EADM_760","EADM_780","EADM_800","EADM_820","EADM_840","EADM_890"]},
+                    {"subtitle":"Comprehensive Examination and Dissertation Research","courses":["EDU_900","EDU_901","EDU_902","EDU_903","EDU_904"]}
+                ]},
+                {"id":"PHD-E-ESL", "title":"English As A Second Language (ESL)", "degreeTitle":"Education","courses":[
+                    {"subtitle":"Doctoral Foundation Courses (12 hours)","courses":["EDU_700","EDU_701","EDU_702"]},
+                    {"subtitle":"Required Core Courses (33 hours)","courses":["TESL_740","TESL_760","TESL_780","TESL_800","TESL_820","TESL_835","TESL_840","TESL_890"]},
+                    {"subtitle":"Comprehensive Examination and Dissertation Research","courses":["EDU_900","EDU_901","EDU_902","EDU_903","EDU_904"]}
+                ]},
+                {"id":"PHD-E-SCEDU", "title":"Secondary Education", "degreeTitle":"Education","courses":[
+                    {"subtitle":"Required Core Courses (33 hours)","courses":["EDU_720","EDU_730","EDU_780","EDU_800","EDU_820","EDU_835","EDU_840","EDU_890"]},
+                    {"subtitle":"Doctoral Foundation Courses (12 hours)","courses":["EDU_700","EDU_701","EDU_702"]},
+                    {"subtitle":"Comprehensive Examination and Dissertation Research","courses":["EDU_900","EDU_901","EDU_902","EDU_903","EDU_904"]}
+                ]},
+                {"id":"PHD-E-SPEDU", "title":"Special Education", "degreeTitle":"Education","courses":[
+                    {"subtitle":"Doctoral Foundation Courses (12 hours)","courses":["EDU_700","EDU_701","EDU_702"]},
+                    {"subtitle":"Required Degree Core Courses (33 hours)","courses":["SPE_740","EDU_760","SPE_770","EDU_780","SPE_820","SPE_830","EDU_840","EDU_890"]},
+                    {"subtitle":"Comprehensive Examination and Dissertation Research","courses":["EDU_900","EDU_901","EDU_902","EDU_903","EDU_904"]}
+                ]},
                 {"id":"PHD-E-HEDUL", "title":"Higher Education Leadership", "degreeTitle":"Education","courses":[]},
 
-                {"id":"PHD-P-ATL", "title":"Adult Teaching & Learning", "degreeTitle":"Philosophy","courses":[]},
+                {"id":"PHD-P-ATL", "title":"Adult Teaching & Learning", "degreeTitle":"Philosophy","courses":[
+                    {"subtitle":"Doctoral Foundation Courses (12 hours)","courses":["EDU_700","EDU_701","EDU_702"]},
+                    {"subtitle":"Required Core Courses","courses":["LEAD_720","EDU_750","EDU_755","EDU_780"]},
+                    {"subtitle":"Comprehensive Examination and Dissertation Research","courses":["EDU_900","EDU_901","EDU_902","EDU_903","EDU_904"]}
+                ]},
                 {"id":"PHD-P-CDDEV", "title":"Child Development", "degreeTitle":"Philosophy","courses":[]},
-                {"id":"PHD-P-CURI", "title":"Curriculum & Instruction", "degreeTitle":"Philosophy","courses":[]},
-                {"id":"PHD-P-EDUL", "title":"Educational Leadership", "degreeTitle":"Philosophy","courses":[]},
+                {"id":"PHD-P-CURI", "title":"Curriculum & Instruction", "degreeTitle":"Philosophy","courses":[
+                    {"subtitle":"Doctoral Foundation Courses (12 hours)","courses":["EDU_700","EDU_701","EDU_702"]},
+                    {"subtitle":"Required Specialization Courses (42 hours)","courses":["EDU_740","EDU_780","EDU_790","EDU_800","EDU_820","EDU_840","EDU_890"]},
+                    {"subtitle":"Comprehensive Examination and Dissertation Research","courses":["EDU_900","EDU_901","EDU_902","EDU_903","EDU_904"]}
+                ]},
+                {"id":"PHD-P-EDUL", "title":"Educational Technology", "degreeTitle":"Philosophy","courses":[
+                    {"subtitle":"Doctoral Foundation Courses (12 hours)","courses":["EDU_700","EDU_701","EDU_702"]},
+                    {"subtitle":"Required Core Courses","courses":["EDU_740","EDU_760","EDU_780","EDU_800","EDU_820","EDU_840","EDU_870"]},
+                    {"subtitle":"Comprehensive Examination and Dissertation Research","courses":["EDU_900","EDU_901","EDU_902","EDU_903","EDU_904"]}
+                ]},
                 {"id":"PHD-P-ESL", "title":"English As A Second Language (ESL)", "degreeTitle":"Philosophy","courses":[]},
                 {"id":"PHD-P-SCEDU", "title":"Secondary Education", "degreeTitle":"Philosophy","courses":[]},
                 {"id":"PHD-P-SPEDU", "title":"Special Education", "degreeTitle":"Philosophy","courses":[]},
-                {"id":"PHD-P-HEDUCCL", "title":"Higher Education & Community College Leadership", "degreeTitle":"Philosophy","courses":[]}
+                {"id":"PHD-P-HEDUCCL", "title":"Higher Education & Community College Leadership", "degreeTitle":"Philosophy","courses":[
+                    {"subtitle":"Doctoral Foundation Courses (12 hours)","courses":["EDU_700","EDU_701","EDU_702"]},
+                    {"subtitle":"Comprehensive Examination and Dissertation Research","courses":["EDU_900","EDU_901","EDU_902","EDU_903","EDU_904"]}
+                ]}
             ]
         }
     },
