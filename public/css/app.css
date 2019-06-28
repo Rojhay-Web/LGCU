@@ -1123,6 +1123,28 @@
 .tuitionPage .tuition-section.alternate .tuition-table tr.full-row {
   color: #ffffff;
 }
+.aboutHeader {
+  position: relative;
+  z-index: 2;
+  background: #dcdcdc;
+}
+.aboutHeader .header-section {
+  padding: 10px 5%;
+}
+.aboutHeader .header-section.header-title .solid-back span {
+  background: rgba(80, 78, 153, 0.7) !important;
+}
+.aboutHeader .header-section.header-title .backImg:before {
+  background-color: rgba(80, 78, 153, 0.3) !important;
+}
+@media (max-width: 770px) {
+  .aboutHeader .header-section.header-title .btn-container {
+    flex-direction: column !important;
+  }
+  .aboutHeader .header-section.header-title .btn-container .lBtn + .lBtn {
+    margin-left: 0 !important;
+  }
+}
 body,
 html {
   margin: 0px !important;

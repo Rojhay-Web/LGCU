@@ -21,6 +21,7 @@ import back9 from '../../assets/temp/back9.jpeg';
 
 import img1 from '../../assets/temp/img1.jpeg';
 import img8 from '../../assets/temp/img8.jpeg';
+import img11 from '../../assets/temp/img11.jpeg';
 
 
 
@@ -130,7 +131,7 @@ function Home(props){
                 <div className="section-container">
                     <div className="split-section" id="imgSplit">
                         <animated.div className="multi-img-container" onMouseMove={({ clientX: x, clientY: y }) => setIProps({ xys: calc(x, y) })} onMouseLeave={() => setIProps({ xys: [0, 0, 1] })} style={{ transform: imgprops.xys.interpolate(trans) }}>
-                            <img className="multi-img lrg" src={back7} />
+                            <img className="multi-img lrg" src={img11} />
                             <img className="multi-img sm" src={img8} />
                         </animated.div>
 

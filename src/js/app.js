@@ -10,6 +10,7 @@ import { StudyArea, StudyAreaHeader } from './templates/studyArea';
 import { Admissions, AdmissionsHeader } from './templates/admissions';
 import { Faculty, FacultyHeader } from './templates/faculty';
 import { Tuition, TuitionHeader } from './templates/tuition';
+import { About, AboutHeader } from './templates/about';
 
 /* Styles */
 import "../css/app.less";
@@ -20,7 +21,7 @@ import logo from '../assets/LGCULogo.png';
 const history = createBrowserHistory(); 
 
 const routes = [
-    {path:"/about", component:UC, headerComponent:UCHeader},
+    {path:"/about", component:About, headerComponent:AboutHeader},
     {path:"/academics", component:Academics, headerComponent:AcademicsHeader},
     {path:"/studyarea/:studyArea?", component:StudyArea, headerComponent:StudyAreaHeader},
     {path:"/admissions", component:Admissions, headerComponent:AdmissionsHeader},

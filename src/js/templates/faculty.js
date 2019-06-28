@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import back1 from '../../assets/temp/back10.jpeg';
 import defaultProfile from '../../assets/no-user.jpg';
 import sLawrenceImg from '../../assets/SJLawrence.png';
+import KStevensonImg from '../../assets/KStevenson.jpg';
 
 /* Header */
 class FacultyHeader extends Component{
@@ -49,12 +50,13 @@ class Faculty extends Component{
                     <h2 className="lrgTitle ctr" data-text="Administration">Administration</h2>
                     <div className="section-container">
                         <div className="indProfile">
-                            <img src={defaultProfile} />
+                            <img src={KStevensonImg} />
                             <div className="info title">President/CEO</div>
                             <div className="info name">Kenel Stevenson, B.S., M.A., M.Ed., M.S., Ph.D.</div>
-                            <div className="info">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
-                            <div className="info">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
-                            <div className="info">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</div>
+                            <div className="info">Dr. Stevenson as served as a World Languages and Linguistics instructor; Department Chair; Adult ESL instructor; ESL coordinator and teacher; Multicultural Education Adjunct Professor at graduate level; School Administrator; Founding President of not-for-profit organizations and post-secondary institutions of higher learning;</div>
+                            <div className="info">He earned a Bachelor’s of Science in Church Ministries and Christian Education from Southwestern Assemblies of God University, Waxahachie, Texas; a Masters of Education in Educational Leadership/Administration from Regent University, Virginia Beach, Virginia; a Master’s of Science in Professional Education with an emphasis in Secondary Education from Saint Joseph’s University, Philadelphia, Pennsylvania; a Masters of Arts in Public Policy and Public Administration from Liberty University, Lynchburg, VA; a Certificate of Advanced Graduate Studies (CAGS) in Higher Education Leadership; a Doctor of Philosophy (PhD) in Education with a specialization in Higher Education Leadership/Administration from Capella University, Minneapolis, Minnesota.</div> 
+                            <div className="info">Additionally, he earned two diplomas in Clinical Pastoral Education (CPE), and completed postgraduate studies in the following disciplines: English as a Second Language (ESL), French and Theology from LaSalle University, Regent University School of Divinity, University of Pennsylvania Health Systems and West Chester University. Furthermore, he conducted extensive research regarding challenges faced by Latinos to complete secondary and higher education in the United States. He is a polyglot.</div>
+                            <div className="info">His doctoral dissertation titled: “Academic, Social and Economic Challenges Faced by Latinos to Attain Postsecondary Education” is published globally via ProQuest.</div>
                         </div>
                     </div>
                 </section>
