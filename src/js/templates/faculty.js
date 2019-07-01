@@ -93,16 +93,7 @@ class Faculty extends Component{
                                         <img src={defaultProfile} />
                                     </div>
                                 </div>
-
-                                <div className="slider-vertical flip">
-                                    <div className="slider-card title base">
-                                        <h1 className="name">Mr. Stuart Lawrence</h1>
-                                        <div className="title">University Registrar/Director of Admissions and Enrollment</div>
-                                    </div>
-                                    <div className="slider-card img">
-                                        <img src={sLawrenceImg} />
-                                    </div>
-                                </div>
+                                
                                 <div className="slider-close"/>
                             </div>
 
@@ -116,7 +107,7 @@ class Faculty extends Component{
                     <div className="section-container">
                         <div className="indProfile">
                             <img src={sLawrenceImg} />
-                            <div className="info title">Executive Board Member</div>
+                            <div className="info title">Vice Chair of the Board of Directors</div>
                             <div className="info name">MSGT Stuart J. Lawrence</div>
                             <div className="info">MSgt Stuart J. Lawrence is currently a Political-Military Analyst and Senior Non Commissioned Officer on the Europe Eurasia Regional Center’s 1-A Branch, for Europe, Eurasia regional Center, Intelligence Directorate, DIA HQ, Washington DC.</div>
                             <div className="info">MSgt Sergeant Lawrence emigrated from Jamaica in April of 1996, joined the US Air Force in August and graduated Basic Training with honors in October of that same year.</div>
