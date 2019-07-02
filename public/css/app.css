@@ -1206,6 +1206,37 @@
     margin-left: 0 !important;
   }
 }
+.contactus .contactus-section {
+  margin-top: 50px;
+}
+.contactus .contactus-section .split-info {
+  margin-top: 30px;
+  display: flex;
+}
+.contactus .contactus-section .split-info .split-img {
+  width: 50%;
+  padding-right: 20px;
+  margin-top: auto;
+}
+.contactus .contactus-section .split-info .split-img img {
+  width: 100%;
+  border: 2px solid #ffffff;
+  -moz-box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+}
+.contactus .contactus-section .split-info .split-txt {
+  width: 50%;
+}
+.contactus .contactus-section .split-info .lgcu-form {
+  flex: 1;
+}
+.contactus .contactus-section .split-info p {
+  padding: 7px;
+  font-size: 1.7rem;
+  color: #ffffff;
+  font-weight: 100;
+}
 /* imported */
 .lng {
   background-size: contain;
@@ -2533,6 +2564,67 @@ html {
   .indProfile .info {
     font-size: 1.3rem;
   }
+}
+/* Form */
+.lgcu-form {
+  display: flex;
+  flex-wrap: wrap;
+}
+.lgcu-form .form-element {
+  padding: 7px;
+  display: block;
+  font-size: 1.2rem;
+}
+.lgcu-form .form-element input,
+.lgcu-form .form-element textarea,
+.lgcu-form .form-element select {
+  width: 100%;
+  border-radius: 4px;
+  border: 0;
+  padding: 7px;
+}
+.lgcu-form .form-element textarea {
+  height: 150px;
+  resize: none;
+}
+.lgcu-form .form-element.sz-1 {
+  width: 10%;
+}
+.lgcu-form .form-element.sz-2 {
+  width: 20%;
+}
+.lgcu-form .form-element.sz-3 {
+  width: 30%;
+}
+.lgcu-form .form-element.sz-4 {
+  width: 40%;
+}
+.lgcu-form .form-element.sz-5 {
+  width: 50%;
+}
+.lgcu-form .form-element.sz-6 {
+  width: 60%;
+}
+.lgcu-form .form-element.sz-7 {
+  width: 70%;
+}
+.lgcu-form .form-element.sz-8 {
+  width: 80%;
+}
+.lgcu-form .form-element.sz-9 {
+  width: 90%;
+}
+.lgcu-form .form-element.sz-10 {
+  width: 100%;
+}
+.lgcu-form .btn-container {
+  padding: 7px;
+  margin: 0 !important;
+}
+.lgcu-form .btn-container .lBtn {
+  cursor: pointer;
+  margin: 0;
+  color: #ffffff;
 }
 /* Tabs */
 .tab {

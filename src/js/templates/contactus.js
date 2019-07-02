@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 
 /* Images */
 import back1 from '../../assets/temp/back12.jpeg';
+import emailImg from '../../assets/temp/email.jpeg';
+
+/* Components */
+import FormCpt from './components/formCpt';
 
 /* Header */
 class ContactHeader extends Component{
@@ -30,13 +34,36 @@ class ContactHeader extends Component{
 class Contact extends Component{
     constructor(props) {
         super(props);
+        this.state = {
+            contactForm:{
+                "title":"contact us", "returnAddress":"test@testmail.com",
+                "elements":[
+                    {"type":"input","sz":7, "required":true, "name":"name", "placeholder":"Name", "value":"", "valueList":[]},
+                    {"type":"input","sz":7, "required":true, "name":"email", "placeholder":"Email", "value":"", "valueList":[]},
+                    {"type":"textarea","sz":10, "required":true, "name":"message", "placeholder":"Message", "value":"", "valueList":[]}
+                ]
+            }
+        }
     }
 
     componentDidMount(){ window.scrollTo(0, 0); }
 
     render(){        
         return(
-            <div>Under Construction</div>
+            <div className="inner-page-body contactus">
+                <section className="contactus-section contact-form">
+                    <div className="section-container">                        
+                        <div className="split-info">
+                            <div className="split-img"><img src={emailImg} /></div>
+                            <div className="split-txt">
+                                <h2 className="lrgTitle ctr" data-text="Contact Us">Contact Us</h2>
+                                <p>Thank you for your interest in LGCU complete the form to get in touch with our offices to answer any questions regarding our university.</p>
+                                <FormCpt form={this.state.contactForm} />
+                            </div>                            
+                        </div>
+                    </div>
+                </section>
+            </div>
         );
     }
 }
