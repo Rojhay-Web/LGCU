@@ -1184,6 +1184,28 @@
     font-size: 1.2rem;
   }
 }
+.contactusHeader {
+  position: relative;
+  z-index: 2;
+  background: #dcdcdc;
+}
+.contactusHeader .header-section {
+  padding: 10px 5%;
+}
+.contactusHeader .header-section.header-title .solid-back span {
+  background: rgba(37, 119, 40, 0.7) !important;
+}
+.contactusHeader .header-section.header-title .backImg:before {
+  background-color: rgba(37, 119, 40, 0.3) !important;
+}
+@media (max-width: 770px) {
+  .contactusHeader .header-section.header-title .btn-container {
+    flex-direction: column !important;
+  }
+  .contactusHeader .header-section.header-title .btn-container .lBtn + .lBtn {
+    margin-left: 0 !important;
+  }
+}
 /* imported */
 .lng {
   background-size: contain;

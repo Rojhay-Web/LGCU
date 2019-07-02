@@ -11,6 +11,7 @@ import { Admissions, AdmissionsHeader } from './templates/admissions';
 import { Faculty, FacultyHeader } from './templates/faculty';
 import { Tuition, TuitionHeader } from './templates/tuition';
 import { About, AboutHeader } from './templates/about';
+import { Contact, ContactHeader } from './templates/contactus';
 
 /* Styles */
 import "../css/app.less";
@@ -26,7 +27,9 @@ const routes = [
     {path:"/studyarea/:studyArea?", component:StudyArea, headerComponent:StudyAreaHeader},
     {path:"/admissions", component:Admissions, headerComponent:AdmissionsHeader},
     {path:"/faculty", component:Faculty, headerComponent:FacultyHeader},
-    {path:"/tuition", component:Tuition, headerComponent:TuitionHeader}
+    {path:"/tuition", component:Tuition, headerComponent:TuitionHeader},
+    {path:"/contactus", component:Contact, headerComponent:ContactHeader},
+    {path:"/apply", component:UC, headerComponent:UCHeader}
 ];
 
 
@@ -43,9 +46,9 @@ function MobileNav(props){
         <div className={"sidenav-container" + (props.sidebarOpen ? " active": "")}>
             <div className="nav-close" onClick={() => props.setSidebarDisplay(false)}><i className="fas fa-times"></i></div>
             <div className="sidenav-section">
-                <Link className="sidenav-header-link" to="/">Contact Us</Link>
+                <Link className="sidenav-header-link" to="/contactus">Contact Us</Link>
                 <Link className="sidenav-header-link" to="/">Donate</Link>
-                <Link className="sidenav-header-link" to="/">Apply</Link>
+                <Link className="sidenav-header-link" to="/apply">Apply</Link>
             </div>
             <div className="sidenav-section">
                 <Link className="sidenav-link" to="/about">About</Link>
@@ -80,7 +83,7 @@ class App extends Component{
                             <nav className="navbar navbar-expand-lg nav-top navbar-dark bg-dark">                                
                                 <Link className="nav-item mini-nav-link" to="/">my<span className="c2">LGCU</span></Link>
                                 <Link className="nav-item mini-nav-link" to="/">Donate</Link>
-                                <Link className="nav-item mini-nav-link" to="/">Apply</Link>                                
+                                <Link className="nav-item mini-nav-link" to="/apply">Apply</Link>                                
                             </nav>
                             <nav className="navbar navbar-expand-lg nav-bottom">
                                 <Link className="navbar-brand" to="/">
@@ -152,8 +155,8 @@ class App extends Component{
                                     <Link className="footer-link" to="/admissions">Admissions</Link>
                                     <Link className="footer-link" to="/academics">Academics</Link>
                                     <Link className="footer-link" to="/">Donate</Link>
-                                    <Link className="footer-link" to="/">Apply</Link>
-                                    <Link className="footer-link" to="/">Contact Us</Link>
+                                    <Link className="footer-link" to="/apply">Apply</Link>
+                                    <Link className="footer-link" to="/contactus">Contact Us</Link>
                                     <Link className="footer-link" to="/">myLGCU</Link>
                                 </div>
                             </div>

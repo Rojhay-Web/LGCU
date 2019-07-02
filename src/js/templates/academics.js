@@ -70,8 +70,8 @@ class Academics extends Component{
                         <h2 className="lrgTitle ctr c1" data-text="Take The Next Step">Take The Next Step</h2>
 
                         <div className="btn-container">
-                            <a href="/" className="lBtn clear t1"><span>Request More Information</span><i className="btn-icon fas fa-info-circle"></i></a>
-                            <a href="/" className="lBtn c1"><span>Apply</span><i className="btn-icon far fa-edit"></i></a>
+                            <a href="/contactus" className="lBtn clear t1"><span>Request More Information</span><i className="btn-icon fas fa-info-circle"></i></a>
+                            <a href="/apply" className="lBtn c1"><span>Apply</span><i className="btn-icon far fa-edit"></i></a>
                         </div>
                     </div>                    
                 </section>

@@ -49,7 +49,7 @@ class HomeHeader extends Component{
                             You shall be called the repairer of the breach and the restorer of paths to dwell in"
                             (Isaiah 58:12)</p>
                         
-                        <a href="/" className="lBtn c3"><span>Contact Us</span><i className="btn-icon fas fa-envelope"></i></a>
+                        <a href="/contactus" className="lBtn c3"><span>Contact Us</span><i className="btn-icon fas fa-envelope"></i></a>
                     </div>                    
                 </div>
             </div>
@@ -138,7 +138,7 @@ function Home(props){
                         <div className="split-content">
                             <h2 className="lrgTitle" data-text="Why LGCU">Why LGCU</h2>
                             <p>At LGCU, learners and faculty are engaged in academic and professional learning that is centered on developing and empowering working professionals to succeed in church ministries and other professional fields.</p>
-                            <a href="/" className="lBtn c2"><span>More About LGCU</span><i className="btn-icon fas fa-info-circle"></i></a>
+                            <a href="/about" className="lBtn c2"><span>More About LGCU</span><i className="btn-icon fas fa-info-circle"></i></a>
                         </div>                                                    
                     </div>
                 </div>

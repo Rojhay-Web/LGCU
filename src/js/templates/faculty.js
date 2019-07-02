@@ -5,6 +5,8 @@ import back1 from '../../assets/temp/back10.jpeg';
 import defaultProfile from '../../assets/no-user.jpg';
 import sLawrenceImg from '../../assets/SJLawrence.png';
 import KStevensonImg from '../../assets/KStevenson.jpg';
+import DDurenImg from '../../assets/DDuren.jpg';
+import BernalImg from '../../assets/Bernal.jpg';
 
 /* Header */
 class FacultyHeader extends Component{
@@ -70,7 +72,7 @@ class Faculty extends Component{
                                         <div className="title">Dean & Vice-President School of Business Administration, Finance & Staff Recruitment</div>
                                     </div>
                                     <div className="slider-card img">
-                                        <img src={defaultProfile} />
+                                        <img src={DDurenImg} />
                                     </div>
                                 </div>
 
@@ -80,7 +82,7 @@ class Faculty extends Component{
                                         <div className="title">Dean & Vice-President School of Theology and Biblical Studies, Institutional Advancement & Student Enrollment</div>
                                     </div>
                                     <div className="slider-card img c2">
-                                        <img src={defaultProfile} />
+                                        <img src={BernalImg} />
                                     </div>
                                 </div>
 
