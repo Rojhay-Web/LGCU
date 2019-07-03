@@ -1,4 +1,9 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+
+var rootPath = "";
+//var rootPath = "http://localhost:1111";
+
 /* Form */
 class FormCpt extends Component{
     constructor(props) {
@@ -10,11 +15,13 @@ class FormCpt extends Component{
                     {"type":"","sz":1, "required":false, "name":"", "placeholder":"", "value":"", "valueList":[]}
                 ]
             },
+            requiredData:[],
             formData:{}
         }
         
         this.formElement = this.formElement.bind(this);
         this.submitForm = this.submitForm.bind(this);
+        this.validateFormData = this.validateFormData.bind(this);
     }
 
     componentDidMount(){ 
@@ -24,9 +31,9 @@ class FormCpt extends Component{
     formElement(el){
         switch(el.type) {
             case "input":
-                return <input type="text" name={el.name} placeholder={el.placeholder} value={this.state.formData[el.name]} />;
+                return <input type="text" name={el.name} className={(this.state.requiredData.indexOf(el.name) > -1 ? "empty":"")} placeholder={el.placeholder} value={this.state.formData[el.name]} onChange={(e) => this.onElementChange(e)}/>;
             case "textarea":
-                    return <textarea name={el.name} placeholder={el.placeholder} value={this.state.formData[el.name]} />;
+                    return <textarea name={el.name} className={(this.state.requiredData.indexOf(el.name) > -1 ? "empty":"")} placeholder={el.placeholder} value={this.state.formData[el.name]} onChange={(e) => this.onElementChange(e)} />;
             default:
                 return <div></div>;
         }
@@ -51,8 +58,8 @@ class FormCpt extends Component{
         try {
             if(tmpForm.elements && tmpForm.elements.length > 0) {
                 var tmpData = {};
-                tmpForm.elements.foreach(function(item){
-                    tmpData[item.name] = tmpData[item.value];
+                tmpForm.elements.forEach(function(item){
+                    tmpData[item.name] = tmpData[item.value];                   
                 });
                 self.setState({ formData:tmpData });
             }
@@ -62,7 +69,7 @@ class FormCpt extends Component{
         }
     }
 
-    onElementChange(event, el){
+    onElementChange(event){
         var self = this;
         try {
             var tmpData = this.state.formData;
@@ -74,13 +81,55 @@ class FormCpt extends Component{
             }
         }
         catch(ex){
-            console.log("Error changeing element: ", el);
+            console.log("Error changeing element: ",ex);
         }
     }
 
-    submitForm(){
+    validateFormData(){
+        var self = this;
+        var missingData = [];
         try {
-            alert("form submitted");
+            this.props.form.elements.forEach(function(item) {
+                if(item.required){
+                    if(!(item.name in self.state.formData) || !self.state.formData[item.name] || self.state.formData[item.name].length == 0){
+                        missingData.push(item.name);
+                    }
+                }
+            });
+        }
+        catch(ex){
+            console.log("Error validating form: ",ex);
+        }
+
+        return missingData;
+    }
+
+    submitForm(){
+        var self = this;
+        try {
+            this.setState({ requiredData: this.validateFormData() }, ()=> {
+                if(self.state.requiredData.length > 0 ){
+                    alert("Please update required fields");
+                }
+                else {
+                    var postData = { 
+                            email: self.state.formData.sendAddress, 
+                            subject:self.state.formData.subject, 
+                            title: self.props.form.title, 
+                            formdata: self.state.formData, 
+                            additionalData:self.props.form.additionalData
+                    };
+
+                    /*axios.post(self.rootPath + "/api/sendEmail", postData, {'Content-Type': 'application/json'})
+                    .then(function(response) {
+                        if(response.results == "Email Sent"){
+                            alert("form submitted");
+                        }
+                    }); */ 
+                    alert("form submitted");                 
+                }
+            });
+            
         }
         catch(ex){
             alert("error submitting form");

@@ -5,20 +5,27 @@ var mail = {
     sendEmail:function(req,res){ 
         var response = {"errorMessage":null, "results":null};
 
-        // {}
+        /* { email: "", subject:"", title:"", formdata:{}, additionalData:{}} */
+
         try {
             var emailInfo = req.body.emailInfo;
 
             var transporter = nodemailer.createTransport({
-                service: 'gmail',
+                host: 'smtp.gmail.com',
+                port: 465,
+                secure: true,
                 auth: {
-                  user: 'youremail@gmail.com',
-                  pass: 'yourpassword'
+                    type: 'OAuth2',
+                    user: 'web.lgcu@gmail.com',
+                    clientId: '90291297521-r8hub9fkpt532s5s0lg24d96j7139l9a.apps.googleusercontent.com',
+                    clientSecret: 'dAEipnU6I-oPeC5u5Cm1qCr0',
+                    refreshToken: '1/oB315e-1qDWJZC6Nb1y2DK39o9fmNRguK7jzescqXvE',
+                    accessToken: 'ya29.Gls6B3Ybj9YexL9Wvx6zrRXgU8skf4NdOuNOpBVvrYUrIrO59uSGCbhkK0w81c3ftpxpE5VvlEdX3RALB0xm5c3qh3xBuziGHxan0uDgmQO8vW6kUWTAmL_JkmYA'
                 }
               });
 
               var mailOptions = {
-                from: 'youremail@gmail.com',
+                from: 'web.lgcu@gmail.com',
                 to: emailInfo.email,
                 subject: emailInfo.subject,
                 html: buildEmailHtml(emailInfo)
@@ -26,11 +33,11 @@ var mail = {
 
               transporter.sendMail(mailOptions, function(error, info){
                 if (error) {
-                    throw error;
+                    response.errorMessage = error;
                 } else {
-                    response.results = 'Email sent: ' + info.response;                  
-                    res.status(200).json(response);
-                }                
+                    response.results = 'Email Sent';                  
+                }    
+                res.status(200).json(response);            
               });
         }
         catch(ex){

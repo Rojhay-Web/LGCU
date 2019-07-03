@@ -2587,6 +2587,9 @@ html {
   height: 150px;
   resize: none;
 }
+.lgcu-form .form-element .empty {
+  border: 2px solid rgba(255, 0, 0, 0.8);
+}
 .lgcu-form .form-element.sz-1 {
   width: 10%;
 }

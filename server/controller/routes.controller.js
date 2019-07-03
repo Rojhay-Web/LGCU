@@ -7,3 +7,5 @@ function sendEmail(req, res){ mail.sendEmail(req, res); }
 
 /* Routes */
 router.post('/sendEmail', sendEmail);
+
+module.exports = router;
