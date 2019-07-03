@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-//var rootPath = "";
-var rootPath = "http://localhost:1111";
+var rootPath = "";
+//var rootPath = "http://localhost:1111";
 
 /* Form */
 class FormCpt extends Component{
