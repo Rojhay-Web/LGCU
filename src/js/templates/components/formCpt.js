@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-var rootPath = "";
-//var rootPath = "http://localhost:1111";
+//var rootPath = "";
+var rootPath = "http://localhost:1111";
 
 /* Form */
 class FormCpt extends Component{
@@ -59,7 +59,7 @@ class FormCpt extends Component{
             if(tmpForm.elements && tmpForm.elements.length > 0) {
                 var tmpData = {};
                 tmpForm.elements.forEach(function(item){
-                    tmpData[item.name] = tmpData[item.value];                   
+                    tmpData[item.name] = item.value;                   
                 });
                 self.setState({ formData:tmpData });
             }
@@ -113,20 +113,24 @@ class FormCpt extends Component{
                 }
                 else {
                     var postData = { 
-                            email: self.state.formData.sendAddress, 
-                            subject:self.state.formData.subject, 
+                            email: self.props.form.sendAddress, 
+                            subject:self.props.form.subject, 
                             title: self.props.form.title, 
-                            formdata: self.state.formData, 
+                            formData: self.state.formData, 
                             additionalData:self.props.form.additionalData
                     };
 
-                    /*axios.post(self.rootPath + "/api/sendEmail", postData, {'Content-Type': 'application/json'})
+                    axios.post(rootPath + "/api/sendEmail", postData, {'Content-Type': 'application/json'})
                     .then(function(response) {
-                        if(response.results == "Email Sent"){
-                            alert("form submitted");
+                        if(response.data.results == "Email Sent"){
+                            alert("Form Submitted");
+                            self.initFormData(self.props.form);
                         }
-                    }); */ 
-                    alert("form submitted");                 
+                        else {
+                            alert("Error Submitting Form");
+                            console.log("[Error] Submitting Form: ", response.data.errorMessage);
+                        }
+                    });                 
                 }
             });
             

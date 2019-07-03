@@ -1,5 +1,8 @@
+require('dotenv').config();
+
 const nodemailer = require("nodemailer");
-var util = require('util');
+const util = require('util');
+
 
 var mail = {
     sendEmail:function(req,res){ 
@@ -8,7 +11,8 @@ var mail = {
         /* { email: "", subject:"", title:"", formdata:{}, additionalData:{}} */
 
         try {
-            var emailInfo = req.body.emailInfo;
+            
+            var emailInfo = req.body;
 
             var transporter = nodemailer.createTransport({
                 host: 'smtp.gmail.com',
@@ -16,16 +20,16 @@ var mail = {
                 secure: true,
                 auth: {
                     type: 'OAuth2',
-                    user: 'web.lgcu@gmail.com',
-                    clientId: '90291297521-r8hub9fkpt532s5s0lg24d96j7139l9a.apps.googleusercontent.com',
-                    clientSecret: 'dAEipnU6I-oPeC5u5Cm1qCr0',
-                    refreshToken: '1/oB315e-1qDWJZC6Nb1y2DK39o9fmNRguK7jzescqXvE',
-                    accessToken: 'ya29.Gls6B3Ybj9YexL9Wvx6zrRXgU8skf4NdOuNOpBVvrYUrIrO59uSGCbhkK0w81c3ftpxpE5VvlEdX3RALB0xm5c3qh3xBuziGHxan0uDgmQO8vW6kUWTAmL_JkmYA'
+                    user: process.env.MAIL_SERVER_USER,
+                    clientId: process.env.MAIL_SERVER_CLIENTID,
+                    clientSecret: process.env.MAIL_SERVER_CLIENT_SECRET,
+                    refreshToken: process.env.MAIL_SERVER_REFRESH_TOKEN,
+                    accessToken: process.env.MAIL_SERVER_ACCESS_TOKEN
                 }
               });
 
               var mailOptions = {
-                from: 'web.lgcu@gmail.com',
+                from: process.env.user,
                 to: emailInfo.email,
                 subject: emailInfo.subject,
                 html: buildEmailHtml(emailInfo)
