@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Set our api routes
-//app.use('/api', require('./server/controller/routes.controller.js'));
+app.use('/api', require('./server/controller/routes.controller.js'));
 
 // Point static path to dist
 app.use(express.static(path.join(__dirname, 'build')));
