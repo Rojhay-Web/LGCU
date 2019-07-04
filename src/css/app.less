@@ -260,7 +260,7 @@ body, html {
         }
         @media @mobile-device { 
             .nav-top {padding: 0px; }
-            .nav-bottom { background:rgba(50,50,50,0.5); padding:.5rem 1rem; }
+            .nav-bottom { background:rgba(52,58,64,0.75); padding:.5rem 1rem; }
          }
     }
     &.page-nav {
@@ -269,7 +269,7 @@ body, html {
             position: relative;
             overflow: hidden;
             height: @navHeightBottom;
-            background: rgba(50,50,50,0.5);
+            background: rgba(52,58,64,0.75);
             .navbar-brand { color: rgba(255,255,255,1); }
             .collapse-container { animation: page-nav-slide 0.7s;}
         }
@@ -356,7 +356,13 @@ body, html {
                 }                
                 img { width: 100%;}
             }
-            @media @mobile-device { background-image: linear-gradient(to bottom, rgba(0,0,0,0) , rgba(220,220,220,1) 25%); }
+            @media @mobile-device { 
+                background-image: linear-gradient(to bottom, rgba(0,0,0,0) , rgba(220,220,220,1) 40%);
+                .backImg { 
+                    height: 45%;
+                    img { height: 100%; object-fit: cover;}
+                }
+            }
         }
     }
 }
@@ -447,7 +453,7 @@ body, html {
     }
 
     &.clear {
-        background: rgba(0,0,0,0);
+        background: rgba(52,58,64,0.8);
         transition: 0.3s all ease-in-out;
         &.t1 { &:hover { .color1(background, 0.7); }}
         &.t2 { &:hover { .color2(background, 0.7); }}

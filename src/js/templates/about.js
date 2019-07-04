@@ -72,7 +72,7 @@ class About extends Component{
                     <div className="section-container">
                         <h2 className="lrgTitle ctr" data-text="The LGCU Mission">The LGCU Mission</h2>
                         <div className="indProfile">
-                            <img src={back3} />
+                            <div className="img"><img src={back3} /></div>
                             <p className="info">Lenkeson Global Christian University is a leading online higher learning institution, established to meet the academic and professional needs of college traditional age and working adults, to award associate, baccalaureate, master's, and doctorate degrees.</p>
                             <p className="info">LGCU exists to provide the diverse adult learning community twenty-first century educational programs in various fields. At LGCU, learners and faculty are engaged in academic and professional learning that is centered on developing and empowering working professionals to succeed in church ministries and other professional fields.</p>
                         </div>

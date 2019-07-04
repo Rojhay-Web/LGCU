@@ -107,6 +107,14 @@
     font-size: 1rem;
   }
 }
+@media (max-width: 770px) {
+  .homeHeader .header-card-container .cardImg {
+    z-index: -1;
+  }
+  .homeHeader .header-card-container .frontInfo {
+    position: relative;
+  }
+}
 .homePage {
   padding-top: 100px;
 }
@@ -1075,6 +1083,10 @@
   margin-right: 30px;
   margin-bottom: 30px;
   float: left;
+  border: 2px solid #ffffff;
+  -moz-box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
 }
 .tuitionPage .tuition-section .img img {
   width: 100%;
@@ -1130,8 +1142,19 @@
 .aboutPage .about-section .indProfile .info {
   font-weight: 100;
 }
-.aboutPage .about-section .indProfile img {
+.aboutPage .about-section .indProfile .img {
+  border: 2px solid #ffffff;
   width: 50%;
+  margin: 10px 20px 10px 10px;
+  float: left;
+  -moz-box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+}
+.aboutPage .about-section .indProfile .img img {
+  width: 100%;
+  padding: 0;
+  float: initial;
 }
 .aboutPage .about-section .letter-container {
   font-weight: 100;
@@ -1236,6 +1259,15 @@
   font-size: 1.7rem;
   color: #ffffff;
   font-weight: 100;
+}
+@media (max-width: 770px) {
+  .contactus .contactus-section .split-info {
+    flex-direction: column;
+  }
+  .contactus .contactus-section .split-info .split-img,
+  .contactus .contactus-section .split-info .split-txt {
+    width: 100%;
+  }
 }
 /* imported */
 .lng {
@@ -2265,7 +2297,7 @@ html {
     padding: 0px;
   }
   .app-nav.full-nav .nav-bottom {
-    background: rgba(50, 50, 50, 0.5);
+    background: rgba(52, 58, 64, 0.75);
     padding: 0.5rem 1rem;
   }
 }
@@ -2276,7 +2308,7 @@ html {
   position: relative;
   overflow: hidden;
   height: 89px;
-  background: rgba(50, 50, 50, 0.5);
+  background: rgba(52, 58, 64, 0.75);
 }
 .app-nav.page-nav .nav-bottom .navbar-brand {
   color: #ffffff;
@@ -2379,7 +2411,14 @@ html {
 }
 @media (max-width: 770px) {
   .sub-page .header-section.header-title {
-    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), #dcdcdc 25%);
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), #dcdcdc 40%);
+  }
+  .sub-page .header-section.header-title .backImg {
+    height: 45%;
+  }
+  .sub-page .header-section.header-title .backImg img {
+    height: 100%;
+    object-fit: cover;
   }
 }
 /* Attributes */
@@ -2510,7 +2549,7 @@ html {
   color: #000000 !important;
 }
 .lBtn.clear {
-  background: rgba(0, 0, 0, 0);
+  background: rgba(52, 58, 64, 0.8);
   transition: 0.3s all ease-in-out;
 }
 .lBtn.clear.t1:hover {
