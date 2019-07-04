@@ -235,7 +235,7 @@ class Admissions extends Component{
                             <div className="number">1</div>
                             <div className="info">Apply Online</div>
                         </div>
-                        <p>The first requirement in the admission process is to submit your full student application to Lenkeson Global Christian University. In addition, you will be required to submit several documents required by our Admission Committee to decide on your official admission. You will have the options to apply online or submit the application via email to <a href="mailto:internationaladmissions@lgcu.org">Internationaladmissions@lgcu.org</a></p>
+                        <p>The first requirement in the admission process is to submit your full student application to Lenkeson Global Christian University. In addition, you will be required to submit several documents required by our Admission Committee to decide on your official admission. You will have the options to apply online or submit the application via email to <a href="mailto:internationaladmissions@lenkesongcu.org">Internationaladmissions@lenkesongcu.org</a></p>
 
                         <h2>Application Deadline</h2>
                         <p>The International Admissions committee needs ample time to process your application.</p>
@@ -258,7 +258,7 @@ class Admissions extends Component{
                             <li>Language Consultants International (LCI): Successful Completion of Level 5-6</li>
                         </ul>
 
-                        <p>Submit a photocopy of your passport or a government issued ID. Scan and email document to <a href="mailto:internationaladmissions@lgcu.org">Internationaladmissions@lgcu.org</a></p>
+                        <p>Submit a photocopy of your passport or a government issued ID. Scan and email document to <a href="mailto:internationaladmissions@lenkesongcu.org">Internationaladmissions@lenkesongcu.org</a></p>
 
                         <div className="number-list">
                             <div className="number">2</div>
