@@ -83,7 +83,7 @@ function Tuition(props){
                             </tr>
                         ))}
 
-                        <tr className="full-row"><td colspan="3">Program</td></tr>
+                        <tr className="full-row"><td colspan="3">Programs</td></tr>
 
                         {programRates.map((item,i) =>(
                             <tr key={i}>

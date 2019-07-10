@@ -266,10 +266,10 @@
 .homePage .home-section .section-container .facts-container {
   display: flex;
   flex-direction: row;
-  padding: 120px 7%;
+  padding: 70px 7%;
 }
 .homePage .home-section .section-container .facts-container .factItem {
-  padding: 30px 20px;
+  padding: 30px 20px 10px;
   text-align: center;
   width: 33%;
   font-weight: 100;
@@ -1231,6 +1231,7 @@
 }
 .contactus .contactus-section {
   margin-top: 50px;
+  padding-bottom: 40px;
 }
 .contactus .contactus-section .split-info {
   margin-top: 30px;
