@@ -7,43 +7,43 @@
   font-family: 'Alike';
   font-style: normal;
   font-weight: 400;
-  src: local('Alike Regular'), local('Alike-Regular'), url(https://fonts.gstatic.com/s/alike/v11/HI_EiYEYI6BIoHjGQ5E.ttf) format('truetype');
+  src: local('Alike Regular'), local('Alike-Regular'), url(https://fonts.gstatic.com/s/alike/v12/HI_EiYEYI6BIoHjGQ5E.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Reem Kufi';
   font-style: normal;
   font-weight: 400;
-  src: local('Reem Kufi Regular'), local('ReemKufi-Regular'), url(https://fonts.gstatic.com/s/reemkufi/v6/2sDcZGJLip7W2J7v7wQzaGW8.ttf) format('truetype');
+  src: local('Reem Kufi Regular'), local('ReemKufi-Regular'), url(https://fonts.gstatic.com/s/reemkufi/v7/2sDcZGJLip7W2J7v7wQzaGW8.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Yantramanav';
   font-style: normal;
   font-weight: 100;
-  src: local('Yantramanav Thin'), local('Yantramanav-Thin'), url(https://fonts.gstatic.com/s/yantramanav/v4/flU-Rqu5zY00QEpyWJYWN5-QbeR5CA.ttf) format('truetype');
+  src: local('Yantramanav Thin'), local('Yantramanav-Thin'), url(https://fonts.gstatic.com/s/yantramanav/v5/flU-Rqu5zY00QEpyWJYWN5-QbeR5CA.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Yantramanav';
   font-style: normal;
   font-weight: 300;
-  src: local('Yantramanav Light'), local('Yantramanav-Light'), url(https://fonts.gstatic.com/s/yantramanav/v4/flUhRqu5zY00QEpyWJYWN59Yf_NeKBY.ttf) format('truetype');
+  src: local('Yantramanav Light'), local('Yantramanav-Light'), url(https://fonts.gstatic.com/s/yantramanav/v5/flUhRqu5zY00QEpyWJYWN59Yf_NeKBY.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Yantramanav';
   font-style: normal;
   font-weight: 400;
-  src: local('Yantramanav Regular'), local('Yantramanav-Regular'), url(https://fonts.gstatic.com/s/yantramanav/v4/flU8Rqu5zY00QEpyWJYWN5fzXeM.ttf) format('truetype');
+  src: local('Yantramanav Regular'), local('Yantramanav-Regular'), url(https://fonts.gstatic.com/s/yantramanav/v5/flU8Rqu5zY00QEpyWJYWN5fzXeM.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Yantramanav';
   font-style: normal;
   font-weight: 700;
-  src: local('Yantramanav Bold'), local('Yantramanav-Bold'), url(https://fonts.gstatic.com/s/yantramanav/v4/flUhRqu5zY00QEpyWJYWN59IePNeKBY.ttf) format('truetype');
+  src: local('Yantramanav Bold'), local('Yantramanav-Bold'), url(https://fonts.gstatic.com/s/yantramanav/v5/flUhRqu5zY00QEpyWJYWN59IePNeKBY.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Yantramanav';
   font-style: normal;
   font-weight: 900;
-  src: local('Yantramanav Black'), local('Yantramanav-Black'), url(https://fonts.gstatic.com/s/yantramanav/v4/flUhRqu5zY00QEpyWJYWN59wevNeKBY.ttf) format('truetype');
+  src: local('Yantramanav Black'), local('Yantramanav-Black'), url(https://fonts.gstatic.com/s/yantramanav/v5/flUhRqu5zY00QEpyWJYWN59wevNeKBY.ttf) format('truetype');
 }
 /* Styles */
 .homeHeader .header-card-container {
