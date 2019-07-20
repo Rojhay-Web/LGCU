@@ -91,7 +91,7 @@ class FormCpt extends Component{
         try {
             this.props.form.elements.forEach(function(item) {
                 if(item.required){
-                    if(!(item.name in self.state.formData) || !self.state.formData[item.name] || self.state.formData[item.name].length == 0){
+                    if(!(item.name in self.state.formData) || !self.state.formData[item.name] || self.state.formData[item.name].length === 0){
                         missingData.push(item.name);
                     }
                 }
@@ -122,7 +122,7 @@ class FormCpt extends Component{
 
                     axios.post(rootPath + "/api/sendEmail", postData, {'Content-Type': 'application/json'})
                     .then(function(response) {
-                        if(response.data.results == "Email Sent"){
+                        if(response.data.results === "Email Sent"){
                             alert("Form Submitted");
                             self.initFormData(self.props.form);
                         }

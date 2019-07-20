@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 
 /* Images */
-import back1 from '../../assets/temp/img4.jpeg';
-
 /* Data */
 import academicData from '../data/academics.json';
 
@@ -32,7 +30,7 @@ class StudyAreaHeader extends Component{
         return(
             <div className="headerCard studyHeader sub-page">
                 <div className="header-title header-section">
-                    <div className="backImg"><img src={"../images/tmp/"+this.state.data.img} /></div>
+                    <div className="backImg"><img alt="Study Area img" src={"../images/site/"+this.state.data.img} /></div>
                     
                     <div className="lrg-title">
                         <span>{(this.state.majorData ? this.state.majorData.title : "")}</span>
@@ -79,7 +77,7 @@ class StudyAreaHeader extends Component{
                 if(majorId != null){
                     var degreeList = Object.keys(tmpArea.degrees);
                     for(var i =0; i < degreeList.length; i++){
-                        tmpMajor = tmpArea.degrees[degreeList[i]].filter(function(item){  return item.id == majorId; });
+                        tmpMajor = tmpArea.degrees[degreeList[i]].filter(function(item){  return item.id === majorId; });
                         if(tmpMajor.length > 0) { 
                             displayNum = 2; tmpMajor = tmpMajor[0]; break;
                         }
@@ -157,7 +155,7 @@ class StudyArea extends Component{
                 if(majorId != null){ 
                     /*displayNum = -1;*/
                     for(var i =0; i < tmpData.degreeList.length; i++){
-                        tmpMajor = tmpArea.degrees[tmpData.degreeList[i]].filter(function(item){  return item.id == majorId; });
+                        tmpMajor = tmpArea.degrees[tmpData.degreeList[i]].filter(function(item){  return item.id === majorId; });
                         if(tmpMajor.length > 0) { displayNum = 2; tmpMajor = tmpMajor[0]; break; }
                     }                                     
                 }

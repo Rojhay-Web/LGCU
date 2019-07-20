@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 
-import img5 from '../../../assets/temp/img5.jpeg';
-
 class AcademicSlider extends Component{
     constructor(props) {
         super(props);
@@ -23,13 +21,13 @@ class AcademicSlider extends Component{
                 <div className="slider-container title">
                     <h1>{this.state.academicInfo.title}</h1>
                     <div className="lBtn-group">
-                        {this.props.displayLink != false &&
+                        {this.props.displayLink !== false &&
                             <a href={"/studyarea" + this.state.titleLink} className="lBtn link"><span>Learn More</span><i className="btn-icon fas fa-graduation-cap"/></a>
                         }
                     </div>
                 </div>
                 <div className="slider-container info">
-                    <div className={"img-slider " + this.props.theme}><img src={'../images/tmp/'+ this.props.academicInfo.img} /></div>
+                    <div className={"img-slider " + this.props.theme}><img alt="slider img" src={'../images/site/'+ this.props.academicInfo.img} /></div>
                     <div className="info-container">
                         <p>{this.state.academicInfo.description}</p>
                     </div>

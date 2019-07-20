@@ -124,7 +124,7 @@ body, html {
 
 .footer {
     position: relative;
-    padding: 30px 2%;
+    padding: 30px 2% 5px;
     display: flex;
     flex-direction: row;
     color: rgba(255,255,255,1);
@@ -135,6 +135,19 @@ body, html {
     .footer-section {
         width: 40%;
         &.full { width: 100%;}
+        &.policy-foot {
+            margin-top: 10px;
+            padding: 7px;
+            border-top: 2px solid rgba(255,255,255,0.2);
+
+            .policy-btns {
+                text-align: right;
+                .policy-btn { 
+                    color: rgba(100,100,100,1); 
+                    &+.policy-btn { margin-left: 15px; }
+                }
+            }
+        }
         .footer-logo {
             height: 75px;
             display: flex;

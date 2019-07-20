@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 
 /* Images */
-import back1 from '../../assets/temp/img7.jpeg';
+import back1 from '../../assets/site/mini/img7.jpg';
 
-import img1 from '../../assets/temp/back8.jpeg';
-import img2 from '../../assets/temp/back5.jpeg';
-import img3 from '../../assets/temp/back0.jpeg';
+import img1 from '../../assets/site/mini/back8.jpg';
+import img2 from '../../assets/site/mini/back5.jpg';
+import img3 from '../../assets/site/mini/back0.jpg';
 
 /* Header */
 class AdmissionsHeader extends Component{
@@ -19,7 +19,7 @@ class AdmissionsHeader extends Component{
         return(
             <div className="headerCard admissionsHeader sub-page">
                 <div className="header-title header-section">
-                    <div className="backImg"><img src={back1} /></div>
+                    <div className="backImg"><img alt="Admissions Background img" src={back1} /></div>
                     <h1>Admissions</h1>                    
                     <div className="solid-back">
                         <span>Whether you are interested to enroll in our associate, bachelors, masters or doctoral programs,</span>
@@ -60,7 +60,7 @@ class Admissions extends Component{
                                 <h1>Undergraduate Requirements</h1>
                             </div>
                             <div className="slider-card img">
-                                <img src={img1} />
+                                <img alt="Undergraduate img" src={img1} />
                             </div>
                             <div className="slider-card c2">
                                 <h2 className="line-split">The following documents are required for prospective students:</h2>
@@ -111,7 +111,7 @@ class Admissions extends Component{
                                 <h1>Graduate Requirements</h1>
                             </div>
                             <div className="slider-card img">
-                                <img src={img2} />
+                                <img alt="Graduate img" src={img2} />
                             </div>
                             <div className="slider-card title c1">
                                 <h2>Masters Degree Requirements</h2>
@@ -156,7 +156,7 @@ class Admissions extends Component{
                                 </div>
                             </div>
                             <div className="slider-card img">
-                                <img src={img3} />
+                                <img alt="Doctoral img" src={img3} />
                             </div>
                             <div className="slider-card title c2">
                                 <h2>Doctoral Program Requirements</h2>

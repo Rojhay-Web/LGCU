@@ -87,7 +87,7 @@ class App extends Component{
                             </nav>
                             <nav className="navbar navbar-expand-lg nav-bottom">
                                 <Link className="navbar-brand" to="/">
-                                    <img className="headerLogo" src={logo}/>
+                                    <img alt="logo img" className="headerLogo" src={logo}/>
                                     <div className="textLogo">
                                         <div className="logoLine">Lenkeson Global</div>
                                         <div className="logoLine">Christian University</div>
@@ -138,7 +138,7 @@ class App extends Component{
                         <div className="footer">
                             <div className="footer-section">
                                 <div className="footer-logo">
-                                    <img className="headerLogo" src={logo}/>
+                                    <img alt="logo img" className="headerLogo" src={logo}/>
                                     <div className="textLogo">
                                         <div className="logoLine">Lenkeson Global</div>
                                         <div className="logoLine">Christian University</div>
@@ -147,7 +147,8 @@ class App extends Component{
                                 <div className="footer-info">P.O. Box 121199</div>
                                 <div className="footer-info">Clermont, Florida 34712</div>
                                 <div className="footer-space"></div>
-                                <div className="footer-info">704.953.1609</div>
+                                <div className="footer-info">Phone: 407.573.5855</div>
+                                <div className="footer-info">Fax: 407.807.0567</div>
                                 <div className="footer-info">info@lenkesongcu.org</div>
                             </div>
                             <div className="footer-section">
@@ -161,8 +162,22 @@ class App extends Component{
                                 </div>
                             </div>
 
-                            <div className="footer-section full">
-                                <p className="nonDiscrimination">Lenkeson Global Christian University is a Christ-centered institution of higher learning and is committed to provide cutting-edge academic education to men and women without discriminating against any individual on the basis of gender, race, color, religion, national origin, and intellectually and physically challenged individuals. However, the university reserves the right to refuse admission to persons or hire faculty or staff who do not support its values. LGCU is an equal opportunity employer.</p>
+                            <div className="footer-section full policy-foot">
+                                {/*<p className="nonDiscrimination">Lenkeson Global Christian University is a Christ-centered institution of higher learning and is committed to provide cutting-edge academic education to men and women without discriminating against any individual on the basis of gender, race, color, religion, national origin, and intellectually and physically challenged individuals. However, the university reserves the right to refuse admission to persons or hire faculty or staff who do not support its values. LGCU is an equal opportunity employer.</p>*/}
+                                <div className="accordian" id="policyAccordion">
+                                    <div className="policy-btns">
+                                        <a className="policy-btn" data-toggle="collapse" href="#policyOne" aria-expanded="false" aria-controls="policyOne">Non-Discrimination Statement</a>
+                                        <a className="policy-btn" data-toggle="collapse" href="#policyTwo" aria-expanded="false" aria-controls="policyTwo">Information Policy</a>
+                                    </div>
+                                    <div className="policy-txt">
+                                        <div id="policyOne" className="collapse" data-parent="#policyAccordion">
+                                            <p className="nonDiscrimination">Lenkeson Global Christian University is a Christ-centered institution of higher learning and is committed to provide cutting-edge academic education to men and women without discriminating against any individual on the basis of gender, race, color, religion, national origin, and intellectually and physically challenged individuals. However, the university reserves the right to refuse admission to persons or hire faculty or staff who do not support its values. LGCU is an equal opportunity employer.</p>
+                                        </div>
+                                        <div id="policyTwo" className="collapse" data-parent="#policyAccordion">
+                                            <p className="nonDiscrimination">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -1,5 +1,5 @@
 import {useSpring, animated} from 'react-spring'
-import {Spring, interpolate} from 'react-spring/renderprops'
+import {Spring} from 'react-spring/renderprops'
 
 import React, { Component, useState, useEffect } from 'react';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -9,19 +9,13 @@ import { Carousel } from 'react-responsive-carousel';
 import academicData from '../data/academics.json';
 
 /* Components */
-import TABS from './components/tabs';
 import AcademicSlider from './components/academicSlider';
 
 /* Images */
-import logo from '../../assets/LGCULogo.png';
+import back9 from '../../assets/site/mini/back9.jpg';
 
-
-import back7 from '../../assets/temp/back7.jpeg';
-import back9 from '../../assets/temp/back9.jpeg';
-
-import img1 from '../../assets/temp/img1.jpeg';
-import img8 from '../../assets/temp/img8.jpeg';
-import img11 from '../../assets/temp/img11.jpeg';
+import img8 from '../../assets/site/mini/img8.jpg';
+import img11 from '../../assets/site/mini/img11.jpg';
 
 
 
@@ -37,7 +31,7 @@ class HomeHeader extends Component{
         return(
             <div className="headerCard homeHeader">
                 <div className="header-card-container">
-                    <div className="cardImg"><img src={back9}/></div>
+                    <div className="cardImg"><img alt="Home back img" src={back9}/></div>
 
                     <div className="frontInfo">
                         <h1>
@@ -94,7 +88,7 @@ function Home(props){
     function buildDataList(){
         try {
             var tmpList = Object.keys(academicData);
-            var retList = [{"title":"LGCU Schools", "colorTheme":"c2", "description":"Developing and empowering adult learners through twenty-first century virtual academic education to successfully transform and lead organizations with integrity in a diverse society.", "img":"img4.jpeg"}];
+            var retList = [{"title":"LGCU Schools", "colorTheme":"c2", "description":"Developing and empowering adult learners through twenty-first century virtual academic education to successfully transform and lead organizations with integrity in a diverse society.", "img":"img4.jpg"}];
             tmpList.forEach(function(item){ retList.push(academicData[item]); });
 
             setAcademicList(retList);
@@ -131,8 +125,8 @@ function Home(props){
                 <div className="section-container">
                     <div className="split-section" id="imgSplit">
                         <animated.div className="multi-img-container" onMouseMove={({ clientX: x, clientY: y }) => setIProps({ xys: calc(x, y) })} onMouseLeave={() => setIProps({ xys: [0, 0, 1] })} style={{ transform: imgprops.xys.interpolate(trans) }}>
-                            <img className="multi-img lrg" src={img11} />
-                            <img className="multi-img sm" src={img8} />
+                            <img alt="Home info img" className="multi-img lrg" src={img11} />
+                            <img alt="Home info img mini" className="multi-img sm" src={img8} />
                         </animated.div>
 
                         <div className="split-content">
@@ -168,7 +162,7 @@ function Home(props){
                 <div className="section-container">
                     <h2 className="lrgTitle ctr" data-text="Areas Of Study">Areas Of Study</h2>                        
                     {/* Slide Maze */}
-                    {academicList.length == 6 && 
+                    {academicList.length === 6 && 
                         <div className="slide-maze">
                             <div className="maze-lvl">
                                 <div className="lvl-horizontal">

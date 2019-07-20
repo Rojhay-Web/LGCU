@@ -2134,7 +2134,7 @@ html {
 }
 .footer {
   position: relative;
-  padding: 30px 2%;
+  padding: 30px 2% 5px;
   display: flex;
   flex-direction: row;
   color: #ffffff;
@@ -2147,6 +2147,20 @@ html {
 }
 .footer .footer-section.full {
   width: 100%;
+}
+.footer .footer-section.policy-foot {
+  margin-top: 10px;
+  padding: 7px;
+  border-top: 2px solid rgba(255, 255, 255, 0.2);
+}
+.footer .footer-section.policy-foot .policy-btns {
+  text-align: right;
+}
+.footer .footer-section.policy-foot .policy-btns .policy-btn {
+  color: #646464;
+}
+.footer .footer-section.policy-foot .policy-btns .policy-btn + .policy-btn {
+  margin-left: 15px;
 }
 .footer .footer-section .footer-logo {
   height: 75px;

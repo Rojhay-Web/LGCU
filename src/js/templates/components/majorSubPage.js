@@ -18,13 +18,13 @@ class MajorSub extends Component{
             <div className="inner-page-body studyPage">
                 <section className="studyArea-section"></section>
 
-                {(this.props.majorData && this.props.majorData.courses != undefined) && 
+                {(this.props.majorData && this.props.majorData.courses !== undefined) && 
                     <section className="studyArea-section">
                         <h2 className="lrgTitle ctr" data-text="Curriculum">Curriculum</h2>
 
                         
                         <div className="section-container">
-                            {this.props.majorData.courses.length == 0 && 
+                            {this.props.majorData.courses.length === 0 && 
                                 <div className="course-section noCourseData">                                    
                                     <span>To get information or any general questions regarding our {this.props.majorData.title} degree please contact our admissions team at </span>
                                     <a href="mailto:admissions@lenkesongcu.org">admissions@lenkesongcu.org</a>
