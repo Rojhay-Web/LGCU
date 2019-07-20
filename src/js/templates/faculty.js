@@ -67,9 +67,28 @@ class Faculty extends Component{
                     <div className="info-slider">
                             <div className="info-slider-container" ref={this.slide1}>
                                 <div className="slider-vertical flip">
-                                    <div className="slider-card title base">
+                                    <div className="slider-card title base bio-card">
                                         <h1 className="name">Dr. David Duren</h1>
-                                        <div className="title">Dean & Vice-President School of Business Administration, Finance & Staff Recruitment</div>
+                                        <div className="title">
+                                            <p>Vice-President of Business, Finance & Staff Recruitment</p>
+                                            <p>Dean of the School of Business Administration</p>
+                                        </div>
+
+                                        <div className="faculty-bio" id="bioAccordionDuren">
+                                            <a className="bio-btn" data-toggle="collapse" href="#bioOne" aria-expanded="false" aria-controls="bioOne">Read Bio</a>
+                                            <div id="bioOne" className="bio-txt collapse" data-parent="#bioAccordionDuren">
+                                                <p>Mr. Duren's academic preparation includes a BS in Business Administration from S. C. State
+                                                University, MBA from Pfeiffer University, Doctorate in Business Administration (DBA)
+                                                from the University of Phoenix and completing a Doctoral Certification of Advanced
+                                                Graduates Studies in Advanced Accounting at Northcentral University.</p>
+                                                <p>With over 35 years, including
+                                                hospitality, banking, distribution, manufacturing, professional accounting, nonprofits, and
+                                                communications. The positions he has held include Controller, Director of Accounting,
+                                                Asst. Controller, and Staff.  My experience includes employment in banks, utility
+                                                companies, public accounting, non-profit organizations, manufacturing companies and
+                                                other areas of Corporate America.</p>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div className="slider-card img">
                                         <img alt="David Duren img" src={DDurenImg} />
@@ -79,7 +98,11 @@ class Faculty extends Component{
                                 <div className="slider-vertical">
                                     <div className="slider-card title c2">
                                         <h1 className="name">Dr. Leonel Bernal</h1>
-                                        <div className="title">Dean & Vice-President School of Theology and Biblical Studies, Institutional Advancement & Student Enrollment</div>
+                                        <div className="title">
+                                            <p>Vice-President School of Theology and Biblical Studies, Institutional Advancement & Student Enrollment, International Recruitment</p>
+                                            <p>Dean of the School of Theology and Biblical Studies</p>
+                                        </div>
+                                        <a href="tel:4074340002" className="phone"><i className="fas fa-phone"></i> <span>407.434.0002</span></a>
                                     </div>
                                     <div className="slider-card img c2">
                                         <img alt="Bernal img" src={BernalImg} />
@@ -92,6 +115,17 @@ class Faculty extends Component{
                                         <div className="title">Dean of Academic Affairs, Student Services and Doctoral Residency</div>
                                     </div>
                                     <div className="slider-card img light">
+                                        <img alt="Default img" src={defaultProfile} />
+                                    </div>
+                                </div>
+
+                                <div className="slider-vertical">
+                                    <div className="slider-card title c3">
+                                        <h1 className="name">Mrs. Marisol Rivera Bryant</h1>
+                                        <div className="title">Administrative Secretary</div>
+                                        <a href="tel:4075642992" className="phone"><i className="fas fa-phone"></i> <span>407.564.2992</span></a>
+                                    </div>
+                                    <div className="slider-card img c3">
                                         <img alt="Default img" src={defaultProfile} />
                                     </div>
                                 </div>

@@ -1,0 +1,60 @@
+.applyHeader {
+    position: relative;
+    z-index: 2;
+    background: rgba(220,220,220,1);
+
+    .header-section {
+        padding: 10px 5%;
+        &.header-title {
+            .solid-back {
+                span {
+                    .color3(background, 0.7);
+                }
+            }
+            .backImg {
+                &:before {.color3(background-color, 0.3);}
+            }
+            
+            .btn-container {
+                .btn-split-txt { margin: 30px 10px 0px; padding: 5px; }
+            }
+            @media @mobile-device { 
+                .btn-container { 
+                    flex-direction: column !important;
+                    .lBtn + .lBtn { margin-left: 0 !important;}
+                }
+            }
+        }
+    }
+}
+
+.applyPage {
+    .apply-section {
+        .application-container {
+            color: rgba(255,255,255,1);
+            padding-bottom: 50px;
+            .app-info {
+                text-align: center;
+                font-size: 1.7rem;
+                font-family: 'Reem Kufi', sans-serif;
+                font-weight: 100;
+            }
+
+            .btn-container {
+                margin-bottom: 60px;
+                .btn-split-txt { margin: 30px 10px 0px; padding: 5px; }
+            }
+
+            .img-container {
+                width: 70%;
+                overflow: hidden;
+                margin:0 auto;
+                border: 2px solid rgba(255,255,255,1);
+                -moz-box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+                -webkit-box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+                img{object-fit: contain; width: 100%;}
+            }
+        }
+    }
+}

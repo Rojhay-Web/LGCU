@@ -39,7 +39,22 @@
 
         .info-slider {
             .slider-card {
-                .title { font-size: 1.35rem; }
+                &.bio-card { overflow-y: auto; }
+                .title,.phone { font-size: 1.35rem; }
+                .phone { margin-top: 10px; color: rgba(255,255,255,1);}
+                .faculty-bio {
+                    .bio-btn { 
+                        font-size: 1.1rem; 
+                        border: 2px solid @color1;
+                        color: @color1;
+                        padding: 3px 10px;
+                        border-radius: 50px;
+                        text-decoration: none;
+                        transition: 0.5s all ease-in-out;
+                        &:hover { .color1(background, 0.2); }
+                    }
+                    .bio-txt { margin-top: 5px; font-size: 1rem; background: rgba(50,50,50,0.2); padding: 5px; }
+                }
             }
         }
     }

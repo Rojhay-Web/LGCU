@@ -12,6 +12,7 @@ import { Faculty, FacultyHeader } from './templates/faculty';
 import { Tuition, TuitionHeader } from './templates/tuition';
 import { About, AboutHeader } from './templates/about';
 import { Contact, ContactHeader } from './templates/contactus';
+import { Apply, ApplyHeader } from './templates/apply';
 
 /* Styles */
 import "../css/app.less";
@@ -29,7 +30,7 @@ const routes = [
     {path:"/faculty", component:Faculty, headerComponent:FacultyHeader},
     {path:"/tuition", component:Tuition, headerComponent:TuitionHeader},
     {path:"/contactus", component:Contact, headerComponent:ContactHeader},
-    {path:"/apply", component:UC, headerComponent:UCHeader}
+    {path:"/apply", component:Apply, headerComponent:ApplyHeader}
 ];
 
 

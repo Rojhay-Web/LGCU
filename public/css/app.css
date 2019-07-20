@@ -1017,8 +1017,34 @@
 .facultyPage .faculty-section .lrgTitle {
   margin-bottom: 20px;
 }
-.facultyPage .faculty-section .info-slider .slider-card .title {
+.facultyPage .faculty-section .info-slider .slider-card.bio-card {
+  overflow-y: auto;
+}
+.facultyPage .faculty-section .info-slider .slider-card .title,
+.facultyPage .faculty-section .info-slider .slider-card .phone {
   font-size: 1.35rem;
+}
+.facultyPage .faculty-section .info-slider .slider-card .phone {
+  margin-top: 10px;
+  color: #ffffff;
+}
+.facultyPage .faculty-section .info-slider .slider-card .faculty-bio .bio-btn {
+  font-size: 1.1rem;
+  border: 2px solid #151280;
+  color: #151280;
+  padding: 3px 10px;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: 0.5s all ease-in-out;
+}
+.facultyPage .faculty-section .info-slider .slider-card .faculty-bio .bio-btn:hover {
+  background: rgba(21, 18, 128, 0.2) !important;
+}
+.facultyPage .faculty-section .info-slider .slider-card .faculty-bio .bio-txt {
+  margin-top: 5px;
+  font-size: 1rem;
+  background: rgba(50, 50, 50, 0.2);
+  padding: 5px;
 }
 .tuitionHeader {
   position: relative;
@@ -1269,6 +1295,62 @@
   .contactus .contactus-section .split-info .split-txt {
     width: 100%;
   }
+}
+.applyHeader {
+  position: relative;
+  z-index: 2;
+  background: #dcdcdc;
+}
+.applyHeader .header-section {
+  padding: 10px 5%;
+}
+.applyHeader .header-section.header-title .solid-back span {
+  background: rgba(80, 78, 153, 0.7) !important;
+}
+.applyHeader .header-section.header-title .backImg:before {
+  background-color: rgba(80, 78, 153, 0.3) !important;
+}
+.applyHeader .header-section.header-title .btn-container .btn-split-txt {
+  margin: 30px 10px 0px;
+  padding: 5px;
+}
+@media (max-width: 770px) {
+  .applyHeader .header-section.header-title .btn-container {
+    flex-direction: column !important;
+  }
+  .applyHeader .header-section.header-title .btn-container .lBtn + .lBtn {
+    margin-left: 0 !important;
+  }
+}
+.applyPage .apply-section .application-container {
+  color: #ffffff;
+  padding-bottom: 50px;
+}
+.applyPage .apply-section .application-container .app-info {
+  text-align: center;
+  font-size: 1.7rem;
+  font-family: 'Reem Kufi', sans-serif;
+  font-weight: 100;
+}
+.applyPage .apply-section .application-container .btn-container {
+  margin-bottom: 60px;
+}
+.applyPage .apply-section .application-container .btn-container .btn-split-txt {
+  margin: 30px 10px 0px;
+  padding: 5px;
+}
+.applyPage .apply-section .application-container .img-container {
+  width: 70%;
+  overflow: hidden;
+  margin: 0 auto;
+  border: 2px solid #ffffff;
+  -moz-box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+}
+.applyPage .apply-section .application-container .img-container img {
+  object-fit: contain;
+  width: 100%;
 }
 /* imported */
 .lng {
@@ -2909,6 +2991,9 @@ html {
 }
 .info-slider .info-slider-container .slider-card.img.c2:before {
   border-left: 50px solid #257728;
+}
+.info-slider .info-slider-container .slider-card.img.c3:before {
+  border-left: 50px solid #504e99;
 }
 .info-slider .info-slider-container .slider-card.title {
   display: flex;
