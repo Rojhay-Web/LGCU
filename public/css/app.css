@@ -65,10 +65,12 @@
   background-image: linear-gradient(to right, #151280, #257728 90%);
   opacity: 0.5;
 }
-.homeHeader .header-card-container .cardImg img {
+.homeHeader .header-card-container .cardImg .backImg {
   object-fit: cover;
   width: 100%;
   min-height: 100%;
+}
+.homeHeader .header-card-container .cardImg .backImg.img {
   -webkit-filter: grayscale(70%);
   /* Safari 6.0 - 9.0 */
   filter: grayscale(70%);
@@ -76,23 +78,56 @@
 .homeHeader .header-card-container .frontInfo {
   position: absolute;
   top: 40%;
-  left: 7%;
+  left: 50%;
   color: #ffffff;
-  transform: translate(-7%, -40%);
-  width: 50%;
+  transform: translate(-50%, -40%);
+  width: 60%;
   z-index: 2;
   padding: 5%;
+  text-align: center;
 }
 .homeHeader .header-card-container .frontInfo h1 {
-  font-size: 3rem;
+  font-size: 3.5rem;
   margin-bottom: 20px;
+  opacity: 0;
+  -webkit-animation-name: background-appear;
+  /* Safari 4.0 - 8.0 */
+  -webkit-animation-duration: 2s;
+  /* Safari 4.0 - 8.0 */
+  animation-name: background-appear;
+  animation-duration: 2s;
+  animation-delay: 1s;
+  animation-fill-mode: forwards;
 }
 .homeHeader .header-card-container .frontInfo h1 span {
   display: block;
 }
 .homeHeader .header-card-container .frontInfo p {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   margin-bottom: 30px;
+  opacity: 0;
+  -webkit-animation-name: background-appear;
+  /* Safari 4.0 - 8.0 */
+  -webkit-animation-duration: 3s;
+  /* Safari 4.0 - 8.0 */
+  animation-name: background-appear;
+  animation-duration: 2s;
+  animation-delay: 2s;
+  animation-fill-mode: forwards;
+}
+.homeHeader .header-card-container .frontInfo p span {
+  font-style: italic;
+}
+.homeHeader .header-card-container .frontInfo .lBtn {
+  opacity: 0;
+  -webkit-animation-name: background-appear;
+  /* Safari 4.0 - 8.0 */
+  -webkit-animation-duration: 3s;
+  /* Safari 4.0 - 8.0 */
+  animation-name: background-appear;
+  animation-duration: 2s;
+  animation-delay: 3s;
+  animation-fill-mode: forwards;
 }
 @media (max-width: 770px) {
   .homeHeader .header-card-container .frontInfo {

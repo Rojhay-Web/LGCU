@@ -12,7 +12,8 @@ import academicData from '../data/academics.json';
 import AcademicSlider from './components/academicSlider';
 
 /* Images */
-import back9 from '../../assets/site/mini/back9.jpg';
+import introVideo from '../../assets/site/intro_video.mov';
+//import back9 from '../../assets/site/mini/back9.jpg';
 
 import img8 from '../../assets/site/mini/img8.jpg';
 import img11 from '../../assets/site/mini/img11.jpg';
@@ -31,16 +32,22 @@ class HomeHeader extends Component{
         return(
             <div className="headerCard homeHeader">
                 <div className="header-card-container">
-                    <div className="cardImg"><img alt="Home back img" src={back9}/></div>
+                    <div className="cardImg">
+                        {/*<img alt="Home back img" className="backImg img" src={back9}/>*/}
+                        <video className="backImg" alt="Home back video" autoPlay loop muted>
+                            <source src={introVideo} type="video/mp4" />
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
 
                     <div className="frontInfo">
                         <h1>
                             <span>Global Access Through</span> 
                             <span>Affordable Higher Education</span>
                         </h1>
-                        <p>"Those from among you shall build the wast places; 
+                        <p><span>"Those from among you shall build the wast places; 
                             You shall raise the foundation of many generations;
-                            You shall be called the repairer of the breach and the restorer of paths to dwell in"
+                            You shall be called the repairer of the breach and the restorer of paths to dwell in"</span>
                             (Isaiah 58:12)</p>
                         
                         <a href="/contactus" className="lBtn c3"><span>Contact Us</span><i className="btn-icon fas fa-envelope"></i></a>
