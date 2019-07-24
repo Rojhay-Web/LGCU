@@ -2319,6 +2319,16 @@ html {
   margin-top: 30px;
   color: #646464;
 }
+.footer .footer-section .nonDiscrimination.bold {
+  font-weight: bold;
+}
+.footer .footer-section .privacy {
+  font-size: 1rem;
+  color: #646464;
+}
+.footer .footer-section .privacy.bold {
+  font-weight: bold;
+}
 @media (max-width: 770px) {
   .footer .footer-section {
     width: 100%;
