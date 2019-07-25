@@ -34,6 +34,8 @@ class FormCpt extends Component{
                 return <input type="text" name={el.name} className={(this.state.requiredData.indexOf(el.name) > -1 ? "empty":"")} placeholder={el.placeholder} value={this.state.formData[el.name]} onChange={(e) => this.onElementChange(e)}/>;
             case "textarea":
                     return <textarea name={el.name} className={(this.state.requiredData.indexOf(el.name) > -1 ? "empty":"")} placeholder={el.placeholder} value={this.state.formData[el.name]} onChange={(e) => this.onElementChange(e)} />;
+            case "checkbox":
+                return <div className={"form-checkbox " + (this.state.requiredData.indexOf(el.name) > -1 ? "empty":"")} placeholder={el.placeholder} value={this.state.formData[el.name]}><input type="checkbox" name={el.name} onChange={(e) => this.onElementChange(e)}/><label>{el.placeholder}</label></div>;
             default:
                 return <div></div>;
         }
@@ -41,10 +43,21 @@ class FormCpt extends Component{
 
     render(){        
         return(
-            <div className="lgcu-form">                
-                {this.props.form.elements.map((item,i) => (
+            <div className="lgcu-form">
+                {this.props.form.type === "core" && this.props.form.elements.map((item,i) => (
                     <div key={i} className={"form-element sz-"+item.sz}>{ this.formElement(item) }</div>
                 ))}
+
+                {this.props.form.type === "section" && this.props.form.elements.map((section,i) => (
+                    <div className="form-section-container" key={i}>
+                        <h2>{section.title}</h2>
+                        {section.directions && <p>{section.directions}</p>}
+                        {section.elements.map((item,k) => (
+                            <div key={k} className={"form-element sz-"+item.sz}>{ this.formElement(item) }</div>
+                        ))}                        
+                    </div>
+                ))}
+
 
                 <div className="btn-container">
                     <div className="lBtn c2" onClick={this.submitForm}><span>Submit</span><i className="btn-icon far fa-paper-plane"></i></div>
@@ -76,7 +89,7 @@ class FormCpt extends Component{
             var name = event.target.name;
 
             if(name in tmpData) {
-                tmpData[name] = event.target.value
+                tmpData[name] = (event.target.type === 'checkbox' ? event.target.checked : event.target.value)
                 self.setState({ formData:tmpData });
             }
         }

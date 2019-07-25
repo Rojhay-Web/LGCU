@@ -5,6 +5,9 @@ import queryString from 'query-string';
 import back1 from '../../assets/site/mini/img13.jpg';
 import appImg from '../../assets/site/mini/img14.jpg';
 
+/* Components */
+import FormCpt from './components/formCpt';
+
 /* Header */
 class ApplyHeader extends Component{
     constructor(props) {
@@ -39,7 +42,50 @@ class Apply extends Component{
     constructor(props) {
         super(props);
         this.state={
-            params:""
+            params:"",
+            facultyApplication:{
+                "title":"faculty application", "sendAddress":"web.lgcu@gmail.com",
+                "subject":"Faculty Application", "additionalData":{}, "type":"section",
+                "elements":[
+                    {"title":"Applicant Information", "elements":[
+                        {"type":"input","sz":3, "required":true, "name":"firstName", "placeholder":"First Name", "value":"", "valueList":[]},
+                        {"type":"input","sz":3, "required":true, "name":"middleName", "placeholder":"Middle Name", "value":"", "valueList":[]},
+                        {"type":"input","sz":4, "required":true, "name":"lastName", "placeholder":"Last Name", "value":"", "valueList":[]},
+                        {"type":"input","sz":10, "required":true, "name":"email", "placeholder":"Email", "value":"", "valueList":[]},
+                        {"type":"input","sz":10, "required":true, "name":"address", "placeholder":"Home Address", "value":"", "valueList":[]},
+                        {"type":"input","sz":5, "required":true, "name":"city", "placeholder":"City", "value":"", "valueList":[]},
+                        {"type":"input","sz":2, "required":true, "name":"state", "placeholder":"State", "value":"", "valueList":[]},
+                        {"type":"input","sz":3, "required":true, "name":"postal", "placeholder":"Postal Code", "value":"", "valueList":[]},
+                        {"type":"input","sz":3, "required":false, "name":"dayphone", "placeholder":"Daytime Phone", "value":"", "valueList":[]},
+                        {"type":"input","sz":3, "required":false, "name":"eveningphone", "placeholder":"Evening Phone", "value":"", "valueList":[]},
+                        {"type":"input","sz":4, "required":true, "name":"mobilephone", "placeholder":"Mobile Phone", "value":"", "valueList":[]},
+                        
+                        {"type":"input","sz":5, "required":true, "name":"ssn", "placeholder":"Social Security Number", "value":"", "valueList":[]},
+                        {"type":"input","sz":5, "required":true, "name":"driverlicense", "placeholder":"Drivers License", "value":"", "valueList":[]},
+                        
+                    ]},
+                    {"title":"Emergency Contact Information", "elements":[
+                        {"type":"input","sz":5, "required":true, "name":"emergencyname", "placeholder":"Name", "value":"", "valueList":[]},
+                        {"type":"input","sz":3, "required":false, "name":"emergencyrelationship", "placeholder":"Relationship", "value":"", "valueList":[]},
+                        {"type":"input","sz":2, "required":true, "name":"emergencyphone", "placeholder":"Phone Number", "value":"", "valueList":[]},
+                        {"type":"input","sz":10, "required":false, "name":"emergencyaddress", "placeholder":"Address", "value":"", "valueList":[]},
+                        {"type":"input","sz":5, "required":false, "name":"emergencycity", "placeholder":"City", "value":"", "valueList":[]},
+                        {"type":"input","sz":2, "required":false, "name":"emergencystate", "placeholder":"State", "value":"", "valueList":[]},
+                        {"type":"input","sz":3, "required":false, "name":"emergencypostal", "placeholder":"Postal Code", "value":"", "valueList":[]}
+                    ]},
+                    {"title":"Position", "elements":[
+                        {"type":"input","sz":10, "required":true, "name":"position", "placeholder":"Faculty Position Applied For", "value":"", "valueList":[]},
+                        {"type":"checkbox","sz":3, "required":false, "name":"veteran", "placeholder":"Are You A US Veteran", "value":"", "valueList":[]},
+                        {"type":"input","sz":7, "required":false, "name":"veteranbranch", "placeholder":"Branch", "value":"", "valueList":[]},
+                        {"type":"textarea","sz":10, "required":false, "name":"veteranskill", "placeholder":"Specific Skills Acquired", "value":"", "valueList":[]}
+                    ]},
+                    {"title":"Educational Experience", "elements":[
+                        {"type":"input","sz":10, "required":true, "name":"highestdegree", "placeholder":"Highest Degree Earned", "value":"", "valueList":[]},                        
+                        {"type":"textarea","sz":10, "required":false, "name":"otherdegrees", "placeholder":"Other Degrees Earned", "value":"", "valueList":[]}
+                    ]},
+                    {"title":"Employment History", "directions":"List employment history for the past 5 years without any gap.", "elements":[]}
+                ]
+            }
         }
 
         this.getAppType = this.getAppType.bind(this);
@@ -88,8 +134,16 @@ class Apply extends Component{
             case "faculty":
                 return <div className="application-container">
                         <h2 className="lrgTitle ctr" data-text="Faculty Application">Faculty Application</h2>
-                        <div className="section-container">
-                            <p className="app-info">Faculty Application Coming Soon, for immediate information please email us at <a href="mailto:info@lenkesongcu.org">info@lenkesongcu.org</a></p>
+                        <div className="section-container">                            
+                            <FormCpt form={this.state.facultyApplication} />
+                            <p className="form-info">Please submit via email at admin@lenkesongcu.org copies of unofficial transcripts, Curriculum Vitae or resume. If hired, official transcripts will be required. Official State issued government identifications and background check will be required if employment is offered. All required documents must be submitted to Human Resources before beginning employment. Employment offer will be made only based on student enrollment.</p>
+                            
+                            <h3 className="lrgTitle ctr" data-text="CERTIFICATION OF APPLICATION">CERTIFICATION OF APPLICATION</h3>
+                            <p className="form-info">I certify that all information provided on this application is accurate. I understand that if I provide false information to Lenkeson Global Christian University, no employment will be offered. This is also cause for termination.</p>
+                            <p className="form-info">I authorize Lenkeson Global Christian University to contact educational institutions that I attended and former/current employers to release information regarding enrollment, graduation and job performance. Furthermore, I authorize Lenkeson Global Christian University to contact references listed on the job application to release information about me.</p>
+
+                            <h3 className="lrgTitle ctr" data-text="NON-DISCRIMINATION POLICY">NON-DISCRIMINATION POLICY</h3>
+                            <p className="form-info">Lenkeson Global Christian University is a Christ-centered institution of higher learning and is committed to provide cutting-edge academic education to men and women without discriminating against any individual on the basis of gender, race, color, religion, national origin, and intellectually and physically challenged individuals. However, the university reserves the right to refuse admission to persons or hire faculty or staff who do not support its values. LGCU is an equal opportunity employer.</p>                                                        
                         </div>
                     </div>;
                 break;

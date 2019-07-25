@@ -37,7 +37,7 @@ class Contact extends Component{
         this.state = {
             contactForm:{
                 "title":"contact us", "sendAddress":"web.lgcu@gmail.com",
-                "subject":"Contact Us Form Submission", "additionalData":{},
+                "subject":"Contact Us Form Submission", "additionalData":{}, "type":"core",
                 "elements":[
                     {"type":"input","sz":7, "required":true, "name":"name", "placeholder":"Name", "value":"", "valueList":[]},
                     {"type":"input","sz":7, "required":true, "name":"email", "placeholder":"Email", "value":"", "valueList":[]},

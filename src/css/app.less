@@ -135,20 +135,46 @@ body, html {
     font-family: 'Reem Kufi', sans-serif;
 
     .footer-section {
-        width: 40%;
+        width: 32%;
         &.full { width: 100%;}
+        &.address {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            margin-top: 20px; 
+            .address-section {
+                display: flex;
+                flex-direction: row;
+                .footer-info { &+.footer-info { margin-left: 14px; }}   
+                @media @mobile-device { flex-direction: column;}                             
+            }
+            @media @mobile-device { flex-direction: column;}
+        }
         &.policy-foot {
             margin-top: 10px;
             padding: 7px;
             border-top: 2px solid rgba(255,255,255,0.2);
 
-            .policy-btns {
-                text-align: right;
-                .policy-btn { 
-                    color: rgba(100,100,100,1); 
-                    &+.policy-btn { margin-left: 15px; }
+            .footer-info-container {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+
+                .policy-btns {
+                    text-align: right;
+                    .policy-btn { 
+                        color: rgba(100,100,100,1); 
+                        text-decoration: underline;
+                        &+.policy-btn { margin-left: 15px; }
+                    }
                 }
-            }
+
+                .footer-copyright { color: rgba(100,100,100,1); }
+
+                @media @mobile-device { flex-direction: column;}
+            }   
+            
+            .policy-collapse { margin-top: 30px; }
         }
         .footer-logo {
             height: 75px;
@@ -158,6 +184,15 @@ body, html {
 
             img { height: 100%;}
             .textLogo { padding-left: 7px; padding-top: 7px; font-size: 21px; }
+        }
+        .social-container {
+            .social-link { 
+                color: rgba(255,255,255,1);
+                font-size: 1.3rem;
+                transition: 0.5s all ease-in-out;
+                &:hover {  opacity: 0.7; font-size: 1rem;  }
+                &+.social-link { margin-left: 14px; }
+            }
         }
         .footer-info {
             font-size: 1.2rem;
@@ -175,20 +210,14 @@ body, html {
             flex-wrap: wrap;
             .footer-link { 
                 width: 33%; 
-                padding: 10px;
+                padding: 0px 10px 10px;
                 color: rgba(255,255,255,1);
                 font-size: 1.5rem;
+                text-decoration: underline;
             }
         }
-
-        .nonDiscrimination {
-            font-size: 1rem;
-            margin-top: 30px;
-            color: rgba(100,100,100,1);
-            &.bold { font-weight: bold;}
-        }
-
-        .privacy{
+        
+        .policy{
             font-size: 1rem;
             color: rgba(100,100,100,1);
             &.bold { font-weight: bold;}
@@ -508,6 +537,14 @@ body, html {
 .lgcu-form {
     display: flex;
     flex-wrap: wrap;
+
+    .form-section-container {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        h2 { width: 100%; text-decoration: underline; }
+        &+.form-section-container { margin-top: 40px;}
+    }
     .form-element {
         padding: 7px; 
         display: block;
@@ -520,6 +557,16 @@ body, html {
         }
 
         textarea { height: 150px; resize: none; }        
+
+        .form-checkbox { 
+            display: flex; 
+            flex-direction: row; 
+            background: rgba(255,255,255,0.3);
+            border-radius: 5px;
+            padding: 7px 0px;
+            input{ width: initial; margin: 5px 7px; }
+            label { margin: 0; }
+        }
 
         .empty { border: 2px solid rgba(255,0,0,0.8);}
         &.sz-1 { width: 10%; }

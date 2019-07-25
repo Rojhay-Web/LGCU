@@ -48,7 +48,7 @@ function MobileNav(props){
             <div className="nav-close" onClick={() => props.setSidebarDisplay(false)}><i className="fas fa-times"></i></div>
             <div className="sidenav-section">
                 <Link className="sidenav-header-link" to="/contactus">Contact Us</Link>
-                <Link className="sidenav-header-link" to="/">Donate</Link>
+                <a href="https://www.givelify.com/givenow/1.0/?token=eyJvcmdfaWQiOiJNelUyT1RFfiIsImJhZGdlX2ltYWdlIjoiYjMucG5nIn0~" target="_blank" className="sidenav-header-link">Donate</a>
                 <Link className="sidenav-header-link" to="/apply">Apply</Link>
             </div>
             <div className="sidenav-section">
@@ -83,7 +83,7 @@ class App extends Component{
                         <div className={"app-nav" + (this.state.navChange ? " page-nav" : " full-nav")}>
                             <nav className="navbar navbar-expand-lg nav-top navbar-dark bg-dark">                                
                                 <Link className="nav-item mini-nav-link" to="/">my<span className="c2">LGCU</span></Link>
-                                <Link className="nav-item mini-nav-link" to="/">Donate</Link>
+                                <a href="https://www.givelify.com/givenow/1.0/?token=eyJvcmdfaWQiOiJNelUyT1RFfiIsImJhZGdlX2ltYWdlIjoiYjMucG5nIn0~" target="_blank" className="nav-item mini-nav-link">Donate</a>
                                 <Link className="nav-item mini-nav-link" to="/apply">Apply</Link>                                
                             </nav>
                             <nav className="navbar navbar-expand-lg nav-bottom">
@@ -145,45 +145,66 @@ class App extends Component{
                                         <div className="logoLine">Christian University</div>
                                     </div>
                                 </div>
-                                <div className="footer-info">P.O. Box 121199</div>
-                                <div className="footer-info">Clermont, Florida 34712</div>
-                                <div className="footer-space"></div>
-                                <div className="footer-info">Phone: 407.573.5855</div>
-                                <div className="footer-info">Fax: 407.807.0567</div>
-                                <div className="footer-info">info@lenkesongcu.org</div>
+
+                                <div className="social-container">
+                                    <a href="" target="_blank" className="social-link"><i className="fab fa-twitter"></i></a>
+                                    <a href="" target="_blank" className="social-link"><i className="fab fa-facebook"></i></a>
+                                    <a href="" target="_blank" className="social-link"><i className="fab fa-instagram"></i></a>
+                                </div>                                                            
+                            </div>
+                            <div className="footer-section">
+                                <div className="footer-info">Hours of Operation:</div>
+                                <div className="footer-info">Monday - Friday 9:00 a.m. - 6:00 p.m. (ET)</div>
+                                <div className="footer-info">Saturday 10:00 a.m. - 1:00 p.m. (ET)</div>
                             </div>
                             <div className="footer-section">
                                 <div className="footer-link-section">
                                     <Link className="footer-link" to="/admissions">Admissions</Link>
                                     <Link className="footer-link" to="/academics">Academics</Link>
-                                    <Link className="footer-link" to="/">Donate</Link>
+                                    <a href="https://www.givelify.com/givenow/1.0/?token=eyJvcmdfaWQiOiJNelUyT1RFfiIsImJhZGdlX2ltYWdlIjoiYjMucG5nIn0~" target='_blank' className="footer-link">Donate</a>
                                     <Link className="footer-link" to="/apply">Apply</Link>
                                     <Link className="footer-link" to="/contactus">Contact Us</Link>
                                     <Link className="footer-link" to="/">myLGCU</Link>
                                 </div>
                             </div>
-
+                            <div className="footer-section full address">
+                                <div className="address-section">
+                                    <div className="footer-info">P.O. Box 121199</div>
+                                    <div className="footer-info">Clermont, Florida 34712</div>                                
+                                </div>
+                                <div className="address-section">
+                                    <div className="footer-info">Phone: 407.573.5855</div>
+                                    <div className="footer-info">Fax: 407.807.0567</div>
+                                    <div className="footer-info">info@lenkesongcu.org</div>
+                                </div>
+                            </div>
                             <div className="footer-section full policy-foot">
                                 {/*<p className="nonDiscrimination">Lenkeson Global Christian University is a Christ-centered institution of higher learning and is committed to provide cutting-edge academic education to men and women without discriminating against any individual on the basis of gender, race, color, religion, national origin, and intellectually and physically challenged individuals. However, the university reserves the right to refuse admission to persons or hire faculty or staff who do not support its values. LGCU is an equal opportunity employer.</p>*/}
                                 <div className="accordian" id="policyAccordion">
-                                    <div className="policy-btns">
-                                        <a className="policy-btn" data-toggle="collapse" href="#policyOne" aria-expanded="false" aria-controls="policyOne">Non-Discrimination Statement</a>
-                                        <a className="policy-btn" data-toggle="collapse" href="#policyTwo" aria-expanded="false" aria-controls="policyTwo">Privacy Policy</a>
+                                    <div className="footer-info-container">
+                                        <div className="footer-copyright">
+                                            <i className="far fa-copyright"/>
+                                            <span>2019. Lenkeson Global Christian University, Inc. All Rights Reserved.</span>
+                                        </div>
+                                        <div className="policy-btns">
+                                            <a className="policy-btn" data-toggle="collapse" href="#policyOne" aria-expanded="false" aria-controls="policyOne">Non-Discrimination Statement</a>
+                                            <a className="policy-btn" data-toggle="collapse" href="#policyTwo" aria-expanded="false" aria-controls="policyTwo">Privacy Policy</a>
+                                        </div>
                                     </div>
                                     <div className="policy-txt">
-                                        <div id="policyOne" className="collapse" data-parent="#policyAccordion">
-                                            <p className="nonDiscrimination">Lenkeson Global Christian University is a Christ-centered institution of higher learning and is committed to provide cutting-edge academic education to men and women without discriminating against any individual on the basis of gender, race, color, religion, national origin, and intellectually and physically challenged individuals. However, the university reserves the right to refuse admission to persons or hire faculty or staff who do not support its values. LGCU is an equal opportunity employer.</p>
+                                        <div id="policyOne" className="policy-collapse collapse" data-parent="#policyAccordion">
+                                            <p className="policy">Lenkeson Global Christian University is a Christ-centered institution of higher learning and is committed to provide cutting-edge academic education to men and women without discriminating against any individual on the basis of gender, race, color, religion, national origin, and intellectually and physically challenged individuals. However, the university reserves the right to refuse admission to persons or hire faculty or staff who do not support its values. LGCU is an equal opportunity employer.</p>
                                         </div>
-                                        <div id="policyTwo" className="collapse" data-parent="#policyAccordion">
-                                            <p className="privacy bold">How do We Gather Information?</p>
-                                            <p className="privacy">Lenkeson Global Christian University fully shares the legitimate concerns of our users regarding the submission of personal information via the University website or other means of communication such as other sites, mobile applications, email, phone calls, postal mail and forms submitted from individuals and face to face interaction. We respect the privacy of all individual users. For this reason, we carefully explain the collection and handling of data from our users.</p>
-                                            <p className="privacy">Keep in mind that some information is provided to us through a number of websites and internet technology services. In addition, we collect information that is submitted to the University on a voluntary basis. Furthermore, we may collect information through third parties including education partners, business organizations and non-affiliated groups and compare it with information we collect. We will not sell, share or loan your information with other third parties. However, information collected may be shared to meet federal regulations.</p>
-                                            <p className="privacy bold">Why We Gather Information?</p>
-                                            <p className="privacy">The primary means of gathering information is by completing the University web form. This form gathers basic information from the individual users expressing their interest in our University. Once the form is completed and submitted, it is directed to the department that handles the collection of the data. You may choose not to provide us with information. However, if you are interested in applying for admissions or submitting a job application, you will be required to submit the proper data to process your application. Failure to provide the required information may result of denying your request for either admissions or employment.</p>
-                                            <p className="privacy bold">Changes in Our Privacy Policy</p>
-                                            <p className="privacy">Lenkeson Global Christian University reserves the right to make changes to its Privacy Policy without notifying individual users prior to the effective date and time of the changes.</p>
-                                            <p className="privacy bold">Contact US</p>
-                                            <p className="privacy">For questions regarding our Privacy Policy, please contact us via email or phone located on our Website.</p>
+                                        <div id="policyTwo" className="policy-collapse collapse" data-parent="#policyAccordion">
+                                            <p className="policy bold">How do We Gather Information?</p>
+                                            <p className="policy">Lenkeson Global Christian University fully shares the legitimate concerns of our users regarding the submission of personal information via the University website or other means of communication such as other sites, mobile applications, email, phone calls, postal mail and forms submitted from individuals and face to face interaction. We respect the privacy of all individual users. For this reason, we carefully explain the collection and handling of data from our users.</p>
+                                            <p className="policy">Keep in mind that some information is provided to us through a number of websites and internet technology services. In addition, we collect information that is submitted to the University on a voluntary basis. Furthermore, we may collect information through third parties including education partners, business organizations and non-affiliated groups and compare it with information we collect. We will not sell, share or loan your information with other third parties. However, information collected may be shared to meet federal regulations.</p>
+                                            <p className="policy bold">Why We Gather Information?</p>
+                                            <p className="policy">The primary means of gathering information is by completing the University web form. This form gathers basic information from the individual users expressing their interest in our University. Once the form is completed and submitted, it is directed to the department that handles the collection of the data. You may choose not to provide us with information. However, if you are interested in applying for admissions or submitting a job application, you will be required to submit the proper data to process your application. Failure to provide the required information may result of denying your request for either admissions or employment.</p>
+                                            <p className="policy bold">Changes in Our Privacy Policy</p>
+                                            <p className="policy">Lenkeson Global Christian University reserves the right to make changes to its Privacy Policy without notifying individual users prior to the effective date and time of the changes.</p>
+                                            <p className="policy bold">Contact US</p>
+                                            <p className="policy">For questions regarding our Privacy Policy, please contact us via email or phone located on our Website.</p>
                                         </div>
                                     </div>
                                 </div>
