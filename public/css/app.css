@@ -65,10 +65,12 @@
   background-image: linear-gradient(to right, #151280, #257728 90%);
   opacity: 0.5;
 }
-.homeHeader .header-card-container .cardImg img {
+.homeHeader .header-card-container .cardImg .backImg {
   object-fit: cover;
   width: 100%;
   min-height: 100%;
+}
+.homeHeader .header-card-container .cardImg .backImg.img {
   -webkit-filter: grayscale(70%);
   /* Safari 6.0 - 9.0 */
   filter: grayscale(70%);
@@ -76,23 +78,56 @@
 .homeHeader .header-card-container .frontInfo {
   position: absolute;
   top: 40%;
-  left: 7%;
+  left: 50%;
   color: #ffffff;
-  transform: translate(-7%, -40%);
-  width: 50%;
+  transform: translate(-50%, -40%);
+  width: 60%;
   z-index: 2;
   padding: 5%;
+  text-align: center;
 }
 .homeHeader .header-card-container .frontInfo h1 {
-  font-size: 3rem;
+  font-size: 3.5rem;
   margin-bottom: 20px;
+  opacity: 0;
+  -webkit-animation-name: background-appear;
+  /* Safari 4.0 - 8.0 */
+  -webkit-animation-duration: 2s;
+  /* Safari 4.0 - 8.0 */
+  animation-name: background-appear;
+  animation-duration: 2s;
+  animation-delay: 1s;
+  animation-fill-mode: forwards;
 }
 .homeHeader .header-card-container .frontInfo h1 span {
   display: block;
 }
 .homeHeader .header-card-container .frontInfo p {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   margin-bottom: 30px;
+  opacity: 0;
+  -webkit-animation-name: background-appear;
+  /* Safari 4.0 - 8.0 */
+  -webkit-animation-duration: 3s;
+  /* Safari 4.0 - 8.0 */
+  animation-name: background-appear;
+  animation-duration: 2s;
+  animation-delay: 2s;
+  animation-fill-mode: forwards;
+}
+.homeHeader .header-card-container .frontInfo p span {
+  font-style: italic;
+}
+.homeHeader .header-card-container .frontInfo .lBtn {
+  opacity: 0;
+  -webkit-animation-name: background-appear;
+  /* Safari 4.0 - 8.0 */
+  -webkit-animation-duration: 3s;
+  /* Safari 4.0 - 8.0 */
+  animation-name: background-appear;
+  animation-duration: 2s;
+  animation-delay: 3s;
+  animation-fill-mode: forwards;
 }
 @media (max-width: 770px) {
   .homeHeader .header-card-container .frontInfo {
@@ -1017,8 +1052,34 @@
 .facultyPage .faculty-section .lrgTitle {
   margin-bottom: 20px;
 }
-.facultyPage .faculty-section .info-slider .slider-card .title {
+.facultyPage .faculty-section .info-slider .slider-card.bio-card {
+  overflow-y: auto;
+}
+.facultyPage .faculty-section .info-slider .slider-card .title,
+.facultyPage .faculty-section .info-slider .slider-card .phone {
   font-size: 1.35rem;
+}
+.facultyPage .faculty-section .info-slider .slider-card .phone {
+  margin-top: 10px;
+  color: #ffffff;
+}
+.facultyPage .faculty-section .info-slider .slider-card .faculty-bio .bio-btn {
+  font-size: 1.1rem;
+  border: 2px solid #151280;
+  color: #151280;
+  padding: 3px 10px;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: 0.5s all ease-in-out;
+}
+.facultyPage .faculty-section .info-slider .slider-card .faculty-bio .bio-btn:hover {
+  background: rgba(21, 18, 128, 0.2) !important;
+}
+.facultyPage .faculty-section .info-slider .slider-card .faculty-bio .bio-txt {
+  margin-top: 5px;
+  font-size: 1rem;
+  background: rgba(50, 50, 50, 0.2);
+  padding: 5px;
 }
 .tuitionHeader {
   position: relative;
@@ -1269,6 +1330,62 @@
   .contactus .contactus-section .split-info .split-txt {
     width: 100%;
   }
+}
+.applyHeader {
+  position: relative;
+  z-index: 2;
+  background: #dcdcdc;
+}
+.applyHeader .header-section {
+  padding: 10px 5%;
+}
+.applyHeader .header-section.header-title .solid-back span {
+  background: rgba(80, 78, 153, 0.7) !important;
+}
+.applyHeader .header-section.header-title .backImg:before {
+  background-color: rgba(80, 78, 153, 0.3) !important;
+}
+.applyHeader .header-section.header-title .btn-container .btn-split-txt {
+  margin: 30px 10px 0px;
+  padding: 5px;
+}
+@media (max-width: 770px) {
+  .applyHeader .header-section.header-title .btn-container {
+    flex-direction: column !important;
+  }
+  .applyHeader .header-section.header-title .btn-container .lBtn + .lBtn {
+    margin-left: 0 !important;
+  }
+}
+.applyPage .apply-section .application-container {
+  color: #ffffff;
+  padding-bottom: 50px;
+}
+.applyPage .apply-section .application-container .app-info {
+  text-align: center;
+  font-size: 1.7rem;
+  font-family: 'Reem Kufi', sans-serif;
+  font-weight: 100;
+}
+.applyPage .apply-section .application-container .btn-container {
+  margin-bottom: 60px;
+}
+.applyPage .apply-section .application-container .btn-container .btn-split-txt {
+  margin: 30px 10px 0px;
+  padding: 5px;
+}
+.applyPage .apply-section .application-container .img-container {
+  width: 70%;
+  overflow: hidden;
+  margin: 0 auto;
+  border: 2px solid #ffffff;
+  -moz-box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+}
+.applyPage .apply-section .application-container .img-container img {
+  object-fit: contain;
+  width: 100%;
 }
 /* imported */
 .lng {
@@ -2134,7 +2251,7 @@ html {
 }
 .footer {
   position: relative;
-  padding: 30px 2%;
+  padding: 30px 2% 5px;
   display: flex;
   flex-direction: row;
   color: #ffffff;
@@ -2147,6 +2264,20 @@ html {
 }
 .footer .footer-section.full {
   width: 100%;
+}
+.footer .footer-section.policy-foot {
+  margin-top: 10px;
+  padding: 7px;
+  border-top: 2px solid rgba(255, 255, 255, 0.2);
+}
+.footer .footer-section.policy-foot .policy-btns {
+  text-align: right;
+}
+.footer .footer-section.policy-foot .policy-btns .policy-btn {
+  color: #646464;
+}
+.footer .footer-section.policy-foot .policy-btns .policy-btn + .policy-btn {
+  margin-left: 15px;
 }
 .footer .footer-section .footer-logo {
   height: 75px;
@@ -2187,6 +2318,16 @@ html {
   font-size: 1rem;
   margin-top: 30px;
   color: #646464;
+}
+.footer .footer-section .nonDiscrimination.bold {
+  font-weight: bold;
+}
+.footer .footer-section .privacy {
+  font-size: 1rem;
+  color: #646464;
+}
+.footer .footer-section .privacy.bold {
+  font-weight: bold;
 }
 @media (max-width: 770px) {
   .footer .footer-section {
@@ -2895,6 +3036,9 @@ html {
 }
 .info-slider .info-slider-container .slider-card.img.c2:before {
   border-left: 50px solid #257728;
+}
+.info-slider .info-slider-container .slider-card.img.c3:before {
+  border-left: 50px solid #504e99;
 }
 .info-slider .info-slider-container .slider-card.title {
   display: flex;

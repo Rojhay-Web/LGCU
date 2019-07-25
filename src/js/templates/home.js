@@ -1,5 +1,5 @@
 import {useSpring, animated} from 'react-spring'
-import {Spring, interpolate} from 'react-spring/renderprops'
+import {Spring} from 'react-spring/renderprops'
 
 import React, { Component, useState, useEffect } from 'react';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -9,19 +9,14 @@ import { Carousel } from 'react-responsive-carousel';
 import academicData from '../data/academics.json';
 
 /* Components */
-import TABS from './components/tabs';
 import AcademicSlider from './components/academicSlider';
 
 /* Images */
-import logo from '../../assets/LGCULogo.png';
+import introVideo from '../../assets/site/intro_video.mov';
+//import back9 from '../../assets/site/mini/back9.jpg';
 
-
-import back7 from '../../assets/temp/back7.jpeg';
-import back9 from '../../assets/temp/back9.jpeg';
-
-import img1 from '../../assets/temp/img1.jpeg';
-import img8 from '../../assets/temp/img8.jpeg';
-import img11 from '../../assets/temp/img11.jpeg';
+import img8 from '../../assets/site/mini/img8.jpg';
+import img11 from '../../assets/site/mini/img11.jpg';
 
 
 
@@ -37,16 +32,22 @@ class HomeHeader extends Component{
         return(
             <div className="headerCard homeHeader">
                 <div className="header-card-container">
-                    <div className="cardImg"><img src={back9}/></div>
+                    <div className="cardImg">
+                        {/*<img alt="Home back img" className="backImg img" src={back9}/>*/}
+                        <video className="backImg" alt="Home back video" autoPlay loop muted>
+                            <source src={introVideo} type="video/mp4" />
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
 
                     <div className="frontInfo">
                         <h1>
                             <span>Global Access Through</span> 
                             <span>Affordable Higher Education</span>
                         </h1>
-                        <p>"Those from among you shall build the wast places; 
+                        <p><span>"Those from among you shall build the wast places; 
                             You shall raise the foundation of many generations;
-                            You shall be called the repairer of the breach and the restorer of paths to dwell in"
+                            You shall be called the repairer of the breach and the restorer of paths to dwell in"</span>
                             (Isaiah 58:12)</p>
                         
                         <a href="/contactus" className="lBtn c3"><span>Contact Us</span><i className="btn-icon fas fa-envelope"></i></a>
@@ -70,12 +71,10 @@ function Home(props){
                 {value: 33, decimal:false, valueSub:"%", text:"Of all college students are taking at least one course online" }
     ];
     const testimonials = [
-                {name:"Jane Doe", title:"Student", text:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."},
-                {name:"John Smith", title:"Student", text:"Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."},
-                {name:"Tim Plane", title:"Teacher", text:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."},
-                {name:"Mark Jackson", title:"Student", text:"Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."},
-                {name:"Michael Wilson", title:"Alumni", text:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."}
-    ];              
+                {name:"Leonel Bernal", title:"Dean of the School of Theology and Biblical Studies", text:"Lenkeson Global Christian University, Inc., is a University founded to empower students from all over the world to become innovators, problem-solvers, effective church leaders, entrepreneurs, to be economically and professionally successful. Jesus Christ is at the Center of this great university. Please request information regarding enrollment now!"},
+                {name:"David Duren", title:"Dean of the School of Business Administration", text:"Lenkeson Global Christian University (LGCU) and its administration is committed to providing quality education opportunities and developing an economic social fabric throughout the world. LGCU demonstrates its commitment through the development of educational programs and sharing resources to the global community. The outreach to the Haitian people during their earthquake in 2010 is one prime example as I was part of a group that visited Haiti to provide fellowship, health services, and education supplies. I am privileged to be a part of this organization and look forward to their continued global connection and opportunities to help develop and care for the global society."},
+                {name:"Stuart Lawrence", title:"Retired Master Sergeant", text:"I am extremely proud and honored to serve as the Vice-Chairman of the Board of Directors at Lenkeson Global Christian University. I witnessed the birth of this outstanding project which has come to fruition. LGCU is the cutting edge institution of higher learning founded for such a time as this to meet the academic and professional needs of both traditional and adult learners. The University is designed to provide global access to all through affordable tuition. I invite you to become a part of this great institution as you embark on your academic journey and professional success."}
+            ];             
     
     function listenToScroll() {
         try {
@@ -94,7 +93,7 @@ function Home(props){
     function buildDataList(){
         try {
             var tmpList = Object.keys(academicData);
-            var retList = [{"title":"LGCU Schools", "colorTheme":"c2", "description":"Developing and empowering adult learners through twenty-first century virtual academic education to successfully transform and lead organizations with integrity in a diverse society.", "img":"img4.jpeg"}];
+            var retList = [{"title":"LGCU Schools", "colorTheme":"c2", "description":"Developing and empowering adult learners through twenty-first century virtual academic education to successfully transform and lead organizations with integrity in a diverse society.", "img":"img4.jpg"}];
             tmpList.forEach(function(item){ retList.push(academicData[item]); });
 
             setAcademicList(retList);
@@ -131,8 +130,8 @@ function Home(props){
                 <div className="section-container">
                     <div className="split-section" id="imgSplit">
                         <animated.div className="multi-img-container" onMouseMove={({ clientX: x, clientY: y }) => setIProps({ xys: calc(x, y) })} onMouseLeave={() => setIProps({ xys: [0, 0, 1] })} style={{ transform: imgprops.xys.interpolate(trans) }}>
-                            <img className="multi-img lrg" src={img11} />
-                            <img className="multi-img sm" src={img8} />
+                            <img alt="Home info img" className="multi-img lrg" src={img11} />
+                            <img alt="Home info img mini" className="multi-img sm" src={img8} />
                         </animated.div>
 
                         <div className="split-content">
@@ -168,7 +167,7 @@ function Home(props){
                 <div className="section-container">
                     <h2 className="lrgTitle ctr" data-text="Areas Of Study">Areas Of Study</h2>                        
                     {/* Slide Maze */}
-                    {academicList.length == 6 && 
+                    {academicList.length === 6 && 
                         <div className="slide-maze">
                             <div className="maze-lvl">
                                 <div className="lvl-horizontal">

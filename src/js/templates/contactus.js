@@ -19,7 +19,7 @@ class ContactHeader extends Component{
         return(
             <div className="headerCard contactusHeader sub-page">
                 <div className="header-title header-section">
-                    <div className="backImg"><img src={back1} /></div>
+                    <div className="backImg"><img alt="Contact Header img" src={back1} /></div>
                     <h1>Contact Us</h1>                    
                     <div className="solid-back">
                         <span>Reach out to us to get more information on the great opportunities that we have at LGCU</span>                        
@@ -55,7 +55,7 @@ class Contact extends Component{
                 <section className="contactus-section contact-form">
                     <div className="section-container">                        
                         <div className="split-info">
-                            <div className="split-img"><img src={emailImg} /></div>
+                            <div className="split-img"><img alt="Contact info img" src={emailImg} /></div>
                             <div className="split-txt">
                                 <h2 className="lrgTitle ctr" data-text="Contact Us">Contact Us</h2>
                                 <p>Thank you for your interest in LGCU complete the form to get in touch with our offices to answer any questions regarding our university.</p>

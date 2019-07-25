@@ -16,7 +16,6 @@ class TABS extends Component{
 
     changeSelected(id){
         var self = this;
-        var thisQuery = $(this).closest('.tab');
         this.setState({selectedId: id}, () =>{            
             self.props.list.forEach(function(item,i){
                 if(i !== id) { $(self.refs['tabcontent-' + i]).slideUp(); }
@@ -46,7 +45,7 @@ class TABS extends Component{
                                     <a href="/" className="lBtn c2"><span>Learn More</span><i className="btn-icon fas fa-graduation-cap"></i></a>
                                     </div>
                                 </div>
-                                <div className="img-container"><img src={item.img} /></div>
+                                <div className="img-container"><img alt="Tab img" src={item.img} /></div>
                                 <div className="mobile-title">{item.title}</div>
                             </div>
                         </div>

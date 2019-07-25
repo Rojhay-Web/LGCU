@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 /* Images */
-import back1 from '../../assets/temp/img4.jpeg';
+import back1 from '../../assets/site/mini/img4.jpg';
 
 /* Data */
 import academicData from '../data/academics.json';
@@ -22,7 +22,7 @@ class AcademicsHeader extends Component{
         return(
             <div className="headerCard academicHeader sub-page">
                 <div className="header-title header-section">
-                    <div className="backImg"><img src={back1} /></div>
+                    <div className="backImg"><img alt="Academic Header img" src={back1} /></div>
                     <h1>Academics</h1>                    
                     <div className="solid-back">
                         <span>Lenkeson Global Christian University is a Christ-centered institution of higher learning &</span>
@@ -81,7 +81,7 @@ class Academics extends Component{
 
                     <div className="section-container area-container">
                         {this.state.academicList.map((item,i) => (
-                            <AcademicSlider key={i} academicInfo={academicData[item]} direction={(i%2 == 0 ? "right" : "left")} theme={academicData[item].colorTheme}/>
+                            <AcademicSlider key={i} academicInfo={academicData[item]} direction={(i%2 === 0 ? "right" : "left")} theme={academicData[item].colorTheme}/>
                         ))}                        
                     </div>
                 </section>

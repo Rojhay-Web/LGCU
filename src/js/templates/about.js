@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import back1 from '../../assets/temp/back11.jpeg';
-import back3 from '../../assets/temp/back3.jpeg';
+import back1 from '../../assets/site/mini/back11.jpg';
+import back3 from '../../assets/site/mini/back3.jpg';
 
 /* Header */
 class AboutHeader extends Component{
@@ -16,7 +16,7 @@ class AboutHeader extends Component{
         return(
             <div className="headerCard aboutHeader sub-page">
                 <div className="header-title header-section">
-                    <div className="backImg"><img src={back1} /></div>
+                    <div className="backImg"><img alt="About header img" src={back1} /></div>
                     <h1>About LGCU</h1>                    
                     <div className="solid-back">
                         <span>Developing and empowering adult learners through twenty-first century virtual academic</span>
@@ -72,7 +72,7 @@ class About extends Component{
                     <div className="section-container">
                         <h2 className="lrgTitle ctr" data-text="The LGCU Mission">The LGCU Mission</h2>
                         <div className="indProfile">
-                            <div className="img"><img src={back3} /></div>
+                            <div className="img"><img alt="About Mission img" src={back3} /></div>
                             <p className="info">Lenkeson Global Christian University is a leading online higher learning institution, established to meet the academic and professional needs of college traditional age and working adults, to award associate, baccalaureate, master's, and doctorate degrees.</p>
                             <p className="info">LGCU exists to provide the diverse adult learning community twenty-first century educational programs in various fields. At LGCU, learners and faculty are engaged in academic and professional learning that is centered on developing and empowering working professionals to succeed in church ministries and other professional fields.</p>
                         </div>
@@ -99,9 +99,9 @@ class About extends Component{
                         <h2 className="lrgTitle ctr" data-text="Letter From Our President">Letter From Our President</h2>
                         <div className="letter-container">
                             <div className="lang-ctrl">
-                                <div className={"lang-btn" + (this.state.selectedLang == "en" ? " selected" : "")} onClick={() => this.chooseLetter("en")}><span className="lng lng-us"></span></div>
-                                <div className={"lang-btn" + (this.state.selectedLang == "fr" ? " selected" : "")} onClick={() => this.chooseLetter("fr")}><span className="lng lng-fr"></span></div>
-                                <div className={"lang-btn" + (this.state.selectedLang == "es" ? " selected" : "")} onClick={() => this.chooseLetter("es")}><span className="lng lng-es"></span></div>
+                                <div className={"lang-btn" + (this.state.selectedLang === "en" ? " selected" : "")} onClick={() => this.chooseLetter("en")}><span className="lng lng-us"></span></div>
+                                <div className={"lang-btn" + (this.state.selectedLang === "fr" ? " selected" : "")} onClick={() => this.chooseLetter("fr")}><span className="lng lng-fr"></span></div>
+                                <div className={"lang-btn" + (this.state.selectedLang === "es" ? " selected" : "")} onClick={() => this.chooseLetter("es")}><span className="lng lng-es"></span></div>
                             </div>
                             <p className="letter-title">{this.state.selectedLetter.title}</p>
                             {this.state.selectedLetter.info.map((item, i) =>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 /* Images */
-import back1 from '../../assets/temp/back10.jpeg';
+import back1 from '../../assets/site/mini/back10.jpg';
 import defaultProfile from '../../assets/no-user.jpg';
 import sLawrenceImg from '../../assets/SJLawrence.png';
 import KStevensonImg from '../../assets/KStevenson.jpg';
@@ -20,7 +20,7 @@ class FacultyHeader extends Component{
         return(
             <div className="headerCard facultyHeader sub-page">
                 <div className="header-title header-section">
-                    <div className="backImg"><img src={back1} /></div>
+                    <div className="backImg"><img alt="Faculty Header img" src={back1} /></div>
                     <h1>Faculty & Staff</h1>                    
                     <div className="solid-back">
                         <span>Meet our world class faculty working for Lenkeson Global Christian University</span>
@@ -52,7 +52,7 @@ class Faculty extends Component{
                     <h2 className="lrgTitle ctr" data-text="Administration">Administration</h2>
                     <div className="section-container">
                         <div className="indProfile">
-                            <img src={KStevensonImg} />
+                            <img alt="President img" src={KStevensonImg} />
                             <div className="info title">President/CEO</div>
                             <div className="info name">Kenel Stevenson, B.S., M.A., M.Ed., M.S., Ph.D.</div>
                             <div className="info">Dr. Stevenson as served as a World Languages and Linguistics instructor; Department Chair; Adult ESL instructor; ESL coordinator and teacher; Multicultural Education Adjunct Professor at graduate level; School Administrator; Founding President of not-for-profit organizations and post-secondary institutions of higher learning;</div>
@@ -66,33 +66,67 @@ class Faculty extends Component{
                 <section className="faculty-section alternate">
                     <div className="info-slider">
                             <div className="info-slider-container" ref={this.slide1}>
-                                <div className="slider-vertical">
-                                    <div className="slider-card title base">
+                                <div className="slider-vertical flip">
+                                    <div className="slider-card title base bio-card">
                                         <h1 className="name">Dr. David Duren</h1>
-                                        <div className="title">Dean & Vice-President School of Business Administration, Finance & Staff Recruitment</div>
+                                        <div className="title">
+                                            <p>Vice-President of Business, Finance & Staff Recruitment</p>
+                                            <p>Dean of the School of Business Administration</p>
+                                        </div>
+
+                                        <div className="faculty-bio" id="bioAccordionDuren">
+                                            <a className="bio-btn" data-toggle="collapse" href="#bioOne" aria-expanded="false" aria-controls="bioOne">Read Bio</a>
+                                            <div id="bioOne" className="bio-txt collapse" data-parent="#bioAccordionDuren">
+                                                <p>Mr. Duren's academic preparation includes a BS in Business Administration from S. C. State
+                                                University, MBA from Pfeiffer University, Doctorate in Business Administration (DBA)
+                                                from the University of Phoenix and completing a Doctoral Certification of Advanced
+                                                Graduates Studies in Advanced Accounting at Northcentral University.</p>
+                                                <p>With over 35 years, including
+                                                hospitality, banking, distribution, manufacturing, professional accounting, nonprofits, and
+                                                communications. The positions he has held include Controller, Director of Accounting,
+                                                Asst. Controller, and Staff.  My experience includes employment in banks, utility
+                                                companies, public accounting, non-profit organizations, manufacturing companies and
+                                                other areas of Corporate America.</p>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div className="slider-card img">
-                                        <img src={DDurenImg} />
+                                        <img alt="David Duren img" src={DDurenImg} />
+                                    </div>
+                                </div>
+
+                                <div className="slider-vertical">
+                                    <div className="slider-card title c2">
+                                        <h1 className="name">Dr. Leonel Bernal</h1>
+                                        <div className="title">
+                                            <p>Vice-President School of Theology and Biblical Studies, Institutional Advancement & Student Enrollment, International Recruitment</p>
+                                            <p>Dean of the School of Theology and Biblical Studies</p>
+                                        </div>
+                                        <a href="tel:4074340002" className="phone"><i className="fas fa-phone"></i> <span>407.434.0002</span></a>
+                                    </div>
+                                    <div className="slider-card img c2">
+                                        <img alt="Bernal img" src={BernalImg} />
                                     </div>
                                 </div>
 
                                 <div className="slider-vertical flip">
-                                    <div className="slider-card title c2">
-                                        <h1 className="name">Dr. Leonel Bernal</h1>
-                                        <div className="title">Dean & Vice-President School of Theology and Biblical Studies, Institutional Advancement & Student Enrollment</div>
-                                    </div>
-                                    <div className="slider-card img c2">
-                                        <img src={BernalImg} />
-                                    </div>
-                                </div>
-
-                                <div className="slider-vertical">
                                     <div className="slider-card title light">
                                         <h1 className="name">Mrs. Anita Stevenson</h1>
                                         <div className="title">Dean of Academic Affairs, Student Services and Doctoral Residency</div>
                                     </div>
                                     <div className="slider-card img light">
-                                        <img src={defaultProfile} />
+                                        <img alt="Default img" src={defaultProfile} />
+                                    </div>
+                                </div>
+
+                                <div className="slider-vertical">
+                                    <div className="slider-card title c3">
+                                        <h1 className="name">Mrs. Marisol Rivera Bryant</h1>
+                                        <div className="title">Administrative Secretary</div>
+                                        <a href="tel:4075642992" className="phone"><i className="fas fa-phone"></i> <span>407.564.2992</span></a>
+                                    </div>
+                                    <div className="slider-card img c3">
+                                        <img alt="Default img" src={defaultProfile} />
                                     </div>
                                 </div>
                                 
@@ -108,7 +142,7 @@ class Faculty extends Component{
                     <h2 className="lrgTitle ctr" data-text="Board of Directors">Board of Directors</h2>
                     <div className="section-container">
                         <div className="indProfile">
-                            <img src={sLawrenceImg} />
+                            <img alt="S Lawrence img" src={sLawrenceImg} />
                             <div className="info title">Vice Chair of the Board of Directors</div>
                             <div className="info name">MSGT Stuart J. Lawrence</div>
                             <div className="info">MSgt Stuart J. Lawrence is currently a Political-Military Analyst and Senior Non Commissioned Officer on the Europe Eurasia Regional Center’s 1-A Branch, for Europe, Eurasia regional Center, Intelligence Directorate, DIA HQ, Washington DC.</div>
@@ -123,28 +157,13 @@ class Faculty extends Component{
                 <section className="faculty-section alternate">
                     <div className="info-slider">
                             <div className="info-slider-container" ref={this.slide2}>
-                                <div className="slider-card title base">
-                                    <h1 className="name">Mr. Reginald Spears</h1>
-                                    <div className="title">Board Member</div>
-                                </div>
-                                <div className="slider-card img">
-                                    <img src={defaultProfile} />
-                                </div>
-                                
-                                <div className="slider-card title c1">
-                                    <h1 className="name">Rev. George Rucker</h1>
-                                    <div className="title">Board Member</div>                                    
-                                </div>
-                                <div className="slider-card img c1">
-                                    <img src={defaultProfile} />
-                                </div>
 
                                 <div className="slider-card title light">
                                     <h1 className="name">Attorney Tiffany Wilson, Esq.</h1>
                                     <div className="title">Board Member</div>
                                 </div>
                                 <div className="slider-card img light">
-                                    <img src={defaultProfile} />
+                                    <img alt="default img" src={defaultProfile} />
                                 </div>                               
                                 
                                 <div className="slider-close"/>

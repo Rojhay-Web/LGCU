@@ -1,11 +1,11 @@
 import {useSpring, animated} from 'react-spring'
-import {Spring, interpolate} from 'react-spring/renderprops'
+//import {Spring, interpolate} from 'react-spring/renderprops'
 
-import React, { Component, useState, useEffect } from 'react';
+import React, { Component, useEffect } from 'react';
 
 /* Images */
-import back1 from '../../assets/temp/img10.jpeg';
-import img1 from '../../assets/temp/img9.jpeg';
+import back1 from '../../assets/site/mini/img10.jpg';
+import img1 from '../../assets/site/mini/img9.jpg';
 
 /* Header */
 class TuitionHeader extends Component{
@@ -19,7 +19,7 @@ class TuitionHeader extends Component{
         return(
             <div className="headerCard tuitionHeader sub-page">
                 <div className="header-title header-section">
-                    <div className="backImg"><img src={back1} /></div>
+                    <div className="backImg"><img alt="Tuition back img" src={back1} /></div>
                     <h1>Tuition</h1>                    
                     <div className="solid-back">
                         <span>Lenkeson Global Christian University is a non-profit institution of higher learning established</span>                        
@@ -101,7 +101,7 @@ function Tuition(props){
                 <h2 className="lrgTitle ctr c1" data-text="Payment">Payment</h2>
                 <div className="section-container" id="imgSplit"> 
                     <animated.div className="img" onMouseMove={({ clientX: x, clientY: y }) => setIProps({ xys: calc(x, y) })} onMouseLeave={() => setIProps({ xys: [0, 0, 1] })} style={{ transform: imgprops.xys.interpolate(trans) }}>                       
-                       <img src={img1} />
+                       <img alt="tuition info img" src={img1} />
                     </animated.div>
                     <p>Lenkeson Global Christian University is a private, non-profit Christian institution of higher learning. The tuition and fees paid by students do not fully cover the total cost of operating LGCU. We rely heavily on grants and other financial contributions from like-minded individuals who support our vision, mission and core values.</p>
                         

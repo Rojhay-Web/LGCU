@@ -5,7 +5,7 @@
         "description":"The School of Undergraduate Studies is designed to equip college age students, adult learners, & working professionals;  Either returning to college, or pursuing studies in their professional fields that they may be effective in their specific location in the labor market or church ministries.",
         "fullDescription":"The School of Undergraduate Studies is designed to equip traditional college age students, adult learners, and working professionals, individuals who are first time college students, either returning to college, or pursuing studies in their professional fields that they may be effective in their specific location in the labor market or church ministries. The programs offered within the school of undergraduate studies are online courses designed asynchronously to allow the learner to engage in teaching and learning with the use of a desktop or laptop and internet services while attending to their personal endeavors. All associate degrees at Lenkeson Global Christian University are transferable toward the baccalaureate programs.",
         "icon":"",
-        "img":"img6.jpeg",
+        "img":"img6.jpg",
         "degrees":{
             "associates":[
                 {"id":"AS-ACC", "title":"Accounting", "courses":[
@@ -93,7 +93,7 @@
         "description":"The School of Theology and Biblical Studies is designed to prepare men and women in the disciplines of biblical and theological studies by equipping them with the necessary tools to become transformative servant-leaders in local church ministries, the marketplace, global and strategic missions. ",
         "fullDescription":"The School of Theology and Biblical Studies is designed to prepare men and women in the disciplines of biblical and theological studies by equipping them with the necessary tools to become transformative servant-leaders in local church ministries, the marketplace, global and strategic missions. The School of Theology and Biblical Studies awards the Associate of Arts, Bachelor of Arts in Biblical Studies, the Master of Arts in Religious Education, and the Master of Arts in Theological Studies. The School of Theology and Biblical Studies welcomes aspiring, emerging and current Christian leaders from all denominations across the globe including all ethnic identities to enroll in one of the programs offered by the school.",
         "icon":"",
-        "img":"img12.jpeg",
+        "img":"img12.jpg",
         "degrees":{
             "associates":[
                 {"id":"AS-BBS", "title":"Biblical Studies","courses":[]}
@@ -137,7 +137,7 @@
         "description":"The School of Business Administration is designed to prepare men and women to become innovators, business leaders, and problem-solvers in the twenty-first century. ",
         "fullDescription":"The School of Business Administration is designed to prepare men and women to become innovators, business leaders, and problem-solvers in the twenty-first century. Learners are engaged in teaching and learning by using cutting-edge technology and state- of- the- art business strategies to serve as pioneers in their current workplace, communities, and the world. The School of Business Administration offers associates, bachelors, masters and doctoral degrees in the disciplines of Accounting, Business Administration, Finance, Human Resource Management, International Business and Marketing.",
         "icon":"",
-        "img":"img8.jpeg",
+        "img":"img8.jpg",
         "degrees":{
             "bachelors":[
                 {"id":"BA-BA", "title":"Business Administration",
@@ -189,7 +189,7 @@
         "description":"The School of Education is designed to develop current and emerging educators and school leaders to meet the educational challenges of the twenty-first century. Learners are equipped with academic and educational tools to deliver state- of- the- art instructional information using diverse teaching and learning methods through constructionist processes.",
         "fullDescription":"The School of Education is designed to develop current and emerging educators and school leaders to meet the educational challenges of the twenty-first century. Learners are equipped with academic and educational tools to deliver state- of- the- art instructional information using diverse teaching and learning methods through constructionist processes. They are using cutting-edge technology to enhance teaching and learning in and beyond the walls of the classroom. The highly qualified faculty members of the school of education at Lenkeson Global Christian University use their academic and professional expertise to empower K-12 classroom facilitators, and higher education leaders to lead in diverse entrepreneurial organizations and academic institutions.",
         "icon":"",
-        "img":"img7.jpeg",
+        "img":"img7.jpg",
         "degrees":{
             "masters":[
                 {"id":"MA-CURI", "title":"Curriculum & Instruction","courses":[
@@ -275,7 +275,7 @@
         "description":"The School of Global and Strategic Leadership is designed to equip organizational leaders with the necessary tools to respond to the challenges that require transformational changes and strategic leadership to succeed in the twenty-first century.",
         "fullDescription":"The School of Global and Strategic Leadership is designed to equip organizational leaders with the necessary tools to respond to the challenges that require transformational changes and strategic leadership to succeed in the twenty-first century. The School of Global and Strategic Leadership at Lenkeson Global Christian University is created to empower men and women with leadership skills combined with experiential learning to enter and succeed in the fields of business, church ministries, education, government, and other local and global organizational enterprises. Additionally, learners apply cutting-edge technology and state- of- the- art training to create and implement goals, making decisions, and policy development. The School of Strategic Leadership emphasizes: vision, innovation, transformational leadership, integrity, excellence, courage, appropriate and effective delegation, and the desire to lead.",
         "icon":"",
-        "img":"img9.jpeg",
+        "img":"img9.jpg",
         "degrees":{
             "masters":[
                 {"id":"MA-ODL", "title":"Organizational Development and Leadership","courses":[

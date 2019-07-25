@@ -24,7 +24,7 @@ class FindDegree extends Component{
         const filteredResults = this.state.majorResults.filter(
             function(x) { 
                 return (
-                    self.state.searchQuery == "" 
+                    self.state.searchQuery === "" 
                     || x.title.toLowerCase().indexOf(self.state.searchQuery.toLowerCase()) >= 0
                     || x.subtitle && x.subtitle.toLowerCase().indexOf(self.state.searchQuery.toLowerCase()) >= 0
                     ); 
@@ -77,7 +77,7 @@ class FindDegree extends Component{
                                     </a>
                                 ))}
 
-                                {filteredResults.length == 0 && <div className="result-message">Sorry we did not return any results for that search.</div>}
+                                {filteredResults.length === 0 && <div className="result-message">Sorry we did not return any results for that search.</div>}
                             </div>
                         </div>
                     </div>
@@ -148,8 +148,8 @@ class FindDegree extends Component{
         var self = this;
         try {
             var retList = [];
-            var activeAreaFilter = this.state.areaList.filter(function(x) { return x.status == true; });
-            var activeDegreeFilter = this.state.degreeList.filter(function(x) { return x.status == true; });
+            var activeAreaFilter = this.state.areaList.filter(function(x) { return x.status === true; });
+            var activeDegreeFilter = this.state.degreeList.filter(function(x) { return x.status === true; });
 
             activeAreaFilter = ((!activeAreaFilter || activeAreaFilter.length <= 0) && activeDegreeFilter.length > 0 ? this.state.areaList : activeAreaFilter);
             activeDegreeFilter = ((!activeDegreeFilter || activeDegreeFilter.length <= 0) && activeAreaFilter.length > 0 ? this.state.degreeList : activeDegreeFilter);
