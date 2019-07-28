@@ -11,9 +11,7 @@ class FormCpt extends Component{
         this.state = {
             tmpForm:{
                 "title":"", "returnAddress":"",
-                "elements":[
-                    {"type":"","sz":1, "required":false, "name":"", "placeholder":"", "value":"", "valueList":[]}
-                ]
+                "elements":[]
             },
             requiredData:[],
             formData:{}
@@ -31,11 +29,11 @@ class FormCpt extends Component{
     formElement(el){
         switch(el.type) {
             case "input":
-                return <input type="text" name={el.name} className={(this.state.requiredData.indexOf(el.name) > -1 ? "empty":"")} placeholder={el.placeholder} value={this.state.formData[el.name]} onChange={(e) => this.onElementChange(e)}/>;
+                return <input type="text" name={el.name} className={(this.state.requiredData.indexOf(el.name) > -1 ? "empty":"")} placeholder={el.placeholder +(el.required ?"*":"")} value={this.state.formData[el.name]} onChange={(e) => this.onElementChange(e)}/>;
             case "textarea":
-                    return <textarea name={el.name} className={(this.state.requiredData.indexOf(el.name) > -1 ? "empty":"")} placeholder={el.placeholder} value={this.state.formData[el.name]} onChange={(e) => this.onElementChange(e)} />;
+                    return <textarea name={el.name} className={(this.state.requiredData.indexOf(el.name) > -1 ? "empty":"")} placeholder={el.placeholder +(el.required ?"*":"")} value={this.state.formData[el.name]} onChange={(e) => this.onElementChange(e)} />;
             case "checkbox":
-                return <div className={"form-checkbox " + (this.state.requiredData.indexOf(el.name) > -1 ? "empty":"")} placeholder={el.placeholder} value={this.state.formData[el.name]}><input type="checkbox" name={el.name} onChange={(e) => this.onElementChange(e)}/><label>{el.placeholder}</label></div>;
+                return <div className={"form-checkbox " + (this.state.requiredData.indexOf(el.name) > -1 ? "empty":"")} placeholder={el.placeholder +(el.required ?"*":"")} value={this.state.formData[el.name]}><input type="checkbox" name={el.name} onChange={(e) => this.onElementChange(e)}/><label>{el.placeholder +(el.required ?"*":"")}</label></div>;
             default:
                 return <div></div>;
         }
@@ -44,6 +42,7 @@ class FormCpt extends Component{
     render(){        
         return(
             <div className="lgcu-form">
+                <div className="form-info">(* Required Field)</div>
                 {this.props.form.type === "core" && this.props.form.elements.map((item,i) => (
                     <div key={i} className={"form-element sz-"+item.sz}>{ this.formElement(item) }</div>
                 ))}
@@ -51,7 +50,14 @@ class FormCpt extends Component{
                 {this.props.form.type === "section" && this.props.form.elements.map((section,i) => (
                     <div className="form-section-container" key={i}>
                         <h2>{section.title}</h2>
-                        {section.directions && <p>{section.directions}</p>}
+                        {section.directions && <p className="directionsInfo">{section.directions}</p>}
+                        {section.directionList && 
+                            <ul className="directionsInfo">
+                                {section.directionList.map((litem,j) => (
+                                    <li key={j}>{litem}</li>
+                                ))}
+                            </ul>
+                        }
                         {section.elements.map((item,k) => (
                             <div key={k} className={"form-element sz-"+item.sz}>{ this.formElement(item) }</div>
                         ))}                        
@@ -70,10 +76,19 @@ class FormCpt extends Component{
         var self = this;
         try {
             if(tmpForm.elements && tmpForm.elements.length > 0) {
-                var tmpData = {};
+                var tmpData = {};                
+               
                 tmpForm.elements.forEach(function(item){
-                    tmpData[item.name] = item.value;                   
+                    if(tmpForm.type === "section"){
+                        item.elements.forEach(function(subitem){
+                            tmpData[subitem.name] = subitem.value;
+                        });
+                    }
+                    else {
+                        tmpData[item.name] = item.value;        
+                    }           
                 });
+                
                 self.setState({ formData:tmpData });
             }
         }
@@ -89,7 +104,7 @@ class FormCpt extends Component{
             var name = event.target.name;
 
             if(name in tmpData) {
-                tmpData[name] = (event.target.type === 'checkbox' ? event.target.checked : event.target.value)
+                tmpData[name] = (event.target.type === 'checkbox' ? event.target.checked : event.target.value);
                 self.setState({ formData:tmpData });
             }
         }
@@ -103,11 +118,22 @@ class FormCpt extends Component{
         var missingData = [];
         try {
             this.props.form.elements.forEach(function(item) {
-                if(item.required){
-                    if(!(item.name in self.state.formData) || !self.state.formData[item.name] || self.state.formData[item.name].length === 0){
-                        missingData.push(item.name);
-                    }
+                if(self.props.form.type === "section"){
+                    item.elements.forEach(function(subitem){
+                        if(subitem.required){
+                            if(!(subitem.name in self.state.formData) || !self.state.formData[subitem.name] || self.state.formData[subitem.name].length === 0){
+                                missingData.push(subitem.name);
+                            }
+                        }
+                    });
                 }
+                else {
+                    if(item.required){
+                        if(!(item.name in self.state.formData) || !self.state.formData[item.name] || self.state.formData[item.name].length === 0){
+                            missingData.push(item.name);
+                        }
+                    }
+                }          
             });
         }
         catch(ex){
