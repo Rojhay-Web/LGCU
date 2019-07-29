@@ -59,7 +59,7 @@ function buildEmailHtml(obj){
         
         ret +=  util.format('<h1>%s</h1>', obj.title);
         dataList.forEach(function(item){
-            ret += util.format('<p><b>%s:</b> <span>%s</span></p>', item, obj.formData[item]);
+            ret += util.format('<p><b>%s:</b> <span>%s</span></p>', item, obj.formData[item].toString().replace(/\n/g,'<br>'));
         });
 
         if(obj.additionalData) {

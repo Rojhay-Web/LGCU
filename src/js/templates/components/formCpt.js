@@ -14,7 +14,9 @@ class FormCpt extends Component{
                 "elements":[]
             },
             requiredData:[],
-            formData:{}
+            formData:{},
+            status:0,
+            loading: false
         }
         
         this.formElement = this.formElement.bind(this);
@@ -29,11 +31,11 @@ class FormCpt extends Component{
     formElement(el){
         switch(el.type) {
             case "input":
-                return <input type="text" name={el.name} className={(this.state.requiredData.indexOf(el.name) > -1 ? "empty":"")} placeholder={el.placeholder +(el.required ?"*":"")} value={this.state.formData[el.name]} onChange={(e) => this.onElementChange(e)}/>;
+                return <input type="text" name={el.name} className={(this.state.requiredData.indexOf(el.name) > -1 ? "empty":"")} placeholder={el.placeholder +(el.required ?"*":"")} value={this.state.formData[el.name] || ''} onChange={(e) => this.onElementChange(e)}/>;
             case "textarea":
-                    return <textarea name={el.name} className={(this.state.requiredData.indexOf(el.name) > -1 ? "empty":"")} placeholder={el.placeholder +(el.required ?"*":"")} value={this.state.formData[el.name]} onChange={(e) => this.onElementChange(e)} />;
+                    return <textarea name={el.name} className={(this.state.requiredData.indexOf(el.name) > -1 ? "empty":"")} placeholder={el.placeholder +(el.required ?"*":"")} value={this.state.formData[el.name]|| ''} onChange={(e) => this.onElementChange(e)} />;
             case "checkbox":
-                return <div className={"form-checkbox " + (this.state.requiredData.indexOf(el.name) > -1 ? "empty":"")} placeholder={el.placeholder +(el.required ?"*":"")} value={this.state.formData[el.name]}><input type="checkbox" name={el.name} onChange={(e) => this.onElementChange(e)}/><label>{el.placeholder +(el.required ?"*":"")}</label></div>;
+                return <div className={"form-checkbox " + (this.state.requiredData.indexOf(el.name) > -1 ? "empty":"")} placeholder={el.placeholder +(el.required ?"*":"")} value={this.state.formData[el.name]|| false}><input type="checkbox" name={el.name} onChange={(e) => this.onElementChange(e)}/><label>{el.placeholder +(el.required ?"*":"")}</label></div>;
             default:
                 return <div></div>;
         }
@@ -42,32 +44,42 @@ class FormCpt extends Component{
     render(){        
         return(
             <div className="lgcu-form">
-                <div className="form-info">(* Required Field)</div>
-                {this.props.form.type === "core" && this.props.form.elements.map((item,i) => (
-                    <div key={i} className={"form-element sz-"+item.sz}>{ this.formElement(item) }</div>
-                ))}
+                {this.state.loading && <i className="loading fas fa-redo-alt fa-spin"></i> }
+                {this.state.status === 0 ?
+                <div className="lgcu-form-container">
+                    <div className="form-info">(* Required Field)</div>
+                    {this.props.form.type === "core" && this.props.form.elements.map((item,i) => (
+                        <div key={i} className={"form-element sz-"+item.sz}>{ this.formElement(item) }</div>
+                    ))}
 
-                {this.props.form.type === "section" && this.props.form.elements.map((section,i) => (
-                    <div className="form-section-container" key={i}>
-                        <h2>{section.title}</h2>
-                        {section.directions && <p className="directionsInfo">{section.directions}</p>}
-                        {section.directionList && 
-                            <ul className="directionsInfo">
-                                {section.directionList.map((litem,j) => (
-                                    <li key={j}>{litem}</li>
-                                ))}
-                            </ul>
-                        }
-                        {section.elements.map((item,k) => (
-                            <div key={k} className={"form-element sz-"+item.sz}>{ this.formElement(item) }</div>
-                        ))}                        
+                    {this.props.form.type === "section" && this.props.form.elements.map((section,i) => (
+                        <div className="form-section-container" key={i}>
+                            <h2>{section.title}</h2>
+                            {section.directions && <p className="directionsInfo">{section.directions}</p>}
+                            {section.directionList && 
+                                <ul className="directionsInfo">
+                                    {section.directionList.map((litem,j) => (
+                                        <li key={j}>{litem}</li>
+                                    ))}
+                                </ul>
+                            }
+                            {section.elements.map((item,k) => (
+                                <div key={k} className={"form-element sz-"+item.sz}>{ this.formElement(item) }</div>
+                            ))}                        
+                        </div>
+                    ))}
+
+
+                    <div className="btn-container">
+                        <div className="lBtn c2" onClick={this.submitForm}><span>Submit</span><i className="btn-icon far fa-paper-plane"></i></div>
                     </div>
-                ))}
-
-
-                <div className="btn-container">
-                    <div className="lBtn c2" onClick={this.submitForm}><span>Submit</span><i className="btn-icon far fa-paper-plane"></i></div>
                 </div>
+
+                : 
+                <div className="lgcu-form-container submitted">
+                    <h2>{this.props.form.sendMessage}</h2>
+                </div> 
+                }
             </div>
         );
     }
@@ -146,8 +158,9 @@ class FormCpt extends Component{
     submitForm(){
         var self = this;
         try {
-            this.setState({ requiredData: this.validateFormData() }, ()=> {
+            this.setState({ requiredData: this.validateFormData(), loading: true }, ()=> {
                 if(self.state.requiredData.length > 0 ){
+                    self.setState({ loading: false});
                     alert("Please update required fields");
                 }
                 else {
@@ -162,14 +175,16 @@ class FormCpt extends Component{
                     axios.post(rootPath + "/api/sendEmail", postData, {'Content-Type': 'application/json'})
                     .then(function(response) {
                         if(response.data.results === "Email Sent"){
-                            alert("Form Submitted");
-                            self.initFormData(self.props.form);
+                            self.setState({status: 1, loading: false }, () =>{
+                                alert("Form Submitted");
+                                self.initFormData(self.props.form);
+                            });                            
                         }
                         else {
                             alert("Error Submitting Form");
                             console.log("[Error] Submitting Form: ", response.data.errorMessage);
                         }
-                    });                 
+                    });                
                 }
             });
             

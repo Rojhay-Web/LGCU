@@ -2806,8 +2806,32 @@ html {
 }
 /* Form */
 .lgcu-form {
+  position: relative;
   display: flex;
   flex-wrap: wrap;
+}
+.lgcu-form .loading {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -40%);
+  color: #257728;
+  font-size: 150px;
+  z-index: 10;
+}
+.lgcu-form .lgcu-form-container {
+  width: 100%;
+  position: relative;
+  z-index: 0;
+}
+.lgcu-form .lgcu-form-container.submitted {
+  color: #504e99;
+  text-align: center;
+  margin: 20px 0px;
+  border: 2px solid #ffffff;
+  padding: 10px;
+  border-radius: 5px;
+  background: #ffffff;
 }
 .lgcu-form .form-info {
   width: 100%;

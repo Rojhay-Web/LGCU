@@ -38,6 +38,7 @@ class Contact extends Component{
             contactForm:{
                 "title":"contact us", "sendAddress":"web.lgcu@gmail.com",
                 "subject":"Contact Us Form Submission", "additionalData":{}, "type":"core",
+                "sendMessage":"Thank you we have received message we will respond as soon as we get the opportunity.",
                 "elements":[
                     {"type":"input","sz":7, "required":true, "name":"name", "placeholder":"Name", "value":"", "valueList":[]},
                     {"type":"input","sz":7, "required":true, "name":"email", "placeholder":"Email", "value":"", "valueList":[]},

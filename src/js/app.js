@@ -48,7 +48,7 @@ function MobileNav(props){
             <div className="nav-close" onClick={() => props.setSidebarDisplay(false)}><i className="fas fa-times"></i></div>
             <div className="sidenav-section">
                 <Link className="sidenav-header-link" to="/contactus">Contact Us</Link>
-                <a href="https://www.givelify.com/givenow/1.0/?token=eyJvcmdfaWQiOiJNelUyT1RFfiIsImJhZGdlX2ltYWdlIjoiYjMucG5nIn0~" target="_blank" className="sidenav-header-link">Donate</a>
+                <a href="https://www.givelify.com/givenow/1.0/?token=eyJvcmdfaWQiOiJNelUyT1RFfiIsImJhZGdlX2ltYWdlIjoiYjMucG5nIn0~" target="_blank" rel="noopener noreferrer" className="sidenav-header-link">Donate</a>
                 <Link className="sidenav-header-link" to="/apply">Apply</Link>
             </div>
             <div className="sidenav-section">
@@ -82,8 +82,8 @@ class App extends Component{
                     <div className="app-body">
                         <div className={"app-nav" + (this.state.navChange ? " page-nav" : " full-nav")}>
                             <nav className="navbar navbar-expand-lg nav-top navbar-dark bg-dark">                                
-                                <Link className="nav-item mini-nav-link" to="/">my<span className="c2">LGCU</span></Link>
-                                <a href="https://www.givelify.com/givenow/1.0/?token=eyJvcmdfaWQiOiJNelUyT1RFfiIsImJhZGdlX2ltYWdlIjoiYjMucG5nIn0~" target="_blank" className="nav-item mini-nav-link">Donate</a>
+                                {/*<Link className="nav-item mini-nav-link" to="/">my<span className="c2">LGCU</span></Link>*/}
+                                <a href="https://www.givelify.com/givenow/1.0/?token=eyJvcmdfaWQiOiJNelUyT1RFfiIsImJhZGdlX2ltYWdlIjoiYjMucG5nIn0~" target="_blank" rel="noopener noreferrer" className="nav-item mini-nav-link">Donate</a>
                                 <Link className="nav-item mini-nav-link" to="/apply">Apply</Link>                                
                             </nav>
                             <nav className="navbar navbar-expand-lg nav-bottom">
@@ -147,9 +147,9 @@ class App extends Component{
                                 </div>
 
                                 <div className="social-container">
-                                    <a href="" target="_blank" className="social-link"><i className="fab fa-twitter"></i></a>
-                                    <a href="" target="_blank" className="social-link"><i className="fab fa-facebook"></i></a>
-                                    <a href="" target="_blank" className="social-link"><i className="fab fa-instagram"></i></a>
+                                    <a href="" target="_blank" rel="noopener noreferrer" className="social-link"><i className="fab fa-twitter"></i></a>
+                                    <a href="" target="_blank" rel="noopener noreferrer" className="social-link"><i className="fab fa-facebook"></i></a>
+                                    <a href="" target="_blank" rel="noopener noreferrer" className="social-link"><i className="fab fa-instagram"></i></a>
                                 </div>                                                            
                             </div>
                             <div className="footer-section">
@@ -164,7 +164,7 @@ class App extends Component{
                                     <a href="https://www.givelify.com/givenow/1.0/?token=eyJvcmdfaWQiOiJNelUyT1RFfiIsImJhZGdlX2ltYWdlIjoiYjMucG5nIn0~" target='_blank' className="footer-link">Donate</a>
                                     <Link className="footer-link" to="/apply">Apply</Link>
                                     <Link className="footer-link" to="/contactus">Contact Us</Link>
-                                    <Link className="footer-link" to="/">myLGCU</Link>
+                                    {/*<Link className="footer-link" to="/">myLGCU</Link>*/}
                                 </div>
                             </div>
                             <div className="footer-section full address">

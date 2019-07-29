@@ -46,10 +46,11 @@ class Apply extends Component{
             facultyApplication:{
                 "title":"faculty application", "sendAddress":"web.lgcu@gmail.com",
                 "subject":"Faculty Application", "additionalData":{}, "type":"section",
+                "sendMessage":"Thank you we have received your application we will be review your application and be in contact with you.",
                 "elements":[
                     {"title":"Applicant Information", "elements":[
                         {"type":"input","sz":3, "required":true, "name":"firstName", "placeholder":"First Name", "value":"", "valueList":[]},
-                        {"type":"input","sz":3, "required":true, "name":"middleName", "placeholder":"Middle Name", "value":"", "valueList":[]},
+                        {"type":"input","sz":3, "required":false, "name":"middleName", "placeholder":"Middle Name", "value":"", "valueList":[]},
                         {"type":"input","sz":4, "required":true, "name":"lastName", "placeholder":"Last Name", "value":"", "valueList":[]},
                         {"type":"input","sz":10, "required":true, "name":"email", "placeholder":"Email", "value":"", "valueList":[]},
                         {"type":"input","sz":10, "required":true, "name":"address", "placeholder":"Home Address", "value":"", "valueList":[]},
@@ -61,8 +62,7 @@ class Apply extends Component{
                         {"type":"input","sz":4, "required":true, "name":"mobilephone", "placeholder":"Mobile Phone", "value":"", "valueList":[]},
                         
                         {"type":"input","sz":5, "required":true, "name":"ssn", "placeholder":"Social Security Number", "value":"", "valueList":[]},
-                        {"type":"input","sz":5, "required":true, "name":"driverlicense", "placeholder":"Drivers License", "value":"", "valueList":[]},
-                        
+                        {"type":"input","sz":5, "required":true, "name":"driverlicense", "placeholder":"Drivers License", "value":"", "valueList":[]},                       
                     ]},
                     {"title":"Emergency Contact Information", "elements":[
                         {"type":"input","sz":5, "required":true, "name":"emergencyname", "placeholder":"Name", "value":"", "valueList":[]},
