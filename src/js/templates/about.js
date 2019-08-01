@@ -73,7 +73,7 @@ class About extends Component{
                         <h2 className="lrgTitle ctr" data-text="The LGCU Mission">The LGCU Mission</h2>
                         <div className="indProfile">
                             <div className="img"><img alt="About Mission img" src={back3} /></div>
-                            <p className="info">Lenkeson Global Christian University is a leading online higher learning institution, established to meet the academic and professional needs of college traditional age and working adults, to award associate, baccalaureate, master's, and doctorate degrees.</p>
+                            <p className="info">Lenkeson Global Christian University is a leading online higher learning institution, established to meet the academic and professional needs of college traditional age and working adults, to award associate, baccalaureate, masters, and doctorate degrees.</p>
                             <p className="info">LGCU exists to provide the diverse adult learning community twenty-first century educational programs in various fields. At LGCU, learners and faculty are engaged in academic and professional learning that is centered on developing and empowering working professionals to succeed in church ministries and other professional fields.</p>
                         </div>
                     </div>                    
@@ -121,9 +121,9 @@ class About extends Component{
                         <p>Lenkeson Global Christian University is a Christ-centered institution of higher learning. The board of trustees, faculty and staff of the university understand the importance of representing and reflecting Christ in all aspects of their lives; hereby accept the Scriptures of the revealed Will of God, the all sufficient rule of faith and practice, and for the purpose of maintaining general unity, adopt these fundamentals Tenets of Faith and Doctrine written below:</p>
                         <ul>
                             <li>The Bible is the inspired Word of God, a revelation from God to man, the living, infallible, and everlasting rule of faith and conduct, and is superior to conscience and reason.</li>
-                            <li>The tribune Godhead is comprised of three separate and distinct personalities, the Father, the Son, and the Holy Spirit, who are eternally self-existent, self-revealed, and function as one entity. Jesus Christ, who is God manifested in the flesh, is the second member of the Godhead, co-equal and co-eternal with the Father and the Holy Spirit.</li>
+                            <li>The triune Godhead is comprised of three separate and distinct personalities, the Father, the Son, and the Holy Spirit, who are eternally self-existent, self-revealed, and function as one entity. Jesus Christ, who is God manifested in the flesh, is the second member of the Godhead, co-equal and co-eternal with the Father and the Holy Spirit.</li>
                             <li>Man was created good and upright. But, by voluntary transgression, man fell, and his only hope of redemption is in Jesus Christ the Son of God.</li>
-                            <li>The church is the body of Christ, the habitation of God through the Spirit, with divine appointments for the fulfillment of her great commission. Each believer, born of the Spirit, is an integral part of the general assembly and the universal church whose names are written in heaven.</li>
+                            <li>The church is the Body of Christ, the habitation of God through the Spirit, with divine appointments for the fulfillment of her great commission. Each believer, born of the Spirit, is an integral part of the general assembly and the universal church whose names are written in heaven.</li>
                             <li>Jesus is coming again to gather all His Saints to be eternally with Him.</li>
                         </ul>
                     </div>

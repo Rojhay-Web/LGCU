@@ -23,7 +23,7 @@ class TuitionHeader extends Component{
                     <h1>Tuition</h1>                    
                     <div className="solid-back">
                         <span>Lenkeson Global Christian University is a non-profit institution of higher learning established</span>                        
-                        <span>To provide affordable education to individuals who otherwise could not afford it</span>
+                        <span>To provide affordable education to individuals who otherwise could not afford it.</span>
                     </div>
                 </div>                
             </div>

@@ -45,7 +45,7 @@ class HomeHeader extends Component{
                             <span>Global Access Through</span> 
                             <span>Affordable Higher Education</span>
                         </h1>
-                        <p><span>"Those from among you shall build the wast places; 
+                        <p><span>"Those from among you shall build the waste places; 
                             You shall raise the foundation of many generations;
                             You shall be called the repairer of the breach and the restorer of paths to dwell in"</span>
                             (Isaiah 58:12)</p>
@@ -135,7 +135,7 @@ function Home(props){
                         </animated.div>
 
                         <div className="split-content">
-                            <h2 className="lrgTitle" data-text="Why LGCU">Why LGCU</h2>
+                            <h2 className="lrgTitle" data-text="Why LGCU">Why LGCU?</h2>
                             <p>At LGCU, learners and faculty are engaged in academic and professional learning that is centered on developing and empowering working professionals to succeed in church ministries and other professional fields.</p>
                             <a href="/about" className="lBtn c2"><span>More About LGCU</span><i className="btn-icon fas fa-info-circle"></i></a>
                         </div>                                                    

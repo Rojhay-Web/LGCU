@@ -245,7 +245,18 @@ class Admissions extends Component{
                         <p>The following documents are required for admission consideration:</p>
                         <ul>
                             <li>Admissions essay</li>
-                            <li>High School & College transcripts<span>(Prospective students who have completed high school or coursework at the college level     outside of the United States are required to have their transcripts evaluated by an organization that is affiliated with the National Association of Credential Services.)</span></li>
+                            <li>
+                                High School & College transcripts<span>(Prospective students who have completed high school or coursework at the college level     outside of the United States are required to have their transcripts evaluated by an organization that is affiliated with the National Association of Credential Services.)</span>
+                                <ul>
+                                    <li>Please contact the following organization to have your transcript evaluated: World Education Services (WES) by logging onto their website at www.wes.org or email them at www.wes.org/contact-us. You may also write to them:</li>
+                                    <li>
+                                        World Education Services
+                                        <br/>P.O. Box 5087
+                                        <br/>Bowling Green Station
+                                        <br/>New York, NY 10274-5087
+                                    </li>
+                                </ul>
+                            </li>
                             <li>Proof of English Proficiency is required:</li>
                         </ul>
 
@@ -267,9 +278,9 @@ class Admissions extends Component{
                         <p>Application fee: $50.00 U.S. currency and Confirmation Deposit - $250.00 can be paid online or call:</p> 
                         <div className="address-info">
                             <span>Admissions Office</span> 
-                            <span>(877) xxx xxxx</span>
+                            <span>(407) 564-2992 / (407) 434-0002</span>
                             <span>Pay by phone, Monday through Friday</span>
-                            <span>9 a.m. - 9 p.m. and Saturday 10 a.m. - 6 p.m.</span>
+                            <span>9 a.m. - 6 p.m. and Saturday 10 a.m. - 1 p.m.</span>
                         </div>
 
                         <h3>International Transfer Students</h3>

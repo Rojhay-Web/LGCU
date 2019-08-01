@@ -156,7 +156,7 @@ class StudyArea extends Component{
                     /*displayNum = -1;*/
                     for(var i =0; i < tmpData.degreeList.length; i++){
                         tmpMajor = tmpArea.degrees[tmpData.degreeList[i]].filter(function(item){  return item.id === majorId; });
-                        if(tmpMajor.length > 0) { displayNum = 2; tmpMajor = tmpMajor[0]; break; }
+                        if(tmpMajor.length > 0) { displayNum = 2; tmpMajor = tmpMajor[0]; tmpMajor.degreeLvl = tmpData.degreeList[i];  break; }
                     }                                     
                 }
 

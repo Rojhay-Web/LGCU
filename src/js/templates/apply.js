@@ -23,7 +23,7 @@ class ApplyHeader extends Component{
                     <div className="backImg"><img alt="Apply img" src={back1} /></div>
                     <h1>Apply Online</h1>                    
                     <div className="solid-back">
-                        <span>Complete an online application to become apart of the Lenkeson Global Christian University community.</span>
+                        <span>Complete an online application to become a part of the Lenkeson Global Christian University community.</span>
                     </div>
 
                     <div className="btn-container">

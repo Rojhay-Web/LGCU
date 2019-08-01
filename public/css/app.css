@@ -830,10 +830,17 @@
   position: relative;
   overflow: hidden;
 }
+.studyPage .studyArea-section .fullTitle {
+  text-transform: capitalize;
+}
 .studyPage .studyArea-section p {
   font-size: 1.4rem;
   font-weight: 100;
   color: #ffffff;
+}
+.studyPage .studyArea-section p a {
+  color: #ffffff;
+  text-decoration: underline;
 }
 .studyPage .studyArea-section .degreeSection .degreeTitle {
   text-transform: capitalize;
@@ -903,6 +910,9 @@
 .studyPage .course-section.noCourseData a {
   color: #e6e6e6;
   text-decoration: underline;
+}
+.studyPage .course-section.gradTotal {
+  margin: 20px 0px;
 }
 .studyPage .course-section .course-title {
   margin: 20px 0px 5px;
@@ -1223,8 +1233,6 @@
 }
 .aboutPage .about-section .letter-container .ltxt {
   margin-bottom: 30px;
-}
-.aboutPage .about-section .letter-container .ltxt.letter-line0 {
   text-indent: 30px;
 }
 .aboutPage .about-section .letter-container .lang-ctrl {

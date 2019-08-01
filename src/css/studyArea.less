@@ -63,10 +63,15 @@
         position: relative;
         overflow: hidden;
 
+        .fullTitle { text-transform: capitalize;  }
         p { 
             font-size: 1.4rem; 
             font-weight: 100; 
             color: rgba(255,255,255,1);
+            a {
+                color: rgba(255,255,255,1);
+                text-decoration: underline;
+            }
         }
 
         .degreeSection {
@@ -131,6 +136,8 @@
             font-weight: 100;
             a { color: rgba(230,230,230,1); text-decoration: underline; }
         }
+        &.gradTotal { margin: 20px 0px; }
+
         .course-title { 
             margin: 20px 0px 5px; 
             font-weight: 300; 
