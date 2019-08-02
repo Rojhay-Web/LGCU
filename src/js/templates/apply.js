@@ -153,7 +153,7 @@ class Apply extends Component{
                 return <div className="application-container">
                         <h2 className="lrgTitle ctr" data-text="Online Applications">Online Applications</h2>
                         <div className="section-container">
-                            <p className="app-info">We are happy your are interested in joining the LGCU community please select and application to continue.</p>
+                            <p className="app-info">We are happy you are interested in joining the LGCU community. Please select an application to continue.</p>
                             <div className="btn-container">
                                 <a href="/apply?type=student" className="lBtn clear t1"><span>Student Application</span><i className="btn-icon fas fa-graduation-cap"></i></a>
                                 <div className="btn-split-txt">Or</div>

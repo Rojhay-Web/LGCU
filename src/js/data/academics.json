@@ -37,7 +37,7 @@
             ],
             "bachelors":[
                 {"id":"BA-BA", "title":"Business Administration", "gradtotal":120, "courses":[
-                    {"subtitle":"General Education Courses: 45 credits","courses":["ANTH_110","CIS_107", "ENG_101","ENG_102","MATH_160","MATH_161","BIOL_105","SOC_101","HIST_122","HIST_123","PSY_101","ENG_117","ENG_118","POLS_101","SOC_217"]},
+                    {"subtitle":"General Education Courses: 45 credits","courses":["ANTH_110","CIS_107", "ENG_101","ENG_102","MTH_160","MTH_161","BIOL_105","SOC_101","HIST_122","HIST_123","PSY_101","ENG_117","ENG_118","POLS_101","SOC_217"]},
                     {"subtitle":"Required Business Core Courses: 45 credits","courses":["ACCT_310","ACCT_315","BUSN_317","MKTG_320","BUSN_321","BUSL_323","BUSM_325","ECON_328","ECON_329","FINA_340","BUSN_470"]},
                     {"subtitle":"BSBA Concentration: 15 credits","courses":[]}
                     ],
@@ -50,32 +50,27 @@
                         {"title":"Marketing Concentrations", "courses":["MKTG_341","MKTG_342","MKTG_350","MKTG_460","MKTG_470"]}
                 ]},
                 {"id":"BA-CDE", "title":"Child Development Education","gradtotal":120, "courses":[
-                    {"subtitle":"General Education Courses: 45 credits","courses":["ANTH_110","CIS_107", "ENG_101","ENG_102","MATH_160","MATH_161","BIOL_105","SOC_101","HIST_122","HIST_123","PSY_101","ENG_117","ENG_118","POLS_101","SOC_217"]},
+                    {"subtitle":"General Education Courses: 45 credits","courses":["ANTH_110","CIS_107", "ENG_101","ENG_102","MTH_160","MTH_161","BIOL_105","SOC_101","HIST_122","HIST_123","PSY_101","ENG_117","ENG_118","POLS_101","SOC_217"]},
                     {"subtitle":"Required Credit Courses: 45 credits","courses":["CDE_110","CDE_123","CDE_113","CDE_115","CDE_117","CDE_121","CDE_131","CDE_211","CDE_217","CDE_321","CDE_323","CDE_225","CDE_227"]},
                     {"subtitle":"Elective Courses: 30 credits (Professional portfolio can make up 15 credits of the electives or electives can be chosen from other programs at LGCU)","courses":[]}
                 ]},
                 {"id":"BA-CIS", "title":"Computer Information Systems","gradtotal":120, "courses":[
-                    {"subtitle":"General Education Courses: 45 credits","courses":["ANTH_110","CIS_107", "ENG_101","ENG_102","MATH_160","MATH_161","BIOL_105","SOC_101","HIST_122","HIST_123","PSY_101","ENG_117","ENG_118","POLS_101","SOC_217"]},
+                    {"subtitle":"General Education Courses: 45 credits","courses":["ANTH_110","CIS_107", "ENG_101","ENG_102","MTH_160","MTH_161","BIOL_105","SOC_101","HIST_122","HIST_123","PSY_101","ENG_117","ENG_118","POLS_101","SOC_217"]},
                     {"subtitle":"Required Credit Courses: 45 credits","courses":["CIS_301","CIS_303","CIS_341","CIS_401","CIS_403","CIS_405","CIS_407","CIS_411","CIS_413","CIS_415","CIS_417"]},
                     {"subtitle":"Elective Courses: 30 credits (Professional portfolio can make up 15 credits of the electives or electives can be chosen from other programs at LGCU)","courses":[]}
-                ]},
-                {"id":"BA-CJ", "title":"Criminal Justice","gradtotal":120, "courses":[
-                    {"subtitle":"General Education Courses: 45 credits","courses":["ANTH_110","CIS_107","ENG_101","ENG_102","MATH_160","MATH_161","BIOL_105","SOC_101","HIST_122","HIST_123","POLS_101","PSY_101","ENG_117","ENG_118","SOC_223"]},
-                    {"subtitle":"Required Credit Courses: 45 credits","courses":["CMJ_201","CMJ_203","CMJ_211","CMJ_227","CMJ_229","CMJ_331","CMJ_340","CMJ_343","CMJ_345","CMJ_347","CMJ_430","CMJ_433","CMJ_431","CMJ_499"]},
-                    {"subtitle":"Elective Courses: 30 credits (Professional portfolio can make up 15 credits of the electives or electives can be chosen from other programs at LGCU)","courses":[]}
-                ]},
+                ]},                
                 {"id":"BA-PSY", "title":"Psychology","gradtotal":120, "courses":[
-                    {"subtitle":"General Education Courses: 45 credits","courses":["ANTH_110","CIS_107","ENG_101","ENG_102","MATH_160","MATH_161","BIOL_105","SOC_101","HIST_122","HIST_123","POLS_101","PSY_101","ENG_117","ENG_118","SOC_217"]},
+                    {"subtitle":"General Education Courses: 45 credits","courses":["ANTH_110","CIS_107","ENG_101","ENG_102","MTH_160","MTH_161","BIOL_105","SOC_101","HIST_122","HIST_123","POLS_101","PSY_101","ENG_117","ENG_118","SOC_217"]},
                     {"subtitle":"Required Credit Courses: 45 credits","courses":["PSY_303","PSY_305","PSY_307","PSY_312","PSY_315","PSY_433","PSY_435","PSY_415","PSY_413","PSY_417","PSY_423","PSY_401","PSY_341","PSY_431","PSY_425","PSY_439","PSY_441"]},
                     {"subtitle":"Elective Courses: 30 credits (Professional portfolio can make up 15 credits of the electives or electives can be chosen from other programs at LGCU)","courses":[]}
                 ]},
                 {"id":"BA-SCEDU", "title":"Secondary Education","gradtotal":120, "courses":[
-                    {"subtitle":"General Education Courses: 45 credits","courses":["ANTH_110","CIS_107","ENG_101","ENG_102","MATH_160","MATH_161","BIOL_105","SOC_101","HIST_122","HIST_123","POLS_101","PSY_101","ENG_117","ENG_118","SOC_217"]},
+                    {"subtitle":"General Education Courses: 45 credits","courses":["ANTH_110","CIS_107","ENG_101","ENG_102","MTH_160","MTH_161","BIOL_105","SOC_101","HIST_122","HIST_123","POLS_101","PSY_101","ENG_117","ENG_118","SOC_217"]},
                     {"subtitle":"Required Credit Courses: 45 credits","courses":["EDU_300","EDU_303","EDU_306","EDU_310","EDU_320","EDU_340","EDU_360","EDU_370","EDU_400","EDU_410","EDU_420","EDU_450","EDU_460","EDU_480"]},
                     {"subtitle":"Elective Courses: 30 credits (Professional portfolio can make up 15 credits of the electives or electives can be chosen from other programs at LGCU)","courses":["EDU_415","EDU_417","EDU_421","EDU_423","EDU_430","EDU_470","EDU_473","EDU_474","TESL_475","TESL_476"]}                
                 ]},
                 {"id":"BA-SLS", "title":"Spanish and Latino Studies","gradtotal":120, "courses":[
-                    {"subtitle":"General Education Courses: 45 credits","courses":["ANTH_110","CIS_107","ENG_101","ENG_102","MATH_160","MATH_161","BIOL_105","SOC_101","HIST_122","HIST_123","POLS_101","PSY_101","ENG_117","ENG_118","SOC_217"]},
+                    {"subtitle":"General Education Courses: 45 credits","courses":["ANTH_110","CIS_107","ENG_101","ENG_102","MTH_160","MTH_161","BIOL_105","SOC_101","HIST_122","HIST_123","POLS_101","PSY_101","ENG_117","ENG_118","SOC_217"]},
                     {"subtitle":"Required Credit Courses: 45 credits","courses":["SPA_101","SPA_102","SPA_201","SPA_202","SPA_217","SPA_219","SPA_231","SPA_241","SPA_301","SPA_321","SPA_331","SPA_341","SPA_430","SPA_440","SPA_441"]},
                     {"subtitle":"Elective Courses: 30 credits (Professional portfolio can make up 15 credits of the electives or electives can be chosen from other programs at LGCU)","courses":["SPA_343","SPA_347","SPA_351","SPA_353","SPA_355","SPA_370","SPA_371","SPA_380","SPA_410","SPA_470"]}                
                 ]},

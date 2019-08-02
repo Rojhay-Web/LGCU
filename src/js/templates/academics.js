@@ -26,7 +26,7 @@ class AcademicsHeader extends Component{
                     <h1>Academics</h1>                    
                     <div className="solid-back">
                         <span>Lenkeson Global Christian University is a Christ-centered institution of higher learning &</span>
-                        <span>Is committed to provide cutting-edge academic education to men and women.</span>
+                        <span>is committed to providing twenty-first century academic education to men and women globally.</span>
                     </div>
 
                     <div className="btn-container">
