@@ -155,10 +155,10 @@
                 ]}
             ],
             "masters":[
-                {"id":"MA-BA", "title":"MBA","gradtotal":45, "courses":[
+                {"id":"MA-BA", "title":"Master in Business Administration","gradtotal":45, "courses":[
                     {"subtitle":"Required Core Credits (27 hours)","courses":["MBA_510","MBA_511","MBA_520","MBA_530","MBA_534","MBA_541","MBA_550","MBA_560","MBA_580"]},
                     {"subtitle":"MBA Concentrations (15 hours)","courses":[]}
-                ], "concentration":[
+                ], "concentrations":[
                     {"title":"Accounting Concentration","courses":["ACCT_600","ACCT_601","ACCT_610","ACCT_620","ACCT_670"]},
                     {"title":"Finance Concentration","courses":["FINA_600","FINA_601","FINA_610","FINA_620","FINA_670"]},
                     {"title":"Human Resource Management","courses":["HRM_600","HRM_601","HRM_610","HRM_620","HRM_670"]},
@@ -168,11 +168,11 @@
                 ]}                
             ],
             "doctorate":[
-                {"id":"PHD-BA", "title":"Business Administration","gradtotal":60, "courses":[
+                {"id":"PHD-BA", "title":"Business Administration","gradtotal":70, "courses":[
                     {"subtitle":"Doctoral Foundation Courses (12 hours)","courses":["DBA_700","DBA_701","DBA_702"]},
                     {"subtitle":"Required Core Courses (24 hours)","courses":["DBA_703","DBA_708","DBA_710","DBA_718","DBA_720","DBA_721"]},
                     {"subtitle":"Comprehensive Examination and Dissertation Research","courses":["DBA_900","DBA_901","DBA_902","DBA_903","DBA_904"]}
-                ], "concentration":[
+                ], "concentrations":[
                     {"title":"Finance Concentration","courses":["DBA_823","DBA_824","DBA_826"]},
                     {"title":"Human Resource Management Concentration","courses":["DBA_827","DBA_828","DBA_830"]},
                     {"title":"International Business Concentration","courses":["DBA_831","DBA_832","DBA_834"]},

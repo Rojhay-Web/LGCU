@@ -92,25 +92,25 @@
     "ACCT_600": {
         "section": "ACCT",
         "id": 600,
-        "title": "Advanced Accounting Principles  ",
+        "title": "Advanced Accounting Principles",
         "credit": 3
     },
     "ACCT_601": {
         "section": "ACCT",
         "id": 601,
-        "title": "Accounting for Critical Decision Making  ",
+        "title": "Accounting for Critical Decision Making",
         "credit": 3
     },
     "ACCT_610": {
         "section": "ACCT",
         "id": 610,
-        "title": "International Accounting I  ",
+        "title": "International Accounting I",
         "credit": 3
     },
     "ACCT_620": {
         "section": "ACCT",
         "id": 620,
-        "title": "International Accounting II ",
+        "title": "International Accounting II",
         "credit": 3
     },
     "ACCT_670": {
@@ -423,7 +423,7 @@
         "section": "CDE",
         "id": 223,
         "title": "Practicum",
-        "credit": 3
+        "credit": 6
     },
     "CDE_225": {
         "section": "CDE",
@@ -452,13 +452,13 @@
     "CDE_510": {
         "section": "CDE",
         "id": 510,
-        "title": "Intro to Child Development Education  ",
+        "title": "Intro to Child Development Education",
         "credit": 3
     },
     "CDE_523": {
         "section": "CDE",
         "id": 523,
-        "title": "Program Planning  ",
+        "title": "Program Planning",
         "credit": 3
     },
     "CDE_526": {
@@ -482,7 +482,7 @@
     "CDE_539": {
         "section": "CDE",
         "id": 539,
-        "title": "Language Arts  ",
+        "title": "Language Arts",
         "credit": 3
     },
     "CDE_541": {
@@ -494,26 +494,26 @@
     "CDE_545": {
         "section": "CDE",
         "id": 545,
-        "title": "Career Growth and Dev  ",
+        "title": "Career Growth and Dev",
         "credit": 3
     },
     "CDE_549": {
         "section": "CDE",
         "id": 549,
-        "title": "Children’s Lit  ",
+        "title": "Children’s Lit",
         "credit": 3
     },
     "CDE_560": {
         "section": "CDE",
         "id": 560,
-        "title": "Child Development Educational Admin  ",
+        "title": "Child Development Educational Admin",
         "credit": 3
     },
     "CDE_570": {
         "section": "CDE",
         "id": 570,
-        "title": "Practicum ",
-        "credit": 3
+        "title": "Practicum",
+        "credit": 6
     },
     "CDE_740": {
         "section": "CDE",
@@ -530,7 +530,7 @@
     "CDE_780": {
         "section": "CDE",
         "id": 780,
-        "title": "Teacher Parent Child Relations  ",
+        "title": "Teacher Parent Child Relations",
         "credit": 3
     },
     "CDE_800": {
@@ -542,7 +542,7 @@
     "CDE_820": {
         "section": "CDE",
         "id": 820,
-        "title": "Socio-Cultural Issues (At Risk Children)  ",
+        "title": "Socio-Cultural Issues (At Risk Children)",
         "credit": 3
     },
     "CDE_840": {
@@ -578,8 +578,8 @@
     "CDE_890": {
         "section": "CDE",
         "id": 890,
-        "title": "Practicum or Professional Portfolio ",
-        "credit": 3
+        "title": "Practicum or Professional Portfolio",
+        "credit": 6
     },
     "CED_301": {
         "section": "CED",
@@ -693,7 +693,7 @@
         "section": "CED",
         "id": 560,
         "title": "Practicum",
-        "credit": null
+        "credit": 6
     },
     "CED_570": {
         "section": "CED",
@@ -771,13 +771,13 @@
         "section": "CHM",
         "id": 345,
         "title": "Practicum I",
-        "credit": 3
+        "credit": 6
     },
     "CHM_347": {
         "section": "CHM",
         "id": 347,
         "title": "Practicum II",
-        "credit": 3
+        "credit": 6
     },
     "CHM_501": {
         "section": "CHM",
@@ -813,7 +813,7 @@
         "section": "CHM",
         "id": 570,
         "title": "Practicum or Professional Portfolio",
-        "credit": 3
+        "credit": 6
     },
     "CHS_520": {
         "section": "CHS",
@@ -1016,20 +1016,20 @@
     "CSAD_540": {
         "section": "CSAD",
         "id": 540,
-        "title": "Issues and Trends in Christian Schools Administration  ",
+        "title": "Issues and Trends in Christian Schools Administration",
         "credit": 3
     },
     "CSAD_542": {
         "section": "CSAD",
         "id": 542,
-        "title": "Assessment & Evaluation of Christian Schools Curriculum  ",
+        "title": "Assessment & Evaluation of Christian Schools Curriculum",
         "credit": 3
     },
     "CSAD_590": {
         "section": "CSAD",
         "id": 590,
-        "title": "Practicum or Professional Portfolio  ",
-        "credit": 3
+        "title": "Practicum or Professional Portfolio",
+        "credit": 6
     },
     "CSC_500": {
         "section": "CSC",
@@ -1310,8 +1310,8 @@
     "EADM_670": {
         "section": "EADM",
         "id": 670,
-        "title": "Practicum ",
-        "credit": 3
+        "title": "Practicum",
+        "credit": 6
     },
     "EADM_740": {
         "section": "EADM",
@@ -1346,14 +1346,14 @@
     "EADM_840": {
         "section": "EADM",
         "id": 840,
-        "title": "Personnel Administration  ",
+        "title": "Personnel Administration",
         "credit": 4
     },
     "EADM_890": {
         "section": "EADM",
         "id": 890,
-        "title": "Professional portfolio",
-        "credit": 4
+        "title": "Professional Portfolio",
+        "credit": 6
     },
     "ECON_221": {
         "section": "ECON",
@@ -1382,7 +1382,7 @@
     "EDU_203": {
         "section": "EDU",
         "id": 203,
-        "title": "Foundations of American Education  ",
+        "title": "Foundations of American Education",
         "credit": 3
     },
     "EDU_217": {
@@ -1467,7 +1467,7 @@
         "section": "EDU",
         "id": 323,
         "title": "Practicum",
-        "credit": 3
+        "credit": 6
     },
     "EDU_340": {
         "section": "EDU",
@@ -1569,7 +1569,7 @@
         "section": "EDU",
         "id": 474,
         "title": "Portfolio Development",
-        "credit": 3
+        "credit": 6
     },
     "EDU_480": {
         "section": "EDU",
@@ -1580,7 +1580,7 @@
     "EDU_500": {
         "section": "EDU",
         "id": 500,
-        "title": "Foundations of American Education  ",
+        "title": "Foundations of American Education",
         "credit": 3
     },
     "EDU_501": {
@@ -1616,13 +1616,13 @@
     "EDU_540": {
         "section": "EDU",
         "id": 540,
-        "title": "Multicultural Perspectives in K-12 Curriculum  ",
+        "title": "Multicultural Perspectives in K-12 Curriculum",
         "credit": 3
     },
     "EDU_560": {
         "section": "EDU",
         "id": 560,
-        "title": "Mainstream and Special Learner K-12 Curriculum  ",
+        "title": "Mainstream and Special Learner K-12 Curriculum",
         "credit": 3
     },
     "EDU_570": {
@@ -1646,19 +1646,19 @@
     "EDU_610": {
         "section": "EDU",
         "id": 610,
-        "title": "Curriculum Design in Reading ",
+        "title": "Curriculum Design in Reading",
         "credit": 3
     },
     "EDU_620": {
         "section": "EDU",
         "id": 620,
-        "title": "Curriculum Design Assessment & Evaluation  ",
+        "title": "Curriculum Design Assessment & Evaluation",
         "credit": 3
     },
     "EDU_630": {
         "section": "EDU",
         "id": 630,
-        "title": "School/Parent/Student Relations  ",
+        "title": "School/Parent/Student Relations",
         "credit": 3
     },
     "EDU_640": {
@@ -1670,25 +1670,25 @@
     "EDU_680": {
         "section": "EDU",
         "id": 680,
-        "title": "Practicum ",
-        "credit": 3
+        "title": "Practicum",
+        "credit": 6
     },
     "EDU_700": {
         "section": "EDU",
         "id": 700,
-        "title": "Doctoral Writing for Educators  ",
+        "title": "Doctoral Writing for Educators",
         "credit": 4
     },
     "EDU_701": {
         "section": "EDU",
         "id": 701,
-        "title": "Quantitative Research Methodology  ",
+        "title": "Quantitative Research Methodology",
         "credit": 4
     },
     "EDU_702": {
         "section": "EDU",
         "id": 702,
-        "title": "Qualitative Research Methodology  ",
+        "title": "Qualitative Research Methodology",
         "credit": 4
     },
     "EDU_720": {
@@ -1700,7 +1700,7 @@
     "EDU_730": {
         "section": "EDU",
         "id": 730,
-        "title": "Classroom Management  ",
+        "title": "Classroom Management",
         "credit": 4
     },
     "EDU_740": {
@@ -1736,7 +1736,7 @@
     "EDU_790": {
         "section": "EDU",
         "id": 790,
-        "title": "Critical Issues in K-12 Curriculum and Instruction  ",
+        "title": "Critical Issues in K-12 Curriculum and Instruction",
         "credit": 6
     },
     "EDU_800": {
@@ -1772,13 +1772,13 @@
     "EDU_890": {
         "section": "EDU",
         "id": 890,
-        "title": "Practicum or Professional Portfolio ",
-        "credit": 3
+        "title": "Practicum or Professional Portfolio",
+        "credit": 6
     },
     "EDU_900": {
         "section": "EDU",
         "id": 900,
-        "title": "Doctoral Comprehensive Examination ",
+        "title": "Doctoral Comprehensive Examination",
         "credit": 0
     },
     "EDU_901": {
@@ -1802,7 +1802,7 @@
     "EDU_904": {
         "section": "EDU",
         "id": 904,
-        "title": "Dissertation research 4 ",
+        "title": "Dissertation research 4",
         "credit": 4
     },
     "ENG_101": {
@@ -1898,7 +1898,7 @@
     "FINA_600": {
         "section": "FINA",
         "id": 600,
-        "title": "Investment Analysis  ",
+        "title": "Investment Analysis",
         "credit": 3
     },
     "FINA_601": {
@@ -2000,13 +2000,13 @@
     "GSM_501": {
         "section": "GSM",
         "id": 501,
-        "title": "Introduction to Global Missions  ",
+        "title": "Introduction to Global Missions",
         "credit": 3
     },
     "GSM_503": {
         "section": "GSM",
         "id": 503,
-        "title": "Survey of the Book of Acts  ",
+        "title": "Survey of the Book of Acts",
         "credit": 3
     },
     "GSM_505": {
@@ -2018,7 +2018,7 @@
     "GSM_507": {
         "section": "GSM",
         "id": 507,
-        "title": "Multicultural Counseling  ",
+        "title": "Multicultural Counseling",
         "credit": 3
     },
     "GSM_511": {
@@ -2060,20 +2060,20 @@
     "GSM_527": {
         "section": "GSM",
         "id": 527,
-        "title": "Bible Study Methods ",
+        "title": "Bible Study Methods",
         "credit": 5
     },
     "GSM_531": {
         "section": "GSM",
         "id": 531,
-        "title": "Global Theological Views ",
+        "title": "Global Theological Views",
         "credit": 5
     },
     "GSM_590": {
         "section": "GSM",
         "id": 590,
-        "title": "Practicum or Professional Portfolio  ",
-        "credit": 4
+        "title": "Practicum or Professional Portfolio",
+        "credit": 6
     },
     "HEB_307": {
         "section": "HEB",
@@ -2162,7 +2162,7 @@
     "HRM_670": {
         "section": "HRM",
         "id": 670,
-        "title": "Field Experience  ",
+        "title": "Field Experience",
         "credit": 3
     },
     "INTB_341": {
@@ -2222,7 +2222,7 @@
     "INTB_670": {
         "section": "INTB",
         "id": 670,
-        "title": "Field Experience ",
+        "title": "Field Experience",
         "credit": 3
     },
     "LEAD_341": {
@@ -2258,13 +2258,13 @@
     "LEAD_520": {
         "section": "LEAD",
         "id": 520,
-        "title": "Theories of Leadership  ",
+        "title": "Theories of Leadership",
         "credit": 3
     },
     "LEAD_537": {
         "section": "LEAD",
         "id": 537,
-        "title": "Theories of Leadership ",
+        "title": "Theories of Leadership",
         "credit": 3
     },
     "LEAD_543": {
@@ -2288,7 +2288,7 @@
     "LEAD_601": {
         "section": "LEAD",
         "id": 601,
-        "title": "Leading in a Diverse Society ",
+        "title": "Leading in a Diverse Society",
         "credit": 3
     },
     "LEAD_605": {
@@ -2331,7 +2331,7 @@
         "section": "LEAD",
         "id": 680,
         "title": "Leadership Practicum: Internship or Capstone Project",
-        "credit": 3
+        "credit": 6
     },
     "LEAD_700": {
         "section": "LEAD",
@@ -2378,7 +2378,7 @@
     "LEAD_790": {
         "section": "LEAD",
         "id": 790,
-        "title": "Distributed Leadership  ",
+        "title": "Distributed Leadership",
         "credit": 6
     },
     "LEAD_820": {
@@ -2438,7 +2438,7 @@
     "MATH_160": {
         "section": "MATH",
         "id": 160,
-        "title": "College Algebra  ",
+        "title": "College Algebra",
         "credit": 3
     },
     "MBA_510": {
@@ -2462,7 +2462,7 @@
     "MBA_530": {
         "section": "MBA",
         "id": 530,
-        "title": "Ethical Issues in Business  ",
+        "title": "Ethical Issues in Business",
         "credit": 3
     },
     "MBA_534": {
@@ -2474,19 +2474,19 @@
     "MBA_541": {
         "section": "MBA",
         "id": 541,
-        "title": "Business Law  ",
+        "title": "Business Law",
         "credit": 3
     },
     "MBA_550": {
         "section": "MBA",
         "id": 550,
-        "title": "Organizational Behavior in Business  ",
+        "title": "Organizational Behavior in Business",
         "credit": 3
     },
     "MBA_560": {
         "section": "MBA",
         "id": 560,
-        "title": "Critical Thinking in Management Decisions  ",
+        "title": "Critical Thinking in Management Decisions",
         "credit": 3
     },
     "MBA_580": {
@@ -2535,7 +2535,7 @@
         "section": "MKTG",
         "id": 460,
         "title": "Successful Portfolio Management",
-        "credit": 3
+        "credit": 6
     },
     "MKTG_470": {
         "section": "MKTG",
@@ -2571,7 +2571,7 @@
         "section": "MKTG",
         "id": 620,
         "title": "Successful Portfolio Management",
-        "credit": 3
+        "credit": 6
     },
     "MKTG_670": {
         "section": "MKTG",
@@ -2582,7 +2582,7 @@
     "MTH_118": {
         "section": "MTH",
         "id": 118,
-        "title": "College Math  ",
+        "title": "College Math",
         "credit": 3
     },
     "MTH_122": {
@@ -2793,7 +2793,7 @@
         "section": "PSY",
         "id": 437,
         "title": "Field Experience",
-        "credit": null
+        "credit": 3
     },
     "PSY_439": {
         "section": "PSY",
@@ -2985,13 +2985,13 @@
         "section": "SPA",
         "id": 440,
         "title": "Practicum I",
-        "credit": 3
+        "credit": 6
     },
     "SPA_441": {
         "section": "SPA",
         "id": 441,
         "title": "Practicum II",
-        "credit": 3
+        "credit": 6
     },
     "SPA_470": {
         "section": "SPA",
@@ -2999,16 +2999,10 @@
         "title": "Mexico/Canada/USA Relations",
         "credit": 3
     },
-    "SPA_NaN": {
-        "section": "SPA",
-        "id": null,
-        "title": "Mexico/Canada/USA",
-        "credit": null
-    },
     "SPE_740": {
         "section": "SPE",
         "id": 740,
-        "title": "Multicultural Perspectives in Special Education ",
+        "title": "Multicultural Perspectives in Special Education",
         "credit": 4
     },
     "SPE_770": {
@@ -3026,7 +3020,7 @@
     "SPE_830": {
         "section": "SPE",
         "id": 830,
-        "title": "Special Education Curriculum Design and Evaluation  ",
+        "title": "Special Education Curriculum Design and Evaluation",
         "credit": 3
     },
     "SPF_511": {
@@ -3056,7 +3050,7 @@
     "TESL_506": {
         "section": "TESL",
         "id": 506,
-        "title": "Second Language Acquisition  ",
+        "title": "Second Language Acquisition",
         "credit": 3
     },
     "TESL_511": {
@@ -3068,49 +3062,49 @@
     "TESL_515": {
         "section": "TESL",
         "id": 515,
-        "title": "Issues and Trends in Bilingual Education  ",
+        "title": "Issues and Trends in Bilingual Education",
         "credit": 3
     },
     "TESL_520": {
         "section": "TESL",
         "id": 520,
-        "title": "Curriculum Design for Bilingual Education  ",
+        "title": "Curriculum Design for Bilingual Education",
         "credit": 3
     },
     "TESL_525": {
         "section": "TESL",
         "id": 525,
-        "title": "Teaching Reading and Writing in ESL  ",
+        "title": "Teaching Reading and Writing in ESL",
         "credit": 3
     },
     "TESL_540": {
         "section": "TESL",
         "id": 540,
-        "title": "Sheltered Instruction for ELLs ",
+        "title": "Sheltered Instruction for ELLs",
         "credit": 3
     },
     "TESL_590": {
         "section": "TESL",
         "id": 590,
-        "title": "Professional Portfolio ",
-        "credit": 3
+        "title": "Professional Portfolio",
+        "credit": 6
     },
     "TESL_740": {
         "section": "TESL",
         "id": 740,
-        "title": "Principles of Multicultural Communications  ",
+        "title": "Principles of Multicultural Communications",
         "credit": 4
     },
     "TESL_760": {
         "section": "TESL",
         "id": 760,
-        "title": "Second Language Acquisition  ",
+        "title": "Second Language Acquisition",
         "credit": 5
     },
     "TESL_780": {
         "section": "TESL",
         "id": 780,
-        "title": "ESL Teaching Methods  ",
+        "title": "ESL Teaching Methods",
         "credit": 5
     },
     "TESL_800": {
@@ -3140,8 +3134,8 @@
     "TESL_890": {
         "section": "TESL",
         "id": 890,
-        "title": "Professional Portfolio  ",
-        "credit": 3
+        "title": "Professional Portfolio",
+        "credit": 6
     },
     "THE_550": {
         "section": "THE",
