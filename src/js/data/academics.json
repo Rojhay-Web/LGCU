@@ -110,7 +110,7 @@
                 ]}
             ],
             "masters":[
-                {"id":"MA-REDU", "title":"Religious Education", "degreeTitle":"(M.Ed.)","gradtotal":45, "courses":[
+                {"id":"MA-REDU", "title":"Religious Education","gradtotal":45, "courses":[
                     {"subtitle":"Education Foundation Courses (15 hours)","courses":["EDU_500","EDU_501","EDU_503","EDU_510","EDU_520"]},
                     {"subtitle":"Child Development Education","courses":["CDE_510","CDE_523","CDE_526","CDE_535","CDE_537","CDE_539","CDE_541","CDE_545","CDE_549","CDE_560","CDE_570"]},
                     {"subtitle":"Christian Education","courses":["CED_501","CED_503","CED_507","CED_509","CED_511","CED_515","CED_517","CED_519","CED_560","CED_570"]},
@@ -118,7 +118,7 @@
                     {"subtitle":"Christian Schools Administration","courses":["LEAD_520","CSAD_525","CSAD_528","CSAD_530","CSAD_533","CSAD_535","CSAD_540","CSAD_542","CSAD_590"]},
                     {"subtitle":"Church Business Administration & Developmental Leadership","courses":["ACCT_505","ACCT_515","BUSN_517","CHAM_541","LEAD_520","LEAD_543","LEAD_547","MKTG_550","BUSN_553","BUSN_558","BUSN_559","CHAM_560","BUSN_570"]}
                 ]},
-                {"id":"MA-THST", "title":"Theological Studies", "degreeTitle":"(M.Ed.)","gradtotal":54, "courses":[
+                {"id":"MA-THST", "title":"Theological Studies", "gradtotal":54, "courses":[
                     {"subtitle":"Biblical Languages (18 hours)","courses":["NTG_531","NTG_532","NTG_533","OTH_541","OTH_542","OTH_543"]},
                     {"subtitle":"Foundational Courses (18 hours)","courses":["SPF_511","OTS_513","OTS_514","NTS_516","NTS_517","CHS_520"]},
                     {"subtitle":"Theological Courses (18 hours)","courses":["THE_550","THE_551","THE_553","THE_557","THE_561","THE_562","THE_640"]},
@@ -155,7 +155,7 @@
                 ]}
             ],
             "masters":[
-                {"id":"MA-BA", "title":"Business Administration", "degreeTitle":"(M.Ed.)","gradtotal":45, "courses":[
+                {"id":"MA-BA", "title":"Business Administration", "gradtotal":45, "courses":[
                     {"subtitle":"Required Core Credits (27 hours)","courses":["MBA_510","MBA_511","MBA_520","MBA_530","MBA_534","MBA_541","MBA_550","MBA_560","MBA_580"]},
                     {"subtitle":"MBA Concentrations (18 hours)","courses":[]}
                 ], "concentrations":[
@@ -280,7 +280,7 @@
         "img":"img9.jpg",
         "degrees":{
             "masters":[
-                {"id":"MA-ODL", "title":"Organizational Development and Leadership", "degreeTitle":"(M.Ed.)","gradtotal":45, "courses":[
+                {"id":"MA-ODL", "title":"Organizational Development and Leadership", "gradtotal":45, "courses":[
                     {"subtitle":"Required Core Courses: 24 credits","courses":["LEAD_600","LEAD_605","LEAD_610","LEAD_615","LEAD_620","LEAD_640","LEAD_670","LEAD_680"]},
                     {"subtitle":"Concentrations: 12 credits","courses":[]}
                     ], 
