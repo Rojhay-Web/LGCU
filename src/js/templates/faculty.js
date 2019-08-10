@@ -121,7 +121,7 @@ class Faculty extends Component{
 
                                 <div className="slider-vertical">
                                     <div className="slider-card title c3">
-                                        <h1 className="name">Mrs. Marisol Rivera Bryant</h1>
+                                        <h1 className="name"></h1>
                                         <div className="title">Administrative Secretary</div>
                                         <a href="tel:4075642992" className="phone"><i className="fas fa-phone"></i> <span>407.564.2992</span></a>
                                     </div>

@@ -36,6 +36,17 @@ class FormCpt extends Component{
                     return <textarea name={el.name} className={(this.state.requiredData.indexOf(el.name) > -1 ? "empty":"")} placeholder={el.placeholder +(el.required ?"*":"")} value={this.state.formData[el.name]|| ''} onChange={(e) => this.onElementChange(e)} />;
             case "checkbox":
                 return <div className={"form-checkbox " + (this.state.requiredData.indexOf(el.name) > -1 ? "empty":"")} placeholder={el.placeholder +(el.required ?"*":"")} value={this.state.formData[el.name]|| false}><input type="checkbox" name={el.name} onChange={(e) => this.onElementChange(e)}/><label>{el.placeholder +(el.required ?"*":"")}</label></div>;
+            case "select_group":
+                return <select name={el.name} className={(this.state.requiredData.indexOf(el.name) > -1 ? "empty":"")} value={this.state.formData[el.name]|| ''} onChange={(e) => this.onElementChange(e)}>
+                    <option value="">{el.placeholder}</option>
+                    {el.valueList.map((item,i) => (
+                        <optgroup label={item.title} key={i}>
+                            {item.list.map((major,k) => (
+                                <option value={item.title +"-"+major}>{major}</option>
+                            ))}
+                        </optgroup>
+                    ))}
+                </select>
             default:
                 return <div></div>;
         }

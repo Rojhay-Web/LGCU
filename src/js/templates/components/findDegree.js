@@ -68,7 +68,7 @@ class FindDegree extends Component{
                                     <a href={item.url} className={"result-item " + item.theme } key={i}>
                                         <div className={"result-icon " + item.theme} />
                                         <div className="item-info-container">
-                                            <div className="degree-title"><span>{item.degree}</span> <span>{(item.degreeTitle ? "of "+ item.degreeTitle : "")}</span></div>
+                                            <div className="degree-title"><span>{item.degree}</span> <span>{(item.degreeTitle ? item.degreeTitle : "")}</span></div>
                                             <div className="major-title">
                                                 {item.subtitle && <span className="sub-title">{item.subtitle} - </span>}
                                                 <span className="major-title">{item.title}</span>
@@ -165,13 +165,13 @@ class FindDegree extends Component{
 
                             if(major.concentrations && major.concentrations.length > 0){
                                 major.concentrations.forEach(function(concentration) {
-                                    retList.push({title:major.title, subtitle:concentration.title, theme:area.colorTheme, degree: degree.title, area: area.title, url: url});
+                                    retList.push({title:major.title, subtitle:concentration.title, theme:area.colorTheme, degreeTitle:major.degreeTitle, degree: degree.title, area: area.title, url: url});
                                 });
                             }
 
                             if(major.specialization && major.specialization.length > 0){
                                 major.specialization.forEach(function(specialization) {
-                                    retList.push({title:major.title, subtitle:specialization.title, theme:area.colorTheme, degree: degree.title, area: area.title, url: url});
+                                    retList.push({title:major.title, subtitle:specialization.title, theme:area.colorTheme, degreeTitle:major.degreeTitle, degree: degree.title, area: area.title, url: url});
                                 });
                             }                            
                             retList.push({title:major.title, degreeTitle: major.degreeTitle, theme:area.colorTheme, degree: degree.title, area: area.title, url: url});                                                      

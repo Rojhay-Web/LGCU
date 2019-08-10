@@ -39,7 +39,7 @@ class SchoolSub extends Component{
                                     <a href={this.props.baseUrl +"?majorId="+major.id} key={j} className="majorLink">
                                         <i className="fas fa-chevron-right" />
                                         <span>{major.title}</span>
-                                        {major.degreeTitle && <span className="subText">(in {major.degreeTitle})</span>}
+                                        {major.degreeTitle && <span className="subText">{major.degreeTitle}</span>}
                                     </a>
                                 ))}
                             </div>

@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import queryString from 'query-string';
 
+/* Data */
+import academicData from '../data/academics.json';
+
 /* Images */
 import back1 from '../../assets/site/mini/img13.jpg';
 import appImg from '../../assets/site/mini/img14.jpg';
@@ -87,11 +90,58 @@ class Apply extends Component{
                         {"type":"textarea","sz":10, "required":true, "name":"employmenthistory", "placeholder":"Employment History", "value":"", "valueList":[]}
                     ]}
                 ]
+            },
+            studentApplication:{
+                "title":"student application", "sendAddress":"web.lgcu@gmail.com",
+                "subject":"Student Application", "additionalData":{}, "type":"section",
+                "sendMessage":"Thank you we have received your application we will be review your application and be in contact with you.",
+                "elements":[
+                    {"title":"Applicant Information", "elements":[
+                        {"type":"input","sz":3, "required":true, "name":"firstName", "placeholder":"First Name", "value":"", "valueList":[]},
+                        {"type":"input","sz":3, "required":false, "name":"middleName", "placeholder":"Middle Name", "value":"", "valueList":[]},
+                        {"type":"input","sz":4, "required":true, "name":"lastName", "placeholder":"Last Name", "value":"", "valueList":[]},
+                        {"type":"input","sz":10, "required":true, "name":"email", "placeholder":"Email", "value":"", "valueList":[]},
+                        {"type":"input","sz":10, "required":true, "name":"address", "placeholder":"Home Address", "value":"", "valueList":[]},
+                        {"type":"input","sz":5, "required":true, "name":"city", "placeholder":"City", "value":"", "valueList":[]},
+                        {"type":"input","sz":2, "required":true, "name":"state", "placeholder":"State", "value":"", "valueList":[]},
+                        {"type":"input","sz":3, "required":true, "name":"postal", "placeholder":"Postal Code", "value":"", "valueList":[]},
+                        {"type":"input","sz":3, "required":false, "name":"dayphone", "placeholder":"Daytime Phone", "value":"", "valueList":[]},
+                        {"type":"input","sz":3, "required":false, "name":"eveningphone", "placeholder":"Evening Phone", "value":"", "valueList":[]},
+                        {"type":"input","sz":4, "required":true, "name":"mobilephone", "placeholder":"Mobile Phone", "value":"", "valueList":[]},
+                        
+                        {"type":"input","sz":5, "required":true, "name":"ssn", "placeholder":"Social Security Number", "value":"", "valueList":[]},
+                        {"type":"input","sz":5, "required":true, "name":"driverlicense", "placeholder":"Drivers License", "value":"", "valueList":[]},                       
+                    ]},
+                    {"title":"Emergency Contact Information", "elements":[
+                        {"type":"input","sz":5, "required":true, "name":"emergencyname", "placeholder":"Name", "value":"", "valueList":[]},
+                        {"type":"input","sz":3, "required":false, "name":"emergencyrelationship", "placeholder":"Relationship", "value":"", "valueList":[]},
+                        {"type":"input","sz":2, "required":true, "name":"emergencyphone", "placeholder":"Phone Number", "value":"", "valueList":[]},
+                        {"type":"input","sz":10, "required":false, "name":"emergencyaddress", "placeholder":"Address", "value":"", "valueList":[]},
+                        {"type":"input","sz":5, "required":false, "name":"emergencycity", "placeholder":"City", "value":"", "valueList":[]},
+                        {"type":"input","sz":2, "required":false, "name":"emergencystate", "placeholder":"State", "value":"", "valueList":[]},
+                        {"type":"input","sz":3, "required":false, "name":"emergencypostal", "placeholder":"Postal Code", "value":"", "valueList":[]}
+                    ]},
+                    {"title":"Degree Information", "elements":[
+                        {"type":"select_group","sz":10, "required":true, "name":"degreeType", "placeholder":"What Degrees Are You Interested In?", "value":"", "valueList":[]},
+
+                        {"type":"checkbox","sz":3, "required":false, "name":"veteran", "placeholder":"Are You A US Veteran", "value":"", "valueList":[]},
+                        {"type":"input","sz":7, "required":false, "name":"veteranbranch", "placeholder":"Branch", "value":"", "valueList":[]},
+                        {"type":"textarea","sz":10, "required":false, "name":"veteranskill", "placeholder":"Specific Skills Acquired", "value":"", "valueList":[]}
+                    ]},
+                    {"title":"Previous Educational Experience", "elements":[
+                        {"type":"input","sz":10, "required":true, "name":"highestdegree", "placeholder":"Highest Degree Earned", "value":"", "valueList":[]},                        
+                        {"type":"textarea","sz":10, "required":false, "name":"otherdegrees", "placeholder":"Other Degrees Earned", "value":"", "valueList":[]}
+                    ]},
+                    {"title":"Employment History", "directions":"List employment history for the past 5 years without any gap. Include the following information for each: ", "directionList":["Emplorer Name","Employer Address","Total Years Of Employment","Name of Supervisor","Emplorer Phone Number","Why did you leave?"], "elements":[
+                        {"type":"textarea","sz":10, "required":true, "name":"employmenthistory", "placeholder":"Employment History", "value":"", "valueList":[]}
+                    ]}
+                ]
             }
         }
 
         this.getAppType = this.getAppType.bind(this);
         this.setApplication = this.setApplication.bind(this);
+        this.loadMajorData = this.loadMajorData.bind(this);
     }
 
     componentDidMount(){ 
@@ -115,6 +165,11 @@ class Apply extends Component{
         try {
             var values = queryString.parse(this.props.location.search);
             appType = ("type" in values ? values.type : "");
+
+            if(appType == "student"){
+                // Load Degree info
+                this.loadMajorData();
+            }
         }
         catch(ex){
             console.log("Error getting App type: ",ex);
@@ -123,13 +178,50 @@ class Apply extends Component{
         this.setState({params: appType });
     }
 
+    loadMajorData(){
+        var self = this;
+        try {
+            // academicData
+            var areaInit = Object.keys(academicData);
+            var degreeKey = {};
+
+            areaInit.forEach(function(area){
+                var tmpDegreeList = Object.keys(academicData[area].degrees);
+                tmpDegreeList.forEach(function(degree){
+                    var tmpList = academicData[area].degrees[degree].map(a => a.title +(a.degreeTitle ? " "+a.degreeTitle :""));
+                    if(degree in degreeKey){
+                        degreeKey[degree] = degreeKey[degree].concat(tmpList);
+                    }
+                    else {
+                        degreeKey[degree] = tmpList;
+                    }
+                });
+            });
+
+            Object.keys(degreeKey).forEach(function(item){
+                self.state.studentApplication.elements[2].elements[0].valueList.push({"title":item, "list":degreeKey[item]});
+            });            
+        }
+        catch(ex){
+            console.log("Error getting Major data: ",ex);
+        }
+    }
+
     setApplication(){        
         switch(this.state.params){
             case "student":
                 return <div className="application-container">
                     <h2 className="lrgTitle ctr" data-text="Student Application">Student Application</h2>
                     <div className="section-container">
-                        <p className="app-info">Student Application Coming Soon, for immediate information please email us at <a href="mailto:info@lenkesongcu.org">info@lenkesongcu.org</a></p>
+                    <FormCpt form={this.state.studentApplication} />
+                            <p className="form-info">Please submit via email at admin@lenkesongcu.org copies of unofficial transcripts, Curriculum Vitae or resume. If offered admissions, official transcripts will be required. Official State issued government identifications will be required if admission is offered. All required documents must be submitted to the Admissions Office before registering for classes. For more information regarding admissions requirements, please log into the University Website www.lenkesongcu.org and click on admissions. Please read and sign the Certification of Application and Non-Discrimination Policy below.</p>
+                            
+                            <h3 className="lrgTitle ctr" data-text="CERTIFICATION OF APPLICATION">CERTIFICATION OF APPLICATION</h3>
+                            <p className="form-info">I certify that all information provided on this application is accurate. I understand that if I provide false information to Lenkeson Global Christian University, no employment will be offered. This is also cause for termination.</p>
+                            <p className="form-info">I authorize Lenkeson Global Christian University to contact educational institutions that I attended and former/current employers to release information regarding enrollment, graduation and job performance. Furthermore, I authorize Lenkeson Global Christian University to contact references listed on the job application to release information about me.</p>
+
+                            <h3 className="lrgTitle ctr" data-text="NON-DISCRIMINATION POLICY">NON-DISCRIMINATION POLICY</h3>
+                            <p className="form-info">Lenkeson Global Christian University is a Christ-centered institution of higher learning and is committed to provide cutting-edge academic education to men and women without discriminating against any individual on the basis of gender, race, color, religion, national origin, and intellectually and physically challenged individuals. However, the university reserves the right to refuse admission to persons or hire faculty or staff who do not support its values. LGCU is an equal opportunity employer.</p>                                                        
                     </div>
                 </div>;
                 break;

@@ -3266,6 +3266,9 @@ html {
 .info-slider .info-slider-container .slider-vertical .slider-card.img.c2:before {
   border-top: 50px solid #257728;
 }
+.info-slider .info-slider-container .slider-vertical .slider-card.img.c3:before {
+  border-top: 50px solid #504e99;
+}
 @media (max-width: 770px) {
   .info-slider .info-slider-container .slider-vertical .slider-card {
     width: initial;
@@ -3291,6 +3294,9 @@ html {
 }
 .info-slider .info-slider-container .slider-vertical.flip .img.c2:before {
   border-bottom: 50px solid #257728 !important;
+}
+.info-slider .info-slider-container .slider-vertical.flip .img.c3:before {
+  border-bottom: 50px solid #504e99 !important;
 }
 .info-slider .slider-ctrl {
   position: absolute;

@@ -34,7 +34,7 @@ class StudyAreaHeader extends Component{
                     
                     <div className="lrg-title">
                         <span>{(this.state.majorData ? this.state.majorData.title : "")}</span>
-                        {(this.state.majorData && this.state.majorData.degreeTitle) && <span className="subText">({this.state.majorData.degreeTitle})</span>}
+                        {(this.state.majorData && this.state.majorData.degreeTitle) && <span className="subText">{this.state.majorData.degreeTitle}</span>}
                     </div>  
                     <div className={(this.state.majorData.title ? "sub-title": "lrg-title")}>{"The School of " + this.state.data.title}</div>  
 
@@ -54,6 +54,7 @@ class StudyAreaHeader extends Component{
                             <div className="acCrumb-item optional-link">
                                 <span className="acCrumb-item">/</span>
                                 <span className="acCrumb-item acCrumb-active">{this.state.majorData.title}</span>
+                                {(this.state.majorData && this.state.majorData.degreeTitle) && <span className="acCrumb-item acCrumb-active">{this.state.majorData.degreeTitle}</span>}
                             </div>
                         }
                     </div>

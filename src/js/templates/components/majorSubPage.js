@@ -18,7 +18,7 @@ class MajorSub extends Component{
     componentDidMount(){
         this.loadMajorData(this.props.majorData);
         var dL = this.props.majorData.degreeLvl.charAt(0).toUpperCase() + this.props.majorData.degreeLvl.slice(1);
-        var mt = this.props.majorData.title.charAt(0).toUpperCase() + this.props.majorData.title.slice(1);
+        var mt = this.props.majorData.title.charAt(0).toUpperCase() + this.props.majorData.title.slice(1) + (this.props.majorData.degreeTitle ? " "+this.props.majorData.degreeTitle : "");
         
         this.setState({ fullTitle: dL+ " In " + mt});
     }
@@ -32,7 +32,7 @@ class MajorSub extends Component{
                     <section className="studyArea-section">                       
                         
                         <div className="section-container">
-                            <h2 className="lrgTitle ctr fullTitle" data-text={this.state.fullTitle}>{this.state.fullTitle}</h2>
+                            <h2 className="lrgTitle ctr fullTitle">{this.state.fullTitle}</h2>
                             <p>Our {this.state.majorData.title} degree is one of the many competitive {this.state.majorData.degreeLvl} degrees that we offer here at Lenkenson Global Christian University.  If you are interested in becoming a student please submit a <a href="/apply?type=student">Student Application</a> or for more information please contact our admissions staff directly via email <a href="mailto:admissions@lenkesongcu.org">admissions@lenkesongcu.org</a></p>
 
                             <h2 className="lrgTitle ctr" data-text="Curriculum">Curriculum</h2>
