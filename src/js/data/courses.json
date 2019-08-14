@@ -75,7 +75,7 @@
         "section": "ACCT",
         "id": 470,
         "title": "Field Experience",
-        "credit": 3
+        "credit": 6
     },
     "ACCT_505": {
         "section": "ACCT",
@@ -117,7 +117,7 @@
         "section": "ACCT",
         "id": 670,
         "title": "Field Experience",
-        "credit": 3
+        "credit": 6
     },
     "ANTH_110": {
         "section": "ANTH",
@@ -273,7 +273,7 @@
         "section": "BUSN",
         "id": 298,
         "title": "Field Experience",
-        "credit": 3
+        "credit": 6
     },
     "BUSN_303": {
         "section": "BUSN",
@@ -321,7 +321,7 @@
         "section": "BUSN",
         "id": 380,
         "title": "Field Experience",
-        "credit": 3
+        "credit": 6
     },
     "BUSN_470": {
         "section": "BUSN",
@@ -357,7 +357,7 @@
         "section": "BUSN",
         "id": 570,
         "title": "Field Experience",
-        "credit": 3
+        "credit": 6
     },
     "BUS_327": {
         "section": "BUS",
@@ -1893,7 +1893,7 @@
         "section": "FINA",
         "id": 470,
         "title": "Field Experience",
-        "credit": 3
+        "credit": 6
     },
     "FINA_600": {
         "section": "FINA",
@@ -1923,7 +1923,7 @@
         "section": "FINA",
         "id": 670,
         "title": "Field Experience ",
-        "credit": 3
+        "credit": 6
     },
     "GOV_110": {
         "section": "GOV",
@@ -2133,7 +2133,7 @@
         "section": "HRM",
         "id": 470,
         "title": "Field Experience",
-        "credit": 3
+        "credit": 6
     },
     "HRM_600": {
         "section": "HRM",
@@ -2163,7 +2163,7 @@
         "section": "HRM",
         "id": 670,
         "title": "Field Experience",
-        "credit": 3
+        "credit": 6
     },
     "INTB_341": {
         "section": "INTB",
@@ -2193,7 +2193,7 @@
         "section": "INTB",
         "id": 470,
         "title": "Field Experience",
-        "credit": 3
+        "credit": 6
     },
     "INTB_600": {
         "section": "INTB",
@@ -2223,7 +2223,7 @@
         "section": "INTB",
         "id": 670,
         "title": "Field Experience",
-        "credit": 3
+        "credit": 6
     },
     "LEAD_341": {
         "section": "LEAD",
@@ -2253,7 +2253,7 @@
         "section": "LEAD",
         "id": 470,
         "title": "Field Experience",
-        "credit": 3
+        "credit": 6
     },
     "LEAD_520": {
         "section": "LEAD",
@@ -2541,7 +2541,7 @@
         "section": "MKTG",
         "id": 470,
         "title": "Field Experience",
-        "credit": 3
+        "credit": 6
     },
     "MKTG_550": {
         "section": "MKTG",
@@ -2577,7 +2577,7 @@
         "section": "MKTG",
         "id": 670,
         "title": "Field Experience",
-        "credit": 3
+        "credit": 6
     },
     "MTH_118": {
         "section": "MTH",
@@ -2793,19 +2793,19 @@
         "section": "PSY",
         "id": 437,
         "title": "Field Experience",
-        "credit": 3
+        "credit": 6
     },
     "PSY_439": {
         "section": "PSY",
         "id": 439,
         "title": "Field Experience I",
-        "credit": 3
+        "credit": 6
     },
     "PSY_441": {
         "section": "PSY",
         "id": 441,
         "title": "Field Experience II",
-        "credit": 3
+        "credit": 6
     },
     "PTC_529": {
         "section": "PTC",

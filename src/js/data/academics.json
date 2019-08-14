@@ -155,7 +155,7 @@
                 ]}
             ],
             "masters":[
-                {"id":"MA-BA", "title":"Business Administration", "gradtotal":45, "courses":[
+                {"id":"MA-BA", "title":"Business Administration (MBA)", "gradtotal":45, "courses":[
                     {"subtitle":"Required Core Credits (27 hours)","courses":["MBA_510","MBA_511","MBA_520","MBA_530","MBA_534","MBA_541","MBA_550","MBA_560","MBA_580"]},
                     {"subtitle":"MBA Concentrations (18 hours)","courses":[]}
                 ], "concentrations":[
@@ -168,7 +168,7 @@
                 ]}                
             ],
             "doctorate":[
-                {"id":"PHD-BA", "title":"Business Administration", "degreeTitle":"(Ed.D.)","gradtotal":70, "courses":[
+                {"id":"PHD-BA", "title":"Business Administration", "degreeTitle":"(DBA)","gradtotal":70, "courses":[
                     {"subtitle":"Doctoral Foundation Courses (12 hours)","courses":["DBA_700","DBA_701","DBA_702"]},
                     {"subtitle":"Required Core Courses (24 hours)","courses":["DBA_703","DBA_708","DBA_710","DBA_718","DBA_720","DBA_721"]},
                     {"subtitle":"Comprehensive Examination and Dissertation Research","courses":["DBA_900","DBA_901","DBA_902","DBA_903","DBA_904"]}

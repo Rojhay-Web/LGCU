@@ -7,6 +7,8 @@ import sLawrenceImg from '../../assets/SJLawrence.png';
 import KStevensonImg from '../../assets/KStevenson.jpg';
 import DDurenImg from '../../assets/DDuren.jpg';
 import BernalImg from '../../assets/Bernal.jpg';
+import TWilsonImg from '../../assets/TWilson.jpg';
+import ASmokeImg from '../../assets/ASmoke.jpg';
 
 /* Header */
 class FacultyHeader extends Component{
@@ -96,13 +98,27 @@ class Faculty extends Component{
                                 </div>
 
                                 <div className="slider-vertical">
-                                    <div className="slider-card title c2">
+                                    <div className="slider-card title c2 bio-card">
                                         <h1 className="name">Dr. Leonel Bernal</h1>
                                         <div className="title">
                                             <p>Vice-President School of Theology and Biblical Studies, Institutional Advancement & Student Enrollment, International Recruitment</p>
                                             <p>Dean of the School of Theology and Biblical Studies</p>
                                         </div>
                                         <a href="tel:4074340002" className="phone"><i className="fas fa-phone"></i> <span>407.434.0002</span></a>
+
+                                        <div className="faculty-bio" id="bioAccordionBernal">
+                                            <a className="bio-btn w1" data-toggle="collapse" href="#bioBernal" aria-expanded="false" aria-controls="bioBernal">Read Bio</a>
+                                            <div id="bioBernal" className="bio-txt collapse" data-parent="#bioAccordionBernal">
+                                                <p>Pastor with 37 years of experience of increasing responsibility in congregational leadership.
+                                                    Committed to shepherding individuals to Christ, engaging the community in missionary work
+                                                    and community outreach. Expertise in spiritual counseling, education, and mentorship.
+                                                    Proven success in advancing church goals and increasing community engagement in
+                                                    congregation.</p>
+                                                <p>Professor adept in creative teaching strategies that fully engage students in the learning
+                                                    process. Deeply invested in achieving tenure through administrative service committee
+                                                    contributions and an accomplishment-oriented approach to teaching.</p>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div className="slider-card img c2">
                                         <img alt="Bernal img" src={BernalImg} />
@@ -156,22 +172,54 @@ class Faculty extends Component{
 
                 <section className="faculty-section alternate">
                     <div className="info-slider">
-                            <div className="info-slider-container" ref={this.slide2}>
+                        <div className="info-slider-container" ref={this.slide2}>
 
-                                <div className="slider-card title light">
-                                    <h1 className="name">Attorney Tiffany Wilson, Esq.</h1>
-                                    <div className="title">Board Member</div>
+                        
+                            <div className="slider-card title light bio-card">
+                                <h1 className="name">Attorney Tiffany Wilson, Esq.</h1>
+                                <div className="title">Board Member</div>
+
+                                <div className="faculty-bio" id="bioAccordionWilson">
+                                    <a className="bio-btn w1" data-toggle="collapse" href="#bioWilson" aria-expanded="false" aria-controls="bioWilson">Read Bio</a>
+                                    <div id="bioWilson" className="bio-txt collapse" data-parent="#bioAccordionWilson">
+                                        <p>Tiffany N. Wilson, Esq. is the owner and sole proprietors of Wilson Law Firm in Monroe NC. Wilson Law
+                                            Firm is a General Practice law office where Ms. Wilson focuses on Criminal, Juvenile, and Family Law.</p>
+                                        <p>Tiffany received her Juris Doctorate from North Carolina Central School of Law, Durham, NC, while at
+                                            NCCU school of law she was a member of their Trial Team. She graduated Cum Laude from Howard
+                                            University, Washington DC with a BA in Political Science/Criminal Justice. Ms. Wilson finished her
+                                            secondary education at Monroe High School, Monroe NC.</p>
+                                        <p>Tiffany Wilson is a member of the North Carolina State Bar, the Union County District Bar, and ABA
+                                            member. She currently serves as the Chair for the Indigent Committee in Union County. She’s currently a
+                                            member of the Union County Chamber of Commerce as well as member of the Women’s Business
+                                            subgroup. Ms. Wilson holds memberships in the following organizations: Delta Sigma Theta Sorority
+                                            Inc., Pi Sigma Alpha, National Council of Negro Women, and the NAACP.</p>
+                                    </div>
                                 </div>
-                                <div className="slider-card img light">
-                                    <img alt="default img" src={defaultProfile} />
-                                </div>                               
-                                
-                                <div className="slider-close"/>
                             </div>
+                            <div className="slider-card img light">
+                                <img alt="default img" src={TWilsonImg} />
+                            </div>                               
+                        
+                            <div className="slider-card title c3 bio-card">
+                                <h1 className="name">Dr. Andrew B. Smoke</h1>
+                                <div className="title">Board Member</div>
 
-                            <div className={"slider-ctrl prev" + (this.checkScrollLoc(this.slide2, "prev") ? "" : " noshow")} onClick={()=> this.controlSlider(this.slide2, "prev")}><i className="fas fa-caret-left"></i></div>
-                            <div className={"slider-ctrl next" + (this.checkScrollLoc(this.slide2, "next") ? "" : " noshow")} onClick={()=> this.controlSlider(this.slide2, "next")}><i className="fas fa-caret-right"></i></div>
-                        </div>
+                                <div className="faculty-bio" id="bioAccordionSmoke">
+                                    <a className="bio-btn w1" data-toggle="collapse" href="#bioSmoke" aria-expanded="false" aria-controls="bioSmoke">Read Bio</a>
+                                    <div id="bioSmoke" className="bio-txt collapse" data-parent="#bioAccordionSmoke">
+                                        <p></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="slider-card img c3">
+                                <img alt="Default img" src={ASmokeImg} />
+                            </div>
+                        <div className="slider-close"/>
+                    </div>
+
+                    <div className={"slider-ctrl prev" + (this.checkScrollLoc(this.slide2, "prev") ? "" : " noshow")} onClick={()=> this.controlSlider(this.slide2, "prev")}><i className="fas fa-caret-left"></i></div>
+                    <div className={"slider-ctrl next" + (this.checkScrollLoc(this.slide2, "next") ? "" : " noshow")} onClick={()=> this.controlSlider(this.slide2, "next")}><i className="fas fa-caret-right"></i></div>
+                </div>
                 </section>
             </div>
         );
