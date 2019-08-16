@@ -244,6 +244,7 @@ class Apply extends Component{
                                 <div className="btn-split-txt">Or</div>
                                 <a href="/apply?type=faculty" className="lBtn clear t1"><span>Faculty Application</span><i className="btn-icon fas fa-chalkboard-teacher"></i></a>
                             </div>
+                            <a href="#" className="appFeeSub">Application Fee Submissions</a>
                             <div className="img-container"><img src={appImg} /></div>
                         </div>
                     </div> ;

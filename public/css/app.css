@@ -1406,6 +1406,14 @@
   font-family: 'Reem Kufi', sans-serif;
   font-weight: 100;
 }
+.applyPage .apply-section .application-container .appFeeSub {
+  color: #ffffff;
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+  text-align: center;
+  text-decoration: underline;
+  display: block;
+}
 .applyPage .apply-section .application-container .img-container {
   width: 70%;
   overflow: hidden;
@@ -1493,6 +1501,14 @@
   border: 0;
   padding: 7px;
 }
+.studentAppForm .form-container .form-section-container .form-element input.disabled,
+.studentAppForm .form-container .form-section-container .form-element textarea.disabled,
+.studentAppForm .form-container .form-section-container .form-element select.disabled {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #ffffff;
+  text-transform: capitalize;
+}
 .studentAppForm .form-container .form-section-container .form-element textarea {
   height: 150px;
   resize: none;
@@ -1559,16 +1575,14 @@
 .studentAppForm .form-container .form-section-container .degree-container .full-list-container .list-container .filterBtn {
   display: inline-block;
   padding: 4px 10px;
-  border: 1px solid #343a40;
-  color: #343a40;
-  opacity: 0.4;
+  color: #ffffff;
   font-size: 1.3rem;
   margin: 0px 7px 3px;
   text-transform: capitalize;
   transition: 0.5s all ease-in-out;
   border-radius: 5px;
   cursor: pointer;
-  background: #ffffff;
+  background: rgba(255, 255, 255, 0.3);
   /*&+.filterBtn { margin-left: 15px; }*/
 }
 .studentAppForm .form-container .form-section-container .degree-container .full-list-container .list-container .filterBtn span {
@@ -1724,6 +1738,17 @@
 }
 .studentAppForm .form-container .form-section-container .degree-container .results-list .results-container .result-item:hover.t5 {
   background: rgba(56, 67, 120, 0.3) !important;
+}
+.studentAppForm .form-container .form-section-container.submitted p,
+.studentAppForm .form-container .form-section-container.submitted ul {
+  text-align: left;
+  font-size: 1.5rem;
+}
+.studentAppForm .form-container .form-section-container.submitted .appId {
+  padding: 0px 5px;
+  border-radius: 5px;
+  background: #ffffff;
+  color: #257728;
 }
 .studentAppForm .form-btn-container {
   display: flex;
