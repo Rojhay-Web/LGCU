@@ -10,6 +10,7 @@ import appImg from '../../assets/site/mini/img14.jpg';
 
 /* Components */
 import FormCpt from './components/formCpt';
+import StudentApp from './components/studentApp';
 
 /* Header */
 class ApplyHeader extends Component{
@@ -211,18 +212,10 @@ class Apply extends Component{
         switch(this.state.params){
             case "student":
                 return <div className="application-container">
-                    <h2 className="lrgTitle ctr" data-text="Student Application">Student Application</h2>
-                    <div className="section-container">
-                    <FormCpt form={this.state.studentApplication} />
-                            <p className="form-info">Please submit via email at admin@lenkesongcu.org copies of unofficial transcripts, Curriculum Vitae or resume. If offered admissions, official transcripts will be required. Official State issued government identifications will be required if admission is offered. All required documents must be submitted to the Admissions Office before registering for classes. For more information regarding admissions requirements, please log into the University Website www.lenkesongcu.org and click on admissions. Please read and sign the Certification of Application and Non-Discrimination Policy below.</p>
-                            
-                            <h3 className="lrgTitle ctr" data-text="CERTIFICATION OF APPLICATION">CERTIFICATION OF APPLICATION</h3>
-                            <p className="form-info">I certify that all information provided on this application is accurate. I understand that if I provide false information to Lenkeson Global Christian University, no employment will be offered. This is also cause for termination.</p>
-                            <p className="form-info">I authorize Lenkeson Global Christian University to contact educational institutions that I attended and former/current employers to release information regarding enrollment, graduation and job performance. Furthermore, I authorize Lenkeson Global Christian University to contact references listed on the job application to release information about me.</p>
-
-                            <h3 className="lrgTitle ctr" data-text="NON-DISCRIMINATION POLICY">NON-DISCRIMINATION POLICY</h3>
-                            <p className="form-info">Lenkeson Global Christian University is a Christ-centered institution of higher learning and is committed to provide cutting-edge academic education to men and women without discriminating against any individual on the basis of gender, race, color, religion, national origin, and intellectually and physically challenged individuals. However, the university reserves the right to refuse admission to persons or hire faculty or staff who do not support its values. LGCU is an equal opportunity employer.</p>                                                        
-                    </div>
+                        <h2 className="lrgTitle ctr" data-text="Student Application">Student Application</h2>
+                        <div className="section-container">
+                            <StudentApp />
+                        </div>
                 </div>;
                 break;
             case "faculty":
