@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 /* Data */
 import academicData from '../../data/academics.json';
@@ -17,6 +18,7 @@ class StudentApp extends Component{
             applicationId:null,
             majorResults:[],
             degreeList:[],
+            sendAddress:"",
             form: {
                 firstName:{"title":"First Name","required":true, "value":""},
                 middleName:{"title":"Middle Name","required":false, "value":""},
@@ -256,7 +258,26 @@ class StudentApp extends Component{
             this.validateSection("all",function(ret){
                 if(ret){
                     // Send Email
-                    self.setState({ selectedSection:"submitted", applicationId:"demo-08062910"});
+                    var postData = { 
+                        email: self.state.sendAddress, 
+                        subject:"Student Application Form", 
+                        title: "Student Application", 
+                        formData: self.state.form
+                    
+                    };
+
+                    axios.post(rootPath + "/api/sendAppEmail", postData, {'Content-Type': 'application/json'})
+                    .then(function(response) {
+                        if(response.errorMessage == null && response.data.results.status === "Email Sent"){
+                            self.setState({ selectedSection:"submitted", applicationId: response.data.results.appId});                         
+                        }
+                        else {
+                            alert("Error Submitting Form");
+                            console.log("[Error] Submitting Form: ", response.data.errorMessage);
+                        }
+                    });  
+
+                   
                 }
             }); 
         }
