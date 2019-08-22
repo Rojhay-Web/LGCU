@@ -235,6 +235,7 @@ class StudentApp extends Component{
                     reqErrors.push(self.state.form[field].title);
                 }
             });
+            
             if(reqErrors.length > 0){
                 alert("Please fill in the following required fields: "+ reqErrors.join(', '));
             }
