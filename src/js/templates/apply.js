@@ -11,6 +11,7 @@ import appImg from '../../assets/site/mini/img14.jpg';
 /* Components */
 import FormCpt from './components/formCpt';
 import StudentApp from './components/studentApp';
+import CardPayment from './components/cardPaymentModal';
 
 /* Header */
 class ApplyHeader extends Component{
@@ -92,57 +93,14 @@ class Apply extends Component{
                     ]}
                 ]
             },
-            studentApplication:{
-                "title":"student application", "sendAddress":"web.lgcu@gmail.com",
-                "subject":"Student Application", "additionalData":{}, "type":"section",
-                "sendMessage":"Thank you we have received your application we will be review your application and be in contact with you.",
-                "elements":[
-                    {"title":"Applicant Information", "elements":[
-                        {"type":"input","sz":3, "required":true, "name":"firstName", "placeholder":"First Name", "value":"", "valueList":[]},
-                        {"type":"input","sz":3, "required":false, "name":"middleName", "placeholder":"Middle Name", "value":"", "valueList":[]},
-                        {"type":"input","sz":4, "required":true, "name":"lastName", "placeholder":"Last Name", "value":"", "valueList":[]},
-                        {"type":"input","sz":10, "required":true, "name":"email", "placeholder":"Email", "value":"", "valueList":[]},
-                        {"type":"input","sz":10, "required":true, "name":"address", "placeholder":"Home Address", "value":"", "valueList":[]},
-                        {"type":"input","sz":5, "required":true, "name":"city", "placeholder":"City", "value":"", "valueList":[]},
-                        {"type":"input","sz":2, "required":true, "name":"state", "placeholder":"State", "value":"", "valueList":[]},
-                        {"type":"input","sz":3, "required":true, "name":"postal", "placeholder":"Postal Code", "value":"", "valueList":[]},
-                        {"type":"input","sz":3, "required":false, "name":"dayphone", "placeholder":"Daytime Phone", "value":"", "valueList":[]},
-                        {"type":"input","sz":3, "required":false, "name":"eveningphone", "placeholder":"Evening Phone", "value":"", "valueList":[]},
-                        {"type":"input","sz":4, "required":true, "name":"mobilephone", "placeholder":"Mobile Phone", "value":"", "valueList":[]},
-                        
-                        {"type":"input","sz":5, "required":true, "name":"ssn", "placeholder":"Social Security Number", "value":"", "valueList":[]},
-                        {"type":"input","sz":5, "required":true, "name":"driverlicense", "placeholder":"Drivers License", "value":"", "valueList":[]},                       
-                    ]},
-                    {"title":"Emergency Contact Information", "elements":[
-                        {"type":"input","sz":5, "required":true, "name":"emergencyname", "placeholder":"Name", "value":"", "valueList":[]},
-                        {"type":"input","sz":3, "required":false, "name":"emergencyrelationship", "placeholder":"Relationship", "value":"", "valueList":[]},
-                        {"type":"input","sz":2, "required":true, "name":"emergencyphone", "placeholder":"Phone Number", "value":"", "valueList":[]},
-                        {"type":"input","sz":10, "required":false, "name":"emergencyaddress", "placeholder":"Address", "value":"", "valueList":[]},
-                        {"type":"input","sz":5, "required":false, "name":"emergencycity", "placeholder":"City", "value":"", "valueList":[]},
-                        {"type":"input","sz":2, "required":false, "name":"emergencystate", "placeholder":"State", "value":"", "valueList":[]},
-                        {"type":"input","sz":3, "required":false, "name":"emergencypostal", "placeholder":"Postal Code", "value":"", "valueList":[]}
-                    ]},
-                    {"title":"Degree Information", "elements":[
-                        {"type":"select_group","sz":10, "required":true, "name":"degreeType", "placeholder":"What Degrees Are You Interested In?", "value":"", "valueList":[]},
-
-                        {"type":"checkbox","sz":3, "required":false, "name":"veteran", "placeholder":"Are You A US Veteran", "value":"", "valueList":[]},
-                        {"type":"input","sz":7, "required":false, "name":"veteranbranch", "placeholder":"Branch", "value":"", "valueList":[]},
-                        {"type":"textarea","sz":10, "required":false, "name":"veteranskill", "placeholder":"Specific Skills Acquired", "value":"", "valueList":[]}
-                    ]},
-                    {"title":"Previous Educational Experience", "elements":[
-                        {"type":"input","sz":10, "required":true, "name":"highestdegree", "placeholder":"Highest Degree Earned", "value":"", "valueList":[]},                        
-                        {"type":"textarea","sz":10, "required":false, "name":"otherdegrees", "placeholder":"Other Degrees Earned", "value":"", "valueList":[]}
-                    ]},
-                    {"title":"Employment History", "directions":"List employment history for the past 5 years without any gap. Include the following information for each: ", "directionList":["Emplorer Name","Employer Address","Total Years Of Employment","Name of Supervisor","Emplorer Phone Number","Why did you leave?"], "elements":[
-                        {"type":"textarea","sz":10, "required":true, "name":"employmenthistory", "placeholder":"Employment History", "value":"", "valueList":[]}
-                    ]}
-                ]
-            }
+            modalStatus: false
         }
 
         this.getAppType = this.getAppType.bind(this);
         this.setApplication = this.setApplication.bind(this);
         this.loadMajorData = this.loadMajorData.bind(this);
+        this.modalShow = this.modalShow.bind(this);
+        this.modalHide = this.modalHide.bind(this);
     }
 
     componentDidMount(){ 
@@ -156,8 +114,18 @@ class Apply extends Component{
                 <section className="apply-section" id="appbody">
                     {this.setApplication()}
                 </section>
+
+                <CardPayment title="Student Application Fee" show={this.state.modalStatus} handleClose={this.modalHide} />
             </div>
         );
+    }
+
+    modalShow(){
+        this.setState({ modalStatus: true });
+    }
+
+    modalHide(){
+        this.setState({ modalStatus: false });
     }
 
     getAppType(){
@@ -244,6 +212,7 @@ class Apply extends Component{
                                 <div className="btn-split-txt">Or</div>
                                 <a href="/apply?type=faculty" className="lBtn clear t1"><span>Faculty Application</span><i className="btn-icon fas fa-chalkboard-teacher"></i></a>
                             </div>
+                            <a className="appFeeSub" onClick={this.modalShow}>Application Fee Submissions</a>
                             <div className="img-container"><img src={appImg} /></div>
                         </div>
                     </div> ;

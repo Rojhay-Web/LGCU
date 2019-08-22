@@ -14,18 +14,19 @@ class StudentApp extends Component{
                 "DegreeInfo":{status:false, fields:["degreeType","veteran","veteranbranch","veteranskill"]},
                 "EduEmpHistory":{status:false, fields:["highestdegree","otherdegrees","employmenthistory"]}
             },
+            applicationId:null,
             majorResults:[],
             degreeList:[],
             form: {
                 firstName:{"title":"First Name","required":true, "value":""},
                 middleName:{"title":"Middle Name","required":false, "value":""},
                 lastName:{"title":"Last Name","required":true, "value":""},
-                email:{"title":"Email","required":true, "value":""},
+                email:{"title":"Email","required":true, "validation":"email", "value":""},
                 address:{"title":"Address","required":true, "value":""},
                 city:{"title":"City","required":true, "value":""},
                 state:{"title":"State","required":true, "value":""},
                 postal:{"title":"Postal Code","required":true, "value":""},
-                dayphone:{"title":"Daytime Phone","required":false, "value":""},
+                dayphone:{"title":"Daytime Phone","required":true, "value":""},
                 eveningphone:{"title":"Evening Phone","required":false, "value":""},
                 mobilephone:{"title":"Mobile Phone","required":false, "value":""},
                 ssn:{"title":"Social Security Number","required":true, "value":""},
@@ -40,7 +41,7 @@ class StudentApp extends Component{
                 emergencypostal:{"title":"Emergency Contact Postal Code","required":false, "value":""},
 
                 degreeType:{"title":"Degree Type","required":true, "value":""},
-                veteran:{"title":"Are You A US Veteran","required":true, "value":""},
+                veteran:{"title":"Are You A US Veteran","required":true, "toggle":true, "value":false},
                 veteranbranch:{"title":"Branch","required":false, "value":""},
                 veteranskill:{"title":"Specific Skills Acquired","required":false, "value":""},
 
@@ -53,11 +54,17 @@ class StudentApp extends Component{
         this.buildFilterList = this.buildFilterList.bind(this);
         this.onElementChange = this.onElementChange.bind(this);
         this.changeSelectedSection = this.changeSelectedSection.bind(this);
+        this.isLastSection = this.isLastSection.bind(this);
         this.nextSection = this.nextSection.bind(this);
+        this.submitForm = this.submitForm.bind(this);
+        this.clearForm = this.clearForm.bind(this);
     }
 
     componentDidMount(){
-        this.buildFilterList();
+        var self = this;
+        this.setState({selectedSection:"ApplicationInfo"},() =>{
+            self.buildFilterList();
+        });        
     }
 
     render(){       
@@ -84,7 +91,7 @@ class StudentApp extends Component{
                             <div className="form-element sz-5"><span>City *</span><input type="text" name="city" className="" placeholder="City" value={this.state.form.city.value} onChange={(e) => this.onElementChange(e)}/></div>
                             <div className="form-element sz-2"><span>State *</span><input type="text" name="state" className="" placeholder="State" value={this.state.form.state.value} onChange={(e) => this.onElementChange(e)}/></div>
                             <div className="form-element sz-3"><span>Postal Code *</span><input type="text" name="postal" className="" placeholder="Postal Code" value={this.state.form.postal.value} onChange={(e) => this.onElementChange(e)}/></div>
-                            <div className="form-element sz-3"><span>Daytime Phone</span><input type="text" name="dayphone" className="" placeholder="Daytime Phone" value={this.state.form.dayphone.value} onChange={(e) => this.onElementChange(e)}/></div>
+                            <div className="form-element sz-3"><span>Daytime Phone *</span><input type="text" name="dayphone" className="" placeholder="Daytime Phone" value={this.state.form.dayphone.value} onChange={(e) => this.onElementChange(e)}/></div>
                             <div className="form-element sz-3"><span>Evening Phone</span><input type="text" name="eveningphone" className="" placeholder="Evening Phone" value={this.state.form.eveningphone.value} onChange={(e) => this.onElementChange(e)}/></div>
                             <div className="form-element sz-4"><span>Mobile Phone</span><input type="text" name="mobilephone" className="" placeholder="Mobile Phone" value={this.state.form.mobilephone.value} onChange={(e) => this.onElementChange(e)}/></div>
                             <div className="form-element sz-5"><span>Social Security Number *</span><input type="text" name="ssn" className="" placeholder="Social Security Number" value={this.state.form.ssn.value} onChange={(e) => this.onElementChange(e)}/></div>
@@ -109,8 +116,8 @@ class StudentApp extends Component{
                             <h2>Degree Information</h2>
                             {/* Degree Info */}
                             <div className="degree-container">
-                                <div className="full-list-container">
-                                    <div className="list-title">What Degree Are You Interested In?</div>
+                                <div className="full-list-container">  
+                                    <div className="form-element sz-10"><span>Degree Choice *</span></div>                                                                      
                                     <div className="list-container">
                                             {this.state.degreeList.map((item,i) => (
                                                 <div key={i} className={"filterBtn degreeItem " + (item.status ? " active":"")} onClick={()=> this.toggleFilter("degreeList",i)}>
@@ -119,6 +126,7 @@ class StudentApp extends Component{
                                                 </div>
                                             ))}
                                     </div>
+                                    <div className="form-element sz-10"><input type="text" name="degreeType" className="disabled" placeholder="" value={this.state.form.degreeType.value} disabled/></div>
                                 </div>
                                 
                                 {this.state.majorResults.length > 0 &&
@@ -126,7 +134,7 @@ class StudentApp extends Component{
                                         <div className="results-list">                          
                                             <div className="results-container">
                                                 {filteredResults.map((item,i) =>(
-                                                    <div className={"result-item " + item.theme } key={i}>
+                                                    <div className={"result-item " + item.theme } key={i} onClick={(e) => this.majorSelectChange("degreeType", item)}>
                                                         <div className={"result-icon " + item.theme} />
                                                         <div className="item-info-container">
                                                             <div className="degree-title"><span>{item.degree}</span> <span>{(item.degreeTitle ? item.degreeTitle : "")}</span></div>
@@ -145,7 +153,7 @@ class StudentApp extends Component{
                                 }
                             </div>
 
-                            <div className="form-element sz-3"><span>Veteran Status</span><div className="form-checkbox" placeholder="Are You A US Veteran" value={this.state.form.veteran.value}><input type="checkbox" name="veteran" onChange={(e) => this.onElementChange(e)}/><label>Are You A US Veteran</label></div></div>
+                            <div className="form-element sz-3"><span>Veteran Status *</span><div className="form-checkbox" placeholder="I am a US veteran" value={this.state.form.veteran.value}><input type="checkbox" name="veteran" onChange={(e) => this.onElementChange(e)}/><label>Are You A US Veteran</label></div></div>
                             <div className="form-element sz-7"><span>Branch</span><input type="text" name="veteranbranch" className="" placeholder="Branch" value={this.state.form.veteranbranch.value} onChange={(e) => this.onElementChange(e)}/></div>
                             <div className="form-element sz-10"><span>Specific Skills Acquired</span><textarea type="text" name="veteranskill" className="" placeholder="Specific Skills Acquired" value={this.state.form.veteranskill.value} onChange={(e) => this.onElementChange(e)}/></div>
                         </div> 
@@ -153,10 +161,10 @@ class StudentApp extends Component{
                     {this.state.selectedSection == "EduEmpHistory" && 
                         <div className="form-section-container">
                             <h2>Previous Educational/Employment Experience</h2>
-                            <div className="form-element sz-10"><span>Highest Degree Earned</span><input type="text" name="highestdegree" className="" placeholder="Highest Degree Earned" value={this.state.form.highestdegree.value} onChange={(e) => this.onElementChange(e)}/></div>
+                            <div className="form-element sz-10"><span>Highest Degree Earned *</span><input type="text" name="highestdegree" className="" placeholder="Highest Degree Earned" value={this.state.form.highestdegree.value} onChange={(e) => this.onElementChange(e)}/></div>
                             <div className="form-element sz-10"><span>Other Degrees Earned</span><textarea type="text" name="otherdegrees" className="" placeholder="Other Degrees Earned" value={this.state.form.otherdegrees.value} onChange={(e) => this.onElementChange(e)}/></div>
                             <div className="form-element sz-10">
-                                <span>List employment history for the past 5 years without any gap. Include the following information for each: </span>
+                                <span>List employment history for the past 5 years without any gap. Include the following information for each *: </span>
                                 <ul>
                                     <li>Emplorer Name</li>
                                     <li>Employer Address</li>
@@ -167,25 +175,65 @@ class StudentApp extends Component{
                                 </ul>
                                 <textarea type="text" name="employmenthistory" className="" placeholder="Employment History" value={this.state.form.employmenthistory.value} onChange={(e) => this.onElementChange(e)}/>
                             </div>
+                            
+                            <p className="form-info">Please submit via email at admin@lenkesongcu.org copies of unofficial transcripts, Curriculum Vitae or resume. If offered admissions, official transcripts will be required. Official State issued government identifications will be required if admission is offered. All required documents must be submitted to the Admissions Office before registering for classes. For more information regarding admissions requirements, please log into the University Website www.lenkesongcu.org and click on admissions. Please read and sign the Certification of Application and Non-Discrimination Policy below.</p>       
+                            <h3 className="lrgTitle ctr" data-text="CERTIFICATION OF APPLICATION">CERTIFICATION OF APPLICATION</h3>
+                            <p className="form-info">I certify that all information provided on this application is accurate. I understand that if I provide false information to Lenkeson Global Christian University, no employment will be offered. This is also cause for termination.</p>
+                            <p className="form-info">I authorize Lenkeson Global Christian University to contact educational institutions that I attended and former/current employers to release information regarding enrollment, graduation and job performance. Furthermore, I authorize Lenkeson Global Christian University to contact references listed on the job application to release information about me.</p>
+                            <h3 className="lrgTitle ctr" data-text="NON-DISCRIMINATION POLICY">NON-DISCRIMINATION POLICY</h3>
+                            <p className="form-info">Lenkeson Global Christian University is a Christ-centered institution of higher learning and is committed to provide cutting-edge academic education to men and women without discriminating against any individual on the basis of gender, race, color, religion, national origin, and intellectually and physically challenged individuals. However, the university reserves the right to refuse admission to persons or hire faculty or staff who do not support its values. LGCU is an equal opportunity employer.</p>                                                                                
+                        </div> 
+                    }
+
+                    {this.state.selectedSection == "submitted" && 
+                        <div className="form-section-container submitted">
+                            <h2>You Are Almost Finished</h2>
+                            <p>Your Lenkeson Global Christian University student application has been submitted, to complete your application you must send in your $50.00 application fee payment.</p>
+                            <p>Please click the following link to submit your application fee right now: <a href="#">Application Fee</a></p>
+                            <p>If you are not prepared to submit you application fee right now please use the following steps:</p>
+                            <ul>
+                                <li>Navigate to the lenkesongcu.org apply page</li>
+                                <li>Click the link for "Application Fee Submissions"</li>
+                                <li>Complete the payment using your application id: <span className="appId">{this.state.applicationId}</span> This number will also be emailed to you with your application confirmation.</li>
+                            </ul>
                         </div> 
                     }
                 </div>
 
                 <div className="form-btn-container">
-                    <div className="lBtn c2" onClick={this.nextSection}><span>Next Section</span><i className="btn-icon far fa-arrow-alt-circle-right"></i></div>
-                </div>
-                {/* 
-                    <p className="form-info">Please submit via email at admin@lenkesongcu.org copies of unofficial transcripts, Curriculum Vitae or resume. If offered admissions, official transcripts will be required. Official State issued government identifications will be required if admission is offered. All required documents must be submitted to the Admissions Office before registering for classes. For more information regarding admissions requirements, please log into the University Website www.lenkesongcu.org and click on admissions. Please read and sign the Certification of Application and Non-Discrimination Policy below.</p>       
-                    <h3 className="lrgTitle ctr" data-text="CERTIFICATION OF APPLICATION">CERTIFICATION OF APPLICATION</h3>
-                    <p className="form-info">I certify that all information provided on this application is accurate. I understand that if I provide false information to Lenkeson Global Christian University, no employment will be offered. This is also cause for termination.</p>
-                    <p className="form-info">I authorize Lenkeson Global Christian University to contact educational institutions that I attended and former/current employers to release information regarding enrollment, graduation and job performance. Furthermore, I authorize Lenkeson Global Christian University to contact references listed on the job application to release information about me.</p>
-                    <h3 className="lrgTitle ctr" data-text="NON-DISCRIMINATION POLICY">NON-DISCRIMINATION POLICY</h3>
-                    <p className="form-info">Lenkeson Global Christian University is a Christ-centered institution of higher learning and is committed to provide cutting-edge academic education to men and women without discriminating against any individual on the basis of gender, race, color, religion, national origin, and intellectually and physically challenged individuals. However, the university reserves the right to refuse admission to persons or hire faculty or staff who do not support its values. LGCU is an equal opportunity employer.</p>                                                        
-                */}
+                    {this.state.selectedSection !== "submitted" && (this.isLastSection()
+                    ? <div className="lBtn c2" onClick={this.nextSection}><span>Next Section</span><i className="btn-icon far fa-arrow-alt-circle-right"></i></div>
+                    : <div className="lBtn c1" onClick={this.submitForm}><span>Submit Form</span><i className="btn-icon fas fa-paper-plane"></i></div>
+                    )}
+                </div>                
             </div>
         );
     }
 
+    majorSelectChange(name, item) {
+        try {           
+            var degreeTitle =  item.degree +(item.degreeTitle ? item.degreeTitle:"") +": "+(item.subtitle ? item.subtitle +" - ":"") + item.title;
+            this.onElementChange({ target:{name:name, type:"input", value: degreeTitle}});
+        }
+        catch(ex){
+            console.log("Error with Major select change: ",ex);
+        }
+    }
+
+    isLastSection(){
+        var ret = false;
+        var self = this;
+        try {            
+            var tmpSections = Object.keys(this.state.sectionsTypes);
+            var curLoc = tmpSections.indexOf(this.state.selectedSection);
+
+            ret = curLoc < tmpSections.length - 1;
+        }
+        catch(ex){
+            console.log("Error checking if last section is active: ",ex);
+        }
+        return ret;
+    }
     onElementChange(event){
         var self = this;
         try {
@@ -199,6 +247,45 @@ class StudentApp extends Component{
         }
         catch(ex){
             console.log("Error changeing element: ",ex);
+        }
+    }
+    submitForm() {
+        var self = this;
+
+        try {
+            this.validateSection("all",function(ret){
+                if(ret){
+                    // Send Email
+                    self.setState({ selectedSection:"submitted", applicationId:"demo-08062910"});
+                }
+            }); 
+        }
+        catch(ex){
+            console.log("Error submitting form: ", ex);
+        }
+    }
+
+    clearForm(){
+        var self = this;
+        try {
+            var tmpForm = self.state.form;
+            var formLbls = Object.keys(self.state.form);
+            // Clear Fields
+            formLbls.forEach(function(item){
+                formLbls[item].value = (formLbls[item].toggle ?  false : "");
+            });
+            // Reset Pages 
+            var tmpSectionTypes = self.state.sectionsTypes;
+            var tmpTypes = Object.keys(self.state.sectionsTypes);
+
+            tmpTypes.forEach(function(item){
+                tmpSectionTypes[item].status = false;
+            });
+            // Set Start Location
+            this.setState({form: tmpForm, sectionsTypes:tmpSectionTypes, selectedSection:"ApplicationInfo"});
+        }
+        catch(ex){
+            console.log("Error clearing form: ", ex);
         }
     }
 
@@ -226,21 +313,41 @@ class StudentApp extends Component{
         var self = this;
         var ret = false;
         var reqErrors = [];
+        var valErrors = [];
         try {
-            // check required
-            var sectionFields = this.state.sectionsTypes[section].fields;
+            
+            var sectionFields = (section == "all" ? Object.keys(self.state.form) : this.state.sectionsTypes[section].fields);
 
             sectionFields.forEach(function(field){
-                if(self.state.form[field].required && self.state.form[field].value == ""){
+                // check required
+                if(self.state.form[field].required && !self.state.form[field].toggle && self.state.form[field].value == ""){
                     reqErrors.push(self.state.form[field].title);
+                }
+
+                // check special validations
+                if(self.state.form[field].validation){
+                    var strVal = self.state.form[field].value;
+                    var valid = false;
+                    switch(self.state.form[field].validation){
+                        case "email":
+                            var srtTst = strVal.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/i);
+                            if(!srtTst || srtTst.length == 0){
+                                valErrors.push(self.state.form[field].title);
+                            }
+                            break;
+                        default:
+                            break;
+                    }
                 }
             });
             
             if(reqErrors.length > 0){
                 alert("Please fill in the following required fields: "+ reqErrors.join(', '));
             }
-            else {
-                // check special validations
+            else if(valErrors.length > 0){
+                alert("Please update the followign fields with valid information: "+ valErrors.join(', '));
+            }
+            else {                
                 ret = true;
             }            
         }
@@ -250,7 +357,7 @@ class StudentApp extends Component{
 
         // Check Section Status
         var tmpSectionType = this.state.sectionsTypes;
-        tmpSectionType[section].status = ret;
+        if(section !== "all"){ tmpSectionType[section].status = ret; }
 
         self.setState({ sectionsTypes: tmpSectionType }, () => {
             callback(ret);
