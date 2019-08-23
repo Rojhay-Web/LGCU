@@ -4,6 +4,10 @@ import axios from 'axios';
 /* Data */
 import academicData from '../../data/academics.json';
 
+
+var rootPath = "";
+//var rootPath = "http://localhost:1111";
+
 class StudentApp extends Component{
     constructor(props) {
         super(props);
