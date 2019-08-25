@@ -3288,6 +3288,131 @@ html {
   color: #ffffff;
 }
 /* Modal */
+.lgcuModal {
+  min-width: 75%;
+}
+.lgcuModal .modal-body {
+  padding: 0;
+}
+.lgcuModal .card-payment-container {
+  min-height: 200px;
+  display: flex;
+  flex-direction: row;
+}
+.lgcuModal .card-payment-container .details-container {
+  padding: 7px 14px;
+}
+.lgcuModal .card-payment-container .details-container.card-details {
+  flex: 1;
+}
+.lgcuModal .card-payment-container .details-container.card-details .card-form {
+  display: flex;
+  flex-direction: row;
+}
+.lgcuModal .card-payment-container .details-container.card-details .card-form .form-container {
+  margin: auto 0;
+  padding: 0px 5px;
+}
+.lgcuModal .card-payment-container .details-container.card-details .card-form .form-container.fill {
+  flex: 1;
+}
+.lgcuModal .card-payment-container .details-container.card-details .card-form .form-container .card-display {
+  border: 1px solid #000000;
+  border-radius: 5px;
+  padding: 15px;
+  background: rgba(21, 18, 128, 0.4) !important;
+  width: 300px;
+  height: 170px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.lgcuModal .card-payment-container .details-container.card-details .card-form .form-container .card-display .card-number {
+  font-size: 28px;
+  line-height: 28px;
+  font-weight: bold;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.lgcuModal .card-payment-container .details-container.card-details .card-form .form-container .card-display .card-exp {
+  text-align: center;
+  line-height: 12px;
+}
+.lgcuModal .card-payment-container .details-container.card-details .card-form .form-container .card-display .card-exp .title {
+  font-weight: bold;
+  margin-right: 10px;
+}
+.lgcuModal .card-payment-container .details-container.card-details .card-form .form-container .card-display .card-name {
+  font-size: 18px;
+  line-height: 18px;
+}
+.lgcuModal .card-payment-container .details-container.card-details .card-form .form-container .form-section-container {
+  text-align: center;
+}
+.lgcuModal .card-payment-container .details-container.card-details .card-form .form-container .form-section-container .form-element {
+  padding: 7px;
+  display: block;
+  font-size: 1.2rem;
+  margin-bottom: 2px;
+  display: inline-flex;
+  flex-direction: column;
+  text-align: left;
+}
+.lgcuModal .card-payment-container .details-container.card-details .card-form .form-container .form-section-container .form-element input,
+.lgcuModal .card-payment-container .details-container.card-details .card-form .form-container .form-section-container .form-element textarea,
+.lgcuModal .card-payment-container .details-container.card-details .card-form .form-container .form-section-container .form-element select {
+  width: 100%;
+  border-radius: 4px;
+  border: 1px solid #000000;
+  padding: 7px;
+}
+.lgcuModal .card-payment-container .details-container.card-details .card-form .form-container .form-section-container .form-element input.disabled,
+.lgcuModal .card-payment-container .details-container.card-details .card-form .form-container .form-section-container .form-element textarea.disabled,
+.lgcuModal .card-payment-container .details-container.card-details .card-form .form-container .form-section-container .form-element select.disabled {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #ffffff;
+  text-transform: capitalize;
+}
+.lgcuModal .card-payment-container .details-container.card-details .card-form .form-container .form-section-container .form-element .empty {
+  border: 2px solid rgba(255, 0, 0, 0.8);
+}
+.lgcuModal .card-payment-container .details-container.card-details .card-form .form-container .form-section-container .form-element.sz-1 {
+  width: 10%;
+}
+.lgcuModal .card-payment-container .details-container.card-details .card-form .form-container .form-section-container .form-element.sz-2 {
+  width: 20%;
+}
+.lgcuModal .card-payment-container .details-container.card-details .card-form .form-container .form-section-container .form-element.sz-3 {
+  width: 30%;
+}
+.lgcuModal .card-payment-container .details-container.card-details .card-form .form-container .form-section-container .form-element.sz-4 {
+  width: 40%;
+}
+.lgcuModal .card-payment-container .details-container.card-details .card-form .form-container .form-section-container .form-element.sz-5 {
+  width: 50%;
+}
+.lgcuModal .card-payment-container .details-container.card-details .card-form .form-container .form-section-container .form-element.sz-6 {
+  width: 60%;
+}
+.lgcuModal .card-payment-container .details-container.card-details .card-form .form-container .form-section-container .form-element.sz-7 {
+  width: 70%;
+}
+.lgcuModal .card-payment-container .details-container.card-details .card-form .form-container .form-section-container .form-element.sz-8 {
+  width: 80%;
+}
+.lgcuModal .card-payment-container .details-container.card-details .card-form .form-container .form-section-container .form-element.sz-9 {
+  width: 90%;
+}
+.lgcuModal .card-payment-container .details-container.card-details .card-form .form-container .form-section-container .form-element.sz-10 {
+  width: 100%;
+}
+.lgcuModal .card-payment-container .details-container.payment-details {
+  width: 30%;
+  background: #c8c8c8;
+}
 .lgcuModal .btn-container .lBtn {
   cursor: pointer;
 }

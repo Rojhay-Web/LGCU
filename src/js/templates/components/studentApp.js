@@ -252,7 +252,7 @@ class StudentApp extends Component{
             }
         }
         catch(ex){
-            console.log("Error changeing element: ",ex);
+            console.log("Error changing element: ",ex);
         }
     }
     submitForm() {

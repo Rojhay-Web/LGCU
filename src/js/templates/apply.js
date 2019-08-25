@@ -93,7 +93,7 @@ class Apply extends Component{
                     ]}
                 ]
             },
-            modalStatus: false
+            modalStatus: true
         }
 
         this.getAppType = this.getAppType.bind(this);

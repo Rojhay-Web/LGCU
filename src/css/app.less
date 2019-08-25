@@ -620,6 +620,96 @@ body, html {
 
 /* Modal */
 .lgcuModal {
+    min-width: 75%;
+    .modal-body { padding: 0; }
+    .card-payment-container {
+        min-height: 200px;
+        display: flex;
+        flex-direction: row;
+        .details-container {
+            padding: 7px 14px;
+            &.card-details { 
+                flex:1;
+                .card-form {
+                    display: flex;
+                    flex-direction: row;
+                    .form-container {
+                        margin: auto 0;
+                        padding: 0px 5px;
+                        &.fill { flex:1;}
+                        .card-display {
+                            border: 1px solid rgba(0,0,0,1);
+                            border-radius: 5px;
+                            padding: 15px;
+                            .color1(background, 0.4);
+                            width: 300px;
+                            height: 170px;
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: flex-end;
+                            .card-number {
+                                font-size: 28px;
+                                line-height: 28px;
+                                font-weight: bold;
+                                display: flex;
+                                flex-direction: row;
+                                justify-content: space-between;
+                                margin-bottom: 20px;
+                            }
+                            .card-exp {
+                                text-align: center;
+                                line-height: 12px;
+                                .title{ font-weight: bold; margin-right: 10px;}
+                            }
+                            .card-name { font-size: 18px; line-height: 18px;}
+                        }
+
+                        .form-section-container {
+                            text-align: center;
+                            .form-element {
+                                padding: 7px; 
+                                display: block;
+                                font-size: 1.2rem;
+                                margin-bottom: 2px;
+                                display: inline-flex;
+                                flex-direction: column;
+                                text-align: left;
+                                input, textarea, select {
+                                    width: 100%;
+                                    border-radius: 4px;
+                                    border: 1px solid rgba(0,0,0,1);
+                                    padding: 7px; 
+                                    
+                                    &.disabled { 
+                                        background: rgba(255,255,255,0.1); 
+                                        border: none;
+                                        color: rgba(255,255,255,1);
+                                        text-transform: capitalize;
+                                    }
+                                }
+                                      
+                                .empty { border: 2px solid rgba(255,0,0,0.8);}
+                                &.sz-1 { width: 10%; }
+                                &.sz-2 { width: 20%; }
+                                &.sz-3 { width: 30%; }
+                                &.sz-4 { width: 40%; }
+                                &.sz-5 { width: 50%; }
+                                &.sz-6 { width: 60%; }
+                                &.sz-7 { width: 70%; }
+                                &.sz-8 { width: 80%; }
+                                &.sz-9 { width: 90%; }
+                                &.sz-10 { width: 100%; }
+                            }
+                        }
+                    }
+                }
+            }
+            &.payment-details {
+                width: 30%;
+                background: rgba(200,200,200,1);
+            }
+        }
+    }
     .btn-container {
         .lBtn { cursor: pointer;}
     }
