@@ -4006,6 +4006,7 @@ html {
 }
 .academicSlider.right {
   flex-direction: row;
+  min-height: 250px;
 }
 .academicSlider.right .slider-container {
   flex-direction: column;
@@ -4032,6 +4033,7 @@ html {
 }
 .academicSlider.left {
   flex-direction: row-reverse;
+  min-height: 250px;
 }
 .academicSlider.left .slider-container {
   flex-direction: column;
