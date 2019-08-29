@@ -47,7 +47,7 @@ function Tuition(props){
         { "level":"Doctorate Programs", "full":550, "part":575 },
         { "level":"Military Undergraduate", "full":225, "part":225 },
         { "level":"Military Master in Organizational Leadership", "full":255, "part":255 },
-        { "level":"Military aster in School of Theology", "full":255, "part":255 },
+        { "level":"Military Master in School of Theology", "full":255, "part":255 },
         { "level":"Military Graduate/Doctorate", "full":265, "part":265 }
     ];
 
@@ -94,6 +94,8 @@ function Tuition(props){
                         ))}
                     </table>
                     <p className="special-note">* At Lenkeson Global Christian University a full-time load is considered between 9-12 credits. Part-time is 8 credit hour or less.</p>                            
+
+                    <p>Technology Fees $125 Due at Enrollment for One Year</p>
                 </div>
             </section>
 

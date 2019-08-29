@@ -93,12 +93,14 @@ class Apply extends Component{
                     ]}
                 ]
             },
-            modalStatus: true
+            modalStatus: false,
+            appId:""
         }
 
         this.getAppType = this.getAppType.bind(this);
         this.setApplication = this.setApplication.bind(this);
         this.loadMajorData = this.loadMajorData.bind(this);
+        this.appFeeForm = this.appFeeForm.bind(this);
         this.modalShow = this.modalShow.bind(this);
         this.modalHide = this.modalHide.bind(this);
     }
@@ -115,7 +117,7 @@ class Apply extends Component{
                     {this.setApplication()}
                 </section>
 
-                <CardPayment title="Student Application Fee" show={this.state.modalStatus} handleClose={this.modalHide} />
+                <CardPayment title="Student Application Fee" show={this.state.modalStatus} handleClose={this.modalHide} appId={ this.state.appId } />
             </div>
         );
     }
@@ -176,13 +178,25 @@ class Apply extends Component{
         }
     }
 
+    appFeeForm(appId){
+        var self = this;
+        try {
+            this.setState({ appId: appId}, () =>{
+                self.modalShow()
+            });
+        }
+        catch(ex){
+            console.log("Error opening app fee form: ",ex);
+        }
+    }
+
     setApplication(){        
         switch(this.state.params){
             case "student":
                 return <div className="application-container">
                         <h2 className="lrgTitle ctr" data-text="Student Application">Student Application</h2>
                         <div className="section-container">
-                            <StudentApp />
+                            <StudentApp appFeeForm={this.appFeeForm}/>
                         </div>
                 </div>;
                 break;

@@ -273,7 +273,9 @@ class StudentApp extends Component{
                     axios.post(rootPath + "/api/sendAppEmail", postData, {'Content-Type': 'application/json'})
                     .then(function(response) {
                         if(response.errorMessage == null && response.data.results.status === "Email Sent"){
-                            self.setState({ selectedSection:"submitted", applicationId: response.data.results.appId});                         
+                            self.setState({ selectedSection:"submitted", applicationId: response.data.results.appId}, ()=> {
+                                self.props.appFeeForm(response.data.results.appId);
+                            });                         
                         }
                         else {
                             alert("Error Submitting Form");

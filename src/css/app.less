@@ -29,8 +29,11 @@
 @theme4: rgba(88,116,220,1);
 .theme4(@prop,@val){ @{prop}: rgba(88,116,220,@val) !important; }
 
-@theme5: rgba(56,67,120,1);
-.theme5(@prop,@val){ @{prop}: rgba(56,67,120,@val) !important; }
+@theme5: rgba(241, 196, 15,1);
+.theme5(@prop,@val){ @{prop}: rgba(241, 196, 15,@val) !important; }
+
+@theme6: rgba(150,150,150,1);
+.theme6(@prop,@val){ @{prop}: rgba(150,150,150,@val) !important; }
 
 /* Fonts */
 @font-size: 14px;
@@ -621,18 +624,96 @@ body, html {
 /* Modal */
 .lgcuModal {
     min-width: 75%;
-    .modal-body { padding: 0; }
+    .modal-content { background: rgba(0,0,0,0);}
+    .modal-header { background: rgba(255, 255, 255, 0.95); }
+    .modal-body { padding: 0; background: rgba(255, 255, 255, 0.95); }
+    .modal-footer {
+        background: rgba(255, 255, 255, 0.95);
+        .btn-container { margin: 0px; .lBtn { margin-top:0px; }}
+    }
+    .error-message { 
+        padding: 7px;
+        background: rgba(255,50,50,0.5);
+        color: rgba(50,50,50,1);
+        text-align: center;
+        font-size: 1.2rem;
+        font-weight: bold;
+        display: none;
+        transition: 0.5s all ease-in-out;
+
+        &.errorDisplay{ display: block; }
+    }
+
     .card-payment-container {
         min-height: 200px;
         display: flex;
         flex-direction: row;
+
         .details-container {
             padding: 7px 14px;
+            .description { font-size: 1.2rem; padding: 7px; }
+            .section-split {
+                widows: 100%;
+                content:"";
+                height: 1px;
+                border-bottom: 2px solid rgba(0,0,0,1);
+                margin: 7px 0px;
+
+                &.lrg { margin: 30px 0px;}
+            }
+            .form-section-container {
+                text-align: center;
+                .form-element {
+                    padding: 7px; 
+                    display: block;
+                    font-size: 1.2rem;
+                    margin-bottom: 2px;
+                    display: inline-flex;
+                    flex-direction: column;
+                    text-align: left;
+                    &.text { text-align: center; }
+                    input, textarea, select {
+                        width: 100%;
+                        border-radius: 4px;
+                        border: 1px solid rgba(0,0,0,1);
+                        padding: 7px; 
+                        
+                        &.disabled { 
+                            background: rgba(255,255,255,0.1); 
+                            border: none;
+                            color: rgba(255,255,255,1);
+                            text-transform: capitalize;
+                        }
+                    }
+
+                    input[type=number] {
+                        &::-webkit-outer-spin-button,
+                        &::-webkit-inner-spin-button {
+                            -webkit-appearance: none;
+                            margin: 0;
+                        }
+                    }
+                          
+                    .error { border: 2px solid rgba(255,0,0,0.8);}
+                    &.sz-1 { width: 10%; }
+                    &.sz-2 { width: 20%; }
+                    &.sz-3 { width: 30%; }
+                    &.sz-4 { width: 40%; }
+                    &.sz-5 { width: 50%; }
+                    &.sz-6 { width: 60%; }
+                    &.sz-7 { width: 70%; }
+                    &.sz-8 { width: 80%; }
+                    &.sz-9 { width: 90%; }
+                    &.sz-10 { width: 100%; }
+                }
+            }
+
             &.card-details { 
                 flex:1;
                 .card-form {
                     display: flex;
                     flex-direction: row;
+                    
                     .form-container {
                         margin: auto 0;
                         padding: 0px 5px;
@@ -663,50 +744,46 @@ body, html {
                             }
                             .card-name { font-size: 18px; line-height: 18px;}
                         }
-
-                        .form-section-container {
-                            text-align: center;
-                            .form-element {
-                                padding: 7px; 
-                                display: block;
-                                font-size: 1.2rem;
-                                margin-bottom: 2px;
-                                display: inline-flex;
-                                flex-direction: column;
-                                text-align: left;
-                                input, textarea, select {
-                                    width: 100%;
-                                    border-radius: 4px;
-                                    border: 1px solid rgba(0,0,0,1);
-                                    padding: 7px; 
-                                    
-                                    &.disabled { 
-                                        background: rgba(255,255,255,0.1); 
-                                        border: none;
-                                        color: rgba(255,255,255,1);
-                                        text-transform: capitalize;
-                                    }
-                                }
-                                      
-                                .empty { border: 2px solid rgba(255,0,0,0.8);}
-                                &.sz-1 { width: 10%; }
-                                &.sz-2 { width: 20%; }
-                                &.sz-3 { width: 30%; }
-                                &.sz-4 { width: 40%; }
-                                &.sz-5 { width: 50%; }
-                                &.sz-6 { width: 60%; }
-                                &.sz-7 { width: 70%; }
-                                &.sz-8 { width: 80%; }
-                                &.sz-9 { width: 90%; }
-                                &.sz-10 { width: 100%; }
-                            }
-                        }
                     }
                 }
             }
             &.payment-details {
                 width: 30%;
-                background: rgba(200,200,200,1);
+                .color3(background, 0.7);
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+
+                .charge-total {
+                    display: flex;
+                    flex-direction: row;
+                    padding-top: 7px;
+                    justify-content: space-between;
+                    .chargeTitle { font-size: 24px; text-align: left;}
+                    .chargeAmount {
+                        font-size: 24px;
+                        text-align: right;
+                        span { margin-right: 7px; }
+                        input {
+                            width: 50%;                            
+                            border: 0;
+                            background: rgba(50,50,50,0.05);
+                            border-radius: 5px;
+                            line-height: 24px;
+                        }
+                    }
+                }
+                .form-element {
+                    font-size: 1rem;
+                    padding: 2px 7px;
+                }
+                input[type=number] {
+                    &::-webkit-outer-spin-button,
+                    &::-webkit-inner-spin-button {
+                        -webkit-appearance: none;
+                        margin: 0;
+                    }
+                }
             }
         }
     }

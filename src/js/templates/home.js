@@ -137,7 +137,10 @@ function Home(props){
                         <div className="split-content">
                             <h2 className="lrgTitle" data-text="Why LGCU">Why LGCU?</h2>
                             <p>At LGCU, learners and faculty are engaged in academic and professional learning that is centered on developing and empowering working professionals to succeed in church ministries and other professional fields.</p>
-                            <a href="/about" className="lBtn c2"><span>More About LGCU</span><i className="btn-icon fas fa-info-circle"></i></a>
+                            <div className="btn-container">
+                                <a href="/about" className="lBtn c2"><span>More About LGCU</span><i className="btn-icon fas fa-info-circle"></i></a>
+                                <a href="/files/Accreditation.docx" target="_blank" className="lBtn clear t2"><span>Accreditation  Information</span><i className="btn-icon fas fa-graduation-cap"></i></a>
+                            </div>
                         </div>                                                    
                     </div>
                 </div>
@@ -167,7 +170,7 @@ function Home(props){
                 <div className="section-container">
                     <h2 className="lrgTitle ctr" data-text="Areas Of Study">Areas Of Study</h2>                        
                     {/* Slide Maze */}
-                    {academicList.length === 6 && 
+                    {academicList.length === 8 && 
                         <div className="slide-maze">
                             <div className="maze-lvl">
                                 <div className="lvl-horizontal">
@@ -185,6 +188,15 @@ function Home(props){
                                 <div className="lvl-horizontal">
                                     <AcademicSlider academicInfo={academicList[4]} direction={"left"} theme={"solo"}/>
                                     <AcademicSlider academicInfo={academicList[5]} direction={"right"} theme={"solo"}/>
+                                </div>
+                            </div>
+                            <div className="maze-lvl">
+                                <div className="lvl-horizontal">
+                                    <AcademicSlider academicInfo={academicList[6]} direction={"right"} theme={"solo"}/>
+                                    <AcademicSlider academicInfo={academicList[7]} direction={"left"} theme={"solo"}/>
+                                </div>
+                                <div className="lvl-vertical">
+                                    {/*<AcademicSlider academicInfo={academicList[0]} direction={"bottom"} theme={"solo"} displayLink={false}/>*/}
                                 </div>
                             </div>
                         </div>

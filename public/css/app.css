@@ -391,6 +391,10 @@
   margin-bottom: 20px;
   line-height: 3.2rem;
 }
+.homePage .home-section .section-container .split-section .split-content .btn-container {
+  justify-content: left;
+  margin: 0;
+}
 @media (max-width: 770px) {
   .homePage .home-section .section-container .split-section {
     flex-direction: column;
@@ -594,12 +598,21 @@
   color: #ffffff;
 }
 .academicsPage .academic-section.findDegree .degree-container .full-list-container .list-container .filterBtn.t5 {
-  color: #384378;
-  border-color: #384378;
+  color: #f1c40f;
+  border-color: #f1c40f;
 }
 .academicsPage .academic-section.findDegree .degree-container .full-list-container .list-container .filterBtn.t5:hover,
 .academicsPage .academic-section.findDegree .degree-container .full-list-container .list-container .filterBtn.t5.active {
-  background: #384378;
+  background: #f1c40f;
+  color: #ffffff;
+}
+.academicsPage .academic-section.findDegree .degree-container .full-list-container .list-container .filterBtn.t6 {
+  color: #969696;
+  border-color: #969696;
+}
+.academicsPage .academic-section.findDegree .degree-container .full-list-container .list-container .filterBtn.t6:hover,
+.academicsPage .academic-section.findDegree .degree-container .full-list-container .list-container .filterBtn.t6.active {
+  background: #969696;
   color: #ffffff;
 }
 .academicsPage .academic-section.findDegree .degree-container .result-search-container {
@@ -695,7 +708,7 @@
   background: #5874dc;
 }
 .academicsPage .academic-section.findDegree .degree-container .results-list .results-container .result-item .result-icon.t5 {
-  background: #384378;
+  background: #f1c40f;
 }
 .academicsPage .academic-section.findDegree .degree-container .results-list .results-container .result-item .item-info-container {
   display: flex;
@@ -727,7 +740,7 @@
   background: rgba(88, 116, 220, 0.3) !important;
 }
 .academicsPage .academic-section.findDegree .degree-container .results-list .results-container .result-item:hover.t5 {
-  background: rgba(56, 67, 120, 0.3) !important;
+  background: rgba(241, 196, 15, 0.3) !important;
 }
 .academicsPage .academic-section .area-container {
   margin-top: 30px;
@@ -833,6 +846,15 @@
   color: #ffffff;
   position: relative;
   overflow: hidden;
+}
+.studyPage .studyArea-section .noDegreeData {
+  font-size: 2rem;
+  text-align: center;
+  font-weight: 100;
+}
+.studyPage .studyArea-section .noDegreeData a {
+  color: #e6e6e6;
+  text-decoration: underline;
 }
 .studyPage .studyArea-section .fullTitle {
   text-transform: capitalize;
@@ -1635,12 +1657,12 @@
   color: #ffffff;
 }
 .studentAppForm .form-container .form-section-container .degree-container .full-list-container .list-container .filterBtn.t5 {
-  color: #384378;
-  border-color: #384378;
+  color: #f1c40f;
+  border-color: #f1c40f;
 }
 .studentAppForm .form-container .form-section-container .degree-container .full-list-container .list-container .filterBtn.t5:hover,
 .studentAppForm .form-container .form-section-container .degree-container .full-list-container .list-container .filterBtn.t5.active {
-  background: #384378;
+  background: #f1c40f;
   color: #ffffff;
 }
 .studentAppForm .form-container .form-section-container .degree-container .result-search-container {
@@ -1706,7 +1728,7 @@
   background: #5874dc;
 }
 .studentAppForm .form-container .form-section-container .degree-container .results-list .results-container .result-item .result-icon.t5 {
-  background: #384378;
+  background: #f1c40f;
 }
 .studentAppForm .form-container .form-section-container .degree-container .results-list .results-container .result-item .item-info-container {
   display: flex;
@@ -1738,7 +1760,7 @@
   background: rgba(88, 116, 220, 0.3) !important;
 }
 .studentAppForm .form-container .form-section-container .degree-container .results-list .results-container .result-item:hover.t5 {
-  background: rgba(56, 67, 120, 0.3) !important;
+  background: rgba(241, 196, 15, 0.3) !important;
 }
 .studentAppForm .form-container .form-section-container.submitted p,
 .studentAppForm .form-container .form-section-container.submitted ul {
@@ -3291,8 +3313,37 @@ html {
 .lgcuModal {
   min-width: 75%;
 }
+.lgcuModal .modal-content {
+  background: rgba(0, 0, 0, 0);
+}
+.lgcuModal .modal-header {
+  background: rgba(255, 255, 255, 0.95);
+}
 .lgcuModal .modal-body {
   padding: 0;
+  background: rgba(255, 255, 255, 0.95);
+}
+.lgcuModal .modal-footer {
+  background: rgba(255, 255, 255, 0.95);
+}
+.lgcuModal .modal-footer .btn-container {
+  margin: 0px;
+}
+.lgcuModal .modal-footer .btn-container .lBtn {
+  margin-top: 0px;
+}
+.lgcuModal .error-message {
+  padding: 7px;
+  background: rgba(255, 50, 50, 0.5);
+  color: #323232;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  display: none;
+  transition: 0.5s all ease-in-out;
+}
+.lgcuModal .error-message.errorDisplay {
+  display: block;
 }
 .lgcuModal .card-payment-container {
   min-height: 200px;
@@ -3301,6 +3352,89 @@ html {
 }
 .lgcuModal .card-payment-container .details-container {
   padding: 7px 14px;
+}
+.lgcuModal .card-payment-container .details-container .description {
+  font-size: 1.2rem;
+  padding: 7px;
+}
+.lgcuModal .card-payment-container .details-container .section-split {
+  widows: 100%;
+  content: "";
+  height: 1px;
+  border-bottom: 2px solid #000000;
+  margin: 7px 0px;
+}
+.lgcuModal .card-payment-container .details-container .section-split.lrg {
+  margin: 30px 0px;
+}
+.lgcuModal .card-payment-container .details-container .form-section-container {
+  text-align: center;
+}
+.lgcuModal .card-payment-container .details-container .form-section-container .form-element {
+  padding: 7px;
+  display: block;
+  font-size: 1.2rem;
+  margin-bottom: 2px;
+  display: inline-flex;
+  flex-direction: column;
+  text-align: left;
+}
+.lgcuModal .card-payment-container .details-container .form-section-container .form-element.text {
+  text-align: center;
+}
+.lgcuModal .card-payment-container .details-container .form-section-container .form-element input,
+.lgcuModal .card-payment-container .details-container .form-section-container .form-element textarea,
+.lgcuModal .card-payment-container .details-container .form-section-container .form-element select {
+  width: 100%;
+  border-radius: 4px;
+  border: 1px solid #000000;
+  padding: 7px;
+}
+.lgcuModal .card-payment-container .details-container .form-section-container .form-element input.disabled,
+.lgcuModal .card-payment-container .details-container .form-section-container .form-element textarea.disabled,
+.lgcuModal .card-payment-container .details-container .form-section-container .form-element select.disabled {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #ffffff;
+  text-transform: capitalize;
+}
+.lgcuModal .card-payment-container .details-container .form-section-container .form-element input[type=number]::-webkit-outer-spin-button,
+.lgcuModal .card-payment-container .details-container .form-section-container .form-element input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.lgcuModal .card-payment-container .details-container .form-section-container .form-element .error {
+  border: 2px solid rgba(255, 0, 0, 0.8);
+}
+.lgcuModal .card-payment-container .details-container .form-section-container .form-element.sz-1 {
+  width: 10%;
+}
+.lgcuModal .card-payment-container .details-container .form-section-container .form-element.sz-2 {
+  width: 20%;
+}
+.lgcuModal .card-payment-container .details-container .form-section-container .form-element.sz-3 {
+  width: 30%;
+}
+.lgcuModal .card-payment-container .details-container .form-section-container .form-element.sz-4 {
+  width: 40%;
+}
+.lgcuModal .card-payment-container .details-container .form-section-container .form-element.sz-5 {
+  width: 50%;
+}
+.lgcuModal .card-payment-container .details-container .form-section-container .form-element.sz-6 {
+  width: 60%;
+}
+.lgcuModal .card-payment-container .details-container .form-section-container .form-element.sz-7 {
+  width: 70%;
+}
+.lgcuModal .card-payment-container .details-container .form-section-container .form-element.sz-8 {
+  width: 80%;
+}
+.lgcuModal .card-payment-container .details-container .form-section-container .form-element.sz-9 {
+  width: 90%;
+}
+.lgcuModal .card-payment-container .details-container .form-section-container .form-element.sz-10 {
+  width: 100%;
 }
 .lgcuModal .card-payment-container .details-container.card-details {
   flex: 1;
@@ -3348,70 +3482,45 @@ html {
   font-size: 18px;
   line-height: 18px;
 }
-.lgcuModal .card-payment-container .details-container.card-details .card-form .form-container .form-section-container {
-  text-align: center;
-}
-.lgcuModal .card-payment-container .details-container.card-details .card-form .form-container .form-section-container .form-element {
-  padding: 7px;
-  display: block;
-  font-size: 1.2rem;
-  margin-bottom: 2px;
-  display: inline-flex;
-  flex-direction: column;
-  text-align: left;
-}
-.lgcuModal .card-payment-container .details-container.card-details .card-form .form-container .form-section-container .form-element input,
-.lgcuModal .card-payment-container .details-container.card-details .card-form .form-container .form-section-container .form-element textarea,
-.lgcuModal .card-payment-container .details-container.card-details .card-form .form-container .form-section-container .form-element select {
-  width: 100%;
-  border-radius: 4px;
-  border: 1px solid #000000;
-  padding: 7px;
-}
-.lgcuModal .card-payment-container .details-container.card-details .card-form .form-container .form-section-container .form-element input.disabled,
-.lgcuModal .card-payment-container .details-container.card-details .card-form .form-container .form-section-container .form-element textarea.disabled,
-.lgcuModal .card-payment-container .details-container.card-details .card-form .form-container .form-section-container .form-element select.disabled {
-  background: rgba(255, 255, 255, 0.1);
-  border: none;
-  color: #ffffff;
-  text-transform: capitalize;
-}
-.lgcuModal .card-payment-container .details-container.card-details .card-form .form-container .form-section-container .form-element .empty {
-  border: 2px solid rgba(255, 0, 0, 0.8);
-}
-.lgcuModal .card-payment-container .details-container.card-details .card-form .form-container .form-section-container .form-element.sz-1 {
-  width: 10%;
-}
-.lgcuModal .card-payment-container .details-container.card-details .card-form .form-container .form-section-container .form-element.sz-2 {
-  width: 20%;
-}
-.lgcuModal .card-payment-container .details-container.card-details .card-form .form-container .form-section-container .form-element.sz-3 {
-  width: 30%;
-}
-.lgcuModal .card-payment-container .details-container.card-details .card-form .form-container .form-section-container .form-element.sz-4 {
-  width: 40%;
-}
-.lgcuModal .card-payment-container .details-container.card-details .card-form .form-container .form-section-container .form-element.sz-5 {
-  width: 50%;
-}
-.lgcuModal .card-payment-container .details-container.card-details .card-form .form-container .form-section-container .form-element.sz-6 {
-  width: 60%;
-}
-.lgcuModal .card-payment-container .details-container.card-details .card-form .form-container .form-section-container .form-element.sz-7 {
-  width: 70%;
-}
-.lgcuModal .card-payment-container .details-container.card-details .card-form .form-container .form-section-container .form-element.sz-8 {
-  width: 80%;
-}
-.lgcuModal .card-payment-container .details-container.card-details .card-form .form-container .form-section-container .form-element.sz-9 {
-  width: 90%;
-}
-.lgcuModal .card-payment-container .details-container.card-details .card-form .form-container .form-section-container .form-element.sz-10 {
-  width: 100%;
-}
 .lgcuModal .card-payment-container .details-container.payment-details {
   width: 30%;
-  background: #c8c8c8;
+  background: rgba(80, 78, 153, 0.7) !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.lgcuModal .card-payment-container .details-container.payment-details .charge-total {
+  display: flex;
+  flex-direction: row;
+  padding-top: 7px;
+  justify-content: space-between;
+}
+.lgcuModal .card-payment-container .details-container.payment-details .charge-total .chargeTitle {
+  font-size: 24px;
+  text-align: left;
+}
+.lgcuModal .card-payment-container .details-container.payment-details .charge-total .chargeAmount {
+  font-size: 24px;
+  text-align: right;
+}
+.lgcuModal .card-payment-container .details-container.payment-details .charge-total .chargeAmount span {
+  margin-right: 7px;
+}
+.lgcuModal .card-payment-container .details-container.payment-details .charge-total .chargeAmount input {
+  width: 50%;
+  border: 0;
+  background: rgba(50, 50, 50, 0.05);
+  border-radius: 5px;
+  line-height: 24px;
+}
+.lgcuModal .card-payment-container .details-container.payment-details .form-element {
+  font-size: 1rem;
+  padding: 2px 7px;
+}
+.lgcuModal .card-payment-container .details-container.payment-details input[type=number]::-webkit-outer-spin-button,
+.lgcuModal .card-payment-container .details-container.payment-details input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 .lgcuModal .btn-container .lBtn {
   cursor: pointer;
@@ -3889,7 +3998,7 @@ html {
   background: rgba(88, 116, 220, 0.3) !important;
 }
 .academicSlider .slider-container .img-slider.t5:after {
-  background: rgba(56, 67, 120, 0.3) !important;
+  background: rgba(241, 196, 15, 0.3) !important;
 }
 .academicSlider .slider-container .img-slider.solo img {
   -webkit-filter: grayscale(0%);

@@ -207,7 +207,16 @@ class Faculty extends Component{
                                 <div className="faculty-bio" id="bioAccordionSmoke">
                                     <a className="bio-btn w1" data-toggle="collapse" href="#bioSmoke" aria-expanded="false" aria-controls="bioSmoke">Read Bio</a>
                                     <div id="bioSmoke" className="bio-txt collapse" data-parent="#bioAccordionSmoke">
-                                        <p></p>
+                                        <p>Pastor in the A.M.E. Zion Church for fifty years (William Chapel, Mt.
+                                            Hebron, Vincent Chapel, Mt. Shady, Mt. Mariah, Crockett Memorial, Little
+                                            Zion of the West Alabama Annual Conference; ec.). Nineteen years as a Presiding
+                                            Elder (Wadesboro-Monroe District, Greensboro District, Concord District
+                                            and Hendersonville District).</p>
+                                        <p>Organizations and affiliations:</p>
+                                        <p>Masonic Order of Masonry (Prince Hall); Alpha Phi Alpha Fraternity;
+                                            Ministerial relief Board of the A.M.E. Zion Church; NAACP; Urban League;
+                                            Livingstone College Alumni; Hood Theological Seminary Alumni; Doctoral Mentor
+                                            at Hood Theological Seminary;</p>
                                     </div>
                                 </div>
                             </div>
