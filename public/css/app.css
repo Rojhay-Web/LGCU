@@ -1501,6 +1501,23 @@
 .studentAppForm .form-nav .form-nav-item.completed + .form-nav-item:after {
   background: #257728;
 }
+@media (max-width: 770px) {
+  .studentAppForm .form-nav .form-nav-item {
+    width: 50px;
+    height: 50px;
+  }
+  .studentAppForm .form-nav .form-nav-item + .form-nav-item {
+    margin-left: 35px;
+  }
+  .studentAppForm .form-nav .form-nav-item + .form-nav-item:after {
+    width: 35px;
+    left: -70%;
+  }
+  .studentAppForm .form-nav .form-nav-item.active:before {
+    width: 65px;
+    height: 65px;
+  }
+}
 .studentAppForm .form-container .form-section-container {
   text-align: center;
 }
@@ -1556,32 +1573,82 @@
 .studentAppForm .form-container .form-section-container .form-element.sz-1 {
   width: 10%;
 }
+@media (max-width: 770px) {
+  .studentAppForm .form-container .form-section-container .form-element.sz-1 {
+    width: 100%;
+  }
+}
 .studentAppForm .form-container .form-section-container .form-element.sz-2 {
   width: 20%;
+}
+@media (max-width: 770px) {
+  .studentAppForm .form-container .form-section-container .form-element.sz-2 {
+    width: 100%;
+  }
 }
 .studentAppForm .form-container .form-section-container .form-element.sz-3 {
   width: 30%;
 }
+@media (max-width: 770px) {
+  .studentAppForm .form-container .form-section-container .form-element.sz-3 {
+    width: 100%;
+  }
+}
 .studentAppForm .form-container .form-section-container .form-element.sz-4 {
   width: 40%;
+}
+@media (max-width: 770px) {
+  .studentAppForm .form-container .form-section-container .form-element.sz-4 {
+    width: 100%;
+  }
 }
 .studentAppForm .form-container .form-section-container .form-element.sz-5 {
   width: 50%;
 }
+@media (max-width: 770px) {
+  .studentAppForm .form-container .form-section-container .form-element.sz-5 {
+    width: 100%;
+  }
+}
 .studentAppForm .form-container .form-section-container .form-element.sz-6 {
   width: 60%;
+}
+@media (max-width: 770px) {
+  .studentAppForm .form-container .form-section-container .form-element.sz-6 {
+    width: 100%;
+  }
 }
 .studentAppForm .form-container .form-section-container .form-element.sz-7 {
   width: 70%;
 }
+@media (max-width: 770px) {
+  .studentAppForm .form-container .form-section-container .form-element.sz-7 {
+    width: 100%;
+  }
+}
 .studentAppForm .form-container .form-section-container .form-element.sz-8 {
   width: 80%;
+}
+@media (max-width: 770px) {
+  .studentAppForm .form-container .form-section-container .form-element.sz-8 {
+    width: 100%;
+  }
 }
 .studentAppForm .form-container .form-section-container .form-element.sz-9 {
   width: 90%;
 }
+@media (max-width: 770px) {
+  .studentAppForm .form-container .form-section-container .form-element.sz-9 {
+    width: 100%;
+  }
+}
 .studentAppForm .form-container .form-section-container .form-element.sz-10 {
   width: 100%;
+}
+@media (max-width: 770px) {
+  .studentAppForm .form-container .form-section-container .form-element.sz-10 {
+    width: 100%;
+  }
 }
 .studentAppForm .form-container .form-section-container .degree-container .full-list-container {
   padding: 10px 0px;
@@ -3332,6 +3399,18 @@ html {
 .lgcuModal .modal-footer .btn-container .lBtn {
   margin-top: 0px;
 }
+@media (max-width: 770px) {
+  .lgcuModal .modal-footer .btn-container .lBtn {
+    color: #ffffff;
+  }
+}
+@media (max-width: 770px) {
+  .lgcuModal .modal-footer .btn-container {
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+  }
+}
 .lgcuModal .error-message {
   padding: 7px;
   background: rgba(255, 50, 50, 0.5);
@@ -3521,6 +3600,17 @@ html {
 .lgcuModal .card-payment-container .details-container.payment-details input[type=number]::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+@media (max-width: 770px) {
+  .lgcuModal .card-payment-container {
+    flex-direction: column;
+  }
+  .lgcuModal .card-payment-container .details-container.card-details .card-form {
+    flex-direction: column;
+  }
+  .lgcuModal .card-payment-container .details-container.payment-details {
+    width: 100%;
+  }
 }
 .lgcuModal .btn-container .lBtn {
   cursor: pointer;

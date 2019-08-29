@@ -117,7 +117,7 @@ class Apply extends Component{
                     {this.setApplication()}
                 </section>
 
-                <CardPayment title="Student Application Fee" show={this.state.modalStatus} handleClose={this.modalHide} appId={ this.state.appId } />
+                <CardPayment title="Student Application Fee" show={this.state.modalStatus} handleClose={this.modalHide} appId={this.state.appId} />
             </div>
         );
     }

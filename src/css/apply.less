@@ -129,6 +129,19 @@
                     &:after { background: @color2;}
                 }
             }
+
+            @media @mobile-device {
+                width: 50px;
+                height: 50px;
+                &+.form-nav-item { 
+                    margin-left: 35px;
+                    &:after { width: 35px; left: -70%;}
+                }
+
+                &.active {
+                    &:before { width: 65px; height: 65px; }
+                }
+            }
         }
     }
     
@@ -171,16 +184,16 @@
                 }
         
                 .empty { border: 2px solid rgba(255,0,0,0.8);}
-                &.sz-1 { width: 10%; }
-                &.sz-2 { width: 20%; }
-                &.sz-3 { width: 30%; }
-                &.sz-4 { width: 40%; }
-                &.sz-5 { width: 50%; }
-                &.sz-6 { width: 60%; }
-                &.sz-7 { width: 70%; }
-                &.sz-8 { width: 80%; }
-                &.sz-9 { width: 90%; }
-                &.sz-10 { width: 100%; }
+                &.sz-1 { width: 10%; @media @mobile-device { width: 100%; }}
+                &.sz-2 { width: 20%; @media @mobile-device { width: 100%; }}
+                &.sz-3 { width: 30%; @media @mobile-device { width: 100%; }}
+                &.sz-4 { width: 40%; @media @mobile-device { width: 100%; }}
+                &.sz-5 { width: 50%; @media @mobile-device { width: 100%; }}
+                &.sz-6 { width: 60%; @media @mobile-device { width: 100%; }}
+                &.sz-7 { width: 70%; @media @mobile-device { width: 100%; }}
+                &.sz-8 { width: 80%; @media @mobile-device { width: 100%; }}
+                &.sz-9 { width: 90%; @media @mobile-device { width: 100%; } }
+                &.sz-10 { width: 100%; @media @mobile-device { width: 100%; } }                
             }
 
             .degree-container {

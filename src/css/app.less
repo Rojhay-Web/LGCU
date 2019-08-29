@@ -629,7 +629,11 @@ body, html {
     .modal-body { padding: 0; background: rgba(255, 255, 255, 0.95); }
     .modal-footer {
         background: rgba(255, 255, 255, 0.95);
-        .btn-container { margin: 0px; .lBtn { margin-top:0px; }}
+        .btn-container { 
+            margin: 0px; 
+            .lBtn { margin-top:0px; @media @mobile-device { color: rgba(255,255,255,1);}}
+            @media @mobile-device { flex-direction: row; justify-content: space-between;  width: 100%;}
+        }
     }
     .error-message { 
         padding: 7px;
@@ -783,6 +787,21 @@ body, html {
                         -webkit-appearance: none;
                         margin: 0;
                     }
+                }
+            }
+        }
+
+        @media @mobile-device {
+            flex-direction: column;
+            .details-container { 
+                &.card-details { 
+                    .card-form {
+                        flex-direction: column;
+                    }
+                }
+
+                &.payment-details { 
+                    width: 100%;
                 }
             }
         }
