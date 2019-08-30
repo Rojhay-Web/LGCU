@@ -213,42 +213,42 @@
                 ]}
             ],
             "doctorate":[                
-                {"id":"PHD-E-ATL", "title":"Adult Teaching & Learning", "degreeTitle":"(Ed.D.)","gradtotal":60, "courses":[
+                {"id":"EDD-E-ATL", "title":"Adult Teaching & Learning", "degreeTitle":"(Ed.D.)","gradtotal":60, "courses":[
                     {"subtitle":"Doctoral Foundation Courses (12 hours)","courses":["EDU_700","EDU_701","EDU_702"]},
                     {"subtitle":"Required Core Courses","courses":["LEAD_720","EDU_750","EDU_755","EDU_780"]},
                     {"subtitle":"Comprehensive Examination and Dissertation Research","courses":["EDU_900","EDU_901","EDU_902","EDU_903","EDU_904"]}
                 ]},
-                {"id":"PHD-E-CHDEV", "title":"Child Development", "degreeTitle":"(Ed.D.)","courses":[
+                {"id":"EDD-E-CHDEV", "title":"Child Development", "degreeTitle":"(Ed.D.)","courses":[
                     {"subtitle":"Doctoral Foundation Courses (12 hours)","courses":["EDU_700","EDU_701","EDU_702"]},
                     {"subtitle":"Required Credit Courses (33)","courses":["CDE_740","CDE_760","CDE_780","CDE_800","CDE_820","CDE_840","CDE_843","CDE_845","CDE_849","CDE_860","CDE_890"]},
                     {"subtitle":"Comprehensive Examination and Dissertation Research","courses":["EDU_900","EDU_901","EDU_902","EDU_903","EDU_904"]}
                 ]},
-                {"id":"PHD-E-CURI", "title":"Curriculum & Instruction", "degreeTitle":"(Ed.D.)","gradtotal":60, "courses":[
+                {"id":"EDD-E-CURI", "title":"Curriculum & Instruction", "degreeTitle":"(Ed.D.)","gradtotal":60, "courses":[
                     {"subtitle":"Doctoral Foundation Courses (12 hours)","courses":["EDU_700","EDU_701","EDU_702"]},
                     {"subtitle":"Required Specialization Courses (42 hours)","courses":["EDU_740","EDU_780","EDU_790","EDU_800","EDU_820","EDU_840","EDU_890"]},
                     {"subtitle":"Comprehensive Examination and Dissertation Research","courses":["EDU_900","EDU_901","EDU_902","EDU_903","EDU_904"]}
                 ]},
-                {"id":"PHD-E-EDUL", "title":"Educational Leadership", "degreeTitle":"Philosophy","gradtotal":74, "courses":[
+                {"id":"PHD-E-EDUL", "title":"Educational Leadership", "degreeTitle":"(Ph.D.)","gradtotal":74, "courses":[
                     {"subtitle":"Doctoral Foundation Courses (12 hours)","courses":["EDU_700","EDU_701","EDU_702"]},
                     {"subtitle":"Required Specialization Courses (33 hours)","courses":["LEAD_720","EADM_740","EADM_760","EADM_780","EADM_800","EADM_820","EADM_840","EADM_890"]},
                     {"subtitle":"Comprehensive Examination and Dissertation Research","courses":["EDU_900","EDU_901","EDU_902","EDU_903","EDU_904"]}
                 ]},
-                {"id":"PHD-E-ESL", "title":"English As A Second Language (ESL)", "degreeTitle":"(Ph.D.)","gradtotal":74, "courses":[
+                {"id":"EDD-E-ESL", "title":"English As A Second Language (ESL)", "degreeTitle":"(Ed.D.)","gradtotal":60, "courses":[
                     {"subtitle":"Doctoral Foundation Courses (12 hours)","courses":["EDU_700","EDU_701","EDU_702"]},
                     {"subtitle":"Required Core Courses (33 hours)","courses":["TESL_740","TESL_760","TESL_780","TESL_800","TESL_820","TESL_835","TESL_840","TESL_890"]},
                     {"subtitle":"Comprehensive Examination and Dissertation Research","courses":["EDU_900","EDU_901","EDU_902","EDU_903","EDU_904"]}
                 ]},
-                {"id":"PHD-E-SCEDU", "title":"Secondary Education", "degreeTitle":"(Ph.D.)","gradtotal":74, "courses":[
+                {"id":"PHD-E-SCEDU", "title":"Secondary Education", "degreeTitle":"(Ed.D.)","gradtotal":60, "courses":[
                     {"subtitle":"Required Core Courses (33 hours)","courses":["EDU_720","EDU_730","EDU_780","EDU_800","EDU_820","EDU_835","EDU_840","EDU_890"]},
                     {"subtitle":"Doctoral Foundation Courses (12 hours)","courses":["EDU_700","EDU_701","EDU_702"]},
                     {"subtitle":"Comprehensive Examination and Dissertation Research","courses":["EDU_900","EDU_901","EDU_902","EDU_903","EDU_904"]}
                 ]},
-                {"id":"PHD-E-SPEDU", "title":"Special Education", "degreeTitle":"(Ed.D.)","gradtotal":60, "courses":[
+                {"id":"EDD-E-SPEDU", "title":"Special Education", "degreeTitle":"(Ed.D.)","gradtotal":60, "courses":[
                     {"subtitle":"Doctoral Foundation Courses (12 hours)","courses":["EDU_700","EDU_701","EDU_702"]},
                     {"subtitle":"Required Degree Core Courses (33 hours)","courses":["SPE_740","EDU_760","SPE_770","EDU_780","SPE_820","SPE_830","EDU_840","EDU_890"]},
                     {"subtitle":"Comprehensive Examination and Dissertation Research","courses":["EDU_900","EDU_901","EDU_902","EDU_903","EDU_904"]}
                 ]},
-                {"id":"PHD-E-HEDUL", "title":"Higher Education Leadership", "degreeTitle":"(Ed.D.)","gradtotal":60, "courses":[
+                {"id":"EDD-E-HEDUL", "title":"Higher Education Leadership", "degreeTitle":"(Ed.D.)","gradtotal":60, "courses":[
                     {"subtitle":"Doctoral Foundation Courses (12 hours)","courses":["EDU_700","EDU_701","EDU_702"]},
                     {"subtitle":"Comprehensive Examination and Dissertation Research","courses":["EDU_900","EDU_901","EDU_902","EDU_903","EDU_904"]}
                 ]},
@@ -332,8 +332,8 @@
     "healthcareadministration":{
         "title":"Healthcare Administration",
         "colorTheme":"t6",
-        "description":"The School of Healthcare Administration is a new program that we are looking forward to rolling out to our student in a future calender year for more information regarding this area of study please contact the University.",
-        "fullDescription":"The School of Healthcare Administration is a new program that we are looking forward to rolling out to our student in a future calender year for more information regarding this area of study please contact the University.",
+        "description":"The School of Healthcare Administration is a new program that we are looking forward to rolling out to our students in a future calander year for more information regarding this area of study please contact the University.",
+        "fullDescription":"The School of Healthcare Administration is a new program that we are looking forward to rolling out to our students in a future calander year for more information regarding this area of study please contact the University.",
         "icon":"",
         "img":"img15.jpg",
         "comingSoon":true,
@@ -342,8 +342,8 @@
     "socialwork":{
         "title":"Social Work",
         "colorTheme":"t6",
-        "description":"The School of Healthcare Administration is a new program that we are looking forward to rolling out to our student in a future calender year for more information regarding this area of study please contact the University.",
-        "fullDescription":"The School of Healthcare Administration is a new program that we are looking forward to rolling out to our student in a future calender year for more information regarding this area of study please contact the University.",
+        "description":"The School of Healthcare Administration is a new program that we are looking forward to rolling out to our students in a future calander year for more information regarding this area of study please contact the University.",
+        "fullDescription":"The School of Healthcare Administration is a new program that we are looking forward to rolling out to our students in a future calander year for more information regarding this area of study please contact the University.",
         "icon":"",
         "img":"img16.jpg",
         "comingSoon":true,

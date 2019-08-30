@@ -11,12 +11,16 @@ class SchoolSub extends Component{
     render(){        
         return(
             <div className="inner-page-body studyPage">
+                
                 <section className="studyArea-section">
                     <h2 className="lrgTitle ctr" data-text="About Our School">About Our School</h2>
-                    <div className="section-container">
-                        <p>{this.props.data.fullDescription}</p>
-                    </div>
+                    {(Object.keys(this.props.data.degrees).length > 0) &&
+                        <div className="section-container">
+                         <p>{this.props.data.fullDescription}</p>
+                        </div>
+                    }
                 </section>
+                
 
                 {(Object.keys(this.props.data.degrees).length > 0) &&
                     <section className="studyArea-section alternate patterned">
