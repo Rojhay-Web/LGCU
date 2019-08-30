@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Modal } from 'react-bootstrap';
 import axios from 'axios';
 
+var AppIdGlobal = "";
 var rootPath = "";
 //var rootPath = "http://localhost:1111";
 
@@ -142,7 +143,12 @@ class CardPayment extends Component{
     componentWillUnmount(){
         this.resetForm();
     }
-    render(){        
+    render(){    
+        if(AppIdGlobal != this.props.appId){
+            AppIdGlobal = this.props.appId;
+            this.setState({appId: this.props.appId });
+        }
+
         return(
             <Modal dialogClassName="lgcuModal" show={this.props.show} backdrop="static" size="lg" onHide={this.closeForm}>
                 <Modal.Header closeButton>

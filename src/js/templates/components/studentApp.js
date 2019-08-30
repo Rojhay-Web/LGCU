@@ -68,7 +68,7 @@ class StudentApp extends Component{
 
     componentDidMount(){
         var self = this;
-        this.setState({selectedSection:"ApplicationInfo"},() =>{
+        this.setState({selectedSection:"EduEmpHistory"},() =>{
             self.buildFilterList();
         });        
     }
@@ -195,7 +195,7 @@ class StudentApp extends Component{
                         <div className="form-section-container submitted">
                             <h2>You Are Almost Finished</h2>
                             <p>Your Lenkeson Global Christian University student application has been submitted, to complete your application you must send in your $50.00 application fee payment.</p>
-                            <p>Please click the following link to submit your application fee right now: <a href="#">Application Fee</a></p>
+                            <p>Please click the following link to submit your application fee right now: <a onClick={e => this.props.appFeeForm(this.state.applicationId)}>Application Fee</a></p>
                             <p>If you are not prepared to submit you application fee right now please use the following steps:</p>
                             <ul>
                                 <li>Navigate to the lenkesongcu.org apply page</li>
@@ -259,7 +259,7 @@ class StudentApp extends Component{
         var self = this;
 
         try {
-            this.validateSection("all",function(ret){
+            /*this.validateSection("all",function(ret){
                 if(ret){
                     // Send Email
                     var postData = { 
@@ -281,11 +281,13 @@ class StudentApp extends Component{
                             alert("Error Submitting Form");
                             console.log("[Error] Submitting Form: ", response.data.errorMessage);
                         }
-                    });  
-
-                   
+                    });                               
                 }
-            }); 
+            }); */
+
+            self.setState({ selectedSection:"submitted", applicationId: "demoid-0123456789" }, ()=> {
+                self.props.appFeeForm("demoid-0123456789");
+            });
         }
         catch(ex){
             console.log("Error submitting form: ", ex);

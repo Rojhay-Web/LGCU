@@ -167,11 +167,7 @@ class Apply extends Component{
                         degreeKey[degree] = tmpList;
                     }
                 });
-            });
-
-            Object.keys(degreeKey).forEach(function(item){
-                self.state.studentApplication.elements[2].elements[0].valueList.push({"title":item, "list":degreeKey[item]});
-            });            
+            });                     
         }
         catch(ex){
             console.log("Error getting Major data: ",ex);
