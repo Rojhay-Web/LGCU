@@ -49,7 +49,7 @@ class Apply extends Component{
         this.state={
             params:"",
             facultyApplication:{
-                "title":"faculty application", "sendAddress":"web.lgcu@gmail.com",
+                "title":"faculty application", "sendAddress":"admin@lenkesongcu.org",
                 "subject":"Faculty Application", "additionalData":{}, "type":"section",
                 "sendMessage":"Thank you we have received your application we will be review your application and be in contact with you.",
                 "elements":[

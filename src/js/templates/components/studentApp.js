@@ -22,7 +22,7 @@ class StudentApp extends Component{
             applicationId:null,
             majorResults:[],
             degreeList:[],
-            sendAddress:"",
+            sendAddress:"admin@lenkesongcu.org",
             form: {
                 firstName:{"title":"First Name","required":true, "value":""},
                 middleName:{"title":"Middle Name","required":false, "value":""},
@@ -68,7 +68,7 @@ class StudentApp extends Component{
 
     componentDidMount(){
         var self = this;
-        this.setState({selectedSection:"EduEmpHistory"},() =>{
+        this.setState({selectedSection:"ApplicationInfo"},() =>{
             self.buildFilterList();
         });        
     }
@@ -172,7 +172,7 @@ class StudentApp extends Component{
                             <div className="form-element sz-10">
                                 <span>List employment history for the past 5 years without any gap. Include the following information for each *: </span>
                                 <ul>
-                                    <li>Emplorer Name</li>
+                                    <li>Employer Name</li>
                                     <li>Employer Address</li>
                                     <li>Total Years Of Employment</li>
                                     <li>Name of Supervisor</li>
@@ -195,13 +195,15 @@ class StudentApp extends Component{
                         <div className="form-section-container submitted">
                             <h2>You Are Almost Finished</h2>
                             <p>Your Lenkeson Global Christian University student application has been submitted, to complete your application you must send in your $50.00 application fee payment.</p>
-                            <p>Please click the following link to submit your application fee right now: <a onClick={e => this.props.appFeeForm(this.state.applicationId)}>Application Fee</a></p>
+                            <p>Please click the following link to submit your application fee right now: <span className="idLink" onClick={e => this.props.appFeeForm(this.state.applicationId)}>Application Fee</span></p>
                             <p>If you are not prepared to submit you application fee right now please use the following steps:</p>
                             <ul>
                                 <li>Navigate to the lenkesongcu.org apply page</li>
                                 <li>Click the link for "Application Fee Submissions"</li>
                                 <li>Complete the payment using your application id: <span className="appId">{this.state.applicationId}</span> This number will also be emailed to you with your application confirmation.</li>
                             </ul>
+
+                            <a href="/apply" className="lBtn c1"><span>Finish Later</span><i className="btn-icon fas fa-clipboard-check"></i></a>
                         </div> 
                     }
                 </div>
@@ -259,7 +261,7 @@ class StudentApp extends Component{
         var self = this;
 
         try {
-            /*this.validateSection("all",function(ret){
+            this.validateSection("all",function(ret){
                 if(ret){
                     // Send Email
                     var postData = { 
@@ -283,11 +285,7 @@ class StudentApp extends Component{
                         }
                     });                               
                 }
-            }); */
-
-            self.setState({ selectedSection:"submitted", applicationId: "demoid-0123456789" }, ()=> {
-                self.props.appFeeForm("demoid-0123456789");
-            });
+            }); 
         }
         catch(ex){
             console.log("Error submitting form: ", ex);

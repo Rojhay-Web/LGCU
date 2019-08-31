@@ -101,7 +101,7 @@ function generateAppId(formdata) {
     var appId = "";
 
     try {
-        var firstName = ("firstname" in formdata && formdata.firstName.value.length >= 1 ? formdata.firstName.value : "|");
+        var firstName = ("firstName" in formdata && formdata.firstName.value.length >= 1 ? formdata.firstName.value : "|");
         var lastName = ("lastName" in formdata && formdata.lastName.value.length >= 1  ? formdata.lastName.value : "!");
 
         appId = firstName.charAt(0) + lastName + "-"+ Date.now();
@@ -141,13 +141,14 @@ function buildEmailHtml(obj, appID){
     return ret;
 }
 
-function buildAppEmailHtml(obj){
+function buildAppEmailHtml(obj, appID){
     var ret = "";
     try {
         var dataList = Object.keys(obj.formData);
         
         ret +=  util.format('<h1>%s</h1>', obj.title);
-        ret +=  '<table><tr><th>Descriptiong</th><th>Info</th></tr>';
+        ret +=  util.format('<h2>Application ID: %s</h2>', appID);
+        ret +=  '<table><tr><th>Description</th><th>Info</th></tr>';
 
         dataList.forEach(function(item){
             ret += util.format('<tr><td>%s</td><td>%s</td></tr>', obj.formData[item].title, obj.formData[item].value.toString().replace(/\n/g,'<br>'));

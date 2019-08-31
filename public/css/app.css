@@ -1834,6 +1834,10 @@
   text-align: left;
   font-size: 1.5rem;
 }
+.studentAppForm .form-container .form-section-container.submitted .idLink {
+  text-decoration: underline;
+  cursor: pointer;
+}
 .studentAppForm .form-container .form-section-container.submitted .appId {
   padding: 0px 5px;
   border-radius: 5px;
@@ -3424,6 +3428,31 @@ html {
 .lgcuModal .error-message.errorDisplay {
   display: block;
 }
+.lgcuModal .status-message {
+  padding: 7px;
+  background: rgba(50, 50, 50, 0.5);
+  color: #fafafa;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  display: none;
+  transition: 0.5s all ease-in-out;
+}
+.lgcuModal .status-message.processing {
+  background: rgba(248, 213, 104, 0.5);
+  color: #323232;
+  display: block;
+}
+.lgcuModal .status-message.error {
+  background: rgba(255, 50, 50, 0.5);
+  color: #323232;
+  display: block;
+}
+.lgcuModal .status-message.success {
+  background: rgba(50, 250, 50, 0.5);
+  color: #323232;
+  display: block;
+}
 .lgcuModal .card-payment-container {
   min-height: 200px;
   display: flex;
@@ -3614,6 +3643,10 @@ html {
 }
 .lgcuModal .btn-container .lBtn {
   cursor: pointer;
+}
+.lgcuModal .btn-container .lBtn.disable {
+  cursor: default;
+  opacity: 0.2;
 }
 /* Tabs */
 .tab {

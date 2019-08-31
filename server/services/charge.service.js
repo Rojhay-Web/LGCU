@@ -9,6 +9,7 @@ const util = require('util');
 var charge = {
     applicationCharge:function(req,res){ 
         var response = {"errorMessage":null, "results":null};
+        var defaultEmail = "admin@lenkesongcu.org";
 
         /* { userEmail:str, appId:str, chargeDescription:str, 
             cardInfo:{cardNumber, cardExp, cardCode, firstname, lastname, zip, country},
@@ -23,7 +24,9 @@ var charge = {
                     if(ret.status >= 0){
                         // Successful Charge
                         // Send Email to Default
+                        sendChargeEmail(defaultEmail, transactionInfo, ret.results, function(ret){ });
                         // Send Email Receipt to User
+                        sendChargeEmail(transactionInfo.userEmail, transactionInfo, ret.results, function(ret){ });
                     }
                     else {
                         // Unsuccessfully Charge
@@ -41,6 +44,9 @@ var charge = {
         }
     }
 }
+
+module.exports = charge;
+
 
 function chargeCard(cardInfo, chargeDesc, chargeItems, userEmail, callback){
     var ret = {"errorMessage":null, "status":null, "results":null};
@@ -160,4 +166,73 @@ function chargeCard(cardInfo, chargeDesc, chargeItems, userEmail, callback){
     }
 }
 
-module.exports = charge;
+
+function buildChargeEmailHtml(chargeInfo, transactionInfo){
+    var ret = "";
+    try {
+        /*{ userEmail:str, appId:str, chargeDescription:str, 
+            cardInfo:{cardNumber, cardExp, cardCode, firstname, lastname, zip, country},
+            chargeItems:[{name, description, quantity, price}]} */
+        
+        ret +=  util.format('<h1>%s</h1>', chargeInfo.chargeDescription);
+        ret +=  '<table><tr><th>Description</th><th>Info</th></tr>';
+        
+        ret += util.format('<tr><td>First Name</td><td>%s</td></tr>', chargeInfo.cardInfo.firstname.toString());
+        ret += util.format('<tr><td>Last Name</td><td>%s</td></tr>', chargeInfo.cardInfo.lastname.toString());
+        ret += util.format('<tr><td>Application Id</td><td>%s</td></tr>', chargeInfo.appId.toString());
+        ret += util.format('<tr><td>Charge Amount</td><td>$ %s</td></tr>', chargeInfo.chargeItems[0].price.toString());
+        
+        // Charge Info
+        ret += util.format('<tr><td>Charge Info</td></tr>');
+        transactionInfo.transactionResponse.messages.message.forEach(function(item){
+            ret += util.format('<tr><td>Code</td><td>%s</td></tr>', item.code.toString());
+            ret += util.format('<tr><td>Description</td><td>%s</td></tr>', item.description.toString());
+        });
+        ret +=  '</table>';
+    }
+    catch(ex){
+        console.log("[Error] Error building charge email html: ",ex);        
+    }
+
+    return ret;
+}
+
+function sendChargeEmail(sendEmail, chargeInfo, transactionInfo, callback){ 
+    var response = {"errorMessage":null, "results":null};
+    try {
+        var transporter = nodemailer.createTransport({
+            host: 'smtp.gmail.com',
+            port: 465,
+            secure: true,
+            auth: {
+                type: 'OAuth2',
+                user: process.env.MAIL_SERVER_USER,
+                clientId: process.env.MAIL_SERVER_CLIENTID,
+                clientSecret: process.env.MAIL_SERVER_CLIENT_SECRET,
+                refreshToken: process.env.MAIL_SERVER_REFRESH_TOKEN,
+                accessToken: process.env.MAIL_SERVER_ACCESS_TOKEN
+            }
+          });
+
+          var mailOptions = {
+            from: process.env.user,
+            to: sendEmail,
+            subject: "Lenkeson Global Christian University Transaction - Receipt",
+            html: buildChargeEmailHtml(chargeInfo, transactionInfo)
+          };
+
+          transporter.sendMail(mailOptions, function(error, info){
+            if (error) {
+                response.errorMessage = error;
+            } else {
+                response.results = 'Email Sent';                  
+            }    
+            callback(response);            
+          });
+    }
+    catch(ex){
+        response.errorMessage = "[Error]: Error sending charge email: "+ ex;
+        console.log(response.errorMessage);
+        callback(response);
+    }
+}

@@ -648,6 +648,33 @@ body, html {
         &.errorDisplay{ display: block; }
     }
 
+    .status-message {
+        padding: 7px;
+        background: rgba(50,50,50,0.5);
+        color: rgba(250,250,250,1);
+        text-align: center;
+        font-size: 1.2rem;
+        font-weight: bold;
+        display: none;
+        transition: 0.5s all ease-in-out;
+
+        &.processing { 
+            background: rgba(248, 213, 104,0.5);
+            color: rgba(50,50,50,1);
+            display: block;
+        }
+        &.error { 
+            background: rgba(255,50,50,0.5);
+            color: rgba(50,50,50,1);
+            display: block;
+        }
+        &.success { 
+            background: rgba(50,250,50,0.5);
+            color: rgba(50,50,50,1);
+            display: block;
+        }
+    }
+
     .card-payment-container {
         min-height: 200px;
         display: flex;
@@ -807,7 +834,10 @@ body, html {
         }
     }
     .btn-container {
-        .lBtn { cursor: pointer;}
+        .lBtn { 
+            cursor: pointer;
+            &.disable { cursor: default; opacity: 0.2;}
+        }
     }
 }
 /* Tabs */

@@ -29,7 +29,8 @@ class CardPayment extends Component{
             countryList:[],
             monthList:["01","02","03","04","05","06","07","08","09","10","11","12"],
             yearList:[],
-            errorList:[]
+            errorList:[],
+            returnMessage:{"type":"", "message":""}
         }   
         
         this.onElementChange = this.onElementChange.bind(this);
@@ -119,7 +120,8 @@ class CardPayment extends Component{
                 cardNum:"", cardExpMth:"00", cardExpYr:"00",
                 cardFirstName:"", cardLastName:"", cardCSV:"",
                 cardCountry:"", cardZip:"", cardEmail:"",
-                appName:"", appId:"", chargeTotal:50, errorList:[]
+                appName:"", appId:"", chargeTotal:50, errorList:[],
+                returnMessage:{"type":"", "message":""}
             });
         }
         catch(ex){
@@ -128,8 +130,10 @@ class CardPayment extends Component{
     }
 
     closeForm(){
-        this.props.handleClose();
-        this.resetForm();
+        if(this.state.returnMessage.type != "processing"){
+            this.props.handleClose();
+            this.resetForm();
+        }
     }
 
     componentDidMount(){
@@ -156,6 +160,15 @@ class CardPayment extends Component{
                 </Modal.Header>
                 <Modal.Body>
                     <div className={"error-message" + (this.state.errorList.length > 0 ? " errorDisplay" : "")}><span>Please resolve the issues to complete the processing of your payment</span></div>
+                    <div className={"status-message " + this.state.returnMessage.type}>
+                        {this.state.returnMessage.type != "processing" && 
+                            <span>{this.state.returnMessage.message}</span>
+                        }
+                        {this.state.returnMessage.type == "processing" && 
+                            <span>Processing Transaction Please Wait...</span>
+                        }
+                    </div>
+
                     <div className="card-payment-container">
                         <div className="details-container card-details">
                             <p className="description">Your student application will not be processed until your student application fee is submitted.  Please submit your student application fee online using either your application ID provided after your online application was submitted or the name used on your student application.</p>
@@ -239,8 +252,8 @@ class CardPayment extends Component{
                 </Modal.Body>
                 <Modal.Footer>
                     <div className="btn-container">
-                        <div className="lBtn clear t1" onClick={this.submitForm}><span>Submit</span><i className="btn-icon far fa-credit-card"></i></div>
-                        <div className="lBtn clear t1" onClick={this.closeForm}><span>Cancel</span><i className="btn-icon far fa-times-circle"></i></div>
+                        {this.state.returnMessage.type != "success" && <div className={"lBtn clear t1" +(this.state.returnMessage.type == "processing" ? " disable" : "")} onClick={this.submitForm}><span>Submit</span><i className="btn-icon far fa-credit-card"></i></div> }
+                        <div className={"lBtn clear t1" +(this.state.returnMessage.type == "processing" ? " disable" : "")} onClick={this.closeForm}><span>Cancel</span><i className="btn-icon far fa-times-circle"></i></div>
                     </div>
                 </Modal.Footer>
             </Modal>
@@ -307,12 +320,13 @@ class CardPayment extends Component{
     }
 
     submitForm(){
+        var self = this;
         try {
-            if(this.cardFormValidation()){
-                alert("submit form");
+            if(this.state.returnMessage.type != "processing" && this.cardFormValidation()){
                 var appID = (this.state.appId || this.state.appName);
                 var cardExp = this.state.cardExpMth+this.state.cardExpYr;
                 var charge = parseFloat(this.state.chargeTotal).toFixed();
+                var bannerMessage = {"type":"", "message":""};
 
                 var chargeForm = {
                     userEmail: this.state.cardEmail, appId: appID, chargeDescription: "Student Application Payment",
@@ -326,17 +340,43 @@ class CardPayment extends Component{
                         quantity:1, price: charge
                     }]
                 };
-
-                axios.post(rootPath + "/api/applicationCharge", chargeForm, {'Content-Type': 'application/json'})
-                    .then(function(response) {
-                        if(response.errorMessage == null){
-                            // Successful Charge
+                
+                self.setState({ returnMessage: {"type":"processing", "message":""} }, () =>{
+                    axios.post(rootPath + "/api/applicationCharge", chargeForm, {'Content-Type': 'application/json'})
+                    .then(function(resp) {
+                        try {
+                            var response = resp.data;
+                            if(response.errorMessage == null){
+                                // Successful Charge
+                                if(response.results.messages){
+                                    if(response.results.messages.resultCode && response.results.messages.resultCode == "Ok"){
+                                        // Success
+                                        bannerMessage.type = "success";
+                                        bannerMessage.message = response.results.transactionResponse.messages.message[0].description;
+                                    }
+                                    else {
+                                        // Error Banner
+                                        bannerMessage.type = "error";
+                                        bannerMessage.message = response.results.transactionResponse.messages.message[0].description;
+                                    }
+                                }
+                            }
+                            else {
+                                alert("Error Processing Payment");
+                                console.log("[Error] Error Processing Payment: ", response.errorMessage);
+                                // Error Banner
+                                bannerMessage.type = "error";
+                                bannerMessage.message = response.results.transactionResponse.messages.message[0].description;
+                            }
                         }
-                        else {
-                            alert("Error Processing Payment");
-                            console.log("[Error] Error Processing Payment: ", response.errorMessage);
+                        catch(ex){
+                            alert("Error Processing Payment Please Contact: admissions@lenkesongcu.com");
+                            bannerMessage.type = "error";
+                            bannerMessage.message = "Error Processing Payment Please Contact: admissions@lenkesongcu.com";
                         }
-                    });  
+                        self.setState({ returnMessage: bannerMessage });
+                    });
+                });
             }
         }
         catch(ex){
