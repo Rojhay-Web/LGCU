@@ -88,7 +88,7 @@ class Apply extends Component{
                         {"type":"input","sz":10, "required":true, "name":"highestdegree", "placeholder":"Highest Degree Earned", "value":"", "valueList":[]},                        
                         {"type":"textarea","sz":10, "required":false, "name":"otherdegrees", "placeholder":"Other Degrees Earned", "value":"", "valueList":[]}
                     ]},
-                    {"title":"Employment History", "directions":"List employment history for the past 5 years without any gap. Include the following information for each: ", "directionList":["Employer Name","Employer Address","Total Years Of Employment","Name of Supervisor","Emplorer Phone Number","Why did you leave?"], "elements":[
+                    {"title":"Employment History", "directions":"List employment history for the past 5 years without any gap. Include the following information for each: ", "directionList":["Employer Name","Employer Address","Total Years Of Employment","Name of Supervisor","Employer Phone Number","Why did you leave?"], "elements":[
                         {"type":"textarea","sz":10, "required":true, "name":"employmenthistory", "placeholder":"Employment History", "value":"", "valueList":[]}
                     ]}
                 ]

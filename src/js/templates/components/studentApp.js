@@ -176,7 +176,7 @@ class StudentApp extends Component{
                                     <li>Employer Address</li>
                                     <li>Total Years Of Employment</li>
                                     <li>Name of Supervisor</li>
-                                    <li>Emplorer Phone Number</li>
+                                    <li>Employer Phone Number</li>
                                     <li>Why did you leave?</li>
                                 </ul>
                                 <textarea type="text" name="employmenthistory" className="" placeholder="Employment History" value={this.state.form.employmenthistory.value} onChange={(e) => this.onElementChange(e)}/>
