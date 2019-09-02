@@ -1,10 +1,15 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
+const redirectToHTTPS = require('express-http-to-https').redirectToHTTPS;
 const app = express();
 
 
 const port = process.env.PORT || '1111';
+
+ 
+// Don't redirect if the hostname is `localhost:port` or the route is `/insecure`
+app.use(redirectToHTTPS([/localhost:(\d{4})/], [/\/insecure/], 301));
 
 // Set Cors Header
 app.use((req, res, next) => { 
