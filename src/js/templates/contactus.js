@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactGA from 'react-ga';
 
 /* Images */
 import back1 from '../../assets/temp/back12.jpeg';
@@ -46,9 +47,18 @@ class Contact extends Component{
                 ]
             }
         }
+        this.initialReactGA = this.initialReactGA.bind(this);
     }
 
-    componentDidMount(){ window.scrollTo(0, 0); }
+    componentDidMount(){ 
+        window.scrollTo(0, 0);
+        this.initialReactGA();
+    }
+
+    initialReactGA(){
+        ReactGA.initialize('UA-147138083-1');
+        ReactGA.pageview('/contactUs');
+    }
 
     render(){        
         return(

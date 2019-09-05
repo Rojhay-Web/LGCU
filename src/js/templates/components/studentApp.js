@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import ReactGA from 'react-ga';
 
 /* Data */
 import academicData from '../../data/academics.json';
@@ -64,13 +65,20 @@ class StudentApp extends Component{
         this.nextSection = this.nextSection.bind(this);
         this.submitForm = this.submitForm.bind(this);
         this.clearForm = this.clearForm.bind(this);
+        this.initialReactGA = this.initialReactGA.bind(this);
     }
 
     componentDidMount(){
         var self = this;
         this.setState({selectedSection:"ApplicationInfo"},() =>{
             self.buildFilterList();
-        });        
+        });
+        this.initialReactGA();        
+    }
+
+    initialReactGA(){
+        ReactGA.initialize('UA-147138083-1');
+        ReactGA.pageview('/studentApplication');
     }
 
     render(){       

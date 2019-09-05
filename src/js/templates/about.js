@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactGA from 'react-ga';
 
 import back1 from '../../assets/site/mini/back11.jpg';
 import back3 from '../../assets/site/mini/back3.jpg';
@@ -58,11 +59,18 @@ class About extends Component{
         }
 
         this.chooseLetter = this.chooseLetter.bind(this);
+        this.initialReactGA = this.initialReactGA.bind(this);
+    }
+
+    initialReactGA(){
+        ReactGA.initialize('UA-147138083-1');
+        ReactGA.pageview('/about');
     }
 
     componentDidMount(){ 
         window.scrollTo(0, 0);
         this.chooseLetter("en");
+        this.initialReactGA();
     }
 
     render(){        

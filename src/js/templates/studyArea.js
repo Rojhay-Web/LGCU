@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactGA from 'react-ga';
 
 /* Images */
 /* Data */
@@ -111,11 +112,19 @@ class StudyArea extends Component{
         }
 
         this.loadData = this.loadData.bind(this);
+        this.initialReactGA = this.initialReactGA.bind(this);
     }
 
     componentDidMount(){ 
         window.scrollTo(0, 0);
         this.loadData();
+        this.initialReactGA();
+    }
+
+    initialReactGA(){
+        var pagetype = (this.props.match.params.studyArea ? "?type="+this.props.match.params.studyArea : "");
+        ReactGA.initialize('UA-147138083-1');
+        ReactGA.pageview('/studyArea'+pagetype);
     }
 
     render(){        

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactGA from 'react-ga';
 
 /* Images */
 import back1 from '../../assets/site/mini/img7.jpg';
@@ -44,9 +45,18 @@ class Admissions extends Component{
 
         this.controlSlider = this.controlSlider.bind(this);
         this.checkScrollLoc = this.checkScrollLoc.bind(this);
+        this.initialReactGA = this.initialReactGA.bind(this);
     }
 
-    componentDidMount(){ window.scrollTo(0, 0); }
+    componentDidMount(){ 
+        window.scrollTo(0, 0);
+        this.initialReactGA();
+    }
+
+    initialReactGA(){
+        ReactGA.initialize('UA-147138083-1');
+        ReactGA.pageview('/admissions');
+    }
 
     render(){        
         return(

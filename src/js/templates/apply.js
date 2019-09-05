@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import queryString from 'query-string';
+import ReactGA from 'react-ga';
 
 /* Data */
 import academicData from '../data/academics.json';
@@ -103,11 +104,18 @@ class Apply extends Component{
         this.appFeeForm = this.appFeeForm.bind(this);
         this.modalShow = this.modalShow.bind(this);
         this.modalHide = this.modalHide.bind(this);
+        this.initialReactGA = this.initialReactGA.bind(this);
     }
 
     componentDidMount(){ 
         window.scrollTo(0, 0);
         this.getAppType();
+        this.initialReactGA();
+    }
+
+    initialReactGA(){
+        ReactGA.initialize('UA-147138083-1');
+        ReactGA.pageview('/apply');
     }
 
     render(){        

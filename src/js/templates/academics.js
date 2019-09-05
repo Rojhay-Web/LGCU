@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactGA from 'react-ga';
 
 /* Images */
 import back1 from '../../assets/site/mini/img4.jpg';
@@ -47,11 +48,18 @@ class Academics extends Component{
             academicList:[]
         }
         this.buildDataList = this.buildDataList.bind(this);
+        this.initialReactGA = this.initialReactGA.bind(this);
     }
 
     componentDidMount(){ 
         window.scrollTo(0, 0);
         this.buildDataList();
+        this.initialReactGA();
+    }
+
+    initialReactGA(){
+        ReactGA.initialize('UA-147138083-1');
+        ReactGA.pageview('/academics');
     }
 
     render(){        

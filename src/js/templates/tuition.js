@@ -1,5 +1,6 @@
 import {useSpring, animated} from 'react-spring'
 //import {Spring, interpolate} from 'react-spring/renderprops'
+import ReactGA from 'react-ga';
 
 import React, { Component, useEffect } from 'react';
 
@@ -52,7 +53,13 @@ function Tuition(props){
     ];
 
     useEffect(() => window.scrollTo(0, 0), []);
-        
+    useEffect(() => initialReactGA(), []);
+    
+    function initialReactGA(){
+        ReactGA.initialize('UA-147138083-1');
+        ReactGA.pageview('/tuition');
+    }
+
     function calc(x,y){
         var container = document.getElementById("imgSplit");
         return [-(y - container.offsetHeight / 2) / 20, (x - container.offsetWidth / 2) / 20, 0.9];

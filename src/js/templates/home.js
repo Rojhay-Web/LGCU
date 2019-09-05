@@ -1,5 +1,6 @@
 import {useSpring, animated} from 'react-spring'
 import {Spring} from 'react-spring/renderprops'
+import ReactGA from 'react-ga';
 
 import React, { Component, useState, useEffect } from 'react';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -103,21 +104,16 @@ function Home(props){
         }
     }
 
-    /*useEffect(() => {         
-        window.addEventListener('scroll', listenToScroll);
-        window.scrollTo(0, 0);
-        buildDataList();
-
-        return function cleanup(){ 
-            window.removeEventListener('scroll', listenToScroll);
-        };
-    });*/
+    function initialReactGA(){
+        ReactGA.initialize('UA-147138083-1');
+        ReactGA.pageview('/home');
+    }
 
     useEffect(() => window.scrollTo(0, 0), []);
     useEffect(() => buildDataList(), []);
     useEffect(() => window.addEventListener('scroll', listenToScroll), []);    
-    //function componentWillUnmount() { window.removeEventListener('scroll', listenToScroll); }
-    
+    useEffect(() => initialReactGA(), []);
+
     function calc(x,y){
         var container = document.getElementById("imgSplit");
         return [-(y - container.offsetHeight / 2) / 20, (x - container.offsetWidth / 2) / 20, 0.9];
