@@ -13,6 +13,7 @@ import { Tuition, TuitionHeader } from './templates/tuition';
 import { About, AboutHeader } from './templates/about';
 import { Contact, ContactHeader } from './templates/contactus';
 import { Apply, ApplyHeader } from './templates/apply';
+import { myLGCU, myLGCUHeader} from './templates/myLgcu';
 
 /* Styles */
 import "../css/app.less";
@@ -30,7 +31,8 @@ const routes = [
     {path:"/faculty", component:Faculty, headerComponent:FacultyHeader},
     {path:"/tuition", component:Tuition, headerComponent:TuitionHeader},
     {path:"/contactus", component:Contact, headerComponent:ContactHeader},
-    {path:"/apply", component:Apply, headerComponent:ApplyHeader}
+    {path:"/apply", component:Apply, headerComponent:ApplyHeader},
+    {path:"/mylgcu", component:myLGCU, headerComponent:myLGCUHeader}
 ];
 
 
@@ -82,9 +84,10 @@ class App extends Component{
                     <div className="app-body">
                         <div className={"app-nav" + (this.state.navChange ? " page-nav" : " full-nav")}>
                             <nav className="navbar navbar-expand-lg nav-top navbar-dark bg-dark">                                
-                                {/*<Link className="nav-item mini-nav-link" to="/">my<span className="c2">LGCU</span></Link>*/}
-                                <a href="https://www.givelify.com/givenow/1.0/?token=eyJvcmdfaWQiOiJNelUyT1RFfiIsImJhZGdlX2ltYWdlIjoiYjMucG5nIn0~" target="_blank" rel="noopener noreferrer" className="nav-item mini-nav-link">Givelify Donations</a>
-                                <a href="https://www.paypal.com/mep/dashboard" target="_blank" rel="noopener noreferrer" className="nav-item mini-nav-link">PayPal Donations</a>
+                                <Link className="nav-item mini-nav-link" to="/mylgcu">my<span className="c2">LGCU</span></Link>
+                                <span className="nav-item mini-nav-link no-link">Donations</span>
+                                <a href="https://www.givelify.com/givenow/1.0/?token=eyJvcmdfaWQiOiJNelUyT1RFfiIsImJhZGdlX2ltYWdlIjoiYjMucG5nIn0~" target="_blank" rel="noopener noreferrer" className="nav-item mini-nav-link donation-link"><span className="givelify-logo">Givelify</span></a>
+                                <a href="https://www.paypal.com/mep/dashboard" target="_blank" rel="noopener noreferrer" className="nav-item mini-nav-link donation-link"><i className="fab fa-paypal"></i></a>
                                 <Link className="nav-item mini-nav-link" to="/apply">Apply</Link>                                
                             </nav>
                             <nav className="navbar navbar-expand-lg nav-bottom">
@@ -166,7 +169,7 @@ class App extends Component{
                                     <a href="https://www.givelify.com/givenow/1.0/?token=eyJvcmdfaWQiOiJNelUyT1RFfiIsImJhZGdlX2ltYWdlIjoiYjMucG5nIn0~" target='_blank' className="footer-link">Donate</a>
                                     <Link className="footer-link" to="/apply">Apply</Link>
                                     <Link className="footer-link" to="/contactus">Contact Us</Link>
-                                    {/*<Link className="footer-link" to="/">myLGCU</Link>*/}
+                                    <Link className="footer-link" to="/mylgcu">myLGCU</Link>
                                 </div>
                             </div>
                             <div className="footer-section full address">

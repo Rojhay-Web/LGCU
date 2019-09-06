@@ -1853,6 +1853,192 @@
   display: inline-block;
   cursor: pointer;
 }
+.mylgcuHeader {
+  position: relative;
+  z-index: 2;
+  background: #dcdcdc;
+}
+.mylgcuHeader .header-section {
+  padding: 10px 5%;
+}
+.mylgcuHeader .header-section.header-title .solid-back span {
+  background: rgba(37, 119, 40, 0.7) !important;
+}
+.mylgcuHeader .header-section.header-title .backImg:before {
+  background-color: rgba(37, 119, 40, 0.3) !important;
+}
+.mylgcuHeader .header-section.header-title .mylgcu-info {
+  text-align: left;
+  font-size: 3rem;
+  width: 100%;
+  padding: 7px;
+}
+.mylgcuHeader .header-section.header-title .mylgcu-info span.c1 {
+  color: #151280;
+}
+.mylgcuHeader .header-section.header-title .mylgcu-info span.c2 {
+  color: #257728;
+}
+.mylgcuPage {
+  background: #e6e6e6;
+  min-height: 100vh;
+}
+.mylgcuPage .mylgcu-section {
+  padding: 89px 0px 50px;
+  position: relative;
+  overflow: hidden;
+  padding: 10px 3%;
+}
+.mylgcuPage .mylgcu-section .mylgcu-content-section {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.mylgcuPage .mylgcu-section .mylgcu-content-section .section-title {
+  padding: 0px 7px;
+  width: 100%;
+  font-weight: bold;
+  margin-bottom: 7px;
+  font-size: 1.2rem;
+}
+.mylgcuPage .mylgcu-section .mylgcu-content-section .content-block {
+  display: inline-flex;
+  flex-direction: row;
+  padding: 7px;
+  margin-bottom: 7px;
+}
+.mylgcuPage .mylgcu-section .mylgcu-content-section .content-block.sz1 {
+  width: 10%;
+}
+.mylgcuPage .mylgcu-section .mylgcu-content-section .content-block.sz2 {
+  width: 20%;
+}
+.mylgcuPage .mylgcu-section .mylgcu-content-section .content-block.sz3 {
+  width: 30%;
+}
+.mylgcuPage .mylgcu-section .mylgcu-content-section .content-block.sz4 {
+  width: 40%;
+}
+.mylgcuPage .mylgcu-section .mylgcu-content-section .content-block.sz5 {
+  width: 50%;
+}
+.mylgcuPage .mylgcu-section .mylgcu-content-section .content-block.sz6 {
+  width: 60%;
+}
+.mylgcuPage .mylgcu-section .mylgcu-content-section .content-block.sz7 {
+  width: 70%;
+}
+.mylgcuPage .mylgcu-section .mylgcu-content-section .content-block.sz8 {
+  width: 80%;
+}
+.mylgcuPage .mylgcu-section .mylgcu-content-section .content-block.sz9 {
+  width: 90%;
+}
+.mylgcuPage .mylgcu-section .mylgcu-content-section .content-block.sz10 {
+  width: 100%;
+}
+.mylgcuPage .mylgcu-section .mylgcu-content-section .content-block .block-container {
+  padding: 12px;
+  background: #ffffff;
+  text-align: left;
+  width: 100%;
+  border-radius: 5px;
+  display: inline-flex;
+  flex-direction: row;
+  -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.2);
+}
+.mylgcuPage .mylgcu-section .mylgcu-content-section .content-block .block-container .content-title {
+  color: #4b4b4b;
+  margin-right: 14px;
+}
+.mylgcuPage .mylgcu-section .mylgcu-content-section .content-block .block-container .content-info {
+  font-weight: bold;
+}
+.mylgcuPage .mylgcu-section .mylgcu-profile .overview {
+  max-height: 400px;
+  overflow-y: auto;
+}
+.mylgcuPage .mylgcu-section .mylgcu-profile .overview-table {
+  width: 100%;
+  text-align: center;
+}
+.mylgcuPage .mylgcu-section .mylgcu-profile .overview-table .header {
+  text-transform: uppercase;
+  color: #969696;
+  font-size: 0.8rem;
+}
+.mylgcuPage .mylgcu-section .mylgcu-profile .overview-table .dataRow {
+  font-size: 1.3rem;
+  border-bottom: 1px solid rgba(150, 150, 150, 0.5);
+}
+.mylgcuPage .mylgcu-section .mylgcu-profile .overview-table .dataRow td {
+  padding: 10px 0px;
+}
+.mylgcuPage .mylgcu-section .mylgcu-profile .overview-table .dataRow .courseNumber {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  width: 30px;
+  height: 30px;
+  background: #257728;
+  color: #ffffff;
+  border-radius: 50%;
+}
+.mylgcuPage .mylgcu-section .mylgcu-profile .overview-table .dataRow .courseCode {
+  color: #969696;
+  text-transform: uppercase;
+}
+.mylgcuPage .mylgcu-section .mylgcu-profile .overview-table .dataRow .courseTitle {
+  font-weight: bold;
+}
+.mylgcuPage .mylgcu-section .mylgcu-profile .overview-table .dataRow .courseStatus {
+  background: #969696;
+  padding: 3px 15px;
+  border-radius: 50px;
+  text-transform: capitalize;
+  color: #ffffff;
+}
+.mylgcuPage .mylgcu-section .mylgcu-profile .overview-table .dataRow .courseStatus.status1 {
+  background: #5874dc;
+}
+.mylgcuPage .mylgcu-section .mylgcu-profile .overview-table .dataRow .courseStatus.status2 {
+  background: #f1c40f;
+}
+.mylgcuPage .mylgcu-section .mylgcu-profile .overview-table .dataRow .courseStatus.status3 {
+  background: #257728;
+}
+.mylgcuPage .mylgcu-nav-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  padding: 7px 2%;
+  background: rgba(255, 255, 255, 0.9);
+  justify-content: center;
+}
+.mylgcuPage .mylgcu-nav-container .mylgcu-nav-item {
+  padding: 7px 14px;
+  border-bottom: 3px solid rgba(255, 255, 255, 0);
+  transition: 0.5s all ease-in-out;
+  cursor: pointer;
+}
+.mylgcuPage .mylgcu-nav-container .mylgcu-nav-item span {
+  margin-left: 7px;
+}
+.mylgcuPage .mylgcu-nav-container .mylgcu-nav-item:hover {
+  border-bottom: 3px solid rgba(150, 150, 150, 0.7);
+}
+.mylgcuPage .mylgcu-nav-container .mylgcu-nav-item.selected {
+  border-bottom: 3px solid #257728;
+}
+.mylgcuPage .mylgcu-nav-container .mylgcu-nav-item + .mylgcu-nav-item {
+  margin-left: 2%;
+}
 /* imported */
 .lng {
   background-size: contain;
@@ -2876,6 +3062,16 @@ html {
 }
 .app-nav .navbar.nav-top .nav-item .c2 {
   color: #257728;
+}
+.app-nav .navbar.nav-top .nav-item.no-link {
+  cursor: default;
+  padding-right: 5px;
+}
+.app-nav .navbar.nav-top .nav-item.no-link:hover {
+  background: rgba(0, 0, 0, 0);
+}
+.app-nav .navbar.nav-top .nav-item.donation-link {
+  border: none;
 }
 .app-nav .navbar.nav-bottom .navbar-brand {
   height: 75px;

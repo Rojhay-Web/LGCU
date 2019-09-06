@@ -49,6 +49,7 @@
 @import "about.less";
 @import "contactus.less";
 @import "apply.less";
+@import "mylgcu.less";
 
 /* imported */
 @import "../../node_modules/country-icons/index.less";
@@ -248,7 +249,9 @@ body, html {
                 font-weight: bold;  
                 transition: .5s all ease-in-out;
                 &:hover { background: rgba(255,255,255,0.2); text-decoration: none;}
-                .c2 { color: @color2;}             
+                .c2 { color: @color2;}   
+                &.no-link { cursor: default; padding-right: 5px; &:hover { background: rgba(0,0,0,0); } } 
+                &.donation-link { border: none;   }         
             }           
         }
 

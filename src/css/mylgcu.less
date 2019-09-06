@@ -1,0 +1,152 @@
+.mylgcuHeader {
+    position: relative;
+    z-index: 2;
+    background: rgba(220,220,220,1);
+
+    .header-section {
+        padding: 10px 5%;
+        &.header-title {
+            .solid-back {
+                span {
+                    .color2(background, 0.7);
+                }
+            }
+            .backImg {
+                &:before {.color2(background-color, 0.3);}
+            }
+            
+            .mylgcu-info {
+                text-align: left;
+                font-size: 3rem;
+                width: 100%;
+                padding: 7px;
+                span { &.c1 { color: @color1;} &.c2 { color: @color2; }} 
+            }
+            @media @mobile-device { 
+                
+            }
+        }
+    }
+}
+
+.mylgcuPage {
+    background: rgba(230,230,230,1);
+    min-height: 100vh;
+    .mylgcu-section {
+        padding: @navHeightBottom 0px 50px;
+        position: relative;
+        overflow: hidden;
+        padding: 10px 3%;
+
+        .mylgcu-content-section {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            .section-title { padding: 0px 7px; width: 100%; font-weight: bold; margin-bottom: 7px; font-size: 1.2rem; }
+            .content-block {
+                display: inline-flex;
+                flex-direction: row;
+                padding: 7px;
+                margin-bottom: 7px;
+
+                &.sz1 { width: 10%; }
+                &.sz2 { width: 20%; }
+                &.sz3 { width: 30%; }
+                &.sz4 { width: 40%; }
+                &.sz5 { width: 50%; }
+                &.sz6 { width: 60%; }
+                &.sz7 { width: 70%; }
+                &.sz8 { width: 80%; }
+                &.sz9 { width: 90%; }
+                &.sz10 { width: 100%; }
+                
+                .block-container {
+                    padding: 12px;
+                    background: rgba(255,255,255,1);
+                    text-align: left;   
+                    width: 100%;                          
+                    border-radius: 5px;
+                    display: inline-flex;
+                    flex-direction: row;
+                    -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.2);
+                    -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.2);
+                    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.2);
+                    .content-title { color: rgba( 75,75,75,1); margin-right: 14px; }
+                    .content-info { font-weight: bold; }
+                }
+            }
+        }
+
+        .mylgcu-profile {
+            .overview {
+                max-height: 400px;
+                overflow-y: auto;
+            }
+            .overview-table {
+                width: 100%;
+                text-align: center;
+                .header { 
+                    text-transform: uppercase;
+                    color: rgba(150,150,150,1);
+                    font-size: .8rem;
+                }
+
+                .dataRow {
+                    font-size: 1.3rem;
+                    border-bottom: 1px solid rgba(150,150,150,0.5);
+                    td { padding: 10px 0px; }
+                    .courseNumber {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        text-align: center;
+                        width: 30px;
+                        height: 30px;
+                        background: @color2;
+                        color: rgba(255,255,255,1);
+                        border-radius: 50%;
+                    }
+                    .courseCode { 
+                        color: rgba(150,150,150,1);
+                        text-transform: uppercase;
+                    }
+                    .courseTitle { font-weight: bold; }
+                    .courseStatus { 
+                        background: rgba(150,150,150,1);
+                        padding: 3px 15px;
+                        border-radius: 50px;
+                        text-transform: capitalize;
+                        color: rgba(255,255,255,1);
+
+                        &.status0 { }
+                        &.status1 { background: @theme4; }
+                        &.status2 { background: @theme5; }
+                        &.status3 { background: @color2; }
+                    }
+                }
+            }
+        }
+    }
+
+    .mylgcu-nav-container {
+        position: fixed;
+        bottom:0;
+        left:0;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        padding: 7px 2%;
+        background: rgba(255,255,255,0.9);
+        justify-content: center;
+        .mylgcu-nav-item {
+            padding: 7px 14px;
+            border-bottom: 3px solid rgba(255,255,255,0);
+            transition: 0.5s all ease-in-out;
+            cursor: pointer;
+            span { margin-left: 7px; }
+            &:hover { border-bottom: 3px solid rgba(150,150,150,0.7);}
+            &.selected { border-bottom: 3px solid @color2; }
+            &+.mylgcu-nav-item { margin-left: 2%;}
+        }
+    }
+}
