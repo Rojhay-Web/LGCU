@@ -58,7 +58,7 @@ function chargeCard(cardInfo, chargeDesc, chargeItems, userEmail, callback){
         var merchantAuthenticationType = new ApiContracts.MerchantAuthenticationType();
         merchantAuthenticationType.setName(process.env.AuthNetApiLoginKey);
         merchantAuthenticationType.setTransactionKey(process.env.AuthNetTransactionKey);
-
+        
         /* Credit Card */
         var creditCard = new ApiContracts.CreditCardType();
         creditCard.setCardNumber(cardInfo.cardNumber);
@@ -117,12 +117,17 @@ function chargeCard(cardInfo, chargeDesc, chargeItems, userEmail, callback){
         createRequest.setTransactionRequest(transactionRequestType);
 
         //pretty print request
-        if(process.env.CODEENV && process.env.CODEENV == "DEBUG") { console.log(JSON.stringify(createRequest.getJSON(), null, 2)); }
+        if(process.env.CODEENV && process.env.CODEENV == "DEBUG") { 
+            console.log("transaction sent");
+            console.log(JSON.stringify(createRequest.getJSON(), null, 2));
+        }
 
         var ctrl = new ApiControllers.CreateTransactionController(createRequest.getJSON());
         
-        //Defaults to sandbox
-        //ctrl.setEnvironment(SDKConstants.endpoint.production);
+        //Remove to defaults to sandbox
+        if(!process.env.CODEENV || process.env.CODEENV !== "DEBUG") { 
+            ctrl.setEnvironment(SDKConstants.endpoint.production);
+        }
         
         /* Send Transaction */
         ctrl.execute(function(){ 
@@ -130,7 +135,10 @@ function chargeCard(cardInfo, chargeDesc, chargeItems, userEmail, callback){
             var response = new ApiContracts.CreateTransactionResponse(apiResponse);
             
             //pretty print response
-            if(process.env.CODEENV && process.env.CODEENV == "DEBUG") { console.log(JSON.stringify(response, null, 2)); }
+            if(process.env.CODEENV && process.env.CODEENV == "DEBUG") { 
+                console.log("transaction completed");
+                console.log(JSON.stringify(response, null, 2));
+            }
             
             if(response != null){ 
                 if(response.getMessages().getResultCode() == ApiContracts.MessageTypeEnum.OK){

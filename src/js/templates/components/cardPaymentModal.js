@@ -24,7 +24,7 @@ class CardPayment extends Component{
 
             appName:"",
             appId:"",
-            chargeTotal:50,
+            chargeTotal:50.00,
 
             countryList:[],
             monthList:["01","02","03","04","05","06","07","08","09","10","11","12"],
@@ -325,7 +325,7 @@ class CardPayment extends Component{
             if(this.state.returnMessage.type != "processing" && this.cardFormValidation()){
                 var appID = (this.state.appId || this.state.appName);
                 var cardExp = this.state.cardExpMth+this.state.cardExpYr;
-                var charge = parseFloat(this.state.chargeTotal).toFixed();
+                var charge = parseFloat(this.state.chargeTotal).toFixed(2);
                 var bannerMessage = {"type":"", "message":""};
 
                 var chargeForm = {
