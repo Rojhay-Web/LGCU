@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Router, Route, Link } from "react-router-dom";
 import { createBrowserHistory } from 'history';
+import $ from 'jquery';
 
 /* Components */
 import { Home, HomeHeader } from './templates/home';
@@ -67,11 +68,15 @@ class App extends Component{
         super(props);
         this.state = {
             navChange: false,
-            sidebarOpen: false
+            sidebarOpen: false,
+            alerts:[
+                {title:"Rolling Enrollment",text:"Next Classes Start on October 7th. To obtain additional information regarding enrollment, click on <a href=\"/apply\">Apply</a> then click on Student Application.", type:"primary"}
+            ]
         };
 
         this.setSidebarDisplay = this.setSidebarDisplay.bind(this);
         this.listenToScroll = this.listenToScroll.bind(this);
+        this.setAlerts = this.setAlerts.bind(this);
     }
 
     render(){     
@@ -131,6 +136,7 @@ class App extends Component{
                                 </nav>
                             </div>
                             
+                            <div id="notifications"/>
                             {/* Body */}
                             <Route exact path="/" component={Home} />
                             { routes.map((route, i) => <SiteRoutes key={i} {...route} />) }
@@ -245,10 +251,24 @@ class App extends Component{
         });
     }
 
+    setAlerts(){
+        try {
+            if(this.state.alerts){
+                this.state.alerts.forEach(function(item){  
+                    $("#notifications").append("<div class=\"alert alert-"+item.type+" alert-dismissible fade show\" role=\"alert\"><div class=\"alert-title\">"+item.title +"</div><div class=\"alert-text\">"+item.text+"</div><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button></div>")
+                });
+            }
+        }
+        catch(ex){
+            console.log("Error")
+        }
+    }
+
     componentDidMount(){
         var self = this;
         window.addEventListener('scroll', this.listenToScroll);
-        
+        this.setAlerts();
+
         self.unlisten = history.listen(location => { 
             if(self.sidebarOpen) { self.setSidebarDisplay(false); }
         });                     

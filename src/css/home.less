@@ -292,7 +292,13 @@
 
                 @media @mobile-device { 
                     flex-direction: column;
-                    .split-content { margin-left:0; p { font-size: 1.5rem; line-height: 2.4rem; }}
+                    .split-content { 
+                        margin-left:0; 
+                        p { font-size: 1.5rem; line-height: 2.4rem; }
+                        .btn-container {
+                            .clear{ color: rgba(255,255,255,1); }
+                        }
+                    }
                 }
             }
 
