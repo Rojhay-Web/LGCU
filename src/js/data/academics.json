@@ -58,7 +58,12 @@
                     {"subtitle":"General Education Courses: 45 credits","courses":["ANTH_110","CIS_107", "ENG_101","ENG_102","MTH_160","MTH_161","BIOL_105","SOC_101","HIST_122","HIST_123","PSY_101","ENG_117","ENG_118","POLS_101","SOC_217"]},
                     {"subtitle":"Required Credit Courses: 45 credits","courses":["CIS_301","CIS_303","CIS_341","CIS_401","CIS_403","CIS_405","CIS_407","CIS_411","CIS_413","CIS_415","CIS_417"]},
                     {"subtitle":"Elective Courses: 30 credits (Professional portfolio can make up 15 credits of the electives or electives can be chosen from other programs at LGCU)","courses":[]}
-                ]},                
+                ]},      
+                {"id":"BS-CJ", "title":"Criminal Justice","gradtotal":69, "courses":[
+                    {"subtitle":"General Education Courses (45)","courses":["ENG_101","MTH_160","MTH_118","BIOL_107","SOC_101","HIST_117","ENG_102","PSY_101","ENG_110","ENG_201","GOV_110","COM_118","PED_112", "CIS_107","SOC_223","REL_227"]},
+                    {"subtitle":"Required Degree Courses and Credits (45)","courses":["CMJ_201","CMJ_203","CMJ_211","CMJ_227","CMJ_229","CMJ_331","CMJ_340","CMJ_345","CMJ_347","CMJ_430","CMJ_431","CMJ_433"]},
+                    {"subtitle":"Elective Courses: 30 credits (Professional portfolio can make up 15 credits of the electives or electives can be chosen from other programs at LGCU)","courses":[]}
+                ]},          
                 {"id":"BA-PSY", "title":"Psychology","gradtotal":120, "courses":[
                     {"subtitle":"General Education Courses: 45 credits","courses":["ANTH_110","CIS_107","ENG_101","ENG_102","MTH_160","MTH_161","BIOL_105","SOC_101","HIST_122","HIST_123","POLS_101","PSY_101","ENG_117","ENG_118","SOC_217"]},
                     {"subtitle":"Required Credit Courses: 45 credits","courses":["PSY_303","PSY_305","PSY_307","PSY_312","PSY_315","PSY_433","PSY_435","PSY_415","PSY_413","PSY_417","PSY_423","PSY_401","PSY_341","PSY_431","PSY_425","PSY_439","PSY_441"]},

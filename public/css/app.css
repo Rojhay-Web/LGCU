@@ -3219,7 +3219,7 @@ html {
 }
 @media (max-width: 770px) {
   .lBtn.clear {
-    color: #646464;
+    color: #ffffff;
   }
 }
 @media (max-width: 770px) {
@@ -4266,6 +4266,7 @@ html {
 /* Alert */
 #notifications {
   padding: 1rem 5%;
+  background: #343a40;
 }
 .alert-title {
   font-weight: bold;
