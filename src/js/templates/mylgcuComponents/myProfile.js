@@ -89,7 +89,7 @@ class MyProfile extends Component{
 
                    <div className="content-block sz2">
                        <div className="block-container">
-                            <div className="content-title">Credits:</div>
+                            <div className="content-title">Credits Count:</div>
                             <div className="content-info">{this.state.totalCredits}</div>
                        </div>
                    </div>
@@ -102,20 +102,24 @@ class MyProfile extends Component{
                    <div className="content-block sz10">
                        <div className="block-container overview">
                             <table className="overview-table">
-                                <tr className="header">
-                                    <th></th>
-                                    <th>Course Code</th>
-                                    <th>Course Title</th>
-                                    <th>Status</th>
-                                </tr>
-                                {this.state.overviewData.map((item, i) =>(
-                                    <tr key={i} className="dataRow">
-                                        <td><span className="courseNumber">{i+1}</span></td>
-                                        <td><span className="courseCode">{item.courseCode.name} {item.courseCode.id}</span></td>
-                                        <td><span className="courseTitle">{item.title}</span></td>
-                                        <td><span className={"courseStatus status"+item.statusCode}>{this.getCourseStatus(item.statusCode)}</span></td>
+                                <thead>
+                                    <tr className="header">
+                                        <th></th>
+                                        <th>Course Code</th>
+                                        <th>Course Title</th>
+                                        <th>Status</th>
                                     </tr>
-                                ))}
+                                </thead>
+                                <tbody>
+                                    {this.state.overviewData.map((item, i) =>(
+                                        <tr key={i} className="dataRow">
+                                            <td><span className="courseNumber">{i+1}</span></td>
+                                            <td><span className="courseCode">{item.courseCode.name} {item.courseCode.id}</span></td>
+                                            <td><span className="courseTitle">{item.title}</span></td>
+                                            <td><span className={"courseStatus status"+item.statusCode}>{this.getCourseStatus(item.statusCode)}</span></td>
+                                        </tr>
+                                    ))}
+                                </tbody>
                             </table>
                        </div>
                    </div>
