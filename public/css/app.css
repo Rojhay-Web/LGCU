@@ -4277,6 +4277,42 @@ html {
   font-size: 1.2rem;
   display: block;
 }
+/* Translation Button */
+.translate-btn {
+  display: inline-flex;
+  position: fixed;
+  bottom: 15px;
+  left: 1%;
+  background: #257728;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  z-index: 901;
+  text-align: center;
+  flex-direction: column;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 18px;
+  -moz-box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  transition: 0.7s all ease-in-out;
+}
+.translate-btn:hover {
+  background: #57a95a;
+}
+.translateModal .modal-header {
+  background: rgba(255, 255, 255, 0.85);
+}
+.translateModal .modal-body {
+  overflow: hidden;
+  padding: 20px 5%;
+  background: rgba(255, 255, 255, 0.85);
+}
+.translateModal .modal-body .translateVideo {
+  width: 100%;
+}
 /* Mobile Nav */
 .noscroll {
   overflow: hidden;

@@ -30,75 +30,83 @@ class MajorSub extends Component{
 
                 {(this.state.majorData && this.state.majorData.courses !== undefined) && 
                     <section className="studyArea-section">                       
-                        
-                        <div className="section-container">
-                            <h2 className="lrgTitle ctr fullTitle">{this.state.fullTitle}</h2>
-                            <p>Our {this.state.majorData.title} degree is one of the many competitive {this.state.majorData.degreeLvl} degrees that we offer here at Lenkenson Global Christian University.  If you are interested in becoming a student please submit a <a href="/apply?type=student">Student Application</a> or for more information please contact our admissions staff directly via email <a href="mailto:admissions@lenkesongcu.org">admissions@lenkesongcu.org</a></p>
+                        {this.state.majorData.comingSoon && 
+                            <div className="section-container">
+                                <h2 className="lrgTitle ctr fullTitle">{this.state.fullTitle}</h2>
+                                <p>To obtain information or any general questions regarding our {this.state.majorData.title} degree please contact our admissions team at <a href="mailto:admissions@lenkesongcu.org">admissions@lenkesongcu.org</a></p>
+                            </div>
+                        }
 
-                            <h2 className="lrgTitle ctr" data-text="Curriculum">Curriculum</h2>
+                        {!this.state.majorData.comingSoon &&
+                            <div className="section-container">
+                                <h2 className="lrgTitle ctr fullTitle">{this.state.fullTitle}</h2>
+                                <p>Our {this.state.majorData.title} degree is one of the many competitive {this.state.majorData.degreeLvl} degrees that we offer here at Lenkenson Global Christian University.  If you are interested in becoming a student please submit a <a href="/apply?type=student">Student Application</a> or for more information please contact our admissions staff directly via email <a href="mailto:admissions@lenkesongcu.org">admissions@lenkesongcu.org</a></p>
 
-                            {this.state.majorData.courses.length === 0 && 
-                                <div className="course-section noCourseData">                                    
-                                    <span>To get information or any general questions regarding our {this.state.majorData.title} degree please contact our admissions team at </span>
-                                    <a href="mailto:admissions@lenkesongcu.org">admissions@lenkesongcu.org</a>
-                                    <span> and request the course curriculum and degree information.</span>                                    
-                                </div>
-                            }
+                                <h2 className="lrgTitle ctr" data-text="Curriculum">Curriculum</h2>
 
-                            {this.state.majorData.courses.map((item,i) => (
-                                <div className="course-section" key={i}>
-                                    <p className="course-title">{item.subtitle}</p>
-                                    <table className="course-table">
-                                        {item.courses.map((course,j) => (
-                                            <tr key={j}>
-                                                <td>{course.section}</td>
-                                                <td>{course.id}</td>
-                                                <td>{course.title}</td>
-                                                <td>{course.credit}</td>
-                                            </tr>
-                                        ))}
-                                    </table>
-                                </div>
-                            ))}
+                                {this.state.majorData.courses.length === 0 && 
+                                    <div className="course-section noCourseData">                                    
+                                        <span>To get information or any general questions regarding our {this.state.majorData.title} degree please contact our admissions team at </span>
+                                        <a href="mailto:admissions@lenkesongcu.org">admissions@lenkesongcu.org</a>
+                                        <span> and request the course curriculum and degree information.</span>                                    
+                                    </div>
+                                }
 
-                            {this.state.majorData.concentrations && this.state.majorData.concentrations.map((item,i) => (
-                                <div className="course-section" key={i}>
-                                    <p className="course-title">{item.title}</p>
-                                    <table className="course-table">
-                                        {item.courses.map((course,j) => (
-                                            <tr key={j}>
-                                                <td>{course.section}</td>
-                                                <td>{course.id}</td>
-                                                <td>{course.title}</td>
-                                                <td>{course.credit}</td>
-                                            </tr>
-                                        ))}
-                                    </table>                           
-                                </div>
-                            ))}
+                                {this.state.majorData.courses.map((item,i) => (
+                                    <div className="course-section" key={i}>
+                                        <p className="course-title">{item.subtitle}</p>
+                                        <table className="course-table">
+                                            {item.courses.map((course,j) => (
+                                                <tr key={j}>
+                                                    <td>{course.section}</td>
+                                                    <td>{course.id}</td>
+                                                    <td>{course.title}</td>
+                                                    <td>{course.credit}</td>
+                                                </tr>
+                                            ))}
+                                        </table>
+                                    </div>
+                                ))}
 
-                            {this.state.majorData.specialization && this.state.majorData.specialization.map((item,i) => (
-                                <div className="course-section" key={i}>
-                                    <h2 className="lrgTitle ctr sub concentrations-title" data-text={item.title}>{item.title}</h2>
-                                    <table className="course-table">
-                                        {item.courses.map((course,j) => (
-                                            <tr key={j}>
-                                                <td>{course.section}</td>
-                                                <td>{course.id}</td>
-                                                <td>{course.title}</td>
-                                                <td>{course.credit}</td>
-                                            </tr>
-                                        ))}
-                                    </table>                           
-                                </div>
-                            ))}
+                                {this.state.majorData.concentrations && this.state.majorData.concentrations.map((item,i) => (
+                                    <div className="course-section" key={i}>
+                                        <p className="course-title">{item.title}</p>
+                                        <table className="course-table">
+                                            {item.courses.map((course,j) => (
+                                                <tr key={j}>
+                                                    <td>{course.section}</td>
+                                                    <td>{course.id}</td>
+                                                    <td>{course.title}</td>
+                                                    <td>{course.credit}</td>
+                                                </tr>
+                                            ))}
+                                        </table>                           
+                                    </div>
+                                ))}
 
-                            {this.state.majorData.gradtotal &&
-                                <div className="course-section gradTotal">
-                                    <h2>Total number of required hours for graduation: {this.state.majorData.gradtotal}</h2>
-                                </div>
-                            }
-                        </div>
+                                {this.state.majorData.specialization && this.state.majorData.specialization.map((item,i) => (
+                                    <div className="course-section" key={i}>
+                                        <h2 className="lrgTitle ctr sub concentrations-title" data-text={item.title}>{item.title}</h2>
+                                        <table className="course-table">
+                                            {item.courses.map((course,j) => (
+                                                <tr key={j}>
+                                                    <td>{course.section}</td>
+                                                    <td>{course.id}</td>
+                                                    <td>{course.title}</td>
+                                                    <td>{course.credit}</td>
+                                                </tr>
+                                            ))}
+                                        </table>                           
+                                    </div>
+                                ))}
+
+                                {this.state.majorData.gradtotal &&
+                                    <div className="course-section gradTotal">
+                                        <h2>Total number of required hours for graduation: {this.state.majorData.gradtotal}</h2>
+                                    </div>
+                                }
+                            </div>
+                        }
                     </section>
                 }
             </div>

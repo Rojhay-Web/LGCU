@@ -15,6 +15,8 @@ import { About, AboutHeader } from './templates/about';
 import { Contact, ContactHeader } from './templates/contactus';
 import { Apply, ApplyHeader } from './templates/apply';
 
+import TranslateVideo from './templates/components/translateVideoModal';
+
 /* Styles */
 import "../css/app.less";
 
@@ -69,6 +71,7 @@ class App extends Component{
         this.state = {
             navChange: false,
             sidebarOpen: false,
+            modalStatus: false,
             alerts:[
                 {title:"Rolling Enrollment",text:"Next Classes Start on October 7th. To obtain additional information regarding enrollment, click on <a href=\"/apply\">Apply</a> then click on Student Application.", type:"primary"}
             ]
@@ -77,6 +80,8 @@ class App extends Component{
         this.setSidebarDisplay = this.setSidebarDisplay.bind(this);
         this.listenToScroll = this.listenToScroll.bind(this);
         this.setAlerts = this.setAlerts.bind(this);
+        this.modalShow = this.modalShow.bind(this);
+        this.modalHide = this.modalHide.bind(this);
     }
 
     render(){     
@@ -87,7 +92,7 @@ class App extends Component{
                     <div className="app-body">
                         <div className={"app-nav" + (this.state.navChange ? " page-nav" : " full-nav")}>
                             <nav className="navbar navbar-expand-lg nav-top navbar-dark bg-dark">                                
-                                {/*<Link className="nav-item mini-nav-link" to="/">my<span className="c2">LGCU</span></Link>*/}
+                                {/*<Link className="nav-item mini-nav-link" to="/">my<span className="c2">LGCU</span></Link>*/}                                
                                 <a href="https://www.givelify.com/givenow/1.0/?token=eyJvcmdfaWQiOiJNelUyT1RFfiIsImJhZGdlX2ltYWdlIjoiYjMucG5nIn0~" target="_blank" rel="noopener noreferrer" className="nav-item mini-nav-link">Givelify Donations</a>
                                 <a href="https://www.paypal.com/mep/dashboard" target="_blank" rel="noopener noreferrer" className="nav-item mini-nav-link">PayPal Donations</a>
                                 <Link className="nav-item mini-nav-link" to="/apply">Apply</Link>                                
@@ -219,9 +224,20 @@ class App extends Component{
                             </div>
                         </div>
                     </div>
+
+                    <div className="translate-btn" title="Translate Our Website" onClick={this.modalShow}><i className="fas fa-language"></i></div>
+                    <div className="translateModal"><TranslateVideo show={this.state.modalStatus} handleClose={this.modalHide}/></div>
                 </div>  
             </Router>
         )
+    }
+
+    modalShow(){
+        this.setState({ modalStatus: true });
+    }
+
+    modalHide(){
+        this.setState({ modalStatus: false });
     }
 
     listenToScroll() {
