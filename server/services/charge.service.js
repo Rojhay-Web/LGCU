@@ -42,6 +42,62 @@ var charge = {
             console.log(response.errorMessage);
             res.status(200).json(response);
         }
+    },
+    createAccount: function(accountInfo, callback){
+        var response = {"errorMessage":null, "results":null};
+            /* { fullname, email, userId }*/
+
+        try {     
+            var merchantAuthenticationType = new ApiContracts.MerchantAuthenticationType();
+            merchantAuthenticationType.setName(process.env.AuthNetApiLoginKey);
+            merchantAuthenticationType.setTransactionKey(process.env.AuthNetTransactionKey);
+
+            var customerProfileType = new ApiContracts.CustomerProfileType();
+            customerProfileType.setMerchantCustomerId('AN_' + accountInfo.userId);
+            customerProfileType.setDescription(accountInfo.fullname);
+            customerProfileType.setEmail(accountInfo.email);
+
+            var createRequest = new ApiContracts.CreateCustomerProfileRequest();
+            createRequest.setProfile(customerProfileType);
+            createRequest.setValidationMode(ApiContracts.ValidationModeEnum.TESTMODE);
+            createRequest.setMerchantAuthentication(merchantAuthenticationType);
+
+            var ctrl = new ApiControllers.CreateCustomerProfileController(createRequest.getJSON());
+
+            ctrl.execute(function(){
+                var apiResponse = ctrl.getResponse();
+
+                var ret = new ApiContracts.CreateCustomerProfileResponse(apiResponse);
+                if(ret != null) {
+                    if(ret.getMessages().getResultCode() == ApiContracts.MessageTypeEnum.OK){
+                        response.results = {"status":"Ok","accountId":ret.getCustomerProfileId() };
+                    }
+                    else {
+                        response.errorMessage = "[Error] Creating User Profile (E08): " + ret.getMessages().getMessage()[0].getText();
+                    }
+                }
+                else {
+                    response.errorMessage = "[Error] Creating User Profile (E07)";
+                }
+
+                callback(response);
+            });
+        }
+        catch(ex){
+            response.errorMessage = "[Error] Creating User Profile (E09): "+ex;
+            callback(response);
+        }
+    },
+    searchAccountTransactions: function(accountInfo, callback){
+        var response = {"errorMessage":null, "results":null};
+
+        try {
+
+        }
+        catch(ex){
+            response.errorMessage = "[Error] Searching Account Transactions (E09): "+ex;
+            callback(response);
+        }
     }
 }
 
