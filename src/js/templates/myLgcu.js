@@ -7,6 +7,7 @@ import back1 from '../../assets/site/mylgcuBack.jpeg';
 import MyProfile from './mylgcuComponents/myProfile';
 import MyAccount from './mylgcuComponents/myAccount';
 import MyCourses from './mylgcuComponents/myCourses';
+import MyAdmin from './mylgcuComponents/myAdmin';
 
 /* Header */
 class myLGCUHeader extends Component{
@@ -52,7 +53,7 @@ class myLGCU extends Component{
         this.changePage = this.changePage.bind(this);
     }
 
-    componentDidMount(){ window.scrollTo(0, 0); }
+    componentDidMount(){ window.scrollTo(0, 0); this.setState({ selectedPage: "admin" }); }
 
     render(){        
         return(
@@ -87,6 +88,9 @@ class myLGCU extends Component{
             case "account":
                 return <MyAccount user={this.state.userInfo} />;
                 break;
+            case "admin":
+                return <MyAdmin user={this.state.userInfo} />;
+                break;    
             default:
                 return <div>No Page Selected</div>;
                 break;
