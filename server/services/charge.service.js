@@ -88,11 +88,59 @@ var charge = {
             callback(response);
         }
     },
-    searchAccountTransactions: function(accountInfo, callback){
+    searchAccountTransactions: function(searchInfo, callback){
         var response = {"errorMessage":null, "results":null};
 
+        /* pageInfo: {limit, offset, accountId} */
         try {
+            var merchantAuthenticationType = new ApiContracts.MerchantAuthenticationType();
+            merchantAuthenticationType.setName(process.env.AuthNetApiLoginKey);
+            merchantAuthenticationType.setTransactionKey(process.env.AuthNetTransactionKey);
 
+            var paging = new ApiContracts.Paging();
+            paging.setLimit(searchInfo.limit);
+            paging.setOffset(searchInfo.offset);
+
+            var sorting = new ApiContracts.TransactionListSorting();
+            sorting.setOrderBy(ApiContracts.TransactionListOrderFieldEnum.ID);
+            sorting.setOrderDescending(true);
+
+            var getRequest = new ApiContracts.GetTransactionListForCustomerRequest();
+            getRequest.setMerchantAuthentication(merchantAuthenticationType);
+            getRequest.setCustomerProfileId(searchInfo.accountId);
+            getRequest.setPaging(paging);
+            getRequest.setSorting(sorting);
+
+            var ctrl = new ApiControllers.GetTransactionListForCustomerController(getRequest.getJSON());
+            
+            ctrl.execute(function(){ 
+                var apiResponse = ctrl.getResponse();
+
+                var ret = new ApiContracts.GetTransactionListResponse(apiResponse);
+                
+                if(ret != null) {
+                    if(ret.getMessages().getResultCode() == ApiContracts.MessageTypeEnum.OK){
+                        response.results = [];
+                        var transactions = ret.getTransactions().getTransaction();
+
+                        transactions.forEach(function(trans){
+                            response.results.push({
+                                    id: trans.getTransId(), status:trans.getTransactionStatus(), 
+                                    accountType:trans.getAccountType(), settleAmmount:trans.getSettleAmount(),
+                                    date:trans.submitTimeLocal
+                                });
+                        });
+                    }
+                    else {
+                        response.errorMessage = "[Error] Searching Account Transactions (E08): " + ret.getMessages().getMessage()[0].getText();
+                    }
+                }
+                else {
+                    response.errorMessage = "[Error] Searching Account Transactions (E07)";
+                }
+
+                callback(response);
+            });
         }
         catch(ex){
             response.errorMessage = "[Error] Searching Account Transactions (E09): "+ex;
