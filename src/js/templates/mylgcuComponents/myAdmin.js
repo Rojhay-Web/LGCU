@@ -8,24 +8,24 @@ class MyAdmin extends Component{
     constructor(props) {
         super(props);
         this.state = {
+            searchQuery: "",
+            searchResults:[
+                {id:"3001001", name:"Tony Wilson"}, {id:"3001002", name:"Jason Warrick"},
+                {id:"3001003", name:"Adrian Henkerson"}, {id:"3001004", name:"Dak Prescott"},
+                {id:"3001005", name:"Alvin Kamara"}, {id:"3001006", name:"Ben Rothlisberger"},
+                {id:"3001007", name:"Cameron Newton"}, {id:"3001008", name:"Will Smith"},
+                {id:"3001009", name:"Mya Reed"}, {id:"3001010", name:"Diangelo Russel"},
+                {id:"3001011", name:"Nancy Drew"}, {id:"3001012", name:"Erika Coleman"},
+                {id:"3001013", name:"Tony Wilson"}, {id:"3001014", name:"Jason Rowe"},
+                {id:"3001015", name:"Jack Wilson"}, {id:"3001016", name:"Will Turner"},
+                {id:"3001017", name:"Andrew Phillips"}, {id:"3001018", name:"Felica Coliver"}
+            ],
             selectedUser: {
-                firstName:"",
-                lastName:"",
-                email:"",
-                address:"",
-                degree:{
-                    school:"",
-                    code:"",
-                    major:"",
-                    declareDate: null
-                },
-                studentId:null,
-                accountId:null,
-                talentlmsId:null
+                firstName:"", lastName:"",  email:"", address:"",
+                degree:{ school:"", code:"", major:"", declareDate: null },
+                studentId:null, accountId:null, talentlmsId:null
             },
-            degreeList:[],
-            areaList:[],
-            majorResults:[]
+            degreeList:[], areaList:[], majorResults:[]
         }
 
         this.onElementChange = this.onElementChange.bind(this);
@@ -43,24 +43,56 @@ class MyAdmin extends Component{
 
         return(
             <div className="mylgcu-admin">
-               <div className="mylgcu-content-section inverse">
+                {/* Search Section */}
+                <div className="mylgcu-content-section inverse">
+                    <div className="section-title">Student Search</div>
+
+                    <div className="content-block sz10">
+                        <div className="block-label-title">Search</div>
+                        <div className="block-container">                            
+                            <div className="content-info icon"><i className="fas fa-search"></i><input type="text" name="search" className="" placeholder="Search Name Or Student ID" value={this.state.searchQuery} onChange={(e) => this.onSearchChange(e)}/></div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Results Section */}
+                <div className="mylgcu-content-section">
+                    <div className="section-title">Search Results <span>({this.state.searchResults.length} results)</span></div>
+
+                    <div className="results-container">
+                        <div className="results-subcontainer">
+                            {this.state.searchResults.map((item,i) =>
+                                <div key={i} className="result-item">
+                                    <div className="user-icon"><i className="far fa-user"/></div>
+                                    <div className="user-info">
+                                        <div className="info-name">{item.name}</div>
+                                        <div className="info-id">{item.id}</div>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                </div>
+
+                {/* Student Section*/}
+                <div className="mylgcu-content-section inverse">
                     <div className="section-title">Student Information</div>
 
-                    <div className="content-block sz5">
+                    <div className="content-block sz3">
                         <div className="block-label-title">First Name:</div>
                         <div className="block-container">                            
                             <div className="content-info"><input type="text" name="firstName" className="" placeholder="First Name" value={this.state.selectedUser.firstName} onChange={(e) => this.onElementChange(e)}/></div>
                         </div>
                    </div>
 
-                   <div className="content-block sz5">
+                   <div className="content-block sz3">
                         <div className="block-label-title">Last Name:</div>
                         <div className="block-container">                            
                             <div className="content-info"><input type="text" name="lastName" className="" placeholder="Last Name" value={this.state.selectedUser.lastName} onChange={(e) => this.onElementChange(e)}/></div>
                         </div>
                    </div>
 
-                   <div className="content-block sz10">
+                   <div className="content-block sz4">
                         <div className="block-label-title">Email:</div>
                         <div className="block-container">                            
                             <div className="content-info"><input type="text" name="email" className="" placeholder="Email" value={this.state.selectedUser.email} onChange={(e) => this.onElementChange(e)}/></div>
@@ -137,6 +169,17 @@ class MyAdmin extends Component{
                </div>
             </div>
         );
+    }
+
+    onSearchChange(e){
+        var self = this;
+        try {
+            var name = e.target.name;
+            self.setState({ [name]: e.target.value });
+        }
+        catch(ex){
+            console.log("Error changing search: ",ex);
+        }
     }
 
     onElementChange(e){

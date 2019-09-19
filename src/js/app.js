@@ -69,14 +69,20 @@ class App extends Component{
         super(props);
         this.state = {
             navChange: false,
-            sidebarOpen: false
+            sidebarOpen: false,
+            mlAccess:false
         };
 
         this.setSidebarDisplay = this.setSidebarDisplay.bind(this);
         this.listenToScroll = this.listenToScroll.bind(this);
+        this.setMLAccess = this.setMLAccess.bind(this);
+    }
+    
+    setMLAccess(status){
+        this.setState({ mlAccess: status });
     }
 
-    render(){     
+    render(){    
         return(            
             <Router history={history}>
                 <div className="nav-body">

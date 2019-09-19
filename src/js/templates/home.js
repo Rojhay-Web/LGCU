@@ -81,7 +81,7 @@ function Home(props){
             var y = window.scrollY;
             var counterEl = document.getElementById("counter");
 
-            if(!counter && y >= (counterEl.offsetTop + (counterEl.clientHeight*.4))){
+            if(counterEl && !counter && y >= (counterEl.offsetTop + (counterEl.clientHeight*.4))){
                 setCounter(true);
             }           
         }

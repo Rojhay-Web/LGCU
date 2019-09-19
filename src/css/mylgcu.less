@@ -11,6 +11,8 @@
                     .color2(background, 0.7);
                 }
             }
+
+            .btn-container { justify-content: left; .lBtn { cursor: pointer; }}
             .backImg {
                 &:before {.color2(background-color, 0.3);}
             }
@@ -77,7 +79,7 @@
             }
 
             &.inverse {
-                padding: 30px 0px;                
+                padding: 15px 0px;                
                 background: rgba(255,255,255,1);
                 border-radius: 5px;
 
@@ -96,6 +98,7 @@
                         .content-info { 
                             width: 100%;
                             input { background: none; border: none; width: 100%; }
+                            &.icon { display: flex; i{ padding: 3px 0px; margin-right: 7px; } input { flex:1; }}
                         }
                     }
                 }
@@ -209,6 +212,8 @@
                     }
                 }
             }
+
+            &+.mylgcu-content-section { margin-top: 20px; }
         }
 
         .mylgcu-profile {
@@ -265,6 +270,48 @@
                 }
             }
         }
+
+        .mylgcu-admin {
+            padding: 30px 0px 0px;
+        }
+
+        .results-container {
+            width: 100%;
+            overflow: auto;
+            white-space: nowrap;
+            padding: 7px 14px;
+            .results-subcontainer {
+                .result-item {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    text-align: center;
+                    display: inline-block;
+                    overflow: hidden;
+                    border-radius: 4px;
+                    cursor: pointer;
+                    padding: 14px 7px;
+                    transition: 0.3s all ease-in-out;
+                    .user-icon { 
+                        border-radius: 50%;
+                        height: 25px;
+                        width: 25px;
+                        border: 1px solid @color2;
+                        color: @color2;
+                        display: inline-flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        text-align: center;
+                        margin-bottom: 7px;
+                        background: rgba(250,250,250,1);                        
+                    }
+                    .user-info { }
+
+                    &:hover { background: rgba(200,200,200,0.9);}
+                    &+.result-item { margin-left: 30px; }
+                }
+            }
+        }
     }
 
     .mylgcu-nav-container {
@@ -287,5 +334,55 @@
             &.selected { border-bottom: 3px solid @color2; }
             &+.mylgcu-nav-item { margin-left: 2%;}
         }
+    }
+}
+
+/* Sign in modal */
+.signin-container {
+    display: flex;
+    flex-direction: column;
+    padding: 7px 5%;
+    
+    justify-content: center;
+    text-align: center;
+    .header-container {
+        height: 75px;
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+        color: @color1;
+        font-family: 'Reem Kufi', sans-serif;
+        margin-bottom: 20px;
+        img { height: 100%;}
+        .textLogo { padding-left: 10px; padding-top: 7px; font-size: 21px; line-height: 25px; }
+    }
+    h1 { color: @color1; }
+    .form-element {
+        padding: 7px; 
+        display: block;
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+        width: 100%;
+        text-align: left;
+        span { color: @color1; }
+        input, textarea, select {
+            width: 100%;
+            border-radius: 4px;
+            border: 1px solid @color1;
+            padding: 7px;   
+            .color1(background, 0.05);
+        }
+    }
+
+    .forgot-link {
+        text-align: right;
+        font-weight: bold;
+        font-size: 1.3rem;
+    }
+    .form-btn-container {
+        padding: 7px;
+        display: flex;
+        flex-direction: column;
+        .lBtn { border-radius: 4px; cursor: pointer; &+.lBtn { margin-top: 14px; }}       
     }
 }

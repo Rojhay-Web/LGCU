@@ -1864,6 +1864,12 @@
 .mylgcuHeader .header-section.header-title .solid-back span {
   background: rgba(37, 119, 40, 0.7) !important;
 }
+.mylgcuHeader .header-section.header-title .btn-container {
+  justify-content: left;
+}
+.mylgcuHeader .header-section.header-title .btn-container .lBtn {
+  cursor: pointer;
+}
 .mylgcuHeader .header-section.header-title .backImg:before {
   background-color: rgba(37, 119, 40, 0.3) !important;
 }
@@ -2007,7 +2013,7 @@
   font-weight: bold;
 }
 .mylgcuPage .mylgcu-section .mylgcu-content-section.inverse {
-  padding: 30px 0px;
+  padding: 15px 0px;
   background: #ffffff;
   border-radius: 5px;
   -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.2);
@@ -2031,6 +2037,16 @@
   background: none;
   border: none;
   width: 100%;
+}
+.mylgcuPage .mylgcu-section .mylgcu-content-section.inverse .content-block .block-container .content-info.icon {
+  display: flex;
+}
+.mylgcuPage .mylgcu-section .mylgcu-content-section.inverse .content-block .block-container .content-info.icon i {
+  padding: 3px 0px;
+  margin-right: 7px;
+}
+.mylgcuPage .mylgcu-section .mylgcu-content-section.inverse .content-block .block-container .content-info.icon input {
+  flex: 1;
 }
 .mylgcuPage .mylgcu-section .mylgcu-content-section.inverse .degree-block {
   padding: 7px;
@@ -2214,6 +2230,9 @@
 .mylgcuPage .mylgcu-section .mylgcu-content-section.inverse .degree-container .results-list .results-container .result-item:hover.t5 {
   background: rgba(241, 196, 15, 0.3) !important;
 }
+.mylgcuPage .mylgcu-section .mylgcu-content-section + .mylgcu-content-section {
+  margin-top: 20px;
+}
 .mylgcuPage .mylgcu-section .mylgcu-profile .overview {
   max-height: 400px;
   overflow-y: auto;
@@ -2289,6 +2308,46 @@
     font-size: 8px;
   }
 }
+.mylgcuPage .mylgcu-section .mylgcu-admin {
+  padding: 30px 0px 0px;
+}
+.mylgcuPage .mylgcu-section .results-container {
+  width: 100%;
+  overflow: auto;
+  white-space: nowrap;
+  padding: 7px 14px;
+}
+.mylgcuPage .mylgcu-section .results-container .results-subcontainer .result-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  display: inline-block;
+  overflow: hidden;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 14px 7px;
+  transition: 0.3s all ease-in-out;
+}
+.mylgcuPage .mylgcu-section .results-container .results-subcontainer .result-item .user-icon {
+  border-radius: 50%;
+  height: 25px;
+  width: 25px;
+  border: 1px solid #257728;
+  color: #257728;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 7px;
+  background: #fafafa;
+}
+.mylgcuPage .mylgcu-section .results-container .results-subcontainer .result-item:hover {
+  background: rgba(200, 200, 200, 0.9);
+}
+.mylgcuPage .mylgcu-section .results-container .results-subcontainer .result-item + .result-item {
+  margin-left: 30px;
+}
 .mylgcuPage .mylgcu-nav-container {
   position: fixed;
   bottom: 0;
@@ -2317,6 +2376,72 @@
 }
 .mylgcuPage .mylgcu-nav-container .mylgcu-nav-item + .mylgcu-nav-item {
   margin-left: 2%;
+}
+/* Sign in modal */
+.signin-container {
+  display: flex;
+  flex-direction: column;
+  padding: 7px 5%;
+  justify-content: center;
+  text-align: center;
+}
+.signin-container .header-container {
+  height: 75px;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  color: #151280;
+  font-family: 'Reem Kufi', sans-serif;
+  margin-bottom: 20px;
+}
+.signin-container .header-container img {
+  height: 100%;
+}
+.signin-container .header-container .textLogo {
+  padding-left: 10px;
+  padding-top: 7px;
+  font-size: 21px;
+  line-height: 25px;
+}
+.signin-container h1 {
+  color: #151280;
+}
+.signin-container .form-element {
+  padding: 7px;
+  display: block;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  width: 100%;
+  text-align: left;
+}
+.signin-container .form-element span {
+  color: #151280;
+}
+.signin-container .form-element input,
+.signin-container .form-element textarea,
+.signin-container .form-element select {
+  width: 100%;
+  border-radius: 4px;
+  border: 1px solid #151280;
+  padding: 7px;
+  background: rgba(21, 18, 128, 0.05) !important;
+}
+.signin-container .forgot-link {
+  text-align: right;
+  font-weight: bold;
+  font-size: 1.3rem;
+}
+.signin-container .form-btn-container {
+  padding: 7px;
+  display: flex;
+  flex-direction: column;
+}
+.signin-container .form-btn-container .lBtn {
+  border-radius: 4px;
+  cursor: pointer;
+}
+.signin-container .form-btn-container .lBtn + .lBtn {
+  margin-top: 14px;
 }
 /* imported */
 .lng {

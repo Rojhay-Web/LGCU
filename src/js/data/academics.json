@@ -143,7 +143,7 @@
                     "courses":[
                         {"subtitle":"General Education Courses (45)","courses":["ENG_101","MTH_160","MTH_161","BIOL_107","SOC_101","HIST_117","ENG_102","PSY_101","ENG_110","ENG_201","GOV_110","COM_118","PED_112","CIS_107","SOC_223","REL_227"]},
                         {"subtitle":"Required Business Core Courses (45)","courses":["ACCT_310","ACCT_315","BUSN_317","MKTG_320","BUSN_321","BUSL_323","BUSM_325","ECON_328","ECON_329","FINA_340","BUSN_470"]},
-                        {"subtitle":"Elective Courses (15hours) or Professional Portfolio Credit (15 hours)","courses":[]},
+                        {"subtitle":"Elective Courses (15 hours) or Professional Portfolio Credit (15 hours)","courses":[]},
                         {"subtitle":"BSBA Concentrations (15 hours)","courses":[]}
                     ], "concentrations":[
                         {"title":"Accounting Concentration","courses":["ACCT_341","ACCT_342","ACCT_350","ACCT_460","ACCT_470"]},

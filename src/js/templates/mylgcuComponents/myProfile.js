@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 
+/* Data */
+import academicData from '../../data/academics.json';
+import courseData from '../../data/courses.json';
+
 /* Body */
 /* Status code
     0: Not Completed
@@ -11,35 +15,24 @@ class MyProfile extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            id:"70000010",
-            name:"Joe Smith",
-            email: "joe.smith@gmail.com",
-            address: "1357 Wilson St., New Castle, DE. 19711, USA",
-            degree:"Business Administration",
-            degreelvl:"Doctorate",
-            totalCredits:15,
-            overviewData: [
-                { courseCode: {name:"TST",id:"100"}, title:"Educational Technology", statusCode:3 },
-                { courseCode: {name:"TST",id:"105"}, title:"Classroom Management", statusCode:3 },
-                { courseCode: {name:"TST",id:"106"}, title:"Assessment and Evaluation", statusCode:3 },
-                { courseCode: {name:"TST",id:"200"}, title:"Processes of Learning", statusCode:3 },
-                { courseCode: {name:"TST",id:"243"}, title:"Educational Research", statusCode:2 },
-                { courseCode: {name:"TST",id:"245"}, title:"Intro to Literature", statusCode:2 },
-                { courseCode: {name:"TST",id:"246"}, title:"Principles of Virtual Education and Management", statusCode:2 },
-                { courseCode: {name:"TST",id:"270"}, title:"Issues and Trends in Entrepreneurship", statusCode:2 },
-                { courseCode: {name:"TST",id:"271"}, title:"Investment Analysis 1", statusCode:2 },
-                { courseCode: {name:"TST",id:"272"}, title:"Investment Analysis 2", statusCode:1 },
-                { courseCode: {name:"TST",id:"277"}, title:"Advanced Marketing Research", statusCode:1 },
-                { courseCode: {name:"TST",id:"278"}, title:"Financial Institutions and Banking", statusCode:1 },
-                { courseCode: {name:"TST",id:"279"}, title:"Multicultural Perspectives in Education", statusCode:0 },
-                { courseCode: {name:"TST",id:"302"}, title:"Special Learner Educational Intervention", statusCode:0 }
-            ]
+            id:null,
+            name:null,
+            email: null,
+            address: null,
+            degree:null,
+            degreelvl:null,
+            gpa: 0,
+            totalCredits: 0,
+            overviewData: []
         }
 
         this.getCourseStatus = this.getCourseStatus.bind(this);
+        this.getUserInfo = this.getUserInfo.bind(this);
     }
 
-    componentDidMount(){ }
+    componentDidMount(){ 
+        this.getUserInfo();
+    }
 
     render(){        
         return(
@@ -73,24 +66,31 @@ class MyProfile extends Component{
                <div className="mylgcu-content-section">
                    <div className="section-title">Student Information</div>
 
-                   <div className="content-block sz3">
+                   <div className="content-block sz2">
                        <div className="block-container">
                             <div className="content-title">Student Id:</div>
                             <div className="content-info">{this.state.id}</div>
                        </div>
                    </div>
 
-                   <div className="content-block sz5">
+                   <div className="content-block sz4">
                         <div className="block-container">
                             <div className="content-title">Degree:</div>
                             <div className="content-info">{this.state.degreelvl} in {this.state.degree}</div>
                        </div>
                    </div>
+                   
+                   <div className="content-block sz2">
+                       <div className="block-container">
+                            <div className="content-title">Total Credits:</div>
+                            <div className="content-info">{this.state.totalCredits}</div>
+                       </div>
+                   </div>
 
                    <div className="content-block sz2">
                        <div className="block-container">
-                            <div className="content-title">Credits Count:</div>
-                            <div className="content-info">{this.state.totalCredits}</div>
+                            <div className="content-title">GPA:</div>
+                            <div className="content-info">{this.state.gpa}</div>
                        </div>
                    </div>
                </div>
@@ -126,6 +126,58 @@ class MyProfile extends Component{
                </div>
             </div>
         );
+    }
+
+    getUserInfo(){
+        var self = this;
+        try {
+            self.setState({ id:"30000010", name:"Joe Smith", email: "joe.smith@gmail.com",
+                address: "1357 Wilson St., New Castle, DE. 19711, USA", degree:"Business Administration",
+                degreelvl:"Bachelors", degreeId:"BA-BA", totalCredits:12, gpa:3.10 }, () =>{ self.getCourseList("BA-BA"); });
+        }
+        catch(ex){
+            console.log("[Error]: Error Getting User Info: ",ex);
+        }
+    }
+
+    getCourseList(degreeId){
+        var self = this;
+        try {
+           // Get Course list from TalentLMS
+
+           // Get Major Course List
+           var major = null;
+           var courseList = [];
+           var academics = Object.keys(academicData);
+
+           academics.forEach(function(school){
+                var levels = Object.keys(academicData[school].degrees);
+                levels.forEach(function(lvl){
+                    var degrees = academicData[school].degrees[lvl];
+                    degrees.forEach(function(degree){
+                        if(degree.id.toLowerCase() == degreeId.toLowerCase()){
+                            major = degree;
+                        }
+                    });
+                });
+           });
+
+           if(major != null){
+                major.courses.forEach(function(section){
+                    section.courses.forEach(function(course){
+                        if(course in courseData){
+                            courseList.push({courseCode:{name:courseData[course].section, id:courseData[course].id}, title: courseData[course].title, statusCode:0 });
+                        }                        
+                    });
+                });
+           }
+
+           // Create overviewData List
+           self.setState({overviewData: courseList });
+        }
+        catch(ex){
+            console.log("[Error]: Error Getting Course List: ",ex);
+        }
     }
 
     getCourseStatus(code){

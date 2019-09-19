@@ -1,40 +1,99 @@
 import React, { Component } from 'react';
+import { Modal } from 'react-bootstrap';
+import axios from 'axios';
 
 /* Images */
 import back1 from '../../assets/site/mylgcuBack.jpeg';
-
+import logo from '../../assets/LGCULogo.png';
 /* Components */
 import MyProfile from './mylgcuComponents/myProfile';
 import MyAccount from './mylgcuComponents/myAccount';
 import MyCourses from './mylgcuComponents/myCourses';
 import MyAdmin from './mylgcuComponents/myAdmin';
 
+var mySessKey = "mylgcu_aditum";
+
 /* Header */
 class myLGCUHeader extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            name: "Joe Smith"
+            name: null,
+            userId:null,
+            modalStatus: false
+        }
+
+        this.modalHide = this.modalHide.bind(this);
+        this.userAccess = this.userAccess.bind(this);
+        this.getUserInfo = this.getUserInfo.bind(this);
+        this.signOut = this.signOut.bind(this);
+    }
+
+    componentDidMount(){
+        this.getUserInfo();
+    }
+
+    modalHide(){
+        this.setState({ modalStatus: false });
+    }
+
+    getUserInfo(){
+        var self = this;
+        try {
+            var sessionInfo = localStorage.getItem(mySessKey);
+            
+            if(sessionInfo){
+                var localUser = JSON.parse(sessionInfo);
+                self.setState({name: "Joe Smith", userId: localUser.id, modalStatus: false });
+            }
+            else {
+                self.setState({ name: null, userId: null, modalStatus: true });
+            }
+        }
+        catch(ex){
+            console.log("[Error] Getting User Info: ",ex);
         }
     }
 
-    componentDidMount(){}
+    userAccess(status){
+        this.getUserInfo();
+        window.location.reload();
+    }
+
+    signOut() {
+        localStorage.removeItem(mySessKey);
+        this.getUserInfo();
+    }
 
     render(){        
         return(
             <div className="headerCard mylgcuHeader sub-page">
                 <div className="header-title header-section">
                     <div className="backImg"><img alt="myLGCU back img" src={back1} /></div>
-                    <div className="mylgcu-info">
-                        <div className="info-welcome">
-                            <p>Welcome, {this.state.name} to <span className="c2">myLGCU</span></p>
-                            <p>your student portal.</p>
+                    {this.state.userId ? 
+                        <div className="mylgcu-info">
+                            <div className="info-welcome">
+                                <p>Welcome, {this.state.name} to <span className="c2">myLGCU</span></p>
+                                <p>your student portal.</p>
+                            </div>
+                            <div className="solid-back">
+                                <span>Please use the tools below to access your Lenkeson Global Christian University courses, account, and resources.</span>
+                            </div>
+
+                            <div className="btn-container">
+                                <div className="lBtn clear t2" onClick={this.signOut}><span>Sign Out</span><i className="btn-icon fas fa-sign-out-alt"></i></div>
+                            </div>
                         </div>
-                        <div className="solid-back">
-                            <span>Please use the tools below to access your Lenkeson Global Christian University courses, account, and resources.</span>
+                        :
+                        <div className="mylgcu-info">
+                            <div className="info-welcome">
+                                <p>Please sign in to access your <span className="c2">myLGCU</span> account</p>                               
+                            </div>
                         </div>
-                    </div>
-                </div>                
+                    }
+                </div> 
+
+                <SignInModal show={this.state.modalStatus} handleClose={this.modalHide} userAccess={this.userAccess} />               
             </div>
         );
     }
@@ -46,31 +105,64 @@ class myLGCU extends Component{
         super(props);
         this.state = {
             selectedPage:"profile",
-            userInfo:{id:"", email:"", pwd:""}
+            name: null,
+            userId:null,
+            userAccess: false
         }
 
         this.setPage = this.setPage.bind(this);
         this.changePage = this.changePage.bind(this);
+        this.getUserInfo = this.getUserInfo.bind(this);
     }
 
-    componentDidMount(){ window.scrollTo(0, 0); this.setState({ selectedPage: "admin" }); }
+    componentDidMount(){ 
+        window.scrollTo(0, 0); 
+        this.getUserInfo(); 
+        this.setState({ selectedPage: "admin" });
+    }
 
-    render(){        
+    render(){   
         return(
             <div className="inner-page-body mylgcuPage">
-                <section className="mylgcu-section">
-                    { this.setPage() }
-                </section>
+                {this.state.userId ? 
+                    <div className="userAccess">
+                        <section className="mylgcu-section">
+                            { this.setPage() }
+                        </section>
 
-                <section className="mylgcu-nav-container">
-                    <div className={"mylgcu-nav-item" + (this.state.selectedPage == "profile" ? " selected" :"")} onClick={(e) => this.changePage("profile")}><i className="far fa-user-circle"></i> <span>Profile</span></div>
-                    <div className={"mylgcu-nav-item" + (this.state.selectedPage == "courses" ? " selected" :"")} onClick={(e) => this.changePage("courses")}><i className="fas fa-book-reader"></i> <span>Courses</span></div>
-                    <div className={"mylgcu-nav-item" + (this.state.selectedPage == "account" ? " selected" :"")} onClick={(e) => this.changePage("account")}><i className="fas fa-file-invoice-dollar"></i> <span>Account</span></div>
-                    <div className="mylgcu-nav-item"><i className="fas fa-chalkboard-teacher"></i> <span>TalentLMS</span></div>
-                    <div className={"mylgcu-nav-item" + (this.state.selectedPage == "admin" ? " selected" :"")} onClick={(e) => this.changePage("admin")}><i className="fas fa-user-shield"></i> <span>Admin</span></div>
-                </section>
+                        <section className="mylgcu-nav-container">
+                            <div className={"mylgcu-nav-item" + (this.state.selectedPage == "profile" ? " selected" :"")} onClick={(e) => this.changePage("profile")}><i className="far fa-user-circle"></i> <span>Profile</span></div>
+                            <div className={"mylgcu-nav-item" + (this.state.selectedPage == "courses" ? " selected" :"")} onClick={(e) => this.changePage("courses")}><i className="fas fa-book-reader"></i> <span>Courses</span></div>
+                            <div className={"mylgcu-nav-item" + (this.state.selectedPage == "account" ? " selected" :"")} onClick={(e) => this.changePage("account")}><i className="fas fa-file-invoice-dollar"></i> <span>Account</span></div>
+                            <div className="mylgcu-nav-item"><i className="fas fa-chalkboard-teacher"></i> <span>TalentLMS</span></div>
+                            <div className={"mylgcu-nav-item" + (this.state.selectedPage == "admin" ? " selected" :"")} onClick={(e) => this.changePage("admin")}><i className="fas fa-user-shield"></i> <span>Admin</span></div>
+                        </section>
+                    </div>
+                :
+                    <div className="userAccess">
+                        <h1>Please Sign in to access your <span className="c2">myLGCU</span> account</h1>
+                    </div>
+                }
             </div>
         );
+    }
+
+    getUserInfo(){
+        var self = this;
+        try {
+            var sessionInfo = localStorage.getItem(mySessKey);
+            
+            if(sessionInfo){
+                var localUser = JSON.parse(sessionInfo);
+                self.setState({ userAccess: true, name: "Joe Smith", userId: localUser.id, modalStatus: false });
+            }
+            else {
+                self.setState({ userAccess: false, name: null, userId: null, modalStatus: true });
+            }
+        }
+        catch(ex){
+            console.log("[Error] Getting User Info: ",ex);
+        }
     }
 
     changePage(pageTitle){
@@ -99,3 +191,89 @@ class myLGCU extends Component{
 }
 
 export {myLGCU, myLGCUHeader};
+
+/* Sign in Modal */
+class SignInModal extends Component{
+    constructor(props) {
+        super(props);
+        this.state = {
+            email:"",
+            password:""
+        }
+
+        this.onElementChange = this.onElementChange.bind(this);
+        this.login = this.login.bind(this);
+    }
+
+    componentDidMount(){}
+
+    onElementChange(event){
+        var self = this;
+        try {
+            var tmpData = this.state;
+            var name = event.target.name;
+
+            if(name in tmpData) {
+                self.setState({ [name]: event.target.value });
+            }
+        }
+        catch(ex){
+            console.log("Error changing text: ",ex);
+        }
+    }
+    login(e){
+        var self = this;
+        try {
+            /* Call Login */
+           if(this.state.email.length > 0 && this.state.password.length > 0){
+                // Set key info
+                //mySessKey
+                var tmpUser = {email:this.state.email, id:"d3mo3308004"};
+                localStorage.setItem(mySessKey, JSON.stringify(tmpUser));
+                self.props.userAccess(true);
+           }
+        }
+        catch(ex){
+            console.log("Error with user login: ",ex);
+        }
+    }
+
+    render(){    
+        return(
+            <Modal dialogClassName="signinModal" show={this.props.show} backdrop="static" size="xl" onHide={this.closeForm}>
+                <Modal.Body>
+                    <div className="signin-container">
+                        <div className="header-container">
+                            <img alt="logo img" className="headerLogo" src={logo}/>
+                            <div className="textLogo">
+                                <div className="logoLine">Lenkeson Global</div>
+                                <div className="logoLine">Christian University</div>
+                            </div>
+                        </div>
+
+                        <h1>Sign In to MyLGCU</h1>
+
+                        <div className="form-element">
+                            <span>Email</span>
+                            <input type="text" name="email" className="" placeholder="Your Email" value={this.state.email} onChange={(e) => this.onElementChange(e)}/>
+                        </div>
+
+                        <div className="form-element">
+                            <span>Password</span>
+                            <input type="password" name="password" className="" placeholder="" value={this.state.password} onChange={(e) => this.onElementChange(e)}/>
+                        </div>
+
+                        <div className="forgot-link">
+                            <a href="">Forgot Password?</a>
+                        </div>
+
+                        <div className="form-btn-container">
+                            <div className="lBtn c1" onClick={this.login}><span>Sign In</span><i className="btn-icon fas fa-unlock-alt"></i></div>
+                            <a href="" className="lBtn c2"><span>Return Home</span><i className="btn-icon fas fa-home"></i></a>
+                        </div>  
+                    </div>
+                </Modal.Body>
+            </Modal>
+        );
+    }
+}
