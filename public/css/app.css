@@ -2311,6 +2311,19 @@
 .mylgcuPage .mylgcu-section .mylgcu-admin {
   padding: 30px 0px 0px;
 }
+.mylgcuPage .mylgcu-section .mylgcu-admin .addUser {
+  justify-content: flex-end;
+}
+.mylgcuPage .mylgcu-section .mylgcu-admin .addUser .btn-container {
+  margin-top: 0px;
+}
+.mylgcuPage .mylgcu-section .mylgcu-admin .addUser .btn-container .lBtn {
+  margin-top: 0px;
+  border-radius: 5px;
+  cursor: pointer;
+  -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.2);
+}
 .mylgcuPage .mylgcu-section .results-container {
   width: 100%;
   overflow: auto;
