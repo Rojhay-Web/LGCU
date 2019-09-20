@@ -12,6 +12,8 @@ import MyCourses from './mylgcuComponents/myCourses';
 import MyAdmin from './mylgcuComponents/myAdmin';
 
 var mySessKey = "mylgcu_aditum";
+var rootPath = "";
+//var rootPath = "http://localhost:1111";
 
 /* Header */
 class myLGCUHeader extends Component{
@@ -198,7 +200,8 @@ class SignInModal extends Component{
         super(props);
         this.state = {
             email:"",
-            password:""
+            password:"",
+            error:null
         }
 
         this.onElementChange = this.onElementChange.bind(this);
@@ -224,14 +227,19 @@ class SignInModal extends Component{
     login(e){
         var self = this;
         try {
+            var postData = { "email":this.state.email, "password":this.state.password};
             /* Call Login */
-           if(this.state.email.length > 0 && this.state.password.length > 0){
-                // Set key info
-                //mySessKey
-                var tmpUser = {email:this.state.email, id:"d3mo3308004"};
-                localStorage.setItem(mySessKey, JSON.stringify(tmpUser));
-                self.props.userAccess(true);
-           }
+            axios.post(rootPath + "/api/userLogin", postData, {'Content-Type': 'application/json'})
+            .then(function(response) {
+                if(response.errorMessage){
+                    self.setState({ error: response.errorMessage });
+                }
+                else {
+                    var tmpUser = {email: this.state.email, id: response.results._id};
+                    localStorage.setItem(mySessKey, JSON.stringify(tmpUser));
+                    self.props.userAccess(true);
+                }
+            });             
         }
         catch(ex){
             console.log("Error with user login: ",ex);

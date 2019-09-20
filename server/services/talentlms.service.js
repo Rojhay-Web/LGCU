@@ -14,32 +14,57 @@ var database = {
 var talentlms = {
     signin:function(loginInfo, callback){
         var response = {"errorMessage":null, "results":null};
+        /* loginInfo: { email, password }*/
 
         try {
-            var form = new FormData();
-            form.append('login', loginInfo.username);
-            form.append('password', loginInfo.password);
 
-            form.submit({
-                host: 'lenkesongcu.talentlms.com',
-                path: '/api/v1/userlogin',
-                auth: talentlmsKey+":"
-              }, function(err, res) {
-                var ret = "";
-                res.on('data', function(chunk) {
-                    ret += chunk;
-                });
-                res.on('end', function() {
-                    ret = JSON.parse(ret);
-                    if(ret.error){
-                        response.errorMessage = ret.error.message;
-                    }
-                    else {
-                        response.results = ret;
-                    }                     
+            mongoClient.connect(database.connectionString, database.mongoOptions, function(err, client){
+                if(err) {
+                    response.errorMessage = err;
                     callback(response);
-                });
-            });
+                }
+                else {
+                    const db = client.db(database.dbName).collection('mylgcu_users');
+                    
+                    db.find({ "email": ObjectId(loginInfo.email) }).toArray(function(err, res){ 
+                        if(res.length <= 0){
+                            response.errorMessage = "[Error] Email Address does not exist";
+                            callback(response);
+                        }
+                        else {
+                            var currentUser = res[0];
+
+                            var form = new FormData();
+                            form.append('login', currentUser.talentlmsId.login);
+                            form.append('password', loginInfo.password);
+
+                            form.submit({
+                                host: 'lenkesongcu.talentlms.com',
+                                path: '/api/v1/userlogin',
+                                auth: talentlmsKey+":"
+                            }, function(err, res) {
+                                var ret = "";
+                                res.on('data', function(chunk) {
+                                    ret += chunk;
+                                });
+                                res.on('end', function() {
+                                    ret = JSON.parse(ret);
+                                    if(ret.error){
+                                        response.errorMessage = ret.error.message;
+                                    }
+                                    else {
+                                        response.results = ret;
+                                        response.results._id = currentUser._id;                                        
+                                    }                     
+                                    callback(response);
+                                });
+                            });
+
+                        }
+                        callback(response);
+                    });
+                }
+            });            
         }
         catch(ex){
             response.errorMessage = "[Error] with talentlms sign in (E09): "+ ex;
