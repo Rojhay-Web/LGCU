@@ -1,0 +1,144 @@
+require('dotenv').config();
+const axios = require('axios');
+var FormData = require('form-data');
+var mongoClient = require('mongodb').MongoClient;
+var ObjectId = require('mongodb').ObjectID;
+
+var talentlmsKey = process.env.TalentLMS_API_KEY;
+var database = {
+    connectionString: process.env.DatabaseConnectionString,
+    dbName: process.env.DatabaseName,
+    connectionOptions: { connectTimeoutMS: 2000, socketTimeoutMS: 2000}
+}
+
+var talentlms = {
+    signin:function(loginInfo, callback){
+        var response = {"errorMessage":null, "results":null};
+
+        try {
+            var form = new FormData();
+            form.append('login', loginInfo.username);
+            form.append('password', loginInfo.password);
+
+            form.submit({
+                host: 'lenkesongcu.talentlms.com',
+                path: '/api/v1/userlogin',
+                auth: talentlmsKey+":"
+              }, function(err, res) {
+                var ret = "";
+                res.on('data', function(chunk) {
+                    ret += chunk;
+                });
+                res.on('end', function() {
+                    ret = JSON.parse(ret);
+                    if(ret.error){
+                        response.errorMessage = ret.error.message;
+                    }
+                    else {
+                        response.results = ret;
+                    }                     
+                    callback(response);
+                });
+            });
+        }
+        catch(ex){
+            response.errorMessage = "[Error] with talentlms sign in (E09): "+ ex;
+            callback(response);
+        }
+    },
+    signup:function(userInfo, callback){
+        var response = {"errorMessage":null, "results":null};
+        var url = "https://lenkesongcu.talentlms.com/api/v1/usersignup";
+
+        try {
+            var formData = {
+                first_name: userInfo.firstname, last_name: userInfo.lastname,
+                email: userInfo.email, login: "", password: ""
+            };
+
+            createTalentLMSLogin(userInfo, function(ret){
+                if(ret.errorMessage){
+                    callback(ret);
+                }
+                else {
+                    formData.login = ret.results.login;
+                    formData.password = ret.results.password;
+
+                    axios.post(url, formData, { auth: { username: talentlmsKey, password: '' }})
+                    .then(res => { 
+                        addTalentLMSUserInfo(userInfo, res.data, callback);
+                    })
+                    .catch(error => { 
+                        response.errorMessage = "[Error] unable to create TalentLMS User: " + error.message; 
+                        callback(response);
+                    });
+                }
+            });
+        }
+        catch(ex){
+            response.errorMessage = "[Error] with talentlms sign up (E09): "+ ex;
+            callback(response);
+        }
+    }
+
+}
+
+module.exports = talentlms;
+
+function addTalentLMSUserInfo(userInfo, talentInfo, callback){
+    var response = {"errorMessage":null, "results":null};
+
+    try {
+        mongoClient.connect(database.connectionString, database.mongoOptions, function(err, client){
+            if(err) {
+                response.errorMessage = err;
+                callback(response);
+            }
+            else {
+                const db = client.db(database.dbName).collection('mylgcu_users');
+                response.result = {id: talentInfo.id, login: talentInfo.login};
+
+                db.updateOne({ "_id": ObjectId(userInfo._id) }, { $set: { talentlmsId: response.result }
+                            }, {upsert: true, useNewUrlParser: true});
+
+                callback(response);
+            }
+        });
+    }
+    catch(ex){
+        response.errorMessage = "[Error] adding users talentlms info to user (E09): "+ ex;
+        callback(response);
+    }
+}
+
+function createTalentLMSLogin(userInfo, callback){
+    var response = {"errorMessage":null, "results":null};
+
+    try {
+        var login = (userInfo.firstname && userInfo.firstname.length > 0 ? userInfo.firstname.charAt(0) : "L") + userInfo.lastname;
+
+        mongoClient.connect(database.connectionString, database.mongoOptions, function(err, client){
+            if(err) {
+                response.errorMessage = err;
+                callback(response);
+            }
+            else {
+                const db = client.db(database.dbName).collection('mylgcu_users');
+                
+                db.find({ "_id": ObjectId(ret.results._id) }).toArray(function(err, res){ 
+                    if(res.length <= 0){
+                        response.errorMessage = "[Error] Invalid User Id";
+                    }
+                    else {
+                        response.results = {login: login + "-"+res[0].studentId, password: "LGCU-"+res[0].studentId};
+                    }
+                    callback(response);
+                });
+            }
+        });
+    }
+    catch(ex){
+        response.errorMessage = "[Error] creating talentlms login credentials (E09): "+ ex;
+        callback(response);
+    }
+}

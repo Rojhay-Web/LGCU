@@ -4,6 +4,7 @@ var router = express.Router();
 var mail = require('../services/mail.service');
 var charge = require('../services/charge.service');
 var auth = require('../services/auth.service');
+var talentlms = require('../services/talentlms.service');
 
 /* emails */
 function sendEmail(req, res){ mail.sendEmail(req, res); }
@@ -53,8 +54,32 @@ function generateStudentId(req, res){
     });
 }
 
+/* TalentLMS */
+function createTLMSUser(req, res){
+    var requestUser = req.body.requestUser;
+    
+    var userInfo = req.body.userInfo;
+    // Validate User
+    talentlms.signup(userInfo, function(ret){
+        res.status(200).json(ret);
+    });
+}
+
+function userLogin(req, res){
+    var requestUser = req.body.requestUser;
+    
+    var loginInfo = req.body.loginInfo;
+    // Validate User
+    talentlms.signin(loginInfo, function(ret){
+        res.status(200).json(ret);
+    });
+}
 
 /*** Routes ***/
+/* TalentLMS */
+router.post('/createTLMSUser', createTLMSUser);
+router.post('/userLogin', userLogin);
+
 /* User Auth */
 router.post('/createUser', createUser);
 router.post('/updateUser', updateUser);
