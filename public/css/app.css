@@ -4313,6 +4313,9 @@ html {
 .translateModal .modal-body .translateVideo {
   width: 100%;
 }
+.translateModal .highlight {
+  color: #504e99;
+}
 /* Mobile Nav */
 .noscroll {
   overflow: hidden;

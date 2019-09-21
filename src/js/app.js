@@ -71,7 +71,7 @@ class App extends Component{
         this.state = {
             navChange: false,
             sidebarOpen: false,
-            modalStatus: false,
+            modalStatus: true,
             alerts:[
                 {title:"Rolling Enrollment",text:"Next Classes Start on October 7th. To obtain additional information regarding enrollment, click on <a href=\"/apply\">Apply</a> then click on Student Application.", type:"primary"}
             ]
