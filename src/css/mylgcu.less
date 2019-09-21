@@ -82,7 +82,45 @@
                     -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.2);
                     box-shadow: 0 3px 7px rgba(0, 0, 0, 0.2);
                     .content-title { color: rgba( 75,75,75,1); margin-right: 14px; }
-                    .content-info { font-weight: bold; }
+                    .content-info { 
+                        font-weight: bold;
+                    }
+                }
+
+                &.search-container {
+                    justify-content: flex-end;
+                    .search-btn {
+                        text-align: center;
+                        font-size: 24px;
+                        color: rgba(150,150,150,1);
+                        transition: 0.5s all ease-in-out;
+                        cursor: pointer;                        
+                        &:hover { color: rgba(0,0,0,1); }
+                    }
+                }
+            }
+
+            .resource-container {
+                display: inline-block;
+                width: 33%;
+                padding: 7px;
+                .resource-link {                    
+                    padding: 12px;
+                    border-radius: 5px; 
+                    width:100%;      
+                    display: block;             
+                    .color2(background, 0.8);
+                    color: rgba(255,255,255,1);
+                    font-size: 1.3rem;
+                    text-align: center;
+                    transition: 0.5s all ease-in-out;
+                    -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.2);
+                    -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.2);
+                    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.2);
+                    &:hover { .color2(background, 1); }
+                    @media @mobile-device { width: 100%; } 
+
+                    span { margin-left: 7px; }
                 }
             }
 
@@ -107,6 +145,20 @@
                             width: 100%;
                             input { background: none; border: none; width: 100%; }
                             &.icon { display: flex; i{ padding: 3px 0px; margin-right: 7px; } input { flex:1; }}
+                            &.generator {
+                                display: flex;
+                                input{ flex: 1; }
+                                .IdGenerator { 
+                                    background: rgba(255,255,255,1);
+                                    padding: 0px 7px;
+                                    margin-right: 5px;
+                                    border-radius: 5px;
+                                    display: flex;
+                                    flex-direction: column;
+                                    justify-content: center;
+                                    cursor: pointer;
+                                }
+                            }
                         }
                     }
                 }

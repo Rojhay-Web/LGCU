@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 /* Data */
 import academicData from '../../data/academics.json';
@@ -9,19 +10,9 @@ class MyAdmin extends Component{
         super(props);
         this.state = {
             searchQuery: "",
-            searchResults:[
-                {_id:"abc123", id:"3001001", name:"Tony Wilson"}, {_id:"xyz123", id:"3001002", name:"Jason Warrick"},
-                {_id:"abc456", id:"3001003", name:"Adrian Henkerson"}, {_id:"xyz456", id:"3001004", name:"Dak Prescott"},
-                {_id:"abc789", id:"3001005", name:"Alvin Kamara"}, {_id:"xyz789", id:"3001006", name:"Ben Rothlisberger"},
-                {_id:"abc012", id:"3001007", name:"Cameron Newton"}, {_id:"xyz012", id:"3001008", name:"Will Smith"},
-                {_id:"abc345", id:"3001009", name:"Mya Reed"}, {_id:"xyz345", id:"3001010", name:"Diangelo Russel"},
-                {_id:"abc678", id:"3001011", name:"Nancy Drew"}, {_id:"xyz678", id:"3001012", name:"Erika Coleman"},
-                {_id:"abc901", id:"3001013", name:"Tony Wilson"}, {_id:"xyz901", id:"3001014", name:"Jason Rowe"},
-                {_id:"abc234", id:"3001015", name:"Jack Wilson"}, {_id:"xyz234", id:"3001016", name:"Will Turner"},
-                {_id:"abc567", id:"3001017", name:"Andrew Phillips"}, {_id:"xyz567", id:"3001018", name:"Felica Coliver"}
-            ],
+            searchResults:[],
             selectedUser: {
-                firstName:"", lastName:"",  email:"", address:"",
+                firstname:"", lastname:"",  email:"", address:"",
                 degree:{ school:"", code:"", major:"", declareDate: null },
                 studentId:null, accountId:null, talentlmsId:null
             },
@@ -36,6 +27,8 @@ class MyAdmin extends Component{
         this.newStudent = this.newStudent.bind(this);
         this.clearStudentForm = this.clearStudentForm.bind(this);
         this.selectStudent = this.selectStudent.bind(this);
+        this.getStudentInfo = this.getStudentInfo.bind(this);
+        this.searchQuery = this.searchQuery.bind(this);
     }
 
     componentDidMount(){
@@ -51,11 +44,15 @@ class MyAdmin extends Component{
                 <div className="mylgcu-content-section inverse">
                     <div className="section-title">Student Search</div>
 
-                    <div className="content-block sz10">
+                    <div className="content-block sz9">
                         <div className="block-label-title">Search</div>
                         <div className="block-container">                            
-                            <div className="content-info icon"><i className="fas fa-search"></i><input type="text" name="searchQuery" className="" placeholder="Search Name Or Student ID" value={this.state.searchQuery} onChange={(e) => this.onSearchChange(e)}/></div>
+                            <div className="content-info icon"><i className="fas fa-search"></i><input type="text" name="searchQuery" className="" placeholder="Search Name, Email, or Student ID" value={this.state.searchQuery} onChange={(e) => this.onSearchChange(e)}/></div>
                         </div>
+                    </div>
+
+                    <div className="content-block search-container sz1">                          
+                        <div className="search-btn" onClick={this.searchQuery}><i className="btn-icon fas fa-search"></i></div>
                     </div>
                 </div>
 
@@ -73,11 +70,12 @@ class MyAdmin extends Component{
                         <div className="results-container">
                             <div className="results-subcontainer">
                                 {this.state.searchResults.map((item,i) =>
-                                    <div key={i} className="result-item" onClick={(e) => this.selectStudent(item.id)}>
+                                    <div key={i} className="result-item" onClick={(e) => this.selectStudent(item._id)}>
                                         <div className="user-icon"><i className="far fa-user"/></div>
                                         <div className="user-info">
-                                            <div className="info-name">{item.name}</div>
-                                            <div className="info-id">{item.id}</div>
+                                            <div className="info-name">{item.fullname}</div>
+                                            <div className="info-email">{item.email}</div>
+                                            <div className="info-id">{item.studentId}</div>
                                         </div>
                                     </div>
                                 )}
@@ -94,29 +92,67 @@ class MyAdmin extends Component{
                         <div className="content-block sz3">
                             <div className="block-label-title">First Name:</div>
                             <div className="block-container">                            
-                                <div className="content-info"><input type="text" name="firstName" className="" placeholder="First Name" value={this.state.selectedUser.firstName} onChange={(e) => this.onElementChange(e)}/></div>
+                                <div className="content-info"><input type="text" name="firstname" className="" placeholder="First Name" value={this.state.selectedUser.firstname} onChange={(e) => this.onElementChange(e)}/></div>
                             </div>
                         </div>
 
                         <div className="content-block sz3">
-                                <div className="block-label-title">Last Name:</div>
-                                <div className="block-container">                            
-                                    <div className="content-info"><input type="text" name="lastName" className="" placeholder="Last Name" value={this.state.selectedUser.lastName} onChange={(e) => this.onElementChange(e)}/></div>
-                                </div>
+                            <div className="block-label-title">Last Name:</div>
+                            <div className="block-container">                            
+                                <div className="content-info"><input type="text" name="lastname" className="" placeholder="Last Name" value={this.state.selectedUser.lastname} onChange={(e) => this.onElementChange(e)}/></div>
+                            </div>
                         </div>
 
                         <div className="content-block sz4">
-                                <div className="block-label-title">Email:</div>
-                                <div className="block-container">                            
-                                    <div className="content-info"><input type="text" name="email" className="" placeholder="Email" value={this.state.selectedUser.email} onChange={(e) => this.onElementChange(e)}/></div>
-                                </div>
+                            <div className="block-label-title">Email:</div>
+                            <div className="block-container">                            
+                                <div className="content-info"><input type="text" name="email" className="" placeholder="Email" value={this.state.selectedUser.email} onChange={(e) => this.onElementChange(e)}/></div>
+                            </div>
                         </div>
 
-                        <div className="content-block sz10">
-                                <div className="block-label-title">Address:</div>
-                                <div className="block-container">                            
-                                    <div className="content-info"><input type="text" name="address" className="" placeholder="Address" value={this.state.selectedUser.address} onChange={(e) => this.onElementChange(e)}/></div>
+                        <div className="content-block sz7">
+                            <div className="block-label-title">Address:</div>
+                            <div className="block-container">                            
+                                <div className="content-info"><input type="text" name="address" className="" placeholder="Address" value={this.state.selectedUser.address} onChange={(e) => this.onElementChange(e)}/></div>
+                            </div>
+                        </div>
+
+                        <div className="content-block sz3">
+                            <div className="block-label-title">Phone:</div>
+                            <div className="block-container">                            
+                                <div className="content-info"><input type="text" name="phone" className="" placeholder="Phone" value={this.state.selectedUser.phone} onChange={(e) => this.onElementChange(e)}/></div>
+                            </div>
+                        </div>
+
+                        {/* IDs */}
+                        <div className="content-block sz3">
+                            <div className="block-label-title">Student ID:</div>
+                            <div className="block-container">                            
+                                <div className="content-info generator">
+                                    <span className="IdGenerator"><i className="fas fa-recycle"></i></span>
+                                    <input type="text" name="studentId" className="" placeholder="Student id" value={this.state.selectedUser.studentId} readOnly/>
                                 </div>
+                            </div>
+                        </div>
+
+                        <div className="content-block sz3">
+                            <div className="block-label-title">Acccount ID:</div>
+                            <div className="block-container">                            
+                                <div className="content-info generator">
+                                    <span className="IdGenerator"><i className="fas fa-recycle"></i></span>
+                                    <input type="text" name="accountId" className="" placeholder="Account id" value={this.state.selectedUser.accountId} readOnly/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="content-block sz3">
+                            <div className="block-label-title">TalentLMS ID:</div>
+                            <div className="block-container">                            
+                                <div className="content-info generator">
+                                    <span className="IdGenerator"><i className="fas fa-recycle"></i></span>
+                                    <input type="text" name="talentlmsId" className="" placeholder="Talentlms id" value={this.state.selectedUser.talentlmsId.id + " | "+this.state.selectedUser.talentlmsId.login} readOnly/>
+                                </div>
+                            </div>
                         </div>
                             
                         <div className="degree-block">                                                
@@ -137,21 +173,21 @@ class MyAdmin extends Component{
                                 <div className="content-block sz4">
                                     <div className="block-label-title">Degree School:</div>
                                     <div className="block-container">                            
-                                        <div className="content-info">{this.state.selectedUser.degree.school}</div>
+                                        <div className="content-info">{this.state.selectedUser.degree.school || ""}</div>
                                     </div>
                                 </div>
 
                                 <div className="content-block sz4">
                                     <div className="block-label-title">Degree Major:</div>
                                     <div className="block-container">                            
-                                        <div className="content-info">{this.state.selectedUser.degree.major}</div>
+                                        <div className="content-info">{this.state.selectedUser.degree.major || ""}</div>
                                     </div>
                                 </div>
 
                                 <div className="content-block sz2">
                                     <div className="block-label-title">Degree ID:</div>
                                     <div className="block-container">                            
-                                        <div className="content-info">{this.state.selectedUser.degree.code}</div>
+                                        <div className="content-info">{this.state.selectedUser.degree.code || ""}</div>
                                     </div>
                                 </div>
 
@@ -193,21 +229,17 @@ class MyAdmin extends Component{
                 if(window.confirm("Do you want to select this student, all of your unsaved work will be lost?")) {
                     // Clear form 
                     self.clearStudentForm(function(){ 
-                        self.setState({ updateType: "update" });
+                        // Add Loading Animation                        
                         // Get Student Information
-                        self.setState({ selectedUser:{firstName:"Tony", lastName:"James",  email:"t.James@gmail.com", address:"123 test street, wilmington, DE. 19711", 
-                            degree:{ school:"Education", code:"BA-BA", major:"Business Administration", declareDate: null },  
-                            studentId:"30010001", accountId:"456", talentlmsId:"123"}});
+                        self.getStudentInfo(studentid);
                     });
                 }                                
             }
             else {
                 this.clearStudentForm(function(){ 
-                    self.setState({ updateType: "update" });
+                    // Add Loading Animation
                     // Get Student Information
-                    self.setState({ selectedUser:{firstName:"Tony", lastName:"James",  email:"t.James@gmail.com", address:"123 test street, wilmington, DE. 19711", 
-                            degree:{ school:"Education", code:"BA-BA", major:"Business Administration", declareDate: null },  
-                            studentId:"30010001", accountId:"456", talentlmsId:"123"}});
+                    self.getStudentInfo(studentid);
                 });                
             }
         }
@@ -239,9 +271,9 @@ class MyAdmin extends Component{
         var self = this;
         try{           
             
-            this.setState({ selectedUser:{firstName:"", lastName:"",  email:"", address:"", 
+            this.setState({ selectedUser:{firstname:"", lastname:"",  email:"", address:"", 
                 degree:{ school:"", code:"", major:"", declareDate: null },  
-                studentId:null, accountId:null, talentlmsId:null}}, ()=> {callback(); });
+                studentId:null, accountId:null, talentlmsId:{}}}, ()=> {callback(); });
         }
         catch(ex){
             console.log("[Error] clearing form: ",ex);
@@ -251,24 +283,86 @@ class MyAdmin extends Component{
     onSearchChange(e){
         var self = this;
         try {
-            var name = e.target.name;
-            self.setState({ [name]: e.target.value }, () =>{
-                self.searchQuery(self.state.searchQuery);
-            });
+            var name = e.target.name;           
+            self.setState({ [name]: e.target.value });
         }
         catch(ex){
             console.log("[Error] changing search: ",ex);
         }
     }
-    searchQuery(query){
+    searchQuery(){
+        var self = this;
         try {
+            var query = this.state.searchQuery;
 
+            if(query.length <= 0){
+                self.setState({ searchResults: [] });
+            }
+            else {
+                var sessionInfo = localStorage.getItem(self.props.mySessKey);
+                if(sessionInfo) {
+                    var localUser = JSON.parse(sessionInfo);
+
+                    var postData = { 
+                        requestUser: { _id: localUser._id}, 
+                        searchInfo: { query: query} 
+                    };
+                    axios.post(self.props.rootPath + "/api/userSearch", postData, {'Content-Type': 'application/json'})
+                    .then(function(response) {
+                        if(response.data.errorMessage){
+                            self.setState({ error: response.data.errorMessage, searchResults: [] });
+                        }
+                        else {
+                            self.setState({searchResults: response.data.results });
+                        }
+                    });  
+                } 
+            }
         }
         catch(ex){
             console.log("[Error] searching students: ",ex);
         }
     }
 
+    getStudentInfo(id){
+        var self = this;
+        try {
+            if(id.length <= 0){
+                self.setState({ error: "DB Id is not valid please contact site admin" });
+            }
+            else {
+                var sessionInfo = localStorage.getItem(self.props.mySessKey);
+                if(sessionInfo) {
+                    var localUser = JSON.parse(sessionInfo);
+
+                    var postData = { 
+                        requestUser: { _id: localUser._id}, 
+                        userInfo: { _id: id, full: true} 
+                    };
+                    axios.post(self.props.rootPath + "/api/getUserById", postData, {'Content-Type': 'application/json'})
+                    .then(function(response) {
+                        if(response.data.errorMessage){
+                            self.setState({ error: response.data.errorMessage, selectedUser: {}, updateType:null });
+                        }
+                        else {
+                            var student = response.data.results;
+                            self.setState({ updateType: "update", 
+                                selectedUser:{
+                                    firstname:student.firstname, lastname:student.lastname, email:student.email, 
+                                    address:student.address, phone: student.phone, admin:student.admin,
+                                    degree:student.degree, _id:student._id, studentId:student.studentId, 
+                                    accountId:student.accountId, talentlmsId:student.talentlmsId
+                                }
+                            });
+                        }
+                    });  
+                } 
+            }
+        }
+        catch(ex){
+            console.log("[Error] getting student: ",ex);
+        }
+    }
     onElementChange(e){
         var self = this;
         try {

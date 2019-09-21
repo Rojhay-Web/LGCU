@@ -96,6 +96,30 @@ class MyProfile extends Component{
                    </div>
                </div>
 
+                {/* Student Resources */}
+                <div className="mylgcu-content-section">
+                    <div className="section-title">Student Resources</div>
+
+                    <div className="resource-container">
+                        <a href="https://lenkesongcu.talentlms.com/" target="_blank" className="resource-link">
+                            <i className="fas fa-chalkboard-teacher"></i>
+                            <span>TalentLMS</span>
+                        </a>
+                    </div>
+                    <div className="resource-container">
+                        <a href="https://iii.ocls.info/patroninfo/top" target="_blank" className="resource-link">
+                            <i className="fas fa-book-reader"></i>
+                            <span>Online Library</span>
+                        </a>
+                    </div>
+                    <div className="resource-container">
+                        <a href="https://www.mbsdirect.net/" className="resource-link">
+                            <i className="fas fa-book"></i>
+                            <span>LGCU Bookstore</span>
+                        </a>
+                    </div>
+                </div>
+
                 {/* Degree Overview */}
                 <div className="mylgcu-content-section">
                    <div className="section-title">Degree Overview</div>
@@ -137,7 +161,7 @@ class MyProfile extends Component{
             if(sessionInfo){
                 var localUser = JSON.parse(sessionInfo);
 
-                var postData = { requestUser: { _id: localUser._id}, userInfo: { _id: localUser._id} };
+                var postData = { requestUser: { _id: localUser._id}, userInfo: { _id: localUser._id, full:true} };
                 axios.post(self.props.rootPath + "/api/getUserById", postData, {'Content-Type': 'application/json'})
                 .then(function(response) {
                     if(response.data.errorMessage){

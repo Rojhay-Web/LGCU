@@ -2017,6 +2017,49 @@
 .mylgcuPage .mylgcu-section .mylgcu-content-section .content-block .block-container .content-info {
   font-weight: bold;
 }
+.mylgcuPage .mylgcu-section .mylgcu-content-section .content-block.search-container {
+  justify-content: flex-end;
+}
+.mylgcuPage .mylgcu-section .mylgcu-content-section .content-block.search-container .search-btn {
+  text-align: center;
+  font-size: 24px;
+  color: #969696;
+  transition: 0.5s all ease-in-out;
+  cursor: pointer;
+}
+.mylgcuPage .mylgcu-section .mylgcu-content-section .content-block.search-container .search-btn:hover {
+  color: #000000;
+}
+.mylgcuPage .mylgcu-section .mylgcu-content-section .resource-container {
+  display: inline-block;
+  width: 33%;
+  padding: 7px;
+}
+.mylgcuPage .mylgcu-section .mylgcu-content-section .resource-container .resource-link {
+  padding: 12px;
+  border-radius: 5px;
+  width: 100%;
+  display: block;
+  background: rgba(37, 119, 40, 0.8) !important;
+  color: #ffffff;
+  font-size: 1.3rem;
+  text-align: center;
+  transition: 0.5s all ease-in-out;
+  -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.2);
+}
+.mylgcuPage .mylgcu-section .mylgcu-content-section .resource-container .resource-link:hover {
+  background: #257728 !important;
+}
+@media (max-width: 770px) {
+  .mylgcuPage .mylgcu-section .mylgcu-content-section .resource-container .resource-link {
+    width: 100%;
+  }
+}
+.mylgcuPage .mylgcu-section .mylgcu-content-section .resource-container .resource-link span {
+  margin-left: 7px;
+}
 .mylgcuPage .mylgcu-section .mylgcu-content-section.inverse {
   padding: 15px 0px;
   background: #ffffff;
@@ -2052,6 +2095,22 @@
 }
 .mylgcuPage .mylgcu-section .mylgcu-content-section.inverse .content-block .block-container .content-info.icon input {
   flex: 1;
+}
+.mylgcuPage .mylgcu-section .mylgcu-content-section.inverse .content-block .block-container .content-info.generator {
+  display: flex;
+}
+.mylgcuPage .mylgcu-section .mylgcu-content-section.inverse .content-block .block-container .content-info.generator input {
+  flex: 1;
+}
+.mylgcuPage .mylgcu-section .mylgcu-content-section.inverse .content-block .block-container .content-info.generator .IdGenerator {
+  background: #ffffff;
+  padding: 0px 7px;
+  margin-right: 5px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  cursor: pointer;
 }
 .mylgcuPage .mylgcu-section .mylgcu-content-section.inverse .degree-block {
   padding: 7px;

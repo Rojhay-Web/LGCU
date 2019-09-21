@@ -61,7 +61,7 @@ var auth = {
                         if(ret.errorMessage == null){
                             db.updateOne({ "_id": ObjectId(ret.results._id) },  
                             { $set: 
-                                { firstName: ret.results.firstName, lastName: ret.results.lastName, 
+                                { firstname: ret.results.firstname, lastname: ret.results.lastname, 
                                     email: ret.results.email, address: ret.results.address,
                                     degree: ret.results.degree
                                 }
@@ -88,8 +88,9 @@ var auth = {
     getUserById:function(userInfo,callback){
         var response = {"errorMessage":null, "results":null};
 
-        /* userInfo: { _id} */
+        /* userInfo: { _id, full:bool} */
         try {
+
             mongoClient.connect(database.connectionString, database.mongoOptions, function(err, client){
                 if(err) {
                     response.errorMessage = err;
@@ -98,15 +99,29 @@ var auth = {
                 else {
                     const db = client.db(database.dbName).collection('mylgcu_users');                    
 
-                    db.find({ "_id": ObjectId(userInfo._id) }).limit(1).toArray(function(err, res){ 
-                        if(res && res.length > 0){
-                            response.results = res[0];
-                        }
-                        else {
-                            response.errorMessage = "Unable to get user by this id";
-                        }
-                        callback(response);
-                    });            
+                    if(userInfo.full){
+                        db.find({ "_id": ObjectId(userInfo._id)}).limit(1).toArray(function(err, res){ 
+                            if(res && res.length > 0){
+                                response.results = res[0];
+                            }
+                            else {
+                                response.errorMessage = "Unable to get user by this id";
+                            }
+                            callback(response);
+                        });
+                    }
+                    else {
+                        db.find({ "_id": ObjectId(userInfo._id)}).project({_id:1, studentId:1, firstname:1, lastname:1, admin:1})
+                        .limit(1).toArray(function(err, res){ 
+                            if(res && res.length > 0){
+                                response.results = res[0];
+                            }
+                            else {
+                                response.errorMessage = "Unable to get user by this id";
+                            }
+                            callback(response);
+                        });
+                    }
                 }
             });
         }
@@ -119,6 +134,8 @@ var auth = {
         var response = {"errorMessage":null, "results":null};
 
         try {
+
+            /* searchInfo: { query }*/
             mongoClient.connect(database.connectionString, database.mongoOptions, function(err, client){
                 if(err) {
                     response.errorMessage = err;
@@ -132,10 +149,12 @@ var auth = {
                     db.find({ $or:[
                         {'email' : new RegExp(searchInfo.query,'i') },
                         {'studentId' : idSearch },
-                        {'firstName' : new RegExp(searchInfo.query,'i') },
-                        {'lastName' : new RegExp(searchInfo.query,'i') },
-                        {'fullName' : new RegExp(searchInfo.query,'i') }
-                        ] }).toArray(function(err, res){ 
+                        {'firstname' : new RegExp(searchInfo.query,'i') },
+                        {'lastname' : new RegExp(searchInfo.query,'i') },
+                        {'fullname' : new RegExp(searchInfo.query,'i') }
+                        ] })
+                        .project({_id:1, studentId:1, fullname:1, email:1, admin:1})
+                        .toArray(function(err, res){ 
                             response.results = res;
                             callback(response);
                     });            
@@ -216,7 +235,7 @@ function validateNewUser(userInfo, callback){
                         response.errorMessage ="[Error] Validating New User (E11): User with email address already exists";
                     }
                     else {
-                        var neccessaryItems = ["firstName", "lastName", "email"];
+                        var neccessaryItems = ["firstname", "lastname", "email"];
                         var errorList = [];
                         
                         neccessaryItems.forEach(function(item){
@@ -230,7 +249,7 @@ function validateNewUser(userInfo, callback){
                         }
                         else {
                             // Create new user
-                            var newUser = { firstName: userInfo.firstName, lastName: userInfo.lastName, email: userInfo.email,
+                            var newUser = { firstname: userInfo.firstname, lastname: userInfo.lastname, email: userInfo.email,
                                 address:userInfo.address, studentId:null, accountId:null, talentlmsId:null,
                                 degree:{
                                     school:userInfo.degree.school, code:userInfo.degree.code, 
@@ -269,7 +288,7 @@ function validateExistingUser(userInfo, callback){
                         response.errorMessage ="[Error] Validating Existing User (E11): User with email address already exists";
                     }
                     else {
-                        var neccessaryItems = ["firstName", "lastName", "email"];
+                        var neccessaryItems = ["firstname", "lastname", "email"];
                         var errorList = [];
                         
                         neccessaryItems.forEach(function(item){
@@ -283,7 +302,7 @@ function validateExistingUser(userInfo, callback){
                         }
                         else {
                             // Create new user
-                            var newUser = { firstName: userInfo.firstName, lastName: userInfo.lastName, email: userInfo.email,
+                            var newUser = { firstname: userInfo.firstname, lastname: userInfo.lastname, email: userInfo.email,
                                 address:userInfo.address, _id:userInfo._id,
                                 degree:{
                                     school:userInfo.degree.school, code:userInfo.degree.code, 

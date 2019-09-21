@@ -46,17 +46,7 @@ class myLGCUHeader extends Component{
             
             if(sessionInfo){
                 var localUser = JSON.parse(sessionInfo);
-
-                var postData = { requestUser: { _id: localUser._id}, userInfo: { _id: localUser._id} };
-                axios.post(rootPath + "/api/getUserById", postData, {'Content-Type': 'application/json'})
-                .then(function(response) {
-                    if(response.data.errorMessage){
-                        self.setState({ error: response.data.errorMessage });
-                    }
-                    else {
-                        self.setState({name: response.data.results.fullname, userId: localUser._id, modalStatus: false });
-                    }
-                });     
+                self.setState({name: localUser.fullname, userId: localUser._id, modalStatus: false });
             }
             else {
                 this.setState({ name: null, userId:null, modalStatus: true });
@@ -166,17 +156,7 @@ class myLGCU extends Component{
             
             if(sessionInfo){
                 var localUser = JSON.parse(sessionInfo);
-
-                var postData = { requestUser: { _id: localUser._id}, userInfo: { _id: localUser._id} };
-                axios.post(rootPath + "/api/getUserById", postData, {'Content-Type': 'application/json'})
-                .then(function(response) {
-                    if(response.data.errorMessage){
-                        self.setState({ error: response.data.errorMessage });
-                    }
-                    else {
-                        self.setState({ userAccess: true, name: response.data.results.fullname, userId: localUser._id, admin: response.data.results.admin });
-                    }
-                });     
+                self.setState({ userAccess: true, name: localUser.fullname, userId: localUser._id, admin: localUser.admin });
             }
             else {
                 self.setState({ userAccess: false, name: null, userId: null });
@@ -255,7 +235,8 @@ class SignInModal extends Component{
                     self.setState({ error: response.errorMessage });
                 }
                 else {
-                    var tmpUser = {email: self.state.email, _id: response.data.results._id};
+                    var tmpUser = {email: self.state.email, fullname: response.data.results.fullname, 
+                                    _id: response.data.results._id, admin: response.data.results.admin};
                     localStorage.setItem(mySessKey, JSON.stringify(tmpUser));
                     self.props.userAccess(true);
                 }
