@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 /* Data */
 import academicData from '../../data/academics.json';
@@ -69,7 +70,7 @@ class MyProfile extends Component{
                    <div className="content-block sz2">
                        <div className="block-container">
                             <div className="content-title">Student Id:</div>
-                            <div className="content-info">{this.state.id}</div>
+                            <div className="content-info">{this.state.studentId}</div>
                        </div>
                    </div>
 
@@ -83,14 +84,14 @@ class MyProfile extends Component{
                    <div className="content-block sz2">
                        <div className="block-container">
                             <div className="content-title">Total Credits:</div>
-                            <div className="content-info">{this.state.totalCredits}</div>
+                            <div className="content-info">{this.state.totalCredits || ""}</div>
                        </div>
                    </div>
 
                    <div className="content-block sz2">
                        <div className="block-container">
                             <div className="content-title">GPA:</div>
-                            <div className="content-info">{this.state.gpa}</div>
+                            <div className="content-info">{this.state.gpa || ""}</div>
                        </div>
                    </div>
                </div>
@@ -131,9 +132,31 @@ class MyProfile extends Component{
     getUserInfo(){
         var self = this;
         try {
-            self.setState({ id:"30000010", name:"Joe Smith", email: "joe.smith@gmail.com",
-                address: "1357 Wilson St., New Castle, DE. 19711, USA", degree:"Business Administration",
-                degreelvl:"Bachelors", degreeId:"BA-BA", totalCredits:12, gpa:3.10 }, () =>{ self.getCourseList("BA-BA"); });
+            var sessionInfo = localStorage.getItem(this.props.mySessKey);
+            
+            if(sessionInfo){
+                var localUser = JSON.parse(sessionInfo);
+
+                var postData = { requestUser: { _id: localUser._id}, userInfo: { _id: localUser._id} };
+                axios.post(self.props.rootPath + "/api/getUserById", postData, {'Content-Type': 'application/json'})
+                .then(function(response) {
+                    if(response.data.errorMessage){
+                        self.setState({ error: response.errorMessage });
+                    }
+                    else {
+                        var userInfo = response.data.results;
+
+                        self.setState({ _id:userInfo._id, studentId: userInfo.studentId, name: userInfo.fullname, email: userInfo.email,
+                                        address: userInfo.address, degree: userInfo.degree.major, degreeId: userInfo.degree.code,
+                                        degreelevl:userInfo.degree.level, totalCredits: userInfo.studentInfo.credits, gpa: userInfo.studentInfo.gpa
+                        }, () =>{ self.getCourseList(self.state.degreeId); });
+                    }
+                });     
+            }
+            else {
+                self.setState({ _id:null, studentId: null, name: null, address: null, degree: null, 
+                    degreeId: null, degreelevl:null, totalCredits: 0, gpa: 0}, () =>{ self.getCourseList(null); });
+            }
         }
         catch(ex){
             console.log("[Error]: Error Getting User Info: ",ex);
@@ -149,28 +172,30 @@ class MyProfile extends Component{
            var major = null;
            var courseList = [];
            var academics = Object.keys(academicData);
-
-           academics.forEach(function(school){
-                var levels = Object.keys(academicData[school].degrees);
-                levels.forEach(function(lvl){
-                    var degrees = academicData[school].degrees[lvl];
-                    degrees.forEach(function(degree){
-                        if(degree.id.toLowerCase() == degreeId.toLowerCase()){
-                            major = degree;
-                        }
+           
+           if(degreeId != null){           
+                academics.forEach(function(school){
+                    var levels = Object.keys(academicData[school].degrees);
+                    levels.forEach(function(lvl){
+                        var degrees = academicData[school].degrees[lvl];
+                        degrees.forEach(function(degree){
+                            if(degree.id.toLowerCase() == degreeId.toLowerCase()){
+                                major = degree;
+                            }
+                        });
                     });
                 });
-           });
 
-           if(major != null){
-                major.courses.forEach(function(section){
-                    section.courses.forEach(function(course){
-                        if(course in courseData){
-                            courseList.push({courseCode:{name:courseData[course].section, id:courseData[course].id}, title: courseData[course].title, statusCode:0 });
-                        }                        
+                if(major != null){
+                    major.courses.forEach(function(section){
+                        section.courses.forEach(function(course){
+                            if(course in courseData){
+                                courseList.push({courseCode:{name:courseData[course].section, id:courseData[course].id}, title: courseData[course].title, statusCode:0 });
+                            }                        
+                        });
                     });
-                });
-           }
+                }
+            }
 
            // Create overviewData List
            self.setState({overviewData: courseList });

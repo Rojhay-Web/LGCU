@@ -44,6 +44,16 @@ function userSearch(req, res){
     });
 }
 
+function getUserById(req, res){
+    var requestUser = req.body.requestUser;
+
+    var userInfo = req.body.userInfo;
+    // Validate User
+    auth.getUserById(userInfo, function(ret){
+        res.status(200).json(ret);
+    });
+}
+
 function generateStudentId(req, res){
     var requestUser = req.body.requestUser;
     
@@ -65,11 +75,8 @@ function createTLMSUser(req, res){
     });
 }
 
-function userLogin(req, res){
-    var requestUser = req.body.requestUser;
-    
+function userLogin(req, res){    
     var loginInfo = req.body.loginInfo;
-    // Validate User
     talentlms.signin(loginInfo, function(ret){
         res.status(200).json(ret);
     });
@@ -84,6 +91,7 @@ router.post('/userLogin', userLogin);
 router.post('/createUser', createUser);
 router.post('/updateUser', updateUser);
 router.post('/userSearch', userSearch);
+router.post('/getUserById', getUserById);
 router.post('/generateStudentId', generateStudentId);
 
 /* Emails */

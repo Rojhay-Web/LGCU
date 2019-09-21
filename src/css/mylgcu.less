@@ -34,6 +34,14 @@
 .mylgcuPage {
     background: rgba(230,230,230,1);
     min-height: 100vh;
+    .userAccess {
+        .noAccess {
+            width: 100%;
+            text-align: center;
+            padding: 20px 0px;    
+        }
+    }
+
     .mylgcu-section {
         padding: @navHeightBottom 0px 50px;
         position: relative;
@@ -359,6 +367,16 @@
     
     justify-content: center;
     text-align: center;
+
+    .signin-error-message {
+        background: rgba(250,50,50,1);
+        color: rgba(255,255,255,1);
+        text-align: center;
+        padding: 5px;
+        border-radius: 5px;
+        width: 100%;
+        margin-bottom: 10px;
+    }
     .header-container {
         height: 75px;
         display: flex;

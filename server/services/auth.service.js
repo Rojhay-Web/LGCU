@@ -85,6 +85,36 @@ var auth = {
             callback(response);
         }
     },
+    getUserById:function(userInfo,callback){
+        var response = {"errorMessage":null, "results":null};
+
+        /* userInfo: { _id} */
+        try {
+            mongoClient.connect(database.connectionString, database.mongoOptions, function(err, client){
+                if(err) {
+                    response.errorMessage = err;
+                    callback(response);
+                }
+                else {
+                    const db = client.db(database.dbName).collection('mylgcu_users');                    
+
+                    db.find({ "_id": ObjectId(userInfo._id) }).limit(1).toArray(function(err, res){ 
+                        if(res && res.length > 0){
+                            response.results = res[0];
+                        }
+                        else {
+                            response.errorMessage = "Unable to get user by this id";
+                        }
+                        callback(response);
+                    });            
+                }
+            });
+        }
+        catch(ex){
+            response.errorMessage = "[Error] Getting User By Id (E09): "+ ex;
+            callback(response);
+        }
+    },
     userSearch:function(searchInfo,callback){
         var response = {"errorMessage":null, "results":null};
 
@@ -103,7 +133,8 @@ var auth = {
                         {'email' : new RegExp(searchInfo.query,'i') },
                         {'studentId' : idSearch },
                         {'firstName' : new RegExp(searchInfo.query,'i') },
-                        {'lastName' : new RegExp(searchInfo.query,'i') }
+                        {'lastName' : new RegExp(searchInfo.query,'i') },
+                        {'fullName' : new RegExp(searchInfo.query,'i') }
                         ] }).toArray(function(err, res){ 
                             response.results = res;
                             callback(response);
@@ -124,17 +155,6 @@ var auth = {
         }
         catch(ex){
             response.errorMessage = "[Error] Authorizing User (E09): "+ ex;
-            callback(response);
-        }
-    },
-    loginUser:function(userInfo,callback){
-        var response = {"errorMessage":null, "results":null};
-
-        try {
-
-        }
-        catch(ex){
-            response.errorMessage = "[Error] Loging In User (E09): "+ ex;
             callback(response);
         }
     },

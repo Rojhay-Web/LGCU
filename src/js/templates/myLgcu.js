@@ -12,8 +12,8 @@ import MyCourses from './mylgcuComponents/myCourses';
 import MyAdmin from './mylgcuComponents/myAdmin';
 
 var mySessKey = "mylgcu_aditum";
-var rootPath = "";
-//var rootPath = "http://localhost:1111";
+//var rootPath = "";
+var rootPath = "http://localhost:1111";
 
 /* Header */
 class myLGCUHeader extends Component{
@@ -46,10 +46,20 @@ class myLGCUHeader extends Component{
             
             if(sessionInfo){
                 var localUser = JSON.parse(sessionInfo);
-                self.setState({name: "Joe Smith", userId: localUser.id, modalStatus: false });
+
+                var postData = { requestUser: { _id: localUser._id}, userInfo: { _id: localUser._id} };
+                axios.post(rootPath + "/api/getUserById", postData, {'Content-Type': 'application/json'})
+                .then(function(response) {
+                    if(response.data.errorMessage){
+                        self.setState({ error: response.data.errorMessage });
+                    }
+                    else {
+                        self.setState({name: response.data.results.fullname, userId: localUser._id, modalStatus: false });
+                    }
+                });     
             }
             else {
-                self.setState({ name: null, userId: null, modalStatus: true });
+                this.setState({ name: null, userId:null, modalStatus: true });
             }
         }
         catch(ex){
@@ -120,7 +130,7 @@ class myLGCU extends Component{
     componentDidMount(){ 
         window.scrollTo(0, 0); 
         this.getUserInfo(); 
-        this.setState({ selectedPage: "admin" });
+        this.setState({ selectedPage: "profile" });
     }
 
     render(){   
@@ -137,12 +147,12 @@ class myLGCU extends Component{
                             <div className={"mylgcu-nav-item" + (this.state.selectedPage == "courses" ? " selected" :"")} onClick={(e) => this.changePage("courses")}><i className="fas fa-book-reader"></i> <span>Courses</span></div>
                             <div className={"mylgcu-nav-item" + (this.state.selectedPage == "account" ? " selected" :"")} onClick={(e) => this.changePage("account")}><i className="fas fa-file-invoice-dollar"></i> <span>Account</span></div>
                             <div className="mylgcu-nav-item"><i className="fas fa-chalkboard-teacher"></i> <span>TalentLMS</span></div>
-                            <div className={"mylgcu-nav-item" + (this.state.selectedPage == "admin" ? " selected" :"")} onClick={(e) => this.changePage("admin")}><i className="fas fa-user-shield"></i> <span>Admin</span></div>
+                            {this.state.admin && <div className={"mylgcu-nav-item" + (this.state.selectedPage == "admin" ? " selected" :"")} onClick={(e) => this.changePage("admin")}><i className="fas fa-user-shield"></i> <span>Admin</span></div> }
                         </section>
                     </div>
                 :
                     <div className="userAccess">
-                        <h1>Please Sign in to access your <span className="c2">myLGCU</span> account</h1>
+                        <h1 className="noAccess">Please Sign in to access your <span className="c2">myLGCU</span> account</h1>
                     </div>
                 }
             </div>
@@ -156,10 +166,20 @@ class myLGCU extends Component{
             
             if(sessionInfo){
                 var localUser = JSON.parse(sessionInfo);
-                self.setState({ userAccess: true, name: "Joe Smith", userId: localUser.id, modalStatus: false });
+
+                var postData = { requestUser: { _id: localUser._id}, userInfo: { _id: localUser._id} };
+                axios.post(rootPath + "/api/getUserById", postData, {'Content-Type': 'application/json'})
+                .then(function(response) {
+                    if(response.data.errorMessage){
+                        self.setState({ error: response.data.errorMessage });
+                    }
+                    else {
+                        self.setState({ userAccess: true, name: response.data.results.fullname, userId: localUser._id, admin: response.data.results.admin });
+                    }
+                });     
             }
             else {
-                self.setState({ userAccess: false, name: null, userId: null, modalStatus: true });
+                self.setState({ userAccess: false, name: null, userId: null });
             }
         }
         catch(ex){
@@ -174,16 +194,16 @@ class myLGCU extends Component{
     setPage(){
         switch(this.state.selectedPage.toLowerCase()){
             case "profile":
-                return <MyProfile user={this.state.userInfo} />;
+                return <MyProfile user={this.state.userInfo} rootPath={rootPath} mySessKey={mySessKey} />;
                 break;
             case "courses":
-                return <MyCourses user={this.state.userInfo} />;
+                return <MyCourses user={this.state.userInfo} rootPath={rootPath} mySessKey={mySessKey} />;
                 break;
             case "account":
-                return <MyAccount user={this.state.userInfo} />;
+                return <MyAccount user={this.state.userInfo} rootPath={rootPath} mySessKey={mySessKey} />;
                 break;
             case "admin":
-                return <MyAdmin user={this.state.userInfo} />;
+                return <MyAdmin user={this.state.userInfo} rootPath={rootPath} mySessKey={mySessKey} />;
                 break;    
             default:
                 return <div>No Page Selected</div>;
@@ -227,15 +247,15 @@ class SignInModal extends Component{
     login(e){
         var self = this;
         try {
-            var postData = { "email":this.state.email, "password":this.state.password};
+            var postData = { loginInfo:{"email":this.state.email, "password":this.state.password}};
             /* Call Login */
             axios.post(rootPath + "/api/userLogin", postData, {'Content-Type': 'application/json'})
             .then(function(response) {
-                if(response.errorMessage){
+                if(response.data.errorMessage){
                     self.setState({ error: response.errorMessage });
                 }
                 else {
-                    var tmpUser = {email: this.state.email, id: response.results._id};
+                    var tmpUser = {email: self.state.email, _id: response.data.results._id};
                     localStorage.setItem(mySessKey, JSON.stringify(tmpUser));
                     self.props.userAccess(true);
                 }
@@ -251,6 +271,9 @@ class SignInModal extends Component{
             <Modal dialogClassName="signinModal" show={this.props.show} backdrop="static" size="xl" onHide={this.closeForm}>
                 <Modal.Body>
                     <div className="signin-container">
+                        {this.state.error && 
+                            <div className="signin-error-message">{this.state.error}</div>
+                        }
                         <div className="header-container">
                             <img alt="logo img" className="headerLogo" src={logo}/>
                             <div className="textLogo">

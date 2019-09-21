@@ -26,13 +26,13 @@ var talentlms = {
                 else {
                     const db = client.db(database.dbName).collection('mylgcu_users');
                     
-                    db.find({ "email": ObjectId(loginInfo.email) }).toArray(function(err, res){ 
-                        if(res.length <= 0){
+                    db.find({ "email": loginInfo.email }).toArray(function(err, dbres){ 
+                        if(dbres.length <= 0){
                             response.errorMessage = "[Error] Email Address does not exist";
                             callback(response);
                         }
                         else {
-                            var currentUser = res[0];
+                            var currentUser = dbres[0];
 
                             var form = new FormData();
                             form.append('login', currentUser.talentlmsId.login);
@@ -50,7 +50,7 @@ var talentlms = {
                                 res.on('end', function() {
                                     ret = JSON.parse(ret);
                                     if(ret.error){
-                                        response.errorMessage = ret.error.message;
+                                        response.errorMessage = "[Error] with login information";
                                     }
                                     else {
                                         response.results = ret;
@@ -61,7 +61,6 @@ var talentlms = {
                             });
 
                         }
-                        callback(response);
                     });
                 }
             });            
@@ -75,6 +74,7 @@ var talentlms = {
         var response = {"errorMessage":null, "results":null};
         var url = "https://lenkesongcu.talentlms.com/api/v1/usersignup";
 
+        /* userInfo: { firstname, lastname, email, _id, retry} */
         try {
             var formData = {
                 first_name: userInfo.firstname, last_name: userInfo.lastname,
@@ -141,6 +141,9 @@ function createTalentLMSLogin(userInfo, callback){
 
     try {
         var login = (userInfo.firstname && userInfo.firstname.length > 0 ? userInfo.firstname.charAt(0) : "L") + userInfo.lastname;
+        login = login + (userInfo.retry && parseInt(userInfo.retry) > 0 ? userInfo.retry : "");
+
+        console.log("login: "+login);
 
         mongoClient.connect(database.connectionString, database.mongoOptions, function(err, client){
             if(err) {
@@ -150,12 +153,12 @@ function createTalentLMSLogin(userInfo, callback){
             else {
                 const db = client.db(database.dbName).collection('mylgcu_users');
                 
-                db.find({ "_id": ObjectId(ret.results._id) }).toArray(function(err, res){ 
+                db.find({ "_id": ObjectId(userInfo._id) }).toArray(function(err, res){ 
                     if(res.length <= 0){
                         response.errorMessage = "[Error] Invalid User Id";
                     }
                     else {
-                        response.results = {login: login + "-"+res[0].studentId, password: "LGCU-"+res[0].studentId};
+                        response.results = {login: login, password: "LGCU-"+res[0].studentId};
                     }
                     callback(response);
                 });

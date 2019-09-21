@@ -1889,6 +1889,11 @@
   background: #e6e6e6;
   min-height: 100vh;
 }
+.mylgcuPage .userAccess .noAccess {
+  width: 100%;
+  text-align: center;
+  padding: 20px 0px;
+}
 .mylgcuPage .mylgcu-section {
   padding: 89px 0px 50px;
   position: relative;
@@ -2397,6 +2402,15 @@
   padding: 7px 5%;
   justify-content: center;
   text-align: center;
+}
+.signin-container .signin-error-message {
+  background: #fa3232;
+  color: #ffffff;
+  text-align: center;
+  padding: 5px;
+  border-radius: 5px;
+  width: 100%;
+  margin-bottom: 10px;
 }
 .signin-container .header-container {
   height: 75px;
