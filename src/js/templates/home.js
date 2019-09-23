@@ -43,7 +43,7 @@ class HomeHeader extends Component{
 
                     <div className="frontInfo">
                         <h1>
-                            <span>Global Access Through</span> 
+                            <span>Global Access Through Online</span> 
                             <span>Affordable Higher Education</span>
                         </h1>
                         <p><span>"Those from among you shall build the waste places; 
@@ -132,7 +132,7 @@ function Home(props){
 
                         <div className="split-content">
                             <h2 className="lrgTitle" data-text="Why LGCU">Why LGCU?</h2>
-                            <p>At LGCU, learners and faculty are engaged in academic and professional learning that is centered on developing and empowering working professionals to succeed in church ministries and other professional fields.</p>
+                            <p>At LGCU, learners and faculty are engaged in academic and professional online learning that is centered on developing and empowering working professionals to succeed in church ministries and other professional fields.</p>
                             <div className="btn-container">
                                 <a href="/about" className="lBtn c2"><span>More About LGCU</span><i className="btn-icon fas fa-info-circle"></i></a>
                                 <a href="/files/Accreditation.docx" target="_blank" className="lBtn clear t2"><span>Accreditation  Information</span><i className="btn-icon fas fa-graduation-cap"></i></a>

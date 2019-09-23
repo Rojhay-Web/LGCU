@@ -73,6 +73,7 @@ class App extends Component{
             sidebarOpen: false,
             modalStatus: false,
             alerts:[
+                {title:"100% Online",text:"Lenkeson Global Christian University is a completely online university founded to provide higher education globally.", type:"primary"},
                 {title:"Rolling Enrollment",text:"Next Classes Start on October 7th. To obtain additional information regarding enrollment, click on <a href=\"/apply\">Apply</a> then click on Student Application.", type:"primary"}
             ]
         };
@@ -95,7 +96,7 @@ class App extends Component{
                                 {/*<Link className="nav-item mini-nav-link" to="/">my<span className="c2">LGCU</span></Link>*/}                                
                                 <a href="https://www.givelify.com/givenow/1.0/?token=eyJvcmdfaWQiOiJNelUyT1RFfiIsImJhZGdlX2ltYWdlIjoiYjMucG5nIn0~" target="_blank" rel="noopener noreferrer" className="nav-item mini-nav-link">Givelify Donations</a>
                                 <a href="https://www.paypal.com/mep/dashboard" target="_blank" rel="noopener noreferrer" className="nav-item mini-nav-link">PayPal Donations</a>
-                                <Link className="nav-item mini-nav-link" to="/apply">Apply</Link>                                
+                                <Link className="nav-item mini-nav-link" to="/apply">Apply Online</Link>                                
                             </nav>
                             <nav className="navbar navbar-expand-lg nav-bottom">
                                 <Link className="navbar-brand" to="/">
