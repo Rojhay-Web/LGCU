@@ -74,7 +74,7 @@ class App extends Component{
             modalStatus: false,
             alerts:[
                 {title:"100% Online",text:"Lenkeson Global Christian University is a completely online university founded to provide higher education globally.", type:"primary"},
-                {title:"Rolling Enrollment",text:"Next Classes Start on October 7th. To obtain additional information regarding enrollment, click on <a href=\"/apply\">Apply</a> then click on Student Application.", type:"primary"}
+                {title:"Rolling Enrollment",text:"Classes starting soon, all classes are 8 weeks in length. To obtain additional information regarding enrollment, click on <a href=\"/apply\">Apply</a> then click on Student Application.", type:"primary"}
             ]
         };
 
