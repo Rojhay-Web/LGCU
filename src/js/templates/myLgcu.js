@@ -43,13 +43,20 @@ class myLGCUHeader extends Component{
         var self = this;
         try {
             var sessionInfo = localStorage.getItem(mySessKey);
+            var signOut = true;
             
             if(sessionInfo){
                 var localUser = JSON.parse(sessionInfo);
-                self.setState({name: localUser.fullname, userId: localUser._id, modalStatus: false });
+                if(localUser.lastLogin != null){
+                    signOut = false;
+                    self.setState({name: localUser.fullname, userId: localUser._id, lastLogin: Date.now(), modalStatus: false });
+                }
             }
-            else {
-                this.setState({ name: null, userId:null, modalStatus: true });
+
+
+            if(signOut) {
+                localStorage.removeItem(mySessKey);
+                this.setState({ name: null, userId:null, lastLogin:null, modalStatus: true });
             }
         }
         catch(ex){
@@ -235,7 +242,7 @@ class SignInModal extends Component{
                     self.setState({ error: response.errorMessage });
                 }
                 else {
-                    var tmpUser = {email: self.state.email, fullname: response.data.results.fullname, 
+                    var tmpUser = {email: self.state.email, fullname: response.data.results.fullname, lastLogin: Date.now(),
                                     _id: response.data.results._id, admin: response.data.results.admin};
                     localStorage.setItem(mySessKey, JSON.stringify(tmpUser));
                     self.props.userAccess(true);

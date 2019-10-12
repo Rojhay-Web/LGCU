@@ -29,11 +29,13 @@ var auth = {
                             db.insert(ret.results);
                             db.find({ 'email' : ret.results.email }).limit(1).toArray(function(err, res){ 
                                 response.results = res[0];
+                                client.close();
                                 callback(response);
                             });
                         }
                         else {
                             response.errorMessage = ret.errorMessage;  
+                            client.close();
                             callback(response);                          
                         }
                     });                    
@@ -61,19 +63,21 @@ var auth = {
                         if(ret.errorMessage == null){
                             db.updateOne({ "_id": ObjectId(ret.results._id) },  
                             { $set: 
-                                { firstname: ret.results.firstname, lastname: ret.results.lastname, 
-                                    email: ret.results.email, address: ret.results.address,
-                                    degree: ret.results.degree
+                                { firstname: ret.results.firstname, lastname: ret.results.lastname, fullname: ret.results.fullname,
+                                    email: ret.results.email, address: ret.results.address, phone: ret.results.phone,
+                                    degree: ret.results.degree 
                                 }
                             }, {upsert: true, useNewUrlParser: true});
 
                             db.find({ "_id": ObjectId(ret.results._id) }).limit(1).toArray(function(err, res){ 
                                 response.results = res[0];
+                                client.close();
                                 callback(response);
                             });
                         }
                         else {
-                            response.errorMessage = ret.errorMessage;  
+                            response.errorMessage = ret.errorMessage; 
+                            client.close(); 
                             callback(response);                          
                         }
                     });                    
@@ -107,6 +111,7 @@ var auth = {
                             else {
                                 response.errorMessage = "Unable to get user by this id";
                             }
+                            client.close();
                             callback(response);
                         });
                     }
@@ -119,6 +124,7 @@ var auth = {
                             else {
                                 response.errorMessage = "Unable to get user by this id";
                             }
+                            client.close();
                             callback(response);
                         });
                     }
@@ -139,6 +145,7 @@ var auth = {
             mongoClient.connect(database.connectionString, database.mongoOptions, function(err, client){
                 if(err) {
                     response.errorMessage = err;
+                    client.close();
                     callback(response);
                 }
                 else {
@@ -156,6 +163,7 @@ var auth = {
                         .project({_id:1, studentId:1, fullname:1, email:1, admin:1})
                         .toArray(function(err, res){ 
                             response.results = res;
+                            client.close();
                             callback(response);
                     });            
                 }
@@ -185,6 +193,7 @@ var auth = {
             mongoClient.connect(database.connectionString, database.mongoOptions, function(err, client){
                 if(err) {
                     response.errorMessage = err;
+                    client.close();
                     callback(response);
                 }
                 else {
@@ -203,6 +212,7 @@ var auth = {
                         db.updateOne({ "_id": ObjectId(userInfo._id) },  { $set: {studentId: newId }}, {upsert: true, useNewUrlParser: true});
 
                         response.results = newId;
+                        client.close();
                         callback(response);
                     });                   
                 }
@@ -249,16 +259,18 @@ function validateNewUser(userInfo, callback){
                         }
                         else {
                             // Create new user
-                            var newUser = { firstname: userInfo.firstname, lastname: userInfo.lastname, email: userInfo.email,
-                                address:userInfo.address, studentId:null, accountId:null, talentlmsId:null,
+                            var newUser = { firstname: userInfo.firstname, lastname: userInfo.lastname, fullname: userInfo.firstname + " " + userInfo.lastname, email: userInfo.email,
+                                address:userInfo.address, phone: userInfo.phone, admin: false, studentId:null, accountId:null, 
+                                talentlmsId:{id:"", login:""}, studentInfo:{gpa:0, credits:0},
                                 degree:{
                                     school:userInfo.degree.school, code:userInfo.degree.code, 
-                                    major:userInfo.degree.major, declareDate: Date.now()
+                                    major:userInfo.degree.major, level: userInfo.degree.level, declareDate: Date.now()
                                 }
                             };
                             response.results = newUser;
                         }                        
                     }      
+                    client.close();
                     callback(response);
                 });  
             }
@@ -303,15 +315,16 @@ function validateExistingUser(userInfo, callback){
                         else {
                             // Create new user
                             var newUser = { firstname: userInfo.firstname, lastname: userInfo.lastname, email: userInfo.email,
-                                address:userInfo.address, _id:userInfo._id,
+                                address:userInfo.address, phone: userInfo.phone, _id:userInfo._id, fullname: userInfo.firstname + " " + userInfo.lastname,
                                 degree:{
                                     school:userInfo.degree.school, code:userInfo.degree.code, 
-                                    major:userInfo.degree.major, declareDate: Date.now()
+                                    major:userInfo.degree.major, level: userInfo.degree.level, declareDate: Date.now()
                                 }
                             };
                             response.results = newUser;
                         }                        
                     }      
+                    client.close();
                     callback(response);
                 });  
             }

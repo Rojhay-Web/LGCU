@@ -172,14 +172,14 @@ class MyProfile extends Component{
 
                         self.setState({ _id:userInfo._id, studentId: userInfo.studentId, name: userInfo.fullname, email: userInfo.email,
                                         address: userInfo.address, degree: userInfo.degree.major, degreeId: userInfo.degree.code,
-                                        degreelevl:userInfo.degree.level, totalCredits: userInfo.studentInfo.credits, gpa: userInfo.studentInfo.gpa
+                                        degreelvl:userInfo.degree.level, totalCredits: userInfo.studentInfo.credits, gpa: userInfo.studentInfo.gpa
                         }, () =>{ self.getCourseList(self.state.degreeId); });
                     }
                 });     
             }
             else {
                 self.setState({ _id:null, studentId: null, name: null, address: null, degree: null, 
-                    degreeId: null, degreelevl:null, totalCredits: 0, gpa: 0}, () =>{ self.getCourseList(null); });
+                    degreeId: null, degreelvl:null, totalCredits: 0, gpa: 0}, () =>{ self.getCourseList(null); });
             }
         }
         catch(ex){

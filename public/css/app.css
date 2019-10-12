@@ -1998,6 +1998,13 @@
     width: 100%;
   }
 }
+.mylgcuPage .mylgcu-section .mylgcu-content-section .content-block .btn-container {
+  margin-top: 0px;
+}
+.mylgcuPage .mylgcu-section .mylgcu-content-section .content-block .btn-container .lBtn {
+  border-radius: 5px;
+  cursor: pointer;
+}
 .mylgcuPage .mylgcu-section .mylgcu-content-section .content-block .block-container {
   padding: 12px;
   background: #ffffff;

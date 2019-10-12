@@ -10,11 +10,11 @@ class MyAdmin extends Component{
         super(props);
         this.state = {
             searchQuery: "",
-            searchResults:[],
+            searchResults:null,
             selectedUser: {
-                firstname:"", lastname:"",  email:"", address:"",
+                firstname:"", lastname:"",  email:"", address:"", phone:"",
                 degree:{ school:"", code:"", major:"", declareDate: null },
-                studentId:null, accountId:null, talentlmsId:null
+                studentId:"", accountId:"", talentlmsId:{}
             },
             degreeList:[], areaList:[], majorResults:[],
             updateType:null
@@ -29,6 +29,7 @@ class MyAdmin extends Component{
         this.selectStudent = this.selectStudent.bind(this);
         this.getStudentInfo = this.getStudentInfo.bind(this);
         this.searchQuery = this.searchQuery.bind(this);
+        this.saveStudent = this.saveStudent.bind(this);
     }
 
     componentDidMount(){
@@ -63,7 +64,7 @@ class MyAdmin extends Component{
                 </div>
 
                 {/* Results Section */}                
-                {this.state.searchQuery.length > 0 &&
+                {this.state.searchResults != null &&
                     <div className="mylgcu-content-section">
                         <div className="section-title">Search Results <span>({this.state.searchResults.length} results)</span></div>
 
@@ -150,7 +151,7 @@ class MyAdmin extends Component{
                             <div className="block-container">                            
                                 <div className="content-info generator">
                                     <span className="IdGenerator"><i className="fas fa-recycle"></i></span>
-                                    <input type="text" name="talentlmsId" className="" placeholder="Talentlms id" value={this.state.selectedUser.talentlmsId.id + " | "+this.state.selectedUser.talentlmsId.login} readOnly/>
+                                    <input type="text" name="talentlmsId" className="" placeholder="Talentlms id" value={ (this.state.selectedUser.talentlmsId ? this.state.selectedUser.talentlmsId.id + " | "+this.state.selectedUser.talentlmsId.login : "") } readOnly/>
                                 </div>
                             </div>
                         </div>
@@ -170,7 +171,7 @@ class MyAdmin extends Component{
                                 </div>
                                 
                                 {/* Degree */}
-                                <div className="content-block sz4">
+                                <div className="content-block sz3">
                                     <div className="block-label-title">Degree School:</div>
                                     <div className="block-container">                            
                                         <div className="content-info">{this.state.selectedUser.degree.school || ""}</div>
@@ -181,6 +182,13 @@ class MyAdmin extends Component{
                                     <div className="block-label-title">Degree Major:</div>
                                     <div className="block-container">                            
                                         <div className="content-info">{this.state.selectedUser.degree.major || ""}</div>
+                                    </div>
+                                </div>
+
+                                <div className="content-block sz1">
+                                    <div className="block-label-title">Degree Level:</div>
+                                    <div className="block-container">                            
+                                        <div className="content-info">{this.state.selectedUser.degree.level || ""}</div>
                                     </div>
                                 </div>
 
@@ -215,10 +223,54 @@ class MyAdmin extends Component{
                                 }
                             </div>
                         </div>
+
+                        <div className="content-block sz10">
+                            <div className="btn-container">
+                                <div className="lBtn c2" onClick={this.saveStudent}><span>Save Student</span><i className="btn-icon far fa-save"></i></div>
+                            </div> 
+                        </div>
                     </div>
                 }
             </div>
         );
+    }
+
+    saveStudent(){
+        var self = this;
+        try {
+            var sessionInfo = localStorage.getItem(self.props.mySessKey);
+            
+            if(sessionInfo) {
+                var localUser = JSON.parse(sessionInfo);
+                var url = (this.state.updateType == "new" ? "/api/createUser" : "/api/updateUser");
+
+                var postData = { 
+                    requestUser: { _id: localUser._id}, 
+                    userInfo: this.state.selectedUser 
+                };
+
+                axios.post(self.props.rootPath + url, postData, {'Content-Type': 'application/json'})
+                .then(function(response) {
+                    if(response.data.errorMessage){
+                        alert("Unable to update/add student: "+ response.data.errorMessage);
+                    }
+                    else {
+                        var student = response.data.results;
+                        self.setState({ updateType: "update", 
+                            selectedUser:{
+                                firstname:student.firstname, lastname:student.lastname, email:student.email, 
+                                address:student.address, phone: student.phone, admin:student.admin,
+                                degree:student.degree, _id:student._id, studentId:student.studentId || "", 
+                                accountId:student.accountId || "", talentlmsId:student.talentlmsId
+                            }
+                        }, ()=> { alert("Successfully updated/added student "); });
+                    }
+                });  
+            }
+        }
+        catch(ex){
+            console.log("Error saving student:",ex);
+        }
     }
 
     selectStudent(studentid){
@@ -271,9 +323,10 @@ class MyAdmin extends Component{
         var self = this;
         try{           
             
-            this.setState({ selectedUser:{firstname:"", lastname:"",  email:"", address:"", 
+            this.setState({ selectedUser:{firstname:"", lastname:"",  email:"", address:"", phone:"",
                 degree:{ school:"", code:"", major:"", declareDate: null },  
-                studentId:null, accountId:null, talentlmsId:{}}}, ()=> {callback(); });
+                studentId:"", accountId:"", talentlmsId:{ id:"", login:""}}}, ()=> { 
+                    callback(); });
         }
         catch(ex){
             console.log("[Error] clearing form: ",ex);
@@ -350,8 +403,8 @@ class MyAdmin extends Component{
                                 selectedUser:{
                                     firstname:student.firstname, lastname:student.lastname, email:student.email, 
                                     address:student.address, phone: student.phone, admin:student.admin,
-                                    degree:student.degree, _id:student._id, studentId:student.studentId, 
-                                    accountId:student.accountId, talentlmsId:student.talentlmsId
+                                    degree:student.degree, _id:student._id, studentId:student.studentId || "", 
+                                    accountId:student.accountId || "", talentlmsId:student.talentlmsId
                                 }
                             });
                         }
@@ -384,7 +437,7 @@ class MyAdmin extends Component{
             var degreeTitle =  (item.degreeTitle ? item.degreeTitle:"") +" "+(item.subtitle ? item.subtitle +" - ":"") + item.title;
             
             var tmpStudent = this.state.selectedUser;
-            tmpStudent.degree = { school:item.area, code:item.id, major:degreeTitle, declareDate: new Date()};
+            tmpStudent.degree = { school:item.area, code:item.id, major:degreeTitle, level: item.degree, declareDate: new Date()};
             this.setState({ selectedUser: tmpStudent });
         }
         catch(ex){

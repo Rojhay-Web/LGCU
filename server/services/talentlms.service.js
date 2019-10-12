@@ -27,6 +27,8 @@ var talentlms = {
                     const db = client.db(database.dbName).collection('mylgcu_users');
                     
                     db.find({ "email": loginInfo.email }).toArray(function(err, dbres){ 
+                        client.close();
+
                         if(dbres.length <= 0){
                             response.errorMessage = "[Error] Email Address does not exist";
                             callback(response);
@@ -127,7 +129,8 @@ function addTalentLMSUserInfo(userInfo, talentInfo, callback){
 
                 db.updateOne({ "_id": ObjectId(userInfo._id) }, { $set: { talentlmsId: response.result }
                             }, {upsert: true, useNewUrlParser: true});
-
+                
+                client.close();
                 callback(response);
             }
         });
@@ -162,6 +165,8 @@ function createTalentLMSLogin(userInfo, callback){
                     else {
                         response.results = {login: login, password: "LGCU-"+res[0].studentId};
                     }
+
+                    client.close();
                     callback(response);
                 });
             }
