@@ -142,8 +142,27 @@ function Home(props){
                 </div>
             </section>   
 
-            <section className="home-section alternate patterned" id="counter">
+            <section className="home-section alternate2 patterned">
                 <div className="section-container">
+                    <h2 className="lrgTitle ctr" data-text="LGCU Media">LGCU Media</h2>
+                    
+                    <div className="media-container">
+                        <div className="media-item">
+                            <h3 className="media-title">The Birth of Lenkeson Global Christian University</h3>
+                            <iframe className="media-video" src="https://www.youtube.com/embed/iJfNHbToqfo"></iframe>
+                        </div>
+                        <div className="media-item">
+                            <h3 className="media-title">Students' Testimonial</h3>
+                            <iframe className="media-video" src="https://www.youtube.com/embed/OKh3zApCQE0"></iframe>
+                        </div>
+                    </div>                    
+                </div>                    
+            </section>    
+
+            <section className="home-section alternate2 patterned" id="counter">
+                <div className="section-container">
+                    <h2 className="lrgTitle ctr" data-text="College Stats">College Stats</h2>
+
                     <div className="facts-container">
                         {facts.map((item,i) => (
                             <div className="factItem" key={i}>
@@ -213,7 +232,7 @@ function Home(props){
                         )}
                     </Carousel>
                 </div>                    
-            </section>        
+            </section>                    
         </div>
     );
     

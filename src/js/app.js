@@ -187,8 +187,9 @@ class App extends Component{
                                     <div className="footer-info">Clermont, Florida 34712</div>                                
                                 </div>
                                 <div className="address-section">
+                                    <div className="footer-info">Toll-Free: 1.888.971.9715</div>
                                     <div className="footer-info">Phone: 407.573.5855</div>
-                                    <div className="footer-info">Fax: 407.807.0567</div>
+                                    <div className="footer-info">Fax: 407.807.0567</div>                                    
                                     <div className="footer-info">info@lenkesongcu.org</div>
                                 </div>
                             </div>

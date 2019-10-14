@@ -39,16 +39,16 @@ function Tuition(props){
 
     const degreeRates= [
         { "level":"Associate", "full":295, "part":315 },
-        { "level":"Bachelors", "full":375, "part":395 },
+        { "level":"Bachelors", "full":295, "part":315 },
         { "level":"M.A., M.B.A., M.S.", "full":495, "part":515 },
         { "level":"Masters in Education", "full":390, "part":415 },
-        { "level":"School of Theology Master", "full":375, "part":395 }                
+        { "level":"School of Theology Masters", "full":375, "part":395 }                
     ];
     const programRates = [
         { "level":"Doctorate Programs", "full":550, "part":575 },
         { "level":"Military Undergraduate", "full":225, "part":225 },
-        { "level":"Military Master in Organizational Leadership", "full":255, "part":255 },
-        { "level":"Military Master in School of Theology", "full":255, "part":255 },
+        { "level":"Military Masters in Organizational Leadership", "full":255, "part":255 },
+        { "level":"Military Masters in School of Theology", "full":255, "part":255 },
         { "level":"Military Graduate/Doctorate", "full":265, "part":265 }
     ];
 

@@ -103,6 +103,10 @@
         position: relative;
         overflow: hidden;
         &+.home-section { margin-top: 80px;}
+
+        &:last-child {
+            padding-bottom: 50px;
+        }
         .section-container {
             position: relative;
             z-index: 5;
@@ -236,7 +240,7 @@
                     }
                     .item-text { font-size: 1.5rem; line-height: 1.8rem; font-weight: 300;}
 
-                    &+.factItem { border-left: 3px solid rgba(0,0,0,0.5);}
+                    &+.factItem { border-left: 3px solid rgba(255,255,255,0.5);}
                 }
 
                 @media @mobile-device { 
@@ -244,7 +248,7 @@
                     padding: 50px 7%;
                     .factItem {
                         width: 100%;
-                        &+.factItem { border-left:none; border-top: 3px solid rgba(0,0,0,0.5);}
+                        &+.factItem { border-left:none; border-top: 3px solid rgba(255,255,255,0.5);}
                     }
                 }
             }
@@ -334,6 +338,36 @@
                     }
                 }
             }
+
+            .media-container {
+                display: flex;
+                flex-direction: row;
+
+                .media-item { 
+                    display: flex; 
+                    flex-direction: column; 
+                    flex: 1;
+                    padding: 0px 7px;
+
+                    .media-title { 
+                        font-family: 'Reem Kufi', sans-serif; 
+                        color: rgba(255,255,255,1); 
+                        text-align: center; 
+                        margin-bottom: 20px;
+                    }
+                    .media-video { 
+                        border: none; 
+                        height: 315px;
+                        width: 420px;
+                        margin: 0px auto;
+                        @media @mobile-device { width: 100%;}
+                    }
+
+                    @media @mobile-device { margin-top: 10px;}
+                }
+
+                @media @mobile-device { flex-direction: column;  }
+            }
         }
 
         .back-img {
@@ -361,6 +395,13 @@
             background: rgba(255,255,255,0.7);
             color: rgba(0,0,0,1);
         }
+        &.alternate2 { 
+            .color2(background, 0.7);
+            padding-bottom: 50px;
+            color: rgba(255,255,255,1);
+            &+.alternate, &+.alternate2  { margin-top: 0px; }
+        }
+
         &.patterned {
             &:before {
                 position: absolute;
