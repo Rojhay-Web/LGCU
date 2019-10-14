@@ -12,6 +12,7 @@ class MyAdmin extends Component{
             searchQuery: "",
             searchResults:null,
             selectedUser: {
+                _id:null,
                 firstname:"", lastname:"",  email:"", address:"", phone:"",
                 degree:{ school:"", code:"", major:"", declareDate: null },
                 studentId:"", accountId:"", talentlmsId:{}
@@ -30,6 +31,7 @@ class MyAdmin extends Component{
         this.getStudentInfo = this.getStudentInfo.bind(this);
         this.searchQuery = this.searchQuery.bind(this);
         this.saveStudent = this.saveStudent.bind(this);
+        this.refreshStudentID = this.refreshStudentID.bind(this);
     }
 
     componentDidMount(){
@@ -87,152 +89,197 @@ class MyAdmin extends Component{
 
                 {/* Student Section*/}
                 {this.state.updateType != null &&
-                    <div className="mylgcu-content-section inverse">
-                        <div className="section-title">Student Information</div>
+                    <div className="collapse-section">
+                        <div className="collapse-title" data-toggle="collapse" href="#studentInfo" aria-expanded="true" aria-controls="studentInfo"><span>Student Info</span> <i className="fas fa-chevron-down"></i></div>
 
-                        <div className="content-block sz3">
-                            <div className="block-label-title">First Name:</div>
-                            <div className="block-container">                            
-                                <div className="content-info"><input type="text" name="firstname" className="" placeholder="First Name" value={this.state.selectedUser.firstname} onChange={(e) => this.onElementChange(e)}/></div>
-                            </div>
-                        </div>
-
-                        <div className="content-block sz3">
-                            <div className="block-label-title">Last Name:</div>
-                            <div className="block-container">                            
-                                <div className="content-info"><input type="text" name="lastname" className="" placeholder="Last Name" value={this.state.selectedUser.lastname} onChange={(e) => this.onElementChange(e)}/></div>
-                            </div>
-                        </div>
-
-                        <div className="content-block sz4">
-                            <div className="block-label-title">Email:</div>
-                            <div className="block-container">                            
-                                <div className="content-info"><input type="text" name="email" className="" placeholder="Email" value={this.state.selectedUser.email} onChange={(e) => this.onElementChange(e)}/></div>
-                            </div>
-                        </div>
-
-                        <div className="content-block sz7">
-                            <div className="block-label-title">Address:</div>
-                            <div className="block-container">                            
-                                <div className="content-info"><input type="text" name="address" className="" placeholder="Address" value={this.state.selectedUser.address} onChange={(e) => this.onElementChange(e)}/></div>
-                            </div>
-                        </div>
-
-                        <div className="content-block sz3">
-                            <div className="block-label-title">Phone:</div>
-                            <div className="block-container">                            
-                                <div className="content-info"><input type="text" name="phone" className="" placeholder="Phone" value={this.state.selectedUser.phone} onChange={(e) => this.onElementChange(e)}/></div>
-                            </div>
-                        </div>
-
-                        {/* IDs */}
-                        <div className="content-block sz3">
-                            <div className="block-label-title">Student ID:</div>
-                            <div className="block-container">                            
-                                <div className="content-info generator">
-                                    <span className="IdGenerator"><i className="fas fa-recycle"></i></span>
-                                    <input type="text" name="studentId" className="" placeholder="Student id" value={this.state.selectedUser.studentId} readOnly/>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="content-block sz3">
-                            <div className="block-label-title">Acccount ID:</div>
-                            <div className="block-container">                            
-                                <div className="content-info generator">
-                                    <span className="IdGenerator"><i className="fas fa-recycle"></i></span>
-                                    <input type="text" name="accountId" className="" placeholder="Account id" value={this.state.selectedUser.accountId} readOnly/>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="content-block sz3">
-                            <div className="block-label-title">TalentLMS ID:</div>
-                            <div className="block-container">                            
-                                <div className="content-info generator">
-                                    <span className="IdGenerator"><i className="fas fa-recycle"></i></span>
-                                    <input type="text" name="talentlmsId" className="" placeholder="Talentlms id" value={ (this.state.selectedUser.talentlmsId ? this.state.selectedUser.talentlmsId.id + " | "+this.state.selectedUser.talentlmsId.login : "") } readOnly/>
-                                </div>
-                            </div>
-                        </div>
+                        <div className="mylgcu-content-section inverse" id="studentInfo">                        
+                            <div className="section-title">Student Information</div>
                             
-                        <div className="degree-block">                                                
-                            {/* Degree Info */}
-                            <div className="degree-container">
-                                <div className="full-list-container">                            
-                                    <div className="list-container">
-                                        {this.state.degreeList.map((item, i) => (
-                                            <div key={i} className={"filterBtn degreeItem " + (item.status ? " active" : "")} onClick={() => this.toggleFilter("degreeList", i)}>
-                                                <i className={"far " + (item.status ? "fa-check-circle" : "fa-circle")}></i>
-                                                <span>{item.title}</span>
-                                            </div>
-                                        ))}
-                                    </div>                                
+                            <div className="content-block sz3">
+                                <div className="block-label-title">First Name:</div>
+                                <div className="block-container">                            
+                                    <div className="content-info"><input type="text" name="firstname" className="" placeholder="First Name" value={this.state.selectedUser.firstname} onChange={(e) => this.onElementChange(e)}/></div>
                                 </div>
+                            </div>
+
+                            <div className="content-block sz3">
+                                <div className="block-label-title">Last Name:</div>
+                                <div className="block-container">                            
+                                    <div className="content-info"><input type="text" name="lastname" className="" placeholder="Last Name" value={this.state.selectedUser.lastname} onChange={(e) => this.onElementChange(e)}/></div>
+                                </div>
+                            </div>
+
+                            <div className="content-block sz4">
+                                <div className="block-label-title">Email:</div>
+                                <div className="block-container">                            
+                                    <div className="content-info"><input type="text" name="email" className="" placeholder="Email" value={this.state.selectedUser.email} onChange={(e) => this.onElementChange(e)}/></div>
+                                </div>
+                            </div>
+
+                            <div className="content-block sz7">
+                                <div className="block-label-title">Address:</div>
+                                <div className="block-container">                            
+                                    <div className="content-info"><input type="text" name="address" className="" placeholder="Address" value={this.state.selectedUser.address} onChange={(e) => this.onElementChange(e)}/></div>
+                                </div>
+                            </div>
+
+                            <div className="content-block sz3">
+                                <div className="block-label-title">Phone:</div>
+                                <div className="block-container">                            
+                                    <div className="content-info"><input type="text" name="phone" className="" placeholder="Phone" value={this.state.selectedUser.phone} onChange={(e) => this.onElementChange(e)}/></div>
+                                </div>
+                            </div>
+
+                            {/* IDs */}
+                            <div className="content-block sz3">
+                                <div className="block-label-title">Student ID:</div>
+                                <div className="block-container">                            
+                                    <div className="content-info generator">
+                                        <span className="IdGenerator" onClick={this.refreshStudentID}><i className="fas fa-sync-alt"></i></span>
+                                        <input type="text" name="studentId" className="" placeholder="Student id" value={this.state.selectedUser.studentId} readOnly/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="content-block sz3">
+                                <div className="block-label-title">Acccount ID:</div>
+                                <div className="block-container">                            
+                                    <div className="content-info generator">
+                                        <span className="IdGenerator"><i className="fas fa-sync-alt"></i></span>
+                                        <input type="text" name="accountId" className="" placeholder="Account id" value={this.state.selectedUser.accountId} readOnly/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="content-block sz3">
+                                <div className="block-label-title">TalentLMS ID:</div>
+                                <div className="block-container">                            
+                                    <div className="content-info generator">
+                                        <span className="IdGenerator"><i className="fas fa-sync-alt"></i></span>
+                                        <input type="text" name="talentlmsId" className="" placeholder="Talentlms id" value={ (this.state.selectedUser.talentlmsId ? this.state.selectedUser.talentlmsId.id + " | "+this.state.selectedUser.talentlmsId.login : "") } readOnly/>
+                                    </div>
+                                </div>
+                            </div>
                                 
-                                {/* Degree */}
-                                <div className="content-block sz3">
-                                    <div className="block-label-title">Degree School:</div>
-                                    <div className="block-container">                            
-                                        <div className="content-info">{this.state.selectedUser.degree.school || ""}</div>
+                            <div className="degree-block">                                                
+                                {/* Degree Info */}
+                                <div className="degree-container">
+                                    <div className="full-list-container">                            
+                                        <div className="list-container">
+                                            {this.state.degreeList.map((item, i) => (
+                                                <div key={i} className={"filterBtn degreeItem " + (item.status ? " active" : "")} onClick={() => this.toggleFilter("degreeList", i)}>
+                                                    <i className={"far " + (item.status ? "fa-check-circle" : "fa-circle")}></i>
+                                                    <span>{item.title}</span>
+                                                </div>
+                                            ))}
+                                        </div>                                
                                     </div>
-                                </div>
-
-                                <div className="content-block sz4">
-                                    <div className="block-label-title">Degree Major:</div>
-                                    <div className="block-container">                            
-                                        <div className="content-info">{this.state.selectedUser.degree.major || ""}</div>
-                                    </div>
-                                </div>
-
-                                <div className="content-block sz1">
-                                    <div className="block-label-title">Degree Level:</div>
-                                    <div className="block-container">                            
-                                        <div className="content-info">{this.state.selectedUser.degree.level || ""}</div>
-                                    </div>
-                                </div>
-
-                                <div className="content-block sz2">
-                                    <div className="block-label-title">Degree ID:</div>
-                                    <div className="block-container">                            
-                                        <div className="content-info">{this.state.selectedUser.degree.code || ""}</div>
-                                    </div>
-                                </div>
-
-                                {this.state.majorResults.length > 0 &&
-                                    <div className="result-search-container">
-                                        <div className="results-list">
-                                            <div className="results-container">
-                                                {filteredResults.map((item, i) => (
-                                                    <div className={"result-item " + item.theme} key={i} onClick={(e) => this.majorSelectChange(item)}>
-                                                        <div className={"result-icon " + item.theme} />
-                                                        <div className="item-info-container">
-                                                            <div className="degree-title"><span>{item.degree}</span> <span>{(item.degreeTitle ? item.degreeTitle : "")}</span></div>
-                                                            <div className="major-title">
-                                                                {item.subtitle && <span className="sub-title">{item.subtitle} - </span>}
-                                                                <span className="major-title">{item.title}</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                ))}
-
-                                                {filteredResults.length === 0 && <div className="result-message">Sorry we did not return any results for that search.</div>}
-                                            </div>
+                                    
+                                    {/* Degree */}
+                                    <div className="content-block sz3">
+                                        <div className="block-label-title">Degree School:</div>
+                                        <div className="block-container">                            
+                                            <div className="content-info">{this.state.selectedUser.degree.school || ""}</div>
                                         </div>
                                     </div>
-                                }
-                            </div>
-                        </div>
 
-                        <div className="content-block sz10">
-                            <div className="btn-container">
-                                <div className="lBtn c2" onClick={this.saveStudent}><span>Save Student</span><i className="btn-icon far fa-save"></i></div>
-                            </div> 
-                        </div>
-                    </div>
+                                    <div className="content-block sz4">
+                                        <div className="block-label-title">Degree Major:</div>
+                                        <div className="block-container">                            
+                                            <div className="content-info">{this.state.selectedUser.degree.major || ""}</div>
+                                        </div>
+                                    </div>
+
+                                    <div className="content-block sz1">
+                                        <div className="block-label-title">Degree Level:</div>
+                                        <div className="block-container">                            
+                                            <div className="content-info">{this.state.selectedUser.degree.level || ""}</div>
+                                        </div>
+                                    </div>
+
+                                    <div className="content-block sz2">
+                                        <div className="block-label-title">Degree ID:</div>
+                                        <div className="block-container">                            
+                                            <div className="content-info">{this.state.selectedUser.degree.code || ""}</div>
+                                        </div>
+                                    </div>
+
+                                    {this.state.majorResults.length > 0 &&
+                                        <div className="result-search-container">
+                                            <div className="results-list">
+                                                <div className="results-container">
+                                                    {filteredResults.map((item, i) => (
+                                                        <div className={"result-item " + item.theme} key={i} onClick={(e) => this.majorSelectChange(item)}>
+                                                            <div className={"result-icon " + item.theme} />
+                                                            <div className="item-info-container">
+                                                                <div className="degree-title"><span>{item.degree}</span> <span>{(item.degreeTitle ? item.degreeTitle : "")}</span></div>
+                                                                <div className="major-title">
+                                                                    {item.subtitle && <span className="sub-title">{item.subtitle} - </span>}
+                                                                    <span className="major-title">{item.title}</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    ))}
+
+                                                    {filteredResults.length === 0 && <div className="result-message">Sorry we did not return any results for that search.</div>}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+
+                            <div className="content-block sz10">
+                                <div className="btn-container">
+                                    <div className="lBtn c2" onClick={this.saveStudent}><span>Save Student</span><i className="btn-icon far fa-save"></i></div>
+                                </div> 
+                            </div>
+                        </div>   
+                    </div>                 
                 }
+                {/* Course Section */}
+                {/* Account Section */}
             </div>
         );
+    }
+
+    refreshStudentID(){
+        var self = this;
+        try {
+            var sessionInfo = localStorage.getItem(self.props.mySessKey);
+            
+            if(sessionInfo) {
+                var localUser = JSON.parse(sessionInfo);
+                
+                if(!this.state.selectedUser || !this.state.selectedUser._id)
+                {
+                    alert("Student not active");
+                }
+                else {
+                    var postData = { 
+                        requestUser: { _id: localUser._id}, 
+                        userInfo: { _id: this.state.selectedUser._id } 
+                    };
+
+                    axios.post(self.props.rootPath + "/api/generateStudentId", postData, {'Content-Type': 'application/json'})
+                    .then(function(response) {
+                        if(response.data.errorMessage){
+                            alert("Unable to refresh student ID: "+ response.data.errorMessage);
+                        }
+                        else {                        
+                            var student = self.state.selectedUser;
+                            student.studentId = response.data.results;
+
+                            self.setState({ updateType: "update", selectedUser: student
+                            }, ()=> { alert("Successfully refreshed student ID: "); });
+                        }
+                    });  
+                }
+            }
+        }
+        catch(ex){            
+            alert("[Error] Refreshing Student Id: ", ex);
+        }
     }
 
     saveStudent(){
@@ -323,7 +370,7 @@ class MyAdmin extends Component{
         var self = this;
         try{           
             
-            this.setState({ selectedUser:{firstname:"", lastname:"",  email:"", address:"", phone:"",
+            this.setState({ selectedUser:{_id:null, firstname:"", lastname:"",  email:"", address:"", phone:"",
                 degree:{ school:"", code:"", major:"", declareDate: null },  
                 studentId:"", accountId:"", talentlmsId:{ id:"", login:""}}}, ()=> { 
                     callback(); });

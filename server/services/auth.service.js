@@ -174,11 +174,31 @@ var auth = {
             callback(response);
         }
     },
-    authorizeUser:function(userInfo,callback){
+    authorizeUser:function(requestUser, userId, callback){
         var response = {"errorMessage":null, "results":null};
 
         try {
+            mongoClient.connect(database.connectionString, database.mongoOptions, function(err, client){
+                if(err) {
+                    response.errorMessage = err;
+                    client.close();
+                    callback(response);
+                }
+                else {
+                    const db = client.db(database.dbName).collection('mylgcu_users');  
 
+                    db.find({ "_id": ObjectId(requestUser._id)}).project({_id:1, admin:1}).limit(1).toArray(function(err, res){ 
+                        if(res && res.length > 0){
+                            response.results = (res[0].admin == true || requestUser._id == userId);
+                        }
+                        else {
+                            response.errorMessage = "Unable to get user by this id";
+                        }
+                        client.close();
+                        callback(response);
+                    });                              
+                }
+            });
         }
         catch(ex){
             response.errorMessage = "[Error] Authorizing User (E09): "+ ex;
