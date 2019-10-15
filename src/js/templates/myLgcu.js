@@ -181,20 +181,15 @@ class myLGCU extends Component{
     setPage(){
         switch(this.state.selectedPage.toLowerCase()){
             case "profile":
-                return <MyProfile user={this.state.userInfo} rootPath={rootPath} mySessKey={mySessKey} />;
-                break;
+                return <MyProfile user={this.state.userInfo} rootPath={rootPath} mySessKey={mySessKey} />;                
             case "courses":
                 return <MyCourses user={this.state.userInfo} rootPath={rootPath} mySessKey={mySessKey} />;
-                break;
             case "account":
                 return <MyAccount user={this.state.userInfo} rootPath={rootPath} mySessKey={mySessKey} />;
-                break;
             case "admin":
                 return <MyAdmin user={this.state.userInfo} rootPath={rootPath} mySessKey={mySessKey} />;
-                break;    
             default:
                 return <div>No Page Selected</div>;
-                break;
         }
     }
 }

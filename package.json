@@ -34,7 +34,8 @@
     "react-responsive-carousel": "^3.1.46",
     "react-router-dom": "^4.3.1",
     "react-scripts": "^3.0.1",
-    "react-spring": "^8.0.20"
+    "react-spring": "^8.0.20",
+    "react-table-hoc-fixed-columns": "^2.1.1"
   },
   "devDependencies": {
     "concurrently": "^4.1.0",

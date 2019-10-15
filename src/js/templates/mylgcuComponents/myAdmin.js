@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Collapse from 'react-bootstrap/Collapse'
 
 /* Data */
 import academicData from '../../data/academics.json';
@@ -9,6 +10,8 @@ class MyAdmin extends Component{
     constructor(props) {
         super(props);
         this.state = {
+            spinner: false,
+            studentCollapse: true,
             searchQuery: "",
             searchResults:null,
             selectedUser: {
@@ -21,6 +24,7 @@ class MyAdmin extends Component{
             updateType:null
         }
 
+        this.toggleSpinner = this.toggleSpinner.bind(this);
         this.onElementChange = this.onElementChange.bind(this);
         this.buildFilterList = this.buildFilterList.bind(this);
         this.toggleFilter = this.toggleFilter.bind(this);
@@ -32,6 +36,7 @@ class MyAdmin extends Component{
         this.searchQuery = this.searchQuery.bind(this);
         this.saveStudent = this.saveStudent.bind(this);
         this.refreshStudentID = this.refreshStudentID.bind(this);
+        this.createTalentLmsId = this.createTalentLmsId.bind(this);
     }
 
     componentDidMount(){
@@ -40,9 +45,13 @@ class MyAdmin extends Component{
 
     render(){   
         const filteredResults = this.state.majorResults;
+        const { studentCollapse } = this.state;
 
         return(
             <div className="mylgcu-admin">
+                {/* Spinner */}
+                {this.state.spinner && <div className="spinner"><i className="fas fa-cog fa-spin"/><span>Loading</span></div> }
+
                 {/* Search Section */}
                 <div className="mylgcu-content-section inverse">
                     <div className="section-title">Student Search</div>
@@ -90,11 +99,11 @@ class MyAdmin extends Component{
                 {/* Student Section*/}
                 {this.state.updateType != null &&
                     <div className="collapse-section">
-                        <div className="collapse-title" data-toggle="collapse" href="#studentInfo" aria-expanded="true" aria-controls="studentInfo"><span>Student Info</span> <i className="fas fa-chevron-down"></i></div>
-
+                        <div className="collapse-title" onClick={() => this.setState({studentCollapse: !studentCollapse}) } aria-expanded={studentCollapse} aria-controls="studentInfo"><span>Student Info</span> <i className="fas fa-chevron-down"></i></div>
+                        {this.state.studentCollapse && 
                         <div className="mylgcu-content-section inverse" id="studentInfo">                        
                             <div className="section-title">Student Information</div>
-                            
+                                
                             <div className="content-block sz3">
                                 <div className="block-label-title">First Name:</div>
                                 <div className="block-container">                            
@@ -155,12 +164,12 @@ class MyAdmin extends Component{
                                 <div className="block-label-title">TalentLMS ID:</div>
                                 <div className="block-container">                            
                                     <div className="content-info generator">
-                                        <span className="IdGenerator"><i className="fas fa-sync-alt"></i></span>
+                                        <span className="IdGenerator" onClick={this.createTalentLmsId}><i className="fas fa-sync-alt"></i></span>
                                         <input type="text" name="talentlmsId" className="" placeholder="Talentlms id" value={ (this.state.selectedUser.talentlmsId ? this.state.selectedUser.talentlmsId.id + " | "+this.state.selectedUser.talentlmsId.login : "") } readOnly/>
                                     </div>
                                 </div>
                             </div>
-                                
+                                    
                             <div className="degree-block">                                                
                                 {/* Degree Info */}
                                 <div className="degree-container">
@@ -174,7 +183,7 @@ class MyAdmin extends Component{
                                             ))}
                                         </div>                                
                                     </div>
-                                    
+                                        
                                     {/* Degree */}
                                     <div className="content-block sz3">
                                         <div className="block-label-title">Degree School:</div>
@@ -218,9 +227,8 @@ class MyAdmin extends Component{
                                                                     <span className="major-title">{item.title}</span>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    ))}
-
+                                                         </div>
+                                                        ))}
                                                     {filteredResults.length === 0 && <div className="result-message">Sorry we did not return any results for that search.</div>}
                                                 </div>
                                             </div>
@@ -234,7 +242,8 @@ class MyAdmin extends Component{
                                     <div className="lBtn c2" onClick={this.saveStudent}><span>Save Student</span><i className="btn-icon far fa-save"></i></div>
                                 </div> 
                             </div>
-                        </div>   
+                        </div>  
+                        }
                     </div>                 
                 }
                 {/* Course Section */}
@@ -243,9 +252,14 @@ class MyAdmin extends Component{
         );
     }
 
+    toggleSpinner(status){
+        this.setState({spinner: status });
+    }
+
     refreshStudentID(){
         var self = this;
         try {
+            this.toggleSpinner(true);
             var sessionInfo = localStorage.getItem(self.props.mySessKey);
             
             if(sessionInfo) {
@@ -273,18 +287,63 @@ class MyAdmin extends Component{
                             self.setState({ updateType: "update", selectedUser: student
                             }, ()=> { alert("Successfully refreshed student ID: "); });
                         }
+                        self.toggleSpinner(false);
                     });  
                 }
             }
         }
         catch(ex){            
             alert("[Error] Refreshing Student Id: ", ex);
+            self.toggleSpinner(false);
+        }
+    }
+
+    createTalentLmsId(){
+        var self = this;
+        try {
+            this.toggleSpinner(true);
+            var sessionInfo = localStorage.getItem(self.props.mySessKey);
+            
+            if(sessionInfo) {
+                var localUser = JSON.parse(sessionInfo);
+                
+                if(!this.state.selectedUser || !this.state.selectedUser._id)
+                {
+                    alert("Student not active");
+                }
+                else {
+                    var postData = { 
+                        requestUser: { _id: localUser._id}, 
+                        userInfo: { _id: this.state.selectedUser._id, firstname:this.state.selectedUser.firstname, lastname:this.state.selectedUser.lastname, email:this.state.selectedUser.email, retry:0 } 
+                    };
+
+                    axios.post(self.props.rootPath + "/api/createTLMSUser", postData, {'Content-Type': 'application/json'})
+                    .then(function(response) {
+                        if(response.data.errorMessage){
+                            alert("Unable to create TalentLMS ID: "+ response.data.errorMessage);
+                        }
+                        else {                        
+                            var student = self.state.selectedUser;
+                            student.talentlmsId = response.data.results;
+
+                            self.setState({ updateType: "update", selectedUser: student
+                            }, ()=> { alert("Successfully created TalentLMS ID: "); });
+                        }
+                        self.toggleSpinner(false);
+                    });  
+                }
+            }
+        }
+        catch(ex){            
+            alert("[Error] Creating TalentLMS ID: ", ex);
+            self.toggleSpinner(false);
         }
     }
 
     saveStudent(){
         var self = this;
         try {
+            self.toggleSpinner(true);
             var sessionInfo = localStorage.getItem(self.props.mySessKey);
             
             if(sessionInfo) {
@@ -306,17 +365,19 @@ class MyAdmin extends Component{
                         self.setState({ updateType: "update", 
                             selectedUser:{
                                 firstname:student.firstname, lastname:student.lastname, email:student.email, 
-                                address:student.address, phone: student.phone, admin:student.admin,
+                                address:student.address, phone: student.phone || "", admin:student.admin,
                                 degree:student.degree, _id:student._id, studentId:student.studentId || "", 
                                 accountId:student.accountId || "", talentlmsId:student.talentlmsId
                             }
                         }, ()=> { alert("Successfully updated/added student "); });
                     }
+                    self.toggleSpinner(false);
                 });  
             }
         }
         catch(ex){
             console.log("Error saving student:",ex);
+            self.toggleSpinner(false);
         }
     }
 
@@ -328,7 +389,6 @@ class MyAdmin extends Component{
                 if(window.confirm("Do you want to select this student, all of your unsaved work will be lost?")) {
                     // Clear form 
                     self.clearStudentForm(function(){ 
-                        // Add Loading Animation                        
                         // Get Student Information
                         self.getStudentInfo(studentid);
                     });
@@ -336,7 +396,6 @@ class MyAdmin extends Component{
             }
             else {
                 this.clearStudentForm(function(){ 
-                    // Add Loading Animation
                     // Get Student Information
                     self.getStudentInfo(studentid);
                 });                
@@ -394,6 +453,7 @@ class MyAdmin extends Component{
         var self = this;
         try {
             var query = this.state.searchQuery;
+            self.toggleSpinner(true);
 
             if(query.length <= 0){
                 self.setState({ searchResults: [] });
@@ -415,12 +475,14 @@ class MyAdmin extends Component{
                         else {
                             self.setState({searchResults: response.data.results });
                         }
+                        self.toggleSpinner(false);
                     });  
                 } 
             }
         }
         catch(ex){
             console.log("[Error] searching students: ",ex);
+            self.toggleSpinner(false);
         }
     }
 
@@ -432,6 +494,8 @@ class MyAdmin extends Component{
             }
             else {
                 var sessionInfo = localStorage.getItem(self.props.mySessKey);
+                self.toggleSpinner(true);
+
                 if(sessionInfo) {
                     var localUser = JSON.parse(sessionInfo);
 
@@ -449,18 +513,20 @@ class MyAdmin extends Component{
                             self.setState({ updateType: "update", 
                                 selectedUser:{
                                     firstname:student.firstname, lastname:student.lastname, email:student.email, 
-                                    address:student.address, phone: student.phone, admin:student.admin,
+                                    address:student.address, phone: student.phone || "", admin:student.admin,
                                     degree:student.degree, _id:student._id, studentId:student.studentId || "", 
                                     accountId:student.accountId || "", talentlmsId:student.talentlmsId
                                 }
                             });
                         }
+                        self.toggleSpinner(false);
                     });  
                 } 
             }
         }
         catch(ex){
             console.log("[Error] getting student: ",ex);
+            self.toggleSpinner(false);
         }
     }
     onElementChange(e){

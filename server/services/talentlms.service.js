@@ -108,8 +108,28 @@ var talentlms = {
             response.errorMessage = "[Error] with talentlms sign up (E09): "+ ex;
             callback(response);
         }
-    }
+    },
+    getUserById:function(userInfo, callback){
+        var response = {"errorMessage":null, "results":null};
+        var url = "https://lenkesongcu.talentlms.com/api/v1/users";
 
+        try {
+            url = url + "/id:"+userInfo.id;
+            axios.get(url, { auth: { username: talentlmsKey, password: '' }})
+            .then(res => { 
+                response.results = res.data; 
+                callback(response);
+            })
+            .catch(error => { 
+                response.errorMessage = "[Error] unable to create TalentLMS User: " + error.message; 
+                callback(response);
+            });
+        }
+        catch(ex){
+            response.errorMessage = "[Error] getting users talentlms courses (E09): "+ ex;
+            callback(response);
+        }
+    }
 }
 
 module.exports = talentlms;
@@ -125,9 +145,9 @@ function addTalentLMSUserInfo(userInfo, talentInfo, callback){
             }
             else {
                 const db = client.db(database.dbName).collection('mylgcu_users');
-                response.result = {id: talentInfo.id, login: talentInfo.login};
+                response.results = {id: talentInfo.id, login: talentInfo.login};
 
-                db.updateOne({ "_id": ObjectId(userInfo._id) }, { $set: { talentlmsId: response.result }
+                db.updateOne({ "_id": ObjectId(userInfo._id) }, { $set: { talentlmsId: response.results }
                             }, {upsert: true, useNewUrlParser: true});
                 
                 client.close();
@@ -148,8 +168,6 @@ function createTalentLMSLogin(userInfo, callback){
         var login = (userInfo.firstname && userInfo.firstname.length > 0 ? userInfo.firstname.charAt(0) : "L") + userInfo.lastname;
         login = login + (userInfo.retry && parseInt(userInfo.retry) > 0 ? userInfo.retry : "");
 
-        console.log("login: "+login);
-
         mongoClient.connect(database.connectionString, database.mongoOptions, function(err, client){
             if(err) {
                 response.errorMessage = err;
@@ -161,6 +179,9 @@ function createTalentLMSLogin(userInfo, callback){
                 db.find({ "_id": ObjectId(userInfo._id) }).toArray(function(err, res){ 
                     if(res.length <= 0){
                         response.errorMessage = "[Error] Invalid User Id";
+                    }
+                    else if(res[0].talentlmsId && (res[0].talentlmsId.id > 0 || res[0].talentlmsId.login.length > 0)){
+                        response.errorMessage = "[Error] User Login Already Exists";
                     }
                     else {
                         response.results = {login: login, password: "LGCU-"+res[0].studentId};

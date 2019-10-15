@@ -120,9 +120,19 @@ function createTLMSUser(req, res){
     var userInfo = req.body.userInfo;
 
     // Validate User
-    talentlms.signup(userInfo, function(ret){
-        res.status(200).json(ret);
-    });
+    auth.authorizeUser(requestUser, null, function(ret){
+        if(ret.errorMessage != null) {
+            res.status(200).json(ret);
+        }
+        else if(!ret.results) {
+            res.status(200).json({"errorMessage":"User status invalid for this request", "results":null});
+        }
+        else {
+            talentlms.signup(userInfo, function(ret){
+                res.status(200).json(ret);
+            });
+        }
+    });  
 }
 
 function userLogin(req, res){    
@@ -133,10 +143,20 @@ function userLogin(req, res){
     });
 }
 
+function getTLMSUserById(req, res){
+    var requestUser = req.body.requestUser;    
+    var userInfo = req.body.userInfo;
+
+    talentlms.getUserById(userInfo, function(ret){
+        res.status(200).json(ret);
+    });
+}
+
 /*** Routes ***/
 /* TalentLMS */
 router.post('/createTLMSUser', createTLMSUser);
 router.post('/userLogin', userLogin);
+router.post('/getTLMSUserById', getTLMSUserById);
 
 /* User Auth */
 router.post('/createUser', createUser);
