@@ -152,11 +152,18 @@ function getTLMSUserById(req, res){
     });
 }
 
+function getCourses(req, res){
+    talentlms.getCourses(function(ret){
+        res.status(200).json(ret);
+    });
+}
+
 /*** Routes ***/
 /* TalentLMS */
 router.post('/createTLMSUser', createTLMSUser);
 router.post('/userLogin', userLogin);
 router.post('/getTLMSUserById', getTLMSUserById);
+router.get('/getCourses', getCourses);
 
 /* User Auth */
 router.post('/createUser', createUser);

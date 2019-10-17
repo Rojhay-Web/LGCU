@@ -117,7 +117,16 @@ var talentlms = {
             url = url + "/id:"+userInfo.id;
             axios.get(url, { auth: { username: talentlmsKey, password: '' }})
             .then(res => { 
-                response.results = res.data; 
+                if(!res.data){
+                    response.errorMessage = "Unable to find user";
+                }
+                else {
+                    response.results = {
+                        id: res.data.id, login: res.data.login, firstname: res.data.first_name, lastname:res.data.last_name,
+                        email: res.data.email, status: res.data.status, usertype: res.data.user_type, 
+                        createdDate:res.data.created_on, courses: res.data.courses
+                    };
+                }
                 callback(response);
             })
             .catch(error => { 
@@ -126,7 +135,33 @@ var talentlms = {
             });
         }
         catch(ex){
-            response.errorMessage = "[Error] getting users talentlms courses (E09): "+ ex;
+            response.errorMessage = "[Error] getting talentlms user (E09): "+ ex;
+            callback(response);
+        }
+    },
+    getCourses:function(callback){
+        var response = {"errorMessage":null, "results":null};
+        var url = "https://lenkesongcu.talentlms.com/api/v1/courses";
+
+        try {
+            axios.get(url, { auth: { username: talentlmsKey, password: '' }})
+            .then(res => { 
+                var courseData = (res.data && res.data.length > 0 ? 
+                    res.data.map(function(d){
+                        return { id:d.id, name:d.name, description: d.description, status: d.status,
+                            credits: d.custom_field_1, courseCode: d.custom_field_2, courseId: d.custom_field_3};
+                        }) : []);
+
+                response.results = courseData; 
+                callback(response);
+            })
+            .catch(error => { 
+                response.errorMessage = "[Error] unable to create TalentLMS User: " + error.message; 
+                callback(response);
+            });
+        }
+        catch(ex){
+            response.errorMessage = "[Error] getting talentlms courses (E09): "+ ex;
             callback(response);
         }
     }
