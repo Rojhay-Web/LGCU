@@ -13,6 +13,33 @@ function sendAppEmail(req, res){ mail.sendAppEmail(req, res); }
 /* charges */
 function applicationCharge(req, res){ charge.applicationCharge(req, res); }
 
+function createAuthNETAccount(req, ret){
+    var requestUser = req.body.requestUser;
+    var userInfo = req.body.userInfo;
+
+    // Validate User (Admin Only)
+    auth.authorizeUser(requestUser, null, function(ret){
+        if(ret.errorMessage != null) {
+            res.status(200).json(ret);
+        }
+        else if(!ret.results) {
+            res.status(200).json({"errorMessage":"User status invalid for this request", "results":null});
+        }
+        else {
+            auth.getUserById(userInfo, function(ret0){
+                if(ret0.errorMessage){
+                    res.status(200).json(ret0);
+                }
+                else {            
+                    charge.createAccount(ret.results, function(ret){
+                        res.status(200).json(ret);
+                    });
+                }
+            });    
+        }
+    });         
+}
+
 /* user auth */
 function createUser(req, res){
     var requestUser = req.body.requestUser;
@@ -178,6 +205,7 @@ router.post('/sendAppEmail', sendAppEmail);
 
 /* Charge */
 router.post('/applicationCharge', applicationCharge);
+router.post('/createAuthNETAccount', createAuthNETAccount);
 
 
 module.exports = router;

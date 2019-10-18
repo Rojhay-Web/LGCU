@@ -6,6 +6,14 @@ var ApiControllers = require('authorizenet').APIControllers;
 var SDKConstants = require('authorizenet').Constants;
 const util = require('util');
 
+var mongoClient = require('mongodb').MongoClient;
+var ObjectId = require('mongodb').ObjectID;
+var database = {
+    connectionString: process.env.DatabaseConnectionString,
+    dbName: process.env.DatabaseName,
+    connectionOptions: { connectTimeoutMS: 2000, socketTimeoutMS: 2000}
+}
+
 var charge = {
     applicationCharge:function(req,res){ 
         var response = {"errorMessage":null, "results":null};
@@ -45,7 +53,7 @@ var charge = {
     },
     createAccount: function(accountInfo, callback){
         var response = {"errorMessage":null, "results":null};
-            /* { fullname, email, userId }*/
+        /* { fullname, email, userId }*/
 
         try {     
             var merchantAuthenticationType = new ApiContracts.MerchantAuthenticationType();
@@ -53,7 +61,7 @@ var charge = {
             merchantAuthenticationType.setTransactionKey(process.env.AuthNetTransactionKey);
 
             var customerProfileType = new ApiContracts.CustomerProfileType();
-            customerProfileType.setMerchantCustomerId('AN_' + accountInfo.userId);
+            customerProfileType.setMerchantCustomerId('AN_' + accountInfo.studentId);
             customerProfileType.setDescription(accountInfo.fullname);
             customerProfileType.setEmail(accountInfo.email);
 
@@ -70,21 +78,21 @@ var charge = {
                 var ret = new ApiContracts.CreateCustomerProfileResponse(apiResponse);
                 if(ret != null) {
                     if(ret.getMessages().getResultCode() == ApiContracts.MessageTypeEnum.OK){
-                        response.results = {"status":"Ok","accountId":ret.getCustomerProfileId() };
+                        addAuthNETUserInfo(accountInfo, ret.getCustomerProfileId(), function(autret){ callback(autret); });                        
                     }
                     else {
-                        response.errorMessage = "[Error] Creating User Profile (E08): " + ret.getMessages().getMessage()[0].getText();
+                        response.errorMessage = "[Error] Creating Authorize.NET User Profile (E08): " + ret.getMessages().getMessage()[0].getText();
+                        callback(response);
                     }
                 }
                 else {
-                    response.errorMessage = "[Error] Creating User Profile (E07)";
-                }
-
-                callback(response);
+                    response.errorMessage = "[Error] Creating Authorize.NET User Profile (E07)";
+                    callback(response);
+                }                
             });
         }
         catch(ex){
-            response.errorMessage = "[Error] Creating User Profile (E09): "+ex;
+            response.errorMessage = "[Error] Creating Authorize.NET User Profile (E09): "+ex;
             callback(response);
         }
     },
@@ -337,6 +345,33 @@ function sendChargeEmail(sendEmail, chargeInfo, transactionInfo, callback){
     catch(ex){
         response.errorMessage = "[Error]: Error sending charge email: "+ ex;
         console.log(response.errorMessage);
+        callback(response);
+    }
+}
+
+function addAuthNETUserInfo(userInfo, authId, callback){
+    var response = {"errorMessage":null, "results":null};
+
+    try {
+        mongoClient.connect(database.connectionString, database.mongoOptions, function(err, client){
+            if(err) {
+                response.errorMessage = err;
+                callback(response);
+            }
+            else {
+                const db = client.db(database.dbName).collection('mylgcu_users'); 
+                response.results = authId;
+
+                db.updateOne({ "_id": ObjectId(userInfo._id) }, { $set: { accountId: authId }
+                            }, {upsert: true, useNewUrlParser: true});
+                
+                client.close();
+                callback(response);
+            }
+        });
+    }
+    catch(ex){
+        response.errorMessage = "[Error] adding users talentlms info to user (E09): "+ ex;
         callback(response);
     }
 }

@@ -37,6 +37,7 @@ class MyAdmin extends Component{
         this.saveStudent = this.saveStudent.bind(this);
         this.refreshStudentID = this.refreshStudentID.bind(this);
         this.createTalentLmsId = this.createTalentLmsId.bind(this);
+        this.createAuthNetId = this.createAuthNetId.bind(this);
     }
 
     componentDidMount(){
@@ -154,7 +155,7 @@ class MyAdmin extends Component{
                                 <div className="block-label-title">Acccount ID:</div>
                                 <div className="block-container">                            
                                     <div className="content-info generator">
-                                        <span className="IdGenerator"><i className="fas fa-sync-alt"></i></span>
+                                        <span className="IdGenerator" onClick={this.createAuthNetId}><i className="fas fa-sync-alt"></i></span>
                                         <input type="text" name="accountId" className="" placeholder="Account id" value={this.state.selectedUser.accountId} readOnly/>
                                     </div>
                                 </div>
@@ -328,6 +329,48 @@ class MyAdmin extends Component{
 
                             self.setState({ updateType: "update", selectedUser: student
                             }, ()=> { alert("Successfully created TalentLMS ID: "); });
+                        }
+                        self.toggleSpinner(false);
+                    });  
+                }
+            }
+        }
+        catch(ex){            
+            alert("[Error] Creating TalentLMS ID: ", ex);
+            self.toggleSpinner(false);
+        }
+    }
+
+    createAuthNetId(){
+        var self = this;
+        try {
+            this.toggleSpinner(true);
+            var sessionInfo = localStorage.getItem(self.props.mySessKey);
+            
+            if(sessionInfo) {
+                var localUser = JSON.parse(sessionInfo);
+                
+                if(!this.state.selectedUser || !this.state.selectedUser._id)
+                {
+                    alert("Student not active");
+                }
+                else {
+                    var postData = { 
+                        requestUser: { _id: localUser._id}, 
+                        userInfo: { _id: this.state.selectedUser._id } 
+                    };
+
+                    axios.post(self.props.rootPath + "/api/createAuthNETAccount", postData, {'Content-Type': 'application/json'})
+                    .then(function(response) {
+                        if(response.data.errorMessage){
+                            alert("Unable to create Authorize.NET ID: "+ response.data.errorMessage);
+                        }
+                        else {                        
+                            var student = self.state.selectedUser;
+                            student.accountId = response.data.results;
+
+                            self.setState({ updateType: "update", selectedUser: student
+                            }, ()=> { alert("Successfully created Authorize.NET ID: "); });
                         }
                         self.toggleSpinner(false);
                     });  
