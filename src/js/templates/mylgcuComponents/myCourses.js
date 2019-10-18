@@ -8,13 +8,6 @@ import 'react-table-hoc-fixed-columns/lib/styles.css';
 
 const ReactTableFixedColumns = withFixedColumns(ReactTable);
 
-var courseColumns = [    
-    { Header: 'Course Code', accessor: 'courseCode', fixed: 'left' },
-    { Header: 'Course Id', accessor: 'courseId', fixed: 'left' },
-    { Header: 'Course Name', accessor: 'name', fixed: 'left' },
-    { Header: 'Credits', accessor: 'credits', fixed: 'left' }
-];
-
 /* Body */
 class MyCourses extends Component{
     constructor(props) {
@@ -29,6 +22,7 @@ class MyCourses extends Component{
         this.toggleSpinner = this.toggleSpinner.bind(this);
         this.loadStudentInfo = this.loadStudentInfo.bind(this);
         this.loadCourses = this.loadCourses.bind(this);
+        this.addCourse = this.addCourse.bind(this);
     }
 
     componentDidMount(){ 
@@ -36,8 +30,21 @@ class MyCourses extends Component{
         this.loadCourses();
     }
 
+    
     render(){   
         var filterData = this.state.courseSearch;
+
+        var courseColumns = [    
+            { Header: 'Course Code', accessor: 'courseCode', fixed: 'left' },
+            { Header: 'Course Id', accessor: 'courseId', fixed: 'left' },
+            { Header: 'Course Name', accessor: 'name', fixed: 'left' },
+            { Header: 'Credits', accessor: 'credits', fixed: 'left' },
+            { Header: '', fixed: 'right', Cell: row => (
+                <div className="course-btn">
+                    <div className="lBtn c2" onClick={() => this.addCourse(row.original)}><span>Add Course</span><i className="btn-icon fas fa-plus-circle"></i></div>
+                </div>
+            ) }
+        ];
 
         return(
             <div className="mylgcu-course">
@@ -119,6 +126,15 @@ class MyCourses extends Component{
         this.setState({ spinner: status });
     }
 
+    addCourse(course){
+        var self = this;
+        try {
+            var tst = 0;
+        }
+        catch(ex){
+
+        }
+    }
     loadStudentInfo() {
         var self = this;
 

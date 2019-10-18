@@ -84,7 +84,7 @@
 
                 .ReactTable  {
                     width: 100%;
-                    height: 400px;
+                    height: 500px;
                     -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.2);
                     -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.2);
                     box-shadow: 0 3px 7px rgba(0, 0, 0, 0.2);
@@ -417,6 +417,8 @@
         padding: 7px 2%;
         background: rgba(255,255,255,0.9);
         justify-content: center;
+        z-index: 100;
+
         .mylgcu-nav-item {
             padding: 7px 14px;
             border-bottom: 3px solid rgba(255,255,255,0);
@@ -511,5 +513,26 @@
         -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.2);
             -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.2);
             box-shadow: 0 3px 7px rgba(0, 0, 0, 0.2);
+    }
+}
+
+.course-btn {
+    text-align: center;
+    width: 100%;
+    padding: 5px 10%;
+    cursor: pointer;
+
+    .lBtn { margin:0; border-radius: 5px;}
+    &:hover { opacity: 0.7;}
+}
+
+.rt-tr {
+    &.-even {
+        .rt-td { background: rgba(230,230,230,0.5); }
+    }
+
+    .rt-td {
+        text-align: center;
+        font-size: 1.3rem;
     }
 }

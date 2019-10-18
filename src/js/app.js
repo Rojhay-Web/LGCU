@@ -172,7 +172,7 @@ class App extends Component{
                                 <div className="footer-link-section">
                                     <Link className="footer-link" to="/admissions">Admissions</Link>
                                     <Link className="footer-link" to="/academics">Academics</Link>
-                                    <a href="https://www.givelify.com/givenow/1.0/?token=eyJvcmdfaWQiOiJNelUyT1RFfiIsImJhZGdlX2ltYWdlIjoiYjMucG5nIn0~" target='_blank' className="footer-link">Donate</a>
+                                    <a href="https://www.givelify.com/givenow/1.0/?token=eyJvcmdfaWQiOiJNelUyT1RFfiIsImJhZGdlX2ltYWdlIjoiYjMucG5nIn0~" target='_blank'  rel="noopener noreferrer" className="footer-link">Donate</a>
                                     <Link className="footer-link" to="/apply">Apply</Link>
                                     <Link className="footer-link" to="/contactus">Contact Us</Link>
                                     <Link className="footer-link" to="/mylgcu">myLGCU</Link>
