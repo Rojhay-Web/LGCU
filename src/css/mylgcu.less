@@ -79,8 +79,8 @@
                     }
                 }
 
-                .block-label-title { font-weight: bold; }
-                .block-text { text-transform: capitalize; }
+                .block-label-title { font-weight: bold; color: rgba(150,150,150,1); }
+                .block-text { text-transform: capitalize; font-size: 1.3rem; }
 
                 .ReactTable  {
                     width: 100%;
@@ -314,7 +314,7 @@
                     border-bottom: 1px solid rgba(150,150,150,0.5);
                     td { padding: 10px 0px; }
                     .courseNumber {
-                        display: flex;
+                        display: inline-flex;
                         flex-direction: column;
                         justify-content: center;
                         text-align: center;
@@ -325,6 +325,23 @@
                         border-radius: 50%;
                         @media @mobile-device { display: none; }
                     }
+                    .courseEdit {
+                        display: inline-flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        text-align: center;
+                        width: 30px;
+                        height: 30px;
+                        background: rgba(233,58,58,1);
+                        color: rgba(255,255,255,1);
+                        border-radius: 50%;
+                        font-size: 20px;
+                        transition: 0.5s all ease-in-out;
+                        cursor: pointer;
+
+                        &:hover { opacity: 0.7; }
+                    }
+
                     .courseCode { 
                         color: rgba(150,150,150,1);
                         text-transform: uppercase;
@@ -346,9 +363,46 @@
 
                         @media @mobile-device { font-size: 8px; }
                     }
+
+                    &.queued {
+                        background: rgba(235,183,30,0.2);
+                        .courseNumber { background: rgba(235,183,30,1);}
+                    }
+                }
+
+                .noDataRow {
+                    &.creditCount { 
+                        text-align: right;
+                        color: rgba(255,255,255,1);
+                        background: rgba(235,183,30,1);
+                        font-size: 1.3rem;
+                        font-weight: bold;
+                        td {
+                            padding: 7px;
+                            .lBtn { display: inline; cursor: pointer; }
+                        }
+                    }
                 }
             }
         //}
+        
+        .payment-center {
+            display: inline-flex;
+            flex-direction: row;
+            padding: 7px;
+            margin-bottom: 7px;
+
+            &.sz1 { width: 10%; @media @mobile-device { width: 100%; } }
+            &.sz2 { width: 20%; @media @mobile-device { width: 100%; } }
+            &.sz3 { width: 30%; @media @mobile-device { width: 100%; } }
+            &.sz4 { width: 40%; @media @mobile-device { width: 100%; } }
+            &.sz5 { width: 50%; @media @mobile-device { width: 100%; } }
+            &.sz6 { width: 60%; @media @mobile-device { width: 100%; } }
+            &.sz7 { width: 70%; @media @mobile-device { width: 100%; } }
+            &.sz8 { width: 80%; @media @mobile-device { width: 100%; } }
+            &.sz9 { width: 90%; @media @mobile-device { width: 100%; } }
+            &.sz10 { width: 100%; @media @mobile-device { width: 100%; } }
+        }
 
         .mylgcu-admin {
             padding: 30px 0px 0px;

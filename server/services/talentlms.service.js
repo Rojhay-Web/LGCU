@@ -130,7 +130,7 @@ var talentlms = {
                 callback(response);
             })
             .catch(error => { 
-                response.errorMessage = "[Error] unable to create TalentLMS User: " + error.message; 
+                response.errorMessage = "[Error] getting talentlms user (E07): " + error.message; 
                 callback(response);
             });
         }

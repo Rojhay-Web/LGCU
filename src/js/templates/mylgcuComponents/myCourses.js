@@ -6,6 +6,8 @@ import withFixedColumns from 'react-table-hoc-fixed-columns';
 import "react-table/react-table.css";
 import 'react-table-hoc-fixed-columns/lib/styles.css';
 
+import StudentPayment from '../components/studentPaymentModal';
+
 const ReactTableFixedColumns = withFixedColumns(ReactTable);
 
 /* Body */
@@ -14,15 +16,25 @@ class MyCourses extends Component{
         super(props);
         this.state = {
             spinner: false,
+            modalStatus:false,
+            totalPrice:0,
             studentInfo:{ degree: "", class:"", gpa:0, fulltime:false },
             currentCourses:[],
+            queuedCourses:[],
             courseSearch:[]
         }
 
         this.toggleSpinner = this.toggleSpinner.bind(this);
         this.loadStudentInfo = this.loadStudentInfo.bind(this);
         this.loadCourses = this.loadCourses.bind(this);
+        this.loadStudentCourses = this.loadStudentCourses.bind(this);
         this.addCourse = this.addCourse.bind(this);
+        this.getCourseInfo = this.getCourseInfo.bind(this);
+        this.removeCourse = this.removeCourse.bind(this);
+        this.getSemesterCredits = this.getSemesterCredits.bind(this);
+        this.getPrice = this.getPrice.bind(this);
+        this.modalShow = this.modalShow.bind(this);
+        this.modalHide = this.modalHide.bind(this);
     }
 
     componentDidMount(){ 
@@ -48,6 +60,9 @@ class MyCourses extends Component{
 
         return(
             <div className="mylgcu-course">
+               {/* Student Payment */}
+               <StudentPayment title="Student Course Payment" show={this.state.modalStatus} handleClose={this.modalHide} totalPrice={this.state.totalPrice} />
+
                {/* Spinner */}
                {this.state.spinner && <div className="spinner"><i className="fas fa-cog fa-spin"/><span>Loading</span></div> }
 
@@ -85,8 +100,10 @@ class MyCourses extends Component{
                                     <tr className="header">
                                         <th></th>
                                         <th>Course Name</th>
-                                        <th>Course Type</th>
+                                        <th>Course Code</th>
                                         <th>Course Id</th>
+                                        <th>Credits</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -94,14 +111,37 @@ class MyCourses extends Component{
                                         <tr key={i} className="dataRow">
                                             <td><span className="courseNumber">{i+1}</span></td>
                                             <td><span className="courseCode">{item.name}</span></td>
-                                            <td><span className="courseTitle"></span></td>
-                                            <td></td>
+                                            <td><span className="courseCode">{ this.getCourseInfo("courseCode", item.id) }</span></td>
+                                            <td><span className="courseId">{ this.getCourseInfo("courseId", item.id) }</span></td>
+                                            <td><span className="credits">{ this.getCourseInfo("credits", item.id) }</span></td>
+                                            <td>{/*<span className="courseEdit"><i className="fas fa-times"></i></span>*/}</td>
                                         </tr>
                                     ))}
 
-                                    {this.state.currentCourses.length == 0 && 
+                                    {this.state.queuedCourses.map((item, i) =>(
+                                        <tr key={i} className="dataRow queued">
+                                            <td><span className="courseNumber">Q</span></td>
+                                            <td><span className="courseCode">{item.name}</span></td>
+                                            <td><span className="courseCode">{ item.courseCode }</span></td>
+                                            <td><span className="courseId">{ item.courseId }</span></td>
+                                            <td><span className="credits">{ item.credits }</span></td>
+                                            <td><span className="courseEdit"><i className="fas fa-times" onClick={()=>this.removeCourse(item.id)}></i></span></td>
+                                        </tr>
+                                    ))}
+
+                                    {(this.state.currentCourses.length == 0 && this.state.queuedCourses.length == 0) && 
                                         <tr className="noDataRow">
-                                            <td colSpan="4">No Courses Added</td>
+                                            <td colSpan="6">No Courses Added</td>
+                                        </tr>
+                                    }
+                                    {(this.state.currentCourses.length > 0 || this.state.queuedCourses.length > 0) && 
+                                        <tr className="noDataRow creditCount">
+                                            <td colSpan="4">
+                                                <span>Total Semester Credits: {this.getSemesterCredits()}</span>
+                                            </td>
+                                            <td colSpan="2">
+                                                {this.state.queuedCourses.length > 0 && <div className="lBtn clear" onClick={this.getPrice}><span>Register</span><i className="btn-icon fas fa-chalkboard"></i></div> }
+                                            </td>
                                         </tr>
                                     }
                                 </tbody>
@@ -126,15 +166,152 @@ class MyCourses extends Component{
         this.setState({ spinner: status });
     }
 
-    addCourse(course){
+    modalShow(){
+        this.setState({ modalStatus: true });
+    }
+
+    modalHide(){
+        this.setState({ modalStatus: false });
+    }
+
+    addCourse(newCourse){
+        try {
+            var tmpQueue =  this.state.queuedCourses;
+            var queuedCourses = tmpQueue.filter(function(course){
+                return course.id == newCourse.id;
+            });
+
+            var currentCourses = this.state.currentCourses.filter(function(course){
+                return course.id == newCourse.id;
+            });
+
+            if(queuedCourses.length > 0 || currentCourses.length > 0){
+                alert("Course has already been added");
+            }
+            else {
+                tmpQueue.push(newCourse);
+                this.setState({ queuedCourses: tmpQueue });
+            }
+        }
+        catch(ex){
+            alert("Error adding course: ",ex);
+        }
+    }
+
+    removeCourse(courseId){
+        try {
+            var tmpQueue =  this.state.queuedCourses;
+            var index = tmpQueue.map(e => e.id).indexOf(courseId);
+            if(index >= 0){
+                tmpQueue.splice(index,1);
+                this.setState({ queuedCourses: tmpQueue });
+            }
+        }
+        catch(ex){
+            alert("Error Removing Course: ",ex);
+        }
+    }
+
+    getSemesterCredits(){
+        var total = 0;
+
+        try {
+            
+            var tmpQueue =  this.state.queuedCourses;
+            var tmpCurrent = this.state.currentCourses;
+
+            if(tmpQueue){
+                for(var i = 0; i < tmpQueue.length; i++){
+                    total = total + parseInt(tmpQueue[i].credits);
+                } 
+            }
+            
+            if(tmpCurrent){
+                for(var i = 0; i < tmpCurrent.length; i++){
+                    total = total + parseInt(this.getCourseInfo("credits", tmpCurrent[i].id));
+                }  
+            }        
+        }
+        catch(ex){
+            alert("Error getting semester credits: ",ex);
+        }
+
+        return total;
+    }
+
+    getPrice(){
+        var totalPrice = 0;
+        try {           
+             var total = this.getSemesterCredits(); 
+             /* Calculate Semester Charge */
+             var fulltime = (total >= 12);
+             var creditRate = 0;
+             
+             /* Military */
+             if(this.state.studentInfo.military === true) {
+                 if(this.state.studentInfo.level == "doctorate") {
+                     creditRate = 265;
+                 }
+                 else if(this.state.studentInfo.level == "masters"){
+                     creditRate = 255;
+                 }
+                 else {
+                     creditRate = 225;
+                 }
+             }
+             else {
+                 if(this.state.studentInfo.level == "doctorate") {
+                     creditRate = (fulltime ? 550 : 575);
+                 }
+                 else if(this.state.studentInfo.level == "masters"){
+                     if(this.state.studentInfo.school.toLowerCase() == "theology & biblical studies"){
+                         creditRate = (fulltime ? 375 : 395);
+                     }
+                     else if(this.state.studentInfo.school.toLowerCase() == "education"){
+                         creditRate = (fulltime ? 390 : 415);
+                     }
+                     else {
+                         creditRate = (fulltime ? 495 : 515);
+                     }
+                 }
+                 else {
+                     creditRate = (fulltime ? 295 : 315);
+                 }
+             }
+
+             totalPrice = creditRate * total;
+        }
+        catch(ex){
+            console.log("Error getting total price: ",ex);
+        }
+
+        this.setState({ totalPrice: totalPrice, modalStatus: true });
+    }
+
+    getCourseInfo(type, id){
         var self = this;
         try {
-            var tst = 0;
+            if(!this.state.courseSearch){
+                return "";
+            }
+            else {
+                var selectedCourse = this.state.courseSearch.filter(function(course){
+                    return course.id == id;
+                });
+
+                if(selectedCourse.length > 0 && (type in selectedCourse[0])){
+                    return selectedCourse[0][type];
+                }
+                else {
+                    return "";
+                }
+            }
         }
         catch(ex){
 
         }
     }
+
     loadStudentInfo() {
         var self = this;
 
@@ -155,8 +332,12 @@ class MyCourses extends Component{
                     else {
                         var userInfo = response.data.results;
                         var tmpStudent = { degree: userInfo.degree.level +" in "+userInfo.degree.major, class: userInfo.studentInfo.class,
-                                            gpa: userInfo.studentInfo.gpa,  fulltime: (userInfo.studentInfo.fulltime == true)};
-                        self.setState({ studentInfo: tmpStudent });
+                                            level: userInfo.studentInfo.level, school: userInfo.studentInfo.school,
+                                            gpa: userInfo.studentInfo.gpa,  fulltime: (userInfo.studentInfo.fulltime == true),
+                                            military: userInfo.military };
+                        self.setState({ studentInfo: tmpStudent }, () =>{
+                            self.loadStudentCourses(userInfo.talentlmsId.id);
+                        });
                     }
                 });   
             }
@@ -171,11 +352,44 @@ class MyCourses extends Component{
         }
     }
 
+    loadStudentCourses(talentlmsId){
+        var self = this;
+
+        try {
+            var sessionInfo = localStorage.getItem(this.props.mySessKey);
+
+            if(sessionInfo){ 
+                var localUser = JSON.parse(sessionInfo);
+                var postData = { requestUser: { _id: localUser._id}, userInfo: { id: talentlmsId } };
+
+                self.toggleSpinner(true);
+
+                axios.post(self.props.rootPath + "/api/getTLMSUserById", postData, {'Content-Type': 'application/json'})
+                .then(function(response) {
+                    if(response.data.errorMessage){
+                        alert(response.data.errorMessage );
+                    }
+                    else {
+                        var userInfo = response.data.results;
+                        self.setState({ currentCourses: userInfo.courses });
+                    }
+                });   
+            }
+            else {
+                self.setState({ currentCourses: [] });
+            }
+            self.toggleSpinner(false);
+        }
+        catch(ex){
+            alert("[Error] Loading Student Course Info: ", ex);
+            self.toggleSpinner(false);
+        }
+    }
+
     loadCourses() {
         var self = this;
 
         try {
-
             self.toggleSpinner(true);
 
             axios.get(self.props.rootPath + "/api/getCourses", {'Content-Type': 'application/json'})

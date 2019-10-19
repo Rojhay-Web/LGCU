@@ -13,7 +13,7 @@ function sendAppEmail(req, res){ mail.sendAppEmail(req, res); }
 /* charges */
 function applicationCharge(req, res){ charge.applicationCharge(req, res); }
 
-function createAuthNETAccount(req, ret){
+function createAuthNETAccount(req, res){
     var requestUser = req.body.requestUser;
     var userInfo = req.body.userInfo;
 
@@ -31,7 +31,7 @@ function createAuthNETAccount(req, ret){
                     res.status(200).json(ret0);
                 }
                 else {            
-                    charge.createAccount(ret.results, function(ret){
+                    charge.createAccount(ret0.results, function(ret){
                         res.status(200).json(ret);
                     });
                 }

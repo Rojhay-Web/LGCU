@@ -2010,9 +2010,11 @@
 }
 .mylgcuPage .mylgcu-section .mylgcu-content-section .content-block .block-label-title {
   font-weight: bold;
+  color: #969696;
 }
 .mylgcuPage .mylgcu-section .mylgcu-content-section .content-block .block-text {
   text-transform: capitalize;
+  font-size: 1.3rem;
 }
 .mylgcuPage .mylgcu-section .mylgcu-content-section .content-block .ReactTable {
   width: 100%;
@@ -2341,7 +2343,7 @@
   padding: 10px 0px;
 }
 .mylgcuPage .mylgcu-section .overview-table .dataRow .courseNumber {
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
   justify-content: center;
   text-align: center;
@@ -2355,6 +2357,23 @@
   .mylgcuPage .mylgcu-section .overview-table .dataRow .courseNumber {
     display: none;
   }
+}
+.mylgcuPage .mylgcu-section .overview-table .dataRow .courseEdit {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  width: 30px;
+  height: 30px;
+  background: #e93a3a;
+  color: #ffffff;
+  border-radius: 50%;
+  font-size: 20px;
+  transition: 0.5s all ease-in-out;
+  cursor: pointer;
+}
+.mylgcuPage .mylgcu-section .overview-table .dataRow .courseEdit:hover {
+  opacity: 0.7;
 }
 .mylgcuPage .mylgcu-section .overview-table .dataRow .courseCode {
   color: #969696;
@@ -2393,6 +2412,112 @@
 @media (max-width: 770px) {
   .mylgcuPage .mylgcu-section .overview-table .dataRow .courseStatus {
     font-size: 8px;
+  }
+}
+.mylgcuPage .mylgcu-section .overview-table .dataRow.queued {
+  background: rgba(235, 183, 30, 0.2);
+}
+.mylgcuPage .mylgcu-section .overview-table .dataRow.queued .courseNumber {
+  background: #ebb71e;
+}
+.mylgcuPage .mylgcu-section .overview-table .noDataRow.creditCount {
+  text-align: right;
+  color: #ffffff;
+  background: #ebb71e;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+.mylgcuPage .mylgcu-section .overview-table .noDataRow.creditCount td {
+  padding: 7px;
+}
+.mylgcuPage .mylgcu-section .overview-table .noDataRow.creditCount td .lBtn {
+  display: inline;
+  cursor: pointer;
+}
+.mylgcuPage .mylgcu-section .payment-center {
+  display: inline-flex;
+  flex-direction: row;
+  padding: 7px;
+  margin-bottom: 7px;
+}
+.mylgcuPage .mylgcu-section .payment-center.sz1 {
+  width: 10%;
+}
+@media (max-width: 770px) {
+  .mylgcuPage .mylgcu-section .payment-center.sz1 {
+    width: 100%;
+  }
+}
+.mylgcuPage .mylgcu-section .payment-center.sz2 {
+  width: 20%;
+}
+@media (max-width: 770px) {
+  .mylgcuPage .mylgcu-section .payment-center.sz2 {
+    width: 100%;
+  }
+}
+.mylgcuPage .mylgcu-section .payment-center.sz3 {
+  width: 30%;
+}
+@media (max-width: 770px) {
+  .mylgcuPage .mylgcu-section .payment-center.sz3 {
+    width: 100%;
+  }
+}
+.mylgcuPage .mylgcu-section .payment-center.sz4 {
+  width: 40%;
+}
+@media (max-width: 770px) {
+  .mylgcuPage .mylgcu-section .payment-center.sz4 {
+    width: 100%;
+  }
+}
+.mylgcuPage .mylgcu-section .payment-center.sz5 {
+  width: 50%;
+}
+@media (max-width: 770px) {
+  .mylgcuPage .mylgcu-section .payment-center.sz5 {
+    width: 100%;
+  }
+}
+.mylgcuPage .mylgcu-section .payment-center.sz6 {
+  width: 60%;
+}
+@media (max-width: 770px) {
+  .mylgcuPage .mylgcu-section .payment-center.sz6 {
+    width: 100%;
+  }
+}
+.mylgcuPage .mylgcu-section .payment-center.sz7 {
+  width: 70%;
+}
+@media (max-width: 770px) {
+  .mylgcuPage .mylgcu-section .payment-center.sz7 {
+    width: 100%;
+  }
+}
+.mylgcuPage .mylgcu-section .payment-center.sz8 {
+  width: 80%;
+}
+@media (max-width: 770px) {
+  .mylgcuPage .mylgcu-section .payment-center.sz8 {
+    width: 100%;
+  }
+}
+.mylgcuPage .mylgcu-section .payment-center.sz9 {
+  width: 90%;
+}
+@media (max-width: 770px) {
+  .mylgcuPage .mylgcu-section .payment-center.sz9 {
+    width: 100%;
+  }
+}
+.mylgcuPage .mylgcu-section .payment-center.sz10 {
+  width: 100%;
+}
+@media (max-width: 770px) {
+  .mylgcuPage .mylgcu-section .payment-center.sz10 {
+    width: 100%;
   }
 }
 .mylgcuPage .mylgcu-section .mylgcu-admin {

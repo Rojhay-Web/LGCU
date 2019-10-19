@@ -67,7 +67,7 @@ var charge = {
 
             var createRequest = new ApiContracts.CreateCustomerProfileRequest();
             createRequest.setProfile(customerProfileType);
-            createRequest.setValidationMode(ApiContracts.ValidationModeEnum.TESTMODE);
+            //createRequest.setValidationMode(ApiContracts.ValidationModeEnum.TESTMODE);
             createRequest.setMerchantAuthentication(merchantAuthenticationType);
 
             var ctrl = new ApiControllers.CreateCustomerProfileController(createRequest.getJSON());
