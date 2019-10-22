@@ -2023,6 +2023,28 @@
   -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.2);
   box-shadow: 0 3px 7px rgba(0, 0, 0, 0.2);
 }
+.mylgcuPage .mylgcu-section .mylgcu-content-section .content-block .search-block {
+  background: #e6e6e6;
+  -moz-box-shadow: inset 0 3px 7px rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: inset 0 3px 7px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 3px 7px rgba(0, 0, 0, 0.2);
+}
+.mylgcuPage .mylgcu-section .mylgcu-content-section .content-block .search-block .content-info {
+  width: 100%;
+}
+.mylgcuPage .mylgcu-section .mylgcu-content-section .content-block .search-block .content-info.icon {
+  display: flex;
+}
+.mylgcuPage .mylgcu-section .mylgcu-content-section .content-block .search-block .content-info.icon i {
+  padding: 3px 0px;
+  margin-right: 7px;
+}
+.mylgcuPage .mylgcu-section .mylgcu-content-section .content-block .search-block .content-info.icon input {
+  flex: 1;
+  background: none;
+  border: none;
+  width: 100%;
+}
 .mylgcuPage .mylgcu-section .mylgcu-content-section .content-block .block-container {
   padding: 12px;
   background: #ffffff;
@@ -2041,6 +2063,22 @@
 }
 .mylgcuPage .mylgcu-section .mylgcu-content-section .content-block .block-container .content-info {
   font-weight: bold;
+}
+.mylgcuPage .mylgcu-section .mylgcu-content-section .content-block .block-container.search-block {
+  background: #e6e6e6;
+  -moz-box-shadow: inset 0 3px 7px rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: inset 0 3px 7px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 3px 7px rgba(0, 0, 0, 0.2);
+}
+.mylgcuPage .mylgcu-section .mylgcu-content-section .content-block .block-container.search-block .content-info.icon {
+  display: flex;
+}
+.mylgcuPage .mylgcu-section .mylgcu-content-section .content-block .block-container.search-block .content-info.icon i {
+  padding: 3px 0px;
+  margin-right: 7px;
+}
+.mylgcuPage .mylgcu-section .mylgcu-content-section .content-block .block-container.search-block .content-info.icon input {
+  flex: 1;
 }
 .mylgcuPage .mylgcu-section .mylgcu-content-section .content-block.search-container {
   justify-content: flex-end;

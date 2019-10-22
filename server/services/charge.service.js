@@ -27,7 +27,7 @@ var charge = {
             var transactionInfo = req.body;
 
             chargeCard(transactionInfo.cardInfo, transactionInfo.chargeDescription, 
-                transactionInfo.chargeItems, transactionInfo.userEmail,
+                transactionInfo.chargeItems, transactionInfo.userEmail, null,
                 function(ret){
                     if(ret.status >= 0){
                         // Successful Charge
@@ -49,6 +49,39 @@ var charge = {
             response.errorMessage = "[Error]: Error application charge: "+ ex;
             console.log(response.errorMessage);
             res.status(200).json(response);
+        }
+    },
+    accountCharge(accountInfo, transactionInfo, callback){
+        var response = {"errorMessage":null, "results":null};
+        var defaultEmail = "admin@lenkesongcu.org";
+
+        /* { userEmail:str, accountId:str, chargeDescription:str, 
+            cardInfo:{cardNumber, cardExp, cardCode, firstname, lastname, zip, country},
+            chargeItems:[{name, description, quantity, price}]} */
+
+        try {
+            chargeCard(transactionInfo.cardInfo, transactionInfo.chargeDescription, 
+                transactionInfo.chargeItems, transactionInfo.userEmail, accountInfo.accountId,
+                function(ret){
+                    if(ret.status >= 0){
+                        // Successful Charge
+                        // Send Email to Default
+                        sendChargeEmail(defaultEmail, transactionInfo, ret.results, function(ret){ });
+                        // Send Email Receipt to User
+                        sendChargeEmail(transactionInfo.userEmail, transactionInfo, ret.results, function(ret){ });
+                    }
+                    else {
+                        // Unsuccessfully Charge
+                        response.errorMessage = "Unsuccessful Charge"
+                    }
+
+                    response.results = ret.results;
+                    callback(response);
+                });   
+        }
+        catch(ex){
+            response.errorMessage = "[Error]: Error account charge: "+ ex;
+            callback(response);
         }
     },
     createAccount: function(accountInfo, callback){
@@ -160,7 +193,7 @@ var charge = {
 module.exports = charge;
 
 
-function chargeCard(cardInfo, chargeDesc, chargeItems, userEmail, callback){
+function chargeCard(cardInfo, chargeDesc, chargeItems, userEmail, accountId, callback){
     var ret = {"errorMessage":null, "status":null, "results":null};
 
     try {
@@ -194,13 +227,20 @@ function chargeCard(cardInfo, chargeDesc, chargeItems, userEmail, callback){
         emailTo.setEmail(userEmail);
         transactionRequestType.setEmail(emailTo);*/
 
+        /* Customer Porfile Id */
+        var profileToCharge = new ApiContracts.CustomerProfilePaymentType();
+    
+        if(accountId != null){
+            profileToCharge.setCustomerProfileId(accountId);
+            profileToCharge.setShippingProfileId(process.env.AuthNetDefaultShipID);
+        }
         /* Order Details */
         var orderDetails = new ApiContracts.OrderType();
         var invoceNum = "lgcu-"+Date.now();
 	    orderDetails.setInvoiceNumber(invoceNum);
         orderDetails.setDescription(chargeDesc);
         transactionRequestType.setOrder(orderDetails);
-        
+
         /* Line Item */
         var lineItemList = [];
         var total = 0.00;
@@ -222,6 +262,8 @@ function chargeCard(cardInfo, chargeDesc, chargeItems, userEmail, callback){
         lineItems.setLineItem(lineItemList);
         transactionRequestType.setLineItems(lineItems);
         transactionRequestType.setAmount(total.toFixed(2));
+        // Charge Profile
+        if(accountId != null) { transactionRequestType.setProfile(profileToCharge); }
 
         /* Transaction */
         var createRequest = new ApiContracts.CreateTransactionRequest();
@@ -260,6 +302,7 @@ function chargeCard(cardInfo, chargeDesc, chargeItems, userEmail, callback){
                     /* Failed Transaction - E2 */
                     ret.errorMessage = "Failed Transaction [E2]";
                     ret.status = -2;
+                    console.log(response);
                 }
             }
             else {
@@ -291,8 +334,11 @@ function buildChargeEmailHtml(chargeInfo, transactionInfo){
         
         ret += util.format('<tr><td>First Name</td><td>%s</td></tr>', chargeInfo.cardInfo.firstname.toString());
         ret += util.format('<tr><td>Last Name</td><td>%s</td></tr>', chargeInfo.cardInfo.lastname.toString());
-        ret += util.format('<tr><td>Application Id</td><td>%s</td></tr>', chargeInfo.appId.toString());
-        ret += util.format('<tr><td>Charge Amount</td><td>$ %s</td></tr>', chargeInfo.chargeItems[0].price.toString());
+        if(chargeInfo.appId) { ret += util.format('<tr><td>Application Id</td><td>%s</td></tr>', chargeInfo.appId.toString()); }
+        
+        chargeInfo.chargeItems.forEach(function(item){
+            ret += util.format('<tr><td>Charge Amount</td><td>$ %s</td></tr>', item.price.toString());
+        });
         
         // Charge Info
         ret += util.format('<tr><td>Charge Info</td></tr>');

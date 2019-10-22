@@ -147,7 +147,9 @@ var talentlms = {
             axios.get(url, { auth: { username: talentlmsKey, password: '' }})
             .then(res => { 
                 var courseData = (res.data && res.data.length > 0 ? 
-                    res.data.map(function(d){
+                    res.data
+                    .filter(function(item){ return (item.status == 'active'); })
+                    .map(function(d){
                         return { id:d.id, name:d.name, description: d.description, status: d.status,
                             credits: d.custom_field_1, courseCode: d.custom_field_2, courseId: d.custom_field_3};
                         }) : []);
@@ -162,6 +164,59 @@ var talentlms = {
         }
         catch(ex){
             response.errorMessage = "[Error] getting talentlms courses (E09): "+ ex;
+            callback(response);
+        }
+    },
+    courseRegister(userInfo, courseInfo, callback){
+        var response = {"errorMessage":null, "results":null};
+        var url = "https://lenkesongcu.talentlms.com/api/v1/addusertocourse";
+
+        try {
+            var formData = { user_id: userInfo.talentlmsId.id, course_id: courseInfo.id, role:"learner" };
+
+            axios.post(url, formData, { auth: { username: talentlmsKey, password: '' }})
+                    .then(res => { 
+                        if(!Array.isArray(res.data)){
+                            response.errorMessage = res.data.error.message;
+                        }
+                        else {
+                            response.results = res.data[0];
+                        }
+                        callback(response);
+                    })
+                    .catch(error => { 
+                        response.errorMessage = "[Error] unable to registering student for course (E07): " + error.message; 
+                        callback(response);
+                    });
+        }
+        catch(ex){
+            response.errorMessage = "[Error] registering student for course (E09): "+ ex;
+            callback(response);
+        }
+    },
+    courseUnregister(userInfo, courseInfo, callback) {
+        var response = {"errorMessage":null, "results":null};
+        var url = "https://lenkesongcu.talentlms.com/api/v1/removeuserfromcourse";
+
+        try {
+            url = url + "/user_id:"+userInfo.talentlmsId.id+",course_id:"+courseInfo.id;
+            axios.get(url, { auth: { username: talentlmsKey, password: '' }})
+            .then(res => { 
+                if(!Array.isArray(res.data)){
+                    response.errorMessage = res.data.error.message;
+                }
+                else {
+                    response.results = res.data[0];
+                }
+                callback(response);
+            })
+            .catch(error => { 
+                response.errorMessage = "[Error] unable to unregister student from course: " + error.message; 
+                callback(response);
+            });
+        }
+        catch(ex){
+            response.errorMessage = "[Error] unregistering student from course (E09): "+ ex;
             callback(response);
         }
     }

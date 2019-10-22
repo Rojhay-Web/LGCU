@@ -7,7 +7,13 @@ var auth = require('../services/auth.service');
 var talentlms = require('../services/talentlms.service');
 
 /* emails */
-function sendEmail(req, res){ mail.sendEmail(req, res); }
+function sendEmail(req, res){ 
+    var emailInfo = req.body.emailInfo;
+
+    mail.sendEmail(emailInfo, function(ret){
+        res.status(200).json(ret);
+    });
+}
 function sendAppEmail(req, res){ mail.sendAppEmail(req, res); }
 
 /* charges */
@@ -38,6 +44,15 @@ function createAuthNETAccount(req, res){
             });    
         }
     });         
+}
+
+function accountCharge(req, res){
+    var userInfo = req.body.userInfo;
+    var transactionInfo = req.body.transactionInfo;
+
+    charge.accountCharge(userInfo, transactionInfo, function(ret){
+        res.status(200).json(ret);
+    });
 }
 
 /* user auth */
@@ -174,6 +189,7 @@ function getTLMSUserById(req, res){
     var requestUser = req.body.requestUser;    
     var userInfo = req.body.userInfo;
 
+    // Validate User
     talentlms.getUserById(userInfo, function(ret){
         res.status(200).json(ret);
     });
@@ -185,12 +201,32 @@ function getCourses(req, res){
     });
 }
 
+function courseRegister(req, res){
+    var requestUser = req.body.requestUser;
+    var userInfo = req.body.userInfo;
+    var courseInfo = req.body.courseInfo;
+
+    // Validate User
+    talentlms.courseRegister(userInfo, courseInfo,function(ret){
+        if(ret.errorMessage){
+            //Send error email
+            //"admin@lenkesongcu.org"
+            mail.sendEmail({ email: "kris.redding3@gmail.com", title:"Registration Error", formData:{}, additionalData:{},
+                subject:"Unable to Register student for course [ID]: "+courseInfo.id +" [student Id]:"+userInfo.studentId+" Error: "+ ret.errorMessage
+                }, function(ret){});
+        }
+
+        res.status(200).json(ret);
+    });
+}
+
 /*** Routes ***/
 /* TalentLMS */
 router.post('/createTLMSUser', createTLMSUser);
 router.post('/userLogin', userLogin);
 router.post('/getTLMSUserById', getTLMSUserById);
 router.get('/getCourses', getCourses);
+router.post('/courseRegister', courseRegister);
 
 /* User Auth */
 router.post('/createUser', createUser);
@@ -206,6 +242,7 @@ router.post('/sendAppEmail', sendAppEmail);
 /* Charge */
 router.post('/applicationCharge', applicationCharge);
 router.post('/createAuthNETAccount', createAuthNETAccount);
+router.post('/accountCharge', accountCharge);
 
 
 module.exports = router;

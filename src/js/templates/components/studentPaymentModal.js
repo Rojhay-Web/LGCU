@@ -3,8 +3,8 @@ import { Modal } from 'react-bootstrap';
 import axios from 'axios';
 
 var AppIdGlobal = "";
-var rootPath = "";
-//var rootPath = "http://localhost:1111";
+//var rootPath = "";
+var rootPath = "http://localhost:1111";
 
 /* Body */
 class StudentPayment extends Component{
@@ -161,7 +161,7 @@ class StudentPayment extends Component{
 
                     <div className="card-payment-container">
                         <div className="details-container card-details">
-                            <p className="description">Your student application will not be processed until your student application fee is submitted.  Please submit your student application fee online using either your application ID provided after your online application was submitted or the name used on your student application.</p>
+                            <p className="description">Courses will be added to students account after payment has been processed.  Students will have a 2 weeks grace period after course registration to remove course (Please contact admissions@lenkesongcu.com to unegister from any course).</p>
                             <div className="card-form">
                                 <div className="form-container">
                                     <div className="card-display">
@@ -303,60 +303,84 @@ class StudentPayment extends Component{
         var self = this;
         try {
             if(this.state.returnMessage.type != "processing" && this.cardFormValidation()){
-                var appID = (this.state.appId || this.state.appName);
                 var cardExp = this.state.cardExpMth+this.state.cardExpYr;
-                var charge = parseFloat(this.props.totalPrice).toFixed();
+                var charge = parseInt(this.props.totalPrice);
+                var tmpCharge = 0;
                 var bannerMessage = {"type":"", "message":""};
 
-                var chargeForm = {
-                    userEmail: this.state.cardEmail, appId: appID, chargeDescription: "Student Application Payment",
-                    cardInfo:{
-                        cardNumber: this.state.cardNum, cardExp: cardExp, cardCode: this.state.cardCSV,
-                        firstname: this.state.cardFirstName, lastname: this.state.cardLastName, 
-                        zip: this.state.cardZip, country: this.state.cardCountry,
+                var chargeForm = 
+                {
+                    userInfo:{
+                        accountId: this.props.studentInfo.accountId
                     },
-                    chargeItems:[{
-                        name: "Student Application Fee", description:"This application fee applies to the formal submission and processing of the Lenkeson Global Christian University Student Application",
-                        quantity:1, price: charge
-                    }]
+                    transactionInfo: {
+                        userEmail: this.state.cardEmail, chargeDescription: "Student Course Payment",
+                        cardInfo:{
+                            cardNumber: this.state.cardNum, cardExp: cardExp, cardCode: this.state.cardCSV,
+                            firstname: this.state.cardFirstName, lastname: this.state.cardLastName, 
+                            zip: this.state.cardZip, country: this.state.cardCountry,
+                        },
+                        chargeItems:[]
+                    }
                 };
                 
-                self.setState({ returnMessage: {"type":"processing", "message":""} }, () =>{
-                    axios.post(rootPath + "/api/applicationCharge", chargeForm, {'Content-Type': 'application/json'})
-                    .then(function(resp) {
-                        try {
-                            var response = resp.data;
-                            if(response.errorMessage == null){
-                                // Successful Charge
-                                if(response.results.messages){
-                                    if(response.results.messages.resultCode && response.results.messages.resultCode == "Ok"){
-                                        // Success
-                                        bannerMessage.type = "success";
-                                        bannerMessage.message = response.results.transactionResponse.messages.message[0].description;
-                                    }
-                                    else {
-                                        // Error Banner
-                                        bannerMessage.type = "error";
-                                        bannerMessage.message = response.results.transactionResponse.messages.message[0].description;
+                
+                // Calculate Course Charges
+                this.props.queuedCourses.forEach(function(course){
+                    var courseCharge = self.props.creditRate * course.credits;
+                    courseCharge = parseInt(courseCharge,10);
+                    var chargeItem = {name:"Course Registration", description:"Course Id: "+ course.id +" Course: "+ course.name+" credit: "+course.credits, quantity:1, price: courseCharge.toFixed(2) };
+                    
+                    tmpCharge = tmpCharge + courseCharge;
+                    chargeForm.transactionInfo.chargeItems.push(chargeItem);
+                });
+
+                if(charge !== tmpCharge) {
+                    alert("Error with charge alignment please contact admin");
+                }
+                else {
+                    self.setState({ returnMessage: {"type":"processing", "message":""} }, () =>{
+                        axios.post(rootPath + "/api/accountCharge", chargeForm, {'Content-Type': 'application/json'})
+                        .then(function(resp) {
+                            try {
+                                var response = resp.data;
+                                if(response.errorMessage == null){
+                                    // Successful Charge
+                                    if(response.results.messages){
+                                        if(response.results.messages.resultCode && response.results.messages.resultCode == "Ok"){
+                                            // Success
+                                            alert("Charge was successful your courses are now being added");
+                                            bannerMessage.type = "success";
+                                            bannerMessage.message = response.results.transactionResponse.messages.message[0].description;
+                                            
+                                            self.props.registerCourseList();
+                                            self.closeForm();
+                                        }
+                                        else {
+                                            // Error
+                                            alert("Error Processing Payment [E1]: "+ response.results.transactionResponse.messages.message[0].description);
+                                            bannerMessage.type = "error";
+                                            bannerMessage.message = response.results.transactionResponse.messages.message[0].description;
+                                        }
                                     }
                                 }
+                                else {
+                                    alert("Error Processing Payment [E2]: " +  response.errorMessage);
+                                    console.log("[Error] Error Processing Payment: ", response.errorMessage);
+                                    bannerMessage.type = "error";
+                                    bannerMessage.message = response.results.transactionResponse.messages.message[0].description;
+                                }
                             }
-                            else {
-                                alert("Error Processing Payment");
-                                console.log("[Error] Error Processing Payment: ", response.errorMessage);
-                                // Error Banner
+                            catch(ex){
+                                alert("Error Processing Payment Please Contact: info@lenkesongcu.com");
                                 bannerMessage.type = "error";
-                                bannerMessage.message = response.results.transactionResponse.messages.message[0].description;
+                                bannerMessage.message = "Error Processing Payment Please Contact: info@lenkesongcu.com";
                             }
-                        }
-                        catch(ex){
-                            alert("Error Processing Payment Please Contact: info@lenkesongcu.com");
-                            bannerMessage.type = "error";
-                            bannerMessage.message = "Error Processing Payment Please Contact: info@lenkesongcu.com";
-                        }
-                        self.setState({ returnMessage: bannerMessage });
+
+                            self.setState({ returnMessage: bannerMessage });
+                        });
                     });
-                });
+                }
             }
         }
         catch(ex){

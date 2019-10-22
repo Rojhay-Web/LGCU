@@ -17,14 +17,17 @@ class MyCourses extends Component{
         this.state = {
             spinner: false,
             modalStatus:false,
+            searchQuery:"",
             totalPrice:0,
-            studentInfo:{ degree: "", class:"", gpa:0, fulltime:false },
+            creditRate:0,
+            studentInfo:{ studentId:0, talentlmsId:0, accountId:0, degree: "", class:"", gpa:0, fulltime:false },
             currentCourses:[],
             queuedCourses:[],
             courseSearch:[]
         }
 
         this.toggleSpinner = this.toggleSpinner.bind(this);
+        this.onSearchChange = this.onSearchChange.bind(this);
         this.loadStudentInfo = this.loadStudentInfo.bind(this);
         this.loadCourses = this.loadCourses.bind(this);
         this.loadStudentCourses = this.loadStudentCourses.bind(this);
@@ -35,6 +38,7 @@ class MyCourses extends Component{
         this.getPrice = this.getPrice.bind(this);
         this.modalShow = this.modalShow.bind(this);
         this.modalHide = this.modalHide.bind(this);
+        this.registerCourseList = this.registerCourseList.bind(this);
     }
 
     componentDidMount(){ 
@@ -43,14 +47,19 @@ class MyCourses extends Component{
     }
 
     
-    render(){   
-        var filterData = this.state.courseSearch;
+    render(){
+        var self = this;   
+        var filterData = this.state.courseSearch.filter(function(course){ 
+            return (self.state.searchQuery == "" || course.name.toLowerCase().indexOf(self.state.searchQuery.toLowerCase()) >= 0
+            || course.courseCode.toLowerCase().indexOf(self.state.searchQuery.toLowerCase()) >= 0
+            || course.courseId.toLowerCase().indexOf(self.state.searchQuery.toLowerCase()) >= 0);
+        });
 
         var courseColumns = [    
             { Header: 'Course Code', accessor: 'courseCode', fixed: 'left' },
-            { Header: 'Course Id', accessor: 'courseId', fixed: 'left' },
+            { Header: 'Course Id', id: 'courseId', fixed: 'left', accessor: d => Number(d.courseId) },
             { Header: 'Course Name', accessor: 'name', fixed: 'left' },
-            { Header: 'Credits', accessor: 'credits', fixed: 'left' },
+            { Header: 'Credits', id: 'credits', fixed: 'left', accessor: d => Number(d.credits) },
             { Header: '', fixed: 'right', Cell: row => (
                 <div className="course-btn">
                     <div className="lBtn c2" onClick={() => this.addCourse(row.original)}><span>Add Course</span><i className="btn-icon fas fa-plus-circle"></i></div>
@@ -60,11 +69,11 @@ class MyCourses extends Component{
 
         return(
             <div className="mylgcu-course">
-               {/* Student Payment */}
-               <StudentPayment title="Student Course Payment" show={this.state.modalStatus} handleClose={this.modalHide} totalPrice={this.state.totalPrice} />
-
                {/* Spinner */}
                {this.state.spinner && <div className="spinner"><i className="fas fa-cog fa-spin"/><span>Loading</span></div> }
+
+               {/* Student Payment */}
+               <StudentPayment title="Student Course Registration Payment" show={this.state.modalStatus} handleClose={this.modalHide} registerCourseList={this.registerCourseList} totalPrice={this.state.totalPrice} creditRate={this.state.creditRate} studentInfo={this.state.studentInfo} queuedCourses={this.state.queuedCourses} />
 
                 {/* Student Base Info */}
                 <div className="mylgcu-content-section inverse">
@@ -155,6 +164,13 @@ class MyCourses extends Component{
                     <div className="section-title">Find Courses</div>
 
                     <div className="content-block sz10">
+                        <div className="block-container search-block">                            
+                            <div className="content-info icon"><i className="fas fa-search"></i><input type="text" name="searchQuery" className="" placeholder="Search Course" value={this.state.searchQuery} onChange={(e) => this.onSearchChange(e)}/></div>
+                        </div>
+                    </div>
+
+
+                    <div className="content-block sz10">
                         <ReactTableFixedColumns data={filterData} columns={courseColumns}></ReactTableFixedColumns>
                     </div>
                 </div>
@@ -174,6 +190,17 @@ class MyCourses extends Component{
         this.setState({ modalStatus: false });
     }
 
+    onSearchChange(e){
+        var self = this;
+        try {
+            var name = e.target.name;           
+            self.setState({ [name]: e.target.value });
+        }
+        catch(ex){
+            console.log("[Error] changing search: ",ex);
+        }
+    }
+    
     addCourse(newCourse){
         try {
             var tmpQueue =  this.state.queuedCourses;
@@ -241,11 +268,12 @@ class MyCourses extends Component{
 
     getPrice(){
         var totalPrice = 0;
+        var creditRate = 0;
+
         try {           
-             var total = this.getSemesterCredits(); 
+             var queuedTotal = this.state.queuedCourses.map(function(q) { return parseInt(q.credits);}).reduce((a, b) => a + b, 0);
              /* Calculate Semester Charge */
-             var fulltime = (total >= 12);
-             var creditRate = 0;
+             var fulltime = (this.getSemesterCredits() >= 12);
              
              /* Military */
              if(this.state.studentInfo.military === true) {
@@ -279,13 +307,62 @@ class MyCourses extends Component{
                  }
              }
 
-             totalPrice = creditRate * total;
+             totalPrice = creditRate * queuedTotal;
         }
         catch(ex){
             console.log("Error getting total price: ",ex);
         }
 
-        this.setState({ totalPrice: totalPrice, modalStatus: true });
+        this.setState({ totalPrice: totalPrice, creditRate: creditRate, modalStatus: true });
+    }
+
+    registerCourseList() {
+        var self = this;
+        try {
+            var sessionInfo = localStorage.getItem(this.props.mySessKey);
+
+            if(sessionInfo){ 
+                var tmpQueue =  this.state.queuedCourses;
+                var localUser = JSON.parse(sessionInfo);
+                var courseStatus = [];
+
+                self.toggleSpinner(true);
+
+                tmpQueue.forEach(function(course){
+                    var postData = { requestUser: { _id: localUser._id}, userInfo: { studentId: self.state.studentInfo.studentId, talentlmsId: self.state.studentInfo.talentlmsId }, courseInfo:course };
+
+                    axios.post(self.props.rootPath + "/api/courseRegister", postData, {'Content-Type': 'application/json'})
+                    .then(function(response) {
+                        if(response.data.errorMessage){
+                            courseStatus.push({id: course.id, name: course.name, status: false, error: response.data.errorMessage});
+                        }
+                        else {
+                            courseStatus.push({id: course.id, name: course.name, status: true});
+                        }
+
+                        if(courseStatus.length == tmpQueue.length){
+                            self.toggleSpinner(false);
+                            var noRegister = courseStatus.filter(function(item){ return item.status == false; });
+
+                            if(noRegister.length > 0){
+                                alert("Unable to register you for the following courses: " + noRegister.map(function(elem){ return elem.name; }).join(","));
+                            } 
+                            else {
+                                alert("Successfully registered for all courses");
+                            }
+
+                            self.setState({ queuedCourses: []}, () => {
+                                self.loadStudentCourses(self.state.studentInfo.talentlmsId.id);
+                            });
+                        }
+                    });  
+                }); 
+            }
+            self.toggleSpinner(false);
+        }
+        catch(ex){
+            console.log("Error registering course list: ",ex);
+        }
     }
 
     getCourseInfo(type, id){
@@ -334,7 +411,7 @@ class MyCourses extends Component{
                         var tmpStudent = { degree: userInfo.degree.level +" in "+userInfo.degree.major, class: userInfo.studentInfo.class,
                                             level: userInfo.studentInfo.level, school: userInfo.studentInfo.school,
                                             gpa: userInfo.studentInfo.gpa,  fulltime: (userInfo.studentInfo.fulltime == true),
-                                            military: userInfo.military };
+                                            military: userInfo.military, accountId: userInfo.accountId, studentId: userInfo.studentId, talentlmsId: userInfo.talentlmsId };
                         self.setState({ studentInfo: tmpStudent }, () =>{
                             self.loadStudentCourses(userInfo.talentlmsId.id);
                         });
