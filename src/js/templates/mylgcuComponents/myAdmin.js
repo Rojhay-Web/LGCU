@@ -12,6 +12,7 @@ class MyAdmin extends Component{
         this.state = {
             spinner: false,
             studentCollapse: true,
+            courseCollapse: false,
             searchQuery: "",
             searchResults:null,
             selectedUser: {
@@ -21,7 +22,10 @@ class MyAdmin extends Component{
                 studentId:"", accountId:"", talentlmsId:{}
             },
             degreeList:[], areaList:[], majorResults:[],
-            updateType:null
+            updateType:null,
+            courseSearch:[],
+            currentCourses:[],
+            queuedCourses:[]
         }
 
         this.toggleSpinner = this.toggleSpinner.bind(this);
@@ -38,9 +42,17 @@ class MyAdmin extends Component{
         this.refreshStudentID = this.refreshStudentID.bind(this);
         this.createTalentLmsId = this.createTalentLmsId.bind(this);
         this.createAuthNetId = this.createAuthNetId.bind(this);
+
+        this.loadCourses = this.loadCourses.bind(this);
+        this.loadStudentCourses = this.loadStudentCourses.bind(this);
+        this.getCourseInfo = this.getCourseInfo.bind(this);
+        this.removeCourse = this.removeCourse.bind(this);
+        this.getSemesterCredits = this.getSemesterCredits.bind(this);
+        this.registerCourseList = this.registerCourseList.bind(this);
     }
 
     componentDidMount(){
+        this.loadCourses();
         this.buildFilterList();
     }
 
@@ -247,7 +259,75 @@ class MyAdmin extends Component{
                         }
                     </div>                 
                 }
+
                 {/* Course Section */}
+                {this.state.updateType != null &&
+                    <div className="collapse-section">
+                        <div className="collapse-title" onClick={() => this.setState({courseCollapse: !courseCollapse}) } aria-expanded={courseCollapse} aria-controls="courseInfo"><span>Student Courses</span> <i className="fas fa-chevron-down"></i></div>
+                        {this.state.courseCollapse && 
+                        <div className="mylgcu-content-section inverse" id="studentInfo">                        
+                           <div className="section-title">Student Courses</div> 
+
+                           <div className="content-block sz10">
+                                <div className="block-container overview">
+                                    <table className="overview-table">
+                                        <thead>
+                                            <tr className="header">
+                                                <th></th>
+                                                <th>Course Name</th>
+                                                <th>Course Code</th>
+                                                <th>Course Id</th>
+                                                <th>Credits</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {this.state.currentCourses.map((item, i) =>(
+                                                <tr key={i} className="dataRow">
+                                                    <td><span className="courseNumber">{i+1}</span></td>
+                                                    <td><span className="courseCode">{item.name}</span></td>
+                                                    <td><span className="courseCode">{ this.getCourseInfo("courseCode", item.id) }</span></td>
+                                                    <td><span className="courseId">{ this.getCourseInfo("courseId", item.id) }</span></td>
+                                                    <td><span className="credits">{ this.getCourseInfo("credits", item.id) }</span></td>
+                                                    <td><span className="courseEdit"><i className="fas fa-times"></i></span></td>
+                                                </tr>
+                                            ))}
+
+                                            {this.state.queuedCourses.map((item, i) =>(
+                                                <tr key={i} className="dataRow queued">
+                                                    <td><span className="courseNumber">Q</span></td>
+                                                    <td><span className="courseCode">{item.name}</span></td>
+                                                    <td><span className="courseCode">{ item.courseCode }</span></td>
+                                                    <td><span className="courseId">{ item.courseId }</span></td>
+                                                    <td><span className="credits">{ item.credits }</span></td>
+                                                    <td><span className="courseEdit"><i className="fas fa-times" onClick={()=>this.removeCourse(item.id)}></i></span></td>
+                                                </tr>
+                                            ))}
+
+                                            {(this.state.currentCourses.length == 0 && this.state.queuedCourses.length == 0) && 
+                                                <tr className="noDataRow">
+                                                    <td colSpan="6">No Courses Added</td>
+                                                </tr>
+                                            }
+                                            {(this.state.currentCourses.length > 0 || this.state.queuedCourses.length > 0) && 
+                                                <tr className="noDataRow creditCount">
+                                                    <td colSpan="4">
+                                                        <span>Total Semester Credits: {this.getSemesterCredits()}</span>
+                                                    </td>
+                                                    <td colSpan="2">
+                                                        {this.state.queuedCourses.length > 0 && <div className="lBtn clear" onClick={this.registerCourseList}><span>Register</span><i className="btn-icon fas fa-chalkboard"></i></div> }
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                            </div>
+                            </div>
+                        </div>  
+                        }
+                    </div>                 
+                }
+
                 {/* Account Section */}
             </div>
         );
@@ -560,6 +640,9 @@ class MyAdmin extends Component{
                                     degree:student.degree, _id:student._id, studentId:student.studentId || "", 
                                     accountId:student.accountId || "", talentlmsId:student.talentlmsId
                                 }
+                            }, () => {
+                                // Load Student Course Info
+                                self.loadStudentCourses(self.state.selectedUser.talentlmsId.id);
                             });
                         }
                         self.toggleSpinner(false);
@@ -685,6 +768,176 @@ class MyAdmin extends Component{
         }
         catch(ex){
             console.log("Error With Degree Search: ", ex);
+        }
+    }
+
+    loadCourses() {
+        var self = this;
+
+        try {
+            self.toggleSpinner(true);
+
+            axios.get(self.props.rootPath + "/api/getCourses", {'Content-Type': 'application/json'})
+            .then(function(response) {
+                if(response.data.errorMessage){
+                    alert(response.data.errorMessage );
+                }
+                else {
+                   self.setState({ courseSearch: response.data.results });
+                }
+            });   
+            self.toggleSpinner(false);
+        }
+        catch(ex){
+            alert("[Error] Loading Courses: ", ex);
+            self.toggleSpinner(false);
+        }
+    }
+
+    loadStudentCourses(talentlmsId){
+        var self = this;
+
+        try {
+            var sessionInfo = localStorage.getItem(this.props.mySessKey);
+
+            if(sessionInfo){ 
+                var localUser = JSON.parse(sessionInfo);
+                var postData = { requestUser: { _id: localUser._id}, userInfo: { id: talentlmsId } };
+
+                self.toggleSpinner(true);
+
+                axios.post(self.props.rootPath + "/api/getTLMSUserById", postData, {'Content-Type': 'application/json'})
+                .then(function(response) {
+                    if(response.data.errorMessage){
+                        alert(response.data.errorMessage );
+                    }
+                    else {
+                        var userInfo = response.data.results;
+                        self.setState({ currentCourses: userInfo.courses });
+                    }
+                });   
+            }
+            else {
+                self.setState({ currentCourses: [] });
+            }
+            self.toggleSpinner(false);
+        }
+        catch(ex){
+            alert("[Error] Loading Student Course Info: ", ex);
+            self.toggleSpinner(false);
+        }
+    }
+
+    getCourseInfo(type, id){
+        try {
+            if(!this.state.courseSearch){
+                return "";
+            }
+            else {
+                var selectedCourse = this.state.courseSearch.filter(function(course){
+                    return course.id == id;
+                });
+
+                if(selectedCourse.length > 0 && (type in selectedCourse[0])){
+                    return selectedCourse[0][type];
+                }
+                else {
+                    return "";
+                }
+            }
+        }
+        catch(ex){
+
+        }
+    }
+
+    removeCourse(courseId){
+        try {
+            var tmpQueue =  this.state.queuedCourses;
+            var index = tmpQueue.map(e => e.id).indexOf(courseId);
+            if(index >= 0){
+                tmpQueue.splice(index,1);
+                this.setState({ queuedCourses: tmpQueue });
+            }
+        }
+        catch(ex){
+            alert("Error Removing Course: ",ex);
+        }
+    }
+
+    getSemesterCredits(){
+        var total = 0;
+
+        try {
+            
+            var tmpQueue =  this.state.queuedCourses;
+            var tmpCurrent = this.state.currentCourses;
+
+            if(tmpQueue){
+                for(var i = 0; i < tmpQueue.length; i++){
+                    total = total + parseInt(tmpQueue[i].credits);
+                } 
+            }
+            
+            if(tmpCurrent){
+                for(var i = 0; i < tmpCurrent.length; i++){
+                    total = total + parseInt(this.getCourseInfo("credits", tmpCurrent[i].id));
+                }  
+            }        
+        }
+        catch(ex){
+            alert("Error getting semester credits: ",ex);
+        }
+
+        return total;
+    }
+
+    registerCourseList() {
+        var self = this;
+        try {
+            var sessionInfo = localStorage.getItem(this.props.mySessKey);
+
+            if(sessionInfo){ 
+                var tmpQueue =  this.state.queuedCourses;
+                var localUser = JSON.parse(sessionInfo);
+                var courseStatus = [];
+
+                self.toggleSpinner(true);
+
+                tmpQueue.forEach(function(course){
+                    var postData = { requestUser: { _id: localUser._id}, userInfo: { studentId: self.state.studentInfo.studentId, talentlmsId: self.state.studentInfo.talentlmsId }, courseInfo:course };
+
+                    axios.post(self.props.rootPath + "/api/courseRegister", postData, {'Content-Type': 'application/json'})
+                    .then(function(response) {
+                        if(response.data.errorMessage){
+                            courseStatus.push({id: course.id, name: course.name, status: false, error: response.data.errorMessage});
+                        }
+                        else {
+                            courseStatus.push({id: course.id, name: course.name, status: true});
+                        }
+
+                        if(courseStatus.length == tmpQueue.length){
+                            self.toggleSpinner(false);
+                            var noRegister = courseStatus.filter(function(item){ return item.status == false; });
+
+                            if(noRegister.length > 0){
+                                alert("Unable to register you for the following courses: " + noRegister.map(function(elem){ return elem.name; }).join(","));
+                            } 
+                            else {
+                                alert("Successfully registered for all courses");
+                            }
+
+                            self.setState({ queuedCourses: []}, () => {
+                                self.loadStudentCourses(self.state.selectedUser.talentlmsId.id);
+                            });
+                        }
+                    });  
+                }); 
+            }
+            self.toggleSpinner(false);
+        }
+        catch(ex){
+            console.log("Error registering course list: ",ex);
         }
     }
 }

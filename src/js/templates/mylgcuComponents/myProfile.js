@@ -267,9 +267,7 @@ class MyProfile extends Component{
 
     getCourseList(degreeId){
         var self = this;
-        try {
-           // Get Course list from TalentLMS
-
+        try {          
            // Get Major Course List
            var major = null;
            var courseList = [];
@@ -297,7 +295,20 @@ class MyProfile extends Component{
                                 var compareCourse = self.state.currentCourses.filter(function(c){ return c.id == courseId; });
                                 var status = 0;
                                 if(compareCourse.length > 0){
-                                    status = 1;
+                                    switch(compareCourse[0].completion_status.toLower()){
+                                        case "not_attempted":
+                                            status = 1;
+                                            break;
+                                        case "incomplete":
+                                            status = 2;
+                                            break;
+                                        case "complete":
+                                            status = 3;
+                                            break;                                        
+                                        default:
+                                            status = 0;
+                                            break;
+                                    }                                    
                                 }
                                 courseList.push({courseCode:{name:courseData[course].section, id:courseData[course].id}, title: courseData[course].title, statusCode:status });
                             }                        
