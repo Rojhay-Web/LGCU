@@ -20,7 +20,7 @@ class MyCourses extends Component{
             searchQuery:"",
             totalPrice:0,
             creditRate:0,
-            studentInfo:{ studentId:0, talentlmsId:0, accountId:0, degree: "", class:"", gpa:0, fulltime:false },
+            studentInfo:{ studentId:0, talentlmsId:0, degree: "", class:"", gpa:0, fulltime:false },
             currentCourses:[],
             queuedCourses:[],
             courseSearch:[]
@@ -73,7 +73,7 @@ class MyCourses extends Component{
                {this.state.spinner && <div className="spinner"><i className="fas fa-cog fa-spin"/><span>Loading</span></div> }
 
                {/* Student Payment */}
-               <StudentPayment title="Student Course Registration Payment" show={this.state.modalStatus} handleClose={this.modalHide} registerCourseList={this.registerCourseList} totalPrice={this.state.totalPrice} creditRate={this.state.creditRate} studentInfo={this.state.studentInfo} queuedCourses={this.state.queuedCourses} />
+               <StudentPayment title="Student Course Registration Payment" show={this.state.modalStatus} handleClose={this.modalHide} registerCourseList={this.registerCourseList} totalPrice={this.state.totalPrice} creditRate={this.state.creditRate} studentInfo={this.state.studentInfo} queuedCourses={this.state.queuedCourses} mySessKey={this.props.mySessKey}/>
 
                 {/* Student Base Info */}
                 <div className="mylgcu-content-section inverse">
@@ -411,7 +411,7 @@ class MyCourses extends Component{
                         var tmpStudent = { degree: userInfo.degree.level +" in "+userInfo.degree.major, class: userInfo.studentInfo.class,
                                             level: userInfo.studentInfo.level, school: userInfo.studentInfo.school,
                                             gpa: userInfo.studentInfo.gpa,  fulltime: (userInfo.studentInfo.fulltime == true),
-                                            military: userInfo.military, accountId: userInfo.accountId, studentId: userInfo.studentId, talentlmsId: userInfo.talentlmsId };
+                                            military: userInfo.military, studentId: userInfo.studentId, talentlmsId: userInfo.talentlmsId };
                         self.setState({ studentInfo: tmpStudent }, () =>{
                             self.loadStudentCourses(userInfo.talentlmsId.id);
                         });

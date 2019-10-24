@@ -308,10 +308,14 @@ class StudentPayment extends Component{
                 var tmpCharge = 0;
                 var bannerMessage = {"type":"", "message":""};
 
+                var sessionInfo = localStorage.getItem(this.props.mySessKey);
+                var localUser = JSON.parse(sessionInfo);
+
                 var chargeForm = 
                 {
                     userInfo:{
-                        accountId: this.props.studentInfo.accountId
+                        _id: localUser._id,
+                        studentId: this.props.studentInfo.studentId
                     },
                     transactionInfo: {
                         userEmail: this.state.cardEmail, chargeDescription: "Student Course Payment",
@@ -329,7 +333,7 @@ class StudentPayment extends Component{
                 this.props.queuedCourses.forEach(function(course){
                     var courseCharge = self.props.creditRate * course.credits;
                     courseCharge = parseInt(courseCharge,10);
-                    var chargeItem = {name:"Course Registration", description:"Course Id: "+ course.id +" Course: "+ course.name+" credit: "+course.credits, quantity:1, price: courseCharge.toFixed(2) };
+                    var chargeItem = {name:"Course Registration", description:"Course Id: "+ course.id +", Course: "+ course.name+", credit: "+course.credits, quantity:1, price: courseCharge.toFixed(2) };
                     
                     tmpCharge = tmpCharge + courseCharge;
                     chargeForm.transactionInfo.chargeItems.push(chargeItem);

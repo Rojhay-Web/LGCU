@@ -143,7 +143,6 @@ class myLGCU extends Component{
                             <div className={"mylgcu-nav-item" + (this.state.selectedPage == "profile" ? " selected" :"")} onClick={(e) => this.changePage("profile")}><i className="far fa-user-circle"></i> <span>Profile</span></div>
                             <div className={"mylgcu-nav-item" + (this.state.selectedPage == "courses" ? " selected" :"")} onClick={(e) => this.changePage("courses")}><i className="fas fa-book-reader"></i> <span>Courses</span></div>
                             <div className={"mylgcu-nav-item" + (this.state.selectedPage == "account" ? " selected" :"")} onClick={(e) => this.changePage("account")}><i className="fas fa-file-invoice-dollar"></i> <span>Account</span></div>
-                            <div className="mylgcu-nav-item"><i className="fas fa-chalkboard-teacher"></i> <span>TalentLMS</span></div>
                             {this.state.admin && <div className={"mylgcu-nav-item" + (this.state.selectedPage == "admin" ? " selected" :"")} onClick={(e) => this.changePage("admin")}><i className="fas fa-user-shield"></i> <span>Admin</span></div> }
                         </section>
                     </div>

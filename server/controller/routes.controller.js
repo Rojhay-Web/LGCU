@@ -55,6 +55,24 @@ function accountCharge(req, res){
     });
 }
 
+function searchUserTransactions(req,res){
+    var requestUser = req.body.requestUser;
+    var userInfo = req.body.userInfo;
+    userInfo.full = true;
+    
+    // Validate User
+    auth.getUserById(userInfo, function(ret){
+        if(ret.errorMessage){
+            res.status(200).json(ret);
+        }
+        else {
+            charge.searchUserTransactions(ret.results.authTrans, function(searchRet) {
+                res.status(200).json(searchRet);
+            });
+        }
+    });
+
+}
 /* user auth */
 function createUser(req, res){
     var requestUser = req.body.requestUser;
@@ -243,6 +261,6 @@ router.post('/sendAppEmail', sendAppEmail);
 router.post('/applicationCharge', applicationCharge);
 router.post('/createAuthNETAccount', createAuthNETAccount);
 router.post('/accountCharge', accountCharge);
-
+router.post('/searchUserTransactions',searchUserTransactions);
 
 module.exports = router;

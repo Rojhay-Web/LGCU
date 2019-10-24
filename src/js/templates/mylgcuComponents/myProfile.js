@@ -24,11 +24,18 @@ class MyProfile extends Component{
             degreelvl:null,
             gpa: 0,
             totalCredits: 0,
-            overviewData: []
+            overviewData: [],
+            currentCourses:[],
+            courseSearch:[],
+            spinner:false
         }
 
         this.getCourseStatus = this.getCourseStatus.bind(this);
         this.getUserInfo = this.getUserInfo.bind(this);
+        this.loadStudentCourses = this.loadStudentCourses.bind(this);
+        this.loadCourses = this.loadCourses.bind(this);
+        this.toggleSpinner = this.toggleSpinner.bind(this);
+        this.getCourseId = this.getCourseId.bind(this);
     }
 
     componentDidMount(){ 
@@ -38,6 +45,9 @@ class MyProfile extends Component{
     render(){        
         return(
             <div className="mylgcu-profile">
+                {/* Spinner */}
+               {this.state.spinner && <div className="spinner"><i className="fas fa-cog fa-spin"/><span>Loading</span></div> }
+
                 {/* Student Profile */}
                <div className="mylgcu-content-section">
                    <div className="section-title">Profile</div>
@@ -153,6 +163,10 @@ class MyProfile extends Component{
         );
     }
 
+    toggleSpinner(status){
+        this.setState({ spinner: status });
+    }
+
     getUserInfo(){
         var self = this;
         try {
@@ -170,10 +184,16 @@ class MyProfile extends Component{
                     else {
                         var userInfo = response.data.results;
 
-                        self.setState({ _id:userInfo._id, studentId: userInfo.studentId, name: userInfo.fullname, email: userInfo.email,
+                        self.setState({ _id:userInfo._id, studentId: userInfo.studentId, talentlmsId:userInfo.talentlmsId, name: userInfo.fullname, email: userInfo.email,
                                         address: userInfo.address, degree: userInfo.degree.major, degreeId: userInfo.degree.code,
                                         degreelvl:userInfo.degree.level, totalCredits: userInfo.studentInfo.credits, gpa: userInfo.studentInfo.gpa
-                        }, () =>{ self.getCourseList(self.state.degreeId); });
+                        }, () =>{ 
+                            self.loadStudentCourses(self.state.talentlmsId.id,function(){
+                                self.loadCourses(function() {
+                                    self.getCourseList(self.state.degreeId);
+                                });
+                            });                           
+                        });
                     }
                 });     
             }
@@ -184,6 +204,64 @@ class MyProfile extends Component{
         }
         catch(ex){
             console.log("[Error]: Error Getting User Info: ",ex);
+        }
+    }
+
+    loadStudentCourses(talentlmsId, callback){
+        var self = this;
+
+        try {
+            var sessionInfo = localStorage.getItem(this.props.mySessKey);
+
+            if(sessionInfo){ 
+                var localUser = JSON.parse(sessionInfo);
+                var postData = { requestUser: { _id: localUser._id}, userInfo: { id: talentlmsId } };
+
+                self.toggleSpinner(true);
+
+                axios.post(self.props.rootPath + "/api/getTLMSUserById", postData, {'Content-Type': 'application/json'})
+                .then(function(response) {
+                    if(response.data.errorMessage){
+                        alert(response.data.errorMessage );
+                    }
+                    else {
+                        var userInfo = response.data.results;
+                        self.setState({ currentCourses: userInfo.courses }, () => { callback(); });
+                    }
+                });   
+            }
+            else {
+                self.setState({ currentCourses: [] }, () => { callback(); });
+            }
+            self.toggleSpinner(false);
+        }
+        catch(ex){
+            alert("[Error] Loading Student Course Info: ", ex);
+            self.toggleSpinner(false);
+        }
+    }
+
+    loadCourses(callback) {
+        var self = this;
+
+        try {
+            self.toggleSpinner(true);
+
+            axios.get(self.props.rootPath + "/api/getCourses", {'Content-Type': 'application/json'})
+            .then(function(response) {
+                if(response.data.errorMessage){
+                    alert(response.data.errorMessage );
+                }
+                else {
+                   self.setState({ courseSearch: response.data.results }, () => { callback(); });
+                }
+            });   
+            self.toggleSpinner(false);
+        }
+        catch(ex){
+            alert("[Error] Loading Courses: ", ex);
+            callback();
+            self.toggleSpinner(false);
         }
     }
 
@@ -214,7 +292,14 @@ class MyProfile extends Component{
                     major.courses.forEach(function(section){
                         section.courses.forEach(function(course){
                             if(course in courseData){
-                                courseList.push({courseCode:{name:courseData[course].section, id:courseData[course].id}, title: courseData[course].title, statusCode:0 });
+                                var courseId = self.getCourseId(courseData[course].section, courseData[course].id);
+
+                                var compareCourse = self.state.currentCourses.filter(function(c){ return c.id == courseId; });
+                                var status = 0;
+                                if(compareCourse.length > 0){
+                                    status = 1;
+                                }
+                                courseList.push({courseCode:{name:courseData[course].section, id:courseData[course].id}, title: courseData[course].title, statusCode:status });
                             }                        
                         });
                     });
@@ -227,6 +312,20 @@ class MyProfile extends Component{
         catch(ex){
             console.log("[Error]: Error Getting Course List: ",ex);
         }
+    }
+
+    getCourseId(code, id) {
+        var val = 0;
+        try {
+            var ret = this.state.courseSearch.filter(function(course){ return (course.courseCode == code && course.courseId == id); })
+
+            val = (ret && ret.length > 0 ? ret[0].id : 0);
+        }
+        catch(ex){
+            console.log("Error Getting course id: ",ex);
+        }
+
+        return val;
     }
 
     getCourseStatus(code){
