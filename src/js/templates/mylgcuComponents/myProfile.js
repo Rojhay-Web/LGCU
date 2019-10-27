@@ -87,7 +87,7 @@ class MyProfile extends Component{
                    <div className="content-block sz4">
                         <div className="block-container">
                             <div className="content-title">Degree:</div>
-                            <div className="content-info">{this.state.degreelvl} in {this.state.degree}</div>
+                            <div className="content-info capitalize">{this.state.degreelvl} in {this.state.degree}</div>
                        </div>
                    </div>
                    
@@ -123,9 +123,15 @@ class MyProfile extends Component{
                         </a>
                     </div>
                     <div className="resource-container">
-                        <a href="https://www.mbsdirect.net/" className="resource-link">
+                        <a href="https://www.chegg.com/" className="resource-link" target="_blank">
                             <i className="fas fa-book"></i>
-                            <span>LGCU Bookstore</span>
+                            <span>CHEGG Bookstore</span>
+                        </a>
+                    </div>
+                    <div className="resource-container">
+                        <a href="https://www.amazon.com/" className="resource-link" target="_blank">
+                            <i className="fas fa-book"></i>
+                            <span>Amazon Bookstore</span>
                         </a>
                     </div>
                 </div>
@@ -176,6 +182,9 @@ class MyProfile extends Component{
                 var localUser = JSON.parse(sessionInfo);
 
                 var postData = { requestUser: { _id: localUser._id}, userInfo: { _id: localUser._id, full:true} };
+                
+                self.toggleSpinner(true);
+
                 axios.post(self.props.rootPath + "/api/getUserById", postData, {'Content-Type': 'application/json'})
                 .then(function(response) {
                     if(response.data.errorMessage){
@@ -191,6 +200,7 @@ class MyProfile extends Component{
                             self.loadStudentCourses(self.state.talentlmsId.id,function(){
                                 self.loadCourses(function() {
                                     self.getCourseList(self.state.degreeId);
+                                    self.toggleSpinner(false);
                                 });
                             });                           
                         });
@@ -199,11 +209,15 @@ class MyProfile extends Component{
             }
             else {
                 self.setState({ _id:null, studentId: null, name: null, address: null, degree: null, 
-                    degreeId: null, degreelvl:null, totalCredits: 0, gpa: 0}, () =>{ self.getCourseList(null); });
+                    degreeId: null, degreelvl:null, totalCredits: 0, gpa: 0}, () =>{ 
+                        self.getCourseList(null);
+                        self.toggleSpinner(false);
+                    });
             }
         }
         catch(ex){
             console.log("[Error]: Error Getting User Info: ",ex);
+            self.toggleSpinner(false);
         }
     }
 
@@ -217,7 +231,7 @@ class MyProfile extends Component{
                 var localUser = JSON.parse(sessionInfo);
                 var postData = { requestUser: { _id: localUser._id}, userInfo: { id: talentlmsId } };
 
-                self.toggleSpinner(true);
+                //self.toggleSpinner(true);
 
                 axios.post(self.props.rootPath + "/api/getTLMSUserById", postData, {'Content-Type': 'application/json'})
                 .then(function(response) {
@@ -233,11 +247,11 @@ class MyProfile extends Component{
             else {
                 self.setState({ currentCourses: [] }, () => { callback(); });
             }
-            self.toggleSpinner(false);
+            //self.toggleSpinner(false);
         }
         catch(ex){
             alert("[Error] Loading Student Course Info: ", ex);
-            self.toggleSpinner(false);
+            //self.toggleSpinner(false);
         }
     }
 
@@ -245,7 +259,7 @@ class MyProfile extends Component{
         var self = this;
 
         try {
-            self.toggleSpinner(true);
+            //self.toggleSpinner(true);
 
             axios.get(self.props.rootPath + "/api/getCourses", {'Content-Type': 'application/json'})
             .then(function(response) {
@@ -261,7 +275,7 @@ class MyProfile extends Component{
         catch(ex){
             alert("[Error] Loading Courses: ", ex);
             callback();
-            self.toggleSpinner(false);
+            //self.toggleSpinner(false);
         }
     }
 
@@ -295,7 +309,7 @@ class MyProfile extends Component{
                                 var compareCourse = self.state.currentCourses.filter(function(c){ return c.id == courseId; });
                                 var status = 0;
                                 if(compareCourse.length > 0){
-                                    switch(compareCourse[0].completion_status.toLower()){
+                                    switch(compareCourse[0].completion_status.toLowerCase()){
                                         case "not_attempted":
                                             status = 1;
                                             break;

@@ -97,6 +97,7 @@
                     box-shadow: inset 0 3px 7px rgba(0, 0, 0, 0.2);
                     .content-info { 
                         width: 100%;
+                        &.capitalize { text-transform: capitalize;}
                         &.icon { 
                             display: flex; 
                             i{ padding: 3px 0px; margin-right: 7px; } 
@@ -119,6 +120,7 @@
                     .content-title { color: rgba( 75,75,75,1); margin-right: 14px; }
                     .content-info { 
                         font-weight: bold;
+                        &.capitalize { text-transform: capitalize;}
                     }
 
                     &.search-block {                           
@@ -128,6 +130,7 @@
                         box-shadow: inset 0 3px 7px rgba(0, 0, 0, 0.2);
                         .content-info { 
                             &.icon { display: flex; i{ padding: 3px 0px; margin-right: 7px; } input { flex:1; }}
+                            &.capitalize { text-transform: capitalize;}
                         }
                     }
                 }
@@ -143,11 +146,15 @@
                         &:hover { color: rgba(0,0,0,1); }
                     }
                 }
+
+                &.mini-height {
+                    .ReactTable  { margin-top: 20px; height: 250px; }
+                }
             }
 
             .resource-container {
                 display: inline-block;
-                width: 33%;
+                width: 25%;
                 padding: 7px;
                 .resource-link {                    
                     padding: 12px;
@@ -204,6 +211,14 @@
                                     cursor: pointer;
                                 }
                             }
+                            &.capitalize { text-transform: capitalize;}
+                        }
+
+                        &.no-back { 
+                            background: none;
+                            -moz-box-shadow: none;
+                            -webkit-box-shadow: none;
+                            box-shadow:none;
                         }
                     }
                 }
@@ -583,9 +598,11 @@
 }
 
 .collapse-section {
+    margin-top: 10px;
     .collapse-title {
         padding: 15px 7px;                
-        background: rgba(255,255,255,1);
+        background: @color2;
+        color: rgba(255,255,255,1);
         border-radius: 5px;
         cursor: pointer;
         margin-bottom: 10px; 
@@ -615,4 +632,47 @@
         text-align: center;
         font-size: 1.3rem;
     }
+}
+
+.mylgcu-account {
+    .lBtn { cursor: pointer; }
+}
+.account-fitted-section {
+    max-height: 700px;
+    overflow-y: auto;
+}
+.account-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 7px;
+    
+    .account-block {
+        padding: 7px;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        .subText { color: rgba(150,150,150,1); font-size: .8rem;}
+        .account-icon {
+            display: inline-flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            width: 30px;
+            height: 30px;
+            color: rgba(255,255,255,1);
+            border-radius: 50%;
+
+            &.success { background: @color2; }
+            &.info { background: rgba(150,150,150,1); cursor: pointer;}
+        }
+    }
+}
+
+.account-toggler {
+    padding: 10px 2px;
+    background: rgba(230,230,230,1);
+    -moz-box-shadow: inset 0 3px 7px rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: inset 0 3px 7px rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 3px 7px rgba(0, 0, 0, 0.2);
 }

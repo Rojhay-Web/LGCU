@@ -498,6 +498,7 @@ function searchTransactionById(transactionId, callback){
                         transactionId: response.transaction.transId,
                         order: response.transaction.order,
                         amount: response.transaction.settleAmount,
+                        submitTime: response.transaction.submitTimeLocal,
                         lineItems: response.transaction.lineItems.lineItem.map(function(item){
                             return { id: item.itemId, name: item.name, description: item.description, quantity:item.quantity, price: item.unitPrice }
                         })

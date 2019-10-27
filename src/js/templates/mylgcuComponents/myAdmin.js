@@ -1,9 +1,17 @@
 import React, { Component } from 'react';
+import { UncontrolledCollapse } from 'reactstrap';
 import axios from 'axios';
-import Collapse from 'react-bootstrap/Collapse'
+
+import ReactTable from 'react-table';
+import withFixedColumns from 'react-table-hoc-fixed-columns';
+
+import "react-table/react-table.css";
+import 'react-table-hoc-fixed-columns/lib/styles.css';
 
 /* Data */
 import academicData from '../../data/academics.json';
+
+const ReactTableFixedColumns = withFixedColumns(ReactTable);
 
 /* Body */
 class MyAdmin extends Component{
@@ -13,11 +21,14 @@ class MyAdmin extends Component{
             spinner: false,
             studentCollapse: true,
             courseCollapse: false,
+            accountCollapse: false,
             searchQuery: "",
+            searchCourseQuery:"",
             searchResults:null,
             selectedUser: {
                 _id:null,
-                firstname:"", lastname:"",  email:"", address:"", phone:"",
+                firstname:"", lastname:"",  email:"", address:"", phone:"", 
+                military:false, admin: false, gpa:0,
                 degree:{ school:"", code:"", major:"", declareDate: null },
                 studentId:"", accountId:"", talentlmsId:{}
             },
@@ -25,7 +36,8 @@ class MyAdmin extends Component{
             updateType:null,
             courseSearch:[],
             currentCourses:[],
-            queuedCourses:[]
+            queuedCourses:[],
+            accountTransactions:[]
         }
 
         this.toggleSpinner = this.toggleSpinner.bind(this);
@@ -49,6 +61,9 @@ class MyAdmin extends Component{
         this.removeCourse = this.removeCourse.bind(this);
         this.getSemesterCredits = this.getSemesterCredits.bind(this);
         this.registerCourseList = this.registerCourseList.bind(this);
+        this.unregisterCourseList = this.unregisterCourseList.bind(this);
+        this.queueCourse = this.queueCourse.bind(this);
+        this.loadAccountInfo = this.loadAccountInfo.bind(this);
     }
 
     componentDidMount(){
@@ -58,7 +73,26 @@ class MyAdmin extends Component{
 
     render(){   
         const filteredResults = this.state.majorResults;
-        const { studentCollapse } = this.state;
+        const { studentCollapse, courseCollapse, accountCollapse } = this.state;
+        var self = this;   
+        var filterData = this.state.courseSearch.filter(function(course){ 
+            return ((self.state.searchCourseQuery != "") && 
+            (  course.name.toLowerCase().indexOf(self.state.searchCourseQuery.toLowerCase()) >= 0
+            || course.courseCode.toLowerCase().indexOf(self.state.searchCourseQuery.toLowerCase()) >= 0
+            || course.courseId.toLowerCase().indexOf(self.state.searchCourseQuery.toLowerCase()) >= 0));
+        });
+
+        var courseColumns = [    
+            { Header: 'Course Code', accessor: 'courseCode', fixed: 'left' },
+            { Header: 'Course Id', id: 'courseId', fixed: 'left', accessor: d => Number(d.courseId) },
+            { Header: 'Course Name', accessor: 'name', fixed: 'left' },
+            { Header: 'Credits', id: 'credits', fixed: 'left', accessor: d => Number(d.credits) },
+            { Header: '', fixed: 'right', Cell: row => (
+                <div className="course-btn">
+                    <div className="lBtn c2" onClick={() => this.queueCourse(row.original)}><span>Add Course</span><i className="btn-icon fas fa-plus-circle"></i></div>
+                </div>
+            ) }
+        ];
 
         return(
             <div className="mylgcu-admin">
@@ -112,7 +146,7 @@ class MyAdmin extends Component{
                 {/* Student Section*/}
                 {this.state.updateType != null &&
                     <div className="collapse-section">
-                        <div className="collapse-title" onClick={() => this.setState({studentCollapse: !studentCollapse}) } aria-expanded={studentCollapse} aria-controls="studentInfo"><span>Student Info</span> <i className="fas fa-chevron-down"></i></div>
+                        <div className="collapse-title" onClick={() => this.setState({studentCollapse: !studentCollapse}) } aria-expanded={studentCollapse} aria-controls="studentInfo"><span>Student Info</span> <i className={"fas " + (studentCollapse? "fa-chevron-up" : "fa-chevron-down")}></i></div>
                         {this.state.studentCollapse && 
                         <div className="mylgcu-content-section inverse" id="studentInfo">                        
                             <div className="section-title">Student Information</div>
@@ -152,6 +186,20 @@ class MyAdmin extends Component{
                                 </div>
                             </div>
 
+                            <div className="content-block sz6">
+                                <div className="block-label-title">Student Classification:</div>
+                                <div className="block-container">                            
+                                    <div className="content-info"><input type="text" name="class" placeholder="student class" value={this.state.selectedUser.studentInfo.class} readOnly/></div>
+                                </div>
+                            </div>
+
+                            <div className="content-block sz4">
+                                <div className="block-label-title">GPA:</div>
+                                <div className="block-container">                            
+                                    <div className="content-info"><input type="text" name="gpa" placeholder="gpa" value={this.state.selectedUser.gpa} onChange={(e) => this.onElementChange(e)}/></div>
+                                </div>
+                            </div>
+
                             {/* IDs */}
                             <div className="content-block sz3">
                                 <div className="block-label-title">Student ID:</div>
@@ -163,7 +211,7 @@ class MyAdmin extends Component{
                                 </div>
                             </div>
 
-                            <div className="content-block sz3">
+                            {/*<div className="content-block sz3">
                                 <div className="block-label-title">Acccount ID:</div>
                                 <div className="block-container">                            
                                     <div className="content-info generator">
@@ -171,7 +219,7 @@ class MyAdmin extends Component{
                                         <input type="text" name="accountId" className="" placeholder="Account id" value={this.state.selectedUser.accountId} readOnly/>
                                     </div>
                                 </div>
-                            </div>
+                            </div>*/}
 
                             <div className="content-block sz3">
                                 <div className="block-label-title">TalentLMS ID:</div>
@@ -179,6 +227,30 @@ class MyAdmin extends Component{
                                     <div className="content-info generator">
                                         <span className="IdGenerator" onClick={this.createTalentLmsId}><i className="fas fa-sync-alt"></i></span>
                                         <input type="text" name="talentlmsId" className="" placeholder="Talentlms id" value={ (this.state.selectedUser.talentlmsId ? this.state.selectedUser.talentlmsId.id + " | "+this.state.selectedUser.talentlmsId.login : "") } readOnly/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="content-block sz2">
+                                <div className="block-label-title">Is Military</div>
+                                <div className="block-container no-back">                            
+                                    <div className="content-info">
+                                        <label className="switch">
+                                            <input type="checkbox" name="military" checked={this.state.selectedUser.military} onChange={(e) => this.onElementChange(e)}/>
+                                            <span className="slider"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="content-block sz2">
+                                <div className="block-label-title">Is Admin</div>
+                                <div className="block-container no-back">                            
+                                    <div className="content-info">
+                                        <label className="switch">
+                                            <input type="checkbox" name="admin" checked={this.state.selectedUser.admin} onChange={(e) => this.onElementChange(e)}/>
+                                            <span className="slider"></span>
+                                        </label>
                                     </div>
                                 </div>
                             </div>
@@ -261,12 +333,20 @@ class MyAdmin extends Component{
                 }
 
                 {/* Course Section */}
-                {this.state.updateType != null &&
+                {this.state.updateType == "update" &&
                     <div className="collapse-section">
-                        <div className="collapse-title" onClick={() => this.setState({courseCollapse: !courseCollapse}) } aria-expanded={courseCollapse} aria-controls="courseInfo"><span>Student Courses</span> <i className="fas fa-chevron-down"></i></div>
+                        <div className="collapse-title" onClick={() => this.setState({courseCollapse: !courseCollapse}) } aria-expanded={courseCollapse} aria-controls="courseInfo"><span>Student Courses</span> <i className={"fas " + (courseCollapse ? "fa-chevron-up" : "fa-chevron-down")}></i></div>
                         {this.state.courseCollapse && 
                         <div className="mylgcu-content-section inverse" id="studentInfo">                        
                            <div className="section-title">Student Courses</div> 
+                           
+                           <div className="content-block sz10 mini-height">
+                                <div className="block-container search-block">                            
+                                    <div className="content-info icon"><i className="fas fa-search"></i><input type="text" name="searchCourseQuery" className="" placeholder="Search Course" value={this.state.searchCourseQuery} onChange={(e) => this.onSearchChange(e)}/></div>
+                                </div>
+                                
+                                <ReactTableFixedColumns data={filterData} columns={courseColumns}></ReactTableFixedColumns>
+                           </div>
 
                            <div className="content-block sz10">
                                 <div className="block-container overview">
@@ -289,7 +369,7 @@ class MyAdmin extends Component{
                                                     <td><span className="courseCode">{ this.getCourseInfo("courseCode", item.id) }</span></td>
                                                     <td><span className="courseId">{ this.getCourseInfo("courseId", item.id) }</span></td>
                                                     <td><span className="credits">{ this.getCourseInfo("credits", item.id) }</span></td>
-                                                    <td><span className="courseEdit"><i className="fas fa-times"></i></span></td>
+                                                    <td><span className="courseEdit" onClick={()=> this.unregisterCourseList(item)}><i className="fas fa-times"></i></span></td>
                                                 </tr>
                                             ))}
 
@@ -321,7 +401,7 @@ class MyAdmin extends Component{
                                             }
                                         </tbody>
                                     </table>
-                            </div>
+                                </div>
                             </div>
                         </div>  
                         }
@@ -329,6 +409,71 @@ class MyAdmin extends Component{
                 }
 
                 {/* Account Section */}
+                {this.state.updateType == "update" &&
+                    <div className="collapse-section">
+                        <div className="collapse-title" onClick={() => this.setState({accountCollapse: !accountCollapse}) } aria-expanded={accountCollapse} aria-controls="accountInfo"><span>Student Account</span> <i className={"fas " + (accountCollapse ? "fa-chevron-up" : "fa-chevron-down")}></i></div>
+                        {this.state.accountCollapse && 
+                            <div className="mylgcu-content-section inverse" id="accountInfo">                        
+                                <div className="section-title">Student Account</div> 
+                            
+                                {this.state.accountTransactions.map((item, i) => (
+                                    <div className="content-block sz10" key={i}>
+                                        <div className="account-info">
+                                            <div className="account-block">
+                                                <span className="account-icon success"><i className="fas fa-check"></i></span>
+                                            </div>
+
+                                            <div className="account-block">
+                                                <span className="subText">Transaction Date</span>
+                                                <span>{item.submitTime}</span>
+                                            </div>
+
+                                            <div className="account-block">
+                                                <span className="subText">Transaction Id</span>
+                                                <span>{item.transactionId}</span>
+                                            </div>
+
+                                            <div className="account-block">
+                                                <span className="subText">{item.order.invoiceNumber}</span>
+                                                <span>{item.order.description}</span>
+                                            </div>
+
+                                            <div className="account-block">
+                                                <span className="subText">Total Charge</span>
+                                                <span>$ {item.amount.toFixed(2)}</span>
+                                            </div>
+
+                                            <div className="account-block">
+                                                <span className="account-icon info" id={"toggler"+i}><i className="fas fa-info"></i></span>
+                                            </div>
+                                        </div>
+
+                                        <UncontrolledCollapse toggler={"#toggler"+i} className="account-toggler">
+                                            <table className="account-table overview-table">
+                                                <thead>
+                                                    <tr className="header">
+                                                        <th>Charge Name</th>
+                                                        <th>Charge Description</th>
+                                                        <th>Charge Amount</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {item.lineItems.map((charge,k) => (
+                                                        <tr key={k}>
+                                                            <td>{charge.name}</td>
+                                                            <td>{charge.description}</td>
+                                                            <td>$ {charge.price.toFixed(2)}</td>
+                                                        </tr>
+                                                    ))}                                        
+                                                </tbody>
+                                            </table>
+                                        </UncontrolledCollapse>
+                                    </div>
+                                ))}
+                            </div>  
+                        }
+                    </div>
+                }
             </div>
         );
     }
@@ -488,7 +633,8 @@ class MyAdmin extends Component{
                         self.setState({ updateType: "update", 
                             selectedUser:{
                                 firstname:student.firstname, lastname:student.lastname, email:student.email, 
-                                address:student.address, phone: student.phone || "", admin:student.admin,
+                                address:student.address, phone: student.phone || "", admin:student.admin, 
+                                military:student.military, studentInfo:student.studentInfo, gpa: (student.studentInfo ? student.studentInfo.gpa : 0),
                                 degree:student.degree, _id:student._id, studentId:student.studentId || "", 
                                 accountId:student.accountId || "", talentlmsId:student.talentlmsId
                             }
@@ -535,11 +681,16 @@ class MyAdmin extends Component{
             if(this.state.updateType != null){
                 // Alert
                 if(window.confirm("Do you want to begin creating a new student, all of your unsaved work will be lost?")) {
+                    // Clear Previous Search
+                    self.setState({ searchQuery:"", searchResults: null });
                     // Clear form begin new student
                     self.clearStudentForm(function(){ self.setState({ updateType: "new" }); });
                 }                                
             }
             else {
+                // Clear Previous Search
+                self.setState({ searchQuery:"", searchResults: null });
+                // Clear form begin new student
                 this.clearStudentForm(function(){ self.setState({ updateType: "new" }); });                
             }
         }
@@ -552,9 +703,13 @@ class MyAdmin extends Component{
         var self = this;
         try{           
             
-            this.setState({ selectedUser:{_id:null, firstname:"", lastname:"",  email:"", address:"", phone:"",
+            this.setState({ 
+                selectedUser:{_id:null, firstname:"", lastname:"",  email:"", address:"", phone:"",
                 degree:{ school:"", code:"", major:"", declareDate: null },  
-                studentId:"", accountId:"", talentlmsId:{ id:"", login:""}}}, ()=> { 
+                studentId:"", accountId:"", talentlmsId:{ id:"", login:""},
+                studentInfo:{gpa:0, class:"freshman"}
+                }
+            }, ()=> { 
                     callback(); });
         }
         catch(ex){
@@ -637,12 +792,18 @@ class MyAdmin extends Component{
                                 selectedUser:{
                                     firstname:student.firstname, lastname:student.lastname, email:student.email, 
                                     address:student.address, phone: student.phone || "", admin:student.admin,
+                                    military: student.military, studentInfo:student.studentInfo, gpa: (student.studentInfo ? student.studentInfo.gpa : 0),
                                     degree:student.degree, _id:student._id, studentId:student.studentId || "", 
                                     accountId:student.accountId || "", talentlmsId:student.talentlmsId
                                 }
                             }, () => {
                                 // Load Student Course Info
-                                self.loadStudentCourses(self.state.selectedUser.talentlmsId.id);
+                                if(self.state.selectedUser.talentlmsId.id) {
+                                    self.loadStudentCourses(self.state.selectedUser.talentlmsId.id);
+                                }
+                                if(self.state.selectedUser._id) {
+                                    self.loadAccountInfo(self.state.selectedUser._id);
+                                }
                             });
                         }
                         self.toggleSpinner(false);
@@ -851,6 +1012,30 @@ class MyAdmin extends Component{
         }
     }
 
+    queueCourse(newCourse){
+        try {
+            var tmpQueue =  this.state.queuedCourses;
+            var queuedCourses = tmpQueue.filter(function(course){
+                return course.id == newCourse.id;
+            });
+
+            var currentCourses = this.state.currentCourses.filter(function(course){
+                return course.id == newCourse.id;
+            });
+
+            if(queuedCourses.length > 0 || currentCourses.length > 0){
+                alert("Course has already been added");
+            }
+            else {
+                tmpQueue.push(newCourse);
+                this.setState({ queuedCourses: tmpQueue });
+            }
+        }
+        catch(ex){
+            alert("Error queueing course: ",ex);
+        }
+    }
+
     removeCourse(courseId){
         try {
             var tmpQueue =  this.state.queuedCourses;
@@ -892,6 +1077,33 @@ class MyAdmin extends Component{
         return total;
     }
 
+    unregisterCourseList(course){
+        var self = this;
+        try {
+            var sessionInfo = localStorage.getItem(this.props.mySessKey);
+            if(sessionInfo){ 
+                var localUser = JSON.parse(sessionInfo);
+
+                self.toggleSpinner(true);
+
+                var postData = { requestUser: { _id: localUser._id}, userInfo: { studentId: self.state.selectedUser.studentId, talentlmsId: self.state.selectedUser.talentlmsId }, courseInfo:course };
+
+                axios.post(self.props.rootPath + "/api/courseUnregister", postData, {'Content-Type': 'application/json'})
+                .then(function(response) {
+                    if(response.data.errorMessage){
+                        alert("Unable to unregister student for the following courses: " + response.data.errorMessage);
+                    }
+                    else {
+                        self.loadStudentCourses(self.state.selectedUser.talentlmsId.id);
+                    }
+                });  
+            }
+        }
+        catch(ex){
+            console.log("Error unregistering course: ",ex);
+        }
+    }
+
     registerCourseList() {
         var self = this;
         try {
@@ -905,7 +1117,7 @@ class MyAdmin extends Component{
                 self.toggleSpinner(true);
 
                 tmpQueue.forEach(function(course){
-                    var postData = { requestUser: { _id: localUser._id}, userInfo: { studentId: self.state.studentInfo.studentId, talentlmsId: self.state.studentInfo.talentlmsId }, courseInfo:course };
+                    var postData = { requestUser: { _id: localUser._id}, userInfo: { studentId: self.state.selectedUser.studentId, talentlmsId: self.state.selectedUser.talentlmsId }, courseInfo:course };
 
                     axios.post(self.props.rootPath + "/api/courseRegister", postData, {'Content-Type': 'application/json'})
                     .then(function(response) {
@@ -938,6 +1150,47 @@ class MyAdmin extends Component{
         }
         catch(ex){
             console.log("Error registering course list: ",ex);
+        }
+    }
+
+    loadAccountInfo(_id){
+        var self = this;
+
+        try {
+            var sessionInfo = localStorage.getItem(this.props.mySessKey);
+
+            if(sessionInfo){ 
+                var localUser = JSON.parse(sessionInfo);
+                var postData = { requestUser: { _id: localUser._id}, userInfo: { _id: _id} };
+
+                self.toggleSpinner(true);
+
+                axios.post(self.props.rootPath + "/api/searchUserTransactions", postData, {'Content-Type': 'application/json'})
+                .then(function(response) {
+                    if(response.data.errorMessage){
+                        alert("Error retreiving user transactions: ", response.errorMessage);
+                    }
+                    else {
+                        var accountTransactions = response.data.results.filter(function(item){
+                            return item.errorMessage == null;
+                        }).map(function(item){
+                            return item.results;
+                        })
+                        .sort(function(a,b){
+                            return new Date(b.submitTime) - new Date(a.submitTime);
+                        });
+
+                        self.setState({ accountTransactions: accountTransactions}, ()=> { self.toggleSpinner(false); });
+                    }
+                });   
+            }
+            else {
+                
+            }
+        }
+        catch(ex){
+            alert("[Error] Loading Student Account Info: ", ex);
+            self.toggleSpinner(false);
         }
     }
 }

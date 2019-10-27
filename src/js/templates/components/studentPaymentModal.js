@@ -230,7 +230,7 @@ class StudentPayment extends Component{
                                 <div className="chargeTitle">Total: </div>
                                 <div className="chargeAmount">
                                     <span>$</span>
-                                    <input type="number" name="chargeTotal" step=".01" value={this.props.totalPrice} readOnly/>
+                                    <input type="number" name="chargeTotal" step=".01" value={(this.props.adhoc == true ? this.state.chargeTotal: this.props.totalPrice)} onChange={(e) => this.onElementChange(e)} readOnly={this.props.adhoc != true}/>
                                 </div>
                             </div>
                         </div>
@@ -311,6 +311,7 @@ class StudentPayment extends Component{
                 var sessionInfo = localStorage.getItem(this.props.mySessKey);
                 var localUser = JSON.parse(sessionInfo);
 
+                
                 var chargeForm = 
                 {
                     userInfo:{
@@ -318,7 +319,7 @@ class StudentPayment extends Component{
                         studentId: this.props.studentInfo.studentId
                     },
                     transactionInfo: {
-                        userEmail: this.state.cardEmail, chargeDescription: "Student Course Payment",
+                        userEmail: this.state.cardEmail, chargeDescription: (this.props.adhoc == true ? "myLGCU Account Payment" : "Student Course Payment"),
                         cardInfo:{
                             cardNumber: this.state.cardNum, cardExp: cardExp, cardCode: this.state.cardCSV,
                             firstname: this.state.cardFirstName, lastname: this.state.cardLastName, 
@@ -328,18 +329,23 @@ class StudentPayment extends Component{
                     }
                 };
                 
-                
-                // Calculate Course Charges
-                this.props.queuedCourses.forEach(function(course){
-                    var courseCharge = self.props.creditRate * course.credits;
-                    courseCharge = parseInt(courseCharge,10);
-                    var chargeItem = {name:"Course Registration", description:"Course Id: "+ course.id +", Course: "+ course.name+", credit: "+course.credits, quantity:1, price: courseCharge.toFixed(2) };
-                    
-                    tmpCharge = tmpCharge + courseCharge;
+                if(this.props.adhoc == true){
+                    var chargeItem = {name:"Account Payment", description:"A payment made by the student via the myLGCU Account Portal", quantity:1, price: parseFloat(this.state.chargeTotal).toFixed(2) };
                     chargeForm.transactionInfo.chargeItems.push(chargeItem);
-                });
+                }
+                else {
+                    // Calculate Course Charges
+                    this.props.queuedCourses.forEach(function(course){
+                        var courseCharge = self.props.creditRate * course.credits;
+                        courseCharge = parseInt(courseCharge,10);
+                        var chargeItem = {name:"Course Registration", description:"Course Id: "+ course.id +", Course: "+ course.name+", credit: "+course.credits, quantity:1, price: courseCharge.toFixed(2) };
+                        
+                        tmpCharge = tmpCharge + courseCharge;
+                        chargeForm.transactionInfo.chargeItems.push(chargeItem);
+                    });
+                }
 
-                if(charge !== tmpCharge) {
+                if(this.props.adhoc != true && charge !== tmpCharge) {
                     alert("Error with charge alignment please contact admin");
                 }
                 else {
@@ -353,11 +359,11 @@ class StudentPayment extends Component{
                                     if(response.results.messages){
                                         if(response.results.messages.resultCode && response.results.messages.resultCode == "Ok"){
                                             // Success
-                                            alert("Charge was successful your courses are now being added");
+                                            alert((self.props.adhoc == true ? "Charge was successful" : "Charge was successful your courses are now being added"));
                                             bannerMessage.type = "success";
                                             bannerMessage.message = response.results.transactionResponse.messages.message[0].description;
                                             
-                                            self.props.registerCourseList();
+                                            if(self.props.adhoc != true ) { self.props.registerCourseList(); }
                                             self.closeForm();
                                         }
                                         else {
@@ -372,7 +378,7 @@ class StudentPayment extends Component{
                                     alert("Error Processing Payment [E2]: " +  response.errorMessage);
                                     console.log("[Error] Error Processing Payment: ", response.errorMessage);
                                     bannerMessage.type = "error";
-                                    bannerMessage.message = response.results.transactionResponse.messages.message[0].description;
+                                    bannerMessage.message = response.results.transactionResponse.errors.error[0].errorText;
                                 }
                             }
                             catch(ex){

@@ -59,7 +59,7 @@ function searchUserTransactions(req,res){
     var requestUser = req.body.requestUser;
     var userInfo = req.body.userInfo;
     userInfo.full = true;
-    
+
     // Validate User
     auth.getUserById(userInfo, function(ret){
         if(ret.errorMessage){
@@ -238,6 +238,17 @@ function courseRegister(req, res){
     });
 }
 
+function courseUnregister(req, res){
+    var requestUser = req.body.requestUser;
+    var userInfo = req.body.userInfo;
+    var courseInfo = req.body.courseInfo;
+
+    // Validate User
+    talentlms.courseUnregister(userInfo, courseInfo, function(ret){
+        res.status(200).json(ret);
+    });
+}
+
 /*** Routes ***/
 /* TalentLMS */
 router.post('/createTLMSUser', createTLMSUser);
@@ -245,6 +256,7 @@ router.post('/userLogin', userLogin);
 router.post('/getTLMSUserById', getTLMSUserById);
 router.get('/getCourses', getCourses);
 router.post('/courseRegister', courseRegister);
+router.post('/courseUnregister', courseUnregister);
 
 /* User Auth */
 router.post('/createUser', createUser);

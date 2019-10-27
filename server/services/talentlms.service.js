@@ -202,11 +202,11 @@ var talentlms = {
             url = url + "/user_id:"+userInfo.talentlmsId.id+",course_id:"+courseInfo.id;
             axios.get(url, { auth: { username: talentlmsKey, password: '' }})
             .then(res => { 
-                if(!Array.isArray(res.data)){
+                if(res.data.error){
                     response.errorMessage = res.data.error.message;
                 }
                 else {
-                    response.results = res.data[0];
+                    response.results = res.data;
                 }
                 callback(response);
             })

@@ -65,7 +65,8 @@ var auth = {
                             { $set: 
                                 { firstname: ret.results.firstname, lastname: ret.results.lastname, fullname: ret.results.fullname,
                                     email: ret.results.email, address: ret.results.address, phone: ret.results.phone,
-                                    degree: ret.results.degree 
+                                    admin: ret.results.admin, military: ret.results.military, degree: ret.results.degree,
+                                    studentInfo: ret.results.studentInfo 
                                 }
                             }, {upsert: true, useNewUrlParser: true});
 
@@ -281,6 +282,7 @@ function validateNewUser(userInfo, callback){
                             // Create new user
                             var newUser = { firstname: userInfo.firstname, lastname: userInfo.lastname, fullname: userInfo.firstname + " " + userInfo.lastname, email: userInfo.email,
                                 address:userInfo.address, phone: userInfo.phone, admin: false, studentId:null, accountId:null, 
+                                admin: userInfo.admin, military: userInfo.military,
                                 talentlmsId:{id:"", login:""}, studentInfo:{gpa:0, credits:0},
                                 degree:{
                                     school:userInfo.degree.school, code:userInfo.degree.code, 
@@ -333,14 +335,20 @@ function validateExistingUser(userInfo, callback){
                             response.errorMessage ="[Error] Validating Existing User (E13): The following fields are not valid " + errorList.join(",");
                         }
                         else {
+                            if(userInfo.studentInfo) {
+                                userInfo.studentInfo.gpa = (userInfo.gpa ? userInfo.gpa : 0);
+                            }
+                            
                             // Create new user
                             var newUser = { firstname: userInfo.firstname, lastname: userInfo.lastname, email: userInfo.email,
                                 address:userInfo.address, phone: userInfo.phone, _id:userInfo._id, fullname: userInfo.firstname + " " + userInfo.lastname,
+                                admin: userInfo.admin, military: userInfo.military, studentInfo:userInfo.studentInfo,
                                 degree:{
                                     school:userInfo.degree.school, code:userInfo.degree.code, 
                                     major:userInfo.degree.major, level: userInfo.degree.level, declareDate: Date.now()
                                 }
                             };
+
                             response.results = newUser;
                         }                        
                     }      
