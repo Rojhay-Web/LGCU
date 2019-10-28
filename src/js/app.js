@@ -14,6 +14,7 @@ import { Tuition, TuitionHeader } from './templates/tuition';
 import { About, AboutHeader } from './templates/about';
 import { Contact, ContactHeader } from './templates/contactus';
 import { Apply, ApplyHeader } from './templates/apply';
+import { myLGCU, myLGCUHeader} from './templates/myLgcu';
 
 import TranslateVideo from './templates/components/translateVideoModal';
 
@@ -33,7 +34,8 @@ const routes = [
     {path:"/faculty", component:Faculty, headerComponent:FacultyHeader},
     {path:"/tuition", component:Tuition, headerComponent:TuitionHeader},
     {path:"/contactus", component:Contact, headerComponent:ContactHeader},
-    {path:"/apply", component:Apply, headerComponent:ApplyHeader}
+    {path:"/apply", component:Apply, headerComponent:ApplyHeader},
+    {path:"/mylgcu", component:myLGCU, headerComponent:myLGCUHeader}
 ];
 
 
@@ -75,7 +77,8 @@ class App extends Component{
             alerts:[
                 {title:"100% Online",text:"Lenkeson Global Christian University is a completely online university founded to provide higher education globally.", type:"primary"},
                 {title:"Rolling Enrollment",text:"Classes starting soon, all classes are 8 weeks in length. To obtain additional information regarding enrollment, click on <a href=\"/apply\">Apply</a> then click on Student Application.", type:"primary"}
-            ]
+            ],
+            mlAccess:false
         };
 
         this.setSidebarDisplay = this.setSidebarDisplay.bind(this);
@@ -83,9 +86,14 @@ class App extends Component{
         this.setAlerts = this.setAlerts.bind(this);
         this.modalShow = this.modalShow.bind(this);
         this.modalHide = this.modalHide.bind(this);
+        this.setMLAccess = this.setMLAccess.bind(this);
+    }
+    
+    setMLAccess(status){
+        this.setState({ mlAccess: status });
     }
 
-    render(){     
+    render(){    
         return(            
             <Router history={history}>
                 <div className="nav-body">
@@ -93,10 +101,11 @@ class App extends Component{
                     <div className="app-body">
                         <div className={"app-nav" + (this.state.navChange ? " page-nav" : " full-nav")}>
                             <nav className="navbar navbar-expand-lg nav-top navbar-dark bg-dark">                                
-                                {/*<Link className="nav-item mini-nav-link" to="/">my<span className="c2">LGCU</span></Link>*/}                                
-                                <a href="https://www.givelify.com/givenow/1.0/?token=eyJvcmdfaWQiOiJNelUyT1RFfiIsImJhZGdlX2ltYWdlIjoiYjMucG5nIn0~" target="_blank" rel="noopener noreferrer" className="nav-item mini-nav-link">Givelify Donations</a>
-                                <a href="https://www.paypal.com/mep/dashboard" target="_blank" rel="noopener noreferrer" className="nav-item mini-nav-link">PayPal Donations</a>
-                                <Link className="nav-item mini-nav-link" to="/apply">Apply Online</Link>                                
+                                <Link className="nav-item mini-nav-link" to="/mylgcu">my<span className="c2">LGCU</span></Link>
+                                <span className="nav-item mini-nav-link no-link">Donations</span>
+                                <a href="https://www.givelify.com/givenow/1.0/?token=eyJvcmdfaWQiOiJNelUyT1RFfiIsImJhZGdlX2ltYWdlIjoiYjMucG5nIn0~" target="_blank" rel="noopener noreferrer" className="nav-item mini-nav-link donation-link"><span className="givelify-logo">Givelify</span></a>
+                                <a href="https://www.paypal.com/mep/dashboard" target="_blank" rel="noopener noreferrer" className="nav-item mini-nav-link donation-link"><i className="fab fa-paypal"></i></a>
+                                <Link className="nav-item mini-nav-link" to="/apply">Apply</Link>                                
                             </nav>
                             <nav className="navbar navbar-expand-lg nav-bottom">
                                 <Link className="navbar-brand" to="/">
@@ -175,10 +184,10 @@ class App extends Component{
                                 <div className="footer-link-section">
                                     <Link className="footer-link" to="/admissions">Admissions</Link>
                                     <Link className="footer-link" to="/academics">Academics</Link>
-                                    <a href="https://www.givelify.com/givenow/1.0/?token=eyJvcmdfaWQiOiJNelUyT1RFfiIsImJhZGdlX2ltYWdlIjoiYjMucG5nIn0~" target='_blank' className="footer-link">Donate</a>
+                                    <a href="https://www.givelify.com/givenow/1.0/?token=eyJvcmdfaWQiOiJNelUyT1RFfiIsImJhZGdlX2ltYWdlIjoiYjMucG5nIn0~" target='_blank'  rel="noopener noreferrer" className="footer-link">Donate</a>
                                     <Link className="footer-link" to="/apply">Apply</Link>
                                     <Link className="footer-link" to="/contactus">Contact Us</Link>
-                                    {/*<Link className="footer-link" to="/">myLGCU</Link>*/}
+                                    <Link className="footer-link" to="/mylgcu">myLGCU</Link>
                                 </div>
                             </div>
                             <div className="footer-section full address">
