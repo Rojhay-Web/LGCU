@@ -490,6 +490,10 @@ function searchTransactionById(transactionId, callback){
 
         var ctrl = new ApiControllers.GetTransactionDetailsController(getRequest.getJSON());
 
+        if(!(process.env.CODEENV && process.env.CODEENV == "DEBUG")) { 
+            ctrl.setEnvironment(SDKConstants.endpoint.production);
+        }
+        
         ctrl.execute(function(){
 
             var apiResponse = ctrl.getResponse();
@@ -512,6 +516,8 @@ function searchTransactionById(transactionId, callback){
                 }
                 else{
                     ret.errorMessage = "[Error] Searching by id (E07)"
+                    console.log(response);
+                    console.log(response.getMessages());
                 }
             }
             else{
