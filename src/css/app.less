@@ -49,6 +49,7 @@
 @import "about.less";
 @import "contactus.less";
 @import "apply.less";
+@import "mylgcu.less";
 
 /* imported */
 @import "../../node_modules/country-icons/index.less";
@@ -248,7 +249,9 @@ body, html {
                 font-weight: bold;  
                 transition: .5s all ease-in-out;
                 &:hover { background: rgba(255,255,255,0.2); text-decoration: none;}
-                .c2 { color: @color2;}             
+                .c2 { color: @color2;}   
+                &.no-link { cursor: default; padding-right: 5px; &:hover { background: rgba(0,0,0,0); } } 
+                &.donation-link { border: none;   }         
             }           
         }
 
@@ -517,6 +520,56 @@ body, html {
     }
 
     @media @mobile-device { text-align: center; display: block; }
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+
+    input { 
+        opacity: 0; 
+        width: 0; 
+        height: 0;
+
+        &:checked{ 
+            &+ .slider { 
+                background-color: @color2;
+                &:before {
+                    -webkit-transform: translateX(26px);
+                    -ms-transform: translateX(26px);
+                    transform: translateX(26px);
+                }
+            }
+        }
+    }
+    
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgb(156, 30, 30);
+        -webkit-transition: .4s;
+        transition: .4s;
+        border-radius: 34px;
+
+        &:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            border-radius: 50%;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+    }
 }
 
 /* profile text */

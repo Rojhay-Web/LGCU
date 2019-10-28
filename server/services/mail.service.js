@@ -5,15 +5,12 @@ const util = require('util');
 
 
 var mail = {
-    sendEmail:function(req,res){ 
+    sendEmail:function(emailInfo,callback){ 
         var response = {"errorMessage":null, "results":null};
 
         /* { email: "", subject:"", title:"", formdata:{}, additionalData:{}} */
 
         try {
-            
-            var emailInfo = req.body;
-
             var transporter = nodemailer.createTransport({
                 host: 'smtp.gmail.com',
                 port: 465,
@@ -41,13 +38,13 @@ var mail = {
                 } else {
                     response.results = 'Email Sent';                  
                 }    
-                res.status(200).json(response);            
+                callback(response);            
               });
         }
         catch(ex){
             response.errorMessage = "[Error]: Error sending email: "+ ex;
             console.log(response.errorMessage);
-            res.status(200).json(response);
+            callback(response);
         }
     },
     sendAppEmail:function(req,res){ 
