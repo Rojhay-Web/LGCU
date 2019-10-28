@@ -18,6 +18,7 @@ class MyCourses extends Component{
             spinner: false,
             modalStatus:false,
             searchQuery:"",
+            technologyFee:150,
             totalPrice:0,
             creditRate:0,
             studentInfo:{ studentId:0, talentlmsId:0, degree: "", class:"", gpa:0, fulltime:false },
@@ -73,7 +74,7 @@ class MyCourses extends Component{
                {this.state.spinner && <div className="spinner"><i className="fas fa-cog fa-spin"/><span>Loading</span></div> }
 
                {/* Student Payment */}
-               <StudentPayment title="Student Course Registration Payment" show={this.state.modalStatus} handleClose={this.modalHide} registerCourseList={this.registerCourseList} totalPrice={this.state.totalPrice} creditRate={this.state.creditRate} studentInfo={this.state.studentInfo} queuedCourses={this.state.queuedCourses} mySessKey={this.props.mySessKey}/>
+               <StudentPayment title="Student Course Registration Payment" show={this.state.modalStatus} handleClose={this.modalHide} registerCourseList={this.registerCourseList} totalPrice={this.state.totalPrice} creditRate={this.state.creditRate} studentInfo={this.state.studentInfo} queuedCourses={this.state.queuedCourses} currentCourses={this.state.currentCourses} technologyFee={this.state.technologyFee} mySessKey={this.props.mySessKey}/>
 
                 {/* Student Base Info */}
                 <div className="mylgcu-content-section inverse">
@@ -308,6 +309,10 @@ class MyCourses extends Component{
              }
 
              totalPrice = creditRate * queuedTotal;
+
+             if(this.state.currentCourses.length == 0){
+                 totalPrice = totalPrice + this.state.technologyFee;
+             }
         }
         catch(ex){
             console.log("Error getting total price: ",ex);

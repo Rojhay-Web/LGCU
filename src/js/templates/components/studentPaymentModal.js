@@ -3,8 +3,8 @@ import { Modal } from 'react-bootstrap';
 import axios from 'axios';
 
 var AppIdGlobal = "";
-//var rootPath = "";
-var rootPath = "http://localhost:1111";
+var rootPath = "";
+//var rootPath = "http://localhost:1111";
 
 /* Body */
 class StudentPayment extends Component{
@@ -343,6 +343,13 @@ class StudentPayment extends Component{
                         tmpCharge = tmpCharge + courseCharge;
                         chargeForm.transactionInfo.chargeItems.push(chargeItem);
                     });
+
+                    if(this.props.currentCourses.length == 0){
+                        var chargeItem = {name:"Technology Fee", description:"Student Semester Technology Fee", quantity:1, price: this.props.technologyFee.toFixed(2) };
+                        
+                        tmpCharge = tmpCharge + this.props.technologyFee;
+                        chargeForm.transactionInfo.chargeItems.push(chargeItem);
+                    }
                 }
 
                 if(this.props.adhoc != true && charge !== tmpCharge) {

@@ -493,7 +493,7 @@ class MyAdmin extends Component{
                 
                 if(!this.state.selectedUser || !this.state.selectedUser._id)
                 {
-                    alert("Student not active");
+                    alert("Student not active, please create student then create id");
                 }
                 else {
                     var postData = { 
@@ -535,7 +535,7 @@ class MyAdmin extends Component{
                 
                 if(!this.state.selectedUser || !this.state.selectedUser._id)
                 {
-                    alert("Student not active");
+                    alert("Student not active, please create student then create id");
                 }
                 else {
                     var postData = { 
@@ -577,7 +577,7 @@ class MyAdmin extends Component{
                 
                 if(!this.state.selectedUser || !this.state.selectedUser._id)
                 {
-                    alert("Student not active");
+                    alert("Student not active, please create student then create id");
                 }
                 else {
                     var postData = { 

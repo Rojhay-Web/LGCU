@@ -124,7 +124,7 @@ var talentlms = {
                     response.results = {
                         id: res.data.id, login: res.data.login, firstname: res.data.first_name, lastname:res.data.last_name,
                         email: res.data.email, status: res.data.status, usertype: res.data.user_type, 
-                        createdDate:res.data.created_on, courses: res.data.courses
+                        createdDate:res.data.created_on, courses: res.data.courses.filter(function(course){ return course.role == "learner" && course.completion_status != "completed"})
                     };
                 }
                 callback(response);

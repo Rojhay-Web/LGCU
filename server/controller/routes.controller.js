@@ -61,17 +61,26 @@ function searchUserTransactions(req,res){
     userInfo.full = true;
 
     // Validate User
-    auth.getUserById(userInfo, function(ret){
-        if(ret.errorMessage){
+    auth.authorizeUser(requestUser, userInfo._id, function(ret){
+        if(ret.errorMessage != null) {
             res.status(200).json(ret);
         }
+        else if(!ret.results) {
+            res.status(200).json({"errorMessage":"User status invalid for this request", "results":null});
+        }
         else {
-            charge.searchUserTransactions(ret.results.authTrans, function(searchRet) {
-                res.status(200).json(searchRet);
+            auth.getUserById(userInfo, function(ret){
+                if(ret.errorMessage){
+                    res.status(200).json(ret);
+                }
+                else {
+                    charge.searchUserTransactions(ret.results.authTrans, function(searchRet) {
+                        res.status(200).json(searchRet);
+                    });
+                }
             });
         }
-    });
-
+    });      
 }
 /* user auth */
 function createUser(req, res){
@@ -208,9 +217,19 @@ function getTLMSUserById(req, res){
     var userInfo = req.body.userInfo;
 
     // Validate User
-    talentlms.getUserById(userInfo, function(ret){
-        res.status(200).json(ret);
-    });
+    auth.authorizeUser(requestUser, userInfo._id, function(ret){
+        if(ret.errorMessage != null) {
+            res.status(200).json(ret);
+        }
+        else if(!ret.results) {
+            res.status(200).json({"errorMessage":"User status invalid for this request", "results":null});
+        }
+        else {            
+            talentlms.getUserById(userInfo, function(ret){
+                res.status(200).json(ret);
+            });
+        }
+    }); 
 }
 
 function getCourses(req, res){
@@ -225,17 +244,26 @@ function courseRegister(req, res){
     var courseInfo = req.body.courseInfo;
 
     // Validate User
-    talentlms.courseRegister(userInfo, courseInfo,function(ret){
-        if(ret.errorMessage){
-            //Send error email
-            //"admin@lenkesongcu.org"
-            mail.sendEmail({ email: "kris.redding3@gmail.com", title:"Registration Error", formData:{}, additionalData:{},
-                subject:"Unable to Register student for course [ID]: "+courseInfo.id +" [student Id]:"+userInfo.studentId+" Error: "+ ret.errorMessage
-                }, function(ret){});
+    auth.authorizeUser(requestUser, userInfo._id, function(ret){
+        if(ret.errorMessage != null) {
+            res.status(200).json(ret);
         }
-
-        res.status(200).json(ret);
-    });
+        else if(!ret.results) {
+            res.status(200).json({"errorMessage":"User status invalid for this request", "results":null});
+        }
+        else {            
+            talentlms.courseRegister(userInfo, courseInfo,function(ret){
+                if(ret.errorMessage){
+                    //Send error email
+                    mail.sendEmail({ email: "admin@lenkesongcu.org", title:"Registration Error", formData:{}, additionalData:{},
+                        subject:"Unable to Register student for course [ID]: "+courseInfo.id +" [student Id]:"+userInfo.studentId+" Error: "+ ret.errorMessage
+                        }, function(ret){});
+                }
+        
+                res.status(200).json(ret);
+            });
+        }
+    }); 
 }
 
 function courseUnregister(req, res){
@@ -244,9 +272,19 @@ function courseUnregister(req, res){
     var courseInfo = req.body.courseInfo;
 
     // Validate User
-    talentlms.courseUnregister(userInfo, courseInfo, function(ret){
-        res.status(200).json(ret);
-    });
+    auth.authorizeUser(requestUser, userInfo._id, function(ret){
+        if(ret.errorMessage != null) {
+            res.status(200).json(ret);
+        }
+        else if(!ret.results) {
+            res.status(200).json({"errorMessage":"User status invalid for this request", "results":null});
+        }
+        else {            
+            talentlms.courseUnregister(userInfo, courseInfo, function(ret){
+                res.status(200).json(ret);
+            });
+        }
+    });      
 }
 
 /*** Routes ***/
