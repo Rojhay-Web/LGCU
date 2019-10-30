@@ -54,7 +54,7 @@ function MobileNav(props){
             <div className="sidenav-section">
                 <Link className="sidenav-header-link" to="/contactus">Contact Us</Link>
                 <a href="https://www.givelify.com/givenow/1.0/?token=eyJvcmdfaWQiOiJNelUyT1RFfiIsImJhZGdlX2ltYWdlIjoiYjMucG5nIn0~" target="_blank" rel="noopener noreferrer" className="sidenav-header-link">Donate</a>
-                <Link className="sidenav-header-link" to="/apply">Apply</Link>
+                <Link className="sidenav-header-link" to="/apply">Apply Now</Link>
             </div>
             <div className="sidenav-section">
                 <Link className="sidenav-link" to="/about">About</Link>
@@ -76,7 +76,7 @@ class App extends Component{
             modalStatus: false,
             alerts:[
                 {title:"100% Online",text:"Lenkeson Global Christian University is a completely online university founded to provide higher education globally.", type:"primary"},
-                {title:"Rolling Enrollment",text:"Classes starting soon, all classes are 8 weeks in length. To obtain additional information regarding enrollment, click on <a href=\"/apply\">Apply</a> then click on Student Application.", type:"primary"}
+                {title:"Rolling Enrollment",text:"Classes starting soon, all classes are 8 weeks in length. To obtain additional information regarding enrollment, click on <a href=\"/apply\">Apply Now</a> then click on Student Application.", type:"primary"}
             ],
             mlAccess:false
         };
@@ -105,7 +105,7 @@ class App extends Component{
                                 <span className="nav-item mini-nav-link no-link">Donations</span>
                                 <a href="https://www.givelify.com/givenow/1.0/?token=eyJvcmdfaWQiOiJNelUyT1RFfiIsImJhZGdlX2ltYWdlIjoiYjMucG5nIn0~" target="_blank" rel="noopener noreferrer" className="nav-item mini-nav-link donation-link"><span className="givelify-logo">Givelify</span></a>
                                 <a href="https://www.paypal.com/mep/dashboard" target="_blank" rel="noopener noreferrer" className="nav-item mini-nav-link donation-link"><i className="fab fa-paypal"></i></a>
-                                <Link className="nav-item mini-nav-link" to="/apply">Apply</Link>                                
+                                <Link className="nav-item mini-nav-link" to="/apply">Apply Now</Link>                                
                             </nav>
                             <nav className="navbar navbar-expand-lg nav-bottom">
                                 <Link className="navbar-brand" to="/">
