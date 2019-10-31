@@ -8,11 +8,16 @@ var talentlms = require('../services/talentlms.service');
 
 /* emails */
 function sendEmail(req, res){ 
-    var emailInfo = req.body.emailInfo;
+    try {
+        var emailInfo = req.body.emailInfo;
 
-    mail.sendEmail(emailInfo, function(ret){
-        res.status(200).json(ret);
-    });
+        mail.sendEmail(emailInfo, function(ret){
+            res.status(200).json(ret);
+        });
+    }
+    catch(ex){
+        res.status(200).json({"errorMessage":"Error Processing Request: " + ex, "results":null });
+    }
 }
 function sendAppEmail(req, res){ mail.sendAppEmail(req, res); }
 
@@ -20,271 +25,341 @@ function sendAppEmail(req, res){ mail.sendAppEmail(req, res); }
 function applicationCharge(req, res){ charge.applicationCharge(req, res); }
 
 function createAuthNETAccount(req, res){
-    var requestUser = req.body.requestUser;
-    var userInfo = req.body.userInfo;
+    try {
+        var requestUser = req.body.requestUser;
+        var userInfo = req.body.userInfo;
 
-    // Validate User (Admin Only)
-    auth.authorizeUser(requestUser, null, function(ret){
-        if(ret.errorMessage != null) {
-            res.status(200).json(ret);
-        }
-        else if(!ret.results) {
-            res.status(200).json({"errorMessage":"User status invalid for this request", "results":null});
-        }
-        else {
-            auth.getUserById(userInfo, function(ret0){
-                if(ret0.errorMessage){
-                    res.status(200).json(ret0);
-                }
-                else {            
-                    charge.createAccount(ret0.results, function(ret){
-                        res.status(200).json(ret);
-                    });
-                }
-            });    
-        }
-    });         
+        // Validate User (Admin Only)
+        auth.authorizeUser(requestUser, null, function(ret){
+            if(ret.errorMessage != null) {
+                res.status(200).json(ret);
+            }
+            else if(!ret.results) {
+                res.status(200).json({"errorMessage":"User status invalid for this request", "results":null});
+            }
+            else {
+                auth.getUserById(userInfo, function(ret0){
+                    if(ret0.errorMessage){
+                        res.status(200).json(ret0);
+                    }
+                    else {            
+                        charge.createAccount(ret0.results, function(ret){
+                            res.status(200).json(ret);
+                        });
+                    }
+                });    
+            }
+        });         
+    }
+    catch(ex){
+        res.status(200).json({"errorMessage":"Error Processing Request: " + ex, "results":null });
+    }
 }
 
 function accountCharge(req, res){
-    var userInfo = req.body.userInfo;
-    var transactionInfo = req.body.transactionInfo;
+    try {
+        var userInfo = req.body.userInfo;
+        var transactionInfo = req.body.transactionInfo;
 
-    charge.accountCharge(userInfo, transactionInfo, function(ret){
-        res.status(200).json(ret);
-    });
+        charge.accountCharge(userInfo, transactionInfo, function(ret){
+            res.status(200).json(ret);
+        });
+    }
+    catch(ex){
+        res.status(200).json({"errorMessage":"Error Processing Request: " + ex, "results":null });
+    }
 }
 
 function searchUserTransactions(req,res){
-    var requestUser = req.body.requestUser;
-    var userInfo = req.body.userInfo;
-    userInfo.full = true;
+    try {
+        var requestUser = req.body.requestUser;
+        var userInfo = req.body.userInfo;
+        userInfo.full = true;
 
-    // Validate User
-    auth.authorizeUser(requestUser, userInfo._id, function(ret){
-        if(ret.errorMessage != null) {
-            res.status(200).json(ret);
-        }
-        else if(!ret.results) {
-            res.status(200).json({"errorMessage":"User status invalid for this request", "results":null});
-        }
-        else {
-            auth.getUserById(userInfo, function(ret){
-                if(ret.errorMessage){
-                    res.status(200).json(ret);
-                }
-                else {
-                    charge.searchUserTransactions(ret.results.authTrans, function(searchRet) {
-                        res.status(200).json(searchRet);
-                    });
-                }
-            });
-        }
-    });      
+        // Validate User
+        auth.authorizeUser(requestUser, userInfo._id, function(ret){
+            if(ret.errorMessage != null) {
+                res.status(200).json(ret);
+            }
+            else if(!ret.results) {
+                res.status(200).json({"errorMessage":"User status invalid for this request", "results":null});
+            }
+            else {
+                auth.getUserById(userInfo, function(ret){
+                    if(ret.errorMessage){
+                        res.status(200).json(ret);
+                    }
+                    else {
+                        charge.searchUserTransactions(ret.results.authTrans, function(searchRet) {
+                            res.status(200).json(searchRet);
+                        });
+                    }
+                });
+            }
+        });  
+    }
+    catch(ex){
+        res.status(200).json({"errorMessage":"Error Processing Request: " + ex, "results":null });
+    }    
 }
 /* user auth */
 function createUser(req, res){
-    var requestUser = req.body.requestUser;
-    var userInfo = req.body.userInfo;
+    try {
+        var requestUser = req.body.requestUser;
+        var userInfo = req.body.userInfo;
 
-    // Validate User (Admin Only)
-    auth.authorizeUser(requestUser, null, function(ret){
-        if(ret.errorMessage != null) {
-            res.status(200).json(ret);
-        }
-        else if(!ret.results) {
-            res.status(200).json({"errorMessage":"User status invalid for this request", "results":null});
-        }
-        else {
-            auth.createUser(userInfo, function(ret){
+        // Validate User (Admin Only)
+        auth.authorizeUser(requestUser, null, function(ret){
+            if(ret.errorMessage != null) {
                 res.status(200).json(ret);
-            });
-        }
-    });          
+            }
+            else if(!ret.results) {
+                res.status(200).json({"errorMessage":"User status invalid for this request", "results":null});
+            }
+            else {
+                auth.createUser(userInfo, function(ret){
+                    res.status(200).json(ret);
+                });
+            }
+        });    
+    }
+    catch(ex){
+        res.status(200).json({"errorMessage":"Error Processing Request: " + ex, "results":null });
+    }      
 }
 
 function updateUser(req, res){
-    var requestUser = req.body.requestUser;
-    var userInfo = req.body.userInfo;
+    try {
+        var requestUser = req.body.requestUser;
+        var userInfo = req.body.userInfo;
 
-    // Validate User
-    auth.authorizeUser(requestUser, userInfo._id, function(ret){
-        if(ret.errorMessage != null) {
-            res.status(200).json(ret);
-        }
-        else if(!ret.results) {
-            res.status(200).json({"errorMessage":"User status invalid for this request", "results":null});
-        }
-        else {
-            auth.updateUser(userInfo, function(ret){
+        // Validate User
+        auth.authorizeUser(requestUser, userInfo._id, function(ret){
+            if(ret.errorMessage != null) {
                 res.status(200).json(ret);
-            });
-        }
-    });         
+            }
+            else if(!ret.results) {
+                res.status(200).json({"errorMessage":"User status invalid for this request", "results":null});
+            }
+            else {
+                auth.updateUser(userInfo, function(ret){
+                    res.status(200).json(ret);
+                });
+            }
+        }); 
+    }
+    catch(ex){
+        res.status(200).json({"errorMessage":"Error Processing Request: " + ex, "results":null });
+    }        
 }
 
 function userSearch(req, res){
-    var requestUser = req.body.requestUser;
-    var searchInfo = req.body.searchInfo;
+    try {
+        var requestUser = req.body.requestUser;
+        var searchInfo = req.body.searchInfo;
 
-    // Validate User (Admin Only)
-    auth.authorizeUser(requestUser, null, function(ret){
-        if(ret.errorMessage != null) {
-            res.status(200).json(ret);
-        }
-        else if(!ret.results) {
-            res.status(200).json({"errorMessage":"User status invalid for this request", "results":null});
-        }
-        else {
-            auth.userSearch(searchInfo, function(ret){
+        // Validate User (Admin Only)
+        auth.authorizeUser(requestUser, null, function(ret){
+            if(ret.errorMessage != null) {
                 res.status(200).json(ret);
-            });
-        }
-    });         
+            }
+            else if(!ret.results) {
+                res.status(200).json({"errorMessage":"User status invalid for this request", "results":null});
+            }
+            else {
+                auth.userSearch(searchInfo, function(ret){
+                    res.status(200).json(ret);
+                });
+            }
+        });  
+    }
+    catch(ex){
+        res.status(200).json({"errorMessage":"Error Processing Request: " + ex, "results":null });
+    }       
 }
 
 function getUserById(req, res){
-    var requestUser = req.body.requestUser;
-    var userInfo = req.body.userInfo;
+    try {
+        var requestUser = req.body.requestUser;
+        var userInfo = req.body.userInfo;
 
-    // Validate User
-    auth.authorizeUser(requestUser, userInfo._id, function(ret){
-        if(ret.errorMessage != null) {
-            res.status(200).json(ret);
-        }
-        else if(!ret.results) {
-            res.status(200).json({"errorMessage":"User status invalid for this request", "results":null});
-        }
-        else {
-            auth.getUserById(userInfo, function(ret){
+        // Validate User
+        auth.authorizeUser(requestUser, userInfo._id, function(ret){
+            if(ret.errorMessage != null) {
                 res.status(200).json(ret);
-            });
-        }
-    });      
+            }
+            else if(!ret.results) {
+                res.status(200).json({"errorMessage":"User status invalid for this request", "results":null});
+            }
+            else {
+                auth.getUserById(userInfo, function(ret){
+                    res.status(200).json(ret);
+                });
+            }
+        });    
+    }
+    catch(ex){
+        res.status(200).json({"errorMessage":"Error Processing Request: " + ex, "results":null });
+    }  
 }
 
 function generateStudentId(req, res){
-    var requestUser = req.body.requestUser;    
-    var userInfo = req.body.userInfo;
+    try {
+        var requestUser = req.body.requestUser;    
+        var userInfo = req.body.userInfo;
 
-    // Validate User
-    auth.authorizeUser(requestUser, userInfo._id, function(ret){
-        if(ret.errorMessage != null) {
-            res.status(200).json(ret);
-        }
-        else if(!ret.results) {
-            res.status(200).json({"errorMessage":"User status invalid for this request", "results":null});
-        }
-        else {
-            auth.generateStudentId(userInfo, function(ret){
+        // Validate User
+        auth.authorizeUser(requestUser, userInfo._id, function(ret){
+            if(ret.errorMessage != null) {
                 res.status(200).json(ret);
-            });
-        }
-    });  
+            }
+            else if(!ret.results) {
+                res.status(200).json({"errorMessage":"User status invalid for this request", "results":null});
+            }
+            else {
+                auth.generateStudentId(userInfo, function(ret){
+                    res.status(200).json(ret);
+                });
+            }
+        });  
+    }
+    catch(ex){
+        res.status(200).json({"errorMessage":"Error Processing Request: " + ex, "results":null });
+    }
 }
 
 /* TalentLMS */
 function createTLMSUser(req, res){
-    var requestUser = req.body.requestUser;    
-    var userInfo = req.body.userInfo;
+    try {
+        var requestUser = req.body.requestUser;    
+        var userInfo = req.body.userInfo;
 
-    // Validate User
-    auth.authorizeUser(requestUser, null, function(ret){
-        if(ret.errorMessage != null) {
-            res.status(200).json(ret);
-        }
-        else if(!ret.results) {
-            res.status(200).json({"errorMessage":"User status invalid for this request", "results":null});
-        }
-        else {
-            talentlms.signup(userInfo, function(ret){
+        // Validate User
+        auth.authorizeUser(requestUser, null, function(ret){
+            if(ret.errorMessage != null) {
                 res.status(200).json(ret);
-            });
-        }
-    });  
+            }
+            else if(!ret.results) {
+                res.status(200).json({"errorMessage":"User status invalid for this request", "results":null});
+            }
+            else {
+                talentlms.signup(userInfo, function(ret){
+                    res.status(200).json(ret);
+                });
+            }
+        });  
+    }
+    catch(ex){
+        res.status(200).json({"errorMessage":"Error Processing Request: " + ex, "results":null });
+    }
 }
 
 function userLogin(req, res){    
-    var loginInfo = req.body.loginInfo;
-    
-    talentlms.signin(loginInfo, function(ret){
-        res.status(200).json(ret);
-    });
+    try {
+        var loginInfo = req.body.loginInfo;
+        
+        talentlms.signin(loginInfo, function(ret){
+            res.status(200).json(ret);
+        });
+    }
+    catch(ex){
+        res.status(200).json({"errorMessage":"Error Processing Request: " + ex, "results":null });
+    }
 }
 
 function getTLMSUserById(req, res){
-    var requestUser = req.body.requestUser;    
-    var userInfo = req.body.userInfo;
+    try {
+        var requestUser = req.body.requestUser;    
+        var userInfo = req.body.userInfo;
 
-    // Validate User
-    auth.authorizeUser(requestUser, userInfo._id, function(ret){
-        if(ret.errorMessage != null) {
-            res.status(200).json(ret);
-        }
-        else if(!ret.results) {
-            res.status(200).json({"errorMessage":"User status invalid for this request", "results":null});
-        }
-        else {            
-            talentlms.getUserById(userInfo, function(ret){
+        // Validate User
+        auth.authorizeUser(requestUser, userInfo._id, function(ret){
+            if(ret.errorMessage != null) {
                 res.status(200).json(ret);
-            });
-        }
-    }); 
+            }
+            else if(!ret.results) {
+                res.status(200).json({"errorMessage":"User status invalid for this request", "results":null});
+            }
+            else {            
+                talentlms.getUserById(userInfo, function(ret){
+                    res.status(200).json(ret);
+                });
+            }
+        }); 
+    }
+    catch(ex){
+        res.status(200).json({"errorMessage":"Error Processing Request: " + ex, "results":null });
+    }
 }
 
 function getCourses(req, res){
-    talentlms.getCourses(function(ret){
-        res.status(200).json(ret);
-    });
+    try {
+        talentlms.getCourses(function(ret){
+            res.status(200).json(ret);
+        });
+    }
+    catch(ex){
+        res.status(200).json({"errorMessage":"Error Processing Request: " + ex, "results":null });
+    }
 }
 
 function courseRegister(req, res){
-    var requestUser = req.body.requestUser;
-    var userInfo = req.body.userInfo;
-    var courseInfo = req.body.courseInfo;
+    try {
+        var requestUser = req.body.requestUser;
+        var userInfo = req.body.userInfo;
+        var courseInfo = req.body.courseInfo;
 
-    // Validate User
-    auth.authorizeUser(requestUser, userInfo._id, function(ret){
-        if(ret.errorMessage != null) {
-            res.status(200).json(ret);
-        }
-        else if(!ret.results) {
-            res.status(200).json({"errorMessage":"User status invalid for this request", "results":null});
-        }
-        else {            
-            talentlms.courseRegister(userInfo, courseInfo,function(ret){
-                if(ret.errorMessage){
-                    //Send error email
-                    mail.sendEmail({ email: "admin@lenkesongcu.org", title:"Registration Error", formData:{}, additionalData:{},
-                        subject:"Unable to Register student for course [ID]: "+courseInfo.id +" [student Id]:"+userInfo.studentId+" Error: "+ ret.errorMessage
-                        }, function(ret){});
-                }
-        
+        // Validate User
+        auth.authorizeUser(requestUser, userInfo._id, function(ret){
+            if(ret.errorMessage != null) {
                 res.status(200).json(ret);
-            });
-        }
-    }); 
+            }
+            else if(!ret.results) {
+                res.status(200).json({"errorMessage":"User status invalid for this request", "results":null});
+            }
+            else {            
+                talentlms.courseRegister(userInfo, courseInfo,function(ret){
+                    if(ret.errorMessage){
+                        //Send error email
+                        mail.sendEmail({ email: "admin@lenkesongcu.org", title:"Registration Error", formData:{}, additionalData:{},
+                            subject:"Unable to Register student for course [ID]: "+courseInfo.id +" [student Id]:"+userInfo.studentId+" Error: "+ ret.errorMessage
+                            }, function(ret){});
+                    }
+            
+                    res.status(200).json(ret);
+                });
+            }
+        }); 
+    }
+    catch(ex){
+        res.status(200).json({"errorMessage":"Error Processing Request: " + ex, "results":null });
+    }
 }
 
 function courseUnregister(req, res){
-    var requestUser = req.body.requestUser;
-    var userInfo = req.body.userInfo;
-    var courseInfo = req.body.courseInfo;
+    try {
+        var requestUser = req.body.requestUser;
+        var userInfo = req.body.userInfo;
+        var courseInfo = req.body.courseInfo;
 
-    // Validate User
-    auth.authorizeUser(requestUser, userInfo._id, function(ret){
-        if(ret.errorMessage != null) {
-            res.status(200).json(ret);
-        }
-        else if(!ret.results) {
-            res.status(200).json({"errorMessage":"User status invalid for this request", "results":null});
-        }
-        else {            
-            talentlms.courseUnregister(userInfo, courseInfo, function(ret){
+        // Validate User
+        auth.authorizeUser(requestUser, userInfo._id, function(ret){
+            if(ret.errorMessage != null) {
                 res.status(200).json(ret);
-            });
-        }
-    });      
+            }
+            else if(!ret.results) {
+                res.status(200).json({"errorMessage":"User status invalid for this request", "results":null});
+            }
+            else {            
+                talentlms.courseUnregister(userInfo, courseInfo, function(ret){
+                    res.status(200).json(ret);
+                });
+            }
+        });    
+    }
+    catch(ex){
+        res.status(200).json({"errorMessage":"Error Processing Request: " + ex, "results":null });
+    }  
 }
 
 /*** Routes ***/
