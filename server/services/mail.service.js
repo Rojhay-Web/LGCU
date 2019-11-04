@@ -68,7 +68,7 @@ var mail = {
                 }
               });
 
-              var appID = generateAppId(emailInfo.formData);
+              var appID = (emailInfo.appId ? emailInfo.appId : generateAppId(emailInfo.formData));
 
               var mailOptions = {
                 from: process.env.user,

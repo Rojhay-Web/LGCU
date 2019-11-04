@@ -64,6 +64,7 @@ class StudentApp extends Component{
         this.nextSection = this.nextSection.bind(this);
         this.submitForm = this.submitForm.bind(this);
         this.clearForm = this.clearForm.bind(this);
+        this.generateAppId = this.generateAppId.bind(this);
     }
 
     componentDidMount(){
@@ -194,16 +195,7 @@ class StudentApp extends Component{
                     {this.state.selectedSection == "submitted" && 
                         <div className="form-section-container submitted">
                             <h2>You Are Almost Finished</h2>
-                            <p>Your Lenkeson Global Christian University student application has been submitted, to complete your application you must send in your $50.00 application fee payment.</p>
-                            <p>Please click the following link to submit your application fee right now: <span className="idLink" onClick={e => this.props.appFeeForm(this.state.applicationId)}>Application Fee</span></p>
-                            <p>If you are not prepared to submit you application fee right now please use the following steps:</p>
-                            <ul>
-                                <li>Navigate to the lenkesongcu.org apply page</li>
-                                <li>Click the link for "Application Fee Submissions"</li>
-                                <li>Complete the payment using your application id: <span className="appId">{this.state.applicationId}</span> This number will also be emailed to you with your application confirmation.</li>
-                            </ul>
-
-                            <a href="/apply" className="lBtn c1"><span>Finish Later</span><i className="btn-icon fas fa-clipboard-check"></i></a>
+                            <p>Your Lenkeson Global Christian University student application has been submitted, to complete your application please email all additional required documentation to admissions@lenkesongcu.org.</p>                                                      
                         </div> 
                     }
                 </div>
@@ -263,27 +255,33 @@ class StudentApp extends Component{
         try {
             this.validateSection("all",function(ret){
                 if(ret){
-                    // Send Email
-                    var postData = { 
-                        email: self.state.sendAddress, 
-                        subject:"Student Application Form", 
-                        title: "Student Application", 
-                        formData: self.state.form
-                    
-                    };
+                    var appId = this.generateAppId(self.state.form);
+                    // Open Payment
+                    self.props.appFeeForm(appId,function(){
 
-                    axios.post(rootPath + "/api/sendAppEmail", postData, {'Content-Type': 'application/json'})
-                    .then(function(response) {
-                        if(response.errorMessage == null && response.data.results.status === "Email Sent"){
-                            self.setState({ selectedSection:"submitted", applicationId: response.data.results.appId}, ()=> {
-                                self.props.appFeeForm(response.data.results.appId);
-                            });                         
-                        }
-                        else {
-                            alert("Error Submitting Form");
-                            console.log("[Error] Submitting Form: ", response.data.errorMessage);
-                        }
-                    });                               
+                        // Close Payment Modal
+                        self.props.modalHide();
+                        // Send Email
+                        var postData = { 
+                            email: self.state.sendAddress, 
+                            subject:"Student Application Form", 
+                            title: "Student Application", 
+                            formData: self.state.form,
+                            appId: appId                        
+                        };
+
+                        /*axios.post(rootPath + "/api/sendAppEmail", postData, {'Content-Type': 'application/json'})
+                        .then(function(response) {
+                            if(response.errorMessage == null && response.data.results.status === "Email Sent"){
+                                self.setState({ selectedSection:"submitted", applicationId: response.data.results.appId});                         
+                            }
+                            else {
+                                alert("Error Submitting Form: Please Contact Admissions Office");
+                                //console.log("[Error] Submitting Form: ", response.data.errorMessage);
+                            }
+                        });*/   
+                        self.setState({ selectedSection:"submitted", applicationId: appId});    
+                    });                                            
                 }
             }); 
         }
@@ -482,6 +480,23 @@ class StudentApp extends Component{
         catch(ex){
             console.log("Error With Degree Search: ", ex);
         }
+    }
+
+    generateAppId(formdata) {
+        var appId = "";
+    
+        try {
+            var firstName = ("firstName" in formdata && formdata.firstName.value.length >= 1 ? formdata.firstName.value : "|");
+            var lastName = ("lastName" in formdata && formdata.lastName.value.length >= 1  ? formdata.lastName.value : "!");
+    
+            appId = firstName.charAt(0) + lastName + "-"+ Date.now();
+        }
+        catch(ex){
+            console.log("[Error]: Error generating app Id: ",ex);
+            appId = "defaultID-000";
+        }
+    
+        return appId;
     }
 }
 

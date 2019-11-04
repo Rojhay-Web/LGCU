@@ -94,7 +94,8 @@ class Apply extends Component{
                 ]
             },
             modalStatus: false,
-            appId:""
+            appId:"",
+            cbFunc: function(){ }
         }
 
         this.getAppType = this.getAppType.bind(this);
@@ -117,7 +118,7 @@ class Apply extends Component{
                     {this.setApplication()}
                 </section>
 
-                <CardPayment title="Student Application Fee" show={this.state.modalStatus} handleClose={this.modalHide} appId={this.state.appId} />
+                <CardPayment title="Student Application Fee" show={this.state.modalStatus} handleClose={this.modalHide} appId={this.state.appId} cbFunc={this.state.cbFunc}/>
             </div>
         );
     }
@@ -174,11 +175,11 @@ class Apply extends Component{
         }
     }
 
-    appFeeForm(appId){
+    appFeeForm(appId, callback){
         var self = this;
         try {
-            this.setState({ appId: appId}, () =>{
-                self.modalShow()
+            this.setState({ appId: appId, cbFunc: callback}, () =>{
+                self.modalShow();
             });
         }
         catch(ex){
@@ -192,7 +193,7 @@ class Apply extends Component{
                 return <div className="application-container">
                         <h2 className="lrgTitle ctr" data-text="Student Application">Student Application</h2>
                         <div className="section-container">
-                            <StudentApp appFeeForm={this.appFeeForm}/>
+                            <StudentApp appFeeForm={this.appFeeForm} modalHide={this.modalHide}/>
                         </div>
                 </div>;
                 break;
