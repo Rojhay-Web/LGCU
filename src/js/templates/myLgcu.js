@@ -277,7 +277,7 @@ class SignInModal extends Component{
                         </div>
 
                         <div className="forgot-link">
-                            <a href="">Forgot Password?</a>
+                            <a href="https://lenkesongcu.talentlms.com" target="_blank">Forgot Password?</a>
                         </div>
 
                         <div className="form-btn-container">
