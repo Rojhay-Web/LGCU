@@ -18,7 +18,7 @@ class MyCourses extends Component{
             spinner: false,
             modalStatus:false,
             searchQuery:"",
-            technologyFee:150,
+            technologyFee:125,
             totalPrice:0,
             creditRate:0,
             studentInfo:{ studentId:0, talentlmsId:0, degree: "", class:"", gpa:0, fulltime:false },
