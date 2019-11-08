@@ -249,13 +249,14 @@ class StudentApp extends Component{
             console.log("Error changing element: ",ex);
         }
     }
+
     submitForm() {
         var self = this;
 
         try {
             this.validateSection("all",function(ret){
                 if(ret){
-                    var appId = this.generateAppId(self.state.form);
+                    var appId = self.generateAppId(self.state.form);
                     // Open Payment
                     self.props.appFeeForm(appId,function(){
 
@@ -270,7 +271,7 @@ class StudentApp extends Component{
                             appId: appId                        
                         };
 
-                        /*axios.post(rootPath + "/api/sendAppEmail", postData, {'Content-Type': 'application/json'})
+                        axios.post(rootPath + "/api/sendAppEmail", postData, {'Content-Type': 'application/json'})
                         .then(function(response) {
                             if(response.errorMessage == null && response.data.results.status === "Email Sent"){
                                 self.setState({ selectedSection:"submitted", applicationId: response.data.results.appId});                         
@@ -279,7 +280,7 @@ class StudentApp extends Component{
                                 alert("Error Submitting Form: Please Contact Admissions Office");
                                 //console.log("[Error] Submitting Form: ", response.data.errorMessage);
                             }
-                        });*/   
+                        });  
                         self.setState({ selectedSection:"submitted", applicationId: appId});    
                     });                                            
                 }
