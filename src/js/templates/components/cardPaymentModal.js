@@ -342,6 +342,7 @@ class CardPayment extends Component{
                 };
                 
                 self.setState({ returnMessage: {"type":"processing", "message":""} }, () =>{
+                    
                     axios.post(rootPath + "/api/applicationCharge", chargeForm, {'Content-Type': 'application/json'})
                     .then(function(resp) {
                         try {
@@ -353,6 +354,7 @@ class CardPayment extends Component{
                                         // Success
                                         bannerMessage.type = "success";
                                         bannerMessage.message = response.results.transactionResponse.messages.message[0].description;
+                                        self.props.cbFunc();
                                     }
                                     else {
                                         // Error Banner
