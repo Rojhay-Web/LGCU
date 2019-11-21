@@ -1352,6 +1352,20 @@
 .aboutPage .about-section .letter-container .lang-ctrl .lang-btn + .lang-btn {
   margin-left: 10px;
 }
+.aboutPage .about-section .acry-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.aboutPage .about-section .acry-container .acryTitle {
+  padding: 2px 5px;
+}
+.aboutPage .about-section .acry-container .acryTitle span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  border: 1px solid #504e99;
+}
 .aboutPage .about-section.alternate {
   background: #ffffff;
   color: #151280;
