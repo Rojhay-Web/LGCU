@@ -89,16 +89,16 @@ class About extends Component{
 
                 <section className="about-section alternate2 patterned">
                     <div className="section-container">
-                        <h2 className="lrgTitle ctr c1" data-text="Our Core Values">Lenkeson Meaning</h2>
+                        <h2 className="lrgTitle ctr" data-text="Lenkeson Meaning">Lenkeson Meaning</h2>
                         <div className="acry-container">
-                            <div className="acryTitle"><span>L</span>eadership</div>
-                            <div className="acryTitle"><span>E</span>mpowerment</div>
-                            <div className="acryTitle"><span>N</span>urturing </div>
-                            <div className="acryTitle"><span>K</span>nowledge </div>
-                            <div className="acryTitle"><span>E</span>xcellence</div>
-                            <div className="acryTitle"><span>S</span>ervices</div>
-                            <div className="acryTitle"><span>O</span>pportunities</div>
-                            <div className="acryTitle"><span>N</span>etworking</div>
+                            <div className="acryTitle"><div className="initLetter">L</div>eadership</div>
+                            <div className="acryTitle"><div className="initLetter">E</div>mpowerment</div>
+                            <div className="acryTitle"><div className="initLetter">N</div>urturing </div>
+                            <div className="acryTitle"><div className="initLetter">K</div>nowledge </div>
+                            <div className="acryTitle"><div className="initLetter">E</div>xcellence</div>
+                            <div className="acryTitle"><div className="initLetter">S</div>ervices</div>
+                            <div className="acryTitle"><div className="initLetter">O</div>pportunities</div>
+                            <div className="acryTitle"><div className="initLetter">N</div>etworking</div>
                         </div>
                     </div>
                 </section>
