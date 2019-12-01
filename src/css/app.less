@@ -250,8 +250,51 @@ body, html {
                 transition: .5s all ease-in-out;
                 &:hover { background: rgba(255,255,255,0.2); text-decoration: none;}
                 .c2 { color: @color2;}   
-                &.no-link { cursor: default; padding-right: 5px; &:hover { background: rgba(0,0,0,0); } } 
-                &.donation-link { border: none;   }         
+                &.no-link { 
+                    cursor: default; 
+                    padding-right: 5px; 
+                    &:hover { background: rgba(0,0,0,0); } 
+                    @media @mobile-device { display: none; }
+                } 
+                &.donation-link { border: none;   @media @mobile-device { border-left: 1px solid rgba(255,255,255,0.5); }}   
+                
+                &.search-bar {
+                    width: 300px;
+                    height: 100%;
+                    font-size: 14px;
+                    .gsc-control-cse {
+                        padding: 0px;
+                        border: none;
+                        background-color: #343a40;
+                        .gsc-search-box { 
+                            margin: 0px;
+                            table { 
+                                margin: 0px;
+                                .gsc-input-box {
+                                    border: 0px;
+                                    table { td { padding: 0px; }}
+                                    input { font-size: 14px;}
+
+                                    @media @mobile-device {
+                                        padding-top: 3px;
+                                        padding-bottom: 3px;
+                                        padding-left: 3px;
+                                    }
+                                }
+                            }
+
+                            .gsc-search-button {
+                                button { 
+                                    padding: 5px 15px;
+                                    svg { width: 10px; height: 10px; }
+                                    @media @mobile-device { padding: 8px 10px;}
+                                }
+                            }
+                        }
+                    }
+
+                    @media @mobile-device { width: 100%; border-left: none;}
+                }
             }           
         }
 

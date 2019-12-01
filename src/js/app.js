@@ -105,7 +105,11 @@ class App extends Component{
                                 <span className="nav-item mini-nav-link no-link">Donations</span>
                                 <a href="https://www.givelify.com/givenow/1.0/?token=eyJvcmdfaWQiOiJNelUyT1RFfiIsImJhZGdlX2ltYWdlIjoiYjMucG5nIn0~" target="_blank" rel="noopener noreferrer" className="nav-item mini-nav-link donation-link"><span className="givelify-logo">Givelify</span></a>
                                 <a href="https://www.paypal.com/mep/dashboard" target="_blank" rel="noopener noreferrer" className="nav-item mini-nav-link donation-link"><i className="fab fa-paypal"></i></a>
-                                <Link className="nav-item mini-nav-link" to="/apply">Apply Now</Link>                                
+                                <Link className="nav-item mini-nav-link" to="/apply">Apply Now</Link>  
+                                
+                                <div className="nav-item search-bar">
+                                    <div className="gcse-search"></div>
+                                </div>                              
                             </nav>
                             <nav className="navbar navbar-expand-lg nav-bottom">
                                 <Link className="navbar-brand" to="/">
