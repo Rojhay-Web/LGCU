@@ -2,36 +2,189 @@
 
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-        <loc>http://www.lenkesongcu.org</loc>
+        <loc>https://www.lenkesongcu.org</loc>
     </url>
     <url>
-        <loc>http://www.lenkesongcu.org/about</loc>
+        <loc>https://www.lenkesongcu.org/about</loc>
     </url>
     <url>
-        <loc>http://www.lenkesongcu.org/academics</loc>
+        <loc>https://www.lenkesongcu.org/academics</loc>
     </url>
     <url>
-        <loc>http://www.lenkesongcu.org/admissions</loc>
+        <loc>https://www.lenkesongcu.org/admissions</loc>
     </url>
     <url>
-        <loc>http://www.lenkesongcu.org/faculty</loc>
+        <loc>https://www.lenkesongcu.org/faculty</loc>
     </url>
     <url>
-        <loc>http://www.lenkesongcu.org/tuition</loc>
+        <loc>https://www.lenkesongcu.org/tuition</loc>
     </url>
     <url>
-        <loc>http://www.lenkesongcu.org/studyarea/undergraduatestudies</loc>
+        <loc>https://www.lenkesongcu.org/studyarea/undergraduatestudies</loc>
     </url>
     <url>
-        <loc>http://www.lenkesongcu.org/studyarea/theology_biblicalstudies</loc>
+        <loc>https://www.lenkesongcu.org/studyarea/theology_biblicalstudies</loc>
     </url>
     <url>
-        <loc>http://www.lenkesongcu.org/studyarea/businessadministration</loc>
+        <loc>https://www.lenkesongcu.org/studyarea/businessadministration</loc>
     </url>
     <url>
-        <loc>http://www.lenkesongcu.org/studyarea/education</loc>
+        <loc>https://www.lenkesongcu.org/studyarea/education</loc>
     </url>
     <url>
-        <loc>http://www.lenkesongcu.org/studyarea/global_strategicleadership</loc>
+        <loc>https://www.lenkesongcu.org/studyarea/global_strategicleadership</loc>
+    </url>
+    <url>
+        <loc>https://www.lenkesongcu.org/studyarea/healthcareadministration</loc>
+    </url>
+    <url>
+        <loc>https://www.lenkesongcu.org/studyarea/socialwork</loc>
+    </url>
+    <url>
+        <loc>https://www.lenkesongcu.org/studyarea/undergraduatestudies?majorId=AS-ACC</loc>
+    </url>
+    <url>
+        <loc>https://www.lenkesongcu.org/studyarea/undergraduatestudies?majorId=AS-BA</loc>
+    </url>
+    <url>
+        <loc>https://www.lenkesongcu.org/studyarea/undergraduatestudies?majorId=AS-CDE</loc>
+    </url>
+    <url>
+        <loc>https://www.lenkesongcu.org/studyarea/undergraduatestudies?majorId=AS-CIS</loc>
+    </url>
+    <url>
+        <loc>https://www.lenkesongcu.org/studyarea/undergraduatestudies?majorId=AS-CJ</loc>
+    </url>
+    <url>
+        <loc>https://www.lenkesongcu.org/studyarea/undergraduatestudies?majorId=AS-EDU</loc>
+    </url>
+    <url>
+        <loc>https://www.lenkesongcu.org/studyarea/undergraduatestudies?majorId=AS-PSY</loc>
+    </url>
+    <url>
+        <loc>https://www.lenkesongcu.org/studyarea/undergraduatestudies?majorId=BA-BA</loc>
+    </url>
+    <url>
+        <loc>https://www.lenkesongcu.org/studyarea/undergraduatestudies?majorId=BA-CDE</loc>
+    </url>
+    <url>
+        <loc>https://www.lenkesongcu.org/studyarea/undergraduatestudies?majorId=BA-CIS</loc>
+    </url>
+    <url>
+        <loc>https://www.lenkesongcu.org/studyarea/undergraduatestudies?majorId=BS-CJ</loc>
+    </url>
+    <url>
+        <loc>https://www.lenkesongcu.org/studyarea/undergraduatestudies?majorId=BA-PSY</loc>
+    </url>
+    <url>
+        <loc>https://www.lenkesongcu.org/studyarea/undergraduatestudies?majorId=BA-SCEDU</loc>
+    </url>
+    <url>
+        <loc>https://www.lenkesongcu.org/studyarea/undergraduatestudies?majorId=BA-SLS</loc>
+    </url>
+    <url>
+        <loc>https://www.lenkesongcu.org/studyarea/undergraduatestudies?majorId=BA-SPEDU</loc>
+    </url>
+    <url>
+        <loc>https://www.lenkesongcu.org/studyarea/undergraduatestudies?majorId=BA-IR</loc>
+    </url>
+    <url>
+        <loc>https://www.lenkesongcu.org/studyarea/undergraduatestudies?majorId=BA-OL</loc>
+    </url>
+    <url>
+        <loc>https://www.lenkesongcu.org/studyarea/undergraduatestudies?majorId=BA-PA</loc>
+    </url>
+    <url>
+        <loc>https://www.lenkesongcu.org/studyarea/undergraduatestudies?majorId=BA-PP</loc>
+    </url>
+    <url>
+        <loc>https://www.lenkesongcu.org/studyarea/theology_biblicalstudies?majorId=AS-BBS</loc>
+    </url>
+    <url>
+        <loc>https://www.lenkesongcu.org/studyarea/theology_biblicalstudies?majorId=BA-THBBS</loc>
+    </url>
+    <url>
+        <loc>https://www.lenkesongcu.org/studyarea/theology_biblicalstudies?majorId=MA-REDU</loc>
+    </url>
+    <url>
+        <loc>https://www.lenkesongcu.org/studyarea/theology_biblicalstudies?majorId=MA-THST</loc>
+    </url>
+    <url>
+        <loc>https://www.lenkesongcu.org/studyarea/businessadministration?majorId=BA-BA</loc>
+    </url>
+    <url>
+        <loc>https://www.lenkesongcu.org/studyarea/businessadministration?majorId=MA-BA</loc>
+    </url>
+    <url>
+        <loc>https://www.lenkesongcu.org/studyarea/businessadministration?majorId=PHD-BA</loc>
+    </url>
+    <url>
+        <loc>https://www.lenkesongcu.org/studyarea/education?majorId=MA-CURI</loc>
+    </url>
+    <url>
+        <loc>https://www.lenkesongcu.org/studyarea/education?majorId=MA-EDULS</loc>
+    </url>
+    <url>
+        <loc>https://www.lenkesongcu.org/studyarea/education?majorId=MA-ESL</loc>
+    </url>
+    <url>
+        <loc>https://www.lenkesongcu.org/studyarea/education?majorId=MA-SCEDU</loc>
+    </url>
+    <url>
+        <loc>https://www.lenkesongcu.org/studyarea/education?majorId=MA-SPEDU</loc>
+    </url>
+    <url>
+        <loc>https://www.lenkesongcu.org/studyarea/education?majorId=EDD-E-ATL</loc>
+    </url>
+    <url>
+        <loc>https://www.lenkesongcu.org/studyarea/education?majorId=EDD-E-CHDEV</loc>
+    </url>
+    <url>
+        <loc>https://www.lenkesongcu.org/studyarea/education?majorId=EDD-E-CURI</loc>
+    </url>
+    <url>
+        <loc>https://www.lenkesongcu.org/studyarea/education?majorId=PHD-E-EDUL</loc>
+    </url>
+    <url>
+        <loc>https://www.lenkesongcu.org/studyarea/education?majorId=EDD-E-ESL</loc>
+    </url>
+    <url>
+        <loc>https://www.lenkesongcu.org/studyarea/education?majorId=PHD-E-SCEDU</loc>
+    </url>
+    <url>
+        <loc>https://www.lenkesongcu.org/studyarea/education?majorId=EDD-E-SPEDU</loc>
+    </url>
+    <url>
+        <loc>https://www.lenkesongcu.org/studyarea/education?majorId=EDD-E-HEDUL</loc>
+    </url>
+    <url>
+        <loc>https://www.lenkesongcu.org/studyarea/education?majorId=PHD-P-ATL</loc>
+    </url>
+    <url>
+        <loc>https://www.lenkesongcu.org/studyarea/education?majorId=PHD-P-CDDEV</loc>
+    </url>
+    <url>
+        <loc>https://www.lenkesongcu.org/studyarea/education?majorId=PHD-P-CURI</loc>
+    </url>
+    <url>
+        <loc>https://www.lenkesongcu.org/studyarea/education?majorId=PHD-P-EDUL</loc>
+    </url>
+    <url>
+        <loc>https://www.lenkesongcu.org/studyarea/education?majorId=PHD-P-ESL</loc>
+    </url>
+    <url>
+        <loc>https://www.lenkesongcu.org/studyarea/education?majorId=PHD-P-SCEDU</loc>
+    </url>
+    <url>
+        <loc>https://www.lenkesongcu.org/studyarea/education?majorId=PHD-P-SPEDU</loc>
+    </url>
+    <url>
+        <loc>https://www.lenkesongcu.org/studyarea/education?majorId=PHD-P-HEDUCCL</loc>
+    </url>
+    <url>
+        <loc>https://www.lenkesongcu.org/studyarea/global_strategicleadership?majorId=MA-ODL</loc>
+    </url>
+    <url>
+        <loc>https://www.lenkesongcu.org/studyarea/global_strategicleadership?majorId=PHD-GSL</loc>
     </url>
 </urlset> 
