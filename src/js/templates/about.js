@@ -87,6 +87,22 @@ class About extends Component{
                     </div>                    
                 </section>
 
+                <section className="about-section alternate2 patterned">
+                    <div className="section-container">
+                        <h2 className="lrgTitle ctr" data-text="Lenkeson Meaning">Lenkeson Meaning</h2>
+                        <div className="acry-container">
+                            <div className="acryTitle"><div className="initLetter">L</div>eadership</div>
+                            <div className="acryTitle"><div className="initLetter">E</div>mpowerment</div>
+                            <div className="acryTitle"><div className="initLetter">N</div>urturing </div>
+                            <div className="acryTitle"><div className="initLetter">K</div>nowledge </div>
+                            <div className="acryTitle"><div className="initLetter">E</div>xcellence</div>
+                            <div className="acryTitle"><div className="initLetter">S</div>ervices</div>
+                            <div className="acryTitle"><div className="initLetter">O</div>pportunities</div>
+                            <div className="acryTitle"><div className="initLetter">N</div>etworking</div>
+                        </div>
+                    </div>
+                </section>
+
                 <section className="about-section alternate">
                     <div className="section-container">
                         <h2 className="lrgTitle ctr c1" data-text="Our Core Values">Our Core Values</h2>
