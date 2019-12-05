@@ -121,7 +121,7 @@ function Home(props){
     const trans = (x, y, s) => `perspective(900px) rotateX(${x}deg) rotateY(${y}deg) scale(${s})`;
 
     return(
-        <div className="inner-page-body homePage">                
+        <div className="inner-page-body homePage">     
             <section className="home-section">
                 <div className="section-container">
                     <div className="split-section" id="imgSplit">

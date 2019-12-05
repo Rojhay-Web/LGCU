@@ -146,7 +146,7 @@
 }
 @media (max-width: 770px) {
   .homeHeader .header-card-container {
-    padding-top: 89px;
+    padding-top: 127px;
   }
   .homeHeader .header-card-container .cardImg {
     z-index: -1;
@@ -1377,6 +1377,11 @@
   color: #257728;
   font-weight: bold;
   border: 1px solid #ffffff;
+}
+@media (max-width: 770px) {
+  .aboutPage .about-section .acry-container {
+    flex-direction: column;
+  }
 }
 .aboutPage .about-section.alternate {
   background: #ffffff;
@@ -3961,8 +3966,68 @@ html {
 .app-nav .navbar.nav-top .nav-item.no-link:hover {
   background: rgba(0, 0, 0, 0);
 }
+@media (max-width: 770px) {
+  .app-nav .navbar.nav-top .nav-item.no-link {
+    display: none;
+  }
+}
 .app-nav .navbar.nav-top .nav-item.donation-link {
   border: none;
+}
+@media (max-width: 770px) {
+  .app-nav .navbar.nav-top .nav-item.donation-link {
+    border-left: 1px solid rgba(255, 255, 255, 0.5);
+  }
+}
+.app-nav .navbar.nav-top .nav-item.search-bar {
+  width: 300px;
+  height: 100%;
+  font-size: 14px;
+}
+.app-nav .navbar.nav-top .nav-item.search-bar .gsc-control-cse {
+  padding: 0px;
+  border: none;
+  background-color: #343a40;
+}
+.app-nav .navbar.nav-top .nav-item.search-bar .gsc-control-cse .gsc-search-box {
+  margin: 0px;
+}
+.app-nav .navbar.nav-top .nav-item.search-bar .gsc-control-cse .gsc-search-box table {
+  margin: 0px;
+}
+.app-nav .navbar.nav-top .nav-item.search-bar .gsc-control-cse .gsc-search-box table .gsc-input-box {
+  border: 0px;
+}
+.app-nav .navbar.nav-top .nav-item.search-bar .gsc-control-cse .gsc-search-box table .gsc-input-box table td {
+  padding: 0px;
+}
+.app-nav .navbar.nav-top .nav-item.search-bar .gsc-control-cse .gsc-search-box table .gsc-input-box input {
+  font-size: 14px;
+}
+@media (max-width: 770px) {
+  .app-nav .navbar.nav-top .nav-item.search-bar .gsc-control-cse .gsc-search-box table .gsc-input-box {
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 3px;
+  }
+}
+.app-nav .navbar.nav-top .nav-item.search-bar .gsc-control-cse .gsc-search-box .gsc-search-button button {
+  padding: 5px 15px;
+}
+.app-nav .navbar.nav-top .nav-item.search-bar .gsc-control-cse .gsc-search-box .gsc-search-button button svg {
+  width: 10px;
+  height: 10px;
+}
+@media (max-width: 770px) {
+  .app-nav .navbar.nav-top .nav-item.search-bar .gsc-control-cse .gsc-search-box .gsc-search-button button {
+    padding: 8px 10px;
+  }
+}
+@media (max-width: 770px) {
+  .app-nav .navbar.nav-top .nav-item.search-bar {
+    width: 100%;
+    border-left: none;
+  }
 }
 .app-nav .navbar.nav-bottom .navbar-brand {
   height: 75px;
