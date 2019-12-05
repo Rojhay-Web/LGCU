@@ -1378,6 +1378,11 @@
   font-weight: bold;
   border: 1px solid #ffffff;
 }
+@media (max-width: 770px) {
+  .aboutPage .about-section .acry-container {
+    flex-direction: column;
+  }
+}
 .aboutPage .about-section.alternate {
   background: #ffffff;
   color: #151280;
