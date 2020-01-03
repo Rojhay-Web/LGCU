@@ -6,6 +6,17 @@ var charge = require('../services/charge.service');
 var auth = require('../services/auth.service');
 var talentlms = require('../services/talentlms.service');
 
+/* sire routes */
+function getCopyrightDate(req, res){
+    try {
+        var d = new Date();
+        res.status(200).json({"errorMessage":null, "results":d.getFullYear() });
+    }
+    catch(ex){
+        res.status(200).json({"errorMessage":"Error Processing Request: " + ex, "results":null });
+    }
+}
+
 /* emails */
 function sendEmail(req, res){ 
     try {
@@ -363,6 +374,9 @@ function courseUnregister(req, res){
 }
 
 /*** Routes ***/
+/* Site Routes */
+router.get('/getCopyrightDate', getCopyrightDate);
+
 /* TalentLMS */
 router.post('/createTLMSUser', createTLMSUser);
 router.post('/userLogin', userLogin);

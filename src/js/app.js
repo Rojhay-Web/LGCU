@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Router, Route, Link } from "react-router-dom";
+import axios from 'axios';
 import { createBrowserHistory } from 'history';
 import $ from 'jquery';
 
@@ -38,6 +39,9 @@ const routes = [
     {path:"/mylgcu", component:myLGCU, headerComponent:myLGCUHeader}
 ];
 
+// API Route
+var rootPath = "";
+//var rootPath = "http://localhost:1111";
 
 const HeaderRoutes = route => (
     <Route path={route.path} render={props => ( <route.headerComponent {...props} />)} />
@@ -74,6 +78,7 @@ class App extends Component{
             navChange: false,
             sidebarOpen: false,
             modalStatus: false,
+            copyrightDate: "2019",
             alerts:[
                 {title:"100% Online",text:"Lenkeson Global Christian University is a completely online university founded to provide higher education globally.", type:"primary"},
                 {title:"Rolling Enrollment",text:"Classes starting soon, all classes are 8 weeks in length. To obtain additional information regarding enrollment, click on <a href=\"/apply\">Apply Now</a> then click on Student Application.", type:"primary"}
@@ -87,6 +92,7 @@ class App extends Component{
         this.modalShow = this.modalShow.bind(this);
         this.modalHide = this.modalHide.bind(this);
         this.setMLAccess = this.setMLAccess.bind(this);
+        this.getCopyrightDate = this.getCopyrightDate.bind(this);
     }
     
     setMLAccess(status){
@@ -212,7 +218,7 @@ class App extends Component{
                                     <div className="footer-info-container">
                                         <div className="footer-copyright">
                                             <i className="far fa-copyright"/>
-                                            <span>2019. Lenkeson Global Christian University, Inc. All Rights Reserved.</span>
+                                            <span>{this.state.copyrightDate}. Lenkeson Global Christian University, Inc. All Rights Reserved.</span>
                                         </div>
                                         <div className="policy-btns">
                                             <a className="policy-btn" data-toggle="collapse" href="#policyOne" aria-expanded="false" aria-controls="policyOne">Non-Discrimination Statement</a>
@@ -295,11 +301,26 @@ class App extends Component{
         }
     }
 
+    getCopyrightDate(){
+        var self = this;
+        try {
+            axios.get(rootPath + "/api/getCopyrightDate", {'Content-Type': 'application/json'})
+            .then(function(response) {
+                if(!response.data.errorMessage){
+                   self.setState({ copyrightDate: response.data.results });
+                }
+            });   
+        }
+        catch(ex){
+            console.log("Error Retrieving Copyright Date: ",ex);
+        }
+    }
+
     componentDidMount(){
         var self = this;
         window.addEventListener('scroll', this.listenToScroll);
         this.setAlerts();
-
+        this.getCopyrightDate();
         self.unlisten = history.listen(location => { 
             if(self.sidebarOpen) { self.setSidebarDisplay(false); }
         });                     
