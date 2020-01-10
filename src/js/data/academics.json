@@ -86,8 +86,15 @@
                 ]},
                 {"id":"BA-IR","title":"International Relations","gradtotal":120,"comingSoon":true, "courses":[]},
                 {"id":"BA-OL","title":"Organizational Leadership","gradtotal":120,"comingSoon":true, "courses":[]},
-                {"id":"BA-PA","title":"Public Administration","gradtotal":120,"comingSoon":true, "courses":[]},
-                {"id":"BA-PP","title":"Public Policy","gradtotal":120,"comingSoon":true, "courses":[]}
+                {"id":"BA-PA","title":"Public Administration","gradtotal":120,"comingSoon":true, "courses":[]},                                
+                {"id":"BA-COMM","title":"Communications","gradtotal":120,"comingSoon":true, "courses":[]},
+                {"id":"BA-ENG","title":"English","gradtotal":120,"comingSoon":true, "courses":[]},
+                {"id":"BA-FRE","title":"French","gradtotal":120,"comingSoon":true, "courses":[]}
+            ],
+            "masters":[
+                {"id":"MA-COMM","title":"Communications","gradtotal":45,"comingSoon":true, "courses":[]},
+                {"id":"MA-ENG","title":"English","gradtotal":45,"comingSoon":true, "courses":[]},
+                {"id":"MA-FRE","title":"French","gradtotal":45,"comingSoon":true, "courses":[]}
             ]
         }
     },
