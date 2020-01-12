@@ -86,8 +86,15 @@
                 ]},
                 {"id":"BA-IR","title":"International Relations","gradtotal":120,"comingSoon":true, "courses":[]},
                 {"id":"BA-OL","title":"Organizational Leadership","gradtotal":120,"comingSoon":true, "courses":[]},
-                {"id":"BA-PA","title":"Public Administration","gradtotal":120,"comingSoon":true, "courses":[]},
-                {"id":"BA-PP","title":"Public Policy","gradtotal":120,"comingSoon":true, "courses":[]}
+                {"id":"BA-PA","title":"Public Administration","gradtotal":120,"comingSoon":true, "courses":[]},                                
+                {"id":"BA-COMM","title":"Communications","gradtotal":120,"comingSoon":true, "courses":[]},
+                {"id":"BA-ENG","title":"English","gradtotal":120,"comingSoon":true, "courses":[]},
+                {"id":"BA-FRE","title":"French","gradtotal":120,"comingSoon":true, "courses":[]}
+            ],
+            "masters":[
+                {"id":"MA-COMM","title":"Communications","gradtotal":45,"comingSoon":true, "courses":[]},
+                {"id":"MA-ENG","title":"English","gradtotal":45,"comingSoon":true, "courses":[]},
+                {"id":"MA-FRE","title":"French","gradtotal":45,"comingSoon":true, "courses":[]}
             ]
         }
     },
@@ -135,7 +142,12 @@
                 ], "concentrations":[
                     {"title":"Church Ministries Concentration","courses":["CHM_501","CED_503","CHM_517","CHM_521","CHM_527","LEAD_543","LEAD_547","PTC_529","PTL_531","PTL_533","CHM_537","CHM_570"]},
                     {"title":"Global and Strategic Missions Concentration","courses":["GSM_501","GSM_503","GSM_505","GSM_507","GSM_511","GSM_521","GSM_527","GSM_531","LEAD_547","GSM_590"]}
-                ]}
+                ]},
+                {"id":"MA-DIVT", "title":"Divinity","gradtotal":45, "courses":[]}
+            ],
+            "doctorate":[
+                {"id":"PHD-MIN", "title":"Ministry", "degreeTitle":"","gradtotal":60, "courses":[]},
+                {"id":"PHD-THEO", "title":"Theology", "degreeTitle":"(Ph.D.)","gradtotal":60, "courses":[]}
             ]
         }
     },
