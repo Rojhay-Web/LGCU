@@ -20,7 +20,7 @@ function getCopyrightDate(req, res){
 /* emails */
 function sendEmail(req, res){ 
     try {
-        var emailInfo = req.body.emailInfo;
+        var emailInfo = req.body;
 
         mail.sendEmail(emailInfo, function(ret){
             res.status(200).json(ret);
