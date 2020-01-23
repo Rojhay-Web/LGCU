@@ -300,13 +300,15 @@ body, html {
 
         &.nav-bottom {                                   
             .navbar-brand {
-                height: 75px;
+                height: 120px;
                 display: flex;
                 flex-direction: row;
                 color: rgba(255,255,255,1);
                 font-family: 'Reem Kufi', sans-serif;
                 img { height: 100%;}
                 .textLogo { padding-left: 10px; padding-top: 7px; font-size: 21px; line-height: 25px; }
+
+                @media @mobile-device { height: 80px; }
             }
             .navbar-toggler {
                 color: rgba(255,255,255,1);
@@ -368,12 +370,15 @@ body, html {
         .nav-bottom { 
             position: relative;
             overflow: hidden;
-            height: @navHeightBottom;
+            //height: @navHeightBottom;
             background: rgba(52,58,64,0.75);
             .navbar-brand { color: rgba(255,255,255,1); }
             .collapse-container { animation: page-nav-slide 0.7s;}
         }
-        @media @mobile-device { padding:0; }
+        @media @mobile-device { 
+            padding:0;
+            .nav-bottom { height: @navHeightBottom; }
+        }
     }    
 }
 
