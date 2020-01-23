@@ -4030,7 +4030,7 @@ html {
   }
 }
 .app-nav .navbar.nav-bottom .navbar-brand {
-  height: 75px;
+  height: 120px;
   display: flex;
   flex-direction: row;
   color: #ffffff;
@@ -4044,6 +4044,11 @@ html {
   padding-top: 7px;
   font-size: 21px;
   line-height: 25px;
+}
+@media (max-width: 770px) {
+  .app-nav .navbar.nav-bottom .navbar-brand {
+    height: 80px;
+  }
 }
 .app-nav .navbar.nav-bottom .navbar-toggler {
   color: #ffffff;
@@ -4112,7 +4117,6 @@ html {
 .app-nav.page-nav .nav-bottom {
   position: relative;
   overflow: hidden;
-  height: 89px;
   background: rgba(52, 58, 64, 0.75);
 }
 .app-nav.page-nav .nav-bottom .navbar-brand {
@@ -4124,6 +4128,9 @@ html {
 @media (max-width: 770px) {
   .app-nav.page-nav {
     padding: 0;
+  }
+  .app-nav.page-nav .nav-bottom {
+    height: 89px;
   }
 }
 .inner-nav .nav-bottom {
