@@ -24,7 +24,8 @@ import "../css/app.less";
 
 /* Images */
 //import logo from '../assets/LGCULogo.png';
-import logo from '../assets/LGCULogo2.jpg';
+import logo from '../assets/LGCULogo2.png';
+import logotxt from '../assets/LGCULogo2_txt.png';
 
 const history = createBrowserHistory(); 
 
@@ -121,10 +122,10 @@ class App extends Component{
                             <nav className="navbar navbar-expand-lg nav-bottom">
                                 <Link className="navbar-brand" to="/">
                                     <img alt="logo img" className="headerLogo" src={logo}/>
-                                    {/*<div className="textLogo">
+                                    <div className="textLogo">
                                         <div className="logoLine">Lenkeson Global</div>
                                         <div className="logoLine">Christian University</div>
-                                    </div>*/}   
+                                    </div>
                                 </Link>
 
                                 <button className="navbar-toggler" type="button" aria-label="Toggle navigation" onClick={() => this.setSidebarDisplay(true)}>

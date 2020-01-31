@@ -6,6 +6,23 @@
 @navHeightBottom: 89px;
 
 /* Color Themes */
+//#014EB3
+@color1: rgba(1,78,179,1);
+.color1(@prop,@val){ @{prop}: rgba(1,78,179,@val) !important; }
+
+//FDA800
+@color2: rgba(253,168,0,1);
+.color2(@prop,@val){ @{prop}: rgba(253,168,0,@val) !important; }
+
+//0F7697
+@color3: rgba(15,118,151,1);
+.color3(@prop,@val){ @{prop}: rgba(15,118,151,@val) !important; }
+
+//82BAC1
+@color4: rgba(130,186,193,1);
+.color4(@prop,@val){ @{prop}: rgba(130,186,193,@val) !important; }
+
+/*
 @color1: rgba(21, 18, 128,1);
 .color1(@prop,@val){ @{prop}: rgba(21, 18, 128,@val) !important; }
 
@@ -14,6 +31,7 @@
 
 @color3: rgba(80, 78, 153,1);
 .color3(@prop,@val){ @{prop}: rgba(80, 78, 153,@val) !important; }
+*/
 
 /* Theme Colors */
 /* https://digitalsynopsis.com/design/beautiful-color-gradient-palettes/*/
@@ -187,7 +205,15 @@ body, html {
             margin-bottom: 20px;
 
             img { height: 100%;}
-            .textLogo { padding-left: 7px; padding-top: 7px; font-size: 21px; }
+            .textLogo { 
+                padding-left: 7px; 
+                padding-top: 7px; 
+                font-size: 21px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                color: @color3;
+            }
         }
         .social-container {
             .social-link { 
@@ -306,7 +332,15 @@ body, html {
                 color: rgba(255,255,255,1);
                 font-family: 'Reem Kufi', sans-serif;
                 img { height: 100%;}
-                .textLogo { padding-left: 10px; padding-top: 7px; font-size: 21px; line-height: 25px; }
+                .textLogo { 
+                    padding-left: 10px; 
+                    padding-top: 7px; 
+                    font-size: 21px; 
+                    line-height: 25px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                }
 
                 @media @mobile-device { height: 80px; }
             }
@@ -1300,8 +1334,8 @@ body, html {
             }
         }
         &:hover { 
-            background:rgba(255,255,255,0.3);            
-            .img-slider { left: calc(100% - 0px); &:before { border-left: 50px solid rgba(133,131,184,1) !important;} }
+            .color2(background, 1);            
+            .img-slider { left: calc(100% - 0px); &:before { border-left: 50px solid @color2 !important;} }
         }
     }
 
@@ -1323,8 +1357,8 @@ body, html {
             }
         }
         &:hover { 
-            background:rgba(255,255,255,0.3);
-            .img-slider { right: calc(100% - 0px); &:before { border-right: 50px solid rgba(133,131,184,1) !important;}}
+            .color2(background, 1);
+            .img-slider { right: calc(100% - 0px); &:before { border-right: 50px solid @color2 !important;}}
         }
     }
 
@@ -1346,8 +1380,8 @@ body, html {
             }
         }
         &:hover { 
-            background:rgba(255,255,255,0.3);
-            .img-slider { top: calc(100% - 0px); &:before { border-top: 50px solid rgba(133,131,184,1) !important;}}
+            .color2(background, 1);
+            .img-slider { top: calc(100% - 0px); &:before { border-top: 50px solid @color2 !important;}}
         }
     }
     
@@ -1375,7 +1409,7 @@ body, html {
             }
 
             &:hover { 
-                .img-slider { top: 0; &:before { border-bottom: 50px solid rgba(133,131,184,1) !important; } }
+                .img-slider { top: 0; &:before { border-bottom: 50px solid @color2 !important; } }
             }
         }
     }
@@ -1421,7 +1455,7 @@ body, html {
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
     cursor: pointer;
     transition: 0.7s all ease-in-out;
-    &:hover { background:rgba(87, 169, 90,1); }
+    &:hover { background:@color3; }
 }
 
 .translateModal {   
