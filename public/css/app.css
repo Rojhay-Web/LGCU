@@ -1144,6 +1144,9 @@
 .facultyPage .faculty-section .info-slider .slider-card.bio-card {
   overflow-y: auto;
 }
+.facultyPage .faculty-section .info-slider .slider-card.bio-card.txtOpen {
+  justify-content: normal;
+}
 .facultyPage .faculty-section .info-slider .slider-card .title,
 .facultyPage .faculty-section .info-slider .slider-card .phone {
   font-size: 1.35rem;

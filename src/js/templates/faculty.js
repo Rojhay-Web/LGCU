@@ -10,6 +10,8 @@ import DDurenImg from '../../assets/DDuren.jpg';
 import BernalImg from '../../assets/Bernal.jpg';
 import TWilsonImg from '../../assets/TWilson.jpg';
 import ASmokeImg from '../../assets/ASmoke.jpg';
+import AStevensonImg from '../../assets/AStevenson.PNG';
+import DPettusImg from '../../assets/DPettus.PNG';
 
 /* Header */
 class FacultyHeader extends Component{
@@ -45,6 +47,7 @@ class Faculty extends Component{
         this.controlSlider = this.controlSlider.bind(this);
         this.checkScrollLoc = this.checkScrollLoc.bind(this);
         this.initialReactGA = this.initialReactGA.bind(this);
+        this.checkBio = this.checkBio.bind(this);
     }
 
     componentDidMount(){ 
@@ -79,7 +82,7 @@ class Faculty extends Component{
                     <div className="info-slider">
                             <div className="info-slider-container" ref={this.slide1}>
                                 <div className="slider-vertical flip">
-                                    <div className="slider-card title base bio-card">
+                                    <div className="slider-card title base bio-card" id="bioOneCard">
                                         <h1 className="name">Dr. David Duren</h1>
                                         <div className="title">
                                             <p>Vice-President of Business, Finance & Staff Recruitment</p>
@@ -87,7 +90,7 @@ class Faculty extends Component{
                                         </div>
 
                                         <div className="faculty-bio" id="bioAccordionDuren">
-                                            <a className="bio-btn" data-toggle="collapse" href="#bioOne" aria-expanded="false" aria-controls="bioOne">Read Bio</a>
+                                            <a className="bio-btn" data-toggle="collapse" href="#bioOne" aria-expanded="false" aria-controls="bioOne" onClick={() => this.checkBio("bioOneCard")}>Read Bio</a>
                                             <div id="bioOne" className="bio-txt collapse" data-parent="#bioAccordionDuren">
                                                 <p>Dr. Duren's academic preparation includes a BS in Business Administration from S. C. State
                                                 University, MBA from Pfeiffer University, Doctorate in Business Administration (DBA)
@@ -108,7 +111,7 @@ class Faculty extends Component{
                                 </div>
 
                                 <div className="slider-vertical">
-                                    <div className="slider-card title c2 bio-card">
+                                    <div className="slider-card title c2 bio-card" id="bioBernalCard">
                                         <h1 className="name">Dr. Leonel Bernal</h1>
                                         <div className="title">
                                             <p>Vice-President School of Theology and Biblical Studies, Institutional Advancement & Student Enrollment, International Recruitment</p>
@@ -117,7 +120,7 @@ class Faculty extends Component{
                                         <a href="tel:4074340002" className="phone"><i className="fas fa-phone"></i> <span>407.434.0002</span></a>
 
                                         <div className="faculty-bio" id="bioAccordionBernal">
-                                            <a className="bio-btn w1" data-toggle="collapse" href="#bioBernal" aria-expanded="false" aria-controls="bioBernal">Read Bio</a>
+                                            <a className="bio-btn w1" data-toggle="collapse" href="#bioBernal" aria-expanded="false" aria-controls="bioBernal" onClick={() => this.checkBio("bioBernalCard")}>Read Bio</a>
                                             <div id="bioBernal" className="bio-txt collapse" data-parent="#bioAccordionBernal">
                                                 <p>Pastor with 37 years of experience of increasing responsibility in congregational leadership.
                                                     Committed to shepherding individuals to Christ, engaging the community in missionary work
@@ -136,12 +139,23 @@ class Faculty extends Component{
                                 </div>
 
                                 <div className="slider-vertical flip">
-                                    <div className="slider-card title light">
-                                        <h1 className="name">Mrs. Anita Stevenson</h1>
-                                        <div className="title">Dean of Academic Affairs, Student Services and Doctoral Residency</div>
+                                    <div className="slider-card title light bio-card" id="bioAStevensonCard">
+                                        <h1 className="name">Dr. Anita Stevenson</h1>
+                                        <div className="title">
+                                            <p>Dean of the School of Education</p>
+                                            <p>Dean of Academic Affairs, Student Services and Doctoral Residency</p>
+                                        </div>
+
+                                        <div className="faculty-bio" id="bioAccordionAStevenson">
+                                            <a className="bio-btn w1" data-toggle="collapse" href="#bioAStevenson" aria-expanded="false" aria-controls="bioAStevenson" onClick={() => this.checkBio("bioAStevensonCard")}>Read Bio</a>
+                                            <div id="bioAStevenson" className="bio-txt collapse" data-parent="#bioAccordionAStevenson">
+                                                <p>Dr. Anita Stevenson's experience in education includes more than twenty-five years of teaching in special education, regular education as well as serving as department chair / mentor. During this time in public education, Dr. Stevenson has been devoted to serving as an educational consultant. Her doctoral work involved an online learning program and her current position encompasses instructing online at the graduate level in the College of Education at Lenkeson Global Christian University.</p>
+                                                <p>Currently, Dr. Stevenson serves as the Academic Dean in the College of Education. Prior to serving in the Dean’s position, Dr. Stevenson wrote a portion of the elementary math curriculum and a Flipped Classroom Application Program for students with significant learning disabilities. In addition, she served as the Department Chair for a Community Referenced Instruction Program within a Public School system. Dr. Stevenson’s undergraduate degrees include a Bachelor of Science in Psychology and Early Childhood Education, a Master of Arts in Special Education and a Doctor of Philosophy in Educational Leadership with a focus on Special Education Administration and Supervision. Dr. Stevenson is actively involved in developing new teacher leaders and coaching professionals as educational consultants. </p>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div className="slider-card img light">
-                                        <img alt="Default img" src={defaultProfile} />
+                                        <img alt="Default img" src={AStevensonImg} />
                                     </div>
                                 </div>
 
@@ -184,65 +198,106 @@ class Faculty extends Component{
                 <section className="faculty-section alternate">
                     <div className="info-slider">
                         <div className="info-slider-container" ref={this.slide2}>
+                            <div className="slider-vertical">
+                                <div className="slider-card title light bio-card" id="bioWilsonCard">
+                                    <h1 className="name">Attorney Tiffany Wilson, Esq.</h1>
+                                    <div className="title">Board Member</div>
 
-                        
-                            <div className="slider-card title light bio-card">
-                                <h1 className="name">Attorney Tiffany Wilson, Esq.</h1>
-                                <div className="title">Board Member</div>
-
-                                <div className="faculty-bio" id="bioAccordionWilson">
-                                    <a className="bio-btn w1" data-toggle="collapse" href="#bioWilson" aria-expanded="false" aria-controls="bioWilson">Read Bio</a>
-                                    <div id="bioWilson" className="bio-txt collapse" data-parent="#bioAccordionWilson">
-                                        <p>Tiffany N. Wilson, Esq. is the owner and sole proprietors of Wilson Law Firm in Monroe NC. Wilson Law
-                                            Firm is a General Practice law office where Ms. Wilson focuses on Criminal, Juvenile, and Family Law.</p>
-                                        <p>Tiffany received her Juris Doctorate from North Carolina Central School of Law, Durham, NC, while at
-                                            NCCU school of law she was a member of their Trial Team. She graduated Cum Laude from Howard
-                                            University, Washington DC with a BA in Political Science/Criminal Justice. Ms. Wilson finished her
-                                            secondary education at Monroe High School, Monroe NC.</p>
-                                        <p>Tiffany Wilson is a member of the North Carolina State Bar, the Union County District Bar, and ABA
-                                            member. She currently serves as the Chair for the Indigent Committee in Union County. She’s currently a
-                                            member of the Union County Chamber of Commerce as well as member of the Women’s Business
-                                            subgroup. Ms. Wilson holds memberships in the following organizations: Delta Sigma Theta Sorority
-                                            Inc., Pi Sigma Alpha, National Council of Negro Women, and the NAACP.</p>
+                                    <div className="faculty-bio" id="bioAccordionWilson">
+                                        <a className="bio-btn w1" data-toggle="collapse" href="#bioWilson" aria-expanded="false" aria-controls="bioWilson" onClick={() => this.checkBio("bioWilsonCard")}>Read Bio</a>
+                                        <div id="bioWilson" className="bio-txt collapse" data-parent="#bioAccordionWilson">
+                                            <p>Tiffany N. Wilson, Esq. is the owner and sole proprietors of Wilson Law Firm in Monroe NC. Wilson Law
+                                                Firm is a General Practice law office where Ms. Wilson focuses on Criminal, Juvenile, and Family Law.</p>
+                                            <p>Tiffany received her Juris Doctorate from North Carolina Central School of Law, Durham, NC, while at
+                                                NCCU school of law she was a member of their Trial Team. She graduated Cum Laude from Howard
+                                                University, Washington DC with a BA in Political Science/Criminal Justice. Ms. Wilson finished her
+                                                secondary education at Monroe High School, Monroe NC.</p>
+                                            <p>Tiffany Wilson is a member of the North Carolina State Bar, the Union County District Bar, and ABA
+                                                member. She currently serves as the Chair for the Indigent Committee in Union County. She’s currently a
+                                                member of the Union County Chamber of Commerce as well as member of the Women’s Business
+                                                subgroup. Ms. Wilson holds memberships in the following organizations: Delta Sigma Theta Sorority
+                                                Inc., Pi Sigma Alpha, National Council of Negro Women, and the NAACP.</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div className="slider-card img light">
-                                <img alt="default img" src={TWilsonImg} />
-                            </div>                               
-                        
-                            <div className="slider-card title c3 bio-card">
-                                <h1 className="name">Dr. Andrew B. Smoke</h1>
-                                <div className="title">Board Member</div>
+                                <div className="slider-card img light">
+                                    <img alt="default img" src={TWilsonImg} />
+                                </div>  
+                            </div> 
 
-                                <div className="faculty-bio" id="bioAccordionSmoke">
-                                    <a className="bio-btn w1" data-toggle="collapse" href="#bioSmoke" aria-expanded="false" aria-controls="bioSmoke">Read Bio</a>
-                                    <div id="bioSmoke" className="bio-txt collapse" data-parent="#bioAccordionSmoke">
-                                        <p>Pastor in the A.M.E. Zion Church for fifty years (William Chapel, Mt.
-                                            Hebron, Vincent Chapel, Mt. Shady, Mt. Mariah, Crockett Memorial, Little
-                                            Zion of the West Alabama Annual Conference; ec.). Nineteen years as a Presiding
-                                            Elder (Wadesboro-Monroe District, Greensboro District, Concord District
-                                            and Hendersonville District).</p>
-                                        <p>Organizations and affiliations:</p>
-                                        <p>Masonic Order of Masonry (Prince Hall); Alpha Phi Alpha Fraternity;
-                                            Ministerial relief Board of the A.M.E. Zion Church; NAACP; Urban League;
-                                            Livingstone College Alumni; Hood Theological Seminary Alumni; Doctoral Mentor
-                                            at Hood Theological Seminary;</p>
+                            <div className="slider-vertical flip">
+                                <div className="slider-card title c3 bio-card" id="bioSmokeCard">
+                                    <h1 className="name">Dr. Andrew B. Smoke</h1>
+                                    <div className="title">Board Member</div>
+
+                                    <div className="faculty-bio" id="bioAccordionSmoke">
+                                        <a className="bio-btn w1" data-toggle="collapse" href="#bioSmoke" aria-expanded="false" aria-controls="bioSmoke" onClick={() => this.checkBio("bioSmokeCard")}>Read Bio</a>
+                                        <div id="bioSmoke" className="bio-txt collapse" data-parent="#bioAccordionSmoke">
+                                            <p>Pastor in the A.M.E. Zion Church for fifty years (William Chapel, Mt.
+                                                Hebron, Vincent Chapel, Mt. Shady, Mt. Mariah, Crockett Memorial, Little
+                                                Zion of the West Alabama Annual Conference; ec.). Nineteen years as a Presiding
+                                                Elder (Wadesboro-Monroe District, Greensboro District, Concord District
+                                                and Hendersonville District).</p>
+                                            <p>Organizations and affiliations:</p>
+                                            <p>Masonic Order of Masonry (Prince Hall); Alpha Phi Alpha Fraternity;
+                                                Ministerial relief Board of the A.M.E. Zion Church; NAACP; Urban League;
+                                                Livingstone College Alumni; Hood Theological Seminary Alumni; Doctoral Mentor
+                                                at Hood Theological Seminary;</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div className="slider-card img c3">
-                                <img alt="Default img" src={ASmokeImg} />
-                            </div>
-                        <div className="slider-close"/>
+                                <div className="slider-card img c3">
+                                    <img alt="Default img" src={ASmokeImg} />
+                                </div>
+                            </div>  
+
+                            <div className="slider-vertical">
+                                <div className="slider-card title base bio-card" id="bioPettusCard">
+                                    <h1 className="name">Mrs. Pettus</h1>
+                                    <div className="title">Board Member</div>
+
+                                    <div className="faculty-bio" id="bioAccordionPettus">
+                                        <a className="bio-btn" data-toggle="collapse" href="#bioPettus" aria-expanded="false" aria-controls="bioPettus" onClick={() => this.checkBio("bioPettusCard")}>Read Bio</a>
+                                        <div id="bioPettus" className="bio-txt collapse" data-parent="#bioAccordionPettus">
+                                            <p>Mrs. Pettus served the United States Federal Government for thirty-six (36) years. She started her tenure with the Food and Drug Administration and moved within several agencies such as the National Institutes of Health, ending her career as a paralegal for the United States Department of Justice’s Environmental Enforcement Section. </p>
+                                            <p>Mrs. Pettus was born and received her early education in Salisbury, North Carolina and graduated from South Rowan High School. She relocated from the little small town to the big city of Washington, DC at the age of twenty. She continued her post-secondary education and earned her Associates of Arts and Bachelor of Science Degrees in Paralegal studies. Because she believes in lifelong learning, she continued earning her Juris Doctorate Degree and a Certificate in Real Estate Law and a Diploma in Estates, Wills and Trusts. She is also a Notary Public, where in 1996 she started her business “Have Notary Will Travel.”</p>
+                                            <p>Mrs. Pettus retired to care for her special needs’ infant grandson. In 2012, Mrs. Pettus began to volunteer several days during the school year at her grandson’s elementary school. As natural servant, she supported administrators, teachers and other stuff where she was needed. She felt a call to support other special needs classrooms where she felt the need. During her time at the school, she established a lunch account to be used when children were unable to pay for their breakfast or lunch, as she felt no child should not be afforded the opportunity for a decent and nutritious meal. She volunteered at the school until 2018, when her grandson was promoted to middle school. </p>
+                                            <p>Mrs. Pettus is very active in her church. Mrs. Pettus is the wife of the love of her life, James Edward Pettus. Many who come into her presence also affectionately known her as Grandma and Ma Pettus. Her favorite Bible scriptures are Psalms 121 and Ecclesiastes 3:1-8. </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="slider-card img base">
+                                    <img alt="Default img" src={DPettusImg} />
+                                </div>
+                            </div>     
+
+                            <div className="slider-close"/>                   
+                        </div>
+                        <div className={"slider-ctrl prev" + (this.checkScrollLoc(this.slide2, "prev") ? "" : " noshow")} onClick={()=> this.controlSlider(this.slide2, "prev")}><i className="fas fa-caret-left"></i></div>
+                        <div className={"slider-ctrl next" + (this.checkScrollLoc(this.slide2, "next") ? "" : " noshow")} onClick={()=> this.controlSlider(this.slide2, "next")}><i className="fas fa-caret-right"></i></div>
                     </div>
-
-                    <div className={"slider-ctrl prev" + (this.checkScrollLoc(this.slide2, "prev") ? "" : " noshow")} onClick={()=> this.controlSlider(this.slide2, "prev")}><i className="fas fa-caret-left"></i></div>
-                    <div className={"slider-ctrl next" + (this.checkScrollLoc(this.slide2, "next") ? "" : " noshow")} onClick={()=> this.controlSlider(this.slide2, "next")}><i className="fas fa-caret-right"></i></div>
-                </div>
                 </section>
             </div>
         );
+    }
+
+    checkBio(id){
+        var ret = false;
+        try {
+            var cardElement = document.getElementById(id);
+
+            if(!cardElement.classList.contains("txtOpen")){
+                cardElement.classList.add("txtOpen");
+            }
+            else {
+                cardElement.classList.remove("txtOpen");
+            }
+        }
+        catch(ex){
+            console.log("Error checking bio: ",ex);
+        }
+
+        return ret;
     }
 
     controlSlider(ref, dir){
