@@ -25,7 +25,7 @@ class SchoolSub extends Component{
                 {(Object.keys(this.props.data.degrees).length > 0) &&
                     <section className="studyArea-section alternate patterned">
                         <div className="section-container">
-                            <h2 className="lrgTitle ctr c1" data-text="Take The Next Step">Take The Next Step</h2>
+                            <h2 className="lrgTitle ctr" data-text="Take The Next Step">Take The Next Step</h2>
 
                             <div className="btn-container">
                                 <a href="/contactus" className="lBtn clear t1"><span>Request More Information</span><i className="btn-icon fas fa-info-circle"></i></a>

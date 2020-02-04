@@ -72,7 +72,7 @@
   z-index: 1;
   width: 100%;
   height: 100%;
-  background-image: linear-gradient(to right, #014eb3, #fda800 90%);
+  background-image: linear-gradient(to right, #014eb3, #82bac1 90%);
   opacity: 0.5;
 }
 .homeHeader .header-card-container .cardImg .backImg {
@@ -441,7 +441,7 @@
   font-size: 1.7rem;
 }
 .homePage .home-section .section-container .testimonial-carousel .testimonial-item .testimonial-title {
-  font-size: 1rem;
+  font-size: 1.2rem;
   color: #fda800;
   font-weight: bold;
 }
@@ -1088,12 +1088,13 @@
   height: 42px;
   border: 1px solid #ffffff;
   color: #ffffff;
-  background: #014eb3;
+  background: #fda800;
   border-radius: 50%;
   margin-right: 7px;
 }
 .admissionsPage .admissions-section .international .number-list .info {
   flex: 1;
+  color: #fda800;
 }
 .admissionsPage .admissions-section .international .number-list .info span {
   font-size: 0.9rem;
@@ -1149,7 +1150,7 @@
 }
 .facultyPage .faculty-section.alternate {
   background: #ffffff;
-  color: #014eb3;
+  color: #0f7697;
 }
 .facultyPage .faculty-section .lrgTitle {
   margin-bottom: 20px;
@@ -1170,15 +1171,15 @@
 }
 .facultyPage .faculty-section .info-slider .slider-card .faculty-bio .bio-btn {
   font-size: 1.1rem;
-  border: 2px solid #014eb3;
-  color: #014eb3;
+  border: 2px solid #0f7697;
+  color: #0f7697;
   padding: 3px 10px;
   border-radius: 50px;
   text-decoration: none;
   transition: 0.5s all ease-in-out;
 }
 .facultyPage .faculty-section .info-slider .slider-card .faculty-bio .bio-btn:hover {
-  background: rgba(1, 78, 179, 0.2) !important;
+  background: rgba(15, 118, 151, 0.2) !important;
 }
 .facultyPage .faculty-section .info-slider .slider-card .faculty-bio .bio-btn.w1 {
   color: #ffffff;
@@ -3748,7 +3749,7 @@ html {
 .app-body {
   position: relative;
   z-index: 900;
-  background-image: linear-gradient(to right, rgba(80, 78, 153, 0.7), rgba(80, 78, 153, 0.3) 90%);
+  background-image: linear-gradient(to right, rgba(15, 118, 151, 0.7), rgba(15, 118, 151, 0.3) 90%);
   padding: calc(100vh - 49px) 2% 0;
 }
 @media (max-width: 770px) {
@@ -3773,7 +3774,7 @@ html {
   width: 100%;
   height: 100%;
   opacity: 0;
-  background-image: linear-gradient(to right, #8583b8, #cacae0 100%);
+  background-image: linear-gradient(to right, #979797, #b9b9b9 90%);
 }
 .app-header-body .header-cover.appear {
   z-index: 3;
@@ -5112,13 +5113,13 @@ html {
 }
 .info-slider .info-slider-container .slider-card.base {
   background: #e6e6e6;
-  color: #014eb3;
+  color: #0f7697;
 }
 .info-slider .info-slider-container .slider-card.base .line-split {
   border-color: #014eb3;
 }
 .info-slider .info-slider-container .slider-card.base .number {
-  border-color: #014eb3;
+  border-color: #0f7697;
 }
 .info-slider .info-slider-container .slider-card.dark {
   background: #646464;
