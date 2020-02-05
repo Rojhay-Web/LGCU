@@ -23,7 +23,6 @@ import TranslateVideo from './templates/components/translateVideoModal';
 import "../css/app.less";
 
 /* Images */
-//import logo from '../assets/LGCULogo.png';
 import logo from '../assets/LGCULogo2.png';
 import logotxt from '../assets/LGCULogo2_txt.png';
 
