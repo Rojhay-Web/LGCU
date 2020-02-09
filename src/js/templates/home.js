@@ -221,7 +221,7 @@ function Home(props){
 
             <section className="home-section alternate patterned">
                 <div className="section-container">
-                    <h2 className="lrgTitle ctr c1" data-text="Testimonials">Testimonials</h2>
+                    <h2 className="lrgTitle ctr" data-text="Testimonials">Testimonials</h2>
 
                     <Carousel className="testimonial-carousel" showThumbs={false} showStatus={false} interval={7000} infiniteLoop autoPlay>
                         {testimonials.map((item,i) =>
