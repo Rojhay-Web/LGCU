@@ -23,7 +23,7 @@ import TranslateVideo from './templates/components/translateVideoModal';
 import "../css/app.less";
 
 /* Images */
-import logo from '../assets/LGCULogo2_full.png';
+import logo from '../assets/LGCULogo2_full.PNG';
 import logotxt from '../assets/LGCULogo2_txt.png';
 
 const history = createBrowserHistory(); 
