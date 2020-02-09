@@ -4,7 +4,7 @@ import axios from 'axios';
 
 /* Images */
 import back1 from '../../assets/site/mylgcuBack.jpeg';
-import logo from '../../assets/LGCULogo2_txt.png';
+import logo from '../../assets/LGCULogo2_full.PNG';
 /* Components */
 import MyProfile from './mylgcuComponents/myProfile';
 import MyAccount from './mylgcuComponents/myAccount';

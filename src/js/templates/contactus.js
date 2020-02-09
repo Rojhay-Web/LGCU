@@ -37,7 +37,7 @@ class Contact extends Component{
         super(props);
         this.state = {
             contactForm:{
-                "title":"contact us", "sendAddress":"info@lenkesongcu.org",
+                "title":"contact us", "sendAddress":"admissions@lenkesongcu.org",
                 "subject":"Contact Us Form Submission", "additionalData":{}, "type":"core",
                 "sendMessage":"Thank you we have received message we will respond as soon as we get the opportunity.",
                 "elements":[
