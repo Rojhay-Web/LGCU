@@ -233,7 +233,7 @@ class SignInModal extends Component{
             axios.post(rootPath + "/api/userLogin", postData, {'Content-Type': 'application/json'})
             .then(function(response) {
                 if(response.data.errorMessage){
-                    self.setState({ error: response.errorMessage });
+                    self.setState({ error: response.data.errorMessage });
                 }
                 else {
                     var tmpUser = {email: self.state.email, fullname: response.data.results.fullname, lastLogin: Date.now(),
