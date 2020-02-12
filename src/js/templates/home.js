@@ -52,6 +52,7 @@ class HomeHeader extends Component{
                             (Isaiah 58:12)</p>
                         
                         <a href="/contactus" className="lBtn c3"><span>Contact Us</span><i className="btn-icon fas fa-envelope"></i></a>
+                        <a href="/files/LGCU_Web_Tutorial.pdf" target="_blank" className="lBtn clear t2"><span>Web Tutorial</span><i className="btn-icon fas fa-question-circle"></i></a>
                     </div>                    
                 </div>
             </div>

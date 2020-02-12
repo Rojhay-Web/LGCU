@@ -76,6 +76,8 @@
                 animation-duration: 2s;
                 animation-delay: 3s;
                 animation-fill-mode: forwards;
+
+                &+.lBtn { margin-left: 20px; }
             }
 
             @media @mobile-device {
@@ -85,6 +87,8 @@
                 transform: translate(0%, 0%);
                 h1 { font-size: 1.5rem; }
                 p { font-size: 1rem; }
+
+                .lBtn { &+.lBtn { margin-left: 0px;}}
             }
         }
 
