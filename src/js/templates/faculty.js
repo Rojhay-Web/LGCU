@@ -12,6 +12,7 @@ import TWilsonImg from '../../assets/TWilson.jpg';
 import ASmokeImg from '../../assets/ASmoke.jpg';
 import AStevensonImg from '../../assets/AStevenson.PNG';
 import DPettusImg from '../../assets/DPettus.PNG';
+import MTerefeImg from '../../assets/MTerefe.jpg'
 
 /* Header */
 class FacultyHeader extends Component{
@@ -269,7 +270,26 @@ class Faculty extends Component{
                                 <div className="slider-card img base">
                                     <img alt="Default img" src={DPettusImg} />
                                 </div>
-                            </div>     
+                            </div>
+
+                            <div className="slider-vertical flip">
+                                <div className="slider-card title c1 bio-card" id="bioTerefeCard">
+                                    <h1 className="name">Dr. Marta M. Terefe (MD, MPH, HE)</h1>
+                                    <div className="title">Board Member</div>
+
+                                    <div className="faculty-bio" id="bioAccordionTerefe">
+                                        <a className="bio-btn w1" data-toggle="collapse" href="#bioTerefe" aria-expanded="false" aria-controls="bioTerefe" onClick={() => this.checkBio("bioTerefeCard")}>Read Bio</a>
+                                        <div id="bioTerefe" className="bio-txt collapse" data-parent="#bioAccordionTerefe">
+                                           <p>Dr. Marta Terefe has 10 years of experience working in the Ethiopian health care system. She has an innate ability to speak impact fully with staff, donors, implementing partners, and community members with clarity and intentionality in order to effect change, while keeping in mind the importance of an organizations, vison, mission, and values.</p>
+                                           <p>She is skilled in conducting situational analysis, adaptive leadership; program implementation, coordination, and monitoring and evaluation. She has developed these skills through active teamwork with colleagues, implementing partners, the Ministry of Health (MOH), regional and district health bureaus (R/DHBs). During her professional and academic career, she has developed keen analytical skills to contribute to technical approaches in program design, implementation, research, and project assessment.</p>
+                                           <p>In her previous role as the Health Systems Strengthening Specialist at the United States Agency for International Development (USADI), Dr. Terefe led the development of the Health Workforce Improvement Program. Dr. Terefe is a compassionate listener with an empathetic character, fostering strong interpersonal skills.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="slider-card img c1">
+                                    <img alt="Default img" src={MTerefeImg} />
+                                </div>
+                            </div>      
 
                             <div className="slider-close"/>                   
                         </div>
