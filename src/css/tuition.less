@@ -60,6 +60,15 @@
         }
         .special-note { font-style: italic; font-size: 1rem;}
 
+        .international-note {
+            margin-top: 50px;
+            .mini-note {
+                h2 { font-size: 1.7rem; color: @color2; .lng { height: 25px; width: 30px; }}
+                p { font-size: 1rem; margin-bottom: 1px;}
+
+                &+.mini-note { margin-top: 20px;}
+            }
+        }
         &.alternate { 
             background: rgba(255,255,255,1);
             color: @color3;

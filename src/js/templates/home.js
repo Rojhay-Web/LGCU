@@ -14,7 +14,7 @@ import AcademicSlider from './components/academicSlider';
 
 /* Images */
 import introVideo from '../../assets/site/intro_video.mov';
-//import back9 from '../../assets/site/mini/back9.jpg';
+import aboutLgcu from '../../assets/site/about_lgcu.mov';
 
 import img8 from '../../assets/site/mini/img8.jpg';
 import img11 from '../../assets/site/mini/img11.jpg';
@@ -148,6 +148,18 @@ function Home(props){
                     <h2 className="lrgTitle ctr" data-text="LGCU Media">LGCU Media</h2>
                     
                     <div className="media-container">
+                        <div className="media-item">
+                            <h3 className="media-title">About Lenkeson Global Christian University</h3>
+                            <video className="media-video" alt="About Lenkeson Global Christian University video" controls>
+                                <source src={aboutLgcu} type="video/mp4" />
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                        <div className="media-item">
+                            <h3 className="media-title">LGCU First Press Conference & Official Opening in Haiti</h3>
+                            <iframe className="media-video" src="https://www.youtube.com/embed/vvPjd_FTvpk"></iframe>
+                        </div>
+
                         <div className="media-item">
                             <h3 className="media-title">The Birth of Lenkeson Global Christian University</h3>
                             <iframe className="media-video" src="https://www.youtube.com/embed/iJfNHbToqfo"></iframe>

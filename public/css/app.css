@@ -465,12 +465,14 @@
 .homePage .home-section .section-container .media-container {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
 }
 .homePage .home-section .section-container .media-container .media-item {
   display: flex;
   flex-direction: column;
   flex: 1;
   padding: 0px 7px;
+  margin-bottom: 20px;
 }
 .homePage .home-section .section-container .media-container .media-item .media-title {
   font-family: 'Reem Kufi', sans-serif;
@@ -488,6 +490,9 @@
   .homePage .home-section .section-container .media-container .media-item .media-video {
     width: 100%;
   }
+}
+.homePage .home-section .section-container .media-container .media-item + .media-item {
+  margin-left: 7px;
 }
 @media (max-width: 770px) {
   .homePage .home-section .section-container .media-container .media-item {
@@ -1276,6 +1281,24 @@
 .tuitionPage .tuition-section .special-note {
   font-style: italic;
   font-size: 1rem;
+}
+.tuitionPage .tuition-section .international-note {
+  margin-top: 50px;
+}
+.tuitionPage .tuition-section .international-note .mini-note h2 {
+  font-size: 1.7rem;
+  color: #fda800;
+}
+.tuitionPage .tuition-section .international-note .mini-note h2 .lng {
+  height: 25px;
+  width: 30px;
+}
+.tuitionPage .tuition-section .international-note .mini-note p {
+  font-size: 1rem;
+  margin-bottom: 1px;
+}
+.tuitionPage .tuition-section .international-note .mini-note + .mini-note {
+  margin-top: 20px;
 }
 .tuitionPage .tuition-section.alternate {
   background: #ffffff;

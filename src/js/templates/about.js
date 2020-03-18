@@ -54,7 +54,7 @@ class About extends Component{
                     "Gracias por considerar a Lenkeson Global Christian University por su búsqueda académica para alcanzar sus metas profesionales. Te veremos en la línea de inicio."
                 ]}
             },
-            selectedLang:"es",
+            selectedLang:"en",
             selectedLetter:{"info":[], "ending":[]}
         }
 
@@ -123,9 +123,9 @@ class About extends Component{
                         <h2 className="lrgTitle ctr" data-text="Letter From Our President">Letter From Our President</h2>
                         <div className="letter-container">
                             <div className="lang-ctrl">
-                                <div className={"lang-btn" + (this.state.selectedLang === "en" ? " selected" : "")} onClick={() => this.chooseLetter("en")}><span className="lng lng-us"></span></div>
-                                <div className={"lang-btn" + (this.state.selectedLang === "fr" ? " selected" : "")} onClick={() => this.chooseLetter("fr")}><span className="lng lng-fr"></span></div>
-                                <div className={"lang-btn" + (this.state.selectedLang === "es" ? " selected" : "")} onClick={() => this.chooseLetter("es")}><span className="lng lng-es"></span></div>
+                                <div className={"lang-btn" + (this.state.selectedLang === "en" ? " selected" : "")} onClick={() => this.chooseLetter("en")}><span className="lng lng-us"/></div>
+                                <div className={"lang-btn" + (this.state.selectedLang === "fr" ? " selected" : "")} onClick={() => this.chooseLetter("fr")}><span className="lng lng-fr"/></div>
+                                <div className={"lang-btn" + (this.state.selectedLang === "es" ? " selected" : "")} onClick={() => this.chooseLetter("es")}><span className="lng lng-es"/></div>
                             </div>
                             <p className="letter-title">{this.state.selectedLetter.title}</p>
                             {this.state.selectedLetter.info.map((item, i) =>
