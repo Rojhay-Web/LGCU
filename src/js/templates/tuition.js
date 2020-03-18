@@ -52,6 +52,12 @@ function Tuition(props){
         { "level":"Military Graduate/Doctorate", "full":265, "part":265 }
     ];
 
+    const tuitionNote = {
+        "us":{ "title":"Note to International Students:", "text":["One course at LGCU consists of 3 credit hours. Therefore, if the cost of one course is $300 per credit hour, the total cost for the course is $900.","If the degree which you have chosen has 10 courses, the total cost for that degree will be the total cost of 1 course multiplied by the total number of courses to complete the degree; for example: ($900x 10)."] },
+        "fr":{ "title":"Note aux étudiants internationaux:", "text":["Un cours à LGCU comprend 3 heures de crédit. Par exemple, si le coût d'un cours est de 300 $ par heure de crédit, le coût total du cours est de 900 $.","Si le diplôme que vous avez choisi contient 10 cours, le coût total de ce diplôme sera le coût total d'un cours multiplié par le nombre total des cours pour compléter le diplôme; par exemple: (($900 x10)."] },
+        "es":{ "title":"Nota para estudiantes internacionales:", "text":["un curso en LGCU consta de 3 horas de crédito. Por lo tanto, si el costo de un curso es de $ 300 por hora de crédito, el costo total del curso es de $ 900.", "Si el título que ha elegido tiene 10 cursos, el costo total de ese título será el costo total de 1 curso multiplicado por el número total de cursos para completar el título; por ejemplo: ($ 900 x10)."] }
+    };
+
     useEffect(() => window.scrollTo(0, 0), []);
     useEffect(() => initialReactGA(), []);
     
@@ -64,6 +70,7 @@ function Tuition(props){
         var container = document.getElementById("imgSplit");
         return [-(y - container.offsetHeight / 2) / 20, (x - container.offsetWidth / 2) / 20, 0.9];
     }
+
     const trans = (x, y, s) => `perspective(900px) rotateX(${x}deg) rotateY(${y}deg) scale(${s})`;
 
     return(
@@ -103,6 +110,17 @@ function Tuition(props){
                     <p className="special-note">* At Lenkeson Global Christian University a full-time load is considered between 9-12 credits. Part-time is 8 credit hour or less.</p>                            
 
                     <p>Technology Fees $125 Due at Enrollment for One Year</p>
+                    
+                    <div className="international-note">
+                        {Object.keys(tuitionNote).map((item,i) =>( 
+                            <div className="mini-note" key={i}>
+                                <h2><span className={"lng lng-"+item} /> <span>{tuitionNote[item].title}</span></h2>
+                                {tuitionNote[item].text.map((para,k)=>(
+                                    <p key={k}>{para}</p>
+                                ))}
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </section>
 
