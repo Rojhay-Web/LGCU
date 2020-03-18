@@ -346,12 +346,14 @@
             .media-container {
                 display: flex;
                 flex-direction: row;
+                flex-wrap: wrap;
 
                 .media-item { 
                     display: flex; 
                     flex-direction: column; 
                     flex: 1;
                     padding: 0px 7px;
+                    margin-bottom: 20px;
 
                     .media-title { 
                         font-family: 'Reem Kufi', sans-serif; 
@@ -367,6 +369,7 @@
                         @media @mobile-device { width: 100%;}
                     }
 
+                    &+.media-item { margin-left: 7px; }
                     @media @mobile-device { margin-top: 10px;}
                 }
 
