@@ -51,9 +51,21 @@ class MyCourses extends Component{
     render(){
         var self = this;   
         var filterData = this.state.courseSearch.filter(function(course){ 
-            return (self.state.searchQuery == "" || course.name.toLowerCase().indexOf(self.state.searchQuery.toLowerCase()) >= 0
-            || course.courseCode.toLowerCase().indexOf(self.state.searchQuery.toLowerCase()) >= 0
-            || course.courseId.toLowerCase().indexOf(self.state.searchQuery.toLowerCase()) >= 0);
+            var ret = false;
+            try {
+                
+                ret = ((self.state.searchCourseQuery != "") &&
+                (  (course.name && course.name.toLowerCase().indexOf(self.state.searchCourseQuery.toLowerCase()) >= 0)
+                || (course.courseCode && course.courseCode.toLowerCase().indexOf(self.state.searchCourseQuery.toLowerCase()) >= 0)
+                || (course.courseId && course.courseId.toLowerCase().indexOf(self.state.searchCourseQuery.toLowerCase()) >= 0)
+                ));
+            }
+            catch(ex){
+                console.log(course);
+                console.log("[Error] filtering search: ",ex);
+            }
+
+            return ret;
         });
 
         var courseColumns = [    
