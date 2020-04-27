@@ -50,6 +50,7 @@ class MyAdmin extends Component{
         this.selectStudent = this.selectStudent.bind(this);
         this.getStudentInfo = this.getStudentInfo.bind(this);
         this.searchQuery = this.searchQuery.bind(this);
+        this.searchEnterQuery = this.searchEnterQuery.bind(this);
         this.saveStudent = this.saveStudent.bind(this);
         this.refreshStudentID = this.refreshStudentID.bind(this);
         this.createTalentLmsId = this.createTalentLmsId.bind(this);
@@ -76,11 +77,23 @@ class MyAdmin extends Component{
         const { studentCollapse, courseCollapse, accountCollapse } = this.state;
         var self = this;   
         var filterData = this.state.courseSearch.filter(function(course){ 
-            return ((self.state.searchCourseQuery != "") && 
-            (  course.name.toLowerCase().indexOf(self.state.searchCourseQuery.toLowerCase()) >= 0
-            || course.courseCode.toLowerCase().indexOf(self.state.searchCourseQuery.toLowerCase()) >= 0
-            || course.courseId.toLowerCase().indexOf(self.state.searchCourseQuery.toLowerCase()) >= 0));
+            var ret = false;
+            try {
+                
+                ret = ((self.state.searchCourseQuery != "") &&
+                (  (course.name && course.name.toLowerCase().indexOf(self.state.searchCourseQuery.toLowerCase()) >= 0)
+                || (course.courseCode && course.courseCode.toLowerCase().indexOf(self.state.searchCourseQuery.toLowerCase()) >= 0)
+                || (course.courseId && course.courseId.toLowerCase().indexOf(self.state.searchCourseQuery.toLowerCase()) >= 0)
+                ));
+            }
+            catch(ex){
+                console.log(course);
+                console.log("[Error] filtering search: ",ex);
+            }
+
+            return ret;
         });
+
 
         var courseColumns = [    
             { Header: 'Course Code', accessor: 'courseCode', fixed: 'left' },
@@ -106,12 +119,12 @@ class MyAdmin extends Component{
                     <div className="content-block sz9">
                         <div className="block-label-title">Search</div>
                         <div className="block-container">                            
-                            <div className="content-info icon"><i className="fas fa-search"></i><input type="text" name="searchQuery" className="" placeholder="Search Name, Email, or Student ID" value={this.state.searchQuery} onChange={(e) => this.onSearchChange(e)}/></div>
+                            <div className="content-info icon"><i className="fas fa-search"></i><input type="text" name="searchQuery" className="" placeholder="Search Name, Email, or Student ID" value={this.state.searchQuery} onChange={(e) => this.onSearchChange(e)} onKeyPress={(e) => this.searchEnterQuery(e)}/></div>
                         </div>
                     </div>
 
                     <div className="content-block search-container sz1">                          
-                        <div className="search-btn" onClick={this.searchQuery}><i className="btn-icon fas fa-search"></i></div>
+                        <div className="search-btn" onClick={this.searchEnterQuery}><i className="btn-icon fas fa-search"></i></div>
                     </div>
                 </div>
 
@@ -342,10 +355,10 @@ class MyAdmin extends Component{
                            
                            <div className="content-block sz10 mini-height">
                                 <div className="block-container search-block">                            
-                                    <div className="content-info icon"><i className="fas fa-search"></i><input type="text" name="searchCourseQuery" className="" placeholder="Search Course" value={this.state.searchCourseQuery} onChange={(e) => this.onSearchChange(e)}/></div>
+                                    <div className="content-info icon"><i className="fas fa-search"></i><input type="text" name="searchCourseQuery" className="" placeholder="Search Course" value={this.state.searchCourseQuery} onChange={(e) => this.onSearchChange(e)} /></div>
                                 </div>
                                 
-                                <ReactTableFixedColumns data={filterData} columns={courseColumns}></ReactTableFixedColumns>
+                                <ReactTableFixedColumns data={filterData} columns={courseColumns} />
                            </div>
 
                            <div className="content-block sz10">
@@ -725,6 +738,17 @@ class MyAdmin extends Component{
         }
         catch(ex){
             console.log("[Error] changing search: ",ex);
+        }
+    }
+    searchEnterQuery(e){
+        try {
+            if(e.charCode == 13 && e.shiftKey == false) {
+                e.preventDefault();
+                this.searchQuery();
+            }
+        }
+        catch(ex){
+            console.log("Error with search entry: ",ex);
         }
     }
     searchQuery(){

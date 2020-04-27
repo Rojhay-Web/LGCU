@@ -148,7 +148,9 @@ var talentlms = {
             .then(res => { 
                 var courseData = (res.data && res.data.length > 0 ? 
                     res.data
-                    .filter(function(item){ return (item.status == 'active'); })
+                    .filter(function(item){ 
+                        return (item.status == 'active' && item.name != null && item.custom_field_2 != null && item.custom_field_3 != null); 
+                    })
                     .map(function(d){
                         return { id:d.id, name:d.name, description: d.description, status: d.status,
                             credits: d.custom_field_1, courseCode: d.custom_field_2, courseId: d.custom_field_3};
