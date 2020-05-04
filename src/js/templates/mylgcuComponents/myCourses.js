@@ -54,10 +54,10 @@ class MyCourses extends Component{
             var ret = false;
             try {
                 
-                ret = ((self.state.searchCourseQuery != "") &&
-                (  (course.name && course.name.toLowerCase().indexOf(self.state.searchCourseQuery.toLowerCase()) >= 0)
-                || (course.courseCode && course.courseCode.toLowerCase().indexOf(self.state.searchCourseQuery.toLowerCase()) >= 0)
-                || (course.courseId && course.courseId.toLowerCase().indexOf(self.state.searchCourseQuery.toLowerCase()) >= 0)
+                ret = ((self.state.searchQuery != "") &&
+                (  (course.name && course.name.toLowerCase().indexOf(self.state.searchQuery.toLowerCase()) >= 0)
+                || (course.courseCode && course.courseCode.toLowerCase().indexOf(self.state.searchQuery.toLowerCase()) >= 0)
+                || (course.courseId && course.courseId.toLowerCase().indexOf(self.state.searchQuery.toLowerCase()) >= 0)
                 ));
             }
             catch(ex){
