@@ -55,6 +55,7 @@ class MyAdmin extends Component{
         this.refreshStudentID = this.refreshStudentID.bind(this);
         this.createTalentLmsId = this.createTalentLmsId.bind(this);
         this.createAuthNetId = this.createAuthNetId.bind(this);
+        this.displayTalentLmsId = this.displayTalentLmsId.bind(this);
 
         this.loadCourses = this.loadCourses.bind(this);
         this.loadStudentCourses = this.loadStudentCourses.bind(this);
@@ -214,35 +215,31 @@ class MyAdmin extends Component{
                             </div>
 
                             {/* IDs */}
-                            <div className="content-block sz3">
-                                <div className="block-label-title">Student ID:</div>
-                                <div className="block-container">                            
-                                    <div className="content-info generator">
-                                        <span className="IdGenerator" onClick={this.refreshStudentID}><i className="fas fa-sync-alt"></i></span>
-                                        <input type="text" name="studentId" className="" placeholder="Student id" value={this.state.selectedUser.studentId} readOnly/>
+                            {this.state.updateType == "update" && 
+                                <div className="content-block sz3">
+                                    <div className="block-label-title">Student ID:</div>
+                                    <div className="block-container">                            
+                                        <div className="content-info generator">
+                                            <span className="IdGenerator" onClick={this.refreshStudentID}><i className="fas fa-sync-alt"></i></span>
+                                            <input type="text" name="studentId" className="" placeholder="Student id" value={this.state.selectedUser.studentId} readOnly/>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            }
 
-                            {/*<div className="content-block sz3">
-                                <div className="block-label-title">Acccount ID:</div>
-                                <div className="block-container">                            
-                                    <div className="content-info generator">
-                                        <span className="IdGenerator" onClick={this.createAuthNetId}><i className="fas fa-sync-alt"></i></span>
-                                        <input type="text" name="accountId" className="" placeholder="Account id" value={this.state.selectedUser.accountId} readOnly/>
+                            {(this.state.updateType == "update" && this.state.selectedUser.studentId !== "") &&
+                                <div className="content-block sz3">
+                                    <div className="block-label-title">TalentLMS ID:</div>
+                                    <div className="block-container">                            
+                                        <div className="content-info generator">
+                                            {this.displayTalentLmsId() &&
+                                                <span className="IdGenerator" onClick={this.createTalentLmsId}><i className="fas fa-sync-alt"></i></span>
+                                            }
+                                            <input type="text" name="talentlmsId" className="" placeholder="Talentlms id" value={ (this.state.selectedUser.talentlmsId ? this.state.selectedUser.talentlmsId.id + " | "+this.state.selectedUser.talentlmsId.login : "") } readOnly/>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>*/}
-
-                            <div className="content-block sz3">
-                                <div className="block-label-title">TalentLMS ID:</div>
-                                <div className="block-container">                            
-                                    <div className="content-info generator">
-                                        <span className="IdGenerator" onClick={this.createTalentLmsId}><i className="fas fa-sync-alt"></i></span>
-                                        <input type="text" name="talentlmsId" className="" placeholder="Talentlms id" value={ (this.state.selectedUser.talentlmsId ? this.state.selectedUser.talentlmsId.id + " | "+this.state.selectedUser.talentlmsId.login : "") } readOnly/>
-                                    </div>
-                                </div>
-                            </div>
+                            }
 
                             <div className="content-block sz2">
                                 <div className="block-label-title">Is Military</div>
@@ -621,6 +618,21 @@ class MyAdmin extends Component{
         }
     }
 
+    displayTalentLmsId(){
+        var ret = true;
+        try {
+            ret = !(
+                    this.state.selectedUser.talentlmsId 
+                    && this.state.selectedUser.talentlmsId.id !== ""
+                    && !isNaN(this.state.selectedUser.talentlmsId.id)
+                )
+        }
+        catch(ex){
+            console.log("Error checking talent lms display: ",ex);
+        }
+
+        return ret;
+    }
     saveStudent(){
         var self = this;
         try {
