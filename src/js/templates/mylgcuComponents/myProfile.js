@@ -111,25 +111,25 @@ class MyProfile extends Component{
                     <div className="section-title">Student Resources</div>
 
                     <div className="resource-container">
-                        <a href="https://lenkesongcu.talentlms.com/" target="_blank" className="resource-link">
+                        <a href="https://lenkesongcu.talentlms.com/" target="_blank" rel="noopener noreferrer" className="resource-link">
                             <i className="fas fa-chalkboard-teacher"></i>
                             <span>TalentLMS</span>
                         </a>
                     </div>
                     <div className="resource-container">
-                        <a href="https://iii.ocls.info/patroninfo/top" target="_blank" className="resource-link">
+                        <a href="https://iii.ocls.info/patroninfo/top" target="_blank" rel="noopener noreferrer" className="resource-link">
                             <i className="fas fa-book-reader"></i>
                             <span>Online Library</span>
                         </a>
                     </div>
                     <div className="resource-container">
-                        <a href="https://www.chegg.com/" className="resource-link" target="_blank">
+                        <a href="https://www.chegg.com/" className="resource-link" target="_blank" rel="noopener noreferrer">
                             <i className="fas fa-book"></i>
                             <span>CHEGG Bookstore</span>
                         </a>
                     </div>
                     <div className="resource-container">
-                        <a href="https://www.amazon.com/" className="resource-link" target="_blank">
+                        <a href="https://www.amazon.com/" className="resource-link" target="_blank" rel="noopener noreferrer">
                             <i className="fas fa-book"></i>
                             <span>Amazon Bookstore</span>
                         </a>

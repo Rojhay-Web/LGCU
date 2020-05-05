@@ -54,7 +54,7 @@ class MyCourses extends Component{
             var ret = false;
             try {
                 
-                ret = ((self.state.searchQuery != "") &&
+                ret = ((self.state.searchQuery == "") ||
                 (  (course.name && course.name.toLowerCase().indexOf(self.state.searchQuery.toLowerCase()) >= 0)
                 || (course.courseCode && course.courseCode.toLowerCase().indexOf(self.state.searchQuery.toLowerCase()) >= 0)
                 || (course.courseId && course.courseId.toLowerCase().indexOf(self.state.searchQuery.toLowerCase()) >= 0)
