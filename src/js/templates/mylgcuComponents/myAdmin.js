@@ -835,7 +835,7 @@ class MyAdmin extends Component{
                             }, () => {
                                 // Load Student Course Info
                                 if(self.state.selectedUser.talentlmsId.id) {
-                                    self.loadStudentCourses(self.state.selectedUser.talentlmsId.id);
+                                    self.loadStudentCourses(self.state.selectedUser.talentlmsId.id, self.state.selectedUser._id);
                                 }
                                 if(self.state.selectedUser._id) {
                                     self.loadAccountInfo(self.state.selectedUser._id);
@@ -991,7 +991,7 @@ class MyAdmin extends Component{
         }
     }
 
-    loadStudentCourses(talentlmsId){
+    loadStudentCourses(talentlmsId, studentId){
         var self = this;
 
         try {
@@ -999,7 +999,7 @@ class MyAdmin extends Component{
 
             if(sessionInfo){ 
                 var localUser = JSON.parse(sessionInfo);
-                var postData = { requestUser: { _id: localUser._id}, userInfo: { id: talentlmsId } };
+                var postData = { requestUser: { _id: localUser._id}, userInfo: { _id:studentId, id: talentlmsId } };
 
                 self.toggleSpinner(true);
 
@@ -1130,7 +1130,7 @@ class MyAdmin extends Component{
                         alert("Unable to unregister student for the following courses: " + response.data.errorMessage);
                     }
                     else {
-                        self.loadStudentCourses(self.state.selectedUser.talentlmsId.id);
+                        self.loadStudentCourses(self.state.selectedUser.talentlmsId.id, self.state.selectedUser._id);
                     }
                 });  
             }
@@ -1176,7 +1176,7 @@ class MyAdmin extends Component{
                             }
 
                             self.setState({ queuedCourses: []}, () => {
-                                self.loadStudentCourses(self.state.selectedUser.talentlmsId.id);
+                                self.loadStudentCourses(self.state.selectedUser.talentlmsId.id, self.state.selectedUser._id);
                             });
                         }
                     });  

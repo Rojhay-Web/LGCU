@@ -229,7 +229,7 @@ class MyProfile extends Component{
 
             if(sessionInfo){ 
                 var localUser = JSON.parse(sessionInfo);
-                var postData = { requestUser: { _id: localUser._id}, userInfo: { id: talentlmsId } };
+                var postData = { requestUser: { _id: localUser._id}, userInfo: {_id: localUser._id, id: talentlmsId } };
 
                 //self.toggleSpinner(true);
 
