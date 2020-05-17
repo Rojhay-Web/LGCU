@@ -10,7 +10,7 @@ import DDurenImg from '../../assets/DDuren.jpg';
 import BernalImg from '../../assets/Bernal.jpg';
 import TWilsonImg from '../../assets/TWilson.jpg';
 import ASmokeImg from '../../assets/ASmoke.jpg';
-import AStevensonImg from '../../assets/AStevenson.PNG';
+import AStevensonImg from '../../assets/AStevenson.jpg';
 import DPettusImg from '../../assets/DPettus.PNG';
 import MTerefeImg from '../../assets/MTerefe.jpg'
 
