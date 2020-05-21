@@ -125,7 +125,7 @@ class MyAdmin extends Component{
                     </div>
 
                     <div className="content-block search-container sz1">                          
-                        <div className="search-btn" onClick={this.searchEnterQuery}><i className="btn-icon fas fa-search"></i></div>
+                        <div className="search-btn" onClick={this.searchQuery}><i className="btn-icon fas fa-search"></i></div>
                     </div>
                 </div>
 
