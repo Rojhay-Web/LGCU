@@ -81,7 +81,7 @@ class App extends Component{
             modalStatus: false,
             copyrightDate: "2019",
             alerts:[
-                {title:"100% Online",text:"Lenkeson Global Christian University is a completely online university founded to provide higher education globally.", type:"primary"},
+                {title:"Special Offer for All",text:"Due to the Covid-19 global pandemic, we understand that you may be experiencing some financial hardships, which may hinder you from completing your academic journey.<br/><br/>LGCU is pleased to offer you a 30% tuition discount, if you sign up for any academic programs within 10 days.<br/><br/>For additional information, call 407-573-5855 or email us at info@lenkesongcu.org", type:"warning"},
                 {title:"Rolling Enrollment",text:"Classes starting soon, all classes are 8 weeks in length. To obtain additional information regarding enrollment, click on <a href=\"/apply\">Apply Now</a> then click on Student Application.", type:"primary"}
             ],
             mlAccess:false
