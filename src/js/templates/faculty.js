@@ -12,16 +12,10 @@ import TWilsonImg from '../../assets/TWilson.jpg';
 import ASmokeImg from '../../assets/ASmoke.jpg';
 import AStevensonImg from '../../assets/AStevenson.jpg';
 import DPettusImg from '../../assets/DPettus.PNG';
-import MTerefeImg from '../../assets/MTerefe.jpg'
 
 /* Header */
 class FacultyHeader extends Component{
-    constructor(props) {
-        super(props);
-    }
-
-    componentDidMount(){}
-
+   
     render(){        
         return(
             <div className="headerCard facultyHeader sub-page">
@@ -162,7 +156,6 @@ class Faculty extends Component{
 
                                 <div className="slider-vertical">
                                     <div className="slider-card title c3">
-                                        <h1 className="name"></h1>
                                         <div className="title">Administrative Secretary</div>
                                         <a href="tel:4075642992" className="phone"><i className="fas fa-phone"></i> <span>407.564.2992</span></a>
                                     </div>

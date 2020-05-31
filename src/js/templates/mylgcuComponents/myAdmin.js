@@ -81,7 +81,7 @@ class MyAdmin extends Component{
             var ret = false;
             try {
                 
-                ret = ((self.state.searchCourseQuery != "") &&
+                ret = ((self.state.searchCourseQuery !== "") &&
                 (  (course.name && course.name.toLowerCase().indexOf(self.state.searchCourseQuery.toLowerCase()) >= 0)
                 || (course.courseCode && course.courseCode.toLowerCase().indexOf(self.state.searchCourseQuery.toLowerCase()) >= 0)
                 || (course.courseId && course.courseId.toLowerCase().indexOf(self.state.searchCourseQuery.toLowerCase()) >= 0)
@@ -215,7 +215,7 @@ class MyAdmin extends Component{
                             </div>
 
                             {/* IDs */}
-                            {this.state.updateType == "update" && 
+                            {this.state.updateType === "update" && 
                                 <div className="content-block sz3">
                                     <div className="block-label-title">Student ID:</div>
                                     <div className="block-container">                            
@@ -227,7 +227,7 @@ class MyAdmin extends Component{
                                 </div>
                             }
 
-                            {(this.state.updateType == "update" && this.state.selectedUser.studentId !== "") &&
+                            {(this.state.updateType === "update" && this.state.selectedUser.studentId !== "") &&
                                 <div className="content-block sz3">
                                     <div className="block-label-title">TalentLMS ID:</div>
                                     <div className="block-container">                            
@@ -343,7 +343,7 @@ class MyAdmin extends Component{
                 }
 
                 {/* Course Section */}
-                {this.state.updateType == "update" &&
+                {this.state.updateType === "update" &&
                     <div className="collapse-section">
                         <div className="collapse-title" onClick={() => this.setState({courseCollapse: !courseCollapse}) } aria-expanded={courseCollapse} aria-controls="courseInfo"><span>Student Courses</span> <i className={"fas " + (courseCollapse ? "fa-chevron-up" : "fa-chevron-down")}></i></div>
                         {this.state.courseCollapse && 
@@ -394,7 +394,7 @@ class MyAdmin extends Component{
                                                 </tr>
                                             ))}
 
-                                            {(this.state.currentCourses.length == 0 && this.state.queuedCourses.length == 0) && 
+                                            {(this.state.currentCourses.length === 0 && this.state.queuedCourses.length === 0) && 
                                                 <tr className="noDataRow">
                                                     <td colSpan="6">No Courses Added</td>
                                                 </tr>
@@ -419,7 +419,7 @@ class MyAdmin extends Component{
                 }
 
                 {/* Account Section */}
-                {this.state.updateType == "update" &&
+                {this.state.updateType === "update" &&
                     <div className="collapse-section">
                         <div className="collapse-title" onClick={() => this.setState({accountCollapse: !accountCollapse}) } aria-expanded={accountCollapse} aria-controls="accountInfo"><span>Student Account</span> <i className={"fas " + (accountCollapse ? "fa-chevron-up" : "fa-chevron-down")}></i></div>
                         {this.state.accountCollapse && 
@@ -641,7 +641,7 @@ class MyAdmin extends Component{
             
             if(sessionInfo) {
                 var localUser = JSON.parse(sessionInfo);
-                var url = (this.state.updateType == "new" ? "/api/createUser" : "/api/updateUser");
+                var url = (this.state.updateType === "new" ? "/api/createUser" : "/api/updateUser");
 
                 var postData = { 
                     requestUser: { _id: localUser._id}, 
@@ -725,7 +725,6 @@ class MyAdmin extends Component{
     }
     
     clearStudentForm(callback){
-        var self = this;
         try{           
             
             this.setState({ 
@@ -754,7 +753,7 @@ class MyAdmin extends Component{
     }
     searchEnterQuery(e){
         try {
-            if(e.charCode == 13 && e.shiftKey == false) {
+            if(e.charCode === 13 && e.shiftKey === false) {
                 e.preventDefault();
                 this.searchQuery();
             }
@@ -898,7 +897,6 @@ class MyAdmin extends Component{
 
     buildFilterList(){
         try {
-            var self = this;
             if(academicData) {
                 var areaInit = Object.keys(academicData);
                 var degreeKey = {};
@@ -926,7 +924,6 @@ class MyAdmin extends Component{
     }
 
     degreeSearch(){
-        var self = this;
         try {
             var retList = [];
             var activeAreaFilter = this.state.areaList.filter(function(x) { return x.status === true; });
@@ -941,7 +938,7 @@ class MyAdmin extends Component{
                     var tmpDegree = tmpArea.degrees[degree.title];
                     if(tmpDegree){
                         tmpDegree.forEach(function(major){
-                            var areaUrlTitle = area.title.replace(/([&\/\\()])/g,"_").split(' ').join("").toLowerCase();
+                            var areaUrlTitle = area.title.replace(/([&\\()])/g,"_").split(' ').join("").toLowerCase();
                             var url = areaUrlTitle+"-"+major.title;
 
                             if(major.concentrations && major.concentrations.length > 0){
@@ -1032,7 +1029,7 @@ class MyAdmin extends Component{
             }
             else {
                 var selectedCourse = this.state.courseSearch.filter(function(course){
-                    return course.id == id;
+                    return course.id === id;
                 });
 
                 if(selectedCourse.length > 0 && (type in selectedCourse[0])){
@@ -1052,11 +1049,11 @@ class MyAdmin extends Component{
         try {
             var tmpQueue =  this.state.queuedCourses;
             var queuedCourses = tmpQueue.filter(function(course){
-                return course.id == newCourse.id;
+                return course.id === newCourse.id;
             });
 
             var currentCourses = this.state.currentCourses.filter(function(course){
-                return course.id == newCourse.id;
+                return course.id === newCourse.id;
             });
 
             if(queuedCourses.length > 0 || currentCourses.length > 0){
@@ -1101,8 +1098,8 @@ class MyAdmin extends Component{
             }
             
             if(tmpCurrent){
-                for(var i = 0; i < tmpCurrent.length; i++){
-                    total = total + parseInt(this.getCourseInfo("credits", tmpCurrent[i].id));
+                for(var j = 0; j < tmpCurrent.length; j++){
+                    total = total + parseInt(this.getCourseInfo("credits", tmpCurrent[j].id));
                 }  
             }        
         }
@@ -1164,9 +1161,9 @@ class MyAdmin extends Component{
                             courseStatus.push({id: course.id, name: course.name, status: true});
                         }
 
-                        if(courseStatus.length == tmpQueue.length){
+                        if(courseStatus.length === tmpQueue.length){
                             self.toggleSpinner(false);
-                            var noRegister = courseStatus.filter(function(item){ return item.status == false; });
+                            var noRegister = courseStatus.filter(function(item){ return item.status === false; });
 
                             if(noRegister.length > 0){
                                 alert("Unable to register you for the following courses: " + noRegister.map(function(elem){ return elem.name; }).join(","));

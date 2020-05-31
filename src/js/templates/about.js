@@ -6,13 +6,6 @@ import back3 from '../../assets/site/mini/back3.jpg';
 
 /* Header */
 class AboutHeader extends Component{
-    constructor(props) {
-        super(props);       
-        
-    }
-
-    componentDidMount(){}
-
     render(){        
         return(
             <div className="headerCard aboutHeader sub-page">

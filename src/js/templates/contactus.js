@@ -10,12 +10,7 @@ import FormCpt from './components/formCpt';
 
 /* Header */
 class ContactHeader extends Component{
-    constructor(props) {
-        super(props);
-    }
-
-    componentDidMount(){}
-
+   
     render(){        
         return(
             <div className="headerCard contactusHeader sub-page">

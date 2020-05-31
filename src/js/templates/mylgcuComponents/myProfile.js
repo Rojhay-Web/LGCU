@@ -293,7 +293,7 @@ class MyProfile extends Component{
                     levels.forEach(function(lvl){
                         var degrees = academicData[school].degrees[lvl];
                         degrees.forEach(function(degree){
-                            if(degree.id.toLowerCase() == degreeId.toLowerCase()){
+                            if(degree.id.toLowerCase() === degreeId.toLowerCase()){
                                 major = degree;
                             }
                         });
@@ -306,7 +306,7 @@ class MyProfile extends Component{
                             if(course in courseData){
                                 var courseId = self.getCourseId(courseData[course].section, courseData[course].id);
 
-                                var compareCourse = self.state.currentCourses.filter(function(c){ return c.id == courseId; });
+                                var compareCourse = self.state.currentCourses.filter(function(c){ return c.id === courseId; });
                                 var status = 0;
                                 if(compareCourse.length > 0){
                                     switch(compareCourse[0].completion_status.toLowerCase()){
@@ -342,7 +342,7 @@ class MyProfile extends Component{
     getCourseId(code, id) {
         var val = 0;
         try {
-            var ret = this.state.courseSearch.filter(function(course){ return (course.courseCode == code && course.courseId == id); })
+            var ret = this.state.courseSearch.filter(function(course){ return (course.courseCode === code && course.courseId === id); })
 
             val = (ret && ret.length > 0 ? ret[0].id : 0);
         }

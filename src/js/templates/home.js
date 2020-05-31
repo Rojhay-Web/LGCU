@@ -23,11 +23,6 @@ import img11 from '../../assets/site/mini/img11.jpg';
 
 /* Header */
 class HomeHeader extends Component{
-    constructor(props) {
-        super(props);
-    }
-
-    componentDidMount(){}
 
     render(){        
         return(
@@ -78,20 +73,6 @@ function Home(props){
                 {name:"Stuart Lawrence", title:"Retired Master Sergeant", text:"I am extremely proud and honored to serve as the Vice-Chairman of the Board of Directors at Lenkeson Global Christian University. I witnessed the birth of this outstanding project which has come to fruition. LGCU is the cutting edge institution of higher learning founded for such a time as this to meet the academic and professional needs of both traditional and adult learners. The University is designed to provide global access to all through affordable tuition. I invite you to become a part of this great institution as you embark on your academic journey and professional success."}
             ];             
     
-    function listenToScroll() {
-        try {
-            var y = window.scrollY;
-            var counterEl = document.getElementById("counter");
-
-            if(counterEl && !counter && y >= (counterEl.offsetTop + (counterEl.clientHeight*.4))){
-                setCounter(true);
-            }           
-        }
-        catch(ex){
-            console.log("Error with Scroll List: ", ex);
-        }
-    }
-    
     function buildDataList(){
         try {
             var tmpList = Object.keys(academicData);
@@ -112,8 +93,23 @@ function Home(props){
 
     useEffect(() => window.scrollTo(0, 0), []);
     useEffect(() => buildDataList(), []);
-    useEffect(() => window.addEventListener('scroll', listenToScroll), []);    
     useEffect(() => initialReactGA(), []);
+    
+    useEffect(() => window.addEventListener('scroll', function(){
+        try {
+            var y = window.scrollY;
+            var counterEl = document.getElementById("counter");
+
+            if(counterEl && !counter && y >= (counterEl.offsetTop + (counterEl.clientHeight*.4))){
+                setCounter(true);
+            }           
+        }
+        catch(ex){
+            console.log("Error with Scroll List: ", ex);
+        }
+    }), [counter]); 
+
+    
 
     function calc(x,y){
         var container = document.getElementById("imgSplit");
@@ -157,16 +153,16 @@ function Home(props){
                         </div>
                         <div className="media-item">
                             <h3 className="media-title">LGCU First Press Conference & Official Opening in Haiti</h3>
-                            <iframe className="media-video" src="https://www.youtube.com/embed/vvPjd_FTvpk"></iframe>
+                            <iframe title="LGCU First Press Video" className="media-video" src="https://www.youtube.com/embed/vvPjd_FTvpk"></iframe>
                         </div>
 
                         <div className="media-item">
                             <h3 className="media-title">The Birth of Lenkeson Global Christian University</h3>
-                            <iframe className="media-video" src="https://www.youtube.com/embed/iJfNHbToqfo"></iframe>
+                            <iframe title="The Birth of LGCU video" className="media-video" src="https://www.youtube.com/embed/iJfNHbToqfo"></iframe>
                         </div>
                         <div className="media-item">
                             <h3 className="media-title">Students' Testimonial</h3>
-                            <iframe className="media-video" src="https://www.youtube.com/embed/OKh3zApCQE0"></iframe>
+                            <iframe title="Students video" className="media-video" src="https://www.youtube.com/embed/OKh3zApCQE0"></iframe>
                         </div>
                     </div>                    
                 </div>                    

@@ -6,7 +6,7 @@ import $ from 'jquery';
 
 /* Components */
 import { Home, HomeHeader } from './templates/home';
-import { UC, UCHeader } from './templates/uc';
+/*import { UC, UCHeader } from './templates/uc';*/
 import { Academics, AcademicsHeader } from './templates/academics';
 import { StudyArea, StudyAreaHeader } from './templates/studyArea';
 import { Admissions, AdmissionsHeader } from './templates/admissions';
@@ -24,7 +24,6 @@ import "../css/app.less";
 
 /* Images */
 import logo from '../assets/LGCULogo2.jpg';
-import logotxt from '../assets/LGCULogo2_txt.png';
 
 const history = createBrowserHistory(); 
 

@@ -2,11 +2,6 @@ import React, { Component } from 'react';
 
 /* Body */
 class SchoolSub extends Component{
-    constructor(props) {
-        super(props);
-    }
-
-    componentDidMount(){ }
 
     render(){        
         return(
@@ -53,7 +48,7 @@ class SchoolSub extends Component{
                             ))}
                         </div>
                     </section> }
-                    {(Object.keys(this.props.data.degrees).length == 0) && 
+                    {(Object.keys(this.props.data.degrees).length === 0) && 
                         <section className="studyArea-section">
                             <div className="section-container noDegreeData">
                                 <span>To obtain information or any general questions regarding our School of {this.props.data.title} please contact our admissions team at </span>

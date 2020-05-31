@@ -10,10 +10,6 @@ import img3 from '../../assets/site/mini/back0.jpg';
 
 /* Header */
 class AdmissionsHeader extends Component{
-    constructor(props) {
-        super(props);
-    }
-
     componentDidMount(){}
 
     render(){        

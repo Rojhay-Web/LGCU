@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Modal } from 'react-bootstrap';
 import axios from 'axios';
 
-var AppIdGlobal = "";
 var rootPath = "";
 //var rootPath = "http://localhost:1111";
 
@@ -48,7 +47,7 @@ class StudentPayment extends Component{
             var step = event.target.step;
 
             if(name in this.state && (!maxLength || maxLength < 0 || value.length <= maxLength)) {
-                if(name == "cardNum"){
+                if(name === "cardNum"){
                     var tmpDisplayNum = [];
                     for(var i=0; i < 16; i++){
                         if(value.length > i){
@@ -61,7 +60,7 @@ class StudentPayment extends Component{
 
                     self.setState({ [name]:value, cardDisplayNum: tmpDisplayNum.join("")});
                 }
-                else if(step != ""){
+                else if(step !== ""){
                     if(value.indexOf(".") < 0 || (value.length - value.indexOf(".") <= 3)){
                         self.setState({ [name]:value });
                     }
@@ -126,7 +125,7 @@ class StudentPayment extends Component{
     }
 
     closeForm(){
-        if(this.state.returnMessage.type != "processing"){
+        if(this.state.returnMessage.type !== "processing"){
             this.props.handleClose();
             this.resetForm();
         }
@@ -151,10 +150,10 @@ class StudentPayment extends Component{
                 <Modal.Body>
                     <div className={"error-message" + (this.state.errorList.length > 0 ? " errorDisplay" : "")}><span>Please resolve the issues to complete the processing of your payment</span></div>
                     <div className={"status-message " + this.state.returnMessage.type}>
-                        {this.state.returnMessage.type != "processing" && 
+                        {this.state.returnMessage.type !== "processing" && 
                             <span>{this.state.returnMessage.message}</span>
                         }
-                        {this.state.returnMessage.type == "processing" && 
+                        {this.state.returnMessage.type === "processing" && 
                             <span>Processing Transaction Please Wait...</span>
                         }
                     </div>
@@ -230,7 +229,7 @@ class StudentPayment extends Component{
                                 <div className="chargeTitle">Total: </div>
                                 <div className="chargeAmount">
                                     <span>$</span>
-                                    <input type="number" name="chargeTotal" step=".01" value={(this.props.adhoc == true ? this.state.chargeTotal: this.props.totalPrice)} onChange={(e) => this.onElementChange(e)} readOnly={this.props.adhoc != true}/>
+                                    <input type="number" name="chargeTotal" step=".01" value={(this.props.adhoc === true ? this.state.chargeTotal: this.props.totalPrice)} onChange={(e) => this.onElementChange(e)} readOnly={this.props.adhoc !== true}/>
                                 </div>
                             </div>
                         </div>
@@ -238,8 +237,8 @@ class StudentPayment extends Component{
                 </Modal.Body>
                 <Modal.Footer>
                     <div className="btn-container">
-                        {this.state.returnMessage.type != "success" && <div className={"lBtn clear t1" +(this.state.returnMessage.type == "processing" ? " disable" : "")} onClick={this.submitForm}><span>Submit</span><i className="btn-icon far fa-credit-card"></i></div> }
-                        <div className={"lBtn clear t1" +(this.state.returnMessage.type == "processing" ? " disable" : "")} onClick={this.closeForm}><span>Cancel</span><i className="btn-icon far fa-times-circle"></i></div>
+                        {this.state.returnMessage.type !== "success" && <div className={"lBtn clear t1" +(this.state.returnMessage.type === "processing" ? " disable" : "")} onClick={this.submitForm}><span>Submit</span><i className="btn-icon far fa-credit-card"></i></div> }
+                        <div className={"lBtn clear t1" +(this.state.returnMessage.type === "processing" ? " disable" : "")} onClick={this.closeForm}><span>Cancel</span><i className="btn-icon far fa-times-circle"></i></div>
                     </div>
                 </Modal.Footer>
             </Modal>
@@ -252,10 +251,10 @@ class StudentPayment extends Component{
     
         try {
             // Check First & Last Name
-            if(this.state.cardFirstName.length == 0){
+            if(this.state.cardFirstName.length === 0){
                 tmpErrorList.push("cardFirstName");
             }
-            if(this.state.cardLastName.length == 0){
+            if(this.state.cardLastName.length === 0){
                 tmpErrorList.push("cardLastName");
             }
 
@@ -265,10 +264,10 @@ class StudentPayment extends Component{
             }
             
             // Check Expiration Date
-            if(this.state.cardExpMth == "00"){
+            if(this.state.cardExpMth === "00"){
                 tmpErrorList.push("cardExpMth");
             }
-            if(this.state.cardExpYr == "00"){
+            if(this.state.cardExpYr === "00"){
                 tmpErrorList.push("cardExpYr");
             }
             // Check CSV
@@ -277,19 +276,19 @@ class StudentPayment extends Component{
             }
             // Check Email
             var srtTst = this.state.cardEmail.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/i);
-            if(!srtTst || srtTst.length == 0){
+            if(!srtTst || srtTst.length === 0){
                 tmpErrorList.push("cardEmail");
             }
             // Check Country Code
-            if(this.state.cardCountry.length == 0){
+            if(this.state.cardCountry.length === 0){
                 tmpErrorList.push("cardCountry");
             }
             // Check Postal code
-            if(this.state.cardZip.length == 0){
+            if(this.state.cardZip.length === 0){
                 tmpErrorList.push("cardZip");
             }
 
-            status = (tmpErrorList.length == 0);
+            status = (tmpErrorList.length === 0);
             this.setState({ errorList: tmpErrorList });
         }
         catch(ex){
@@ -302,7 +301,7 @@ class StudentPayment extends Component{
     submitForm(){
         var self = this;
         try {
-            if(this.state.returnMessage.type != "processing" && this.cardFormValidation()){
+            if(this.state.returnMessage.type !== "processing" && this.cardFormValidation()){
                 var cardExp = this.state.cardExpMth+this.state.cardExpYr;
                 var charge = parseInt(this.props.totalPrice);
                 var tmpCharge = 0;
@@ -319,7 +318,7 @@ class StudentPayment extends Component{
                         studentId: this.props.studentInfo.studentId
                     },
                     transactionInfo: {
-                        userEmail: this.state.cardEmail, chargeDescription: (this.props.adhoc == true ? "myLGCU Account Payment" : "Student Course Payment"),
+                        userEmail: this.state.cardEmail, chargeDescription: (this.props.adhoc === true ? "myLGCU Account Payment" : "Student Course Payment"),
                         cardInfo:{
                             cardNumber: this.state.cardNum, cardExp: cardExp, cardCode: this.state.cardCSV,
                             firstname: this.state.cardFirstName, lastname: this.state.cardLastName, 
@@ -329,7 +328,7 @@ class StudentPayment extends Component{
                     }
                 };
                 
-                if(this.props.adhoc == true){
+                if(this.props.adhoc === true){
                     var chargeItem = {name:"Account Payment", description:"A payment made by the student via the myLGCU Account Portal", quantity:1, price: parseFloat(this.state.chargeTotal).toFixed(2) };
                     chargeForm.transactionInfo.chargeItems.push(chargeItem);
                 }
@@ -344,15 +343,15 @@ class StudentPayment extends Component{
                         chargeForm.transactionInfo.chargeItems.push(chargeItem);
                     });
 
-                    if(this.props.currentCourses.length == 0){
-                        var chargeItem = {name:"Technology Fee", description:"Student Semester Technology Fee", quantity:1, price: this.props.technologyFee.toFixed(2) };
+                    if(this.props.currentCourses.length === 0){
+                        var chargeItem2 = {name:"Technology Fee", description:"Student Semester Technology Fee", quantity:1, price: this.props.technologyFee.toFixed(2) };
                         
                         tmpCharge = tmpCharge + this.props.technologyFee;
-                        chargeForm.transactionInfo.chargeItems.push(chargeItem);
+                        chargeForm.transactionInfo.chargeItems.push(chargeItem2);
                     }
                 }
 
-                if(this.props.adhoc != true && charge !== tmpCharge) {
+                if(this.props.adhoc !== true && charge !== tmpCharge) {
                     alert("Error with charge alignment please contact admin");
                 }
                 else {
@@ -364,13 +363,13 @@ class StudentPayment extends Component{
                                 if(response.errorMessage == null){
                                     // Successful Charge
                                     if(response.results.messages){
-                                        if(response.results.messages.resultCode && response.results.messages.resultCode == "Ok"){
+                                        if(response.results.messages.resultCode && response.results.messages.resultCode === "Ok"){
                                             // Success
-                                            alert((self.props.adhoc == true ? "Charge was successful" : "Charge was successful your courses are now being added"));
+                                            alert((self.props.adhoc === true ? "Charge was successful" : "Charge was successful your courses are now being added"));
                                             bannerMessage.type = "success";
                                             bannerMessage.message = response.results.transactionResponse.messages.message[0].description;
                                             
-                                            if(self.props.adhoc != true ) { self.props.registerCourseList(); }
+                                            if(self.props.adhoc !== true ) { self.props.registerCourseList(); }
                                             self.closeForm();
                                         }
                                         else {

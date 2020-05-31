@@ -10,12 +10,7 @@ import img1 from '../../assets/site/mini/img9.jpg';
 
 /* Header */
 class TuitionHeader extends Component{
-    constructor(props) {
-        super(props);
-    }
-
-    componentDidMount(){}
-
+   
     render(){        
         return(
             <div className="headerCard tuitionHeader sub-page">
