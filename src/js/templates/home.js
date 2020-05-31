@@ -6,6 +6,9 @@ import React, { Component, useState, useEffect } from 'react';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 
+import SbEditable from 'storyblok-react';
+import StoryblokService from '../utils/storyblok.service';
+
 /* Data */
 import academicData from '../data/academics.json';
 
@@ -19,7 +22,7 @@ import aboutLgcu from '../../assets/site/about_lgcu.mov';
 import img8 from '../../assets/site/mini/img8.jpg';
 import img11 from '../../assets/site/mini/img11.jpg';
 
-
+const stb = new StoryblokService();
 
 /* Header */
 class HomeHeader extends Component{
@@ -59,6 +62,8 @@ class HomeHeader extends Component{
 function Home(props){
     
     const [academicList, setAcademicList] = useState([]);
+    const [videoList, setVideoList] = useState([]);
+    const [testimonials, setTestimonialList] = useState([]);
     const [counter, setCounter] = useState(false);
     const [imgprops, setIProps] = useSpring(() => ({ xys: [0, 0, 1], config: { mass: 5, tension: 350, friction: 40 } }))
 
@@ -66,12 +71,7 @@ function Home(props){
                 {value: 35, decimal:false, valueSub:"%", text:"Of the college student population is veterans, working parents and perpetual students." },
                 {value: 1.09, decimal:true, valueSub:"Million", text:"International students are enrolled in United States colleges" },
                 {value: 33, decimal:false, valueSub:"%", text:"Of all college students are taking at least one course online" }
-    ];
-    const testimonials = [
-                {name:"Leonel Bernal", title:"Dean of the School of Theology and Biblical Studies", text:"Lenkeson Global Christian University, Inc., is a University founded to empower students from all over the world to become innovators, problem-solvers, effective church leaders, entrepreneurs, to be economically and professionally successful. Jesus Christ is at the Center of this great university. Please request information regarding enrollment now!"},
-                {name:"David Duren", title:"Dean of the School of Business Administration", text:"Lenkeson Global Christian University (LGCU) and its administration is committed to providing quality education opportunities and developing an economic social fabric throughout the world. LGCU demonstrates its commitment through the development of educational programs and sharing resources to the global community. The outreach to the Haitian people during their earthquake in 2010 is one prime example as I was part of a group that visited Haiti to provide fellowship, health services, and education supplies. I am privileged to be a part of this organization and look forward to their continued global connection and opportunities to help develop and care for the global society."},
-                {name:"Stuart Lawrence", title:"Retired Master Sergeant", text:"I am extremely proud and honored to serve as the Vice-Chairman of the Board of Directors at Lenkeson Global Christian University. I witnessed the birth of this outstanding project which has come to fruition. LGCU is the cutting edge institution of higher learning founded for such a time as this to meet the academic and professional needs of both traditional and adult learners. The University is designed to provide global access to all through affordable tuition. I invite you to become a part of this great institution as you embark on your academic journey and professional success."}
-            ];             
+    ];          
     
     function buildDataList(){
         try {
@@ -91,7 +91,29 @@ function Home(props){
         ReactGA.pageview('/home');
     }
 
+    function loadPageData(){
+        
+        try {
+            stb.initEditor(this);
+            stb.getInitialProps({"query":"home"}, 'cdn/stories/home', function(page){
+                if(page){
+                    if(page){
+                        var medialist = stb.getContentType("medialist", page);
+                        setVideoList(medialist.mediaitems);
+
+                        var testimonialList = stb.getContentType("testimoniallist", page);
+                        setTestimonialList(testimonialList.list.filter(function(item){ return item.component === "testimonialitem"; }));
+                    }                    
+                }
+            });
+        }
+        catch(ex){
+            console.log("Error Loading Page Data: ",ex);
+        }
+    }
+
     useEffect(() => window.scrollTo(0, 0), []);
+    useEffect(() => loadPageData(), []);
     useEffect(() => buildDataList(), []);
     useEffect(() => initialReactGA(), []);
     
@@ -151,19 +173,14 @@ function Home(props){
                                 Your browser does not support the video tag.
                             </video>
                         </div>
-                        <div className="media-item">
-                            <h3 className="media-title">LGCU First Press Conference & Official Opening in Haiti</h3>
-                            <iframe title="LGCU First Press Video" className="media-video" src="https://www.youtube.com/embed/vvPjd_FTvpk"></iframe>
-                        </div>
-
-                        <div className="media-item">
-                            <h3 className="media-title">The Birth of Lenkeson Global Christian University</h3>
-                            <iframe title="The Birth of LGCU video" className="media-video" src="https://www.youtube.com/embed/iJfNHbToqfo"></iframe>
-                        </div>
-                        <div className="media-item">
-                            <h3 className="media-title">Students' Testimonial</h3>
-                            <iframe title="Students video" className="media-video" src="https://www.youtube.com/embed/OKh3zApCQE0"></iframe>
-                        </div>
+                        {videoList.map((item,i) =>
+                            <SbEditable content={item} key={i}>
+                                <div className="media-item" key={i}>
+                                    <h3 className="media-title">{item.title}</h3>
+                                    <iframe title={item.title +" video"} className="media-video" src={item.link}></iframe>
+                                </div>
+                            </SbEditable>
+                        )}
                     </div>                    
                 </div>                    
             </section>    
@@ -232,14 +249,16 @@ function Home(props){
                 <div className="section-container">
                     <h2 className="lrgTitle ctr" data-text="Testimonials">Testimonials</h2>
 
-                    <Carousel className="testimonial-carousel" showThumbs={false} showStatus={false} interval={7000} infiniteLoop autoPlay>
-                        {testimonials.map((item,i) =>
-                            <div className="testimonial-item" key={i}>
-                                <p>"{item.text}"</p>
-                                <p className="testimonial-title">{item.name}, <span>{item.title}</span></p>
-                            </div>
-                        )}
-                    </Carousel>
+                    {(testimonials && testimonials.length > 0) && 
+                        <Carousel className="testimonial-carousel" showThumbs={false} showStatus={false} interval={7000} infiniteLoop autoPlay>
+                            {testimonials.map((item,i) =>
+                                <div className="testimonial-item" key={i}>
+                                    <p>"{item.text}"</p>
+                                    <p className="testimonial-title">{item.name}, <span>{item.title}</span></p>
+                                </div>
+                            )}
+                        </Carousel>
+                    }
                 </div>                    
             </section>                    
         </div>

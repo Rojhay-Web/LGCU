@@ -4080,7 +4080,7 @@ html {
   }
 }
 .app-nav .navbar.nav-bottom .navbar-brand {
-  height: 120px;
+  height: 100px;
   display: flex;
   flex-direction: row;
   color: #ffffff;
@@ -5628,7 +5628,7 @@ html {
   animation-delay: 0.7s;
   animation-fill-mode: forwards;
 }
-@media (max-width: 770px) {
+@media (max-width: 992px) {
   .sidenav-container {
     display: block;
   }
