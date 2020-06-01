@@ -42,7 +42,7 @@ class StoryblokService extends Component {
             window.storyblok.on(['change', 'published'], () => window.location.reload(true))
 
             window.storyblok.on('input', (event) => {
-                if (event.story.content && reactComponent.state.pageContent && event.story.content._uid === reactComponent.state.pageContent._uid) {
+                if (event.story.content && reactComponent && reactComponent.state.pageContent && event.story.content._uid === reactComponent.state.pageContent._uid) {
                     reactComponent.setState({ pageContent: window.storyblok.addComments(event.story.content, event.story.id) })
                 }
             })

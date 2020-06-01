@@ -1,16 +1,20 @@
 import {useSpring, animated} from 'react-spring'
-//import {Spring, interpolate} from 'react-spring/renderprops'
 import ReactGA from 'react-ga';
 
-import React, { Component, useEffect } from 'react';
+import React, { Component, useState, useEffect } from 'react';
+import TableBuilder from './components/tableBuilder';
+
+import StoryblokService from '../utils/storyblok.service';
+
 
 /* Images */
 import back1 from '../../assets/site/mini/img10.jpg';
 import img1 from '../../assets/site/mini/img9.jpg';
 
+const stb = new StoryblokService();
+
 /* Header */
 class TuitionHeader extends Component{
-   
     render(){        
         return(
             <div className="headerCard tuitionHeader sub-page">
@@ -30,30 +34,18 @@ class TuitionHeader extends Component{
 /* Body */
 function Tuition(props){
 
-    const [imgprops, setIProps] = useSpring(() => ({ xys: [0, 0, 1], config: { mass: 5, tension: 350, friction: 40 } }))
-
-    const degreeRates= [
-        { "level":"Associate", "full":295, "part":315 },
-        { "level":"Bachelors", "full":295, "part":315 },
-        { "level":"M.A., M.B.A., M.S.", "full":495, "part":515 },
-        { "level":"Masters in Education", "full":390, "part":415 },
-        { "level":"School of Theology Masters", "full":375, "part":395 }                
-    ];
-    const programRates = [
-        { "level":"Doctorate Programs", "full":550, "part":575 },
-        { "level":"Military Undergraduate", "full":225, "part":225 },
-        { "level":"Military Masters in Organizational Leadership", "full":255, "part":255 },
-        { "level":"Military Masters in School of Theology", "full":255, "part":255 },
-        { "level":"Military Graduate/Doctorate", "full":265, "part":265 }
-    ];
-
     const tuitionNote = {
         "us":{ "title":"Note to International Students:", "text":["One course at LGCU consists of 3 credit hours. Therefore, if the cost of one course is $300 per credit hour, the total cost for the course is $900.","If the degree which you have chosen has 10 courses, the total cost for that degree will be the total cost of 1 course multiplied by the total number of courses to complete the degree; for example: ($900x 10)."] },
         "fr":{ "title":"Note aux étudiants internationaux:", "text":["Un cours à LGCU comprend 3 heures de crédit. Par exemple, si le coût d'un cours est de 300 $ par heure de crédit, le coût total du cours est de 900 $.","Si le diplôme que vous avez choisi contient 10 cours, le coût total de ce diplôme sera le coût total d'un cours multiplié par le nombre total des cours pour compléter le diplôme; par exemple: (($900 x10)."] },
         "es":{ "title":"Nota para estudiantes internacionales:", "text":["un curso en LGCU consta de 3 horas de crédito. Por lo tanto, si el costo de un curso es de $ 300 por hora de crédito, el costo total del curso es de $ 900.", "Si el título que ha elegido tiene 10 cursos, el costo total de ese título será el costo total de 1 curso multiplicado por el número total de cursos para completar el título; por ejemplo: ($ 900 x10)."] }
     };
 
+    const [tutionTable, setTutionTable] = useState({});
+    const [paymentTable, setPaymentTable] = useState({});
+    const [imgprops, setIProps] = useSpring(() => ({ xys: [0, 0, 1], config: { mass: 5, tension: 350, friction: 40 } }))
+
     useEffect(() => window.scrollTo(0, 0), []);
+    useEffect(() => loadPageData(), []);
     useEffect(() => initialReactGA(), []);
     
     function initialReactGA(){
@@ -68,6 +60,30 @@ function Tuition(props){
 
     const trans = (x, y, s) => `perspective(900px) rotateX(${x}deg) rotateY(${y}deg) scale(${s})`;
 
+    function loadPageData(){
+        try {
+            stb.initEditor(this);
+            stb.getInitialProps({"query":"tuition"}, 'cdn/stories/tuition', function(page){
+                if(page){
+                    var body = page.data.story.content.body;
+                    console.log(body[0]);
+                    if(body && body.length > 0){
+                        if(body[0].component.toLowerCase() === "tuitiontable") {
+                            setTutionTable(body[0]);      
+                        } 
+                        
+                        if(body.length > 1 && body[1].component.toLowerCase() === "tuitiontable") {
+                            setPaymentTable(body[1]);
+                        }
+                    }                    
+                }
+            });
+        }
+        catch(ex){
+            console.log("Error Loading Page Data: ",ex);
+        }
+    }
+
     return(
         <div className="inner-page-body tuitionPage">
             <section className="tuition-section">
@@ -75,34 +91,10 @@ function Tuition(props){
                 <div className="section-container">
                     <p>Lenkeson Global Christian University is a non-profit institution of higher learning established to provide affordable education to individuals who otherwise could not afford it.  LGCU's tuition is among some of the lowest online universities in the United States. Payment plans at Lenkeson Global Christian University make earning a degree convenient and affordable. For more information, please contact the Business Office at 407-564-2992 or email us at <a href="mailto:admin@lenkesongcu.org">admin@lenkesongcu.org</a>.</p>
 
-                    <h3>Tuition Rates for the Academic Year 2019-2020</h3>
-                    <h4>Fall 2019, Spring 2020, Summer 2020</h4>
-
-                    <table className="tuition-table">
-                        <tr className="header">
-                            <th>Degree Level</th>
-                            <th>Full-time per credit hour</th>
-                            <th>Part-time per credit hour</th>
-                        </tr>
-                        {degreeRates.map((item,i) =>(
-                            <tr key={i}>
-                                <td>{item.level}</td>
-                                <td>${item.full}</td>
-                                <td>${item.part}</td>
-                            </tr>
-                        ))}
-
-                        <tr className="full-row"><td colspan="3">Programs</td></tr>
-
-                        {programRates.map((item,i) =>(
-                            <tr key={i}>
-                                <td>{item.level}</td>
-                                <td>${item.full}</td>
-                                <td>${item.part}</td>
-                            </tr>
-                        ))}
-                    </table>
-                    <p className="special-note">* At Lenkeson Global Christian University a full-time load is considered between 9-12 credits. Part-time is 8 credit hour or less.</p>                            
+                    <h3>{tutionTable.title}</h3>
+                    <h4>{tutionTable.subtitle}</h4>
+                    <TableBuilder tableclass="tuition-table" table={tutionTable}/>
+                    <p className="special-note">* {tutionTable.footnote}</p>                            
 
                     <p>Technology Fees $125 Due at Enrollment for One Year</p>
                     
@@ -130,77 +122,7 @@ function Tuition(props){
                     <h3>Deferred Payment Plan Policy</h3>
                     <p>LGCU encourages students to pay in full at registration. If students are not able to pay their full tuition for the semester at the beginning of the academic year, they are required to enter into a deferred payment plan agreement, which allows them to pay their tuition in installments throughout the semester. Students will be charged a fee of $45 to use the deferred payment plan. A $15 late payment fee will be added each month a student fails to schedule a payment.</p>
 
-                    <table className="tuition-table">
-                        <tr className="header">
-                            <th>Semester Plan</th>
-                            <th>Down Payment</th>
-                            <th>First Payment</th>
-                            <th>Second Payment</th>
-                            <th>Third Payment</th>
-                            <th>Fourth Payment</th>
-                            <th>Fith Payment</th>
-                            <th>Sixth Payment</th>
-                        </tr>
-                        <tr className="full-row"><td colspan="8">Fall</td></tr>
-                        <tr>
-                            <td>7 payments in Fall</td>
-                            <td>June 30th</td>
-                            <td>July 30th</td>
-                            <td>Aug. 30th</td>
-                            <td>Sep. 30th</td>
-                            <td>Oct. 30th</td>
-                            <td>Nov. 30th</td>
-                            <td>Dec. 30th</td>
-                        </tr>
-                        <tr>
-                            <td>6 payments in Fall</td>
-                            <td>July 30th</td>
-                            <td>Aug. 30th</td>
-                            <td>Sep. 30th</td>
-                            <td>Oct. 30th</td>
-                            <td>Nov. 30th</td>
-                            <td>Dec. 30th</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>4 payments in Fall</td>
-                            <td>Registration Day</td>                               
-                            <td>Sep. 30th</td>
-                            <td>Oct. 30th</td>
-                            <td>Nov. 30th</td>
-                            <td>Dec. 30th</td>
-                            <td colspan="2"></td>
-                        </tr>
-
-                        <tr className="full-row"><td colspan="8">Spring</td></tr>
-                        <tr>
-                            <td>6 payments in Spring</td>
-                            <td>Dec 30th</td>
-                            <td>Jan. 30th</td>
-                            <td>Feb. 30th</td>
-                            <td>Mar. 30th</td>
-                            <td>Apr. 30th</td>
-                            <td>May 30th</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>5 payments in Spring</td>                                
-                            <td>Registration Day</td>
-                            <td>Feb. 30th</td>
-                            <td>Mar. 30th</td>
-                            <td>Apr. 30th</td>
-                            <td>May 30th</td>
-                            <td colspan="2"></td>
-                        </tr>
-                        <tr className="full-row"><td colspan="8">Summer</td></tr>
-                        <tr>
-                            <td>5 payments in Spring</td>                                
-                            <td>Registration Day</td>
-                            <td>June 15th</td>
-                            <td>July 15th</td>
-                            <td colspan="4"></td>
-                        </tr>
-                    </table>
+                    <TableBuilder tableclass="tuition-table" table={paymentTable} />
 
                     <p>Students who are enrolled and registered in an LGCU graduate program must pay a 1/3 of down payment of the total semester charges.  The remaining charges for the semester will be divided equally to cover the tuition for the remaining installments.</p>
                     <p>Student accounts are classified as follows:</p>
