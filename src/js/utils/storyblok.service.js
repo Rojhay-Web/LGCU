@@ -77,10 +77,7 @@ class StoryblokService extends Component {
     async getInitialProps({ query }, pageUrl, callback) {
         this.setQuery(query);
 
-        let [page] = await Promise.all([
-            this.get(pageUrl)
-        ]);
-
+        let [page] = await Promise.all([ this.get(pageUrl) ]);
         callback(page);
     }
 }
