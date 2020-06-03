@@ -303,15 +303,20 @@ class App extends Component{
                     /* Alerts */
                     if(layoutbody.alerts && layoutbody.alerts.length > 0){
                         var rawMarkup = "";
-                
-                        layoutbody.alerts.forEach(function(item){  
+                        var alertList = layoutbody.alerts.filter(function(item) { return item.component.toLowerCase() === "alert"; });
+                        
+                        alertList.forEach(function(item){  
                             rawMarkup = (item.text ? marked(item.text) : "");
                             $("#notifications").append("<div class=\"alert alert-"+item.type+" alert-dismissible fade show\" role=\"alert\"><div class=\"alert-title\">"+item.title +"</div><div class=\"alert-text\">"+rawMarkup+"</div><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button></div>")
                         });
                     } 
                     
                     /* Footer */
-                    self.setState({ address: (layoutbody.address ?? []) , contact: (layoutbody.contact ?? []), hoursofoperation: (layoutbody.hoursofoperation ?? []) });                
+                    var tmpAddress = (layoutbody.address ? layoutbody.address.filter(function(item) { return item.component.toLowerCase() === "footerline"; }) : []);
+                    var tmpContact = (layoutbody.contact ? layoutbody.contact.filter(function(item) { return item.component.toLowerCase() === "footerline"; }) : []);
+                    var tmpHoursofoperation = (layoutbody.hoursofoperation ? layoutbody.hoursofoperation.filter(function(item) { return item.component.toLowerCase() === "footerline"; }) : []);
+
+                    self.setState({ address: tmpAddress, contact: tmpContact, hoursofoperation: tmpHoursofoperation });                
                 }
             });
         }

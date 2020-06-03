@@ -98,10 +98,12 @@ function Home(props){
             stb.getInitialProps({"query":"home"}, 'cdn/stories/home', function(page){
                 if(page){
                     var medialist = stb.getContentType("medialist", page);
-                    setVideoList(medialist.mediaitems);
+                    var tmpItemList = (medialist.mediaitems ? medialist.mediaitems.filter(function(item) { return item.component.toLowerCase() === "mediaitem"; }) : []);
+                    setVideoList(tmpItemList);
 
                     var testimonialList = stb.getContentType("testimoniallist", page);
-                    setTestimonialList(testimonialList.list.filter(function(item){ return item.component === "testimonialitem"; }));                  
+                    var tmptestimonialList = (testimonialList.list ? testimonialList.list.filter(function(item) { return item.component.toLowerCase() === "testimonialitem"; }) : []);
+                    setTestimonialList(tmptestimonialList);                  
                 }
             });
         }

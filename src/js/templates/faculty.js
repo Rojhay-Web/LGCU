@@ -123,22 +123,26 @@ class Faculty extends Component{
                     
                     if(body) { 
                         var index = 0;
-                       
+                        
+                        var tmpBody = [];
+
                         body.forEach(function(item){
                             if(item.component && item.component.toLowerCase() === "facultysection" ) {
                                 self[item._uid] = React.createRef();
-                            }
-
-                            item.backgroundcolor = (item.backgroundcolor ? item.backgroundcolor : "");
-                            item.SectionTitle = (item.SectionTitle ? item.SectionTitle : "");
-
-                            item.list.forEach(function(sub){                                
-                                sub.cardId = index;
-                                index++;
-                            });
+                                item.backgroundcolor = (item.backgroundcolor ? item.backgroundcolor : "");
+                                item.SectionTitle = (item.SectionTitle ? item.SectionTitle : "");
+                                
+                                item.list = item.list.filter(function(item) { return item.component.toLowerCase() === "subfacultymember"; })
+                                
+                                item.list.forEach(function(sub){                                
+                                    sub.cardId = index;
+                                    index++;
+                                });
+                                tmpBody.push(item);
+                            }                           
                         });
                        
-                        self.setState({ pages: body });
+                        self.setState({ pages: tmpBody });
                     }
                 }
             });
