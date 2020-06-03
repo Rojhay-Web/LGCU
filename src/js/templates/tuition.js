@@ -66,7 +66,7 @@ function Tuition(props){
             stb.getInitialProps({"query":"tuition"}, 'cdn/stories/tuition', function(page){
                 if(page){
                     var body = page.data.story.content.body;
-                    console.log(body[0]);
+                    
                     if(body && body.length > 0){
                         if(body[0].component.toLowerCase() === "tuitiontable") {
                             setTutionTable(body[0]);      

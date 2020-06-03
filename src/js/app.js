@@ -83,10 +83,13 @@ class App extends Component{
             sidebarOpen: false,
             modalStatus: false,
             copyrightDate: "2019",
-            mlAccess:false
+            mlAccess:false,
+            hoursofoperation:[],
+            contact:[],
+            address:[]
         };
 
-        this.getAlerts = this.getAlerts.bind(this);
+        this.getLayout = this.getLayout.bind(this);
         this.setSidebarDisplay = this.setSidebarDisplay.bind(this);
         this.listenToScroll = this.listenToScroll.bind(this);
         this.modalShow = this.modalShow.bind(this);
@@ -188,8 +191,9 @@ class App extends Component{
                             </div>
                             <div className="footer-section">
                                 <div className="footer-info">Hours of Operation:</div>
-                                <div className="footer-info">Monday - Friday 9:00 a.m. - 6:00 p.m. (ET)</div>
-                                <div className="footer-info">Saturday 10:00 a.m. - 1:00 p.m. (ET)</div>
+                                {this.state.hoursofoperation.map((item,i) =>
+                                    <div className="footer-info" key={i}>{item.text}</div>
+                                )}
                             </div>
                             <div className="footer-section">
                                 <div className="footer-link-section">
@@ -203,13 +207,14 @@ class App extends Component{
                             </div>
                             <div className="footer-section full address">
                                 <div className="address-section">
-                                    <div className="footer-info">P.O. Box 121199</div>
-                                    <div className="footer-info">Clermont, Florida 34712</div>                                
+                                    {this.state.address.map((item,i) =>
+                                        <div className="footer-info" key={i}>{item.text}</div>
+                                    )}                               
                                 </div>
                                 <div className="address-section">
-                                    <div className="footer-info">Phone: 407.573.5855</div>
-                                    <div className="footer-info">Fax: 407.807.0567</div>                                    
-                                    <div className="footer-info">info@lenkesongcu.org</div>
+                                    {this.state.contact.map((item,i) =>
+                                        <div className="footer-info" key={i}>{item.text}</div>
+                                    )}
                                 </div>
                             </div>
                             <div className="footer-section full policy-foot">
@@ -288,19 +293,25 @@ class App extends Component{
         });
     }
 
-    getAlerts(){
+    getLayout(){
+        var self = this;
         try {
-            stb.getInitialProps({"query":"alerts"}, 'cdn/stories/alerts', function(page){
+            stb.getInitialProps({"query":"layout"}, 'cdn/stories/layout', function(page){
                 if(page){
-                    var alerts = page.data.story.content.body;
-                    if(alerts && alerts.length > 0){
+                    var layoutbody = page.data.story.content;
+                    
+                    /* Alerts */
+                    if(layoutbody.alerts && layoutbody.alerts.length > 0){
                         var rawMarkup = "";
                 
-                        alerts.forEach(function(item){  
+                        layoutbody.alerts.forEach(function(item){  
                             rawMarkup = (item.text ? marked(item.text) : "");
                             $("#notifications").append("<div class=\"alert alert-"+item.type+" alert-dismissible fade show\" role=\"alert\"><div class=\"alert-title\">"+item.title +"</div><div class=\"alert-text\">"+rawMarkup+"</div><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button></div>")
                         });
-                    }
+                    } 
+                    
+                    /* Footer */
+                    self.setState({ address: (layoutbody.address ?? []) , contact: (layoutbody.contact ?? []), hoursofoperation: (layoutbody.hoursofoperation ?? []) });                
                 }
             });
         }
@@ -328,7 +339,8 @@ class App extends Component{
         var self = this;
         window.addEventListener('scroll', this.listenToScroll);
         stb.initEditor(this);
-        this.getAlerts();
+
+        this.getLayout();
         this.getCopyrightDate();
         self.unlisten = history.listen(location => { 
             if(self.sidebarOpen) { self.setSidebarDisplay(false); }

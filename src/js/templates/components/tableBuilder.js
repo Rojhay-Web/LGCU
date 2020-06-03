@@ -37,7 +37,6 @@ class TableBuilder extends Component{
             console.log("Error Building Table: ",ex);
         }
 
-        console.log("Rows: "); console.log(rows);
         return rows;
     }
     render(){        
