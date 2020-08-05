@@ -13,11 +13,6 @@ import AcademicSlider from './components/academicSlider';
 
 /* Header */
 class AcademicsHeader extends Component{
-    constructor(props) {
-        super(props);
-    }
-
-    componentDidMount(){}
 
     render(){        
         return(

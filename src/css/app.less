@@ -1,4 +1,5 @@
 @mobile-device: ~"(max-width: 770px)";
+@mobile-nav: ~"(max-width: 992px)";
 /* Header Sizes */
 @navHeightMiniBottom: 49px;
 
@@ -325,7 +326,7 @@ body, html {
 
         &.nav-bottom {                                   
             .navbar-brand {
-                height: 120px;
+                height: 100px;
                 display: flex;
                 flex-direction: row;
                 color: rgba(255,255,255,1);
@@ -1524,7 +1525,7 @@ body, html {
             animation-fill-mode: forwards; 
         }
     }
-    @media @mobile-device { display: block;}
+    @media @mobile-nav { display: block;}
 }
 
 /* Animation key frames */

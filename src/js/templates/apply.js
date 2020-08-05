@@ -16,12 +16,7 @@ import CardPayment from './components/cardPaymentModal';
 
 /* Header */
 class ApplyHeader extends Component{
-    constructor(props) {
-        super(props);
-    }
-
-    componentDidMount(){}
-
+    
     render(){        
         return(
             <div className="headerCard applyHeader sub-page">
@@ -140,13 +135,12 @@ class Apply extends Component{
     }
 
     getAppType(){
-        var self = this;
         var appType = "";
         try {
             var values = queryString.parse(this.props.location.search);
             appType = ("type" in values ? values.type : "");
 
-            if(appType == "student"){
+            if(appType === "student"){
                 // Load Degree info
                 this.loadMajorData();
             }
@@ -159,7 +153,6 @@ class Apply extends Component{
     }
 
     loadMajorData(){
-        var self = this;
         try {
             // academicData
             var areaInit = Object.keys(academicData);
@@ -204,7 +197,6 @@ class Apply extends Component{
                             <StudentApp appFeeForm={this.appFeeForm} modalHide={this.modalHide}/>
                         </div>
                 </div>;
-                break;
             case "faculty":
                 return <div className="application-container">
                         <h2 className="lrgTitle ctr" data-text="Faculty Application">Faculty Application</h2>
@@ -220,7 +212,6 @@ class Apply extends Component{
                             <p className="form-info">Lenkeson Global Christian University is a Christ-centered institution of higher learning and is committed to provide cutting-edge academic education to men and women without discriminating against any individual on the basis of gender, race, color, religion, national origin, and intellectually and physically challenged individuals. However, the university reserves the right to refuse admission to persons or hire faculty or staff who do not support its values. LGCU is an equal opportunity employer.</p>                                                        
                         </div>
                     </div>;
-                break;
             default:
                 return <div className="application-container">
                         <h2 className="lrgTitle ctr" data-text="Online Applications">Online Applications</h2>
@@ -231,11 +222,10 @@ class Apply extends Component{
                                 <div className="btn-split-txt">Or</div>
                                 <a href="/apply?type=faculty" className="lBtn clear t1"><span>Faculty Application</span><i className="btn-icon fas fa-chalkboard-teacher"></i></a>
                             </div>
-                            <a className="appFeeSub" onClick={this.modalShow}>Application Fee Submissions</a>
-                            <div className="img-container"><img src={appImg} /></div>
+                            <div className="appFeeSub" onClick={this.modalShow}>Application Fee Submissions</div>
+                            <div className="img-container"><img src={appImg} alt="application fee" /></div>
                         </div>
                     </div> ;
-                break;
         }
     }
 }

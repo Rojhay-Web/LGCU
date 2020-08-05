@@ -83,19 +83,18 @@ class StudentApp extends Component{
     }
 
     render(){       
-        var self = this; 
         const filteredResults = this.state.majorResults;
 
         return(
             <div className="studentAppForm">
                 <div className="form-nav">
-                    <div className={"form-nav-item" + (this.state.selectedSection == "ApplicationInfo" ? " active":"") + (this.state.sectionsTypes.ApplicationInfo.status ? " completed":"")} onClick={(e)=> this.changeSelectedSection("ApplicationInfo",false)}><i className="nav-icon fas fa-user-edit" /></div>
-                    <div className={"form-nav-item" + (this.state.selectedSection == "EContactInfo" ? " active":"") + (this.state.sectionsTypes.EContactInfo.status ? " completed":"")} onClick={(e)=> this.changeSelectedSection("EContactInfo",false)}><i className="nav-icon fas fa-id-card" /></div>
-                    <div className={"form-nav-item" + (this.state.selectedSection == "DegreeInfo" ? " active":"") + (this.state.sectionsTypes.DegreeInfo.status ? " completed":"")} onClick={(e)=> this.changeSelectedSection("DegreeInfo",false)}><i className="nav-icon fas fa-user-graduate" /></div>
-                    <div className={"form-nav-item" + (this.state.selectedSection == "EduEmpHistory" ? " active":"") + (this.state.sectionsTypes.EduEmpHistory.status ? " completed":"")} onClick={(e)=> this.changeSelectedSection("EduEmpHistory",false)}><i className="nav-icon fas fa-history" /></div>
+                    <div className={"form-nav-item" + (this.state.selectedSection === "ApplicationInfo" ? " active":"") + (this.state.sectionsTypes.ApplicationInfo.status ? " completed":"")} onClick={(e)=> this.changeSelectedSection("ApplicationInfo",false)}><i className="nav-icon fas fa-user-edit" /></div>
+                    <div className={"form-nav-item" + (this.state.selectedSection === "EContactInfo" ? " active":"") + (this.state.sectionsTypes.EContactInfo.status ? " completed":"")} onClick={(e)=> this.changeSelectedSection("EContactInfo",false)}><i className="nav-icon fas fa-id-card" /></div>
+                    <div className={"form-nav-item" + (this.state.selectedSection === "DegreeInfo" ? " active":"") + (this.state.sectionsTypes.DegreeInfo.status ? " completed":"")} onClick={(e)=> this.changeSelectedSection("DegreeInfo",false)}><i className="nav-icon fas fa-user-graduate" /></div>
+                    <div className={"form-nav-item" + (this.state.selectedSection === "EduEmpHistory" ? " active":"") + (this.state.sectionsTypes.EduEmpHistory.status ? " completed":"")} onClick={(e)=> this.changeSelectedSection("EduEmpHistory",false)}><i className="nav-icon fas fa-history" /></div>
                 </div>
                 <div className="form-container">
-                    {this.state.selectedSection == "ApplicationInfo" && 
+                    {this.state.selectedSection === "ApplicationInfo" && 
                         <div className="form-section-container">
                             <h2>Applicant Information</h2>
                             <div className="form-element sz-3"><span>First Name *</span><input type="text" name="firstName" className="" placeholder="First Name" value={this.state.form.firstName.value} onChange={(e) => this.onElementChange(e)}/></div>
@@ -113,7 +112,7 @@ class StudentApp extends Component{
                             <div className="form-element sz-5"><span>Drivers License</span><input type="text" name="driverlicense" className="" placeholder="Drivers License" value={this.state.form.driverlicense.value} onChange={(e) => this.onElementChange(e)}/></div>
                         </div> 
                     }
-                    {this.state.selectedSection == "EContactInfo" && 
+                    {this.state.selectedSection === "EContactInfo" && 
                         <div className="form-section-container">
                             <h2>Emergency Contact Information</h2>
                             <div className="form-element sz-5"><span>Name *</span><input type="text" name="emergencyname" className="" placeholder="Name" value={this.state.form.emergencyname.value} onChange={(e) => this.onElementChange(e)}/></div>
@@ -126,7 +125,7 @@ class StudentApp extends Component{
                         </div>
                     }
 
-                    {this.state.selectedSection == "DegreeInfo" && 
+                    {this.state.selectedSection === "DegreeInfo" && 
                         <div className="form-section-container">
                             <h2>Degree Information</h2>
                             {/* Degree Info */}
@@ -173,7 +172,7 @@ class StudentApp extends Component{
                             <div className="form-element sz-10"><span>Specific Skills Acquired</span><textarea type="text" name="veteranskill" className="" placeholder="Specific Skills Acquired" value={this.state.form.veteranskill.value} onChange={(e) => this.onElementChange(e)}/></div>
                         </div> 
                     }
-                    {this.state.selectedSection == "EduEmpHistory" && 
+                    {this.state.selectedSection === "EduEmpHistory" && 
                         <div className="form-section-container">
                             <h2>Previous Educational/Employment Experience</h2>
                             <div className="form-element sz-10"><span>Highest Degree Earned *</span><input type="text" name="highestdegree" className="" placeholder="Highest Degree Earned" value={this.state.form.highestdegree.value} onChange={(e) => this.onElementChange(e)}/></div>
@@ -200,7 +199,7 @@ class StudentApp extends Component{
                         </div> 
                     }
 
-                    {this.state.selectedSection == "submitted" && 
+                    {this.state.selectedSection === "submitted" && 
                         <div className="form-section-container submitted">
                             <h2>You Are Almost Finished</h2>
                             <p>Your Lenkeson Global Christian University student application has been submitted, to complete your application please email all additional required documentation to admissions@lenkesongcu.org.</p>                                                      
@@ -230,7 +229,6 @@ class StudentApp extends Component{
 
     isLastSection(){
         var ret = false;
-        var self = this;
         try {            
             var tmpSections = Object.keys(this.state.sectionsTypes);
             var curLoc = tmpSections.indexOf(this.state.selectedSection);
@@ -350,22 +348,21 @@ class StudentApp extends Component{
         var valErrors = [];
         try {
             
-            var sectionFields = (section == "all" ? Object.keys(self.state.form) : this.state.sectionsTypes[section].fields);
+            var sectionFields = (section === "all" ? Object.keys(self.state.form) : this.state.sectionsTypes[section].fields);
 
             sectionFields.forEach(function(field){
                 // check required
-                if(self.state.form[field].required && !self.state.form[field].toggle && self.state.form[field].value == ""){
+                if(self.state.form[field].required && !self.state.form[field].toggle && self.state.form[field].value === ""){
                     reqErrors.push(self.state.form[field].title);
                 }
 
                 // check special validations
                 if(self.state.form[field].validation){
                     var strVal = self.state.form[field].value;
-                    var valid = false;
                     switch(self.state.form[field].validation){
                         case "email":
                             var srtTst = strVal.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/i);
-                            if(!srtTst || srtTst.length == 0){
+                            if(!srtTst || srtTst.length === 0){
                                 valErrors.push(self.state.form[field].title);
                             }
                             break;
@@ -421,7 +418,6 @@ class StudentApp extends Component{
 
     buildFilterList(){
         try {
-            var self = this;
             if(academicData) {
                 var areaInit = Object.keys(academicData);
                 var degreeKey = {};
@@ -449,7 +445,6 @@ class StudentApp extends Component{
     }
 
     degreeSearch(){
-        var self = this;
         try {
             var retList = [];
             var activeAreaFilter = this.state.areaList.filter(function(x) { return x.status === true; });
@@ -464,7 +459,7 @@ class StudentApp extends Component{
                     var tmpDegree = tmpArea.degrees[degree.title];
                     if(tmpDegree){
                         tmpDegree.forEach(function(major){
-                            var areaUrlTitle = area.title.replace(/([&\/\\()])/g,"_").split(' ').join("").toLowerCase();
+                            var areaUrlTitle = area.title.replace(/([&\\()])/g,"_").split(' ').join("").toLowerCase();
                             var url = areaUrlTitle+"-"+major.title;
 
                             if(major.concentrations && major.concentrations.length > 0){

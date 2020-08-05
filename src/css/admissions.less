@@ -32,10 +32,11 @@
         padding: @navHeightBottom 0px 50px;
         position: relative;
         overflow: hidden;
+        .lrgTitle { color:@color1; &:before { .color1(color, 0.2);} }
 
-        &.c1 { background: @color1; }
-        &.c2 { background: @color2; }
-        &.c3 { background: @color3; }
+        &.c1 { background: @color1; .lrgTitle { color:#fff; &:before { color: rgba(200,200,200,0.2) !important; } } }
+        &.c2 { background: @color2; .lrgTitle { color:#fff; &:before { color: rgba(200,200,200,0.2) !important; } }}
+        &.c3 { background: @color3; .lrgTitle { color:#fff; &:before { color: rgba(200,200,200,0.2) !important; } }}
 
         .international {
             color: @color1;

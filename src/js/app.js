@@ -4,9 +4,12 @@ import axios from 'axios';
 import { createBrowserHistory } from 'history';
 import $ from 'jquery';
 
+import StoryblokService from './utils/storyblok.service';
+import marked from 'marked'
+
 /* Components */
 import { Home, HomeHeader } from './templates/home';
-import { UC, UCHeader } from './templates/uc';
+/*import { UC, UCHeader } from './templates/uc';*/
 import { Academics, AcademicsHeader } from './templates/academics';
 import { StudyArea, StudyAreaHeader } from './templates/studyArea';
 import { Admissions, AdmissionsHeader } from './templates/admissions';
@@ -24,8 +27,8 @@ import "../css/app.less";
 
 /* Images */
 import logo from '../assets/LGCULogo2.jpg';
-import logotxt from '../assets/LGCULogo2_txt.png';
 
+const stb = new StoryblokService();
 const history = createBrowserHistory(); 
 
 const routes = [
@@ -80,16 +83,15 @@ class App extends Component{
             sidebarOpen: false,
             modalStatus: false,
             copyrightDate: "2019",
-            alerts:[
-                {title:"Special Offer for All",text:"Due to the Covid-19 global pandemic, we understand that you may be experiencing some financial hardships, which may hinder you from completing your academic journey.<br/><br/>LGCU is pleased to offer you a 30% tuition discount, if you sign up for any academic programs within 10 days.<br/><br/>For additional information, call 407-573-5855 or email us at info@lenkesongcu.org", type:"warning"},
-                {title:"Rolling Enrollment",text:"Classes starting soon, all classes are 8 weeks in length. To obtain additional information regarding enrollment, click on <a href=\"/apply\">Apply Now</a> then click on Student Application.", type:"primary"}
-            ],
-            mlAccess:false
+            mlAccess:false,
+            hoursofoperation:[],
+            contact:[],
+            address:[]
         };
 
+        this.getLayout = this.getLayout.bind(this);
         this.setSidebarDisplay = this.setSidebarDisplay.bind(this);
         this.listenToScroll = this.listenToScroll.bind(this);
-        this.setAlerts = this.setAlerts.bind(this);
         this.modalShow = this.modalShow.bind(this);
         this.modalHide = this.modalHide.bind(this);
         this.setMLAccess = this.setMLAccess.bind(this);
@@ -189,8 +191,9 @@ class App extends Component{
                             </div>
                             <div className="footer-section">
                                 <div className="footer-info">Hours of Operation:</div>
-                                <div className="footer-info">Monday - Friday 9:00 a.m. - 6:00 p.m. (ET)</div>
-                                <div className="footer-info">Saturday 10:00 a.m. - 1:00 p.m. (ET)</div>
+                                {this.state.hoursofoperation.map((item,i) =>
+                                    <div className="footer-info" key={i}>{item.text}</div>
+                                )}
                             </div>
                             <div className="footer-section">
                                 <div className="footer-link-section">
@@ -204,13 +207,14 @@ class App extends Component{
                             </div>
                             <div className="footer-section full address">
                                 <div className="address-section">
-                                    <div className="footer-info">P.O. Box 121199</div>
-                                    <div className="footer-info">Clermont, Florida 34712</div>                                
+                                    {this.state.address.map((item,i) =>
+                                        <div className="footer-info" key={i}>{item.text}</div>
+                                    )}                               
                                 </div>
                                 <div className="address-section">
-                                    <div className="footer-info">Phone: 407.573.5855</div>
-                                    <div className="footer-info">Fax: 407.807.0567</div>                                    
-                                    <div className="footer-info">info@lenkesongcu.org</div>
+                                    {this.state.contact.map((item,i) =>
+                                        <div className="footer-info" key={i}>{item.text}</div>
+                                    )}
                                 </div>
                             </div>
                             <div className="footer-section full policy-foot">
@@ -289,16 +293,35 @@ class App extends Component{
         });
     }
 
-    setAlerts(){
+    getLayout(){
+        var self = this;
         try {
-            if(this.state.alerts){
-                this.state.alerts.forEach(function(item){  
-                    $("#notifications").append("<div class=\"alert alert-"+item.type+" alert-dismissible fade show\" role=\"alert\"><div class=\"alert-title\">"+item.title +"</div><div class=\"alert-text\">"+item.text+"</div><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button></div>")
-                });
-            }
+            stb.getInitialProps({"query":"layout"}, 'cdn/stories/layout', function(page){
+                if(page){
+                    var layoutbody = page.data.story.content;
+                    
+                    /* Alerts */
+                    if(layoutbody.alerts && layoutbody.alerts.length > 0){
+                        var rawMarkup = "";
+                        var alertList = layoutbody.alerts.filter(function(item) { return item.component.toLowerCase() === "alert"; });
+                        
+                        alertList.forEach(function(item){  
+                            rawMarkup = (item.text ? marked(item.text) : "");
+                            $("#notifications").append("<div class=\"alert alert-"+item.type+" alert-dismissible fade show\" role=\"alert\"><div class=\"alert-title\">"+item.title +"</div><div class=\"alert-text\">"+rawMarkup+"</div><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button></div>")
+                        });
+                    } 
+                    
+                    /* Footer */
+                    var tmpAddress = (layoutbody.address ? layoutbody.address.filter(function(item) { return item.component.toLowerCase() === "footerline"; }) : []);
+                    var tmpContact = (layoutbody.contact ? layoutbody.contact.filter(function(item) { return item.component.toLowerCase() === "footerline"; }) : []);
+                    var tmpHoursofoperation = (layoutbody.hoursofoperation ? layoutbody.hoursofoperation.filter(function(item) { return item.component.toLowerCase() === "footerline"; }) : []);
+
+                    self.setState({ address: tmpAddress, contact: tmpContact, hoursofoperation: tmpHoursofoperation });                
+                }
+            });
         }
         catch(ex){
-            console.log("Error")
+            console.log("Error Getting Alerts: ",ex);
         }
     }
 
@@ -320,7 +343,9 @@ class App extends Component{
     componentDidMount(){
         var self = this;
         window.addEventListener('scroll', this.listenToScroll);
-        this.setAlerts();
+        stb.initEditor(this);
+
+        this.getLayout();
         this.getCopyrightDate();
         self.unlisten = history.listen(location => { 
             if(self.sidebarOpen) { self.setSidebarDisplay(false); }

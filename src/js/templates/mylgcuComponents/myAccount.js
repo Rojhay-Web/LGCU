@@ -179,7 +179,7 @@ class MyAccount extends Component{
                     }
                     else {
                         var userInfo = response.data.results;
-                        var tmpStudent = {  fulltime: (userInfo.studentInfo.fulltime == true),
+                        var tmpStudent = {  fulltime: (userInfo.studentInfo.fulltime === true),
                                             military: userInfo.military, studentId: userInfo.studentId, 
                                             talentlmsId: userInfo.talentlmsId };
                         self.setState({ studentInfo: tmpStudent });
