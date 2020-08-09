@@ -11,7 +11,7 @@ var mail = {
         /* { email: "", subject:"", title:"", formdata:{}, additionalData:{}} */
 
         try {
-            var transporter = nodemailer.createTransport({
+            /*var transporter = nodemailer.createTransport({
                 host: 'smtp.gmail.com',
                 port: 465,
                 secure: true,
@@ -23,7 +23,15 @@ var mail = {
                     refreshToken: process.env.MAIL_SERVER_REFRESH_TOKEN,
                     accessToken: process.env.MAIL_SERVER_ACCESS_TOKEN
                 }
+              });*/
+              const transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                  user:  process.env.MAIL_SERVER_USER,
+                  pass: process.env.MAIL_SERVER_PWD
+                }
               });
+
 
               var mailOptions = {
                 from: process.env.user,
