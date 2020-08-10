@@ -23,7 +23,7 @@ class StudentApp extends Component{
             applicationId:null,
             majorResults:[],
             degreeList:[],
-            sendAddress:"admin@lenkesongcu.org",
+            sendAddress:"web.lgcu@gmail.com", //"admin@lenkesongcu.org",
             form: {
                 firstName:{"title":"First Name","required":true, "value":""},
                 middleName:{"title":"Middle Name","required":false, "value":""},
