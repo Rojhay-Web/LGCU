@@ -192,8 +192,10 @@ class FormCpt extends Component{
                             });                            
                         }
                         else {
-                            alert("Error Submitting Form");
-                            console.log("[Error] Submitting Form: ", response.data.errorMessage);
+                            self.setState({loading: false }, () =>{
+                                alert("Error Submitting Form");
+                                console.log("[Error] Submitting Form: ", response.data.errorMessage);
+                            });
                         }
                     });                
                 }

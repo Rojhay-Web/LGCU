@@ -24,6 +24,7 @@
     "form-data": "^2.5.1",
     "history": "^4.9.0",
     "jquery": "^3.5.1",
+    "mailgun-js": "^0.22.0",
     "marked": "^1.1.0",
     "mongodb": "^3.3.2",
     "nodemailer": "^6.2.1",
