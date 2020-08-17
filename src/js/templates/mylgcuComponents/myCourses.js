@@ -54,7 +54,7 @@ class MyCourses extends Component{
             var ret = false;
             try {
                 
-                ret = ((self.state.searchQuery == "") ||
+                ret = ((self.state.searchQuery === "") ||
                 (  (course.name && course.name.toLowerCase().indexOf(self.state.searchQuery.toLowerCase()) >= 0)
                 || (course.courseCode && course.courseCode.toLowerCase().indexOf(self.state.searchQuery.toLowerCase()) >= 0)
                 || (course.courseId && course.courseId.toLowerCase().indexOf(self.state.searchQuery.toLowerCase()) >= 0)
@@ -151,7 +151,7 @@ class MyCourses extends Component{
                                         </tr>
                                     ))}
 
-                                    {(this.state.currentCourses.length == 0 && this.state.queuedCourses.length == 0) && 
+                                    {(this.state.currentCourses.length === 0 && this.state.queuedCourses.length === 0) && 
                                         <tr className="noDataRow">
                                             <td colSpan="6">No Courses Added</td>
                                         </tr>
@@ -218,11 +218,11 @@ class MyCourses extends Component{
         try {
             var tmpQueue =  this.state.queuedCourses;
             var queuedCourses = tmpQueue.filter(function(course){
-                return course.id == newCourse.id;
+                return course.id === newCourse.id;
             });
 
             var currentCourses = this.state.currentCourses.filter(function(course){
-                return course.id == newCourse.id;
+                return course.id === newCourse.id;
             });
 
             if(queuedCourses.length > 0 || currentCourses.length > 0){
@@ -267,8 +267,8 @@ class MyCourses extends Component{
             }
             
             if(tmpCurrent){
-                for(var i = 0; i < tmpCurrent.length; i++){
-                    total = total + parseInt(this.getCourseInfo("credits", tmpCurrent[i].id));
+                for(var j = 0; j < tmpCurrent.length; j++){
+                    total = total + parseInt(this.getCourseInfo("credits", tmpCurrent[j].id));
                 }  
             }        
         }
@@ -290,10 +290,10 @@ class MyCourses extends Component{
              
              /* Military */
              if(this.state.studentInfo.military === true) {
-                 if(this.state.studentInfo.level == "doctorate") {
+                 if(this.state.studentInfo.level === "doctorate") {
                      creditRate = 265;
                  }
-                 else if(this.state.studentInfo.level == "masters"){
+                 else if(this.state.studentInfo.level === "masters"){
                      creditRate = 255;
                  }
                  else {
@@ -301,14 +301,14 @@ class MyCourses extends Component{
                  }
              }
              else {
-                 if(this.state.studentInfo.level == "doctorate") {
+                 if(this.state.studentInfo.level === "doctorate") {
                      creditRate = (fulltime ? 550 : 575);
                  }
-                 else if(this.state.studentInfo.level == "masters"){
-                     if(this.state.studentInfo.school.toLowerCase() == "theology & biblical studies"){
+                 else if(this.state.studentInfo.level === "masters"){
+                     if(this.state.studentInfo.school.toLowerCase() === "theology & biblical studies"){
                          creditRate = (fulltime ? 375 : 395);
                      }
-                     else if(this.state.studentInfo.school.toLowerCase() == "education"){
+                     else if(this.state.studentInfo.school.toLowerCase() === "education"){
                          creditRate = (fulltime ? 390 : 415);
                      }
                      else {
@@ -322,7 +322,7 @@ class MyCourses extends Component{
 
              totalPrice = creditRate * queuedTotal;
 
-             if(this.state.currentCourses.length == 0){
+             if(this.state.currentCourses.length === 0){
                  totalPrice = totalPrice + this.state.technologyFee;
              }
         }
@@ -357,9 +357,9 @@ class MyCourses extends Component{
                             courseStatus.push({id: course.id, name: course.name, status: true});
                         }
 
-                        if(courseStatus.length == tmpQueue.length){
+                        if(courseStatus.length === tmpQueue.length){
                             self.toggleSpinner(false);
-                            var noRegister = courseStatus.filter(function(item){ return item.status == false; });
+                            var noRegister = courseStatus.filter(function(item){ return item.status === false; });
 
                             if(noRegister.length > 0){
                                 alert("Unable to register you for the following courses: " + noRegister.map(function(elem){ return elem.name; }).join(","));
@@ -383,14 +383,13 @@ class MyCourses extends Component{
     }
 
     getCourseInfo(type, id){
-        var self = this;
         try {
             if(!this.state.courseSearch){
                 return "";
             }
             else {
                 var selectedCourse = this.state.courseSearch.filter(function(course){
-                    return course.id == id;
+                    return course.id === id;
                 });
 
                 if(selectedCourse.length > 0 && (type in selectedCourse[0])){
@@ -427,7 +426,7 @@ class MyCourses extends Component{
                         var userInfo = response.data.results;
                         var tmpStudent = { degree: userInfo.degree.level +" in "+userInfo.degree.major, class: userInfo.studentInfo.class,
                                             level: userInfo.studentInfo.level, school: userInfo.studentInfo.school,
-                                            gpa: userInfo.studentInfo.gpa,  fulltime: (userInfo.studentInfo.fulltime == true),
+                                            gpa: userInfo.studentInfo.gpa,  fulltime: (userInfo.studentInfo.fulltime === true),
                                             military: userInfo.military, studentId: userInfo.studentId, talentlmsId: userInfo.talentlmsId };
                         self.setState({ studentInfo: tmpStudent }, () =>{
                             self.loadStudentCourses(userInfo.talentlmsId.id);

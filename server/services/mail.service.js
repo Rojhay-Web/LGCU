@@ -1,7 +1,15 @@
 require('dotenv').config();
 
-const nodemailer = require("nodemailer");
 const util = require('util');
+
+const mSettings = { 
+    apikey: process.env.MAILGUN_API_KEY, 
+    domain: process.env.MAILGUN_DOMAIN,
+    user: process.env.MAILGUN_SMTP_LOGIN,
+    ccUser: process.env.MAIL_SERVER_USER
+};
+
+const mailgun = require('mailgun-js')({ apiKey: mSettings.apikey, domain: mSettings.domain });
 
 
 var mail = {
@@ -11,35 +19,25 @@ var mail = {
         /* { email: "", subject:"", title:"", formdata:{}, additionalData:{}} */
 
         try {
-            var transporter = nodemailer.createTransport({
-                host: 'smtp.gmail.com',
-                port: 465,
-                secure: true,
-                auth: {
-                    type: 'OAuth2',
-                    user: process.env.MAIL_SERVER_USER,
-                    clientId: process.env.MAIL_SERVER_CLIENTID,
-                    clientSecret: process.env.MAIL_SERVER_CLIENT_SECRET,
-                    refreshToken: process.env.MAIL_SERVER_REFRESH_TOKEN,
-                    accessToken: process.env.MAIL_SERVER_ACCESS_TOKEN
-                }
-              });
-
-              var mailOptions = {
-                from: process.env.user,
+            var toUser = (emailInfo.email ? emailInfo.email+", "+ mSettings.ccUser : mSettings.ccUser);
+            var mailOptions = {
+                from: mSettings.user,
                 to: emailInfo.email,
-                subject: emailInfo.subject,
+                subject: emailInfo.subject + " " + Date.now(),
                 html: buildEmailHtml(emailInfo)
-              };
+            };
 
-              transporter.sendMail(mailOptions, function(error, info){
-                if (error) {
-                    response.errorMessage = error;
-                } else {
-                    response.results = 'Email Sent';                  
-                }    
-                callback(response);            
-              });
+            mailgun.messages().send(mailOptions, function (err, body) {
+                if (err) {
+                    console.log(" [Error] Sending Email: ", err);
+                    response.errorMessage = err;
+                }
+                else {
+                    //console.log("Email Sent"); console.log(body);
+                    response.results = 'Email Sent';
+                }
+                callback(response);
+            });
         }
         catch(ex){
             response.errorMessage = "[Error]: Error sending email: "+ ex;
@@ -54,37 +52,27 @@ var mail = {
         try {
             var emailInfo = req.body;
 
-            var transporter = nodemailer.createTransport({
-                host: 'smtp.gmail.com',
-                port: 465,
-                secure: true,
-                auth: {
-                    type: 'OAuth2',
-                    user: process.env.MAIL_SERVER_USER,
-                    clientId: process.env.MAIL_SERVER_CLIENTID,
-                    clientSecret: process.env.MAIL_SERVER_CLIENT_SECRET,
-                    refreshToken: process.env.MAIL_SERVER_REFRESH_TOKEN,
-                    accessToken: process.env.MAIL_SERVER_ACCESS_TOKEN
-                }
-              });
-
-              var appID = (emailInfo.appId ? emailInfo.appId : generateAppId(emailInfo.formData));
-
-              var mailOptions = {
-                from: process.env.user,
-                to: emailInfo.email,
-                subject: emailInfo.subject,
+            var appID = (emailInfo.appId ? emailInfo.appId : generateAppId(emailInfo.formData));
+            var toUser = (emailInfo.email ? emailInfo.email+", "+ mSettings.ccUser : mSettings.ccUser);
+            
+            var mailOptions = {
+                from: emailInfo.email,
+                to: toUser,
+                subject: emailInfo.subject + " " + Date.now(),
                 html: buildAppEmailHtml(emailInfo, appID)
-              };
-
-              transporter.sendMail(mailOptions, function(error, info){
-                if (error) {
-                    response.errorMessage = error;
-                } else {
-                    response.results = { appId: appID, status: 'Email Sent' };                  
-                }    
-                res.status(200).json(response);            
-              });
+            };
+            
+            mailgun.messages().send(mailOptions, function (err, body) {
+                if (err) {
+                    console.log(" [Error] Sending App Email: ", err);
+                    response.errorMessage = err;
+                }
+                else {
+                    //console.log("Email Sent"); console.log(body);
+                    response.results = { appId: appID, status: 'Email Sent' };
+                }
+                res.status(200).json(response); 
+            });
         }
         catch(ex){
             response.errorMessage = "[Error]: Error sending application email: "+ ex;

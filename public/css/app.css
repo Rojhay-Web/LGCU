@@ -17,7 +17,7 @@
   font-family: 'Alike';
   font-style: normal;
   font-weight: 400;
-  src: local('Alike Regular'), local('Alike-Regular'), url(https://fonts.gstatic.com/s/alike/v12/HI_EiYEYI6BIoHjGQ5E.ttf) format('truetype');
+  src: local('Alike Regular'), local('Alike-Regular'), url(https://fonts.gstatic.com/s/alike/v13/HI_EiYEYI6BIoHjGQ5E.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Reem Kufi';
@@ -1072,14 +1072,38 @@
   position: relative;
   overflow: hidden;
 }
+.admissionsPage .admissions-section .lrgTitle {
+  color: #014eb3;
+}
+.admissionsPage .admissions-section .lrgTitle:before {
+  color: rgba(1, 78, 179, 0.2) !important;
+}
 .admissionsPage .admissions-section.c1 {
   background: #014eb3;
+}
+.admissionsPage .admissions-section.c1 .lrgTitle {
+  color: #fff;
+}
+.admissionsPage .admissions-section.c1 .lrgTitle:before {
+  color: rgba(200, 200, 200, 0.2) !important;
 }
 .admissionsPage .admissions-section.c2 {
   background: #fda800;
 }
+.admissionsPage .admissions-section.c2 .lrgTitle {
+  color: #fff;
+}
+.admissionsPage .admissions-section.c2 .lrgTitle:before {
+  color: rgba(200, 200, 200, 0.2) !important;
+}
 .admissionsPage .admissions-section.c3 {
   background: #0f7697;
+}
+.admissionsPage .admissions-section.c3 .lrgTitle {
+  color: #fff;
+}
+.admissionsPage .admissions-section.c3 .lrgTitle:before {
+  color: rgba(200, 200, 200, 0.2) !important;
 }
 .admissionsPage .admissions-section .international {
   color: #014eb3;
@@ -1192,11 +1216,21 @@
 .facultyPage .faculty-section .info-slider .slider-card .faculty-bio .bio-btn:hover {
   background: rgba(15, 118, 151, 0.2) !important;
 }
-.facultyPage .faculty-section .info-slider .slider-card .faculty-bio .bio-btn.w1 {
+.facultyPage .faculty-section .info-slider .slider-card .faculty-bio .bio-btn.w1,
+.facultyPage .faculty-section .info-slider .slider-card .faculty-bio .bio-btn.light,
+.facultyPage .faculty-section .info-slider .slider-card .faculty-bio .bio-btn.dark,
+.facultyPage .faculty-section .info-slider .slider-card .faculty-bio .bio-btn.c1,
+.facultyPage .faculty-section .info-slider .slider-card .faculty-bio .bio-btn.c2,
+.facultyPage .faculty-section .info-slider .slider-card .faculty-bio .bio-btn.c3 {
   color: #ffffff;
   border-color: #ffffff;
 }
-.facultyPage .faculty-section .info-slider .slider-card .faculty-bio .bio-btn.w1:hover {
+.facultyPage .faculty-section .info-slider .slider-card .faculty-bio .bio-btn.w1:hover,
+.facultyPage .faculty-section .info-slider .slider-card .faculty-bio .bio-btn.light:hover,
+.facultyPage .faculty-section .info-slider .slider-card .faculty-bio .bio-btn.dark:hover,
+.facultyPage .faculty-section .info-slider .slider-card .faculty-bio .bio-btn.c1:hover,
+.facultyPage .faculty-section .info-slider .slider-card .faculty-bio .bio-btn.c2:hover,
+.facultyPage .faculty-section .info-slider .slider-card .faculty-bio .bio-btn.c3:hover {
   background: rgba(255, 255, 255, 0.2);
 }
 .facultyPage .faculty-section .info-slider .slider-card .faculty-bio .bio-txt {
@@ -4080,7 +4114,7 @@ html {
   }
 }
 .app-nav .navbar.nav-bottom .navbar-brand {
-  height: 120px;
+  height: 100px;
   display: flex;
   flex-direction: row;
   color: #ffffff;
@@ -5628,7 +5662,7 @@ html {
   animation-delay: 0.7s;
   animation-fill-mode: forwards;
 }
-@media (max-width: 770px) {
+@media (max-width: 992px) {
   .sidenav-container {
     display: block;
   }

@@ -140,10 +140,10 @@ class myLGCU extends Component{
                         </section>
 
                         <section className="mylgcu-nav-container">
-                            <div className={"mylgcu-nav-item" + (this.state.selectedPage == "profile" ? " selected" :"")} onClick={(e) => this.changePage("profile")}><i className="far fa-user-circle"></i> <span>Profile</span></div>
-                            <div className={"mylgcu-nav-item" + (this.state.selectedPage == "courses" ? " selected" :"")} onClick={(e) => this.changePage("courses")}><i className="fas fa-book-reader"></i> <span>Courses</span></div>
-                            <div className={"mylgcu-nav-item" + (this.state.selectedPage == "account" ? " selected" :"")} onClick={(e) => this.changePage("account")}><i className="fas fa-file-invoice-dollar"></i> <span>Account</span></div>
-                            {this.state.admin && <div className={"mylgcu-nav-item" + (this.state.selectedPage == "admin" ? " selected" :"")} onClick={(e) => this.changePage("admin")}><i className="fas fa-user-shield"></i> <span>Admin</span></div> }
+                            <div className={"mylgcu-nav-item" + (this.state.selectedPage === "profile" ? " selected" :"")} onClick={(e) => this.changePage("profile")}><i className="far fa-user-circle"></i> <span>Profile</span></div>
+                            <div className={"mylgcu-nav-item" + (this.state.selectedPage === "courses" ? " selected" :"")} onClick={(e) => this.changePage("courses")}><i className="fas fa-book-reader"></i> <span>Courses</span></div>
+                            <div className={"mylgcu-nav-item" + (this.state.selectedPage === "account" ? " selected" :"")} onClick={(e) => this.changePage("account")}><i className="fas fa-file-invoice-dollar"></i> <span>Account</span></div>
+                            {this.state.admin && <div className={"mylgcu-nav-item" + (this.state.selectedPage === "admin" ? " selected" :"")} onClick={(e) => this.changePage("admin")}><i className="fas fa-user-shield"></i> <span>Admin</span></div> }
                         </section>
                     </div>
                 :
@@ -277,12 +277,12 @@ class SignInModal extends Component{
                         </div>
 
                         <div className="forgot-link">
-                            <a href="https://lenkesongcu.talentlms.com" target="_blank">Forgot Password?</a>
+                            <a href="https://lenkesongcu.talentlms.com" target="_blank" rel="noopener noreferrer">Forgot Password?</a>
                         </div>
 
                         <div className="form-btn-container">
                             <div className="lBtn c1" onClick={this.login}><span>Sign In</span><i className="btn-icon fas fa-unlock-alt"></i></div>
-                            <a href="" className="lBtn c2"><span>Return Home</span><i className="btn-icon fas fa-home"></i></a>
+                            <a href="/" className="lBtn c2"><span>Return Home</span><i className="btn-icon fas fa-home"></i></a>
                         </div>  
                     </div>
                 </Modal.Body>

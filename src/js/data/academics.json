@@ -8,29 +8,29 @@
         "img":"img6.jpg",
         "degrees":{
             "associates":[
-                {"id":"AS-ACC", "title":"Accounting", "gradtotal":69, "courses":[
+                {"id":"AS-ACC", "title":"Accounting", "gradtotal":60, "courses":[
                     {"subtitle":"General Education Courses: 39 credits", "courses":["ENG_101","MTH_160","MTH_161","BIOL_105","SOC_101","HIST_122","HIST_123", "ENG_102","PSY_101","ENG_117","ENG_118","ANTH_110","CIS_107","SOC_223"]},
                     {"subtitle":"Major: 30 credits", "courses":["ACCT_201","ACCT_215","ACCT_217","ACCT_311","BUSN_240","BUSN_323","BUSN_325","ECON_221","BUSN_380"]}               
                 ]},
-                {"id":"AS-BA", "title":"Business Administration","gradtotal":69, "courses":[
+                {"id":"AS-BA", "title":"Business Administration","gradtotal":60, "courses":[
                     {"subtitle":"General Education Courses: 39 credits", "courses":["ENG_101","COM_118","MTH_160","MTH_161","BIOL_107","CIS_107","HIS_115", "PSY_101","PSY_210" , "SOC_101","ENG_102","ENG_110","SOC_223","REL_227", "ACCT_201" , "ACCT_217","ACCT_315","BUSN_210","BUSN_315","BUSN_317","BUS_327","MKTG_340","BUSN_303","BUSN_329","BUSN_380"]}
                 ]},
-                {"id":"AS-CDE", "title":"Child Development Education","gradtotal":69, "courses":[
+                {"id":"AS-CDE", "title":"Child Development Education","gradtotal":60, "courses":[
                     {"subtitle":"General Education Courses (39)","courses":["ENG_101","MTH_160","MTH_161","BIOL_107","SOC_101","HIST_117","ENG_102","PSY_101","ENG_110","ENG_201","GOV_110","COM_118","PED_112","CIS_107","SOC_223","REL_227","CDE_110","CDE_123","CDE_113","CDE_115","CDE_117","CDE_121","CDE_131","CDE_211","CDE_217","CDE_223"]}
                 ]},
-                {"id":"AS-CIS", "title":"Computer Information Systems","gradtotal":69, "courses":[
+                {"id":"AS-CIS", "title":"Computer Information Systems","gradtotal":60, "courses":[
                     {"subtitle":"General Education Courses (39)","courses":["ENG_101","MTH_160","MTH_161","BIOL_107","SOC_101","HIST_117","ENG_102","PSY_101","ENG_110","ENG_201","GOV_110","COM_118","SOC_223","REL_227","CIS_107"]},
                     {"subtitle":"Required Degree Courses and Credits (30)","courses":["CIS_301","CIS_303","CIS_401","CIS_403","CIS_405","CIS_407","CIS_411","CIS_413","CIS_415","CIS_417"]}
                 ]},
-                {"id":"AS-CJ", "title":"Criminal Justice","gradtotal":69, "courses":[
+                {"id":"AS-CJ", "title":"Criminal Justice","gradtotal":60, "courses":[
                     {"subtitle":"General Education Courses (39)","courses":["ENG_101","MTH_160","MTH_161","BIOL_107","SOC_101","HIST_117","ENG_102","PSY_101","ENG_110","ENG_201","GOV_110","COM_118","CIS_107","SOC_223","REL_227"]},
                     {"subtitle":"Required Degree Courses and Credits (30)","courses":["CMJ_201","CMJ_203","CMJ_211","CMJ_227","CMJ_331","CMJ_340","CMJ_345","CMJ_347","CMJ_430","CMJ_433"]}
                 ]},
-                {"id":"AS-EDU", "title":"Education","gradtotal":69, "courses":[
+                {"id":"AS-EDU", "title":"Education","gradtotal":60, "courses":[
                     {"subtitle":"General Education Courses (39)","courses":["ENG_101","MTH_160","MTH_161","BIOL_107","SOC_101","HIST_117","ENG_102","PSY_101","ENG_110","ENG_201","GOV_110","COM_118","PED_112","CIS_107","SOC_223","REL_227"]},
                     {"subtitle":"Required Degree Credit Courses (30)","courses":["EDU_201","EDU_203","EDU_217","EDU_221","EDU_225","EDU_231","EDU_233","EDU_235","EDU_321","EDU_323"]}
                 ]},
-                {"id":"AS-PSY", "title":"Psychology","gradtotal":69, "courses":[
+                {"id":"AS-PSY", "title":"Psychology","gradtotal":60, "courses":[
                     {"subtitle":"General Education Courses (39)","courses":["ENG_101","MTH_160","MTH_161","BIOL_107","SOC_101","HIST_117","ENG_102","PSY_101","ENG_201","GOV_110","COM_118","PED_112","CIS_107","REL_227"]},
                     {"subtitle":"Required Degree Credit Courses (30)","courses":["PSY_413","PSY_415","PSY_417","PSY_423","PSY_401","PSY_341","PSY_431","PSY_425","PSY_437","PSY_439"]}
                 ]}
@@ -92,9 +92,9 @@
                 {"id":"BA-FRE","title":"French","gradtotal":120,"comingSoon":true, "courses":[]}
             ],
             "masters":[
-                {"id":"MA-COMM","title":"Communications","gradtotal":45,"comingSoon":true, "courses":[]},
-                {"id":"MA-ENG","title":"English","gradtotal":45,"comingSoon":true, "courses":[]},
-                {"id":"MA-FRE","title":"French","gradtotal":45,"comingSoon":true, "courses":[]}
+                {"id":"MA-COMM","title":"Communications","gradtotal":36,"comingSoon":true, "courses":[]},
+                {"id":"MA-ENG","title":"English","gradtotal":36,"comingSoon":true, "courses":[]},
+                {"id":"MA-FRE","title":"French","gradtotal":36,"comingSoon":true, "courses":[]}
             ]
         }
     },
@@ -107,7 +107,7 @@
         "img":"img12.jpg",
         "degrees":{
             "associates":[
-                {"id":"AS-BBS", "title":"Biblical Studies","gradtotal":69, "courses":[
+                {"id":"AS-BBS", "title":"Biblical Studies","gradtotal":60, "courses":[
                     {"subtitle":"General Education Courses (39 Credit Hours Required)(45)","courses":["ENG_101","MTH_160","MTH_161","BIOL_107","SOC_101","HIST_117","ENG_102","PSY_101","ENG_110","ENG_201","GOV_110","COM_118","PED_112","CIS_107","SOC_223","REL_227"]},
                     {"subtitle": "Required Core Courses (30 Credit Hours) credits)","courses":["BSC_203","BSC_205","BSC_207","HEB_307","BSC_209","BSC_211","GRE_307","BSC_213","BSC_215","BSC_217","BSC_241","BSC_301","BSC_417"]}
                 ]}
@@ -126,7 +126,7 @@
                 ]}
             ],
             "masters":[
-                {"id":"MA-REDU", "title":"Religious Education","gradtotal":45, "courses":[
+                {"id":"MA-REDU", "title":"Religious Education","gradtotal":36, "courses":[
                     {"subtitle":"Education Foundation Courses (15 hours)","courses":["EDU_500","EDU_501","EDU_503","EDU_510","EDU_520"]},
                     {"subtitle":"Child Development Education","courses":["CDE_510","CDE_523","CDE_526","CDE_535","CDE_537","CDE_539","CDE_541","CDE_545","CDE_549","CDE_560","CDE_570"]},
                     {"subtitle":"Christian Education","courses":["CED_501","CED_503","CED_507","CED_509","CED_511","CED_515","CED_517","CED_519","CED_560","CED_570"]},
@@ -143,11 +143,12 @@
                     {"title":"Church Ministries Concentration","courses":["CHM_501","CED_503","CHM_517","CHM_521","CHM_527","LEAD_543","LEAD_547","PTC_529","PTL_531","PTL_533","CHM_537","CHM_570"]},
                     {"title":"Global and Strategic Missions Concentration","courses":["GSM_501","GSM_503","GSM_505","GSM_507","GSM_511","GSM_521","GSM_527","GSM_531","LEAD_547","GSM_590"]}
                 ]},
-                {"id":"MA-DIVT", "title":"Divinity","gradtotal":45, "courses":[]}
+                {"id":"MA-DIVT", "title":"Divinity","gradtotal":90, "courses":[]}
             ],
             "doctorate":[
                 {"id":"PHD-MIN", "title":"Ministry", "degreeTitle":"","gradtotal":60, "courses":[]},
-                {"id":"PHD-THEO", "title":"Theology", "degreeTitle":"(Ph.D.)","gradtotal":60, "courses":[]}
+                {"id":"PHD-THEO", "title":"Theology", "degreeTitle":"(Ph.D.)","gradtotal":60, "courses":[]},
+                {"id":"PHD-DIVT", "title":"Divinity","gradtotal":36, "courses":[]}
             ]
         }
     },
@@ -189,7 +190,7 @@
                 ]}                
             ],
             "doctorate":[
-                {"id":"PHD-BA", "title":"Business Administration", "degreeTitle":"(DBA)","gradtotal":70, "courses":[
+                {"id":"PHD-BA", "title":"Business Administration", "degreeTitle":"(DBA)","gradtotal":60, "courses":[
                     {"subtitle":"Doctoral Foundation Courses (12 hours)","courses":["DBA_700","DBA_701","DBA_702"]},
                     {"subtitle":"Required Core Courses (24 hours)","courses":["DBA_703","DBA_708","DBA_710","DBA_718","DBA_720","DBA_721"]},
                     {"subtitle":"Comprehensive Examination and Dissertation Research","courses":["DBA_900","DBA_901","DBA_902","DBA_903","DBA_904"]}
@@ -212,23 +213,23 @@
         "img":"img7.jpg",
         "degrees":{
             "masters":[
-                {"id":"MA-CURI", "title":"Curriculum & Instruction", "degreeTitle":"(M.Ed.)","gradtotal":45, "courses":[
+                {"id":"MA-CURI", "title":"Curriculum & Instruction", "degreeTitle":"(M.Ed.)","gradtotal":36, "courses":[
                     {"subtitle":"Education Foundation Courses (15 hours)","courses":["EDU_500","EDU_501","EDU_503","EDU_510","EDU_520"]},
                     {"subtitle":"Required Core Courses (27 hours)","courses":["EDU_540","EDU_560","EDU_570","EDU_580","EDU_600","EDU_610","EDU_620","EDU_640","EDU_680"]}
                 ]},
-                {"id":"MA-EDULS", "title":"Educational Leadership & Supervision", "degreeTitle":"(M.Ed.)","gradtotal":45, "courses":[
+                {"id":"MA-EDULS", "title":"Educational Leadership & Supervision", "degreeTitle":"(M.Ed.)","gradtotal":36, "courses":[
                     {"subtitle":"Education Foundation Courses (15 hours)","courses":["EDU_500","EDU_501","EDU_503","EDU_510","EDU_520"]},
                     {"subtitle":"Required Core Courses (24)","courses":["LEAD_537","EADM_610","EADM_611","EADM_615","EADM_620","EADM_630","EADM_630","EADM_640","EADM_670"]}
                 ]},
-                {"id":"MA-ESL", "title":"English As A Second Language (ESL)", "degreeTitle":"(M.Ed.)","gradtotal":45, "courses":[
+                {"id":"MA-ESL", "title":"English As A Second Language (ESL)", "degreeTitle":"(M.Ed.)","gradtotal":36, "courses":[
                     {"subtitle":"Education Foundation Courses (15 hours)","courses":["EDU_500","EDU_501","EDU_503","EDU_510","EDU_520"]},
                     {"subtitle":"Required Core Courses (24 credit hours)","courses":["TESL_500","TESL_506","TESL_511","TESL_515","TESL_520","TESL_525","TESL_540","TESL_590"]}
                 ]},
-                {"id":"MA-SCEDU", "title":"Secondary Education", "degreeTitle":"(M.Ed.)","gradtotal":45, "courses":[
+                {"id":"MA-SCEDU", "title":"Secondary Education", "degreeTitle":"(M.Ed.)","gradtotal":36, "courses":[
                     {"subtitle":"Education Foundation Courses (15 hours)","courses":["EDU_500","EDU_501","EDU_503","EDU_510","EDU_520"]},
                     {"subtitle":"Required Core Courses (21)","courses":["EDU_540","EDU_570","EDU_600","EDU_610","EDU_620","EDU_630","EDU_680"]}
                 ]},
-                {"id":"MA-SPEDU", "title":"Special Education", "degreeTitle":"(M.Ed.)","gradtotal":45, "courses":[
+                {"id":"MA-SPEDU", "title":"Special Education", "degreeTitle":"(M.Ed.)","gradtotal":36, "courses":[
                     {"subtitle":"Education Foundation Courses (15 hours)","courses":["EDU_500","EDU_501","EDU_503","EDU_510","EDU_520"]},
                     {"subtitle":"Required Degree Core Courses (24)","courses":["EDU_530","EDU_540","EDU_570","EDU_600","EDU_610","EDU_620","EDU_630","EDU_680"]}
                 ]}
@@ -239,7 +240,7 @@
                     {"subtitle":"Required Core Courses","courses":["LEAD_720","EDU_750","EDU_755","EDU_780"]},
                     {"subtitle":"Comprehensive Examination and Dissertation Research","courses":["EDU_900","EDU_901","EDU_902","EDU_903","EDU_904"]}
                 ]},
-                {"id":"EDD-E-CHDEV", "title":"Child Development", "degreeTitle":"(Ed.D.)","courses":[
+                {"id":"EDD-E-CHDEV", "title":"Child Development", "degreeTitle":"(Ed.D.)","gradtotal":60,"courses":[
                     {"subtitle":"Doctoral Foundation Courses (12 hours)","courses":["EDU_700","EDU_701","EDU_702"]},
                     {"subtitle":"Required Credit Courses (33)","courses":["CDE_740","CDE_760","CDE_780","CDE_800","CDE_820","CDE_840","CDE_843","CDE_845","CDE_849","CDE_860","CDE_890"]},
                     {"subtitle":"Comprehensive Examination and Dissertation Research","courses":["EDU_900","EDU_901","EDU_902","EDU_903","EDU_904"]}
@@ -249,7 +250,7 @@
                     {"subtitle":"Required Specialization Courses (42 hours)","courses":["EDU_740","EDU_780","EDU_790","EDU_800","EDU_820","EDU_840","EDU_890"]},
                     {"subtitle":"Comprehensive Examination and Dissertation Research","courses":["EDU_900","EDU_901","EDU_902","EDU_903","EDU_904"]}
                 ]},
-                {"id":"PHD-E-EDUL", "title":"Educational Leadership", "degreeTitle":"(Ph.D.)","gradtotal":74, "courses":[
+                {"id":"PHD-E-EDUL", "title":"Educational Leadership", "degreeTitle":"(Ph.D.)","gradtotal":70, "courses":[
                     {"subtitle":"Doctoral Foundation Courses (12 hours)","courses":["EDU_700","EDU_701","EDU_702"]},
                     {"subtitle":"Required Specialization Courses (33 hours)","courses":["LEAD_720","EADM_740","EADM_760","EADM_780","EADM_800","EADM_820","EADM_840","EADM_890"]},
                     {"subtitle":"Comprehensive Examination and Dissertation Research","courses":["EDU_900","EDU_901","EDU_902","EDU_903","EDU_904"]}
@@ -273,42 +274,42 @@
                     {"subtitle":"Doctoral Foundation Courses (12 hours)","courses":["EDU_700","EDU_701","EDU_702"]},
                     {"subtitle":"Comprehensive Examination and Dissertation Research","courses":["EDU_900","EDU_901","EDU_902","EDU_903","EDU_904"]}
                 ]},
-                {"id":"PHD-P-ATL", "title":"Adult Teaching & Learning", "degreeTitle":"(Ph.D.)","gradtotal":74, "courses":[
+                {"id":"PHD-P-ATL", "title":"Adult Teaching & Learning", "degreeTitle":"(Ph.D.)","gradtotal":70, "courses":[
                     {"subtitle":"Doctoral Foundation Courses (12 hours)","courses":["EDU_700","EDU_701","EDU_702"]},
                     {"subtitle":"Required Core Courses","courses":["LEAD_720","EDU_750","EDU_755","EDU_780"]},
                     {"subtitle":"Comprehensive Examination and Dissertation Research","courses":["EDU_900","EDU_901","EDU_902","EDU_903","EDU_904"]}
                 ]},
-                {"id":"PHD-P-CDDEV", "title":"Child Development", "degreeTitle":"(Ph.D.)","gradtotal":74, "courses":[
+                {"id":"PHD-P-CDDEV", "title":"Child Development", "degreeTitle":"(Ph.D.)","gradtotal":70, "courses":[
                     {"subtitle":"Doctoral Foundation Courses (12 hours)","courses":["EDU_700","EDU_701","EDU_702"]},
                     {"subtitle":"Required Credit Courses (33)","courses":["CDE_740","CDE_760","CDE_780","CDE_800","CDE_820","CDE_840","CDE_843","CDE_845","CDE_849","CDE_860","CDE_890"]},
                     {"subtitle":"Comprehensive Examination and Dissertation Research","courses":["EDU_900","EDU_901","EDU_902","EDU_903","EDU_904"]}
                 ]},
-                {"id":"PHD-P-CURI", "title":"Curriculum & Instruction", "degreeTitle":"(Ph.D.)","gradtotal":74, "courses":[
+                {"id":"PHD-P-CURI", "title":"Curriculum & Instruction", "degreeTitle":"(Ph.D.)","gradtotal":70, "courses":[
                     {"subtitle":"Doctoral Foundation Courses (12 hours)","courses":["EDU_700","EDU_701","EDU_702"]},
                     {"subtitle":"Required Specialization Courses (42 hours)","courses":["EDU_740","EDU_780","EDU_790","EDU_800","EDU_820","EDU_840","EDU_890"]},
                     {"subtitle":"Comprehensive Examination and Dissertation Research","courses":["EDU_900","EDU_901","EDU_902","EDU_903","EDU_904"]}
                 ]},
-                {"id":"PHD-P-EDUL", "title":"Educational Technology","degreeTitle":"(Ph.D.)", "gradtotal":74, "courses":[
+                {"id":"PHD-P-EDUL", "title":"Educational Technology","degreeTitle":"(Ph.D.)", "gradtotal":70, "courses":[
                     {"subtitle":"Doctoral Foundation Courses (12 hours)","courses":["EDU_700","EDU_701","EDU_702"]},
                     {"subtitle":"Required Core Courses","courses":["EDU_740","EDU_760","EDU_780","EDU_800","EDU_820","EDU_840","EDU_870"]},
                     {"subtitle":"Comprehensive Examination and Dissertation Research","courses":["EDU_900","EDU_901","EDU_902","EDU_903","EDU_904"]}
                 ]},
-                {"id":"PHD-P-ESL", "title":"English As A Second Language (ESL)", "degreeTitle":"(Ph.D.)","gradtotal":74, "courses":[
+                {"id":"PHD-P-ESL", "title":"English As A Second Language (ESL)", "degreeTitle":"(Ph.D.)","gradtotal":70, "courses":[
                     {"subtitle":"Doctoral Foundation Courses (12 hours)","courses":["EDU_700","EDU_701","EDU_702"]},
                     {"subtitle":"Required Core Courses (33 hours)","courses":["TESL_740","TESL_760","TESL_780","TESL_800","TESL_820","TESL_835","TESL_840","TESL_890"]},
                     {"subtitle":"Comprehensive Examination and Dissertation Research","courses":["EDU_900","EDU_901","EDU_902","EDU_903","EDU_904"]}
                 ]},
-                {"id":"PHD-P-SCEDU", "title":"Secondary Education", "degreeTitle":"(Ph.D.)","gradtotal":74, "courses":[
+                {"id":"PHD-P-SCEDU", "title":"Secondary Education", "degreeTitle":"(Ph.D.)","gradtotal":70, "courses":[
                     {"subtitle":"Required Core Courses (33 hours)","courses":["EDU_720","EDU_730","EDU_780","EDU_800","EDU_820","EDU_835","EDU_840","EDU_890"]},
                     {"subtitle":"Doctoral Foundation Courses (12 hours)","courses":["EDU_700","EDU_701","EDU_702"]},
                     {"subtitle":"Comprehensive Examination and Dissertation Research","courses":["EDU_900","EDU_901","EDU_902","EDU_903","EDU_904"]}
                 ]},
-                {"id":"PHD-P-SPEDU", "title":"Special Education", "degreeTitle":"(Ph.D.)","gradtotal":74, "courses":[
+                {"id":"PHD-P-SPEDU", "title":"Special Education", "degreeTitle":"(Ph.D.)","gradtotal":70, "courses":[
                     {"subtitle":"Doctoral Foundation Courses (12 hours)","courses":["EDU_700","EDU_701","EDU_702"]},
                     {"subtitle":"Required Degree Core Courses (33 hours)","courses":["SPE_740","EDU_760","SPE_770","EDU_780","SPE_820","SPE_830","EDU_840","EDU_890"]},
                     {"subtitle":"Comprehensive Examination and Dissertation Research","courses":["EDU_900","EDU_901","EDU_902","EDU_903","EDU_904"]}
                 ]},
-                {"id":"PHD-P-HEDUCCL", "title":"Higher Education & Community College Leadership", "degreeTitle":"(Ph.D.)","gradtotal":74, "courses":[
+                {"id":"PHD-P-HEDUCCL", "title":"Higher Education & Community College Leadership", "degreeTitle":"(Ph.D.)","gradtotal":70, "courses":[
                     {"subtitle":"Doctoral Foundation Courses (12 hours)","courses":["EDU_700","EDU_701","EDU_702"]},
                     {"subtitle":"Comprehensive Examination and Dissertation Research","courses":["EDU_900","EDU_901","EDU_902","EDU_903","EDU_904"]}
                 ]}
@@ -324,7 +325,7 @@
         "img":"img9.jpg",
         "degrees":{            
             "masters":[
-                {"id":"MA-ODL", "title":"Organizational Development and Leadership", "gradtotal":45, "courses":[
+                {"id":"MA-ODL", "title":"Organizational Development and Leadership", "gradtotal":36, "courses":[
                     {"subtitle":"Required Core Courses: 24 credits","courses":["LEAD_600","LEAD_605","LEAD_610","LEAD_615","LEAD_620","LEAD_640","LEAD_670","LEAD_680"]},
                     {"subtitle":"Concentrations: 12 credits","courses":[]}
                     ], 
@@ -334,7 +335,7 @@
                         {"title":"Human Resource Management", "courses":["HRM_600","HRM_601","HRM_610","HRM_620"]}]}
             ],
             "doctorate":[
-                {"id":"PHD-GSL", "title":"Global and Strategic Leadership", "degreeTitle":"(Ph.D.)", "gradtotal":74, "courses":[
+                {"id":"PHD-GSL", "title":"Global and Strategic Leadership", "degreeTitle":"(Ph.D.)", "gradtotal":70, "courses":[
                     {"subtitle":"Doctoral Foundation Courses: 9 credits","courses":["LEAD_702","LEAD_701","LEAD_700"]},
                     {"subtitle":"Required Core Courses: 15 credits","courses":["LEAD_740","LEAD_780","LEAD_870","LEAD_876","LEAD_890"]},
                     {"subtitle":"Comprehensive Examination and Dissertation Research","courses":["LEAD_900","LEAD_901","LEAD_902","LEAD_903","LEAD_904"]}

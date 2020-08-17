@@ -39,7 +39,7 @@ class AcademicSlider extends Component{
     sliderLink(title){
         var ret = "";
         try {
-            ret = "/"+title.replace(/([&\/\\()])/g,"_").split(' ').join("").toLowerCase();
+            ret = "/"+title.replace(/([&\\()])/g,"_").split(' ').join("").toLowerCase();
         }
         catch(ex){
             console.log("Error Building Link Title: ", ex);

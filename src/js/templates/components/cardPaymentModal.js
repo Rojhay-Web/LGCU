@@ -51,7 +51,7 @@ class CardPayment extends Component{
             var step = event.target.step;
 
             if(name in this.state && (!maxLength || maxLength < 0 || value.length <= maxLength)) {
-                if(name == "cardNum"){
+                if(name === "cardNum"){
                     var tmpDisplayNum = [];
                     for(var i=0; i < 16; i++){
                         if(value.length > i){
@@ -64,7 +64,7 @@ class CardPayment extends Component{
 
                     self.setState({ [name]:value, cardDisplayNum: tmpDisplayNum.join("")});
                 }
-                else if(step != ""){
+                else if(step !== ""){
                     if(value.indexOf(".") < 0 || (value.length - value.indexOf(".") <= 3)){
                         self.setState({ [name]:value });
                     }
@@ -130,7 +130,7 @@ class CardPayment extends Component{
     }
 
     closeForm(){
-        if(this.state.returnMessage.type != "processing"){
+        if(this.state.returnMessage.type !== "processing"){
             this.props.handleClose();
             this.resetForm();
         }
@@ -148,7 +148,7 @@ class CardPayment extends Component{
         this.resetForm();
     }
     render(){    
-        if(AppIdGlobal != this.props.appId){
+        if(AppIdGlobal !== this.props.appId){
             AppIdGlobal = this.props.appId;
             this.setState({appId: this.props.appId });
         }
@@ -161,10 +161,10 @@ class CardPayment extends Component{
                 <Modal.Body>
                     <div className={"error-message" + (this.state.errorList.length > 0 ? " errorDisplay" : "")}><span>Please resolve the issues to complete the processing of your payment</span></div>
                     <div className={"status-message " + this.state.returnMessage.type}>
-                        {this.state.returnMessage.type != "processing" && 
+                        {this.state.returnMessage.type !== "processing" && 
                             <span>{this.state.returnMessage.message}</span>
                         }
-                        {this.state.returnMessage.type == "processing" && 
+                        {this.state.returnMessage.type === "processing" && 
                             <span>Processing Transaction Please Wait...</span>
                         }
                     </div>
@@ -252,8 +252,8 @@ class CardPayment extends Component{
                 </Modal.Body>
                 <Modal.Footer>
                     <div className="btn-container">
-                        {this.state.returnMessage.type != "success" && <div className={"lBtn clear t1" +(this.state.returnMessage.type == "processing" ? " disable" : "")} onClick={this.submitForm}><span>Submit</span><i className="btn-icon far fa-credit-card"></i></div> }
-                        <div className={"lBtn clear t1" +(this.state.returnMessage.type == "processing" ? " disable" : "")} onClick={this.closeForm}><span>Cancel</span><i className="btn-icon far fa-times-circle"></i></div>
+                        {this.state.returnMessage.type !== "success" && <div className={"lBtn clear t1" +(this.state.returnMessage.type === "processing" ? " disable" : "")} onClick={this.submitForm}><span>Submit</span><i className="btn-icon far fa-credit-card"></i></div> }
+                        <div className={"lBtn clear t1" +(this.state.returnMessage.type === "processing" ? " disable" : "")} onClick={this.closeForm}><span>Cancel</span><i className="btn-icon far fa-times-circle"></i></div>
                     </div>
                 </Modal.Footer>
             </Modal>
@@ -266,10 +266,10 @@ class CardPayment extends Component{
     
         try {
             // Check First & Last Name
-            if(this.state.cardFirstName.length == 0){
+            if(this.state.cardFirstName.length === 0){
                 tmpErrorList.push("cardFirstName");
             }
-            if(this.state.cardLastName.length == 0){
+            if(this.state.cardLastName.length === 0){
                 tmpErrorList.push("cardLastName");
             }
 
@@ -279,10 +279,10 @@ class CardPayment extends Component{
             }
             
             // Check Expiration Date
-            if(this.state.cardExpMth == "00"){
+            if(this.state.cardExpMth === "00"){
                 tmpErrorList.push("cardExpMth");
             }
-            if(this.state.cardExpYr == "00"){
+            if(this.state.cardExpYr === "00"){
                 tmpErrorList.push("cardExpYr");
             }
             // Check CSV
@@ -291,25 +291,25 @@ class CardPayment extends Component{
             }
 
             // Check App Name || App ID
-            if(this.state.appName.length == 0 && this.state.appId.length == 0){
+            if(this.state.appName.length === 0 && this.state.appId.length === 0){
                 tmpErrorList.push("appName");
                 tmpErrorList.push("appId");
             }
             // Check Email
             var srtTst = this.state.cardEmail.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/i);
-            if(!srtTst || srtTst.length == 0){
+            if(!srtTst || srtTst.length === 0){
                 tmpErrorList.push("cardEmail");
             }
             // Check Country Code
-            if(this.state.cardCountry.length == 0){
+            if(this.state.cardCountry.length === 0){
                 tmpErrorList.push("cardCountry");
             }
             // Check Postal code
-            if(this.state.cardZip.length == 0){
+            if(this.state.cardZip.length === 0){
                 tmpErrorList.push("cardZip");
             }
 
-            status = (tmpErrorList.length == 0);
+            status = (tmpErrorList.length === 0);
             this.setState({ errorList: tmpErrorList });
         }
         catch(ex){
@@ -322,7 +322,7 @@ class CardPayment extends Component{
     submitForm(){
         var self = this;
         try {
-            if(this.state.returnMessage.type != "processing" && this.cardFormValidation()){
+            if(this.state.returnMessage.type !== "processing" && this.cardFormValidation()){
                 var appID = (this.state.appId || this.state.appName);
                 var cardExp = this.state.cardExpMth+this.state.cardExpYr;
                 var charge = parseFloat(this.state.chargeTotal).toFixed(2);
@@ -350,7 +350,7 @@ class CardPayment extends Component{
                             if(response.errorMessage == null){
                                 // Successful Charge
                                 if(response.results.messages){
-                                    if(response.results.messages.resultCode && response.results.messages.resultCode == "Ok"){
+                                    if(response.results.messages.resultCode && response.results.messages.resultCode === "Ok"){
                                         // Success
                                         bannerMessage.type = "success";
                                         bannerMessage.message = response.results.transactionResponse.messages.message[0].description;

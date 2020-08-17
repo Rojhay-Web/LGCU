@@ -26,7 +26,7 @@ class FindDegree extends Component{
                 return (
                     self.state.searchQuery === "" 
                     || x.title.toLowerCase().indexOf(self.state.searchQuery.toLowerCase()) >= 0
-                    || x.subtitle && x.subtitle.toLowerCase().indexOf(self.state.searchQuery.toLowerCase()) >= 0
+                    || (x.subtitle && x.subtitle.toLowerCase().indexOf(self.state.searchQuery.toLowerCase()) >= 0)
                     ); 
             });
 
@@ -160,7 +160,7 @@ class FindDegree extends Component{
                     var tmpDegree = tmpArea.degrees[degree.title];
                     if(tmpDegree){
                         tmpDegree.forEach(function(major){
-                            var areaUrlTitle = area.title.replace(/([&\/\\()])/g,"_").split(' ').join("").toLowerCase();
+                            var areaUrlTitle = area.title.replace(/([&\\()])/g,"_").split(' ').join("").toLowerCase();
                             var url = "/studyarea/"+areaUrlTitle+"?majorId="+major.id;
 
                             if(major.concentrations && major.concentrations.length > 0){

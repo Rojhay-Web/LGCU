@@ -73,7 +73,7 @@ class StudyAreaHeader extends Component{
                 var tmpMajor = [];
                 var displayNum = 1;
 
-                var areaUrlTitle = tmpArea.title.replace(/([&\/\\()])/g,"_").split(' ').join("").toLowerCase();
+                var areaUrlTitle = tmpArea.title.replace(/([&\\()])/g,"_").split(' ').join("").toLowerCase();
                 var baseUrl = "/studyarea/"+areaUrlTitle;
 
                 if(majorId != null){
@@ -153,7 +153,7 @@ class StudyArea extends Component{
                 var tmpData = academicData[this.props.match.params.studyArea];
                 tmpData.degreeList = Object.keys(tmpData.degrees);
 
-                var areaUrlTitle = tmpData.title.replace(/([&\/\\()])/g,"_").split(' ').join("").toLowerCase();
+                var areaUrlTitle = tmpData.title.replace(/([&\\()])/g,"_").split(' ').join("").toLowerCase();
                 var baseUrl = "/studyarea/"+areaUrlTitle;
                 
                 let params = new URLSearchParams(this.props.location.search);
