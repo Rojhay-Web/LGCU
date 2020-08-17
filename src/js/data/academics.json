@@ -146,9 +146,8 @@
                 {"id":"MA-DIVT", "title":"Divinity","gradtotal":90, "courses":[]}
             ],
             "doctorate":[
-                {"id":"PHD-MIN", "title":"Ministry", "degreeTitle":"","gradtotal":60, "courses":[]},
-                {"id":"PHD-THEO", "title":"Theology", "degreeTitle":"(Ph.D.)","gradtotal":60, "courses":[]},
-                {"id":"PHD-DIVT", "title":"Divinity","gradtotal":36, "courses":[]}
+                {"id":"PHD-MIN", "title":"Ministry", "degreeTitle":"","gradtotal":36, "courses":[]},
+                {"id":"PHD-THEO", "title":"Theology", "degreeTitle":"(Ph.D.)","gradtotal":60, "courses":[]}
             ]
         }
     },
