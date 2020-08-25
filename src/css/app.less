@@ -171,6 +171,8 @@ body, html {
                 @media @mobile-device { flex-direction: column;}                             
             }
             @media @mobile-device { flex-direction: column;}
+
+            &+.address  { margin-top: 3px;}
         }
         &.policy-foot {
             margin-top: 10px;
@@ -227,6 +229,7 @@ body, html {
         .footer-info {
             font-size: 1.2rem;
             margin-left: 7px;
+            &.title { font-weight: bold; color: @color3;}
         }
         .footer-space {
             content: '';
