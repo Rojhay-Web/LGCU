@@ -86,7 +86,8 @@ class App extends Component{
             mlAccess:false,
             hoursofoperation:[],
             contact:[],
-            address:[]
+            address:[],
+            pobox:[]
         };
 
         this.getLayout = this.getLayout.bind(this);
@@ -207,6 +208,7 @@ class App extends Component{
                             </div>
                             <div className="footer-section full address">
                                 <div className="address-section">
+                                    <div className="footer-info title">Office:</div>
                                     {this.state.address.map((item,i) =>
                                         <div className="footer-info" key={i}>{item.text}</div>
                                     )}                               
@@ -216,6 +218,14 @@ class App extends Component{
                                         <div className="footer-info" key={i}>{item.text}</div>
                                     )}
                                 </div>
+                            </div>
+                            <div className="footer-section full address">
+                                <div className="address-section">
+                                    <div className="footer-info title">P.O. Box:</div>
+                                    {this.state.pobox.map((item,i) =>
+                                        <div className="footer-info" key={i}>{item.text}</div>
+                                    )}                               
+                                </div>                                
                             </div>
                             <div className="footer-section full policy-foot">
                                 {/*<p className="nonDiscrimination">Lenkeson Global Christian University is a Christ-centered institution of higher learning and is committed to provide cutting-edge academic education to men and women without discriminating against any individual on the basis of gender, race, color, religion, national origin, and intellectually and physically challenged individuals. However, the university reserves the right to refuse admission to persons or hire faculty or staff who do not support its values. LGCU is an equal opportunity employer.</p>*/}
@@ -313,10 +323,11 @@ class App extends Component{
                     
                     /* Footer */
                     var tmpAddress = (layoutbody.address ? layoutbody.address.filter(function(item) { return item.component.toLowerCase() === "footerline"; }) : []);
+                    var tmpPobox = (layoutbody.pobox ? layoutbody.pobox.filter(function(item) { return item.component.toLowerCase() === "footerline"; }) : []);
                     var tmpContact = (layoutbody.contact ? layoutbody.contact.filter(function(item) { return item.component.toLowerCase() === "footerline"; }) : []);
                     var tmpHoursofoperation = (layoutbody.hoursofoperation ? layoutbody.hoursofoperation.filter(function(item) { return item.component.toLowerCase() === "footerline"; }) : []);
 
-                    self.setState({ address: tmpAddress, contact: tmpContact, hoursofoperation: tmpHoursofoperation });                
+                    self.setState({ address: tmpAddress, pobox:tmpPobox, contact: tmpContact, hoursofoperation: tmpHoursofoperation });                
                 }
             });
         }
