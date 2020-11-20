@@ -150,9 +150,9 @@ function Tuition(props){
                     <p>Students who withdraw, terminate or drop a class during the fall or spring semester will be refunded according to the following policy:</p>
                     <ul>
                         <li>First week of classes 100%</li>
-                        <li>Second week of classes 75%</li>
-                        <li>Third week of classes 50%</li>
-                        <li>Fourth week of classes 25%</li>
+                        <li>Second week of classes 60%</li>
+                        <li>Third week of classes 30%</li>
+                        <li>Fourth week of classes 0%</li>
                     </ul>
 
                     <h3>LGCU Special Exceptions to Refund Policy</h3>
