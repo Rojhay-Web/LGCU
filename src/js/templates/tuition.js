@@ -89,7 +89,7 @@ function Tuition(props){
             <section className="tuition-section">
                 <h2 className="lrgTitle ctr" data-text="Tuition & Financing">Tuition & Financing</h2>
                 <div className="section-container">
-                    <p>Lenkeson Global Christian University is a non-profit institution of higher learning established to provide affordable education to individuals who otherwise could not afford it.  LGCU's tuition is among some of the lowest online universities in the United States. Payment plans at Lenkeson Global Christian University make earning a degree convenient and affordable. For more information, please contact the Business Office at 407-564-2992 or email us at <a href="mailto:admin@lenkesongcu.org">admin@lenkesongcu.org</a>.</p>
+                    <p>Lenkeson Global Christian University is a non-profit institution of higher learning established to provide affordable education to individuals who otherwise could not afford it.  LGCU's tuition is among some of the lowest online universities in the United States. Payment plans at Lenkeson Global Christian University make earning a degree convenient and affordable. For more information, please contact the Business Office at 407-567-1942 or email us at <a href="mailto:admin@lenkesongcu.org">admin@lenkesongcu.org</a>.</p>
 
                     <h3>{tutionTable.title}</h3>
                     <h4>{tutionTable.subtitle}</h4>
