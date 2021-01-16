@@ -177,10 +177,10 @@ class Apply extends Component{
     }
 
     appFeeForm(appId, callback){
-        var self = this;
+        //var self = this;
         try {
             this.setState({ appId: appId, cbFunc: callback}, () =>{
-                self.modalShow();
+                //self.modalShow();
             });
         }
         catch(ex){
