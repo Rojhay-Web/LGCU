@@ -3,8 +3,8 @@ import { Modal } from 'react-bootstrap';
 import axios from 'axios';
 
 var AppIdGlobal = "";
-var rootPath = "";
-//var rootPath = "http://localhost:1111";
+//var rootPath = "";
+var rootPath = (window.location.href.indexOf("localhost") > -1 ? "http://localhost:1111" : "");
 
 /* Body */
 class CardPayment extends Component{
@@ -12,15 +12,9 @@ class CardPayment extends Component{
         super(props);
         this.state = {
             cardDisplayNum: "XXXXXXXXXXXXXXXX",
-            cardNum:"",
-            cardExpMth:"00",
-            cardExpYr:"00",
-            cardFirstName:"",
-            cardLastName:"",
-            cardCSV:"",
-            cardCountry:"",
-            cardZip:"",
-            cardEmail:"",
+            cardNum:"", cardExpMth:"00",
+            cardExpYr:"00", cardName:"", cvv:"", cardCountry:"",
+            cardZip:"", cardEmail:"", cardType:"visa",
 
             appName:"",
             appId:"",
@@ -28,6 +22,7 @@ class CardPayment extends Component{
 
             countryList:[],
             monthList:["01","02","03","04","05","06","07","08","09","10","11","12"],
+            cardTypeList:["Visa", "Mastercard", "American Express", "Discover", "JCB", "Diners Club"],
             yearList:[],
             errorList:[],
             returnMessage:{"type":"", "message":""}
@@ -118,7 +113,7 @@ class CardPayment extends Component{
             this.setState({
                 cardDisplayNum: "XXXXXXXXXXXXXXXX",
                 cardNum:"", cardExpMth:"00", cardExpYr:"00",
-                cardFirstName:"", cardLastName:"", cardCSV:"",
+                cardName:"", cardType:"visa", cvv:"",
                 cardCountry:"", cardZip:"", cardEmail:"",
                 appName:"", appId:"", chargeTotal:50, errorList:[],
                 returnMessage:{"type":"", "message":""}
@@ -188,14 +183,20 @@ class CardPayment extends Component{
                                             <span>{this.state.cardExpYr}</span>
                                         </div>
                                         <div className="card-name">
-                                            <span>{this.state.cardFirstName +" "+this.state.cardLastName || "Name"}</span>
+                                            <span>{this.state.cardName || "Cardholder Name"}</span>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="form-container fill">
                                     <div className="form-section-container">
-                                        <div className="form-element sz-5"><span>Firstname</span><input type="text" name="cardFirstName" className={(this.state.errorList.indexOf("cardFirstName") > -1 ? "error":"")} placeholder="Firstname" value={this.state.cardFirstName} onChange={(e) => this.onElementChange(e)}/></div>
-                                        <div className="form-element sz-5"><span>Lastname</span><input type="text" name="cardLastName" className={(this.state.errorList.indexOf("cardLastName") > -1 ? "error":"")} placeholder="LastName" value={this.state.cardLastName} onChange={(e) => this.onElementChange(e)}/></div>
+                                        <div className="form-element sz-7"><span>Cardholder Name</span><input type="text" name="cardName" className={(this.state.errorList.indexOf("cardName") > -1 ? "error":"")} placeholder="Cardholder Name" value={this.state.cardName} onChange={(e) => this.onElementChange(e)}/></div>
+                                        <div className="form-element sz-3"><span>Card Type</span>
+                                            <select name="cardType" className={(this.state.errorList.indexOf("cardType") > -1 ? "error":"")} value={this.state.cardType} onChange={(e) => this.onElementChange(e)}>
+                                                {this.state.cardTypeList.map((type,i) => 
+                                                    <option key={i} value={type}>{type}</option>
+                                                )}
+                                            </select>
+                                        </div>
                                         <div className="form-element sz-10"><span>Card Number</span><input type="number" maxLength="16" name="cardNum" className={(this.state.errorList.indexOf("cardNum") > -1 ? "error":"")} placeholder="" value={this.state.cardNum} onChange={(e) => this.onElementChange(e)}/></div>
 
                                         <div className="form-element sz-3"><span>Exp Month</span>
@@ -214,7 +215,7 @@ class CardPayment extends Component{
                                                 )}
                                             </select>
                                         </div>
-                                        <div className="form-element sz-4"><span>Card CSV</span><input type="number" maxLength="3" name="cardCSV" className={(this.state.errorList.indexOf("cardCSV") > -1 ? "error":"")} placeholder="" value={this.state.cardCSV} onChange={(e) => this.onElementChange(e)}/></div>
+                                        <div className="form-element sz-4"><span>Card CVV</span><input type="number" maxLength="3" name="cvv" className={(this.state.errorList.indexOf("cvv") > -1 ? "error":"")} placeholder="" value={this.state.cvv} onChange={(e) => this.onElementChange(e)}/></div>
                                     </div>
                                 </div>
                             </div>
@@ -265,14 +266,16 @@ class CardPayment extends Component{
         var tmpErrorList = [];
     
         try {
-            // Check First & Last Name
-            if(this.state.cardFirstName.length === 0){
-                tmpErrorList.push("cardFirstName");
+            // Check Cardholder Name
+            if(this.state.cardName.length === 0){
+                tmpErrorList.push("cardName");
             }
-            if(this.state.cardLastName.length === 0){
-                tmpErrorList.push("cardLastName");
+            
+            // Check Card Type
+            if(this.state.cardType.length === 0){
+                tmpErrorList.push("cardType");
             }
-
+            
             // Check Card Number
             if(this.state.cardNum.length !== 16){
                 tmpErrorList.push("cardNum");
@@ -286,8 +289,8 @@ class CardPayment extends Component{
                 tmpErrorList.push("cardExpYr");
             }
             // Check CSV
-            if(this.state.cardCSV.length !== 3){
-                tmpErrorList.push("cardCSV");
+            if(this.state.cvv.length !== 3){
+                tmpErrorList.push("cvv");
             }
 
             // Check App Name || App ID
@@ -331,14 +334,14 @@ class CardPayment extends Component{
                 var chargeForm = {
                     userEmail: this.state.cardEmail, appId: appID, chargeDescription: "Student Application Payment",
                     cardInfo:{
-                        cardNumber: this.state.cardNum, cardExp: cardExp, cardCode: this.state.cardCSV,
-                        firstname: this.state.cardFirstName, lastname: this.state.cardLastName, 
-                        zip: this.state.cardZip, country: this.state.cardCountry,
+                        type: this.state.cardType,
+                        cardNumber: this.state.cardNum, cardExp: cardExp, cvv: this.state.cvv,
+                        name: this.state.cardName, zip: this.state.cardZip, country: this.state.cardCountry,
                     },
-                    chargeItems:[{
-                        name: "Student Application Fee", description:"This application fee applies to the formal submission and processing of the Lenkeson Global Christian University Student Application",
-                        quantity:1, price: charge
-                    }]
+                    chargeItems:{
+                        name: "Student Application Fee", quantity:1, amount: charge,
+                        description:"This application fee applies to the formal submission and processing of the Lenkeson Global Christian University Student Application"                        
+                    }
                 };
                 
                 self.setState({ returnMessage: {"type":"processing", "message":""} }, () =>{
@@ -348,26 +351,16 @@ class CardPayment extends Component{
                             var response = resp.data;
                             if(response.errorMessage == null){
                                 // Successful Charge
-                                if(response.results.messages){
-                                    if(response.results.messages.resultCode && response.results.messages.resultCode === "Ok"){
-                                        // Success
-                                        bannerMessage.type = "success";
-                                        bannerMessage.message = response.results.transactionResponse.messages.message[0].description;
-                                        self.props.cbFunc();
-                                    }
-                                    else {
-                                        // Error Banner
-                                        bannerMessage.type = "error";
-                                        bannerMessage.message = response.results.transactionResponse.messages.message[0].description;
-                                    }
-                                }
+                                bannerMessage.type = "success";
+                                bannerMessage.message = "Succesful Charge";
+                                self.props.cbFunc();
                             }
                             else {
                                 alert("Error Processing Payment");
-                                console.log("[Error] Error Processing Payment: ", response.errorMessage);
+                                console.log("[Error] Processing Payment: ", response.errorMessage);
                                 // Error Banner
                                 bannerMessage.type = "error";
-                                bannerMessage.message = response.results.transactionResponse.messages.message[0].description;
+                                bannerMessage.message = (response.results.Error ? response.results.Error.messages[0].description : response.errorMessage);
                             }
                         }
                         catch(ex){

@@ -44,8 +44,8 @@ const routes = [
 ];
 
 // API Route
-var rootPath = "";
-//var rootPath = "http://localhost:1111";
+//var rootPath = "";
+var rootPath = (window.location.href.indexOf("localhost") > -1 ? "http://localhost:1111" : "");
 
 const HeaderRoutes = route => (
     <Route path={route.path} render={props => ( <route.headerComponent {...props} />)} />

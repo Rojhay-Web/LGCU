@@ -26,12 +26,21 @@ var auth = {
                     
                     validateNewUser(userInfo, function(ret){
                         if(ret.errorMessage == null){
-                            db.insert(ret.results);
-                            db.find({ 'email' : ret.results.email }).limit(1).toArray(function(err, res){ 
-                                response.results = res[0];
-                                client.close();
-                                callback(response);
+                            db.insertOne(ret.results, function(insertError,retObj){
+                                if(insertError){
+                                    response.error = insertError;
+                                    client.close();                            
+                                    callback(response);
+                                }
+                                else {                    
+                                    db.find({ 'email' : ret.results.email }).limit(1).toArray(function(err, res){ 
+                                        response.results = res[0];
+                                        client.close();
+                                        callback(response);
+                                    });                                                                                
+                                }                               
                             });
+                            
                         }
                         else {
                             response.errorMessage = ret.errorMessage;  
