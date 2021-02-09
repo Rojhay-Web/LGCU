@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { UncontrolledCollapse } from 'reactstrap';
 import axios from 'axios';
 
 import StudentPayment from '../components/studentPaymentModal';
@@ -20,6 +19,7 @@ class MyAccount extends Component{
         this.loadStudentInfo = this.loadStudentInfo.bind(this);
         this.modalShow = this.modalShow.bind(this);
         this.modalHide = this.modalHide.bind(this);
+        this.convertItemData = this.convertItemData.bind(this);
     }
 
     componentDidMount(){ 
@@ -57,56 +57,50 @@ class MyAccount extends Component{
 
                                 <div className="account-block">
                                     <span className="subText">Transaction Date</span>
-                                    <span>{item.submitTime}</span>
+                                    <span>{this.convertItemData(item.transaction_date, "date")}</span>
                                 </div>
 
                                 <div className="account-block">
                                     <span className="subText">Transaction Id</span>
-                                    <span>{item.transactionId}</span>
+                                    <span>{item.transaction_id}</span>
                                 </div>
 
                                 <div className="account-block">
-                                    <span className="subText">{item.order.invoiceNumber}</span>
-                                    <span>{item.order.description}</span>
+                                    <span className="subText">Transaction Status</span>
+                                    <span>{item.transaction_status}</span>
                                 </div>
 
                                 <div className="account-block">
                                     <span className="subText">Total Charge</span>
-                                    <span>$ {item.amount.toFixed(2)}</span>
-                                </div>
-
-                                <div className="account-block">
-                                    <span className="account-icon info" id={"toggler"+i}><i className="fas fa-info"></i></span>
+                                    <span>$ {this.convertItemData(item.amount,"amount")}</span>
                                 </div>
                             </div>
-
-                            <UncontrolledCollapse toggler={"#toggler"+i} className="account-toggler">
-                                <table className="account-table overview-table">
-                                    <thead>
-                                        <tr className="header">
-                                            <th>Charge Name</th>
-                                            <th>Charge Description</th>
-                                            <th>Charge Amount</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {item.lineItems.map((charge,k) => (
-                                            <tr key={k}>
-                                                <td>{charge.name}</td>
-                                                <td>{charge.description}</td>
-                                                <td>$ {charge.price.toFixed(2)}</td>
-                                            </tr>
-                                        ))}                                        
-                                    </tbody>
-                                </table>
-                            </UncontrolledCollapse>
                         </div>
                     ))}
                 </div>
             </div>
         );
     }
-    
+
+    convertItemData(data,type){
+        var ret = "";
+        try {
+            if(type === "date"){
+                var d = new Date(data);
+                ret = (d.getMonth()+1) + "-" + d.getDate() + "-" + d.getFullYear() + " " + d.getHours() + ":" + (d.getMinutes() < 10 ? "0"+d.getMinutes() : d.getMinutes());
+            }
+            else if(type === "amount"){
+                ret = data.toString().split("");
+                ret.splice(-2,0, ".");
+                ret = ret.join("");
+            }
+        }
+        catch(ex){
+            console.log("Error converting data: ",ex);
+        }
+        return ret;
+    }
+
     toggleSpinner(status){
         this.setState({ spinner: status });
     }
@@ -137,13 +131,8 @@ class MyAccount extends Component{
                         alert("Error retreiving user transactions: ", response.errorMessage);
                     }
                     else {
-                        var accountTransactions = response.data.results.filter(function(item){
-                            return item.errorMessage == null;
-                        }).map(function(item){
-                            return item.results;
-                        })
-                        .sort(function(a,b){
-                            return new Date(b.submitTime) - new Date(a.submitTime);
+                        var accountTransactions = response.data.results.sort(function(a,b){
+                            return new Date(b.transaction_date) - new Date(a.transaction_date);
                         });
 
                         self.setState({ accountTransactions: accountTransactions}, ()=> { self.toggleSpinner(false); });

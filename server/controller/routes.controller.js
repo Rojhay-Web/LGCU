@@ -33,51 +33,30 @@ function sendEmail(req, res){
 function sendAppEmail(req, res){ mail.sendAppEmail(req, res); }
 
 /* charges */
-function applicationCharge(req, res){ charge.applicationCharge(req, res); }
-
-function createAuthNETAccount(req, res){
+function applicationCharge(req, res){ 
     try {
-        var requestUser = req.body.requestUser;
-        var userInfo = req.body.userInfo;
+        var chargeInfo = req.body;
 
-        // Validate User (Admin Only)
-        auth.authorizeUser(requestUser, null, function(ret){
-            if(ret.errorMessage != null) {
-                res.status(200).json(ret);
-            }
-            else if(!ret.results) {
-                res.status(200).json({"errorMessage":"User status invalid for this request", "results":null});
-            }
-            else {
-                auth.getUserById(userInfo, function(ret0){
-                    if(ret0.errorMessage){
-                        res.status(200).json(ret0);
-                    }
-                    else {            
-                        charge.createAccount(ret0.results, function(ret){
-                            res.status(200).json(ret);
-                        });
-                    }
-                });    
-            }
-        });         
+        charge.applicationCharge(chargeInfo, function(ret){
+            res.status(200).json(ret);
+        });
     }
     catch(ex){
-        res.status(200).json({"errorMessage":"Error Processing Request: " + ex, "results":null });
+        res.status(200).json({"errorMessage":"Error Processing Request (AC1): " + ex, "results":null });
     }
 }
 
 function accountCharge(req, res){
     try {
         var userInfo = req.body.userInfo;
-        var transactionInfo = req.body.transactionInfo;
+        var chargeInfo = req.body.chargeInfo;
 
-        charge.accountCharge(userInfo, transactionInfo, function(ret){
+        charge.accountCharge(userInfo, chargeInfo, function(ret){
             res.status(200).json(ret);
         });
     }
     catch(ex){
-        res.status(200).json({"errorMessage":"Error Processing Request: " + ex, "results":null });
+        res.status(200).json({"errorMessage":"Error Processing Request (AC2) : " + ex, "results":null });
     }
 }
 
@@ -93,26 +72,20 @@ function searchUserTransactions(req,res){
                 res.status(200).json(ret);
             }
             else if(!ret.results) {
-                res.status(200).json({"errorMessage":"User status invalid for this request", "results":null});
+                res.status(200).json({"errorMessage":"User status invalid for this request (SU1)", "results":null});
             }
-            else {
-                auth.getUserById(userInfo, function(ret){
-                    if(ret.errorMessage){
-                        res.status(200).json(ret);
-                    }
-                    else {
-                        charge.searchUserTransactions(ret.results.authTrans, function(searchRet) {
-                            res.status(200).json(searchRet);
-                        });
-                    }
-                });
+            else {                
+                charge.getUserTransactions(userInfo, function(searchRet) {
+                    res.status(200).json(searchRet);
+                });                    
             }
         });  
     }
     catch(ex){
-        res.status(200).json({"errorMessage":"Error Processing Request: " + ex, "results":null });
+        res.status(200).json({"errorMessage":"Error Processing Request (SU1): " + ex, "results":null });
     }    
 }
+
 /* user auth */
 function createUser(req, res){
     try {
@@ -398,7 +371,6 @@ router.post('/sendAppEmail', sendAppEmail);
 
 /* Charge */
 router.post('/applicationCharge', applicationCharge);
-router.post('/createAuthNETAccount', createAuthNETAccount);
 router.post('/accountCharge', accountCharge);
 router.post('/searchUserTransactions',searchUserTransactions);
 

@@ -1,9 +1,10 @@
 require('dotenv').config();
 const nodemailer = require("nodemailer");
 
-var ApiContracts = require('authorizenet').APIContracts;
-var ApiControllers = require('authorizenet').APIControllers;
-var SDKConstants = require('authorizenet').Constants;
+const payeezy = require('./payeezy_update/payeezy')(process.env.PAYEEZY_API, process.env.PAYEEZY_SECRET, process.env.PAYEEZY_MERCHANT_TOKEN);
+payeezy.version = "v1";
+payeezy.host = process.env.PAYEEZY_BASE;
+
 const util = require('util');
 
 var mongoClient = require('mongodb').MongoClient;
@@ -15,206 +16,107 @@ var database = {
 }
 
 var charge = {
-    applicationCharge:function(req,res){ 
+    applicationCharge:function(chargeInfo, callback){ 
         var response = {"errorMessage":null, "results":null};
         var defaultEmail = "admin@lenkesongcu.org";
 
         /* { userEmail:str, appId:str, chargeDescription:str, 
             cardInfo:{cardNumber, cardExp, cardCode, firstname, lastname, zip, country},
-            chargeItems:[{name, description, quantity, price}]} */
+            chargeItems:{name, description, quantity, price}} */
 
         try {
-            var transactionInfo = req.body;
-
-            chargeCard(transactionInfo.cardInfo, transactionInfo.chargeDescription, 
-                transactionInfo.chargeItems, transactionInfo.userEmail, null,
+            
+            chargeCard(chargeInfo.cardInfo, chargeInfo.chargeDescription, chargeInfo.chargeItems, null,
                 function(ret){
-                    if(ret.status >= 0){
-                        // Successful Charge
-                        // Send Email to Default
-                        sendChargeEmail(defaultEmail, transactionInfo, ret.results, function(ret){ });
-                        // Send Email Receipt to User
-                        sendChargeEmail(transactionInfo.userEmail, transactionInfo, ret.results, function(ret){ });
-                        // Add Transaction ID to User DB
+                    if(ret.errorMessage){
+                        // Unsuccessfully Charge
+                       console.log("Unsuccessful Charge");
+                       console.log(ret.errorMessage);
+                    }
+                    else if(ret.results.transaction_status != "approved"){
+                        ret.errorMessage = "Transaction Not Approved";
+                        console.log("Unsuccessful Charge");
+                        console.log(ret.results);
                     }
                     else {
-                        // Unsuccessfully Charge
-                        response.errorMessage = "Unsuccessful Charge"
+                        // Successful Charge
+                        // Send Email to Default
+                        sendChargeEmail(defaultEmail, chargeInfo, ret.results, function(ret){ });
+                        // Send Email Receipt to User
+                        sendChargeEmail(chargeInfo.userEmail, chargeInfo, ret.results, function(ret){ });
+                        // Add Transaction ID to User DB
                     }
-
-                    response.results = ret.results;
-                    res.status(200).json(response);
+                    
+                    callback(ret);
                 });    
         }
         catch(ex){
-            response.errorMessage = "[Error]: Error application charge: "+ ex;
+            response.errorMessage = "[Error] application charge: "+ ex;
             console.log(response.errorMessage);
-            res.status(200).json(response);
+            callback(response);
         }
     },
-    accountCharge(accountInfo, transactionInfo, callback){
+    accountCharge(accountInfo, chargeInfo, callback){
         var response = {"errorMessage":null, "results":null};
         var defaultEmail = "admin@lenkesongcu.org";
 
         /* { userEmail:str, studentId:str, chargeDescription:str, 
             cardInfo:{cardNumber, cardExp, cardCode, firstname, lastname, zip, country},
-            chargeItems:[{name, description, quantity, price}]} */
+            chargeItems:{name, description, quantity, price}} */
 
         try {
-            chargeCard(transactionInfo.cardInfo, transactionInfo.chargeDescription, 
-                transactionInfo.chargeItems, transactionInfo.userEmail, accountInfo.studentId,
-                function(ret){
-                    if(ret.status >= 0){
-                        // Successful Charge
-                        // Send Email to Default
-                        sendChargeEmail(defaultEmail, transactionInfo, ret.results, function(ret){ });
-                        // Send Email Receipt to User
-                        sendChargeEmail(transactionInfo.userEmail, transactionInfo, ret.results, function(ret){ });
 
-                        // Add Transaction Info to User
-                        addTransactionToUser(accountInfo, ret.results, function(ret){ });
+            chargeCard(chargeInfo.cardInfo, chargeInfo.chargeDescription, 
+                chargeInfo.chargeItems, accountInfo.studentId,
+                function(ret){
+                    if(ret.errorMessage){
+                        // Unsuccessfully Charge
+                       console.log("Unsuccessful Charge");
+                       console.log(ret.errorMessage);
+                       callback(ret);
+                    }
+                    else if(ret.results.transaction_status != "approved"){
+                        ret.errorMessage = "Transaction Not Approved";
+                        console.log("Unsuccessful Charge");
+                        console.log(ret.results);
+                        callback(ret);
                     }
                     else {
-                        // Unsuccessfully Charge
-                        response.errorMessage = "Unsuccessful Charge"
-                    }
+                        // Successful Charge
+                        // Send Email to Default
+                        sendChargeEmail(defaultEmail, chargeInfo, ret.results, function(emailRet){ });
+                        // Send Email Receipt to User
+                        sendChargeEmail(chargeInfo.userEmail, chargeInfo, ret.results, function(emailRet2){ });
 
-                    response.results = ret.results;
-                    callback(response);
+                        // Add Transaction Info to User
+                        response.results = shortenTransactionInfo(ret.results);
+                        addTransactionToUser(accountInfo, response.results, function(addRet) {
+                            callback(response);
+                        });
+                    }                  
                 });   
         }
         catch(ex){
-            response.errorMessage = "[Error]: Error account charge: "+ ex;
+            response.errorMessage = "[Error] account charge: "+ ex;
             callback(response);
         }
     },
-    createAccount: function(accountInfo, callback){
-        var response = {"errorMessage":null, "results":null};
-        /* { fullname, email, userId }*/
-
-        try {     
-            var merchantAuthenticationType = new ApiContracts.MerchantAuthenticationType();
-            merchantAuthenticationType.setName(process.env.AuthNetApiLoginKey);
-            merchantAuthenticationType.setTransactionKey(process.env.AuthNetTransactionKey);
-
-            var customerProfileType = new ApiContracts.CustomerProfileType();
-            customerProfileType.setMerchantCustomerId('AN_' + accountInfo.studentId);
-            customerProfileType.setDescription(accountInfo.fullname);
-            customerProfileType.setEmail(accountInfo.email);
-
-            var createRequest = new ApiContracts.CreateCustomerProfileRequest();
-            createRequest.setProfile(customerProfileType);
-            createRequest.setMerchantAuthentication(merchantAuthenticationType);
-
-            var ctrl = new ApiControllers.CreateCustomerProfileController(createRequest.getJSON());
-
-            ctrl.execute(function(){
-                var apiResponse = ctrl.getResponse();
-
-                var ret = new ApiContracts.CreateCustomerProfileResponse(apiResponse);
-                if(ret != null) {
-                    if(ret.getMessages().getResultCode() == ApiContracts.MessageTypeEnum.OK){
-                        addAuthNETUserInfo(accountInfo, ret.getCustomerProfileId(), function(autret){ callback(autret); });                        
-                    }
-                    else {
-                        response.errorMessage = "[Error] Creating Authorize.NET User Profile (E08): " + ret.getMessages().getMessage()[0].getText();
-                        callback(response);
-                    }
-                }
-                else {
-                    response.errorMessage = "[Error] Creating Authorize.NET User Profile (E07)";
-                    callback(response);
-                }                
-            });
-        }
-        catch(ex){
-            response.errorMessage = "[Error] Creating Authorize.NET User Profile (E09): "+ex;
-            callback(response);
-        }
-    },
-    searchUserTransactions: function(transList, callback){
+    getUserTransactions: function(user, callback){
         var response = {"errorMessage":null, "results":null};
 
         try {
-            var retList = [];
-            if(!transList) {
-                response.results = [];
+            if(!user || !user._id) {
+                response.errorMessage = "No Valid User";
                 callback(response);
             }
             else {
-                transList.forEach(function(transactionId){
-                    searchTransactionById(transactionId, function(ret){
-                        retList.push(ret);
-
-                        if(retList.length == transList.length){
-                            response.results = retList;
-                            callback(response);
-                        }
-                    });
+                getTransactionsByUser(user._id,function(ret){ 
+                    callback(ret);
                 });
             }
         }
         catch(ex){
-            response.errorMessage = "[Error] Searching Account Transactions (E09): "+ex;
-            callback(response);
-        }
-    },
-    searchAccountTransactions: function(searchInfo, callback){
-        var response = {"errorMessage":null, "results":null};
-
-        /* pageInfo: {limit, offset, accountId} */
-        try {
-            var merchantAuthenticationType = new ApiContracts.MerchantAuthenticationType();
-            merchantAuthenticationType.setName(process.env.AuthNetApiLoginKey);
-            merchantAuthenticationType.setTransactionKey(process.env.AuthNetTransactionKey);
-
-            var paging = new ApiContracts.Paging();
-            paging.setLimit(searchInfo.limit);
-            paging.setOffset(searchInfo.offset);
-
-            var sorting = new ApiContracts.TransactionListSorting();
-            sorting.setOrderBy(ApiContracts.TransactionListOrderFieldEnum.ID);
-            sorting.setOrderDescending(true);
-
-            var getRequest = new ApiContracts.GetTransactionListForCustomerRequest();
-            getRequest.setMerchantAuthentication(merchantAuthenticationType);
-            getRequest.setCustomerProfileId(searchInfo.accountId);
-            getRequest.setPaging(paging);
-            getRequest.setSorting(sorting);
-
-            var ctrl = new ApiControllers.GetTransactionListForCustomerController(getRequest.getJSON());
-            
-            ctrl.execute(function(){ 
-                var apiResponse = ctrl.getResponse();
-
-                var ret = new ApiContracts.GetTransactionListResponse(apiResponse);
-                
-                if(ret != null) {
-                    if(ret.getMessages().getResultCode() == ApiContracts.MessageTypeEnum.OK){
-                        response.results = [];
-                        var transactions = ret.getTransactions().getTransaction();
-
-                        transactions.forEach(function(trans){
-                            response.results.push({
-                                    id: trans.getTransId(), status:trans.getTransactionStatus(), 
-                                    accountType:trans.getAccountType(), settleAmmount:trans.getSettleAmount(),
-                                    date:trans.submitTimeLocal
-                                });
-                        });
-                    }
-                    else {
-                        response.errorMessage = "[Error] Searching Account Transactions (E08): " + ret.getMessages().getMessage()[0].getText();
-                    }
-                }
-                else {
-                    response.errorMessage = "[Error] Searching Account Transactions (E07)";
-                }
-
-                callback(response);
-            });
-        }
-        catch(ex){
-            response.errorMessage = "[Error] Searching Account Transactions (E09): "+ex;
+            response.errorMessage = "[Error] Getting User Account Transactions (E09): "+ex;
             callback(response);
         }
     }
@@ -222,126 +124,60 @@ var charge = {
 
 module.exports = charge;
 
-
-function chargeCard(cardInfo, chargeDesc, chargeItems, userEmail, studentId, callback){
-    var ret = {"errorMessage":null, "status":null, "results":null};
-
+function shortenTransactionInfo(transInfo){
+    var ret = {};
     try {
-        var transactionRequestType = new ApiContracts.TransactionRequestType();
-        transactionRequestType.setTransactionType(ApiContracts.TransactionTypeEnum.AUTHCAPTURETRANSACTION);
-
-        var merchantAuthenticationType = new ApiContracts.MerchantAuthenticationType();
-        merchantAuthenticationType.setName(process.env.AuthNetApiLoginKey);
-        merchantAuthenticationType.setTransactionKey(process.env.AuthNetTransactionKey);
-        
-        /* Credit Card */
-        var creditCard = new ApiContracts.CreditCardType();
-        creditCard.setCardNumber(cardInfo.cardNumber);
-        creditCard.setExpirationDate(cardInfo.cardExp);
-        creditCard.setCardCode(cardInfo.cardCode);
-        var paymentType = new ApiContracts.PaymentType();
-        paymentType.setCreditCard(creditCard);
-        transactionRequestType.setPayment(paymentType);
-
-        /* Billing User */
-        var billTo = new ApiContracts.CustomerAddressType();
-        billTo.setFirstName(cardInfo.firstname);
-        billTo.setLastName(cardInfo.lastname);
-        billTo.setZip(cardInfo.zip);
-        billTo.setCountry(cardInfo.countryCode);
-        billTo.setEmail(userEmail);
-        transactionRequestType.setBillTo(billTo);
-
-        /* Order Details */
-        var orderDetails = new ApiContracts.OrderType();
-        var invoceNum = "lgcu"+ (studentId ? "."+studentId+"." : "-") + Date.now();
-	    orderDetails.setInvoiceNumber(invoceNum);
-        orderDetails.setDescription(chargeDesc);
-        transactionRequestType.setOrder(orderDetails);
-
-        /* Line Item */
-        var lineItemList = [];
-        var total = 0.00;
-        for(var i =0; i < chargeItems.length; i++){
-            var tmpeLineItem = new ApiContracts.LineItemType();
-            tmpeLineItem.setItemId(i);
-            tmpeLineItem.setName(chargeItems[i].name);
-            tmpeLineItem.setDescription(chargeItems[i].description);
-            tmpeLineItem.setQuantity(chargeItems[i].quantity);
-            tmpeLineItem.setUnitPrice(chargeItems[i].price);
-
-            if(parseFloat(chargeItems[i].price) != "NaN"){
-                total = total + parseFloat(chargeItems[i].price);
-            }
-            lineItemList.push(tmpeLineItem);
+        ret = {
+            "transaction_id": transInfo.transaction_id,
+            "transaction_status": transInfo.transaction_status,
+            "transaction_date": Date.now(), "method": transInfo.method,
+            "amount": transInfo.amount,  "card": transInfo.card            
         }
-        /* Line Item Total */
-        var lineItems = new ApiContracts.ArrayOfLineItem();
-        lineItems.setLineItem(lineItemList);
-        transactionRequestType.setLineItems(lineItems);
-        transactionRequestType.setAmount(total.toFixed(2));
-
-        /* Transaction */
-        var createRequest = new ApiContracts.CreateTransactionRequest();
-        createRequest.setMerchantAuthentication(merchantAuthenticationType);
-        createRequest.setTransactionRequest(transactionRequestType);
-
-        //pretty print request
-        if(process.env.CODEENV && process.env.CODEENV == "DEBUG") { 
-            console.log("transaction sent");
-            console.log(JSON.stringify(createRequest.getJSON(), null, 2));
-        }
-
-        var ctrl = new ApiControllers.CreateTransactionController(createRequest.getJSON());
-        
-        //Defaults to sandbox
-        if(!(process.env.CODEENV && process.env.CODEENV == "DEBUG")) { 
-            ctrl.setEnvironment(SDKConstants.endpoint.production);
-        }
-        
-        /* Send Transaction */
-        ctrl.execute(function(){ 
-            var apiResponse = ctrl.getResponse();
-            var response = new ApiContracts.CreateTransactionResponse(apiResponse);
-            
-            //pretty print response
-            if(process.env.CODEENV && process.env.CODEENV == "DEBUG") { 
-                console.log("transaction completed");
-                console.log(JSON.stringify(response, null, 2));
-            }
-            
-            if(response != null){ 
-                if(response.getMessages().getResultCode() == ApiContracts.MessageTypeEnum.OK){
-                    if(response.getTransactionResponse().getMessages() != null){
-                        /* Successful Transaction */
-                        ret.status = 0;
-                    }
-                    else {
-                        /* Failed Transaction - E1 */
-                        ret.errorMessage = "Failed Transaction [E1]";
-                        ret.status = -1;
-                    }
-                }
-                else {
-                    /* Failed Transaction - E2 */
-                    ret.errorMessage = "Failed Transaction [E2]";
-                    ret.status = -2;
-                    console.log(response);
-                }
-            }
-            else {
-                ret.errorMessage = "Invalid Response Please Contact Our Financial Aid Office";
-                ret.status = -3;
-            }
-
-            ret.results = response;
-            callback(ret);
-        });
     }
     catch(ex){
-        ret.errorMessage = "[Error]: Error charging card: "+ ex;
-        console.log(ret.errorMessage);
-        callback(ret);
+        console.log("[Error] Shortening Transaction Info: "+ ex);
+        ret = transInfo;
+    }
+    return ret;
+}
+
+function chargeCard(cardInfo, chargeDesc, chargeItems, studentId, callback){
+    var response = {"errorMessage":null, "results":null};
+
+    try {
+        var invoceNum = "lgcu"+ (studentId ? "."+studentId+"." : "-") + Date.now();
+        var chargeAmt = chargeItems.amount.toString().split(".").join("");
+        
+        var postData = {
+            "merchant_ref": invoceNum + " Description: " + chargeDesc, 
+            "amount": chargeAmt, 
+            "partial_redemption": "false", "transaction_type": "purchase", 
+            "method": "credit_card", "currency_code": "USD",
+            "credit_card": {
+                "type": cardInfo.type, "cardholder_name": cardInfo.name,
+                "card_number": cardInfo.cardNumber, "exp_date": cardInfo.cardExp, "cvv": cardInfo.cvv
+            }
+        };
+        
+       payeezy.transaction.purchase(postData, function(error, res){
+            if (error) {
+                response.errorMessage = "[Error] charging card (L2)";
+                response.results = error;
+            }
+            else if(!res){
+                response.errorMessage = "[Error] charging card (L3): No Response";
+            }
+            else {
+                response.results = res;
+            }
+
+            callback(response);
+       });
+    }
+    catch(ex){
+        response.errorMessage = "[Error] charging card: "+ ex;
+        console.log(response.errorMessage);
+        callback(response);
     }
 }
 
@@ -349,30 +185,28 @@ function chargeCard(cardInfo, chargeDesc, chargeItems, userEmail, studentId, cal
 function buildChargeEmailHtml(chargeInfo, transactionInfo){
     var ret = "";
     try {
-        /*{ userEmail:str, appId:str, chargeDescription:str, 
+        /* { userEmail:str, studentId:str, chargeDescription:str, 
             cardInfo:{cardNumber, cardExp, cardCode, firstname, lastname, zip, country},
-            chargeItems:[{name, description, quantity, price}]} */
+            chargeItems:{name, description, quantity, price}} */
 
         ret +=  util.format('<h1>%s</h1>', chargeInfo.chargeDescription);
         ret +=  '<table border="1" style="border-color:rgba(80, 78, 153,0.5)"><tr><th style="background-color:rgba(80, 78, 153,0.5); text-align:center;">Description</th><th style="background-color:rgba(80, 78, 153,0.5); text-align:center;">Info</th><th style="background-color:rgba(80, 78, 153,0.5); text-align:center;"></th></tr>';
         
-        ret += util.format('<tr><td>First Name</td><td colspan="2">%s</td></tr>', chargeInfo.cardInfo.firstname.toString());
-        ret += util.format('<tr><td>Last Name</td><td colspan="2">%s</td></tr>', chargeInfo.cardInfo.lastname.toString());
+        ret += util.format('<tr><td>Name</td><td colspan="2">%s</td></tr>', chargeInfo.cardInfo.name.toString());
         if(chargeInfo.appId) { ret += util.format('<tr><td>Application Id</td><td>%s</td></tr>', chargeInfo.appId.toString()); }
         
         // Charges
         ret += util.format('<tr><td colspan="3" style="background-color:rgba(80, 78, 153,0.5); text-align:center;">Charge Info</td></tr>');
-        chargeInfo.chargeItems.forEach(function(item){
-            ret += util.format('<tr><td>%s</td><td>%s</td><td>$ %s</td></tr>', item.name, item.description, item.price.toString());
-        });
+        
+        ret += util.format('<tr><td>%s</td><td>%s</td><td>$ %s</td></tr>', chargeInfo.chargeItems.name, chargeInfo.chargeItems.description, chargeInfo.chargeItems.amount.toString());
         
         // Charge Info
         ret += util.format('<tr><td colspan="3" style="background-color:rgba(80, 78, 153,0.5); text-align:center;">Transaction Info</td></tr>');
-        ret += util.format('<tr><td>Transaction ID</td><td colspan="2">%s</td></tr>', transactionInfo.transactionResponse.transId);
-        transactionInfo.transactionResponse.messages.message.forEach(function(item){
-            ret += util.format('<tr><td>Code</td><td colspan="2">%s</td></tr>', item.code.toString());
-            ret += util.format('<tr><td>Description</td><td colspan="2">%s</td></tr>', item.description.toString());
-        });
+        ret += util.format('<tr><td>Transaction ID</td><td colspan="2">%s</td></tr>', transactionInfo.transaction_id);
+        
+        ret += util.format('<tr><td>Card Holder Name</td><td colspan="2">%s</td></tr>', transactionInfo.card.cardholder_name.toString());
+        ret += util.format('<tr><td>Card</td><td colspan="2">%s</td></tr>', transactionInfo.card.card_number.toString());
+        
         ret +=  '</table>';
     }
     catch(ex){
@@ -416,14 +250,14 @@ function sendChargeEmail(sendEmail, chargeInfo, transactionInfo, callback){
           });
     }
     catch(ex){
-        response.errorMessage = "[Error]: Error sending charge email: "+ ex;
+        response.errorMessage = "[Error] sending charge email: "+ ex;
         console.log(response.errorMessage);
         callback(response);
     }
 }
 
-function addAuthNETUserInfo(userInfo, authId, callback){
-    var response = {"errorMessage":null, "results":null};
+function getTransactionsByUser(userId, callback){
+    var response = { "errorMessage":null, "results":null };
 
     try {
         mongoClient.connect(database.connectionString, database.mongoOptions, function(err, client){
@@ -432,19 +266,25 @@ function addAuthNETUserInfo(userInfo, authId, callback){
                 callback(response);
             }
             else {
-                const db = client.db(database.dbName).collection('mylgcu_users'); 
-                response.results = authId;
+                const db = client.db(database.dbName).collection('mylgcu_charges'); 
 
-                db.updateOne({ "_id": ObjectId(userInfo._id) }, { $set: { accountId: authId }
-                            }, {upsert: true, useNewUrlParser: true});
-                
-                client.close();
-                callback(response);
+                db.find({ 'userId': ObjectId(userId) }).toArray(function(err, res){ 
+                    if(err){
+                        response.errorMessage = err;
+                    }
+                    else {
+                        response.results = res;
+                    }
+
+                    client.close();
+                    callback(response);
+                });
             }
         });
     }
     catch(ex){
-        response.errorMessage = "[Error] adding users talentlms info to user (E09): "+ ex;
+        response.errorMessage = "[Error] Getting User Transactions: "+ ex;
+        console.log(response.errorMessage);
         callback(response);
     }
 }
@@ -459,76 +299,28 @@ function addTransactionToUser(userInfo, transactionInfo, callback){
                 callback(response);
             }
             else {
-                const db = client.db(database.dbName).collection('mylgcu_users'); 
+                const db = client.db(database.dbName).collection('mylgcu_charges'); 
 
-                db.updateOne({ "_id": ObjectId(userInfo._id) }, { $push: { authTrans: transactionInfo.transactionResponse.transId } 
-                            }, {upsert: true, useNewUrlParser: true});
-                
-                client.close();
-                callback(response);
+                transactionInfo.userId = ObjectId(userInfo._id);
+
+                // Insert User Transaction
+                db.insertOne(transactionInfo, function(insertError,retObj){
+                    if(insertError){
+                        response.error = insertError;
+                    }
+                    else {                    
+                        response.results = (retObj.ops.length > 0);                                                                                
+                    }
+                    
+                    client.close();                            
+                    callback(response);
+                });
             }
         });
     }
     catch(ex){
-        response.errorMessage = "[Error] Updating user transaction (E09): "+ ex;
+        response.errorMessage = "[Error] adding user transaction (E09): "+ ex;
         console.log(response);
         callback(response);
-    }
-}
-
-function searchTransactionById(transactionId, callback){
-    var ret = {"errorMessage":null, "results":null};
-
-    try {
-        var merchantAuthenticationType = new ApiContracts.MerchantAuthenticationType();
-        merchantAuthenticationType.setName(process.env.AuthNetApiLoginKey);
-        merchantAuthenticationType.setTransactionKey(process.env.AuthNetTransactionKey);
-
-        var getRequest = new ApiContracts.GetTransactionDetailsRequest();
-        getRequest.setMerchantAuthentication(merchantAuthenticationType);
-        getRequest.setTransId(transactionId);
-
-        var ctrl = new ApiControllers.GetTransactionDetailsController(getRequest.getJSON());
-
-        if(!(process.env.CODEENV && process.env.CODEENV == "DEBUG")) { 
-            ctrl.setEnvironment(SDKConstants.endpoint.production);
-        }
-        
-        ctrl.execute(function(){
-
-            var apiResponse = ctrl.getResponse();
-    
-            var response = new ApiContracts.GetTransactionDetailsResponse(apiResponse);
-
-            if(response != null){
-                if(response.getMessages().getResultCode() == ApiContracts.MessageTypeEnum.OK){
-                    ret.results = {
-                        paymentStatus: response.transaction.responseReasonDescription,
-                        transactionStatus: response.transaction.transactionStatus,
-                        transactionId: response.transaction.transId,
-                        order: response.transaction.order,
-                        amount: response.transaction.settleAmount,
-                        submitTime: response.transaction.submitTimeLocal,
-                        lineItems: response.transaction.lineItems.lineItem.map(function(item){
-                            return { id: item.itemId, name: item.name, description: item.description, quantity:item.quantity, price: item.unitPrice }
-                        })
-                    }
-                }
-                else{
-                    ret.errorMessage = "[Error] Searching by id (E07)"
-                    console.log(response);
-                    console.log(response.getMessages());
-                }
-            }
-            else{
-                ret.errorMessage = "[Error] Searching by id (E09)"
-            }
-            
-            callback(ret);
-        });
-    }
-    catch(ex){
-        ret.errorMessage = "[Error] Searching transaction by id (E09): "+ ex;
-        callback(ret);
     }
 }
