@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Modal } from 'react-bootstrap';
 import axios from 'axios';
 
-var rootPath = "";
-//var rootPath = "http://localhost:1111";
+//var rootPath = "";
+var rootPath = (window.location.href.indexOf("localhost") > -1 ? "http://localhost:1111" : "");
 
 /* Body */
 class StudentPayment extends Component{
@@ -11,19 +11,15 @@ class StudentPayment extends Component{
         super(props);
         this.state = {
             cardDisplayNum: "XXXXXXXXXXXXXXXX",
-            cardNum:"",
-            cardExpMth:"00",
-            cardExpYr:"00",
-            cardFirstName:"",
-            cardLastName:"",
-            cardCSV:"",
-            cardCountry:"",
-            cardZip:"",
-            cardEmail:"",
+            cardNum:"", cardExpMth:"00",
+            cardExpYr:"00",cardName:"",
+            cardType: "visa",cvv:"",
+            cardCountry:"USA",cardZip:"", cardEmail:"",
             chargeTotal:0,
 
             countryList:[],
             monthList:["01","02","03","04","05","06","07","08","09","10","11","12"],
+            cardTypeList:["Visa", "Mastercard", "American Express", "Discover", "JCB", "Diners Club"],
             yearList:[],
             errorList:[],
             returnMessage:{"type":"", "message":""}
@@ -114,8 +110,8 @@ class StudentPayment extends Component{
             this.setState({
                 cardDisplayNum: "XXXXXXXXXXXXXXXX",
                 cardNum:"", cardExpMth:"00", cardExpYr:"00",
-                cardFirstName:"", cardLastName:"", cardCSV:"",
-                cardCountry:"", cardZip:"", cardEmail:"",
+                cardName:"", cardType:"", cvv:"",
+                cardCountry:"USA", cardZip:"", cardEmail:"",
                 chargeTotal:0, errorList:[], returnMessage:{"type":"", "message":""}
             });
         }
@@ -177,14 +173,20 @@ class StudentPayment extends Component{
                                             <span>{this.state.cardExpYr}</span>
                                         </div>
                                         <div className="card-name">
-                                            <span>{this.state.cardFirstName +" "+this.state.cardLastName || "Name"}</span>
+                                            <span>{this.state.cardName || "Name"}</span>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="form-container fill">
                                     <div className="form-section-container">
-                                        <div className="form-element sz-5"><span>Firstname</span><input type="text" name="cardFirstName" className={(this.state.errorList.indexOf("cardFirstName") > -1 ? "error":"")} placeholder="Firstname" value={this.state.cardFirstName} onChange={(e) => this.onElementChange(e)}/></div>
-                                        <div className="form-element sz-5"><span>Lastname</span><input type="text" name="cardLastName" className={(this.state.errorList.indexOf("cardLastName") > -1 ? "error":"")} placeholder="LastName" value={this.state.cardLastName} onChange={(e) => this.onElementChange(e)}/></div>
+                                        <div className="form-element sz-7"><span>Cardholder Name</span><input type="text" name="cardName" className={(this.state.errorList.indexOf("cardName") > -1 ? "error":"")} placeholder="Cardholder Name" value={this.state.cardName} onChange={(e) => this.onElementChange(e)}/></div>
+                                        <div className="form-element sz-3"><span>Card Type</span>
+                                            <select name="cardType" className={(this.state.errorList.indexOf("cardType") > -1 ? "error":"")} value={this.state.cardType} onChange={(e) => this.onElementChange(e)}>
+                                                {this.state.cardTypeList.map((type,i) => 
+                                                    <option key={i} value={type}>{type}</option>
+                                                )}
+                                            </select>
+                                        </div>
                                         <div className="form-element sz-10"><span>Card Number</span><input type="number" maxLength="16" name="cardNum" className={(this.state.errorList.indexOf("cardNum") > -1 ? "error":"")} placeholder="" value={this.state.cardNum} onChange={(e) => this.onElementChange(e)}/></div>
 
                                         <div className="form-element sz-3"><span>Exp Month</span>
@@ -203,7 +205,7 @@ class StudentPayment extends Component{
                                                 )}
                                             </select>
                                         </div>
-                                        <div className="form-element sz-4"><span>Card CSV</span><input type="number" maxLength="3" name="cardCSV" className={(this.state.errorList.indexOf("cardCSV") > -1 ? "error":"")} placeholder="" value={this.state.cardCSV} onChange={(e) => this.onElementChange(e)}/></div>
+                                        <div className="form-element sz-4"><span>CVV</span><input type="number" maxLength="3" name="cvv" className={(this.state.errorList.indexOf("cvv") > -1 ? "error":"")} placeholder="" value={this.state.cvv} onChange={(e) => this.onElementChange(e)}/></div>
                                     </div>
                                 </div>
                             </div>
@@ -251,11 +253,13 @@ class StudentPayment extends Component{
     
         try {
             // Check First & Last Name
-            if(this.state.cardFirstName.length === 0){
-                tmpErrorList.push("cardFirstName");
+            if(this.state.cardName.length === 0){
+                tmpErrorList.push("cardName");
             }
-            if(this.state.cardLastName.length === 0){
-                tmpErrorList.push("cardLastName");
+
+            // Check Card Type
+            if(this.state.cardType.length === 0){
+                tmpErrorList.push("cardType");
             }
 
             // Check Card Number
@@ -271,8 +275,8 @@ class StudentPayment extends Component{
                 tmpErrorList.push("cardExpYr");
             }
             // Check CSV
-            if(this.state.cardCSV.length !== 3){
-                tmpErrorList.push("cardCSV");
+            if(this.state.cvv.length !== 3){
+                tmpErrorList.push("cvv");
             }
             // Check Email
             var srtTst = this.state.cardEmail.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/i);
@@ -311,43 +315,35 @@ class StudentPayment extends Component{
                 var localUser = JSON.parse(sessionInfo);
 
                 
-                var chargeForm = 
-                {
-                    userInfo:{
-                        _id: localUser._id,
-                        studentId: this.props.studentInfo.studentId
-                    },
-                    transactionInfo: {
+                var chargeForm = {
+                    userInfo:{ _id: localUser._id, studentId: this.props.studentInfo.studentId },
+                    chargeInfo: {
                         userEmail: this.state.cardEmail, chargeDescription: (this.props.adhoc === true ? "myLGCU Account Payment" : "Student Course Payment"),
                         cardInfo:{
-                            cardNumber: this.state.cardNum, cardExp: cardExp, cardCode: this.state.cardCSV,
-                            firstname: this.state.cardFirstName, lastname: this.state.cardLastName, 
+                            cardNumber: this.state.cardNum, cardExp: cardExp, cvv: this.state.cvv,
+                            name: this.state.cardName, type: this.state.cardType, 
                             zip: this.state.cardZip, country: this.state.cardCountry,
                         },
-                        chargeItems:[]
+                        chargeItems:{}
                     }
                 };
                 
                 if(this.props.adhoc === true){
-                    var chargeItem = {name:"Account Payment", description:"A payment made by the student via the myLGCU Account Portal", quantity:1, price: parseFloat(this.state.chargeTotal).toFixed(2) };
-                    chargeForm.transactionInfo.chargeItems.push(chargeItem);
+                    chargeForm.chargeInfo.chargeItems = {name:"Account Payment", description:"A payment made by the student via the myLGCU Account Portal", quantity:1, amount: parseFloat(this.state.chargeTotal).toFixed(2) };
                 }
                 else {
                     // Calculate Course Charges
                     this.props.queuedCourses.forEach(function(course){
                         var courseCharge = self.props.creditRate * course.credits;
                         courseCharge = parseInt(courseCharge,10);
-                        var chargeItem = {name:"Course Registration", description:"Course Id: "+ course.id +", Course: "+ course.name+", credit: "+course.credits, quantity:1, price: courseCharge.toFixed(2) };
                         
                         tmpCharge = tmpCharge + courseCharge;
-                        chargeForm.transactionInfo.chargeItems.push(chargeItem);
+                        chargeForm.chargeInfo.chargeItems = {name:"Course Registration", description:"Course Id: "+ course.id +", Course: "+ course.name+", credit: "+course.credits, quantity:1, amount: courseCharge.toFixed(2) };
                     });
 
-                    if(this.props.currentCourses.length === 0){
-                        var chargeItem2 = {name:"Technology Fee", description:"Student Semester Technology Fee", quantity:1, price: this.props.technologyFee.toFixed(2) };
-                        
+                    if(this.props.currentCourses.length === 0){                                                
                         tmpCharge = tmpCharge + this.props.technologyFee;
-                        chargeForm.transactionInfo.chargeItems.push(chargeItem2);
+                        chargeForm.chargeInfo.chargeItems = {name:"Technology Fee", description:"Student Semester Technology Fee", quantity:1, amount: this.props.technologyFee.toFixed(2) };
                     }
                 }
 
@@ -362,29 +358,18 @@ class StudentPayment extends Component{
                                 var response = resp.data;
                                 if(response.errorMessage == null){
                                     // Successful Charge
-                                    if(response.results.messages){
-                                        if(response.results.messages.resultCode && response.results.messages.resultCode === "Ok"){
-                                            // Success
-                                            alert((self.props.adhoc === true ? "Charge was successful" : "Charge was successful your courses are now being added"));
-                                            bannerMessage.type = "success";
-                                            bannerMessage.message = response.results.transactionResponse.messages.message[0].description;
+                                    alert((self.props.adhoc === true ? "Charge was successful" : "Charge was successful your courses are now being added"));
+                                    bannerMessage.type = "success";
+                                    bannerMessage.message = "Succesful Charge";
                                             
-                                            if(self.props.adhoc !== true ) { self.props.registerCourseList(); }
-                                            self.closeForm();
-                                        }
-                                        else {
-                                            // Error
-                                            alert("Error Processing Payment [E1]: "+ response.results.transactionResponse.messages.message[0].description);
-                                            bannerMessage.type = "error";
-                                            bannerMessage.message = response.results.transactionResponse.messages.message[0].description;
-                                        }
-                                    }
+                                    if(self.props.adhoc !== true ) { self.props.registerCourseList(); }
+                                    self.closeForm();
                                 }
                                 else {
                                     alert("Error Processing Payment [E2]: " +  response.errorMessage);
                                     console.log("[Error] Error Processing Payment: ", response.errorMessage);
                                     bannerMessage.type = "error";
-                                    bannerMessage.message = response.results.transactionResponse.errors.error[0].errorText;
+                                    bannerMessage.message = (response.results.Error ? response.results.Error.messages[0].description : response.errorMessage);
                                 }
                             }
                             catch(ex){

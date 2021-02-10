@@ -6,8 +6,8 @@ import ReactGA from 'react-ga';
 import academicData from '../../data/academics.json';
 
 
-var rootPath = "";
-//var rootPath = "http://localhost:1111";
+//var rootPath = "";
+var rootPath = (window.location.href.indexOf("localhost") > -1 ? "http://localhost:1111" : "");
 
 class StudentApp extends Component{
     constructor(props) {
@@ -264,10 +264,10 @@ class StudentApp extends Component{
                 if(ret){
                     var appId = self.generateAppId(self.state.form);
                     // Open Payment
-                    //self.props.appFeeForm(appId,function(){
+                    self.props.appFeeForm(appId,function(){
 
                         // Close Payment Modal
-                        //self.props.modalHide();
+                        self.props.modalHide();
                         // Send Email
                         var postData = { 
                             email: self.state.sendAddress, 
@@ -291,7 +291,7 @@ class StudentApp extends Component{
                             alert("Error Submitting Form: Please Contact Admissions Office");
                         });  
                         //self.setState({ selectedSection:"submitted", applicationId: appId});    
-                    //});                                            
+                    });                                            
                 }
             }); 
         }

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { UncontrolledCollapse } from 'reactstrap';
 import axios from 'axios';
 
 import ReactTable from 'react-table';
@@ -54,7 +53,6 @@ class MyAdmin extends Component{
         this.saveStudent = this.saveStudent.bind(this);
         this.refreshStudentID = this.refreshStudentID.bind(this);
         this.createTalentLmsId = this.createTalentLmsId.bind(this);
-        this.createAuthNetId = this.createAuthNetId.bind(this);
         this.displayTalentLmsId = this.displayTalentLmsId.bind(this);
 
         this.loadCourses = this.loadCourses.bind(this);
@@ -66,6 +64,7 @@ class MyAdmin extends Component{
         this.unregisterCourseList = this.unregisterCourseList.bind(this);
         this.queueCourse = this.queueCourse.bind(this);
         this.loadAccountInfo = this.loadAccountInfo.bind(this);
+        this.convertItemData = this.convertItemData.bind(this);
     }
 
     componentDidMount(){
@@ -435,49 +434,24 @@ class MyAdmin extends Component{
 
                                             <div className="account-block">
                                                 <span className="subText">Transaction Date</span>
-                                                <span>{item.submitTime}</span>
+                                                <span>{this.convertItemData(item.transaction_date, "date")}</span>
                                             </div>
 
                                             <div className="account-block">
                                                 <span className="subText">Transaction Id</span>
-                                                <span>{item.transactionId}</span>
+                                                <span>{item.transaction_id}</span>
                                             </div>
 
                                             <div className="account-block">
-                                                <span className="subText">{item.order.invoiceNumber}</span>
-                                                <span>{item.order.description}</span>
+                                                <span className="subText">Transaction Status</span>
+                                                <span>{item.transaction_status}</span>
                                             </div>
 
                                             <div className="account-block">
                                                 <span className="subText">Total Charge</span>
-                                                <span>$ {item.amount.toFixed(2)}</span>
-                                            </div>
-
-                                            <div className="account-block">
-                                                <span className="account-icon info" id={"toggler"+i}><i className="fas fa-info"></i></span>
+                                                <span>$ {this.convertItemData(item.amount,"amount")}</span>
                                             </div>
                                         </div>
-
-                                        <UncontrolledCollapse toggler={"#toggler"+i} className="account-toggler">
-                                            <table className="account-table overview-table">
-                                                <thead>
-                                                    <tr className="header">
-                                                        <th>Charge Name</th>
-                                                        <th>Charge Description</th>
-                                                        <th>Charge Amount</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    {item.lineItems.map((charge,k) => (
-                                                        <tr key={k}>
-                                                            <td>{charge.name}</td>
-                                                            <td>{charge.description}</td>
-                                                            <td>$ {charge.price.toFixed(2)}</td>
-                                                        </tr>
-                                                    ))}                                        
-                                                </tbody>
-                                            </table>
-                                        </UncontrolledCollapse>
                                     </div>
                                 ))}
                             </div>  
@@ -564,48 +538,6 @@ class MyAdmin extends Component{
 
                             self.setState({ updateType: "update", selectedUser: student
                             }, ()=> { alert("Successfully created TalentLMS ID: "); });
-                        }
-                        self.toggleSpinner(false);
-                    });  
-                }
-            }
-        }
-        catch(ex){            
-            alert("[Error] Creating TalentLMS ID: ", ex);
-            self.toggleSpinner(false);
-        }
-    }
-
-    createAuthNetId(){
-        var self = this;
-        try {
-            this.toggleSpinner(true);
-            var sessionInfo = localStorage.getItem(self.props.mySessKey);
-            
-            if(sessionInfo) {
-                var localUser = JSON.parse(sessionInfo);
-                
-                if(!this.state.selectedUser || !this.state.selectedUser._id)
-                {
-                    alert("Student not active, please create student then create id");
-                }
-                else {
-                    var postData = { 
-                        requestUser: { _id: localUser._id}, 
-                        userInfo: { _id: this.state.selectedUser._id } 
-                    };
-
-                    axios.post(self.props.rootPath + "/api/createAuthNETAccount", postData, {'Content-Type': 'application/json'})
-                    .then(function(response) {
-                        if(response.data.errorMessage){
-                            alert("Unable to create Authorize.NET ID: "+ response.data.errorMessage);
-                        }
-                        else {                        
-                            var student = self.state.selectedUser;
-                            student.accountId = response.data.results;
-
-                            self.setState({ updateType: "update", selectedUser: student
-                            }, ()=> { alert("Successfully created Authorize.NET ID: "); });
                         }
                         self.toggleSpinner(false);
                     });  
@@ -1204,13 +1136,8 @@ class MyAdmin extends Component{
                         alert("Error retreiving user transactions: ", response.errorMessage);
                     }
                     else {
-                        var accountTransactions = response.data.results.filter(function(item){
-                            return item.errorMessage == null;
-                        }).map(function(item){
-                            return item.results;
-                        })
-                        .sort(function(a,b){
-                            return new Date(b.submitTime) - new Date(a.submitTime);
+                        var accountTransactions = response.data.results.sort(function(a,b){
+                            return new Date(b.transaction_date) - new Date(a.transaction_date);
                         });
 
                         self.setState({ accountTransactions: accountTransactions}, ()=> { self.toggleSpinner(false); });
@@ -1225,6 +1152,25 @@ class MyAdmin extends Component{
             alert("[Error] Loading Student Account Info: ", ex);
             self.toggleSpinner(false);
         }
+    }
+
+    convertItemData(data,type){
+        var ret = "";
+        try {
+            if(type === "date"){
+                var d = new Date(data);
+                ret = (d.getMonth()+1) + "-" + d.getDate() + "-" + d.getFullYear() + " " + d.getHours() + ":" + (d.getMinutes() < 10 ? "0"+d.getMinutes() : d.getMinutes());
+            }
+            else if(type === "amount"){
+                ret = data.toString().split("");
+                ret.splice(-2,0, ".");
+                ret = ret.join("");
+            }
+        }
+        catch(ex){
+            console.log("Error converting data: ",ex);
+        }
+        return ret;
     }
 }
 
