@@ -86,8 +86,7 @@ class App extends Component{
             mlAccess:false,
             hoursofoperation:[],
             contact:[],
-            address:[],
-            pobox:[]
+            address:[]
         };
 
         this.getLayout = this.getLayout.bind(this);
@@ -315,11 +314,10 @@ class App extends Component{
                     
                     /* Footer */
                     var tmpAddress = (layoutbody.address ? layoutbody.address.filter(function(item) { return item.component.toLowerCase() === "footerline"; }) : []);
-                    var tmpPobox = (layoutbody.pobox ? layoutbody.pobox.filter(function(item) { return item.component.toLowerCase() === "footerline"; }) : []);
                     var tmpContact = (layoutbody.contact ? layoutbody.contact.filter(function(item) { return item.component.toLowerCase() === "footerline"; }) : []);
                     var tmpHoursofoperation = (layoutbody.hoursofoperation ? layoutbody.hoursofoperation.filter(function(item) { return item.component.toLowerCase() === "footerline"; }) : []);
 
-                    self.setState({ address: tmpAddress, pobox:tmpPobox, contact: tmpContact, hoursofoperation: tmpHoursofoperation });                
+                    self.setState({ address: tmpAddress, contact: tmpContact, hoursofoperation: tmpHoursofoperation });                
                 }
             });
         }
