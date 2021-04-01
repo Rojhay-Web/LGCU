@@ -439,6 +439,9 @@ class StudentApp extends Component{
                     tmpDegree.push({title:item, status: false });
                 });
 
+                // Other Degree Option
+                tmpDegree.push({title:"other", status: false });
+
                 this.setState({ degreeList: tmpDegree, areaList:tmpArea });
             }
         }
@@ -481,6 +484,11 @@ class StudentApp extends Component{
                     }
                 });
             });
+            
+            // Other Add
+            if(activeDegreeFilter.filter(function(x) { return x.title === "other"; }).length > 0){
+                retList.push({title:"Other", theme:"t5", degreeTitle:undefined, degree: "other", area: "other", url: "na"});
+            }
 
             this.setState({ majorResults: retList.sort(function(a,b){ return (a.title.toUpperCase() < b.title.toUpperCase() ? -1 : 1)}) });
         }
