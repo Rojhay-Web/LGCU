@@ -3,7 +3,7 @@ import { Modal } from 'react-bootstrap';
 import axios from 'axios';
 
 //var rootPath = "";
-var rootPath = (window.location.href.indexOf("localhost") > -1 ? "http://localhost:1111" : "");
+var rootPath = (window.location.href.indexOf("localhost") > -1 ? "http://localhost:2323" : "");
 
 /* Body */
 class StudentPayment extends Component{
