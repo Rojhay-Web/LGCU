@@ -15,7 +15,6 @@
   "author": "Kris Redding",
   "license": "ISC",
   "dependencies": {
-    "authorizenet": "^1.0.7",
     "axios": "^0.21.1",
     "bootstrap": "^4.3.1",
     "country-icons": "^1.0.2",

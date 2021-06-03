@@ -302,7 +302,8 @@ function addTransactionToUser(userInfo, transactionInfo, callback){
                 const db = client.db(database.dbName).collection('mylgcu_charges'); 
 
                 transactionInfo.userId = ObjectId(userInfo._id);
-
+                transactionInfo.type = "payment";
+                
                 // Insert User Transaction
                 db.insertOne(transactionInfo, function(insertError,retObj){
                     if(insertError){

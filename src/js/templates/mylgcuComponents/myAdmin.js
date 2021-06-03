@@ -701,7 +701,7 @@ class MyAdmin extends Component{
             self.toggleSpinner(true);
 
             if(query.length <= 0){
-                self.setState({ searchResults: [] });
+                self.setState({ searchResults: [] }, () => { self.toggleSpinner(false); });
             }
             else {
                 var sessionInfo = localStorage.getItem(self.props.mySessKey);

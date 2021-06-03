@@ -33,7 +33,6 @@ var mail = {
                     response.errorMessage = err;
                 }
                 else {
-                    //console.log("Email Sent"); console.log(body);
                     response.results = 'Email Sent';
                 }
                 callback(response);

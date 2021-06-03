@@ -101,8 +101,8 @@ function createUser(req, res){
                 res.status(200).json({"errorMessage":"User status invalid for this request", "results":null});
             }
             else {
-                auth.createUser(userInfo, function(ret){
-                    res.status(200).json(ret);
+                auth.createUser(userInfo, function(userRet){
+                    res.status(200).json(userRet);
                 });
             }
         });    
@@ -126,8 +126,8 @@ function updateUser(req, res){
                 res.status(200).json({"errorMessage":"User status invalid for this request", "results":null});
             }
             else {
-                auth.updateUser(userInfo, function(ret){
-                    res.status(200).json(ret);
+                auth.updateUser(userInfo, function(userRet){
+                    res.status(200).json(userRet);
                 });
             }
         }); 
@@ -151,8 +151,8 @@ function userSearch(req, res){
                 res.status(200).json({"errorMessage":"User status invalid for this request", "results":null});
             }
             else {
-                auth.userSearch(searchInfo, function(ret){
-                    res.status(200).json(ret);
+                auth.userSearch(searchInfo, function(userRet){
+                    res.status(200).json(userRet);
                 });
             }
         });  
@@ -176,8 +176,8 @@ function getUserById(req, res){
                 res.status(200).json({"errorMessage":"User status invalid for this request", "results":null});
             }
             else {
-                auth.getUserById(userInfo, function(ret){
-                    res.status(200).json(ret);
+                auth.getUserById(userInfo, function(userRet){
+                    res.status(200).json(userRet);
                 });
             }
         });    
@@ -201,8 +201,8 @@ function generateStudentId(req, res){
                 res.status(200).json({"errorMessage":"User status invalid for this request", "results":null});
             }
             else {
-                auth.generateStudentId(userInfo, function(ret){
-                    res.status(200).json(ret);
+                auth.generateStudentId(userInfo, function(genRet){
+                    res.status(200).json(genRet);
                 });
             }
         });  
@@ -227,8 +227,8 @@ function createTLMSUser(req, res){
                 res.status(200).json({"errorMessage":"User status invalid for this request", "results":null});
             }
             else {
-                talentlms.signup(userInfo, function(ret){
-                    res.status(200).json(ret);
+                talentlms.signup(userInfo, function(signRet){
+                    res.status(200).json(signRet);
                 });
             }
         });  
@@ -265,8 +265,8 @@ function getTLMSUserById(req, res){
                 res.status(200).json({"errorMessage":"User status invalid for this request", "results":null});
             }
             else {            
-                talentlms.getUserById(userInfo, function(ret){
-                    res.status(200).json(ret);
+                talentlms.getUserById(userInfo, function(userRet){
+                    res.status(200).json(userRet);
                 });
             }
         }); 
@@ -302,15 +302,15 @@ function courseRegister(req, res){
                 res.status(200).json({"errorMessage":"User status invalid for this request", "results":null});
             }
             else {            
-                talentlms.courseRegister(userInfo, courseInfo,function(ret){
-                    if(ret.errorMessage){
+                talentlms.courseRegister(userInfo, courseInfo,function(courseRet){
+                    if(courseRet.errorMessage){
                         //Send error email
                         mail.sendEmail({ email: "admin@lenkesongcu.org", title:"Registration Error", formData:{}, additionalData:{},
-                            subject:"Unable to Register student for course [ID]: "+courseInfo.id +" [student Id]:"+userInfo.studentId+" Error: "+ ret.errorMessage
-                            }, function(ret){});
+                            subject:"Unable to Register student for course [ID]: "+courseInfo.id +" [student Id]:"+userInfo.studentId+" Error: "+ courseRet.errorMessage
+                            }, function(mailRet){});
                     }
             
-                    res.status(200).json(ret);
+                    res.status(200).json(courseRet);
                 });
             }
         }); 
@@ -335,8 +335,8 @@ function courseUnregister(req, res){
                 res.status(200).json({"errorMessage":"User status invalid for this request", "results":null});
             }
             else {            
-                talentlms.courseUnregister(userInfo, courseInfo, function(ret){
-                    res.status(200).json(ret);
+                talentlms.courseUnregister(userInfo, courseInfo, function(courseRet){
+                    res.status(200).json(courseRet);
                 });
             }
         });    
