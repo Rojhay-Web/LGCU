@@ -50,7 +50,7 @@
     "concurrently": "^4.1.0",
     "less": "^3.9.0",
     "less-loader": "^4.1.0",
-    "less-watch-compiler": "^1.13.0"
+    "less-watch-compiler": "1.13.0"
   },
   "browserslist": [
     ">0.2%",
