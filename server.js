@@ -5,7 +5,7 @@ const redirectToHTTPS = require('express-http-to-https').redirectToHTTPS;
 const app = express();
 
 
-const port = process.env.PORT || '1111';
+const port = process.env.PORT || '2323';
 
  
 // Don't redirect if the hostname is `localhost:port` or the route is `/insecure`

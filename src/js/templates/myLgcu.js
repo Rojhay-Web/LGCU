@@ -13,7 +13,7 @@ import MyAdmin from './mylgcuComponents/myAdmin';
 
 var mySessKey = "mylgcu_aditum";
 //var rootPath = "";
-var rootPath = (window.location.href.indexOf("localhost") > -1 ? "http://localhost:1111" : "");
+var rootPath = (window.location.href.indexOf("localhost") > -1 ? "http://localhost:2323" : "");
 
 /* Header */
 class myLGCUHeader extends Component{
