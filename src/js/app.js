@@ -60,16 +60,16 @@ function MobileNav(props){
         <div className={"sidenav-container" + (props.sidebarOpen ? " active": "")}>
             <div className="nav-close" onClick={() => props.setSidebarDisplay(false)}><i className="fas fa-times"></i></div>
             <div className="sidenav-section">
-                <Link className="sidenav-header-link" to="/contactus">Contact Us</Link>
-                <a href="https://www.givelify.com/givenow/1.0/?token=eyJvcmdfaWQiOiJNelUyT1RFfiIsImJhZGdlX2ltYWdlIjoiYjMucG5nIn0~" target="_blank" rel="noopener noreferrer" className="sidenav-header-link">Donate</a>
-                <Link className="sidenav-header-link" to="/apply">Apply Now</Link>
+                <Link className="sidenav-header-link" to="/contactus" onClick={() => props.setSidebarDisplay(false)}>Contact Us</Link>
+                <a href="https://www.givelify.com/givenow/1.0/?token=eyJvcmdfaWQiOiJNelUyT1RFfiIsImJhZGdlX2ltYWdlIjoiYjMucG5nIn0~" target="_blank" rel="noopener noreferrer" className="sidenav-header-link" onClick={() => props.setSidebarDisplay(false)}>Donate</a>
+                <Link className="sidenav-header-link" to="/apply" onClick={() => props.setSidebarDisplay(false)}>Apply Now</Link>
             </div>
             <div className="sidenav-section">
-                <Link className="sidenav-link" to="/about">About</Link>
-                <Link className="sidenav-link" to="/academics">Academics</Link>
-                <Link className="sidenav-link" to="/admissions">Admissions</Link>
-                <Link className="sidenav-link" to="/faculty">Faculty & Staff</Link>
-                <Link className="sidenav-link" to="/tuition">Tuition</Link>
+                <Link className="sidenav-link" to="/about" onClick={() => props.setSidebarDisplay(false)}>About</Link>
+                <Link className="sidenav-link" to="/academics" onClick={() => props.setSidebarDisplay(false)}>Academics</Link>
+                <Link className="sidenav-link" to="/admissions" onClick={() => props.setSidebarDisplay(false)}>Admissions</Link>
+                <Link className="sidenav-link" to="/faculty" onClick={() => props.setSidebarDisplay(false)}>Faculty & Staff</Link>
+                <Link className="sidenav-link" to="/tuition" onClick={() => props.setSidebarDisplay(false)}>Tuition</Link>
             </div>
         </div>
     );
