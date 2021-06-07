@@ -22,6 +22,8 @@ import aboutLgcu from '../../assets/site/about_lgcu.mov';
 import img8 from '../../assets/site/mini/img8.jpg';
 import img11 from '../../assets/site/mini/img11.jpg';
 
+import img12 from '../../assets/site/mini/beautyFlyer2.jpg';
+
 const stb = new StoryblokService();
 
 /* Header */
@@ -66,6 +68,7 @@ function Home(props){
     const [testimonials, setTestimonialList] = useState([]);
     const [counter, setCounter] = useState(false);
     const [imgprops, setIProps] = useSpring(() => ({ xys: [0, 0, 1], config: { mass: 5, tension: 350, friction: 40 } }))
+    const [imgprops2, setI2Props] = useSpring(() => ({ xys: [0, 0, 1], config: { mass: 5, tension: 350, friction: 40 } }))
 
     const facts = [
                 {value: 35, decimal:false, valueSub:"%", text:"Of the college student population is veterans, working parents and perpetual students." },
@@ -144,10 +147,12 @@ function Home(props){
             <section className="home-section">
                 <div className="section-container">
                     <div className="split-section" id="imgSplit">
-                        <animated.div className="multi-img-container" onMouseMove={({ clientX: x, clientY: y }) => setIProps({ xys: calc(x, y) })} onMouseLeave={() => setIProps({ xys: [0, 0, 1] })} style={{ transform: imgprops.xys.interpolate(trans) }}>
-                            <img alt="Home info img" className="multi-img lrg" src={img11} />
-                            <img alt="Home info img mini" className="multi-img sm" src={img8} />
-                        </animated.div>
+                        {(imgprops && imgprops.xys &&
+                            <animated.div className="multi-img-container" onMouseMove={({ clientX: x, clientY: y }) => setIProps({ xys: calc(x, y) })} onMouseLeave={() => setIProps({ xys: [0, 0, 1] })} style={{ transform: imgprops.xys.interpolate(trans) }}>
+                                <img alt="Home info img" className="multi-img lrg" src={img11} />
+                                <img alt="Home info img mini" className="multi-img sm" src={img8} />
+                            </animated.div>
+                        )}
 
                         <div className="split-content">
                             <h2 className="lrgTitle" data-text="Why LGCU">Why LGCU?</h2>
@@ -159,7 +164,26 @@ function Home(props){
                         </div>                                                    
                     </div>
                 </div>
-            </section>   
+            </section>  
+
+            <section className="home-section alternate3">
+                <div className="section-container">
+                    <div className="split-section" id="imgSplit">
+                        <div className="split-content">
+                            <h2 className="lrgTitle c0" data-text="New Program">New Program</h2>
+                            <p className="c0">LGCU is now partnering with Faces of Beauty School of Cosmetology & Workforce Training to provide a new program to our students.</p>
+                            <div className="btn-container">
+                                <a href="/cosmetology" className="lBtn t2"><span>More Information</span><i className="btn-icon fas fa-info-circle"></i></a>
+                            </div>
+                        </div>  
+                        {(imgprops2 && imgprops2.xys &&  
+                            <animated.div className="multi-img-container" onMouseMove={({ clientX: x, clientY: y }) => setI2Props({ xys: calc(x, y) })} onMouseLeave={() => setI2Props({ xys: [0, 0, 1] })} style={{ transform: imgprops2.xys.interpolate(trans) }}>
+                                <img alt="Program img" className="multi-img lrg" src={img12} />
+                            </animated.div>      
+                        )}                                          
+                    </div>
+                </div>
+            </section>
 
             <section className="home-section alternate2 patterned">
                 <div className="section-container">

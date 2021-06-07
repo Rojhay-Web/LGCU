@@ -405,10 +405,13 @@
 }
 .homePage .home-section .section-container .split-section .split-content p {
   font-size: 1.8rem;
-  color: #ffffff;
+  color: #fff;
   font-weight: 100;
   margin-bottom: 20px;
   line-height: 3.2rem;
+}
+.homePage .home-section .section-container .split-section .split-content p.c0 {
+  color: #000;
 }
 .homePage .home-section .section-container .split-section .split-content .btn-container {
   justify-content: left;
@@ -540,7 +543,18 @@
   color: #ffffff;
 }
 .homePage .home-section.alternate2 + .alternate,
-.homePage .home-section.alternate2 + .alternate2 {
+.homePage .home-section.alternate2 + .alternate2,
+.homePage .home-section.alternate2 + .alternate3 {
+  margin-top: 0px;
+}
+.homePage .home-section.alternate3 {
+  background: #f1c40f;
+  padding: 50px 0;
+  color: #000000;
+}
+.homePage .home-section.alternate3 + .alternate,
+.homePage .home-section.alternate3 + .alternate2,
+.homePage .home-section.alternate3 + .alternate3 {
   margin-top: 0px;
 }
 .homePage .home-section.patterned:before {
@@ -1041,6 +1055,40 @@
   .studyPage .course-section .course-table {
     width: 100%;
   }
+}
+.cosmetologyPage {
+  color: #fff;
+  font-size: 1.3rem;
+}
+.cosmetologyPage .cosmetology {
+  position: relative;
+  overflow: hidden;
+  font-weight: 300;
+  display: flex;
+  flex-direction: row;
+}
+.cosmetologyPage .cosmetology .img {
+  width: 40%;
+  margin-right: 30px;
+  margin-bottom: 30px;
+  float: left;
+  border: 2px solid #ffffff;
+  -moz-box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0 5px 20px rgb(0 0 0%);
+  box-shadow: 0 5px 20px rgb(0 0 0%);
+}
+.cosmetologyPage .cosmetology .img img {
+  object-fit: contain;
+  width: 100%;
+}
+.cosmetologyPage .cosmetology .split-content {
+  flex: 1;
+}
+.cosmetologyPage .cosmetology-info .position-title {
+  margin: 0;
+}
+.cosmetologyPage .cosmetology-info h3 {
+  margin: 15px 0;
 }
 .admissionsHeader {
   position: relative;
@@ -4355,6 +4403,12 @@ html {
 .lrgTitle.ctr:before {
   left: 50%;
   transform: translateX(-50%);
+}
+.lrgTitle.c0 {
+  color: #000;
+}
+.lrgTitle.c0:before {
+  color: rgba(0, 0, 0, 0.2);
 }
 .lrgTitle.c1 {
   color: #014eb3;
