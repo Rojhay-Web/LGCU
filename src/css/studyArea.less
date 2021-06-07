@@ -168,8 +168,8 @@
 .cosmetologyPage {
     color: #fff; font-size: 1.3rem;
     .cosmetology {
-         position: relative; overflow: hidden;
-         font-weight: 300; display: flex;
+        position: relative; overflow: hidden;
+        font-weight: 300; display: flex;
         flex-direction: row;
         .img { 
             width: 40%; margin-right: 30px;
@@ -179,9 +179,12 @@
             -webkit-box-shadow: 0 5px 20px rgb(0 0 0 / 50%);
             box-shadow: 0 5px 20px rgb(0 0 0 / 50%);
             img { object-fit: contain; width: 100%; }
+            @media @mobile-device { width: 100%; }
         }
 
         .split-content { flex:1; }
+
+        @media @mobile-device { flex-direction: column; }
     }
     .cosmetology-info {
         .position-title { margin: 0; }
