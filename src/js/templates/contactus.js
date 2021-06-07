@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import ReactGA from 'react-ga';
 
 /* Images */
-import back1 from '../../assets/temp/back12.jpeg';
-import emailImg from '../../assets/temp/email.jpeg';
+import back1 from '../../assets/site/mini/back12.jpg';
+import emailImg from '../../assets/site/mini/email.jpg';
 
 /* Components */
 import FormCpt from './components/formCpt';
