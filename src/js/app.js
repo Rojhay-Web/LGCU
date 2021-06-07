@@ -19,6 +19,7 @@ import { About, AboutHeader } from './templates/about';
 import { Contact, ContactHeader } from './templates/contactus';
 import { Apply, ApplyHeader } from './templates/apply';
 import { myLGCU, myLGCUHeader} from './templates/myLgcu';
+import { Cosmetology, CosmetologyHeader } from './templates/cosmetology';
 
 import TranslateVideo from './templates/components/translateVideoModal';
 
@@ -39,6 +40,7 @@ const routes = [
     {path:"/faculty", component:Faculty, headerComponent:FacultyHeader},
     {path:"/tuition", component:Tuition, headerComponent:TuitionHeader},
     {path:"/contactus", component:Contact, headerComponent:ContactHeader},
+    {path:"/cosmetology", component:Cosmetology, headerComponent:CosmetologyHeader},
     {path:"/apply", component:Apply, headerComponent:ApplyHeader},
     {path:"/mylgcu", component:myLGCU, headerComponent:myLGCUHeader}
 ];
@@ -182,11 +184,9 @@ class App extends Component{
                                 </div>
 
                                 <div className="social-container">
-                                    <a href="https://twitter.com/LenkesonInc" target="_blank" rel="noopener noreferrer" className="social-link"><i className="fab fa-twitter"></i></a>
+                                    <a href="https://www.youtube.com/channel/UCDaaMIpTKOPEBKVuiRTYDdA" target="_blank" rel="noopener noreferrer" className="social-link"><i className="fab fa-youtube"></i></a>
                                     <a href="https://www.facebook.com/lenkesonu1" target="_blank" rel="noopener noreferrer" className="social-link"><i className="fab fa-facebook"></i></a>
                                     <a href="https://www.instagram.com/lenkesongcu/" target="_blank" rel="noopener noreferrer" className="social-link"><i className="fab fa-instagram"></i></a>
-                                    <a href="https://www.linkedin.com/company/lenkeson-global-christian-university-inc/?fbclid=IwAR1jrJNShhK3YHSj96WNHRVgJTEcJ1IsvWbloPfDipc_QYheNthBqfMVGmg" target="_blank" rel="noopener noreferrer" className="social-link"><i className="fab fa-linkedin"></i></a>
-                                    {/*<a href="https://www.youtube.com/channel/UCZM_TW_iQhK1P_k_EY_RZWw?disable_polymer=true" target="_blank" rel="noopener noreferrer" className="social-link"><i className="fab fa-youtube"></i></a>*/}
                                 </div>                                                            
                             </div>
                             <div className="footer-section">
