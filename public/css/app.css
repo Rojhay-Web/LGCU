@@ -1081,8 +1081,18 @@
   object-fit: contain;
   width: 100%;
 }
+@media (max-width: 770px) {
+  .cosmetologyPage .cosmetology .img {
+    width: 100%;
+  }
+}
 .cosmetologyPage .cosmetology .split-content {
   flex: 1;
+}
+@media (max-width: 770px) {
+  .cosmetologyPage .cosmetology {
+    flex-direction: column;
+  }
 }
 .cosmetologyPage .cosmetology-info .position-title {
   margin: 0;
