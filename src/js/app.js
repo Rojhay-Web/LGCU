@@ -62,9 +62,9 @@ function MobileNav(props){
         <div className={"sidenav-container" + (props.sidebarOpen ? " active": "")}>
             <div className="nav-close" onClick={() => props.setSidebarDisplay(false)}><i className="fas fa-times"></i></div>
             <div className="sidenav-section">
-                <Link className="sidenav-header-link" to="/contactus" onClick={() => props.setSidebarDisplay(false)}>Contact Us</Link>
-                <a href="https://www.givelify.com/givenow/1.0/?token=eyJvcmdfaWQiOiJNelUyT1RFfiIsImJhZGdlX2ltYWdlIjoiYjMucG5nIn0~" target="_blank" rel="noopener noreferrer" className="sidenav-header-link" onClick={() => props.setSidebarDisplay(false)}>Donate</a>
-                <Link className="sidenav-header-link" to="/apply" onClick={() => props.setSidebarDisplay(false)}>Apply Now</Link>
+                <div className="search-bar">
+                    <div className="gcse-search"/>
+                </div>
             </div>
             <div className="sidenav-section">
                 <Link className="sidenav-link" to="/about" onClick={() => props.setSidebarDisplay(false)}>About</Link>
@@ -72,6 +72,11 @@ function MobileNav(props){
                 <Link className="sidenav-link" to="/admissions" onClick={() => props.setSidebarDisplay(false)}>Admissions</Link>
                 <Link className="sidenav-link" to="/faculty" onClick={() => props.setSidebarDisplay(false)}>Faculty & Staff</Link>
                 <Link className="sidenav-link" to="/tuition" onClick={() => props.setSidebarDisplay(false)}>Tuition</Link>
+            </div>
+            <div className="sidenav-section">
+                <Link className="sidenav-header-link" to="/contactus" onClick={() => props.setSidebarDisplay(false)}>Contact Us</Link>
+                <a href="https://www.givelify.com/givenow/1.0/?token=eyJvcmdfaWQiOiJNelUyT1RFfiIsImJhZGdlX2ltYWdlIjoiYjMucG5nIn0~" target="_blank" rel="noopener noreferrer" className="sidenav-header-link" onClick={() => props.setSidebarDisplay(false)}>Donate</a>
+                <Link className="sidenav-header-link" to="/apply" onClick={() => props.setSidebarDisplay(false)}>Apply Now</Link>
             </div>
         </div>
     );
@@ -115,7 +120,7 @@ class App extends Component{
                                 <Link className="nav-item mini-nav-link" to="/mylgcu">my<span className="c2">LGCU</span></Link>
                                 <span className="nav-item mini-nav-link no-link">Donations</span>
                                 <a href="https://www.givelify.com/givenow/1.0/?token=eyJvcmdfaWQiOiJNelUyT1RFfiIsImJhZGdlX2ltYWdlIjoiYjMucG5nIn0~" target="_blank" rel="noopener noreferrer" className="nav-item mini-nav-link donation-link"><span className="givelify-logo">Givelify</span></a>
-                                <a href="https://www.paypal.com/mep/dashboard" target="_blank" rel="noopener noreferrer" className="nav-item mini-nav-link donation-link"><i className="fab fa-paypal"></i></a>
+                                <a href="https://www.paypal.com/mep/dashboard" target="_blank" rel="noopener noreferrer" className="nav-item mini-nav-link donation-link"><i className="fab fa-paypal"/>aypal</a>
                                 <Link className="nav-item mini-nav-link" to="/apply">Apply Now</Link>  
                                 
                                 <div className="nav-item search-bar">
