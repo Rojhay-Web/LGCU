@@ -67,6 +67,16 @@ class Academics extends Component{
                         <FindDegree academicData={academicData} />
                     </div>
                 </section>
+                
+                <section className="academic-section alternate3">
+                    <div className="section-container">
+                        <h2 className="lrgTitle ctr cw" data-text="Empowerment Symposium">Leadership Empowerment Symposium</h2>
+
+                        <div className="btn-container">
+                            <a href="https://docs.google.com/forms/d/1BKfk167s7aiufkQziqMKD3ILpscMmhfGDJxtSaqK6uM/edit" target="_blank" className="lBtn clear t4"><span>Sign-up</span><i className="btn-icon far fa-edit"></i></a>
+                        </div>
+                    </div>                    
+                </section>
 
                 <section className="academic-section alternate patterned">
                     <div className="section-container">
