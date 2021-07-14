@@ -23,7 +23,7 @@
   font-family: 'Reem Kufi';
   font-style: normal;
   font-weight: 400;
-  src: url(https://fonts.gstatic.com/s/reemkufi/v10/2sDcZGJLip7W2J7v7wQzaGW8.ttf) format('truetype');
+  src: url(https://fonts.gstatic.com/s/reemkufi/v11/2sDPZGJLip7W2J7v7wQZZE1I0yCmYzzQtuZnIGaV2g.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Yantramanav';
@@ -846,6 +846,10 @@
 }
 .academicsPage .academic-section.alternate {
   background: rgba(255, 255, 255, 0.7);
+  color: #000000;
+}
+.academicsPage .academic-section.alternate3 {
+  background: #82bac1;
   color: #000000;
 }
 .academicsPage .academic-section.patterned:before {
@@ -4422,6 +4426,12 @@ html {
   left: 50%;
   transform: translateX(-50%);
 }
+.lrgTitle.cw {
+  color: #fff;
+}
+.lrgTitle.cw:before {
+  color: rgba(255, 255, 255, 0.2);
+}
 .lrgTitle.c0 {
   color: #000;
 }
@@ -4500,6 +4510,9 @@ html {
 .lBtn:hover .btn-icon {
   padding-left: 14px;
 }
+.lBtn.c0 {
+  background: #000000;
+}
 .lBtn.c1 {
   background: #014eb3;
 }
@@ -4538,6 +4551,9 @@ html {
 }
 .lBtn.clear.t3:hover {
   background: rgba(15, 118, 151, 0.7) !important;
+}
+.lBtn.clear.t4:hover {
+  background: rgba(130, 186, 193, 0.7) !important;
 }
 @media (max-width: 770px) {
   .lBtn.clear {

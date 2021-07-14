@@ -536,6 +536,8 @@ body, html {
         text-align: center;
         &:before { left: 50%; transform: translateX(-50%); }
     }
+
+    &.cw { color: #fff; &:before { color: rgba(255,255,255,0.2);}}
     &.c0 { color: #000; &:before { color: rgba(0,0,0,0.2);}}
     &.c1 { color:@color1; &:before { .color1(color, 0.2);}}
     &.c2 { color:@color2; &:before { .color2(color, 0.2);}}
@@ -579,10 +581,12 @@ body, html {
         .btn-icon { padding-left: 14px; }
     }
 
+    &.c0 { background: rgba(0,0,0,1);}
     &.c1 { background: @color1;}
     &.c2 { background: @color2;}
     &.c3 { background: @color3;}
     &.white { background: rgba(255,255,255,0); border: 1px solid rgba(255,255,255,1);}
+
     &.link {
         color: rgba(0,0,0,1);
         background: none;
@@ -602,6 +606,7 @@ body, html {
         &.t1 { &:hover { .color1(background, 0.7); }}
         &.t2 { &:hover { .color2(background, 0.7); }}
         &.t3 { &:hover { .color3(background, 0.7); }}
+        &.t4 { &:hover { .color4(background, 0.7); }}
 
         @media @mobile-device { color: rgba(255,255,255,1); }
     }
