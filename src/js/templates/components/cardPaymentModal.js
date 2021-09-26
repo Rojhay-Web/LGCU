@@ -93,7 +93,7 @@ class CardPayment extends Component{
     getCountryList() {
         var self = this;
         try {
-        axios.get('https://restcountries.eu/rest/v2/all')
+        axios.get('https://restcountries.com/v2/all')
             .then(function (res) {
                 var coList = res.data.map(x => { return {name:x.name, alpha3Code:x.alpha3Code};});
                 self.setState({countryList: coList });
