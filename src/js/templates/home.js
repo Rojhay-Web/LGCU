@@ -22,8 +22,6 @@ import aboutLgcu from '../../assets/site/about_lgcu.mov';
 import img8 from '../../assets/site/mini/img8.jpg';
 import img11 from '../../assets/site/mini/img11.jpg';
 
-import img12 from '../../assets/site/mini/beautyFlyer2.jpg';
-
 const stb = new StoryblokService();
 
 /* Header */
@@ -165,25 +163,6 @@ function Home(props){
                     </div>
                 </div>
             </section>  
-
-            <section className="home-section alternate3">
-                <div className="section-container">
-                    <div className="split-section" id="imgSplit">
-                        <div className="split-content">
-                            <h2 className="lrgTitle c0" data-text="New Program">New Program</h2>
-                            <p className="c0">LGCU is now partnering with Faces of Beauty School of Cosmetology & Workforce Training to provide a new program to our students.</p>
-                            <div className="btn-container">
-                                <a href="/cosmetology" className="lBtn t2"><span>More Information</span><i className="btn-icon fas fa-info-circle"></i></a>
-                            </div>
-                        </div>  
-                        {(imgprops2 && imgprops2.xys &&  
-                            <animated.div className="multi-img-container" onMouseMove={({ clientX: x, clientY: y }) => setI2Props({ xys: calc(x, y) })} onMouseLeave={() => setI2Props({ xys: [0, 0, 1] })} style={{ transform: imgprops2.xys.interpolate(trans) }}>
-                                <img alt="Program img" className="multi-img lrg" src={img12} />
-                            </animated.div>      
-                        )}                                          
-                    </div>
-                </div>
-            </section>
 
             <section className="home-section alternate2 patterned">
                 <div className="section-container">
