@@ -23,7 +23,7 @@
   font-family: 'Reem Kufi';
   font-style: normal;
   font-weight: 400;
-  src: url(https://fonts.gstatic.com/s/reemkufi/v11/2sDPZGJLip7W2J7v7wQZZE1I0yCmYzzQtuZnIGaV2g.ttf) format('truetype');
+  src: url(https://fonts.gstatic.com/s/reemkufi/v13/2sDPZGJLip7W2J7v7wQZZE1I0yCmYzzQtuZnIGaV2g.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Yantramanav';
@@ -1601,17 +1601,77 @@
   -webkit-box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
 }
+.contactus .contactus-section .split-info .split-contacts {
+  display: flex;
+  flex-direction: column;
+  padding: 5px 3% 30px;
+  flex: 1;
+  border-radius: 5px;
+  background-color: rgba(253, 168, 0, 0.9) !important;
+  margin-right: 20px;
+  -moz-box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+}
+.contactus .contactus-section .split-info .split-contacts p {
+  color: #000;
+  font-size: 1.7rem;
+  margin-bottom: 30px;
+  font-weight: 100;
+}
+.contactus .contactus-section .split-info .split-contacts .card-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.contactus .contactus-section .split-info .split-contacts .card-container {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px;
+  width: 45%;
+}
+.contactus .contactus-section .split-info .split-contacts .card-container i {
+  margin-right: 10px;
+  padding-top: 6px;
+}
+.contactus .contactus-section .split-info .split-contacts .card-container .info {
+  flex: 1;
+}
+.contactus .contactus-section .split-info .split-contacts .card-container .contact-title {
+  font-weight: bold;
+  font-size: 1.3rem;
+}
+.contactus .contactus-section .split-info .split-contacts .card-container .contact-info {
+  font-size: 1.1rem;
+}
+.contactus .contactus-section .split-info .split-contacts .card-container .contact-info.sub {
+  font-style: italic;
+  font-size: 1rem;
+  color: rgba(50, 50, 50, 0.8);
+}
+@media (max-width: 770px) {
+  .contactus .contactus-section .split-info .split-contacts .card-container {
+    width: 100%;
+  }
+}
+@media (max-width: 770px) {
+  .contactus .contactus-section .split-info .split-contacts {
+    margin: 0 0 20px;
+    padding: 5px 20px 30px;
+  }
+}
 .contactus .contactus-section .split-info .split-txt {
   width: 50%;
 }
-.contactus .contactus-section .split-info .lgcu-form {
-  flex: 1;
-}
-.contactus .contactus-section .split-info p {
+.contactus .contactus-section .split-info .split-txt p {
   padding: 7px;
   font-size: 1.7rem;
   color: #ffffff;
   font-weight: 100;
+}
+.contactus .contactus-section .split-info .lgcu-form {
+  flex: 1;
 }
 @media (max-width: 770px) {
   .contactus .contactus-section .split-info {
@@ -3967,6 +4027,16 @@ html {
 }
 .footer .footer-section.address .address-section .footer-info + .footer-info {
   margin-left: 14px;
+}
+.footer .footer-section.address .address-section .add-link {
+  color: #ffffff;
+  text-decoration: underline;
+}
+.footer .footer-section.address .address-section .add-link i {
+  margin-right: 5px;
+}
+.footer .footer-section.address .address-section .add-link:hover {
+  color: #ffffff;
 }
 @media (max-width: 770px) {
   .footer .footer-section.address .address-section {

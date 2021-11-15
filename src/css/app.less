@@ -165,9 +165,13 @@ body, html {
             justify-content: space-between;
             margin-top: 20px; 
             .address-section {
-                display: flex;
-                flex-direction: row;
+                display: flex; flex-direction: row;
                 .footer-info { &+.footer-info { margin-left: 14px; }}   
+                .add-link {
+                    color: rgba(255,255,255,1); text-decoration: underline;
+                    i { margin-right: 5px; }
+                    &:hover { color: rgba(255,255,255,1); }
+                }
                 @media @mobile-device { flex-direction: column;}                             
             }
             @media @mobile-device { flex-direction: column;}
