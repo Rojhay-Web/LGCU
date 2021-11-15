@@ -30,8 +30,7 @@
         margin-top: 50px;
         padding-bottom: 40px;
         .split-info {
-            margin-top: 30px;
-            display: flex;
+            margin-top: 30px; display: flex;
             .split-img {
                 width: 50%;
                 padding-right: 20px;
@@ -44,14 +43,49 @@
                     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
                 }
             }
-            .split-txt { width: 50%; }
-            .lgcu-form { flex: 1; }
-            p{
-                padding: 7px;
-                font-size: 1.7rem;
-                color: rgba(255,255,255,1);
-                font-weight: 100;
+            .split-contacts {
+                display: flex; flex-direction: column;
+                padding: 5px 3% 30px; flex:1; border-radius: 5px;
+                .color2(background-color, 0.9); margin-right: 20px;
+
+                -moz-box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+                -webkit-box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+                box-shadow: 0 0 30px rgba(0, 0, 0, 0.5); 
+                
+                p { 
+                    color: #000; font-size: 1.7rem; 
+                    margin-bottom: 30px; font-weight: 100; 
+                }
+
+                .card-box {
+                    display: flex; flex-direction: row;
+                    justify-content: space-between; flex-wrap: wrap;
+                }
+
+                .card-container {
+                    display: flex; flex-direction: row; 
+                    margin-bottom: 20px; width: 45%;
+                    i { margin-right: 10px; padding-top: 6px; }
+                    .info { flex: 1; }
+                    .contact-title { font-weight: bold; font-size: 1.3rem; }
+                    .contact-info {
+                        font-size: 1.1rem;
+                        &.sub { font-style: italic; font-size: 1rem; color: rgba(50,50,50,0.8);}
+                    }
+
+                    @media @mobile-device { width: 100%; }
+                }
+
+                @media @mobile-device { margin: 0 0 20px; padding: 5px 20px 30px; }
             }
+            .split-txt { 
+                width: 50%;
+                p{
+                    padding: 7px; font-size: 1.7rem;
+                    color: rgba(255,255,255,1); font-weight: 100;
+                }
+            }
+            .lgcu-form { flex: 1; }
 
             @media @mobile-device {
                 flex-direction: column;

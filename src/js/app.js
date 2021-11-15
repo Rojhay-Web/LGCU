@@ -146,6 +146,7 @@ class App extends Component{
                                         <Link className="nav-item nav-link" to="/admissions">Admissions</Link>
                                         <Link className="nav-item nav-link" to="/faculty">Faculty & Staff</Link>
                                         <Link className="nav-item nav-link" to="/tuition">Tuition</Link>
+                                        <Link className="nav-item nav-link" to="/contactus">Contact Us</Link>
                                     </div>
                                 </div>
                             </nav>
@@ -167,6 +168,7 @@ class App extends Component{
                                         <Link className="nav-item nav-link" to="/admissions">Admissions</Link>
                                         <Link className="nav-item nav-link" to="/faculty">Faculty & Staff</Link>
                                         <Link className="nav-item nav-link" to="/tuition">Tuition</Link>
+                                        <Link className="nav-item nav-link" to="/contactus">Contact Us</Link>
                                     </div>
                                 </nav>
                             </div>
@@ -218,9 +220,20 @@ class App extends Component{
                                     )}                               
                                 </div>
                                 <div className="address-section">
-                                    {this.state.contact.map((item,i) =>
-                                        <div className="footer-info" key={i}>{item.text}</div>
-                                    )}
+                                    <div className="footer-info title">Main Line:</div>
+                                    <div className="footer-info">{this.state.mainLine}</div>                                    
+                                </div>
+
+                                <div className="address-section">
+                                    <div className="footer-info title">Email:</div>
+                                    <div className="footer-info">{this.state.email}</div>
+                                </div>
+
+                                <div className="address-section">
+                                    <Link className="add-link" to="/contactus">
+                                        <i className="far fa-address-card"/>
+                                        <span>Additional Contacts</span>
+                                    </Link>
                                 </div>
                             </div>
                 
@@ -322,7 +335,10 @@ class App extends Component{
                     var tmpContact = (layoutbody.contact ? layoutbody.contact.filter(function(item) { return item.component.toLowerCase() === "footerline"; }) : []);
                     var tmpHoursofoperation = (layoutbody.hoursofoperation ? layoutbody.hoursofoperation.filter(function(item) { return item.component.toLowerCase() === "footerline"; }) : []);
 
-                    self.setState({ address: tmpAddress, contact: tmpContact, hoursofoperation: tmpHoursofoperation });                
+                    self.setState({ 
+                        address: tmpAddress, contact: tmpContact, hoursofoperation: tmpHoursofoperation, 
+                        mainLine: layoutbody.mainline, email: layoutbody.email
+                    });                
                 }
             });
         }
