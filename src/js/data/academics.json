@@ -350,14 +350,15 @@
             ]
         }
     },
-    "healthcareadministration":{
-        "title":"Healthcare Administration",
+    "appliedhealthstudies":{
+        "title":"Applied Health Studies",
         "colorTheme":"t6",
-        "description":"To obtain information or any general questions regarding our School of Healthcare Administration please contact our admissions team at admissions@lenkesongcu.org.",
-        "fullDescription":"To obtain information or any general questions regarding our School of Healthcare Administration please contact our admissions team at admissions@lenkesongcu.org.",
+        "description":"To obtain information or any general questions regarding our School of Applied Health Studies please contact our admissions team at admissions@lenkesongcu.org.",
+        "fullDescription":"To obtain information or any general questions regarding our School of Applied Health Studies please contact our admissions team at admissions@lenkesongcu.org.",
         "icon":"",
         "img":"img15.jpg",
         "comingSoon":true,
+        "documents":["LGCU_Healthcare_Administration_Program_Revised.docx", "LGCU_School_of_Applied_Health_Studies_Mission_Vision_Statements.docx","LGCU_School_of_Applied_Health_Studies_Multiple_Programs.docx"],
         "degrees":{}
     },
     "socialwork":{

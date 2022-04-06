@@ -6,12 +6,26 @@ class SchoolSub extends Component{
     render(){        
         return(
             <div className="inner-page-body studyPage">
-                
                 <section className="studyArea-section">
                     <h2 className="lrgTitle ctr" data-text="About Our School">About Our School</h2>
                     {(Object.keys(this.props.data.degrees).length > 0) &&
                         <div className="section-container">
-                         <p>{this.props.data.fullDescription}</p>
+                            <p>{this.props.data.fullDescription}</p>
+                        </div>
+                    }
+                    {(Object.keys(this.props.data.degrees).length === 0) &&             
+                        <div className="section-container noDegreeData">
+                            <span>To obtain information or any general questions regarding our School of {this.props.data.title} please contact our admissions team at </span>
+                            <a href="mailto:admissions@lenkesongcu.org">admissions@lenkesongcu.org</a>
+                        </div>
+                    }
+                    {(this.props.data.documents && this.props.data.documents.length > 0) &&
+                        <div className='file-list'>
+                            <ul>
+                                {this.props.data.documents.map((item,l) =>
+                                    <li key={l}><a href={"/files/"+item}>{item}</a></li>
+                                )}
+                            </ul>
                         </div>
                     }
                 </section>
@@ -48,14 +62,6 @@ class SchoolSub extends Component{
                             ))}
                         </div>
                     </section> }
-                    {(Object.keys(this.props.data.degrees).length === 0) && 
-                        <section className="studyArea-section">
-                            <div className="section-container noDegreeData">
-                                <span>To obtain information or any general questions regarding our School of {this.props.data.title} please contact our admissions team at </span>
-                                <a href="mailto:admissions@lenkesongcu.org">admissions@lenkesongcu.org</a>
-                            </div>
-                        </section>
-                    }
             </div>
         );
     }
