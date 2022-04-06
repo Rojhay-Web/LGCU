@@ -14,10 +14,7 @@ class StudyAreaHeader extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            displayValue: 0,
-            data:{},
-            majorData:{},
-            baseUrl:""
+            displayValue: 0, data:{}, majorData:{}, baseUrl:""
         }
 
         this.loadData = this.loadData.bind(this);
@@ -159,11 +156,9 @@ class StudyArea extends Component{
                 let params = new URLSearchParams(this.props.location.search);
                 var majorId = params.get("majorId");
                 var tmpArea = academicData[this.props.match.params.studyArea];
-                var tmpMajor = [];
-                var displayNum = 1;
+                var tmpMajor = [], displayNum = 1;
 
                 if(majorId != null){ 
-                    /*displayNum = -1;*/
                     for(var i =0; i < tmpData.degreeList.length; i++){
                         tmpMajor = tmpArea.degrees[tmpData.degreeList[i]].filter(function(item){  return item.id === majorId; });
                         if(tmpMajor.length > 0) { displayNum = 2; tmpMajor = tmpMajor[0]; tmpMajor.degreeLvl = tmpData.degreeList[i];  break; }

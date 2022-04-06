@@ -17,43 +17,43 @@
   font-family: 'Alike';
   font-style: normal;
   font-weight: 400;
-  src: url(https://fonts.gstatic.com/s/alike/v13/HI_EiYEYI6BIoHjGQ5E.ttf) format('truetype');
+  src: url(https://fonts.gstatic.com/s/alike/v18/HI_EiYEYI6BIoHjGQ5E.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Reem Kufi';
   font-style: normal;
   font-weight: 400;
-  src: url(https://fonts.gstatic.com/s/reemkufi/v11/2sDPZGJLip7W2J7v7wQZZE1I0yCmYzzQtuZnIGaV2g.ttf) format('truetype');
+  src: url(https://fonts.gstatic.com/s/reemkufi/v16/2sDPZGJLip7W2J7v7wQZZE1I0yCmYzzQtuZnIGaV2g.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Yantramanav';
   font-style: normal;
   font-weight: 100;
-  src: url(https://fonts.gstatic.com/s/yantramanav/v6/flU-Rqu5zY00QEpyWJYWN5-QbeR5CA.ttf) format('truetype');
+  src: url(https://fonts.gstatic.com/s/yantramanav/v10/flU-Rqu5zY00QEpyWJYWN5-QbeR5CA.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Yantramanav';
   font-style: normal;
   font-weight: 300;
-  src: url(https://fonts.gstatic.com/s/yantramanav/v6/flUhRqu5zY00QEpyWJYWN59Yf_NeKBY.ttf) format('truetype');
+  src: url(https://fonts.gstatic.com/s/yantramanav/v10/flUhRqu5zY00QEpyWJYWN59Yf_NeKBY.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Yantramanav';
   font-style: normal;
   font-weight: 400;
-  src: url(https://fonts.gstatic.com/s/yantramanav/v6/flU8Rqu5zY00QEpyWJYWN5fzXeM.ttf) format('truetype');
+  src: url(https://fonts.gstatic.com/s/yantramanav/v10/flU8Rqu5zY00QEpyWJYWN5fzXeM.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Yantramanav';
   font-style: normal;
   font-weight: 700;
-  src: url(https://fonts.gstatic.com/s/yantramanav/v6/flUhRqu5zY00QEpyWJYWN59IePNeKBY.ttf) format('truetype');
+  src: url(https://fonts.gstatic.com/s/yantramanav/v10/flUhRqu5zY00QEpyWJYWN59IePNeKBY.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Yantramanav';
   font-style: normal;
   font-weight: 900;
-  src: url(https://fonts.gstatic.com/s/yantramanav/v6/flUhRqu5zY00QEpyWJYWN59wevNeKBY.ttf) format('truetype');
+  src: url(https://fonts.gstatic.com/s/yantramanav/v10/flUhRqu5zY00QEpyWJYWN59wevNeKBY.ttf) format('truetype');
 }
 /* Styles */
 .homeHeader .header-card-container {
@@ -961,6 +961,20 @@
 .studyPage .studyArea-section p a {
   color: #ffffff;
   text-decoration: underline;
+}
+.studyPage .studyArea-section .file-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.studyPage .studyArea-section .file-list ul {
+  display: inline-block;
+}
+.studyPage .studyArea-section .file-list ul a {
+  color: #fff;
+}
+.studyPage .studyArea-section .file-list a {
+  color: #fff;
 }
 .studyPage .studyArea-section .degreeSection .degreeTitle {
   text-transform: capitalize;
