@@ -103,6 +103,7 @@ class App extends Component{
         this.modalHide = this.modalHide.bind(this);
         this.setMLAccess = this.setMLAccess.bind(this);
         this.getCopyrightDate = this.getCopyrightDate.bind(this);
+        this.lgcuCheck = this.lgcuCheck.bind(this);
     }
     
     setMLAccess(status){
@@ -362,13 +363,26 @@ class App extends Component{
         }
     }
 
+    lgcuCheck(){
+        var self = this;
+        try {
+            axios.get(rootPath + "/api/lgcuCheck", {'Content-Type': 'application/json'})
+            .then(function(response) {
+                if(response.data.errorMessage || !response.data.results){ console.log("[Error] Checking LGCU")}
+            });   
+        }
+        catch(ex){
+            console.log(`Error With LGCU Check: ${ex}`);
+        }
+    }
+
     componentDidMount(){
         var self = this;
         window.addEventListener('scroll', this.listenToScroll);
         stb.initEditor(this);
 
         this.getLayout();
-        this.getCopyrightDate();
+        this.getCopyrightDate(); this.lgcuCheck();
         self.unlisten = history.listen(location => { 
             if(self.sidebarOpen) { self.setSidebarDisplay(false); }
         });                     

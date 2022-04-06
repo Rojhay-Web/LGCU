@@ -12,6 +12,37 @@ var database = {
 }
 
 var auth = {
+    lgcuCheck(callback){
+        var response = {"errorMessage":null, "results":true};
+        try {
+            mongoClient.connect(database.connectionString, database.mongoOptions, function(err, client){
+                if(err) {
+                    response.errorMessage = err;
+                    console.log(`[Error] LGCU Check (E01): ${err}`);
+                    client.close(); callback(response);
+                }
+                else {
+                    const db = client.db(database.dbName).collection('mylgcu_users');                    
+                    db.find({})
+                        .project({studentId:1})
+                        .toArray(function(err, res){ 
+                            if(err) {
+                                response.results = false; response.errorMessage = err;
+                                console.log(`[Error] LGCU Check (E03): ${err}`);
+                            }
+                            else {
+                                response.results = (res.length > 0);
+                            }
+                            client.close(); callback(response);
+                        });            
+                }
+            });
+        }
+        catch(ex){
+            response.errorMessage = `[Error] LGCU Check (E09): ${ex}`;
+            console.log(response.errorMessage); callback(response);
+        }
+    },
     createUser:function(userInfo,callback){
         var response = {"errorMessage":null, "results":null};
 
@@ -325,7 +356,6 @@ function validateExistingUser(userInfo, callback){
                 const db = client.db(database.dbName).collection('mylgcu_users');             
 
                 db.find({ $and: [{'email' : userInfo.email}, { $not: {'_id': ObjectId(userInfo._id)}}] }).toArray(function(err, res){     
-                    
                     if(res && res.length > 0){
                         // User with email address already exists
                         response.errorMessage ="[Error] Validating Existing User (E11): User with email address already exists";

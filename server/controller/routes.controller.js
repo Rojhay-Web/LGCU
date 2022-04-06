@@ -17,6 +17,17 @@ function getCopyrightDate(req, res){
     }
 }
 
+function lgcuCheck(req, res){
+    try {
+        auth.lgcuCheck(function(checkRet){
+            res.status(200).json(checkRet);
+        });
+    }
+    catch(ex){
+        res.status(200).json({"errorMessage":"Error Processing Request: " + ex, "results":null });
+    }
+}
+
 /* emails */
 function sendEmail(req, res){ 
     try {
@@ -349,6 +360,7 @@ function courseUnregister(req, res){
 /*** Routes ***/
 /* Site Routes */
 router.get('/getCopyrightDate', getCopyrightDate);
+router.get('/lgcuCheck', lgcuCheck);
 
 /* TalentLMS */
 router.post('/createTLMSUser', createTLMSUser);
