@@ -21,9 +21,10 @@ class SchoolSub extends Component{
                     }
                     {(this.props.data.documents && this.props.data.documents.length > 0) &&
                         <div className='file-list'>
+                            <h2>Supporting Documents</h2>
                             <ul>
                                 {this.props.data.documents.map((item,l) =>
-                                    <li key={l}><a href={"/files/"+item}>{item}</a></li>
+                                    <li key={l}><a href={"/files/"+item} target="_blank">{item}</a></li>
                                 )}
                             </ul>
                         </div>
