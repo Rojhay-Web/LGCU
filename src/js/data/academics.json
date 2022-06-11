@@ -105,14 +105,17 @@
         "fullDescription":"The School of Theology and Biblical Studies is designed to prepare men and women in the disciplines of biblical and theological studies by equipping them with the necessary tools to become transformative servant-leaders in local church ministries, the marketplace, global and strategic missions. The School of Theology and Biblical Studies awards the Associate of Arts, Bachelor of Arts in Biblical Studies, the Master of Arts in Religious Education, and the Master of Arts in Theological Studies. The School of Theology and Biblical Studies welcomes aspiring, emerging and current Christian leaders from all denominations across the globe including all ethnic identities to enroll in one of the programs offered by the school.",
         "icon":"",
         "img":"img12.jpg",
+        "documents":["Certificate_and_Associate_Ministry_Programs_At_LGCU.pdf"],
         "degrees":{
             "associates":[
                 {"id":"AS-BBS", "title":"Biblical Studies","gradtotal":60, "courses":[
                     {"subtitle":"General Education Courses (39 Credit Hours Required)(45)","courses":["ENG_101","MTH_160","MTH_161","BIOL_107","SOC_101","HIST_117","ENG_102","PSY_101","ENG_110","ENG_201","GOV_110","COM_118","PED_112","CIS_107","SOC_223","REL_227"]},
                     {"subtitle": "Required Core Courses (30 Credit Hours) credits)","courses":["BSC_203","BSC_205","BSC_207","HEB_307","BSC_209","BSC_211","GRE_307","BSC_213","BSC_215","BSC_217","BSC_241","BSC_301","BSC_417"]}
-                ]}
+                ]},
+                {"id":"AS-CBA", "title":"Church Business Administration", "gradtotal":60, "courses":[]},
+                {"id":"AS-CM", "title":"Church Ministries", "gradtotal":60, "courses":[]},
+                {"id":"AS-GSM", "title":"Global and Strategic Missions", "gradtotal":60, "courses":[]}
             ],
-
             "bachelors":[
                 {"id":"BA-THBBS", "title":"Theological and Biblical Studies", "gradtotal":120, "courses":[
                     {"subtitle":"General Education Courses (45)","courses":["ENG_101","MTH_160","MTH_161","BIOL_107","SOC_101","HIST_117","ENG_102","PSY_101","ENG_110","ENG_201","GOV_110","COM_118","PED_112","CIS_107","SOC_223","REL_227"]},
@@ -211,6 +214,10 @@
         "icon":"",
         "img":"img7.jpg",
         "degrees":{
+            "associates":[
+                {"id":"AS-RE", "title":"Religious Education", "gradtotal":60, "courses":[]},
+                {"id":"AS-CE", "title":"Christian Education", "gradtotal":60, "courses":[]}
+            ],
             "masters":[
                 {"id":"MA-CURI", "title":"Curriculum & Instruction", "degreeTitle":"(M.Ed.)","gradtotal":36, "courses":[
                     {"subtitle":"Education Foundation Courses (15 hours)","courses":["EDU_500","EDU_501","EDU_503","EDU_510","EDU_520"]},
