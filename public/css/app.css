@@ -17,43 +17,43 @@
   font-family: 'Alike';
   font-style: normal;
   font-weight: 400;
-  src: url(https://fonts.gstatic.com/s/alike/v18/HI_EiYEYI6BIoHjGQ5E.ttf) format('truetype');
+  src: url(https://fonts.gstatic.com/s/alike/v20/HI_EiYEYI6BIoHjGQ5E.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Reem Kufi';
   font-style: normal;
   font-weight: 400;
-  src: url(https://fonts.gstatic.com/s/reemkufi/v16/2sDPZGJLip7W2J7v7wQZZE1I0yCmYzzQtuZnIGaV2g.ttf) format('truetype');
+  src: url(https://fonts.gstatic.com/s/reemkufi/v17/2sDPZGJLip7W2J7v7wQZZE1I0yCmYzzQtuZnIGaV2g.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Yantramanav';
   font-style: normal;
   font-weight: 100;
-  src: url(https://fonts.gstatic.com/s/yantramanav/v10/flU-Rqu5zY00QEpyWJYWN5-QbeR5CA.ttf) format('truetype');
+  src: url(https://fonts.gstatic.com/s/yantramanav/v11/flU-Rqu5zY00QEpyWJYWN5-QbeR5CA.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Yantramanav';
   font-style: normal;
   font-weight: 300;
-  src: url(https://fonts.gstatic.com/s/yantramanav/v10/flUhRqu5zY00QEpyWJYWN59Yf_NeKBY.ttf) format('truetype');
+  src: url(https://fonts.gstatic.com/s/yantramanav/v11/flUhRqu5zY00QEpyWJYWN59Yf_NeKBY.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Yantramanav';
   font-style: normal;
   font-weight: 400;
-  src: url(https://fonts.gstatic.com/s/yantramanav/v10/flU8Rqu5zY00QEpyWJYWN5fzXeM.ttf) format('truetype');
+  src: url(https://fonts.gstatic.com/s/yantramanav/v11/flU8Rqu5zY00QEpyWJYWN5fzXeM.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Yantramanav';
   font-style: normal;
   font-weight: 700;
-  src: url(https://fonts.gstatic.com/s/yantramanav/v10/flUhRqu5zY00QEpyWJYWN59IePNeKBY.ttf) format('truetype');
+  src: url(https://fonts.gstatic.com/s/yantramanav/v11/flUhRqu5zY00QEpyWJYWN59IePNeKBY.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Yantramanav';
   font-style: normal;
   font-weight: 900;
-  src: url(https://fonts.gstatic.com/s/yantramanav/v10/flUhRqu5zY00QEpyWJYWN59wevNeKBY.ttf) format('truetype');
+  src: url(https://fonts.gstatic.com/s/yantramanav/v11/flUhRqu5zY00QEpyWJYWN59wevNeKBY.ttf) format('truetype');
 }
 /* Styles */
 .homeHeader .header-card-container {
