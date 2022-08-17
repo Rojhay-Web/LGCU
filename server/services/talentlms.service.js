@@ -52,7 +52,8 @@ var talentlms = {
                                 res.on('end', function() {
                                     ret = JSON.parse(ret);
                                     if(ret.error){
-                                        response.errorMessage = "[Error] with login information";
+                                        response.errorMessage = `[Error] with login information`;
+                                        response.error = ret.error; console.log(ret.error);
                                     }
                                     else {
                                         response.results = ret;
