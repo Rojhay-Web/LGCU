@@ -36,33 +36,39 @@ var talentlms = {
                         else {
                             var currentUser = dbres[0];
 
-                            var form = new FormData();
-                            form.append('login', currentUser.talentlmsId.login);
-                            form.append('password', loginInfo.password);
+                            const basicAuth = Buffer.from(`${talentlmsKey}:`).toString('base64');
+                            var data = new FormData();
+                            data.append('login', 'kredding');
+                            data.append('password', 'LGCU_adm!n');
+                            
+                            var config = {
+                                method: 'post',
+                                url: 'https://lenkesongcu.talentlms.com/api/v1/userlogin',
+                                headers: { 
+                                    'Authorization': `Basic ${basicAuth}`,
+                                    ...data.getHeaders()
+                                },
+                                data : data
+                            };
 
-                            form.submit({
-                                host: 'lenkesongcu.talentlms.com',
-                                path: '/api/v1/userlogin',
-                                auth: talentlmsKey+":"
-                            }, function(err, res) {
-                                var ret = "";
-                                res.on('data', function(chunk) {
-                                    ret += chunk;
-                                });
-                                res.on('end', function() {
-                                    ret = JSON.parse(ret);
-                                    if(ret.error){
-                                        response.errorMessage = `[Error] with login information`;
-                                        response.error = ret.error; console.log(ret.error);
-                                    }
-                                    else {
-                                        response.results = ret;
-                                        response.results._id = currentUser._id;      
-                                        response.results.fullname = currentUser.fullname; 
-                                        response.results.admin = currentUser.admin;                               
-                                    }                     
-                                    callback(response);
-                                });
+                            axios(config)
+                            .then(function (ret) {
+                                ret = ret.data;
+                                if(ret.error){
+                                    response.errorMessage = `[Error] with login information`;
+                                    response.error = ret.error; console.log(ret.error);
+                                }
+                                else {
+                                    response.results = ret;
+                                    response.results._id = currentUser._id;      
+                                    response.results.fullname = currentUser.fullname; 
+                                    response.results.admin = currentUser.admin;                               
+                                }   
+                                callback(response);
+                            })
+                            .catch(function (error) {
+                                console.log(error);
+                                callback({ "errorMessage":'[Error] with signin call', "error":error });
                             });
 
                         }
