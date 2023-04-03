@@ -23,7 +23,7 @@
   font-family: 'Reem Kufi';
   font-style: normal;
   font-weight: 400;
-  src: url(https://fonts.gstatic.com/s/reemkufi/v18/2sDPZGJLip7W2J7v7wQZZE1I0yCmYzzQtuZnIGaV2g.ttf) format('truetype');
+  src: url(https://fonts.gstatic.com/s/reemkufi/v20/2sDPZGJLip7W2J7v7wQZZE1I0yCmYzzQtuZnIGaV2g.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Yantramanav';
@@ -394,6 +394,10 @@
   -webkit-box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
 }
+.homePage .home-section .section-container .split-section .multi-img-container.mini-plate {
+  width: 35%;
+  padding: 10px 40px;
+}
 @media (max-width: 770px) {
   .homePage .home-section .section-container .split-section .multi-img-container {
     width: 100%;
@@ -409,6 +413,10 @@
   font-weight: 100;
   margin-bottom: 20px;
   line-height: 3.2rem;
+}
+.homePage .home-section .section-container .split-section .split-content p.small {
+  font-size: 1.2rem;
+  line-height: 2rem;
 }
 .homePage .home-section .section-container .split-section .split-content p.c0 {
   color: #000;
@@ -5878,6 +5886,11 @@ html {
   width: 10px;
   height: 10px;
 }
+.sidenav-container .sidenav-section.phone-footer {
+  text-align: center;
+  font-size: 20px;
+  margin-top: auto;
+}
 .sidenav-container .sidenav-section + .sidenav-section {
   margin-top: 30px;
 }
@@ -5892,7 +5905,8 @@ html {
 }
 @media (max-width: 992px) {
   .sidenav-container {
-    display: block;
+    display: flex;
+    flex-direction: column;
   }
 }
 /* Animation key frames */

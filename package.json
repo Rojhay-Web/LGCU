@@ -1,15 +1,15 @@
 {
   "name": "lgcu_website",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "LENKESON GLOBAL CHRISTIAN UNIVERSITY WEBSITE",
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
     "build-css": "less-watch-compiler --run-once --main-file=app.less src/css/ public/css/",
     "watch-css": "npm run build-css && less-watch-compiler --main-file=app.less src/css/ public/css/",
-    "build": "npm run build-css && react-scripts build",
+    "build": "npm run build-css && react-scripts --openssl-legacy-provider build",
     "heroku-postbuild": "npm run build",
-    "script-run": "react-scripts start",
+    "script-run": "react-scripts --openssl-legacy-provider start",
     "script-dev": "concurrently \"npm run watch-css\" \"npm run script-run\" \"wait-on http://localhost:3001\""
   },
   "author": "Kris Redding",

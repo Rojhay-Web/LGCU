@@ -78,6 +78,10 @@ function MobileNav(props){
                 <a href="https://www.givelify.com/givenow/1.0/?token=eyJvcmdfaWQiOiJNelUyT1RFfiIsImJhZGdlX2ltYWdlIjoiYjMucG5nIn0~" target="_blank" rel="noopener noreferrer" className="sidenav-header-link" onClick={() => props.setSidebarDisplay(false)}>Donate</a>
                 <Link className="sidenav-header-link" to="/apply" onClick={() => props.setSidebarDisplay(false)}>Apply Now</Link>
             </div>
+
+            <div className='sidenav-section phone-footer'>
+                <span className="sidenav-no-link"><i className="fab fa-whatsapp" /> +1 407.493.9827</span>
+            </div>
         </div>
     );
 }
@@ -122,6 +126,7 @@ class App extends Component{
                                 <span className="nav-item mini-nav-link no-link">Donations</span>
                                 <a href="https://www.givelify.com/givenow/1.0/?token=eyJvcmdfaWQiOiJNelUyT1RFfiIsImJhZGdlX2ltYWdlIjoiYjMucG5nIn0~" target="_blank" rel="noopener noreferrer" className="nav-item mini-nav-link donation-link"><span className="givelify-logo">Givelify</span></a>
                                 <a href="https://www.paypal.com/mep/dashboard" target="_blank" rel="noopener noreferrer" className="nav-item mini-nav-link donation-link"><i className="fab fa-paypal"/>aypal</a>
+                                <span className="nav-item mini-nav-link no-link"><i className="fab fa-whatsapp" /> +1 407.493.9827</span>
                                 <Link className="nav-item mini-nav-link" to="/apply">Apply Now</Link>  
                                 
                                 <div className="nav-item search-bar">

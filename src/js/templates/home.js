@@ -21,6 +21,7 @@ import aboutLgcu from '../../assets/site/about_lgcu.mov';
 
 import img8 from '../../assets/site/mini/img8.jpg';
 import img11 from '../../assets/site/mini/img11.jpg';
+import asic_logo from '../../assets/site/mini/asic_logo.jpg';
 
 const stb = new StoryblokService();
 
@@ -157,12 +158,27 @@ function Home(props){
                             <p>At LGCU, learners and faculty are engaged in academic and professional online learning that is centered on developing and empowering working professionals to succeed in church ministries and other professional fields.</p>
                             <div className="btn-container">
                                 <a href="/about" className="lBtn c2"><span>More About LGCU</span><i className="btn-icon fas fa-info-circle"></i></a>
-                                <a href="/files/Accreditation.docx" target="_blank" className="lBtn clear t2"><span>Accreditation  Information</span><i className="btn-icon fas fa-graduation-cap"></i></a>
                             </div>
                         </div>                                                    
                     </div>
                 </div>
             </section>  
+
+            <section className="home-section">
+                <div className="section-container">
+                    <div className="split-section" id="imgSplit">
+                        <div className="split-content">
+                           <h2  className="lrgTitle" data-text="Accredidation">Accredidation</h2>
+                            <p className='small'>Lenkeson Global Christian University is accredited by Accreditation Service for International Schools, Colleges and Universities (ASIC). ASIC accreditation helps students and parents make a more informed choice and will also help a school, college, university, training provider or distance education provider, demonstrate to the international student body that they are a high quality institution.</p>
+                            <p className='small'>ASIC is recognized by UKVI in UK and is a full member of The International Network for Quality Assurance Agencies in Higher Education (INQAAHE), is a member of the BQF (British Quality Foundation) and are institutional members of EDEN (European Distance and E-Learning Network).</p>
+                        </div>
+
+                        <div className="multi-img-container mini-plate">
+                            <img alt="Accredidation" className="multi-img lrg" src={asic_logo} />
+                        </div>                                                    
+                    </div>
+                </div>
+            </section> 
 
             <section className="home-section alternate2 patterned">
                 <div className="section-container">
