@@ -168,13 +168,13 @@ function Home(props){
                 <div className="section-container">
                     <div className="split-section" id="imgSplit">
                         <div className="split-content">
-                           <h2  className="lrgTitle" data-text="Accredidation">Accredidation</h2>
+                           <h2  className="lrgTitle" data-text="Accreditation">Accreditation</h2>
                             <p className='small'>Lenkeson Global Christian University is accredited by Accreditation Service for International Schools, Colleges and Universities (ASIC). ASIC accreditation helps students and parents make a more informed choice and will also help a school, college, university, training provider or distance education provider, demonstrate to the international student body that they are a high quality institution.</p>
                             <p className='small'>ASIC is recognized by UKVI in UK and is a full member of The International Network for Quality Assurance Agencies in Higher Education (INQAAHE), is a member of the BQF (British Quality Foundation) and are institutional members of EDEN (European Distance and E-Learning Network).</p>
                         </div>
 
                         <div className="multi-img-container mini-plate">
-                            <img alt="Accredidation" className="multi-img lrg" src={asic_logo} />
+                            <img alt="Accreditation" className="multi-img lrg" src={asic_logo} />
                         </div>                                                    
                     </div>
                 </div>
