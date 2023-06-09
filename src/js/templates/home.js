@@ -17,7 +17,6 @@ import AcademicSlider from './components/academicSlider';
 
 /* Images */
 import introVideo from '../../assets/site/intro_video.mov';
-import aboutLgcu from '../../assets/site/about_lgcu.mov';
 
 import img8 from '../../assets/site/mini/img8.jpg';
 import img11 from '../../assets/site/mini/img11.jpg';
@@ -33,7 +32,6 @@ class HomeHeader extends Component{
             <div className="headerCard homeHeader">
                 <div className="header-card-container">
                     <div className="cardImg">
-                        {/*<img alt="Home back img" className="backImg img" src={back9}/>*/}
                         <video className="backImg" alt="Home back video" autoPlay loop muted>
                             <source src={introVideo} type="video/mp4" />
                             Your browser does not support the video tag.
@@ -185,13 +183,6 @@ function Home(props){
                     <h2 className="lrgTitle ctr" data-text="LGCU Media">LGCU Media</h2>
                     
                     <div className="media-container">
-                        <div className="media-item">
-                            <h3 className="media-title">About Lenkeson Global Christian University</h3>
-                            <video className="media-video" alt="About Lenkeson Global Christian University video" controls>
-                                <source src={aboutLgcu} type="video/mp4" />
-                                Your browser does not support the video tag.
-                            </video>
-                        </div>
                         {videoList.map((item,i) =>
                             <SbEditable content={item} key={i}>
                                 <div className="media-item" key={i}>
