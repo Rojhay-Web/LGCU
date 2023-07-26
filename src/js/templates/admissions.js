@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ReactGA from 'react-ga';
+import ReactGA from "react-ga4";
 
 import SbEditable from 'storyblok-react';
 import StoryblokService from '../utils/storyblok.service';
@@ -53,8 +53,9 @@ class Admissions extends Component{
     }
 
     initialReactGA(){
-        ReactGA.initialize('UA-147138083-1');
-        ReactGA.pageview('/admissions');
+        ReactGA.initialize('G-K5C0Q6ZKKD');
+        ReactGA.send({ hitType: "pageview", page: "/admissions", title: "Admissions" });
+        //ReactGA.pageview('/admissions');
     }
 
     loadPageData() {

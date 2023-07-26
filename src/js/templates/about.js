@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ReactGA from 'react-ga';
+import ReactGA from "react-ga4";
 
 import back1 from '../../assets/site/mini/back11.jpg';
 import back3 from '../../assets/site/mini/back3.jpg';
@@ -56,8 +56,9 @@ class About extends Component{
     }
 
     initialReactGA(){
-        ReactGA.initialize('UA-147138083-1');
-        ReactGA.pageview('/about');
+        ReactGA.initialize('G-K5C0Q6ZKKD');
+        ReactGA.send({ hitType: "pageview", page: "/about", title: "About" });
+        //ReactGA.pageview('/about');
     }
 
     componentDidMount(){ 

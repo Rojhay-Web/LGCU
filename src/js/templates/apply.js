@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import queryString from 'query-string';
-import ReactGA from 'react-ga';
+import ReactGA from "react-ga4";
 
 /* Data */
 import academicData from '../data/academics.json';
@@ -110,8 +110,9 @@ class Apply extends Component{
     }
 
     initialReactGA(){
-        ReactGA.initialize('UA-147138083-1');
-        ReactGA.pageview('/apply');
+        ReactGA.initialize('G-K5C0Q6ZKKD');
+        ReactGA.send({ hitType: "pageview", page: "/apply", title: "Apply" });
+        //ReactGA.pageview('/apply');
     }
 
     render(){        

@@ -1,5 +1,5 @@
 import {useSpring, animated} from 'react-spring'
-import ReactGA from 'react-ga';
+import ReactGA from "react-ga4";
 
 import React, { Component, useState, useEffect } from 'react';
 import TableBuilder from './components/tableBuilder';
@@ -49,8 +49,9 @@ function Tuition(props){
     useEffect(() => initialReactGA(), []);
     
     function initialReactGA(){
-        ReactGA.initialize('UA-147138083-1');
-        ReactGA.pageview('/tuition');
+        ReactGA.initialize('G-K5C0Q6ZKKD');
+        ReactGA.send({ hitType: "pageview", page: "/tuition", title: "Tuition" });
+        //ReactGA.pageview('/tuition');
     }
 
     function calc(x,y){

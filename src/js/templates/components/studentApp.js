@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import ReactGA from 'react-ga';
+import ReactGA from "react-ga4";
 
 /* Data */
 import academicData from '../../data/academics.json';
@@ -78,8 +78,9 @@ class StudentApp extends Component{
     }
 
     initialReactGA(){
-        ReactGA.initialize('UA-147138083-1');
-        ReactGA.pageview('/studentApplication');
+        ReactGA.initialize('G-K5C0Q6ZKKD');
+        ReactGA.send({ hitType: "pageview", page: "/studentApplication", title: "Student Application" });
+        //ReactGA.pageview('/studentApplication');
     }
 
     render(){       

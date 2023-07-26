@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ReactGA from 'react-ga';
+import ReactGA from "react-ga4";
 
 /* Images */
 /* Data */
@@ -120,8 +120,9 @@ class StudyArea extends Component{
 
     initialReactGA(){
         var pagetype = (this.props.match.params.studyArea ? "?type="+this.props.match.params.studyArea : "");
-        ReactGA.initialize('UA-147138083-1');
-        ReactGA.pageview('/studyArea'+pagetype);
+        ReactGA.initialize('G-K5C0Q6ZKKD');
+        ReactGA.send({ hitType: "pageview", page: `/studyArea${pagetype}`, title: `StudyArea${pagetype}` });
+        //ReactGA.pageview('/studyArea'+pagetype);
     }
 
     render(){        

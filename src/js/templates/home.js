@@ -1,6 +1,6 @@
 import {useSpring, animated} from 'react-spring'
 import {Spring} from 'react-spring/renderprops'
-import ReactGA from 'react-ga';
+import ReactGA from "react-ga4";
 
 import React, { Component, useState, useEffect } from 'react';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -87,8 +87,9 @@ function Home(props){
     }
 
     function initialReactGA(){
-        ReactGA.initialize('UA-147138083-1');
-        ReactGA.pageview('/home');
+        ReactGA.initialize('G-K5C0Q6ZKKD');
+        ReactGA.send({ hitType: "pageview", page: "/home", title: "Home" });
+        //ReactGA.pageview('/home');
     }
 
     function loadPageData(){

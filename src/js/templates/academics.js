@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ReactGA from 'react-ga';
+import ReactGA from "react-ga4";
 
 /* Images */
 import back1 from '../../assets/site/mini/img4.jpg';
@@ -53,8 +53,9 @@ class Academics extends Component{
     }
 
     initialReactGA(){
-        ReactGA.initialize('UA-147138083-1');
-        ReactGA.pageview('/academics');
+        ReactGA.initialize('G-K5C0Q6ZKKD');
+        ReactGA.send({ hitType: "pageview", page: "/academics", title: "Academics" });
+        //ReactGA.pageview('/academics');
     }
 
     render(){        
