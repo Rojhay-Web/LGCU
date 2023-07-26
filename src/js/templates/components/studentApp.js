@@ -80,7 +80,6 @@ class StudentApp extends Component{
     initialReactGA(){
         ReactGA.initialize('G-K5C0Q6ZKKD');
         ReactGA.send({ hitType: "pageview", page: "/studentApplication", title: "Student Application" });
-        //ReactGA.pageview('/studentApplication');
     }
 
     render(){       
