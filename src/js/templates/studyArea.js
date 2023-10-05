@@ -31,11 +31,13 @@ class StudyAreaHeader extends Component{
                     <div className="backImg"><img alt="Study Area img" src={"../images/site/"+this.state.data.img} /></div>
                     
                     <div className="lrg-title">
-                        <span>{(this.state.majorData ? this.state.majorData.title : "")}</span>
+                        <span>{(this.state.majorData?.title ? this.state.majorData.title : "")}</span>
+                        <span className='major-sub-title'>{(this.state.majorData?.title ? '& Christian Leadership' : '')}</span>
                         {(this.state.majorData && this.state.majorData.degreeTitle) && <span className="subText">{this.state.majorData.degreeTitle}</span>}
                     </div>  
                     <div className={(this.state.majorData.title ? "sub-title": "lrg-title")}>{"The School of " + this.state.data.title}</div>  
 
+                    <div className='lrg-sub-title'>{this.state.data.subtitle}</div>
                     <div className="solid-back">
                         <span>{this.state.data.description}</span>
                     </div>

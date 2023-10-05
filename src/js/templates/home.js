@@ -89,7 +89,6 @@ function Home(props){
     function initialReactGA(){
         ReactGA.initialize('G-K5C0Q6ZKKD');
         ReactGA.send({ hitType: "pageview", page: "/home", title: "Home" });
-        //ReactGA.pageview('/home');
     }
 
     function loadPageData(){
@@ -220,9 +219,10 @@ function Home(props){
 
             <section className="home-section">
                 <div className="section-container">
-                    <h2 className="lrgTitle ctr" data-text="Areas Of Study">Areas Of Study</h2>                        
+                    <h2 className="lrgTitle ctr" data-text="Areas Of Study">Areas Of Study</h2>
+                    <p className="subTitle ctr">All programs at LGCU are geared towards empowering current & emerging Christian leaders both in the church setting as well as Christian Leadership in the marketplace.</p>                         
                     {/* Slide Maze */}
-                    {academicList.length === 8 && 
+                    {academicList.length === 7 && 
                         <div className="slide-maze">
                             <div className="maze-lvl">
                                 <div className="lvl-horizontal">
@@ -245,7 +245,6 @@ function Home(props){
                             <div className="maze-lvl">
                                 <div className="lvl-horizontal">
                                     <AcademicSlider academicInfo={academicList[6]} direction={"right"} theme={"solo"}/>
-                                    <AcademicSlider academicInfo={academicList[7]} direction={"left"} theme={"solo"}/>
                                 </div>
                                 <div className="lvl-vertical">
                                     {/*<AcademicSlider academicInfo={academicList[0]} direction={"bottom"} theme={"solo"} displayLink={false}/>*/}

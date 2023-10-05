@@ -55,7 +55,7 @@ class SchoolSub extends Component{
                                     {this.props.data.degrees[item].map((major,j) => (
                                         <a href={this.props.baseUrl +"?majorId="+major.id} key={j} className="majorLink">
                                             <i className="fas fa-chevron-right" />
-                                            <span>{major.title}</span>
+                                            <span>{major.title} & Christian Leadership</span>
                                             {major.degreeTitle && <span className="subText">{major.degreeTitle}</span>}
                                         </a>
                                     ))}

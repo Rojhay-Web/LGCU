@@ -1,6 +1,7 @@
 {
     "undergraduatestudies":{
         "title":"Undergraduate Studies",
+        "subtitle":"from a Biblical Foundation & Judeo-Christian Principles",
         "colorTheme":"t1",
         "description":"The School of Undergraduate Studies is designed to equip college age students, adult learners, & working professionals;  Either returning to college, or pursuing studies in their professional fields that they may be effective in their specific location in the labor market or church ministries.",
         "fullDescription":"The School of Undergraduate Studies is designed to equip traditional college age students, adult learners, and working professionals, individuals who are first time college students, either returning to college, or pursuing studies in their professional fields that they may be effective in their specific location in the labor market or church ministries. The programs offered within the school of undergraduate studies are online courses designed asynchronously to allow the learner to engage in teaching and learning with the use of a desktop or laptop and internet services while attending to their personal endeavors. All associate degrees at Lenkeson Global Christian University are transferable toward the baccalaureate programs.",
@@ -22,17 +23,9 @@
                     {"subtitle":"General Education Courses (39)","courses":["ENG_101","MTH_160","MTH_161","BIOL_107","SOC_101","HIST_117","ENG_102","PSY_101","ENG_110","ENG_201","GOV_110","COM_118","SOC_223","REL_227","CIS_107"]},
                     {"subtitle":"Required Degree Courses and Credits (30)","courses":["CIS_301","CIS_303","CIS_401","CIS_403","CIS_405","CIS_407","CIS_411","CIS_413","CIS_415","CIS_417"]}
                 ]},
-                {"id":"AS-CJ", "title":"Criminal Justice","gradtotal":60, "courses":[
-                    {"subtitle":"General Education Courses (39)","courses":["ENG_101","MTH_160","MTH_161","BIOL_107","SOC_101","HIST_117","ENG_102","PSY_101","ENG_110","ENG_201","GOV_110","COM_118","CIS_107","SOC_223","REL_227"]},
-                    {"subtitle":"Required Degree Courses and Credits (30)","courses":["CMJ_201","CMJ_203","CMJ_211","CMJ_227","CMJ_331","CMJ_340","CMJ_345","CMJ_347","CMJ_430","CMJ_433"]}
-                ]},
                 {"id":"AS-EDU", "title":"Education","gradtotal":60, "courses":[
                     {"subtitle":"General Education Courses (39)","courses":["ENG_101","MTH_160","MTH_161","BIOL_107","SOC_101","HIST_117","ENG_102","PSY_101","ENG_110","ENG_201","GOV_110","COM_118","PED_112","CIS_107","SOC_223","REL_227"]},
                     {"subtitle":"Required Degree Credit Courses (30)","courses":["EDU_201","EDU_203","EDU_217","EDU_221","EDU_225","EDU_231","EDU_233","EDU_235","EDU_321","EDU_323"]}
-                ]},
-                {"id":"AS-PSY", "title":"Psychology","gradtotal":60, "courses":[
-                    {"subtitle":"General Education Courses (39)","courses":["ENG_101","MTH_160","MTH_161","BIOL_107","SOC_101","HIST_117","ENG_102","PSY_101","ENG_201","GOV_110","COM_118","PED_112","CIS_107","REL_227"]},
-                    {"subtitle":"Required Degree Credit Courses (30)","courses":["PSY_413","PSY_415","PSY_417","PSY_423","PSY_401","PSY_341","PSY_431","PSY_425","PSY_437","PSY_439"]}
                 ]}
             ],
             "bachelors":[
@@ -58,35 +51,18 @@
                     {"subtitle":"General Education Courses: 45 credits","courses":["ANTH_110","CIS_107", "ENG_101","ENG_102","MTH_160","MTH_161","BIOL_105","SOC_101","HIST_122","HIST_123","PSY_101","ENG_117","ENG_118","POLS_101","SOC_217"]},
                     {"subtitle":"Required Credit Courses: 45 credits","courses":["CIS_301","CIS_303","CIS_341","CIS_401","CIS_403","CIS_405","CIS_407","CIS_411","CIS_413","CIS_415","CIS_417"]},
                     {"subtitle":"Elective Courses: 30 credits (Professional portfolio can make up 15 credits of the electives or electives can be chosen from other programs at LGCU)","courses":[]}
-                ]},      
-                {"id":"BS-CJ", "title":"Criminal Justice","gradtotal":120, "courses":[
-                    {"subtitle":"General Education Courses (45)","courses":["ENG_101","MTH_160","MTH_118","BIOL_107","SOC_101","HIST_117","ENG_102","PSY_101","ENG_110","ENG_201","GOV_110","COM_118","PED_112", "CIS_107","SOC_223","REL_227"]},
-                    {"subtitle":"Required Degree Courses and Credits (45)","courses":["CMJ_201","CMJ_203","CMJ_211","CMJ_227","CMJ_229","CMJ_331","CMJ_340","CMJ_345","CMJ_347","CMJ_430","CMJ_431","CMJ_433"]},
-                    {"subtitle":"Elective Courses: 30 credits (Professional portfolio can make up 15 credits of the electives or electives can be chosen from other programs at LGCU)","courses":[]}
-                ]},          
-                {"id":"BA-PSY", "title":"Psychology","gradtotal":120, "courses":[
-                    {"subtitle":"General Education Courses: 45 credits","courses":["ANTH_110","CIS_107","ENG_101","ENG_102","MTH_160","MTH_161","BIOL_105","SOC_101","HIST_122","HIST_123","POLS_101","PSY_101","ENG_117","ENG_118","SOC_217"]},
-                    {"subtitle":"Required Credit Courses: 45 credits","courses":["PSY_303","PSY_305","PSY_307","PSY_312","PSY_315","PSY_433","PSY_435","PSY_415","PSY_413","PSY_417","PSY_423","PSY_401","PSY_341","PSY_431","PSY_425","PSY_439","PSY_441"]},
-                    {"subtitle":"Elective Courses: 30 credits (Professional portfolio can make up 15 credits of the electives or electives can be chosen from other programs at LGCU)","courses":[]}
-                ]},
+                ]},            
                 {"id":"BA-SCEDU", "title":"Secondary Education","gradtotal":120, "courses":[
                     {"subtitle":"General Education Courses: 45 credits","courses":["ANTH_110","CIS_107","ENG_101","ENG_102","MTH_160","MTH_161","BIOL_105","SOC_101","HIST_122","HIST_123","POLS_101","PSY_101","ENG_117","ENG_118","SOC_217"]},
                     {"subtitle":"Required Credit Courses: 45 credits","courses":["EDU_300","EDU_303","EDU_306","EDU_310","EDU_320","EDU_340","EDU_360","EDU_370","EDU_400","EDU_410","EDU_420","EDU_450","EDU_460","EDU_480"]},
                     {"subtitle":"Elective Courses: 30 credits (Professional portfolio can make up 15 credits of the electives or electives can be chosen from other programs at LGCU)","courses":["EDU_415","EDU_417","EDU_421","EDU_423","EDU_430","EDU_470","EDU_473","EDU_474","TESL_475","TESL_476"]}                
-                ]},
-                {"id":"BA-SLS", "title":"Spanish and Latino Studies","gradtotal":120, "courses":[
-                    {"subtitle":"General Education Courses: 45 credits","courses":["ANTH_110","CIS_107","ENG_101","ENG_102","MTH_160","MTH_161","BIOL_105","SOC_101","HIST_122","HIST_123","POLS_101","PSY_101","ENG_117","ENG_118","SOC_217"]},
-                    {"subtitle":"Required Credit Courses: 45 credits","courses":["SPA_101","SPA_102","SPA_201","SPA_202","SPA_217","SPA_219","SPA_231","SPA_241","SPA_301","SPA_321","SPA_331","SPA_341","SPA_430","SPA_440","SPA_441"]},
-                    {"subtitle":"Elective Courses: 30 credits (Professional portfolio can make up 15 credits of the electives or electives can be chosen from other programs at LGCU)","courses":["SPA_343","SPA_347","SPA_351","SPA_353","SPA_355","SPA_370","SPA_371","SPA_380","SPA_410","SPA_470"]}                
                 ]},
                 {"id":"BA-SPEDU", "title":"Special Education","gradtotal":120, "courses":[
                     {"subtitles":"General Education Courses: 45 credits", "courses":["ANTH_110","CIS_107","ENG_101","ENG_102","MTH_160","MTH_161","BIOL_105","SOC_101","HIST_122","HIST_123","POLS_101","PSY_101","ENG_117","ENG_118","SOC_223"]},
                     {"subtitle":"Required Credit Courses: 45 credits","courses":["EDU_300","EDU_306","EDU_310","EDU_315","EDU_320","EDU_340","EDU_355","EDU_360","EDU_370","EDU_400","EDU_410","EDU_420","EDU_450","EDU_460","EDU_480"]},
                     {"subtitle":"Elective Courses: 30 credits (Professional portfolio can make up 15 credits of the electives or electives can be chosen from other programs at LGCU)","courses":["EDU_415","EDU_417","EDU_421","EDU_423","EDU_430","EDU_470","EDU_473","EDU_474","TESL_475","TESL_476"]}
                 ]},
-                {"id":"BA-IR","title":"International Relations","gradtotal":120,"comingSoon":true, "courses":[]},
                 {"id":"BA-OL","title":"Organizational Leadership","gradtotal":120,"comingSoon":true, "courses":[]},
-                {"id":"BA-PA","title":"Public Administration","gradtotal":120,"comingSoon":true, "courses":[]},                                
                 {"id":"BA-COMM","title":"Communications","gradtotal":120,"comingSoon":true, "courses":[]},
                 {"id":"BA-ENG","title":"English","gradtotal":120,"comingSoon":true, "courses":[]},
                 {"id":"BA-FRE","title":"French","gradtotal":120,"comingSoon":true, "courses":[]}
@@ -100,6 +76,7 @@
     },
     "theology_biblicalstudies":{
         "title":"Theology & Biblical Studies",
+        "subtitle":"",
         "colorTheme":"t2",
         "description":"The School of Theology and Biblical Studies is designed to prepare men and women in the disciplines of biblical and theological studies by equipping them with the necessary tools to become transformative servant-leaders in local church ministries, the marketplace, global and strategic missions. ",
         "fullDescription":"The School of Theology and Biblical Studies is designed to prepare men and women in the disciplines of biblical and theological studies by equipping them with the necessary tools to become transformative servant-leaders in local church ministries, the marketplace, global and strategic missions. The School of Theology and Biblical Studies awards the Associate of Arts, Bachelor of Arts in Biblical Studies, the Master of Arts in Religious Education, and the Master of Arts in Theological Studies. The School of Theology and Biblical Studies welcomes aspiring, emerging and current Christian leaders from all denominations across the globe including all ethnic identities to enroll in one of the programs offered by the school.",
@@ -156,6 +133,7 @@
     },
     "businessadministration":{
         "title":"Business Administration",
+        "subtitle":"from a Biblical Foundation & Judeo-Christian Principles",
         "colorTheme":"t3",
         "description":"The School of Business Administration is designed to prepare men and women to become innovators, business leaders, and problem-solvers in the twenty-first century. ",
         "fullDescription":"The School of Business Administration is designed to prepare men and women to become innovators, business leaders, and problem-solvers in the twenty-first century. Learners are engaged in teaching and learning by using cutting-edge technology and state- of- the- art business strategies to serve as pioneers in their current workplace, communities, and the world. The School of Business Administration offers associates, bachelors, masters and doctoral degrees in the disciplines of Accounting, Business Administration, Finance, Human Resource Management, International Business and Marketing.",
@@ -208,6 +186,7 @@
     },
     "education":{
         "title":"Education",
+        "subtitle":"from a Biblical Foundation & Judeo-Christian Principles",
         "colorTheme":"t4",
         "description":"The School of Education is designed to develop current and emerging educators and school leaders to meet the educational challenges of the twenty-first century. Learners are equipped with academic and educational tools to deliver state- of- the- art instructional information using diverse teaching and learning methods through constructionist processes.",
         "fullDescription":"The School of Education is designed to develop current and emerging educators and school leaders to meet the educational challenges of the twenty-first century. Learners are equipped with academic and educational tools to deliver state- of- the- art instructional information using diverse teaching and learning methods through constructionist processes. They are using cutting-edge technology to enhance teaching and learning in and beyond the walls of the classroom. The highly qualified faculty members of the school of education at Lenkeson Global Christian University use their academic and professional expertise to empower K-12 classroom facilitators, and higher education leaders to lead in diverse entrepreneurial organizations and academic institutions.",
@@ -324,6 +303,7 @@
     },
     "global_strategicleadership":{
         "title":"Global & Strategic Leadership",
+        "subtitle":"from a Biblical Foundation & Judeo-Christian Principles",
         "colorTheme":"t5",
         "description":"The School of Global and Strategic Leadership is designed to equip organizational leaders with the necessary tools to respond to the challenges that require transformational changes and strategic leadership to succeed in the twenty-first century.",
         "fullDescription":"The School of Global and Strategic Leadership is designed to equip organizational leaders with the necessary tools to respond to the challenges that require transformational changes and strategic leadership to succeed in the twenty-first century. The School of Global and Strategic Leadership at Lenkeson Global Christian University is created to empower men and women with leadership skills combined with experiential learning to enter and succeed in the fields of business, church ministries, education, government, and other local and global organizational enterprises. Additionally, learners apply cutting-edge technology and state- of- the- art training to create and implement goals, making decisions, and policy development. The School of Strategic Leadership emphasizes: vision, innovation, transformational leadership, integrity, excellence, courage, appropriate and effective delegation, and the desire to lead.",
@@ -357,19 +337,9 @@
             ]
         }
     },
-    "appliedhealthstudies":{
-        "title":"Applied Health Studies",
-        "colorTheme":"t6",
-        "description":"To obtain information or any general questions regarding our School of Applied Health Studies please contact our admissions team at admissions@lenkesongcu.org.",
-        "fullDescription":"To obtain information or any general questions regarding our School of Applied Health Studies please contact our admissions team at admissions@lenkesongcu.org.",
-        "icon":"",
-        "img":"img15.jpg",
-        "comingSoon":true,
-        "documents":["LGCU_Healthcare_Administration_Program_Revised.pdf", "LGCU_School_of_Applied_Health_Studies_Mission_Vision_Statements.pdf","LGCU_School_of_Applied_Health_Studies_Multiple_Programs.pdf"],
-        "degrees":{}
-    },
     "socialwork":{
         "title":"Social Work",
+        "subtitle":"from a Biblical Foundation & Judeo-Christian Principles",
         "colorTheme":"t6",
         "description":"To obtain information or any general questions regarding our School of Social Work please contact our admissions team at admissions@lenkesongcu.org.",
         "fullDescription":"To obtain information or any general questions regarding our School of Social Work please contact our admissions team at admissions@lenkesongcu.org.",

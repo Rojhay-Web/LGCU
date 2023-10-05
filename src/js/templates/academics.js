@@ -92,6 +92,7 @@ class Academics extends Component{
 
                 <section className="academic-section viewArea" id="viewArea">
                     <h2 className="lrgTitle ctr c1" data-text="Schools of Study">Schools of Study</h2>
+                    <p className="subTitle ctr c1">All programs at LGCU are geared towards empowering current & emerging Christian leaders both in the church setting as well as Christian Leadership in the marketplace.</p>
 
                     <div className="section-container area-container">
                         {this.state.academicList.map((item,i) => (
