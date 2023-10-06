@@ -12,7 +12,7 @@ const mSettings = {
 const Mailgun = require('mailgun.js');
 const formData = require('form-data');
 const mailgun = new Mailgun(formData);
-const mg = mailgun.client({username: process.env.MAILGUN_API_USER, key: process.env.MAILGUN_API_KEY2 });
+const mg = mailgun.client({username: process.env.MAILGUN_API_USER, key: process.env.MAILGUN_API_KEY });
 
 var mail = {
     sendEmail:function(emailInfo,callback){ 
@@ -22,7 +22,7 @@ var mail = {
 
         try {
             let defaultEmail = `lenkeson8@gmail.com`;
-            mg.messages.create(process.env.MAILGUN_DOMAIN2, {
+            mg.messages.create(process.env.MAILGUN_DOMAIN, {
                 from: mSettings.user,
                 to: [defaultEmail, mSettings.ccUser],
                 subject: emailInfo.subject + " " + Date.now(),
@@ -55,7 +55,7 @@ var mail = {
             var appID = (emailInfo.appId ? emailInfo.appId : generateAppId(emailInfo.formData));
 
             let defaultEmail = `lenkeson8@gmail.com`;
-            mg.messages.create(process.env.MAILGUN_DOMAIN2, {
+            mg.messages.create(process.env.MAILGUN_DOMAIN, {
                 from: mSettings.user,
                 to: [defaultEmail, mSettings.ccUser],
                 subject: emailInfo.subject + " " + Date.now(),

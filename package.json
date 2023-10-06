@@ -2,9 +2,6 @@
   "name": "lgcu_website",
   "version": "1.1.2",
   "description": "LENKESON GLOBAL CHRISTIAN UNIVERSITY WEBSITE",
-  "engines": {
-    "npm": "10.x"
-  },
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
@@ -63,5 +60,8 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "engines": {
+    "npm": "10.x"
+  }
 }
