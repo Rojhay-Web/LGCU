@@ -9,8 +9,10 @@ const mSettings = {
     ccUser: process.env.MAIL_SERVER_USER
 };
 
-const mailgun = require('mailgun-js')({ apiKey: mSettings.apikey, domain: mSettings.domain });
-
+const Mailgun = require('mailgun.js');
+const formData = require('form-data');
+const mailgun = new Mailgun(formData);
+const mg = mailgun.client({username: process.env.MAILGUN_API_USER, key: process.env.MAILGUN_API_KEY2 });
 
 var mail = {
     sendEmail:function(emailInfo,callback){ 
@@ -19,22 +21,21 @@ var mail = {
         /* { email: "", subject:"", title:"", formdata:{}, additionalData:{}} */
 
         try {
-            var toUser = (emailInfo.email ? emailInfo.email+", "+ mSettings.ccUser : mSettings.ccUser);
-            var mailOptions = {
+            let defaultEmail = `lenkeson8@gmail.com`;
+            mg.messages.create(process.env.MAILGUN_DOMAIN2, {
                 from: mSettings.user,
-                to: emailInfo.email,
+                to: [defaultEmail, mSettings.ccUser],
                 subject: emailInfo.subject + " " + Date.now(),
                 html: buildEmailHtml(emailInfo)
-            };
-
-            mailgun.messages().send(mailOptions, function (err, body) {
-                if (err) {
-                    console.log(" [Error] Sending Email: ", err);
-                    response.errorMessage = err;
-                }
-                else {
-                    response.results = 'Email Sent';
-                }
+            })
+            .then((msg)=>{
+                console.log(msg)
+                response.results = 'Email Sent';
+                callback(response);
+            })
+            .catch((err)=>{
+                console.log(" [Error] Sending Email: ", err);
+                response.errorMessage = err;
                 callback(response);
             });
         }
@@ -52,25 +53,22 @@ var mail = {
             var emailInfo = req.body;
 
             var appID = (emailInfo.appId ? emailInfo.appId : generateAppId(emailInfo.formData));
-            var toUser = (emailInfo.email ? emailInfo.email+", "+ mSettings.ccUser : mSettings.ccUser);
-            
-            var mailOptions = {
-                from: emailInfo.email,
-                to: toUser,
+
+            let defaultEmail = `lenkeson8@gmail.com`;
+            mg.messages.create(process.env.MAILGUN_DOMAIN2, {
+                from: mSettings.user,
+                to: [defaultEmail, mSettings.ccUser],
                 subject: emailInfo.subject + " " + Date.now(),
                 html: buildAppEmailHtml(emailInfo, appID)
-            };
-            
-            mailgun.messages().send(mailOptions, function (err, body) {
-                if (err) {
-                    console.log(" [Error] Sending App Email: ", err);
-                    response.errorMessage = err;
-                }
-                else {
-                    //console.log("Email Sent"); console.log(body);
-                    response.results = { appId: appID, status: 'Email Sent' };
-                }
-                res.status(200).json(response); 
+            })
+            .then((msg)=>{
+                response.results = 'Email Sent';
+                res.status(200).json(response);
+            })
+            .catch((err)=>{
+                console.log(" [Error] Sending App Email: ", err);
+                response.errorMessage = err;
+                res.status(200).json(response);
             });
         }
         catch(ex){
