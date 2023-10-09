@@ -37,8 +37,11 @@ class FindDegree extends Component{
                    <div className="list-container">
                         {this.state.areaList.map((item,i) => (
                             <div key={i} className={"filterBtn areaItem " + item.colorTheme + (item.status ? " active":"")} onClick={()=> this.toggleFilter("areaList",i)}>
-                                <i className={"far "+ (item.status ? "fa-check-circle": "fa-circle")}></i>
-                                <span>{item.title}</span>
+                                <div className="base-line">
+                                    <i className={"far "+ (item.status ? "fa-check-circle": "fa-circle")}></i>
+                                    <span>{item.title}</span>
+                                </div>
+                                <div className='filterBtn-subtitle'>{item.subtitle || ""}</div>
                             </div>
                         ))}
                    </div>
@@ -73,6 +76,7 @@ class FindDegree extends Component{
                                                 {item.subtitle && <span className="sub-title">{item.subtitle} - </span>}
                                                 <span className="major-title">{item.title}</span>
                                             </div>
+                                            <div className="major-descriptor">& Christian Leadership</div>
                                         </div>                                
                                     </a>
                                 ))}
@@ -125,7 +129,7 @@ class FindDegree extends Component{
                 var tmpArea = [];
 
                 areaInit.forEach(function(item){
-                    tmpArea.push({ idLink:item, title:self.props.academicData[item].title, colorTheme: self.props.academicData[item].colorTheme, status: false });
+                    tmpArea.push({ idLink:item, title:self.props.academicData[item].title, subtitle:self.props.academicData[item].subtitle, colorTheme: self.props.academicData[item].colorTheme, status: false });
                     var degreeInit = Object.keys(self.props.academicData[item].degrees);
                     degreeInit.forEach(function(dItem){
                         degreeKey[dItem] = true;

@@ -20,6 +20,7 @@ class AcademicSlider extends Component{
             <div className={"academicSlider " + this.props.direction}>
                 <div className="slider-container title">
                     <h1>{this.state.academicInfo.title}</h1>
+                    <h2>{this.state.academicInfo.subtitle}</h2>
                     <div className="lBtn-group">
                         {this.props.displayLink !== false &&
                             <a href={"/studyarea" + this.state.titleLink} className="lBtn link"><span>Learn More</span><i className="btn-icon fas fa-graduation-cap"/></a>

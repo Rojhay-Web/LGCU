@@ -628,7 +628,9 @@
   color: #014eb3;
 }
 .academicsPage .academic-section.findDegree .degree-container .full-list-container .list-container {
-  display: block;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   padding: 10px 0px;
 }
 .academicsPage .academic-section.findDegree .degree-container .full-list-container .list-container .filterBtn {
@@ -637,6 +639,7 @@
   border: 1px solid #343a40;
   color: #343a40;
   opacity: 0.4;
+  text-align: left;
   font-size: 1.3rem;
   margin: 0px 7px 14px;
   text-transform: capitalize;
@@ -646,6 +649,12 @@
 }
 .academicsPage .academic-section.findDegree .degree-container .full-list-container .list-container .filterBtn span {
   margin-left: 5px;
+}
+.academicsPage .academic-section.findDegree .degree-container .full-list-container .list-container .filterBtn .filterBtn-subtitle {
+  font-size: 0.8rem;
+  padding-left: 23px;
+  margin-top: -5px;
+  min-height: 17px;
 }
 .academicsPage .academic-section.findDegree .degree-container .full-list-container .list-container .filterBtn:hover,
 .academicsPage .academic-section.findDegree .degree-container .full-list-container .list-container .filterBtn.active {
@@ -821,6 +830,10 @@
   font-weight: 300;
   font-size: 1.2rem;
   line-height: 1.5rem;
+}
+.academicsPage .academic-section.findDegree .degree-container .results-list .results-container .result-item .item-info-container .major-descriptor {
+  font-size: 1.2rem;
+  font-weight: 300;
 }
 .academicsPage .academic-section.findDegree .degree-container .results-list .results-container .result-item:hover.t1 {
   background: rgba(106, 171, 156, 0.3) !important;
@@ -5566,6 +5579,11 @@ html {
   display: flex;
   justify-content: center;
   position: relative;
+}
+.academicSlider .slider-container h2 {
+  font-size: 1.2rem;
+  margin-top: -5px;
+  text-transform: capitalize;
 }
 .academicSlider .slider-container .info-container p {
   font-size: 1.3rem;
