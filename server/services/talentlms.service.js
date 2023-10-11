@@ -38,8 +38,8 @@ var talentlms = {
 
                             const basicAuth = Buffer.from(`${talentlmsKey}:`).toString('base64');
                             var data = new FormData();
-                            data.append('login', 'kredding');
-                            data.append('password', 'LGCU_adm!n');
+                            form.append('login', currentUser.talentlmsId.login);
+                            form.append('password', loginInfo.password);
                             
                             var config = {
                                 method: 'post',
