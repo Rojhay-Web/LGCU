@@ -38,8 +38,8 @@ var talentlms = {
 
                             const basicAuth = Buffer.from(`${talentlmsKey}:`).toString('base64');
                             var data = new FormData();
-                            form.append('login', currentUser.talentlmsId.login);
-                            form.append('password', loginInfo.password);
+                            data.append('login', currentUser.talentlmsId.login);
+                            data.append('password', loginInfo.password);
                             
                             var config = {
                                 method: 'post',
