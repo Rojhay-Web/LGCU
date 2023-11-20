@@ -1,8 +1,10 @@
 require('dotenv').config();
 var mongoClient = require('mongodb').MongoClient;
 var ObjectId = require('mongodb').ObjectID;
+var crypto = require('crypto');
+const fns = require('date-fns');
+const CsvParser = require("json2csv").Parser;
 
-const nodemailer = require("nodemailer");
 const util = require('util');
 
 var database = {
@@ -12,6 +14,28 @@ var database = {
 }
 
 var auth = {
+    paramCheck(params, obj) {
+        var ret = true;
+        try {
+            if(!obj){
+                ret = false;
+            }
+            else{
+                for(var i = 0; i < params?.length; i++){
+                    if(!(params[i] in obj) || obj[params[i]] == null){
+                        console.log(params[i], " is missing ");
+                        ret = false;
+                        break;
+                    }
+                }
+            }
+        }
+        catch(ex){
+            console.log("checking params");
+            ret = false;
+        }
+        return ret;
+    },
     lgcuCheck(callback){
         var response = {"errorMessage":null, "results":true};
         try {
@@ -283,6 +307,125 @@ var auth = {
             response.errorMessage = "[Error] Generating User Id (E09): "+ ex;
             callback(response);
         }
+    },
+    /* Student Applications */
+    submitStudentApp: function(applicationForm, callback){
+        let response = {};
+        try {
+            // Validate App Form: applicationForm
+            let formValidation = validateStudentApplication(applicationForm);
+            if(formValidation.length > 0){
+                callback({ "error": `Missing Fields: ${formValidation.join(", ")}` })
+            }
+            else {
+                mongoClient.connect(database.connectionString, database.mongoOptions, function(err, client){
+                    if(err) {
+                        response.errorMessage = err;
+                        callback(response);
+                    }
+                    else {
+                        const db = client.db(database.dbName).collection('mylgcu_apps'), 
+                            studentApp = buildStudentAppList(applicationForm);
+
+                        db.insertOne(studentApp, function(insertError,retObj){
+                            if(insertError || retObj.ops.length <= 0){
+                                console.log(insertError ?? "Unable to Insert into DB");
+                                response["error"] = "Unable to add student application [Please contact site admin]";
+                            } else {                    
+                                response["results"] = true;                                                                                
+                            }
+                            
+                            client.close(); callback(response);
+                        });
+                    }
+                });
+            }
+        }
+        catch(ex){
+            console.log(`Error Submitting User App: ${ex}`);
+            callback({ "error": `Error Submitting User App: ${ex}`});
+        }
+    },
+    getStudentAppCount: function(startDt, callback){
+        try {
+            getStudentApps(startDt, true, function(ret){
+                if(ret.error){
+                    callback(ret);
+                }
+                else {
+                    callback({ results: ret.results.length });
+                }
+            });
+        }
+        catch(ex){
+            console.log(`Error Submitting User App: ${ex}`);
+            callback({ "error": `Error Submitting User App: ${ex}`});
+        }
+    },
+    downloadStudentApps: function(startDt, callback){
+        try {
+            getStudentApps(startDt, false, function(ret){
+                if(ret.error){
+                    callback(ret);
+                }
+                else {
+                    const csvData = [];
+                    ret.results.forEach((item) => {
+                        csvData.push({ 
+                            "firstName" : cleanCSVField(item, "firstName"),
+                            "middleName" : cleanCSVField(item, "middleName"),
+                            "lastName" : cleanCSVField(item, "lastName"),
+                            "email" : cleanCSVField(item, "email"),
+                            "address" : cleanCSVField(item, "address"),
+                            "city" : cleanCSVField(item, "city"),
+                            "state" : cleanCSVField(item, "state"),
+                            "postal" : cleanCSVField(item, "postal"),
+                            "dayphone" : cleanCSVField(item, "dayphone"),
+                            "eveningphone" : cleanCSVField(item, "eveningphone"),
+                            "mobilephone" : cleanCSVField(item, "mobilephone"),
+                            "ssn" : cleanCSVField(item, "ssn"),
+                            "driverlicense" : cleanCSVField(item, "driverlicense"),
+
+                            "emergencyname" : cleanCSVField(item, "emergencyname"),
+                            "emergencyrelationship" : cleanCSVField(item, "emergencyrelationship"),
+                            "emergencyphone" : cleanCSVField(item, "emergencyphone"),
+                            "emergencyaddress" : cleanCSVField(item, "emergencyaddress"),
+                            "emergencycity" : cleanCSVField(item, "emergencycity"),
+                            "emergencystate" : cleanCSVField(item, "emergencystate"),
+                            "emergencypostal" : cleanCSVField(item, "emergencypostal"),
+
+                            "degreeType" : cleanCSVField(item, "degreeType"),
+                            "veteran" : cleanCSVField(item, "veteran"),
+                            "veteranbranch" : cleanCSVField(item, "veteranbranch"),
+                            "veteranskill" : cleanCSVField(item, "veteranskill"),
+
+                            "highestdegree" : cleanCSVField(item, "highestdegree"),
+                            "otherdegrees" : cleanCSVField(item, "otherdegrees"),
+                            "employmenthistory" : cleanCSVField(item, "employmenthistory")
+                        });
+
+                    });
+
+                    const csvFields = [
+                        "First Name", "Middle Name", "Last Name", "Email", "Address",
+                        "City", "State", "Postal Code", "Daytime Phone", "Evening Phone",
+                        "Mobile Phone", "SSN", "Drivers License", "Emergency Contact Name", "Emergency Contact Relationship",
+                        "Emergency Contact Phone", "Emergency Contact Address", "Emergency Contact City", "Emergency Contact State", "Emergency Contact Postal Code",
+                        "Degree Type", "Is Veteran", "Branch", "Specific Skills Acquired", "Highest Degree Earned",
+                        "Other Degrees", "Employment History"
+                    ];
+
+                    const csvParser = new CsvParser({ csvFields });
+                    const csvParserData = csvParser.parse(csvData);
+
+                    callback({ "results": csvParserData });
+                }
+            });
+        }
+        catch(ex){
+            console.log(`Error Submitting User App: ${ex}`);
+            callback({ "error": `Error Submitting User App: ${ex}`});
+        }
     }
 }
 
@@ -401,4 +544,106 @@ function validateExistingUser(userInfo, callback){
         response.errorMessage = "[Error] Validating Existing User (E15): "+ ex;
         callback(response);
     }
+}
+
+function validateStudentApplication(appForm){
+    let ret = [];
+    try {
+        let requiredFields = ["firstName","lastName", "email", "state", "postal", "ssn", "degreeType"];
+
+        for(let i=0; i < requiredFields.length; i++){
+            if(!appForm[requiredFields[i]] || appForm[requiredFields[i]]?.value.length === 0){
+                ret.push(requiredFields[i]);
+            }
+        }
+    }
+    catch(ex){
+        console.log(`Error Validationg Student Application: ${ex}`);
+    }
+    return ret;
+}
+
+function buildStudentAppList(appForm){
+    let ret = {};
+    try {
+        let keyList = Object.keys(appForm);
+        keyList.forEach((key) => {
+            ret[key] = appForm[key].value;
+        });
+
+        // Encrypt SSN
+        ret.ssn = cryptText(ret.ssn, true);
+
+        // Set Apply Date
+        ret.applyDate = (new Date()).getTime();
+    }
+    catch(ex){
+        console.log(`Error Building Student App List: ${ex}`);
+    }
+    return ret;
+}
+
+function cryptText(text, encrypt=true){
+    let ret = text;
+    try {
+        if(encrypt){
+            let mykey = crypto.createCipher('aes-128-cbc', process.env.LGCU_SECRET);
+            ret = mykey.update(text, 'utf8', 'hex');
+            ret += mykey.final('hex');
+        }
+        else {
+            var mykey = crypto.createDecipher('aes-128-cbc',  process.env.LGCU_SECRET);
+            ret = mykey.update(text, 'hex', 'utf8')
+            ret += mykey.final('utf8');
+        }
+    }
+    catch(ex){
+        console.log(`Error Crypting Text: ${ex}`);
+    }
+    return ret;
+}
+
+function getStudentApps(start_dt, hideSSN=false, callback){
+    let response = { "error":"", "results":[] };
+        try {
+            if(isNaN(new Date(start_dt))){
+                callback({ "error": `Invalid start date` })
+            }
+            else {
+                mongoClient.connect(database.connectionString, database.mongoOptions, function(err, client){
+                    if(err) {
+                        response.errorMessage = err;
+                        callback(response);
+                    }
+                    else {
+                        const db = client.db(database.dbName).collection('mylgcu_apps'), 
+                            startDt = fns.startOfDay(new Date(start_dt));
+
+                        db.find({ applyDate: { $gte: startDt.getTime() }  })
+                            .toArray(function(err,res){
+                                if(err) { 
+                                    response.error = `[Error] Retrieving Student Apps: ${err}`;
+                                    callback(response); 
+                                }
+                                else {
+                                    response.results = res.map(function(rs){
+                                        rs.ssn = (hideSSN ? "" : cryptText(rs.ssn, false));
+                                        return rs;
+                                    });
+
+                                    callback(response);
+                                }
+                            });
+                    }
+                });
+            }
+        }
+        catch(ex){
+            console.log(`Error Getting User Apps: ${ex}`);
+            callback({ "error": `Error Getting User Apps: ${ex}`});
+        }
+}
+
+function cleanCSVField(item, name){
+    return  name in item ? item[name] : "";
 }

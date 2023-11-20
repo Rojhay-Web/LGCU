@@ -2382,6 +2382,35 @@
   text-transform: capitalize;
   font-size: 1.3rem;
 }
+.mylgcuPage .mylgcu-section .mylgcu-content-section .content-block .download-btn {
+  margin: auto 0 0 auto;
+  display: flex;
+  flex-direction: row;
+  background: #fda800;
+  border-radius: 5px;
+  padding: 5px 15px;
+  color: #fff;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+.mylgcuPage .mylgcu-section .mylgcu-content-section .content-block .download-btn span {
+  margin-right: 4px;
+}
+.mylgcuPage .mylgcu-section .mylgcu-content-section .content-block .download-btn i {
+  margin-left: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: 0.5s all ease-in-out;
+}
+.mylgcuPage .mylgcu-section .mylgcu-content-section .content-block .download-btn.empty {
+  background: #ccc;
+  opacity: 0.5;
+  cursor: initial;
+}
+.mylgcuPage .mylgcu-section .mylgcu-content-section .content-block .download-btn:hover:not(.empty) i {
+  margin-left: 18px;
+}
 .mylgcuPage .mylgcu-section .mylgcu-content-section .content-block .ReactTable {
   width: 100%;
   height: 500px;

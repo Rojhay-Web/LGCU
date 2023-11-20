@@ -277,20 +277,18 @@ class StudentApp extends Component{
                             appId: appId                        
                         };
 
-                        axios.post(rootPath + "/api/sendAppEmail", postData, {'Content-Type': 'application/json'})
+                        axios.post(rootPath + "/api/submitStudentApp", postData, {'Content-Type': 'application/json'})
                         .then(function(response) {
-                            if(response.errorMessage == null && response.data.results.status === "Email Sent"){
-                                self.setState({ selectedSection:"submitted", applicationId: response.data.results.appId});                         
+                            if(response.errorMessage == null && response.data.results){
+                                self.setState({ selectedSection:"submitted", applicationId: appId});                         
                             }
                             else {
                                 alert("Error Submitting Form: Please Contact Admissions Office");
-                                //console.log("[Error] Submitting Form: ", response.data.errorMessage);
                             }
                         })
                         .catch(error => {
                             alert("Error Submitting Form: Please Contact Admissions Office");
-                        });  
-                        //self.setState({ selectedSection:"submitted", applicationId: appId});    
+                        });    
                     });                                            
                 }
             }); 

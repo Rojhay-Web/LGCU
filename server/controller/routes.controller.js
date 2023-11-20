@@ -6,7 +6,7 @@ var charge = require('../services/charge.service');
 var auth = require('../services/auth.service');
 var talentlms = require('../services/talentlms.service');
 
-/* sire routes */
+/* site routes */
 function getCopyrightDate(req, res){
     try {
         var d = new Date();
@@ -28,6 +28,22 @@ function lgcuCheck(req, res){
     }
 }
 
+function submitStudentApp(req, res){
+    try {
+        if(req.body && auth.paramCheck(["formData", "appId"], req.body)){
+            auth.submitStudentApp(req.body.formData, function(ret){
+                res.status(200).json(ret);
+            });
+        }
+        else {
+            res.status(200).json({"error":"Invalid Fields", "results":null });
+        }
+    }
+    catch(ex){
+        res.status(200).json({"errorMessage":"Error Processing Request (AC2) : " + ex, "results":null });
+    }
+}
+
 /* emails */
 function sendEmail(req, res){ 
     try {
@@ -42,6 +58,7 @@ function sendEmail(req, res){
     }
 }
 function sendAppEmail(req, res){ mail.sendAppEmail(req, res); }
+
 
 /* charges */
 function applicationCharge(req, res){ 
@@ -223,6 +240,65 @@ function generateStudentId(req, res){
     }
 }
 
+function getStudentApps(req, res){
+    try {
+        var requestUser = req.body.requestUser;
+        // Validate User
+        auth.authorizeUser(requestUser, null, function(ret){
+            if(ret.errorMessage != null) {
+                res.status(200).json(ret);
+            }
+            else if(!ret.results) {
+                res.status(200).json({"errorMessage":"User status invalid for this request", "results":null});
+            }
+            else if(req.query && auth.paramCheck(["startDt"], req.query)){
+                auth.getStudentAppCount(req.query.startDt, function(ret){
+                    res.status(200).json(ret);
+                });
+            }
+            else {
+                res.status(200).json({"error":"Invalid Fields", "results":null });
+            }
+        });  
+    }
+    catch(ex){
+        res.status(200).json({"errorMessage":"Error Processing Request (AC2) : " + ex, "results":null });
+    }
+}
+
+function downloadStudentApps(req, res){
+    try {
+        var requestUser = req.body.requestUser, userInfo = req.body.userInfo;
+        // Validate User
+        auth.authorizeUser(requestUser, null, function(ret){
+            if(ret.errorMessage != null) {
+                res.status(200).json(ret);
+            }
+            else if(!ret.results) {
+                res.status(200).json({"errorMessage":"User status invalid for this request", "results":null});
+            }
+            else if(req.query && auth.paramCheck(["startDt"], req.query)){
+                auth.downloadStudentApps(req.query.startDt, function(ret){
+                    if(ret.results){
+                        res.setHeader("Content-Type", "text/csv");
+                        res.setHeader("Content-Disposition", "attachment; filename=lgcu_student_applications.csv");
+                        res.status(200).json(ret.results);
+                    }
+                    else {
+                        res.status(200).json(ret);
+                    }
+                });
+            }
+            else {
+                res.status(200).json({"error":"Invalid Fields", "results":null });
+            }
+        });
+    }
+    catch(ex){
+        res.status(200).json({"errorMessage":"Error Processing Request (AC2) : " + ex, "results":null });
+    }
+}
+
 /* TalentLMS */
 function createTLMSUser(req, res){
     try {
@@ -361,6 +437,7 @@ function courseUnregister(req, res){
 /* Site Routes */
 router.get('/getCopyrightDate', getCopyrightDate);
 router.get('/lgcuCheck', lgcuCheck);
+router.post('/submitStudentApp', submitStudentApp);
 
 /* TalentLMS */
 router.post('/createTLMSUser', createTLMSUser);
@@ -376,6 +453,8 @@ router.post('/updateUser', updateUser);
 router.post('/userSearch', userSearch);
 router.post('/getUserById', getUserById);
 router.post('/generateStudentId', generateStudentId);
+router.post('/getStudentApps', getStudentApps);
+router.post('/downloadStudentApps', downloadStudentApps);
 
 /* Emails */
 router.post('/sendEmail', sendEmail);

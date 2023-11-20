@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { saveAs } from 'file-saver';
 
+import { addDays, subDays, format } from 'date-fns';
 import ReactTable from 'react-table';
 import withFixedColumns from 'react-table-hoc-fixed-columns';
 
@@ -32,11 +34,9 @@ class MyAdmin extends Component{
                 studentId:"", accountId:"", talentlmsId:{}
             },
             degreeList:[], areaList:[], majorResults:[],
-            updateType:null,
-            courseSearch:[],
-            currentCourses:[],
-            queuedCourses:[],
-            accountTransactions:[]
+            updateType:null, courseSearch:[], currentCourses:[],
+            queuedCourses:[], accountTransactions:[],
+            studentAppDate: format(subDays(new Date(),7), "yyyy-MM-dd"), studentAppCount: 0
         }
 
         this.toggleSpinner = this.toggleSpinner.bind(this);
@@ -65,10 +65,14 @@ class MyAdmin extends Component{
         this.queueCourse = this.queueCourse.bind(this);
         this.loadAccountInfo = this.loadAccountInfo.bind(this);
         this.convertItemData = this.convertItemData.bind(this);
+
+        this.getStudentApps = this.getStudentApps.bind(this);
+        this.downloadStudentApps = this.downloadStudentApps.bind(this);
     }
 
     componentDidMount(){
         this.loadCourses();
+        this.getStudentApps();
         this.buildFilterList();
     }
 
@@ -79,7 +83,6 @@ class MyAdmin extends Component{
         var filterData = this.state.courseSearch.filter(function(course){ 
             var ret = false;
             try {
-                
                 ret = ((self.state.searchCourseQuery !== "") &&
                 (  (course.name && course.name.toLowerCase().indexOf(self.state.searchCourseQuery.toLowerCase()) >= 0)
                 || (course.courseCode && course.courseCode.toLowerCase().indexOf(self.state.searchCourseQuery.toLowerCase()) >= 0)
@@ -111,6 +114,29 @@ class MyAdmin extends Component{
             <div className="mylgcu-admin">
                 {/* Spinner */}
                 {this.state.spinner && <div className="spinner"><i className="fas fa-cog fa-spin"/><span>Loading</span></div> }
+                {/* Student Applications Tool*/}
+                <div className="mylgcu-content-section inverse student-apps">
+                    <div className="section-title">LGCU Student Applications</div>
+                    
+                    <div className="content-block sz3">
+                        <div className="block-label-title">Start Date Range</div>
+                        <div className="block-container">                            
+                            <div className="content-info icon">
+                                <i className="fas fa-calendar-alt" />
+                                <input type="date" name="studentAppDate" value={this.state.studentAppDate} onChange={(e) => this.onSearchChange(e)} />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className='content-block sz7'>
+                        <div className='block-label-title' />
+                        <div className={`download-btn ${this.state.studentAppCount === 0 ? "empty":""}`} onClick={this.downloadStudentApps}>
+                            <span>{this.state.studentAppCount}</span>
+                            <span>Applications Avaliable</span>
+                            <i className="fas fa-download" />
+                        </div>
+                    </div>
+                </div>
 
                 {/* Search Section */}
                 <div className="mylgcu-content-section inverse">
@@ -676,13 +702,23 @@ class MyAdmin extends Component{
     onSearchChange(e){
         var self = this;
         try {
-            var name = e.target.name;           
-            self.setState({ [name]: e.target.value });
+            var name = e.target.name, value = e.target.value;
+
+            if(name === "studentAppDate"){
+                value = !isNaN(new Date(value)) ? format(addDays(new Date(value),1), "yyyy-MM-dd") : this.state.studentAppDate;
+            }
+            
+            self.setState({ [name]: value },()=>{
+                if(name === "studentAppDate"){                 
+                    self.getStudentApps();
+                }
+            });
         }
         catch(ex){
             console.log("[Error] changing search: ",ex);
         }
     }
+
     searchEnterQuery(e){
         try {
             if(e.charCode === 13 && e.shiftKey === false) {
@@ -694,6 +730,7 @@ class MyAdmin extends Component{
             console.log("Error with search entry: ",ex);
         }
     }
+
     searchQuery(){
         var self = this;
         try {
@@ -1171,6 +1208,60 @@ class MyAdmin extends Component{
             console.log("Error converting data: ",ex);
         }
         return ret;
+    }
+
+    getStudentApps(){
+        let self = this;
+        try {
+            var sessionInfo = localStorage.getItem(self.props.mySessKey);
+            if(sessionInfo) {
+                var localUser = JSON.parse(sessionInfo);
+                var postData = { requestUser: { _id: localUser._id} };
+                self.setState({spinner: true}, ()=>{
+                    axios.post(`${self.props.rootPath}/api/getStudentApps?startDt=${self.state.studentAppDate}`, postData, {'Content-Type': 'application/json'})
+                    .then(function(response) {
+                        if(response.data.error){
+                            //self.setState({ error: response.data.error });
+                            console.log(response.data.error);
+                        }
+                        else {
+                            self.setState({ studentAppCount: response.data.results });
+                        }
+                    }).finally(()=> { self.toggleSpinner(false); });  
+                });
+            }
+        }
+        catch(ex){
+            console.log(`Error Getting Student Application Count: ${ex}`);
+        }
+    }
+
+    downloadStudentApps(){
+        let self = this;
+        try {
+            if(this.state?.studentAppCount > 0){
+                var sessionInfo = localStorage.getItem(self.props.mySessKey);
+                if(sessionInfo) {
+                    var localUser = JSON.parse(sessionInfo);
+                    var postData = { requestUser: { _id: localUser._id} };
+                    self.setState({spinner: true}, ()=>{
+                        axios.post(`${self.props.rootPath}/api/downloadStudentApps?startDt=${self.state.studentAppDate}`, postData, { 'Accept': 'text/csv' })
+                        .then(function(response) {
+                            if(response.data.error){
+                                console.log(response.data.error);
+                            }
+                            else {
+                                const blob = new Blob([response.data], { type: 'text.csv', });
+                                saveAs(blob, `lgcu_student_applications_${self.state.studentAppDate}.csv`);
+                            }
+                        }).finally(()=> { self.toggleSpinner(false); });  
+                    });
+                }
+            }
+        }
+        catch(ex){
+            console.log(`Error Getting Student Application Count: ${ex}`);
+        }
     }
 }
 

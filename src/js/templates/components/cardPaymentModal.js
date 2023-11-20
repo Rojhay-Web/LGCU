@@ -3,8 +3,8 @@ import { Modal } from 'react-bootstrap';
 import axios from 'axios';
 
 var AppIdGlobal = "";
-//var rootPath = "";
 var rootPath = (window.location.href.indexOf("localhost") > -1 ? "http://localhost:2323" : "");
+var is_local = window.location.href.indexOf("localhost") > -1;
 
 /* Body */
 class CardPayment extends Component{
@@ -344,33 +344,38 @@ class CardPayment extends Component{
                     }
                 };
                 
-                self.setState({ returnMessage: {"type":"processing", "message":""} }, () =>{
-                    axios.post(rootPath + "/api/applicationCharge", chargeForm, {'Content-Type': 'application/json'})
-                    .then(function(resp) {
-                        try {
-                            var response = resp.data;
-                            if(response.errorMessage == null){
-                                // Successful Charge
-                                bannerMessage.type = "success";
-                                bannerMessage.message = "Succesful Charge";
-                                self.props.cbFunc();
+                if(is_local){
+                    self.props.cbFunc();
+                }
+                else {
+                    self.setState({ returnMessage: {"type":"processing", "message":""} }, () =>{
+                        axios.post(rootPath + "/api/applicationCharge", chargeForm, {'Content-Type': 'application/json'})
+                        .then(function(resp) {
+                            try {
+                                var response = resp.data;
+                                if(response.errorMessage == null){
+                                    // Successful Charge
+                                    bannerMessage.type = "success";
+                                    bannerMessage.message = "Succesful Charge";
+                                    self.props.cbFunc();
+                                }
+                                else {
+                                    alert("Error Processing Payment");
+                                    console.log("[Error] Processing Payment: ", response.errorMessage);
+                                    // Error Banner
+                                    bannerMessage.type = "error";
+                                    bannerMessage.message = (response.results.Error ? response.results.Error.messages[0].description : response.errorMessage);
+                                }
                             }
-                            else {
-                                alert("Error Processing Payment");
-                                console.log("[Error] Processing Payment: ", response.errorMessage);
-                                // Error Banner
+                            catch(ex){
+                                alert("Error Processing Payment Please Contact: admissions@lenkesongcu.com");
                                 bannerMessage.type = "error";
-                                bannerMessage.message = (response.results.Error ? response.results.Error.messages[0].description : response.errorMessage);
+                                bannerMessage.message = "Error Processing Payment Please Contact: admissions@lenkesongcu.com";
                             }
-                        }
-                        catch(ex){
-                            alert("Error Processing Payment Please Contact: admissions@lenkesongcu.com");
-                            bannerMessage.type = "error";
-                            bannerMessage.message = "Error Processing Payment Please Contact: admissions@lenkesongcu.com";
-                        }
-                        self.setState({ returnMessage: bannerMessage });
+                            self.setState({ returnMessage: bannerMessage });
+                        });
                     });
-                });
+                }
             }
         }
         catch(ex){
