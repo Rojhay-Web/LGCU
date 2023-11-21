@@ -4,7 +4,7 @@ import axios from 'axios';
 
 var AppIdGlobal = "";
 var rootPath = (window.location.href.indexOf("localhost") > -1 ? "http://localhost:2323" : "");
-var is_local = window.location.href.indexOf("localhost") > -1;
+var is_local = true; //window.location.href.indexOf("localhost") > -1;
 
 /* Body */
 class CardPayment extends Component{

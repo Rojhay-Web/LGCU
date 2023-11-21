@@ -30,12 +30,12 @@ var charge = {
                 function(ret){
                     if(ret.errorMessage){
                         // Unsuccessfully Charge
-                       console.log("Unsuccessful Charge");
+                       console.log("Unsuccessful Charge [E0]");
                        console.log(ret.errorMessage);
                     }
                     else if(ret.results.transaction_status != "approved"){
                         ret.errorMessage = "Transaction Not Approved";
-                        console.log("Unsuccessful Charge");
+                        console.log("Unsuccessful Charge [E1]");
                         console.log(ret.results);
                     }
                     else {
@@ -71,13 +71,13 @@ var charge = {
                 function(ret){
                     if(ret.errorMessage){
                         // Unsuccessfully Charge
-                       console.log("Unsuccessful Charge");
+                       console.log("Unsuccessful Charge [E10]");
                        console.log(ret.errorMessage);
                        callback(ret);
                     }
                     else if(ret.results.transaction_status != "approved"){
                         ret.errorMessage = "Transaction Not Approved";
-                        console.log("Unsuccessful Charge");
+                        console.log("Unsuccessful Charge [E11]");
                         console.log(ret.results);
                         callback(ret);
                     }
