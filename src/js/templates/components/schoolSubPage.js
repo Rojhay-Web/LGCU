@@ -16,7 +16,7 @@ class SchoolSub extends Component{
                     {(Object.keys(this.props.data.degrees).length === 0) &&             
                         <div className="section-container noDegreeData">
                             <span>To obtain information or any general questions regarding our School of {this.props.data.title} please contact our admissions team at </span>
-                            <a href="mailto:admissions@lenkesongcu.org">admissions@lenkesongcu.org</a>
+                            <a href="mailto:lenkeson8@gmail.com">lenkeson8@gmail.com</a>
                         </div>
                     }
                     {(this.props.data.documents && this.props.data.documents.length > 0) &&

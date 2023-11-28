@@ -392,7 +392,7 @@ function courseRegister(req, res){
                 talentlms.courseRegister(userInfo, courseInfo,function(courseRet){
                     if(courseRet.errorMessage){
                         //Send error email
-                        mail.sendEmail({ email: "admin@lenkesongcu.org", title:"Registration Error", formData:{}, additionalData:{},
+                        mail.sendEmail({ email: "lenkeson8@gmail.com", title:"Registration Error", formData:{}, additionalData:{},
                             subject:"Unable to Register student for course [ID]: "+courseInfo.id +" [student Id]:"+userInfo.studentId+" Error: "+ courseRet.errorMessage
                             }, function(mailRet){});
                     }

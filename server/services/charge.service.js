@@ -18,7 +18,7 @@ var database = {
 var charge = {
     applicationCharge:function(chargeInfo, callback){ 
         var response = {"errorMessage":null, "results":null};
-        var defaultEmail = "admin@lenkesongcu.org";
+        var defaultEmail = "lenkeson8@gmail.com";
 
         /* { userEmail:str, appId:str, chargeDescription:str, 
             cardInfo:{cardNumber, cardExp, cardCode, firstname, lastname, zip, country},
@@ -58,7 +58,7 @@ var charge = {
     },
     accountCharge(accountInfo, chargeInfo, callback){
         var response = {"errorMessage":null, "results":null};
-        var defaultEmail = "admin@lenkesongcu.org";
+        var defaultEmail = "lenkeson8@gmail.com";
 
         /* { userEmail:str, studentId:str, chargeDescription:str, 
             cardInfo:{cardNumber, cardExp, cardCode, firstname, lastname, zip, country},

@@ -33,21 +33,21 @@ class MajorSub extends Component{
                         {this.state.majorData.comingSoon && 
                             <div className="section-container">
                                 <h2 className="lrgTitle ctr fullTitle">{this.state.fullTitle}</h2>
-                                <p>To obtain information or any general questions regarding our {this.state.majorData.title} degree please contact our admissions team at <a href="mailto:admissions@lenkesongcu.org">admissions@lenkesongcu.org</a></p>
+                                <p>To obtain information or any general questions regarding our {this.state.majorData.title} degree please contact our admissions team at <a href="mailto:lenkeson8@gmail.com">lenkeson8@gmail.com</a></p>
                             </div>
                         }
 
                         {!this.state.majorData.comingSoon &&
                             <div className="section-container">
                                 <h2 className="lrgTitle ctr fullTitle">{this.state.fullTitle} & Christian Leadership</h2>
-                                <p>Our {this.state.majorData.title} degree is one of the many competitive {this.state.majorData.degreeLvl} degrees that we offer here at Lenkenson Global Christian University.  If you are interested in becoming a student please submit a <a href="/apply?type=student">Student Application</a> or for more information please contact our admissions staff directly via email <a href="mailto:admissions@lenkesongcu.org">admissions@lenkesongcu.org</a></p>
+                                <p>Our {this.state.majorData.title} degree is one of the many competitive {this.state.majorData.degreeLvl} degrees that we offer here at Lenkenson Global Christian University.  If you are interested in becoming a student please submit a <a href="/apply?type=student">Student Application</a> or for more information please contact our admissions staff directly via email <a href="mailto:lenkeson8@gmail.com">lenkeson8@gmail.com</a></p>
 
                                 <h2 className="lrgTitle ctr" data-text="Curriculum">Curriculum</h2>
 
                                 {this.state.majorData.courses.length === 0 && 
                                     <div className="course-section noCourseData">                                    
                                         <span>To get information or any general questions regarding our {this.state.majorData.title} degree please contact our admissions team at </span>
-                                        <a href="mailto:admissions@lenkesongcu.org">admissions@lenkesongcu.org</a>
+                                        <a href="mailto:lenkeson8@gmail.com">lenkeson8@gmail.com</a>
                                         <span> and request the course curriculum and degree information.</span>                                    
                                     </div>
                                 }

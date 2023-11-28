@@ -45,7 +45,7 @@ class Apply extends Component{
         this.state={
             params:"",
             facultyApplication:{
-                "title":"faculty application", "sendAddress":"admin@lenkesongcu.org",
+                "title":"faculty application", "sendAddress":"lenkeson8@gmail.com",
                 "subject":"Faculty Application", "additionalData":{}, "type":"section",
                 "sendMessage":"Thank you we have received your application we will be review your application and be in contact with you.",
                 "elements":[
@@ -203,7 +203,7 @@ class Apply extends Component{
                         <h2 className="lrgTitle ctr" data-text="Faculty Application">Faculty Application</h2>
                         <div className="section-container">                            
                             <FormCpt form={this.state.facultyApplication} />
-                            <p className="form-info">Please submit via email at admin@lenkesongcu.org copies of unofficial transcripts, Curriculum Vitae or resume. If hired, official transcripts will be required. Official State issued government identifications and background check will be required if employment is offered. All required documents must be submitted to Human Resources before beginning employment. Employment offer will be made only based on student enrollment.</p>
+                            <p className="form-info">Please submit via email at lenkeson8@gmail.com copies of unofficial transcripts, Curriculum Vitae or resume. If hired, official transcripts will be required. Official State issued government identifications and background check will be required if employment is offered. All required documents must be submitted to Human Resources before beginning employment. Employment offer will be made only based on student enrollment.</p>
                             
                             <h3 className="lrgTitle ctr" data-text="CERTIFICATION OF APPLICATION">CERTIFICATION OF APPLICATION</h3>
                             <p className="form-info">I certify that all information provided on this application is accurate. I understand that if I provide false information to Lenkeson Global Christian University, no employment will be offered. This is also cause for termination.</p>

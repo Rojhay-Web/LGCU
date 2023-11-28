@@ -156,7 +156,7 @@ class StudentPayment extends Component{
 
                     <div className="card-payment-container">
                         <div className="details-container card-details">
-                            <p className="description">Courses will be added to students account after payment has been processed.  Students will have a 2 weeks grace period after course registration to remove course (Please contact admissions@lenkesongcu.com to unegister from any course).</p>
+                            <p className="description">Courses will be added to students account after payment has been processed.  Students will have a 2 weeks grace period after course registration to remove course (Please contact lenkeson8@gmail.com to unegister from any course).</p>
                             <div className="card-form">
                                 <div className="form-container">
                                     <div className="card-display">
@@ -373,9 +373,9 @@ class StudentPayment extends Component{
                                 }
                             }
                             catch(ex){
-                                alert("Error Processing Payment Please Contact: info@lenkesongcu.com");
+                                alert("Error Processing Payment Please Contact: lenkeson8@gmail.com");
                                 bannerMessage.type = "error";
-                                bannerMessage.message = "Error Processing Payment Please Contact: info@lenkesongcu.com";
+                                bannerMessage.message = "Error Processing Payment Please Contact: lenkeson8@gmail.com";
                             }
 
                             self.setState({ returnMessage: bannerMessage });

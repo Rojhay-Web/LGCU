@@ -368,9 +368,9 @@ class CardPayment extends Component{
                                 }
                             }
                             catch(ex){
-                                alert("Error Processing Payment Please Contact: admissions@lenkesongcu.com");
+                                alert("Error Processing Payment Please Contact: lenkeson8@gmail.com");
                                 bannerMessage.type = "error";
-                                bannerMessage.message = "Error Processing Payment Please Contact: admissions@lenkesongcu.com";
+                                bannerMessage.message = "Error Processing Payment Please Contact: lenkeson8@gmail.com";
                             }
                             self.setState({ returnMessage: bannerMessage });
                         });

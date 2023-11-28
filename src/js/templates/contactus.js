@@ -38,7 +38,7 @@ class Contact extends Component{
         this.state = {
             contactCards:[],
             contactForm:{
-                "title":"contact us", "sendAddress":"admissions@lenkesongcu.org",
+                "title":"contact us", "sendAddress":"lenkeson8@gmail.com",
                 "subject":"Contact Us Form Submission", "additionalData":{}, "type":"core",
                 "sendMessage":"Thank you we have received message we will respond as soon as we get the opportunity.",
                 "elements":[

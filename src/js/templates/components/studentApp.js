@@ -23,7 +23,7 @@ class StudentApp extends Component{
             applicationId:null,
             majorResults:[],
             degreeList:[],
-            sendAddress:"admin@lenkesongcu.org",
+            sendAddress:"lenkeson8@gmail.com",
             form: {
                 firstName:{"title":"First Name","required":true, "value":""},
                 middleName:{"title":"Middle Name","required":false, "value":""},
@@ -190,7 +190,7 @@ class StudentApp extends Component{
                                 <textarea type="text" name="employmenthistory" className="" placeholder="Employment History" value={this.state.form.employmenthistory.value} onChange={(e) => this.onElementChange(e)}/>
                             </div>
                             
-                            <p className="form-info">Please submit via email at admin@lenkesongcu.org copies of unofficial transcripts, Curriculum Vitae or resume. If offered admissions, official transcripts will be required. Official State issued government identifications will be required if admission is offered. All required documents must be submitted to the Admissions Office before registering for classes. For more information regarding admissions requirements, please log into the University Website www.lenkesongcu.org and click on admissions. Please read and sign the Certification of Application and Non-Discrimination Policy below.</p>       
+                            <p className="form-info">Please submit via email at lenkeson8@gmail.com copies of unofficial transcripts, Curriculum Vitae or resume. If offered admissions, official transcripts will be required. Official State issued government identifications will be required if admission is offered. All required documents must be submitted to the Admissions Office before registering for classes. For more information regarding admissions requirements, please log into the University Website www.lenkesongcu.org and click on admissions. Please read and sign the Certification of Application and Non-Discrimination Policy below.</p>       
                             <h3 className="lrgTitle ctr" data-text="CERTIFICATION OF APPLICATION">CERTIFICATION OF APPLICATION</h3>
                             <p className="form-info">I certify that all information provided on this application is accurate. I understand that if I provide false information to Lenkeson Global Christian University, no employment will be offered. This is also cause for termination.</p>
                             <p className="form-info">I authorize Lenkeson Global Christian University to contact educational institutions that I attended and former/current employers to release information regarding enrollment, graduation and job performance. Furthermore, I authorize Lenkeson Global Christian University to contact references listed on the job application to release information about me.</p>
@@ -202,7 +202,7 @@ class StudentApp extends Component{
                     {this.state.selectedSection === "submitted" && 
                         <div className="form-section-container submitted">
                             <h2>You Are Almost Finished</h2>
-                            <p>Your Lenkeson Global Christian University student application has been submitted, to complete your application please email all additional required documentation to admissions@lenkesongcu.org.</p>                                                      
+                            <p>Your Lenkeson Global Christian University student application has been submitted, to complete your application please email all additional required documentation to lenkeson8@gmail.com.</p>                                                      
                         </div> 
                     }
                 </div>
