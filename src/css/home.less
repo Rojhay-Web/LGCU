@@ -256,6 +256,71 @@
                 }
             }
 
+            .wrap-content {
+                .multi-img-container {
+                    width: 45%;
+                    padding: 10px; 
+                    position: relative;
+                    img { float: left; margin: 50% 16px 8px 8px; }                     
+                    .lrg { 
+                        width: 100%; 
+                        object-fit: cover; 
+                        border: 2px solid rgba(255,255,255,1);
+                        -moz-box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+                        -webkit-box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+                        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+                    }
+                    .sm {
+                        width: 40%;
+                        position: absolute;
+                        right: 0;
+                        bottom:0;
+                        background:rgba(255,255,255,1);
+                        border: 2px solid rgba(255,255,255,1);
+                        -moz-box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+                        -webkit-box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+                        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+                    }
+
+                    &.mini-plate { width: 35%; padding: 10px 40px; }
+
+                    @media @mobile-device { 
+                        width: 100% !important; 
+                        img { float: none !important; margin: 0 !important; }
+                    }
+                }
+
+                .split-content { 
+                    margin-left: 30px; flex:1; text-align: justify;
+                    .lrgTitle { 
+                        text-align: right;
+                        &::before { left: initial; right: 20px; }
+                    }
+                    p { 
+                        font-size: 1.8rem; color: #fff; 
+                        font-weight: 100; margin-bottom: 20px; line-height: 3.2rem;
+
+                        &.small { font-size: 1.2rem; line-height: 2rem; }
+                        &.c0 { color: #000;}
+                    }
+                    .btn-container {
+                        justify-content: left;
+                        margin:0;
+                    }
+                }
+
+                @media @mobile-device { 
+                    flex-direction: column;
+                    .split-content { 
+                        margin-left:0; 
+                        p { font-size: 1.5rem; line-height: 2.4rem; }
+                        .btn-container {
+                            .clear{ color: rgba(255,255,255,1); }
+                        }
+                    }
+                }
+            }
+
             .split-section {
                 display: flex;
                 flex-direction: row;

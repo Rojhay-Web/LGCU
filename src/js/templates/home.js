@@ -20,7 +20,7 @@ import introVideo from '../../assets/site/intro_video.mov';
 
 import img8 from '../../assets/site/mini/img8.jpg';
 import img11 from '../../assets/site/mini/img11.jpg';
-import asic_logo from '../../assets/site/mini/asic_logo.jpg';
+import asic_logo from '../../assets/site/mini/asic_logo_23_27.jpg';
 
 const stb = new StoryblokService();
 
@@ -164,17 +164,18 @@ function Home(props){
 
             <section className="home-section">
                 <div className="section-container">
-                    <div className="split-section" id="imgSplit">
-                        <div className="split-content">
-                           <h2  className="lrgTitle" data-text="Accreditation">Accreditation</h2>
-                            <p className='small'>Lenkeson Global Christian University is accredited by Accreditation Service for International Schools, Colleges and Universities (ASIC). ASIC accreditation helps students and parents make a more informed choice and will also help a school, college, university, training provider or distance education provider, demonstrate to the international student body that they are a high quality institution.</p>
-                            <p className='small'>ASIC is recognized by UKVI in UK and is a full member of The International Network for Quality Assurance Agencies in Higher Education (INQAAHE), is a member of the BQF (British Quality Foundation) and are institutional members of EDEN (European Distance and E-Learning Network).</p>
-                        </div>
-
+                    <div className="wrap-content" id="imgSplit">
                         <div className="multi-img-container mini-plate">
                             <img alt="Accreditation" className="multi-img lrg" src={asic_logo} />
-                        </div>                                                    
-                    </div>
+                        </div>
+
+                        <div className="split-content">
+                            <h2  className="lrgTitle" data-text="Accreditation">Accreditation</h2>
+                            <p className='small'>Lenkeson Global Christian University holds International Accreditation from ASIC (Accreditation Service for International Schools, Colleges, and Universities).</p>
+                            <p className='small'>ASIC Accreditation is a leading, globally recognised quality standard in international education. Institutions undergo an impartial and independent external assessment process to confirm their provision meets rigorous internationally accepted standards, covering the whole spectrum of its administration, governance, and educational offering. Achieving ASIC Accreditation demonstrates to students and stakeholders that an institution is a high-quality education provider that delivers safe and rewarding educational experiences and is committed to continuous improvement throughout its operation.</p>
+                            <p className='small'>About ASIC: One of the largest international accreditation agencies operating in 70+ countries, ASIC is recognised in the UK by UKVI - UK Visas and Immigration (part of the Home Office of the UK Government), is ISO 9001:2015 (Quality Management Systems) Accredited and is a Full Member of The International Network for Quality Assurance Agencies in Higher Education (INQAAHE), a member of the BQF (British Quality Foundation), a member of the International Schools Association (ISA), and an institutional member of EDEN (European Distance and E-Learning Network).</p>
+                        </div>
+                    </div>    
                 </div>
             </section> 
 
