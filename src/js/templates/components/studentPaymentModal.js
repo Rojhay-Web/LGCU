@@ -22,7 +22,7 @@ class StudentPayment extends Component{
             cardTypeList:["Visa", "Mastercard", "American Express", "Discover", "JCB", "Diners Club"],
             yearList:[],
             errorList:[],
-            returnMessage:{"type":"", "message":""}
+            returnMessage:{"type":"error", "message":"Payment temporarily disabled please contact lenkeson8@gmail.com to make any payments"}
         }   
         
         this.onElementChange = this.onElementChange.bind(this);
@@ -239,7 +239,7 @@ class StudentPayment extends Component{
                 </Modal.Body>
                 <Modal.Footer>
                     <div className="btn-container">
-                        {this.state.returnMessage.type !== "success" && <div className={"lBtn clear t1" +(this.state.returnMessage.type === "processing" ? " disable" : "")} onClick={this.submitForm}><span>Submit</span><i className="btn-icon far fa-credit-card"></i></div> }
+                        {this.state.returnMessage.type !== "success" && <div className={"lBtn clear t1 disable" +(this.state.returnMessage.type === "processing" ? " disable" : "")} onClick={this.submitForm}><span>Submit</span><i className="btn-icon far fa-credit-card"></i></div> }
                         <div className={"lBtn clear t1" +(this.state.returnMessage.type === "processing" ? " disable" : "")} onClick={this.closeForm}><span>Cancel</span><i className="btn-icon far fa-times-circle"></i></div>
                     </div>
                 </Modal.Footer>
@@ -305,6 +305,9 @@ class StudentPayment extends Component{
     submitForm(){
         var self = this;
         try {
+            alert(`Payment temporarily disabled please contact lenkeson8@gmail.com to make any payments`);
+
+            /*
             if(this.state.returnMessage.type !== "processing" && this.cardFormValidation()){
                 var cardExp = this.state.cardExpMth+this.state.cardExpYr;
                 var charge = parseInt(this.props.totalPrice);
@@ -383,6 +386,7 @@ class StudentPayment extends Component{
                     });
                 }
             }
+            */
         }
         catch(ex){
             console.log("Error with form validation: ",ex);
