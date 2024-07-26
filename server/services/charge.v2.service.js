@@ -30,7 +30,7 @@ module.exports = {
             // Get Oauth Token
             let oauthToken = store.searchCacheStore('clover_access_token');
             if(!oauthToken) {
-                const oauthTokenRes = GetOAuthToken(request_code);
+                const oauthTokenRes = await GetOAuthToken(request_code);
                 if(oauthTokenRes.error) { throw oauthTokenRes.error; }
 
                 // Store In Cache
@@ -41,7 +41,7 @@ module.exports = {
             // Get Api Access Key (pakms)
             let apiKey = store.searchCacheStore('clover_api_key');
             if(!apiKey) {
-                const apiKeyRes = GetAPIKey(oauthToken);
+                const apiKeyRes = await GetAPIKey(oauthToken);
                 if(apiKeyRes.error) { throw apiKeyRes.error; }
                 
                 // Store In Cache
@@ -50,23 +50,23 @@ module.exports = {
             }
 
             // Create Card Token
-            const cardToken = CreateCardToken(apiKey, cardInfo);
+            const cardToken = await CreateCardToken(apiKey, cardInfo);
             if(cardToken.error) { throw cardToken.error; }
-
+                
             // Create Order
-            const orderInfo = CreateOrder(oauthToken, title, description, chargeItems);
+            const orderInfo = await CreateOrder(oauthToken, title, description, chargeItems);
             if(orderInfo.error) { throw orderInfo.error; }
-
+                
             // Order Payment
-            const orderPayStatus = OrderPayment(orderInfo.id, cardToken.id);
+            const orderPayStatus = await OrderPayment(oauthToken, orderInfo.results?.id, cardToken.results);
             if(orderPayStatus.error) { throw orderPayStatus.error; }
-
+                
             // TODO: Send Charge Receipt
             if(studentId){
                 // TODO: Add Transaction Info to User
             }
 
-            return { results: orderPayStatus.status };
+            return { results: orderPayStatus?.results?.status };
         }
         catch(ex){
             log.error(`Charging Card: ${ex}`);
@@ -85,8 +85,16 @@ async function GetOAuthToken(code){
             code: code
         };
 
-        let dataRet = await fetch(url, { method: 'POST', body: post_data });
-        if(dataRet.status != 200) {
+        let res = await fetch(url, { 
+            method: 'POST', body: JSON.stringify(post_data),
+            headers: { 
+                "Accept":"application/json",
+                "Content-Type":"application/json",
+            }
+        });
+        let dataRet = await res.json();
+        
+        if(res.status != 200) {
             log.error(`Getting Clover OAuth Token: ${dataRet.message}`);
             return { error: dataRet.message };
         }
@@ -103,14 +111,17 @@ async function GetAPIKey(authToken){
     try {
         let url = `${clover_paths[process.env.CLOVER_ENV].payment}/pakms/apikey`;
 
-        let dataRet = await fetch(url, { 
+        let res = await fetch(url, { 
             method: 'GET',
             headers: {
                 "Content-Type":"application/json", 
-                "Authentication": `Bearer ${authToken}`
+                "Authorization": `Bearer ${authToken}`
             }
         });
-        if(dataRet.status != 200) {
+        
+        let dataRet = await res.json();
+
+        if(res.status != 200) {
             log.error(`Getting Clover API Key: ${dataRet.message}`);
             return { error: dataRet.message };
         }
@@ -128,29 +139,34 @@ async function CreateCardToken(apiKey, cardInfo){
         // TODO: Validate Card Info Object
         let url = `${clover_paths[process.env.CLOVER_ENV].token}/v1/tokens`;
         const post_data = {
-           "number": cardInfo.number,
-            "exp_month": cardInfo.exp_month,
-            "exp_year": cardInfo.exp_year,
-            "cvv": cardInfo.cvv,
-            "last4":cardInfo.number.slice(-4),
-            "first6":cardInfo.number.slice(0,6),
-            "country":cardInfo.country,
-            "brand":cardInfo.brand,
-            "name":cardInfo.name,
-            "address_line1":cardInfo.address,
-            "address_city":cardInfo.city,
-            "address_state":cardInfo.state,
-            "address_zip":cardInfo.zip,
-            "address_country":cardInfo.country
+            "card":{
+                "number": cardInfo.number,
+                "exp_month": cardInfo.exp_month,
+                "exp_year": cardInfo.exp_year,
+                "cvv": cardInfo.cvv,
+                "last4":cardInfo.number.slice(-4),
+                "first6":cardInfo.number.slice(0,6),
+                "country":cardInfo.country,
+                "brand":cardInfo.brand,
+                "name":cardInfo.name,
+                "address_line1":cardInfo.address,
+                "address_city":cardInfo.city,
+                "address_state":cardInfo.state,
+                "address_zip":cardInfo.zip,
+                "address_country":cardInfo.country
+            }
         };
 
-        let dataRet = await fetch(url, { 
-            method: 'POST', body: post_data,
+        let res = await fetch(url, { 
+            method: 'POST', body: JSON.stringify(post_data),
             headers: {
                 "Content-Type":"application/json", "apikey": apiKey
             }
         });
-        if(dataRet.status != 200) {
+
+        let dataRet = await res.json();
+
+        if(res.status != 200) {
             log.error(`Getting Clover Card Token: ${dataRet.message}`);
             return { error: dataRet.message };
         }
@@ -165,29 +181,32 @@ async function CreateCardToken(apiKey, cardInfo){
 
 async function CreateOrder(authToken, title, description, chargeItems){
     try {
-        // TODO: Validate/Transform Charge Items
-        const line_items = [...chargeItems];
+        const line_items = validateCharges(chargeItems);
+        if(line_items.error) { throw 'Validating Charge(s)'; }
 
         // TODO: GET Order Type
-        const order_type_id = "87T2P17PAC26Y";
+        const order_type_id = process.env.CLOVER_ORDER_TYPE;
 
         let url = `${clover_paths[process.env.CLOVER_ENV].base}/v3/merchants/${process.env.CLOVER_MERCHANT_ID}/atomic_order/orders`;
         const post_data = {
             orderCart:{
                 title: title, note: description, 
-                line_items: line_items, orderType: { id: order_type_id }
+                lineItems: line_items.results, 
+                orderType: { id: order_type_id },
+                currency:"USD"
             }
         };
 
-        let dataRet = await fetch(url, { 
-            method: 'POST', body: post_data,
+        let res = await fetch(url, { 
+            method: 'POST', body: JSON.stringify(post_data),
             headers: {
                 "Content-Type":"application/json", 
-                "Authentication": `Bearer ${authToken}`
+                "Authorization": `Bearer ${authToken}`
             }
         });
+        let dataRet = await res.json();
 
-        if(dataRet.status != 200) {
+        if(res.status != 200) {
             log.error(`Creating Clover Order: ${dataRet.message}`);
             return { error: dataRet.message };
         }
@@ -200,20 +219,30 @@ async function CreateOrder(authToken, title, description, chargeItems){
     }
 }
 
-async function OrderPayment(orderId, paymentId){
+async function OrderPayment(authToken, orderId, paymentId){
     try {
+        if(!orderId ){
+            log.error(`Error Validting Order Id For Payment`);
+            return {"error": "Paying Clover Order [E00]"};
+        }
+        else if(!paymentId){
+            log.error(`Error Validting Payment ID For Payment`);
+            return {"error": "Paying Clover Order [E01]"}
+        }
+
         let url = `${clover_paths[process.env.CLOVER_ENV].payment}/v1/orders/${orderId}/pay`;
         const post_data = { ecomind: "ecom", source: paymentId };
 
-        let dataRet = await fetch(url, { 
-            method: 'POST', body: post_data,
+        let res = await fetch(url, { 
+            method: 'POST', body: JSON.stringify(post_data),
             headers: {
                 "Content-Type":"application/json", 
-                "Authentication": `Bearer ${authToken}`
+                "Authorization": `Bearer ${authToken}`
             }
         });
+        let dataRet = await res.json();
 
-        if(dataRet.status != 200) {
+        if(res.status != 200) {
             log.error(`Paying Clover Order: ${dataRet.message}`);
             return { error: dataRet.message };
         }
@@ -223,5 +252,29 @@ async function OrderPayment(orderId, paymentId){
     catch(ex){
         log.error(`Paying Clover Order: ${ex}`);
         return { error: `Paying Clover Order: ${ex}` };
+    }
+}
+
+
+function validateCharges(chargeItems){
+    try {
+        let ret = [];
+
+        chargeItems.forEach((item)=>{
+            if(item?.name?.length > 0 && item?.price >=0){
+                let priceInCt = parseInt(item.price * 100);
+                ret.push({
+                    name: item.name, price: priceInCt,
+                    priceWithModifiers: priceInCt,
+                    printed: false, exchanged: false, isRevenue: true
+                });
+            }
+        });
+
+        return { results: ret };
+    }
+    catch(ex){
+        log.error(`Validating Charge Items: ${ex}`);
+        return { error: `Validating Charge Items: ${ex}` };
     }
 }

@@ -27,9 +27,9 @@ module.exports = function(store) {
     async function lgcu_charge(req, res){
         try {
             // Validate Params
-            utils.validateParam(["card_info", "title", "description", "chargeItems"], req.body);
+            utils.validateParam(["request_code", "card_info", "title", "description", "chargeItems"], req.body);
 
-            const ret = await charge.charge(req.body.card_info, req.body.title, req.body.description, req.body.chargeItems, req.body?.studentId);
+            const ret = await charge.charge(store, req.body.request_code, req.body.card_info, req.body.title, req.body.description, req.body.chargeItems, req.body?.studentId);
             res.status(200).json(ret);
         }
         catch(ex){
