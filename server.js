@@ -6,7 +6,6 @@ const app = express();
 
 
 const port = process.env.PORT || '2323';
-
  
 // Don't redirect if the hostname is `localhost:port` or the route is `/insecure`
 app.use(redirectToHTTPS([/localhost:(\d{4})/], [/\/insecure/], 301));
@@ -21,9 +20,13 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// init local cache store
+const CacheStore = require('./server/config/cache.store.js');
+let localCacheStore = new CacheStore();
+
 // Set our api routes
 app.use('/api', require('./server/controller/routes.controller.js'));
-app.use('/v2/api', require('./server/controller/routes.v2.controller.js'));
+app.use('/v2/api', require('./server/controller/routes.v2.controller.js')(localCacheStore));
 
 // Point static path to dist
 app.use(express.static(path.join(__dirname, 'build')));
