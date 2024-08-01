@@ -38,6 +38,33 @@ module.exports = function(store) {
         }
     }
 
+    async function lgcu_checkout(req, res){
+        try {
+            // Validate Params
+            utils.validateParam(["request_code", "email", "chargeItems"], req.body);
+
+            const ret = await charge.chargeCart(store, req.body.request_code, req.body.email, req.body.chargeItems, req.body?.studentId);
+            res.status(200).json(ret);
+        }
+        catch(ex){
+            log.error(`Generating Cart: ${ex}`);
+            res.status(response.SERVER_ERROR.UNAVAILABLE).json({"error":`Generating Cart: ${ex}` });
+        }
+    }
+
+    function lgcu_cart(req, res){
+        try {
+            console.log(" > S: ", req.params?.status);
+            // console.log(req);
+
+            res.status(200).json({ results: true });      
+        }
+        catch(ex){
+            log.error(`running lgcu cart: ${ex}`);
+            res.status(response.SERVER_ERROR.UNAVAILABLE).json({"error":`lgcu cart: ${ex}` });
+        }
+    }
+
     function oauth_start(req, res){
         try {
             const ret = charge.oauth_redirect();
@@ -46,7 +73,7 @@ module.exports = function(store) {
                 res.status(response.ERROR.BAD_REQUEST).json(ret);
             }
             else {
-                console.log(`redirecting to: ${ret.results}`);
+                log.debug(`redirecting to: ${ret.results}`);
                 res.redirect(ret.results);
             }
         }
@@ -71,15 +98,17 @@ module.exports = function(store) {
         }
     }
     
-    router.get('/test', (req, res)=> { res.status(200).json({ "return": "DONE"})});
-
+    router.get('/test', (req, res)=> { console.log(req); res.status(200).json({ "return": "DONE"})});
 
     router.post('/sendEmail', sendEmail);
 
     /* Charges */
     router.get('/oauth-start', oauth_start);
     router.get('/oauth-store', oauth_store);
+
     router.post('/lgcuCharge', lgcu_charge);
+    router.post('/lgcuCheckout', lgcu_checkout);
+    router.get('/lgcu-cart/:status', lgcu_cart);
 
     return router;
 }

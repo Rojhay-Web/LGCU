@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
+    "lt-server": "lt --port 2323 --subdomain lgcu-local",
     "build-css": "less-watch-compiler --run-once --main-file=app.less src/css/ public/css/",
     "watch-css": "npm run build-css && less-watch-compiler --main-file=app.less src/css/ public/css/",
     "build": "npm run build-css && react-scripts --openssl-legacy-provider build",
@@ -50,7 +51,8 @@
     "react-table-hoc-fixed-columns": "^2.1.1",
     "reactstrap": "^8.1.1",
     "storyblok-js-client": "^4.0.9",
-    "storyblok-react": "0.0.10"
+    "storyblok-react": "0.0.10",
+    "use-broadcast-channel": "^0.3.0"
   },
   "devDependencies": {
     "concurrently": "^6.2.0",

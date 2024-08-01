@@ -1,5 +1,11 @@
 require('dotenv').config();
-const log = require('./log.service');
+
+const { MongoClient, ObjectId } = require('mongodb');
+const log = require('./log.service'),
+    fns = require('date-fns');
+
+const client = new MongoClient(process.env.DatabaseConnectionString);
+(async () => { await client.connect(); log.debug(`Connected Successfully to db server`); })();
 
 const clover_paths = {
     "dev":{
@@ -7,10 +13,24 @@ const clover_paths = {
         "oauth":"https://apisandbox.dev.clover.com",
         "payment":"https://scl-sandbox.dev.clover.com",
         "token":"https://token-sandbox.dev.clover.com",
-        "redirect":"http://localhost:2323/v2/api/oauth-store"
+        "redirect":"http://localhost:2323/v2/api/oauth-store",
+        "redirectUrls":{
+            "success":"https://lgcu-local.loca.lt/v2/api/lgcu-cart/success",
+            "failure":"https://lgcu-local.loca.lt/v2/api/lgcu-cart/failure",
+            "cancel": "https://lgcu-local.loca.lt/v2/api/lgcu-cart/cancel"
+        },
     },
     "prod":{
-        "base":"", "oauth":"", "payment":"", "token":"", "redirect":""
+        "base":"https://www.clover.com", 
+        "oauth":"https://api.clover.com", 
+        "payment":"https://scl.clover.com", 
+        "token":"https://token.clover.com", 
+        "redirect":"https://www.lenkesongcu.org/v2/api/oauth-store",
+        "redirectUrls":{
+            "success":"https://www.lenkesongcu.org/v2/api/lgcu-cart/success",
+            "failure":"https://www.lenkesongcu.org/v2/api/lgcu-cart/failure",
+            "cancel": "https://www.lenkesongcu.org/v2/api/lgcu-cart/cancel"
+        },
     }
 };
 
@@ -25,8 +45,50 @@ module.exports = {
             return { error: `OAuth Redirect: ${ex}` };
         }
     },
+    chargeCart: async function(store, request_code, email, chargeItems, studentId=null){
+        try {
+            // Validations
+            if(request_code.length <= 0){
+                return { error: 'Invalid Request Code' };
+            }
+
+            // Get Oauth Token
+            let oauthToken = store.searchCacheStore('clover_access_token');
+            if(!oauthToken) {
+                const oauthTokenRes = await GetOAuthToken(request_code);
+                if(oauthTokenRes.error) { throw oauthTokenRes.error; }
+
+                // Store In Cache
+                oauthToken = oauthTokenRes.results.access_token;
+                store.updateCacheStore('clover_access_token', oauthToken, oauthTokenRes.results.access_token_expiration);
+            }                    
+
+            // Get Customer ID
+            const customerIdRes = await GetCustomerId(oauthToken, email, studentId);
+            let customerId = customerIdRes?.results ? customerIdRes.results : null;
+            
+            // Create Checkout Order
+            const checkoutInfo = await CreateCheckout(oauthToken, email, chargeItems, studentId, customerId);
+            if(checkoutInfo.error) { throw checkoutInfo.error; }            
+
+            return checkoutInfo;
+        }
+        catch(ex){
+            log.error(`Charging Card: ${ex}`);
+            return { error: `Charging Card: ${ex}` };
+        }
+    },
     charge: async function(store, request_code, cardInfo, title, description, chargeItems, studentId=null){
         try {
+            // Validations
+            const cardValidations = validateCard(cardInfo);
+            if(cardValidations.length > 0){
+                return { error: `${cardValidations.join(', ')}` };
+            }
+            else if(request_code.length <= 0){
+                return { error: 'Invalid Request Code' };
+            }
+
             // Get Oauth Token
             let oauthToken = store.searchCacheStore('clover_access_token');
             if(!oauthToken) {
@@ -60,10 +122,17 @@ module.exports = {
             // Order Payment
             const orderPayStatus = await OrderPayment(oauthToken, orderInfo.results?.id, cardToken.results);
             if(orderPayStatus.error) { throw orderPayStatus.error; }
-                
+            
             // TODO: Send Charge Receipt
             if(studentId){
                 // TODO: Add Transaction Info to User
+                const transactionInfo = {
+                    userId: new ObjectId(studentId),
+                    status: orderPayStatus?.results?.status,
+                    chargeItems: chargeItems
+                };
+                const collection = await dbCollection("mylgcu_charges");
+                // const charge_ret = collection.insertOne(transactionInfo);
             }
 
             return { results: orderPayStatus?.results?.status };
@@ -255,6 +324,123 @@ async function OrderPayment(authToken, orderId, paymentId){
     }
 }
 
+async function CreateCheckout(authToken, userEmail, chargeItems, studentId, customerId){
+    try {
+        const line_items = validateCheckoutCharges(chargeItems);
+        if(line_items.error) { throw 'Validating Charge(s)'; }
+
+        let url = `${clover_paths[process.env.CLOVER_ENV].base}/invoicingcheckoutservice/v1/checkouts`;
+        const post_data = {
+            customer: {
+                ...(customerId ? { id: customerId } : {}),
+                ...(studentId ? { lastName: studentId } : {}),
+                email: userEmail
+            },
+            redirectUrls: clover_paths[process.env.CLOVER_ENV].redirectUrls,
+            shoppingCart:{
+                total: line_items.total, subtotal: line_items.total,
+                lineItems: line_items.results
+            }
+        };
+
+        let res = await fetch(url, { 
+            method: 'POST', body: JSON.stringify(post_data),
+            headers: {
+                "X-Clover-Merchant-Id":`${process.env.CLOVER_MERCHANT_ID}`,
+                "accept":"application/json", 
+                "content-type":"application/json", 
+                "Authorization": `Bearer ${authToken}`
+            }
+        });
+        let dataRet = await res.json();
+
+        if(res.status != 200) {
+            log.error(`Creating Clover Checkout Order: ${dataRet.message}`);
+            return { error: dataRet.message };
+        }
+        
+        return { results: dataRet };
+    }
+    catch(ex){
+        log.error(`Creating Clover Order: ${ex}`);
+        return { error: `Creating Clover Order: ${ex}` };
+    }
+}
+
+async function GetCustomerId(authToken, email, studentId){
+    try {
+
+        let query = (studentId ? `lastName%20LIKE%20${studentId}`:`emailAddress%20LIKE%20${email}`);
+
+        let url = `${clover_paths[process.env.CLOVER_ENV].base}/v3/merchants/${process.env.CLOVER_MERCHANT_ID}/customers`;
+        let queryUrl = `${url}?expand=emailAddresses%2Cmetadata&filter=${query}`;
+        
+        let res = await fetch(queryUrl, { 
+            method: 'GET',
+            headers: {
+                "accept":"application/json", 
+                "content-type":"application/json", 
+                "Authorization": `Bearer ${authToken}`
+            }
+        });
+        let dataRet = await res.json();
+
+        if(res.status != 200) {
+            log.error(`Getting Clover Customer List: ${dataRet.message}`);
+            return { error: dataRet.message };
+        }
+
+        let retId = (dataRet?.elements?.length > 0 ? dataRet.elements[0].id : null);
+
+        return { results: retId };
+    }
+    catch(ex){
+        log.error(`Getting Clover Customer List: ${ex}`);
+        return { error: `Getting Clover Customer List: ${ex}` };
+    }
+}
+
+async function dbCollection(conn_collection) {
+    let collection = null;
+    try {
+        if(client?.s?.hasBeenClosed){
+            await client.connect();
+            log.debug(`Connected Successfully [Reconnected] to db server`);
+        }
+        
+        const db = client.db(process.env.DatabaseName);
+        collection = db.collection(conn_collection);
+    }
+    catch(ex){
+        log.error(`Connection to Database: ${ex}`);
+    }
+
+    return collection;
+}
+
+/* Validations */
+function validateCheckoutCharges(chargeItems){
+    try {
+        let ret = [], total = 0;
+
+        chargeItems.forEach((item)=>{
+            if(item?.name?.length > 0 && item?.price >=0){
+                let priceInCt = parseInt(item.price * 100);
+                ret.push({
+                    name: item.name, price: priceInCt,
+                    note:"", unitQty: 1
+                });
+                total += priceInCt;
+            }
+        });
+
+        return { results: ret, total: total };
+    }
+    catch(ex){
+        log.error(`Validating Checkout Charge Items: ${ex}`);
+        return { error: `Validating Checkout Charge Items: ${ex}` };
+    }
+}
 
 function validateCharges(chargeItems){
     try {
@@ -277,4 +463,64 @@ function validateCharges(chargeItems){
         log.error(`Validating Charge Items: ${ex}`);
         return { error: `Validating Charge Items: ${ex}` };
     }
+}
+
+function validateCard(cardInfo){
+    let ret = [];
+    try {
+        // Card Number
+        if(cardInfo.number?.length < 15){
+            ret.push(`Invalid Card Number`);
+        }
+
+        // Card Exp Date
+        if(cardInfo.exp_month?.length < 2 || cardInfo.exp_year?.length < 4 || !fns.isDate(fns.parseISO(`${cardInfo.exp_year}-${cardInfo.exp_month}-01`))){
+            ret.push(`Invalid Expiration Date`);
+        }
+
+        // Card CVV
+        if(cardInfo.cvv?.length < 3){
+            ret.push(`Invalid CVV Number`);
+        }
+
+        // Card country
+        if(cardInfo.country?.length <= 0){
+            ret.push(`Invalid Country`);
+        }
+
+        // Card brand
+        if(cardInfo.brand?.length <= 0){
+            ret.push(`Invalid Card Brand`);
+        }
+
+        // Card Cardholder name
+        if(cardInfo.name?.length <= 0){
+            ret.push(`Invalid Card Holder Name`);
+        }
+
+        // Card Cardholder address
+        if(cardInfo.address?.length <= 0){
+            ret.push(`Invalid Card Holder Address`);
+        }
+
+        // Card Cardholder city
+        if(cardInfo.city?.length <= 0){
+            ret.push(`Invalid Card Holder City`);
+        }
+
+        // Card Cardholder state
+        if(cardInfo.state?.length <= 0){
+            ret.push(`Invalid Card Holder State`);
+        }
+
+        // Card Cardholder zip
+        if(cardInfo.zip?.length <= 0){
+            ret.push(`Invalid Card Holder Zip`);
+        }
+    }
+    catch(ex){
+        log.error(`Validating Card: ${ex}`);
+        ret.push(`Error Code [00X]`);
+    }
+    return ret;
 }
