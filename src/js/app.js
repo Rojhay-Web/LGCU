@@ -20,6 +20,7 @@ import { Contact, ContactHeader } from './templates/contactus';
 import { Apply, ApplyHeader } from './templates/apply';
 import { myLGCU, myLGCUHeader} from './templates/myLgcu';
 import { Cosmetology, CosmetologyHeader } from './templates/cosmetology';
+import { PaymentPortal, PaymentPortalHeader } from './templates/paymentPortal';
 
 import TranslateVideo from './templates/components/translateVideoModal';
 
@@ -42,7 +43,8 @@ const routes = [
     {path:"/contactus", component:Contact, headerComponent:ContactHeader},
     {path:"/cosmetology", component:Cosmetology, headerComponent:CosmetologyHeader},
     {path:"/apply", component:Apply, headerComponent:ApplyHeader},
-    {path:"/mylgcu", component:myLGCU, headerComponent:myLGCUHeader}
+    {path:"/mylgcu", component:myLGCU, headerComponent:myLGCUHeader},
+    {path:"/payment-portal", component: PaymentPortal, headerComponent: PaymentPortalHeader }
 ];
 
 // API Route

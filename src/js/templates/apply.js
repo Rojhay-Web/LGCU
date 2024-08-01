@@ -13,6 +13,7 @@ import appImg from '../../assets/site/mini/img14.jpg';
 import FormCpt from './components/formCpt';
 import StudentApp from './components/studentApp';
 import CardPayment from './components/cardPaymentModal';
+import CloverCardPayment from './components/cloverPaymentModal';
 
 /* Header */
 class ApplyHeader extends Component{
@@ -89,7 +90,7 @@ class Apply extends Component{
                     ]}
                 ]
             },
-            modalStatus: false,
+            modalStatus: true,
             appId:"",
             cbFunc: function(){ }
         }
@@ -101,6 +102,7 @@ class Apply extends Component{
         this.modalShow = this.modalShow.bind(this);
         this.modalHide = this.modalHide.bind(this);
         this.initialReactGA = this.initialReactGA.bind(this);
+        this.buildChargeItems = this.buildChargeItems.bind(this);
     }
 
     componentDidMount(){ 
@@ -112,7 +114,17 @@ class Apply extends Component{
     initialReactGA(){
         ReactGA.initialize('G-K5C0Q6ZKKD');
         ReactGA.send({ hitType: "pageview", page: "/apply", title: "Apply" });
-        //ReactGA.pageview('/apply');
+    }
+
+    buildChargeItems(){
+        let ret = [];
+        try { 
+            ret.push({ name: `Registration Fee (Application: ${this.state.appId})`, price: 50 });
+        }
+        catch(ex){
+
+        }
+        return ret;
     }
 
     render(){        
@@ -122,7 +134,8 @@ class Apply extends Component{
                     {this.setApplication()}
                 </section>
 
-                {/*<CardPayment title="Student Application Fee" show={this.state.modalStatus} handleClose={this.modalHide} appId={this.state.appId} cbFunc={this.state.cbFunc}/>*/}
+                {/* <CardPayment title="Student Application Fee" show={this.state.modalStatus} handleClose={this.modalHide} appId={this.state.appId} cbFunc={this.state.cbFunc}/>*/}
+                <CloverCardPayment title="Student Application Fee" show={this.state.modalStatus} handleClose={this.modalHide} chargeItems={this.buildChargeItems()} studentId={null} cbFunc={this.state.cbFunc} />
             </div>
         );
     }

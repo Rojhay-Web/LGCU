@@ -13,7 +13,8 @@ const clover_paths = {
         "oauth":"https://apisandbox.dev.clover.com",
         "payment":"https://scl-sandbox.dev.clover.com",
         "token":"https://token-sandbox.dev.clover.com",
-        "redirect":"http://localhost:2323/v2/api/oauth-store",
+        // "redirect":"http://localhost:2323/v2/api/oauth-store",
+        "redirect":"http://localhost:2323/payment-portal",
         "redirectUrls":{
             "success":"https://lgcu-local.loca.lt/v2/api/lgcu-cart/success",
             "failure":"https://lgcu-local.loca.lt/v2/api/lgcu-cart/failure",
@@ -60,7 +61,9 @@ module.exports = {
 
                 // Store In Cache
                 oauthToken = oauthTokenRes.results.access_token;
-                store.updateCacheStore('clover_access_token', oauthToken, oauthTokenRes.results.access_token_expiration);
+
+                let expire_dt = fns.addMilliseconds(new Date(), oauthTokenRes.results.access_token_expiration);
+                store.updateCacheStore('clover_access_token', oauthToken, expire_dt);
             }                    
 
             // Get Customer ID
@@ -168,6 +171,11 @@ async function GetOAuthToken(code){
             return { error: dataRet.message };
         }
         
+        const HR_MS = 3600 * 1000;
+        const default_expire = dataRet.access_token_expiration ? dataRet.access_token_expiration - HR_MS : HR_MS;
+        const offset_expire = fns.addDays(new Date(), 2);
+
+        dataRet.access_token_expiration = offset_expire.getTime() < default_expire ? offset_expire.getTime() : default_expire;
         return { results: dataRet };
     }
     catch(ex){

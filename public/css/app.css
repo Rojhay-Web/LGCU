@@ -5337,6 +5337,7 @@ html {
 .lgcuModal .card-payment-container .details-container .description {
   font-size: 1.2rem;
   padding: 7px;
+  text-align: center;
 }
 .lgcuModal .card-payment-container .details-container .section-split {
   widows: 100%;
@@ -5464,11 +5465,10 @@ html {
   line-height: 18px;
 }
 .lgcuModal .card-payment-container .details-container.payment-details {
-  width: 30%;
+  width: 40%;
   background: rgba(15, 118, 151, 0.7) !important;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
 }
 .lgcuModal .card-payment-container .details-container.payment-details .charge-total {
   display: flex;

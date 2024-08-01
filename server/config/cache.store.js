@@ -13,14 +13,8 @@ class CacheStore {
             key = key.toLowerCase();
             
             let ret = this.store[key];
-            if(!ret?.expireDate || !ret?.data){
-                return null;
-            }
-
-            // Check if cache expired
-            let isPast = fns.isPast(ret.expireDate);
-
-            if(isPast){
+            
+            if(!ret?.expireDate || fns.isPast(ret.expireDate) || !ret?.data){
                 return null;
             }
 
@@ -40,7 +34,7 @@ class CacheStore {
                 log.error(`No Data To Update/Insert`);
                 return false;
             }
-
+            
             if(expireDate == null) {
                 expireDate = fns.getTime(fns.addDays(new Date(),1));
             }
