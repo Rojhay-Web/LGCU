@@ -16,9 +16,9 @@ const clover_paths = {
         // "redirect":"http://localhost:2323/v2/api/oauth-store",
         "redirect":"http://localhost:2323/payment-portal",
         "redirectUrls":{
-            "success":"https://lgcu-local.loca.lt/v2/api/lgcu-cart/success",
-            "failure":"https://lgcu-local.loca.lt/v2/api/lgcu-cart/failure",
-            "cancel": "https://lgcu-local.loca.lt/v2/api/lgcu-cart/cancel"
+            "success":"https://lgcu-local.loca.lt/payment-status/success",
+            "failure":"https://lgcu-local.loca.lt/payment-status/failure",
+            "cancel": "https://lgcu-local.loca.lt/payment-status/cancel"
         },
     },
     "prod":{
@@ -28,9 +28,9 @@ const clover_paths = {
         "token":"https://token.clover.com", 
         "redirect":"https://www.lenkesongcu.org/v2/api/oauth-store",
         "redirectUrls":{
-            "success":"https://www.lenkesongcu.org/v2/api/lgcu-cart/success",
-            "failure":"https://www.lenkesongcu.org/v2/api/lgcu-cart/failure",
-            "cancel": "https://www.lenkesongcu.org/v2/api/lgcu-cart/cancel"
+            "success":"https://www.lenkesongcu.org/payment-status/success",
+            "failure":"https://www.lenkesongcu.org/payment-status/failure",
+            "cancel": "https://www.lenkesongcu.org/payment-status/cancel"
         },
     }
 };

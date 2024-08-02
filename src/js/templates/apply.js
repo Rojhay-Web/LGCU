@@ -90,8 +90,7 @@ class Apply extends Component{
                     ]}
                 ]
             },
-            modalStatus: true,
-            appId:"",
+            modalStatus: false, appId:"",
             cbFunc: function(){ }
         }
 
@@ -119,7 +118,7 @@ class Apply extends Component{
     buildChargeItems(){
         let ret = [];
         try { 
-            ret.push({ name: `Registration Fee (Application: ${this.state.appId})`, price: 50 });
+            ret.push({ name: `Application Fee (Application #: ${this.state.appId})`, price: 50 });
         }
         catch(ex){
 

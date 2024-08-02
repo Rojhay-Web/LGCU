@@ -9,7 +9,7 @@ class CloverCardPayment extends Component {
         super(props);
         this.state = {
             studentId:null, chargeItems: [], request_code: null, email: "",
-            errorList: []
+            errorList: [], returnMessage:{"type":"", "message":""}, initRCode: false
         }
 
         this.onElementChange = this.onElementChange.bind(this);
@@ -40,7 +40,7 @@ class CloverCardPayment extends Component {
         try {
             this.setState({
                 email: "", studentId:null, chargeItems: [], request_code: null,
-                errorList: []
+                errorList: [], returnMessage:{"type":"", "message":""}, initRCode: false
             });
         }
         catch(ex){
@@ -79,46 +79,60 @@ class CloverCardPayment extends Component {
     }
 
     startApp(){
+        let self = this;
         try {
-            let specs ='height=100,width=100,status=no,menubar=no,toolbar=no,top=200,left=200',
-                windowPath = 'http://localhost:3000/payment-portal?code=4858f04a1d3b4b848f23a8cf3d9f9119';
-                //windowPath = 'http://localhost:2323/v2/api/oauth-start';
-            portalWindow = window.open(windowPath, '_blank', specs);
-
+            self.setState({ returnMessage: {"type":"processing", "message":"Retrieving Payment Session"} }, ()=> {
+                let specs ='height=100,width=100,status=no,menubar=no,toolbar=no,top=200,left=200',
+                // windowPath = 'http://localhost:3000/payment-portal?code=5d2fa2d180d34c1887da09aa817f4d77';
+                windowPath = `${rootPath}/v2/api/oauth-start`;
+                // windowPath = 'https://lgcu-local.loca.lt/payment-portal?code=407aa2d1764940bb9822d4560a6a441a';
+                portalWindow = window.open(windowPath, '_blank', specs);
+                
+                setTimeout(function(){
+                    if(!self.state.request_code) { 
+                        self.setState({ returnMessage: {"type":"error", "message":`Please Make Sure Popup Blocker Is Disabled`} });
+                    }
+                }, 3000);
+            });
         }
         catch(ex){
-            error.log(`starting app: ${ex}`);
+            console.log(`starting app: ${ex}`);
         }
     }
 
     openPortal(){
+        let self = this;
         try {
             if(this.state.errorList.length > 0){
                 console.log(this.state.errorList);
             }
             else {
-                let postData = JSON.stringify({ 
-                    request_code: this.state.request_code, email: this.state.email,
-                    chargeItems: this.state.chargeItems
-                });
-    
-                fetch(`${rootPath}/v2/api/lgcuCheckout`, {
-                    method: "POST", body: postData,
-                    headers: { "Accept": "application/json", "Content-Type":"application/json"}
-                })
-                .then((response) => response.json())
-                .then((res)=> {
-                    if(res?.results?.href){
-                        let specs ='height=500,width=500,status=no,menubar=no,toolbar=no,top=200,left=200';
-                            
-                        window.open(res.results.href, '_blank', specs);
-                    }
-                    else {
-                        // Open Toast
-                        console.log(res.error);
-                    }
-                }).catch((err) =>{
-                    console.log(`Error With Submitting Form [DF01]: ${err}`);
+                self.setState({ returnMessage: {"type":"processing", "message":"Complete Payment In Payment Portal Window"} },()=> {
+                    let postData = JSON.stringify({ 
+                        request_code: this.state.request_code, email: this.state.email,
+                        chargeItems: this.state.chargeItems
+                    });
+        
+                    fetch(`${rootPath}/v2/api/lgcuCheckout`, {
+                        method: "POST", body: postData,
+                        headers: { "Accept": "application/json", "Content-Type":"application/json"}
+                    })
+                    .then((response) => response.json())
+                    .then((res)=> {
+                        if(res?.results?.href){
+                            let specs ='height=600,width=500,status=no,menubar=no,toolbar=no,top=200,left=200';
+                                
+                            window.open(res.results.href, '_blank', specs);
+                        }
+                        else {
+                            // Open Toast
+                            console.log(res.error);
+                            self.setState({ returnMessage: {"type":"error", "message":res.error} });
+                        }
+                    }).catch((err) =>{
+                        console.log(`Error With Submitting Form [DF01]: ${err}`);
+                        self.setState({ returnMessage: {"type":"error", "message":"Error With Submitting Form [DF01]"} });
+                    });
                 });
             }
         }
@@ -134,7 +148,19 @@ class CloverCardPayment extends Component {
             bc.onmessage = (e) => {
                 switch(e?.data?.key){
                     case "request-code":
-                        self.setState({ request_code: e?.data?.value }, () => { self.formValidation(); });
+                        self.setState({ 
+                            request_code: e?.data?.value, returnMessage: {"type":"", "message":""}
+                        }, () => { self.formValidation(); });
+                        break;
+                    case "payment-status":
+                        if(e?.data?.value === "success"){
+                            self.setState({ returnMessage: {"type":"success", "message":"Succesful Charge"} });
+                            self.props.cbFunc();
+                        }             
+                        else {
+                            self.setState({ returnMessage: {"type":"error", "message":`Payment ${e?.data?.value}`} });
+                        }           
+                        
                         break;
                     default:
                         console.log(e.data);
@@ -148,11 +174,17 @@ class CloverCardPayment extends Component {
     }
 
     componentDidMount(){
+        this.setState({ studentId: this.props.studentId, chargeItems: this.props.chargeItems });
+    }
+
+    componentDidUpdate(_prevProps){
         let self = this;
-        this.setState({ studentId: self.props.studentId, chargeItems: self.props.chargeItems },()=> {
-            self.setBroadcastChannel();
-            self.startApp();
-        });
+        if(this.props.show && !this.state.initRCode){
+            this.setState({ initRCode: true }, ()=> {
+                self.setBroadcastChannel();
+                self.startApp();
+            });
+        }
     }
 
     componentCleanup(){
@@ -171,6 +203,13 @@ class CloverCardPayment extends Component {
                     <Modal.Title>{this.props.title}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
+                    <div className={"error-message" + (this.state.errorList.length > 0 ? " errorDisplay" : "")}><span>Please resolve the issues to complete the processing of your payment</span></div>
+                    <div className={"status-message " + this.state.returnMessage.type}>
+                        <span>Processing Transaction Please Wait...</span>
+
+                        {!this.state.request_code && <i className="refresh fas fa-redo-alt" onClick={this.startApp}/>}
+                    </div>
+
                     <div className="card-payment-container">
                         <div className="details-container card-details">
                             <p className="description">Your student application will not be processed until your student application fee is submitted.  Please submit your student application fee online using either your application ID provided after your online application was submitted or the name used on your student application.</p>
@@ -187,8 +226,11 @@ class CloverCardPayment extends Component {
                 </Modal.Body>
                 <Modal.Footer>
                     <div className="btn-container">
-                        <div className={"lBtn clear t1" +(this.state.errorList?.length <= 0 ? "" : " disable")} onClick={this.openPortal}><span>Open Payment Portal</span><i className="btn-icon far fa-credit-card"></i></div>
-                        <div className={"lBtn clear t1"} onClick={this.closeForm}><span>Cancel</span><i className="btn-icon far fa-times-circle"></i></div>
+                        {this.state.returnMessage.type !== "success" && <div className={"lBtn clear t1" +(this.state.errorList?.length <= 0 ? "" : " disable")} onClick={this.openPortal}><span>Open Payment Portal</span><i className="btn-icon far fa-credit-card"></i></div> }
+                        <div className={"lBtn clear t1"} onClick={this.closeForm}>
+                            <span>{this.state.returnMessage.type === "success" ? "Close" : "Cancel"}</span>
+                            <i className="btn-icon far fa-times-circle"></i>
+                        </div>
                     </div>
                 </Modal.Footer>
             </Modal>

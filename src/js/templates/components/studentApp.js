@@ -240,6 +240,7 @@ class StudentApp extends Component{
         }
         return ret;
     }
+
     onElementChange(event){
         var self = this;
         try {
@@ -264,9 +265,9 @@ class StudentApp extends Component{
                 if(ret){
                     var appId = self.generateAppId(self.state.form);
                     // Open Payment
-                    /*self.props.appFeeForm(appId,function(){ */
+                    self.props.appFeeForm(appId,function(){
                         // Close Payment Modal
-                        //self.props.modalHide();
+                        self.props.modalHide();
                         // Send Email
                         var postData = { 
                             email: self.state.sendAddress, 
@@ -288,7 +289,7 @@ class StudentApp extends Component{
                         .catch(error => {
                             alert("Error Submitting Form: Please Contact Admissions Office");
                         });    
-                    /*});*/                                            
+                    });                                            
                 }
             }); 
         }
