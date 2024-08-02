@@ -48,7 +48,7 @@ class MyAccount extends Component{
                 <div className="mylgcu-content-section inverse account-fitted-section">
                     <div className="section-title">My Account</div>
 
-                    {this.state.accountTransactions.map((item, i) => (
+                    {/* this.state.accountTransactions.map((item, i) => (
                         <div className="content-block sz10" key={i}>
                             <div className="account-info">
                                 <div className="account-block">
@@ -76,7 +76,7 @@ class MyAccount extends Component{
                                 </div>
                             </div>
                         </div>
-                    ))}
+                    )) */}
                 </div>
             </div>
         );

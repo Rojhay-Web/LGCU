@@ -83,28 +83,10 @@ module.exports = function(store) {
         }
     }
 
-    function oauth_store(req, res){
-        try {
-            if(req.query?.client_id === process.env.CLOVER_CLIENT_ID){
-                res.status(200).json({ results: req.query?.code });
-            }   
-            else {
-                res.status(200).json({ error: `Invalid Client ID` });
-            }        
-        }
-        catch(ex){
-            log.error(`running oauth store: ${ex}`);
-            res.status(response.SERVER_ERROR.UNAVAILABLE).json({"error":`Storing oauth: ${ex}` });
-        }
-    }
-    
-    router.get('/test', (req, res)=> { console.log(req); res.status(200).json({ "return": "DONE"})});
-
     router.post('/sendEmail', sendEmail);
 
     /* Charges */
     router.get('/oauth-start', oauth_start);
-    router.get('/oauth-store', oauth_store);
 
     router.post('/lgcuCharge', lgcu_charge);
     router.post('/lgcuCheckout', lgcu_checkout);

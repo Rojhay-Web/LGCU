@@ -13,7 +13,6 @@ const clover_paths = {
         "oauth":"https://apisandbox.dev.clover.com",
         "payment":"https://scl-sandbox.dev.clover.com",
         "token":"https://token-sandbox.dev.clover.com",
-        // "redirect":"http://localhost:2323/v2/api/oauth-store",
         "redirect":"http://localhost:2323/payment-portal",
         "redirectUrls":{
             "success":"https://lgcu-local.loca.lt/payment-status/success",
@@ -26,7 +25,7 @@ const clover_paths = {
         "oauth":"https://api.clover.com", 
         "payment":"https://scl.clover.com", 
         "token":"https://token.clover.com", 
-        "redirect":"https://www.lenkesongcu.org/v2/api/oauth-store",
+        "redirect":"https://www.lenkesongcu.org/payment-portal",
         "redirectUrls":{
             "success":"https://www.lenkesongcu.org/payment-status/success",
             "failure":"https://www.lenkesongcu.org/payment-status/failure",
@@ -126,18 +125,6 @@ module.exports = {
             const orderPayStatus = await OrderPayment(oauthToken, orderInfo.results?.id, cardToken.results);
             if(orderPayStatus.error) { throw orderPayStatus.error; }
             
-            // TODO: Send Charge Receipt
-            if(studentId){
-                // TODO: Add Transaction Info to User
-                const transactionInfo = {
-                    userId: new ObjectId(studentId),
-                    status: orderPayStatus?.results?.status,
-                    chargeItems: chargeItems
-                };
-                const collection = await dbCollection("mylgcu_charges");
-                // const charge_ret = collection.insertOne(transactionInfo);
-            }
-
             return { results: orderPayStatus?.results?.status };
         }
         catch(ex){
