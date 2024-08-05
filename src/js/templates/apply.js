@@ -12,12 +12,10 @@ import appImg from '../../assets/site/mini/img14.jpg';
 /* Components */
 import FormCpt from './components/formCpt';
 import StudentApp from './components/studentApp';
-import CardPayment from './components/cardPaymentModal';
-import CloverCardPayment from './components/cloverPaymentModal';
+import CardPaymentV2 from './components/cloverCardPaymentModal';
 
 /* Header */
 class ApplyHeader extends Component{
-    
     render(){        
         return(
             <div className="headerCard applyHeader sub-page">
@@ -133,8 +131,13 @@ class Apply extends Component{
                     {this.setApplication()}
                 </section>
 
-                {/* <CardPayment title="Student Application Fee" show={this.state.modalStatus} handleClose={this.modalHide} appId={this.state.appId} cbFunc={this.state.cbFunc}/>*/}
-                <CloverCardPayment title="Student Application Fee" show={this.state.modalStatus} handleClose={this.modalHide} chargeItems={this.buildChargeItems()} studentId={null} cbFunc={this.state.cbFunc} />
+                <CardPaymentV2 
+                    title="Student Application Fee" 
+                    description={`Student Application Fee Payment For Application: ${this.state?.appId}`} 
+                    formDescription="Your student application will not be processed until your student application fee is submitted.  Please submit your student application fee online using either your application ID provided after your online application was submitted or the name used on your student application."
+                    show={this.state.modalStatus} handleClose={this.modalHide} 
+                    chargeItems={this.buildChargeItems()} studentId={null} cbFunc={this.state.cbFunc} 
+                />
             </div>
         );
     }

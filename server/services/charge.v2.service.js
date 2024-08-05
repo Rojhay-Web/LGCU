@@ -80,7 +80,7 @@ module.exports = {
             return { error: `Charging Card: ${ex}` };
         }
     },
-    charge: async function(store, request_code, cardInfo, title, description, chargeItems, studentId=null){
+    fullCharge: async function(store, request_code, cardInfo, title, description, chargeItems, email, studentId=null){
         try {
             // Validations
             const cardValidations = validateCard(cardInfo);
@@ -124,8 +124,25 @@ module.exports = {
             // Order Payment
             const orderPayStatus = await OrderPayment(oauthToken, orderInfo.results?.id, cardToken.results);
             if(orderPayStatus.error) { throw orderPayStatus.error; }
+
+            // Get Customer ID
+            const customerIdRes = await GetCustomerId(oauthToken, email, studentId);
+            let customerId = customerIdRes?.results ? customerIdRes.results : null,
+                updatedCustomer = false;
+
+            if(orderPayStatus?.results?.status == "paid"){
+                if(customerId){
+                    updatedCustomer = UpdateOrder(oauthToken, orderInfo.results?.id, customerId);
+                }
+                else if(studentId) {
+                    updatedCustomer = CreateCustomer(oauthToken, orderInfo.results?.id, studentId, email);
+                }
+            }
             
-            return { results: orderPayStatus?.results?.status };
+            return { 
+                results: orderPayStatus?.results?.status, 
+                customerId: (updatedCustomer ? customerId : null)
+            };
         }
         catch(ex){
             log.error(`Charging Card: ${ex}`);
@@ -395,22 +412,72 @@ async function GetCustomerId(authToken, email, studentId){
     }
 }
 
-async function dbCollection(conn_collection) {
-    let collection = null;
+async function UpdateOrder(authToken, orderId, customerId){
     try {
-        if(client?.s?.hasBeenClosed){
-            await client.connect();
-            log.debug(`Connected Successfully [Reconnected] to db server`);
+        const line_items = validateCharges(chargeItems);
+        if(line_items.error) { throw 'Validating Charge(s)'; }
+
+        // TODO: GET Order Type
+        const order_type_id = process.env.CLOVER_ORDER_TYPE;
+
+        let url = `${clover_paths[process.env.CLOVER_ENV].base}/v3/merchants/${process.env.CLOVER_MERCHANT_ID}/orders/${orderId}`;
+        const post_data = {
+            customers:[{ id: customerId }]
+        };
+
+        let res = await fetch(url, { 
+            method: 'POST', body: JSON.stringify(post_data),
+            headers: {
+                "Content-Type":"application/json", 
+                "Authorization": `Bearer ${authToken}`
+            }
+        });
+
+        if(res.status != 200) {
+            log.error(`Updating Clover Order: ${dataRet.message}`);
+            return { error: dataRet.message, results: false };
         }
         
-        const db = client.db(process.env.DatabaseName);
-        collection = db.collection(conn_collection);
+        return { results: true };
     }
     catch(ex){
-        log.error(`Connection to Database: ${ex}`);
+        log.error(`Updating Clover Order: ${ex}`);
+        return { error: `Updating Clover Order: ${ex}` };
     }
+}
 
-    return collection;
+async function CreateCustomer(authToken, orderId, studentId, email=null){
+    try {
+
+        let url = `${clover_paths[process.env.CLOVER_ENV].base}/v3/merchants/${process.env.CLOVER_MERCHANT_ID}/customers`;
+        const post_data = {
+            lastName: studentId,
+            orders:[{ id: orderId }],
+            ...(email ? { emailAddresses: [{ emailAddress: email, primaryEmail: true }]} : {})
+        };
+
+        let res = await fetch(url, { 
+            method: 'POST',
+            headers: {
+                "accept":"application/json", 
+                "content-type":"application/json", 
+                "Authorization": `Bearer ${authToken}`
+            },
+            body: JSON.stringify(post_data),
+        });
+        let dataRet = await res.json();
+
+        if(res.status != 200) {
+            log.error(`Creating Clover Customer: ${dataRet.message}`);
+            return { error: dataRet.message };
+        }
+
+        return { results: dataRet?.id ? true : false };
+    }
+    catch(ex){
+        log.error(`Creating Clover Customer: ${ex}`);
+        return { error: `Creating Clover Customer: ${ex}` };
+    }
 }
 
 /* Validations */
