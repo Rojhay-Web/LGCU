@@ -70,6 +70,7 @@ class StudentPayment extends Component{
             console.log("Error with element change: ",ex);
         }
     }
+
     getYrList(){
         try {
             var yrList = [];
@@ -137,6 +138,150 @@ class StudentPayment extends Component{
     componentWillUnmount(){
         this.resetForm();
     }
+
+    cardFormValidation(){
+        var status = false;
+        var tmpErrorList = [];
+    
+        try {
+            // Check First & Last Name
+            if(this.state.cardName.length === 0){
+                tmpErrorList.push("cardName");
+            }
+
+            // Check Card Type
+            if(this.state.cardType.length === 0){
+                tmpErrorList.push("cardType");
+            }
+
+            // Check Card Number
+            if(this.state.cardNum.length !== 16){
+                tmpErrorList.push("cardNum");
+            }
+            
+            // Check Expiration Date
+            if(this.state.cardExpMth === "00"){
+                tmpErrorList.push("cardExpMth");
+            }
+            if(this.state.cardExpYr === "00"){
+                tmpErrorList.push("cardExpYr");
+            }
+            // Check CSV
+            if(this.state.cvv.length !== 3){
+                tmpErrorList.push("cvv");
+            }
+            // Check Email
+            var srtTst = this.state.cardEmail.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/i);
+            if(!srtTst || srtTst.length === 0){
+                tmpErrorList.push("cardEmail");
+            }
+            // Check Country Code
+            if(this.state.cardCountry.length === 0){
+                tmpErrorList.push("cardCountry");
+            }
+            // Check Postal code
+            if(this.state.cardZip.length === 0){
+                tmpErrorList.push("cardZip");
+            }
+
+            status = (tmpErrorList.length === 0);
+            this.setState({ errorList: tmpErrorList });
+        }
+        catch(ex){
+            console.log("Error with form validation: ",ex);
+        }
+
+        return status;
+    }
+
+    submitForm(){
+        var self = this;
+        try {
+            alert(`Payment temporarily disabled please contact lenkeson8@gmail.com to make any payments`);
+
+            if(this.state.returnMessage.type !== "processing" && this.cardFormValidation()){
+                var cardExp = this.state.cardExpMth+this.state.cardExpYr;
+                var charge = parseInt(this.props.totalPrice);
+                var tmpCharge = 0;
+                var bannerMessage = {"type":"", "message":""};
+
+                var sessionInfo = localStorage.getItem(this.props.mySessKey);
+                var localUser = JSON.parse(sessionInfo);
+                
+                var chargeForm = {
+                    userInfo:{ _id: localUser._id, studentId: this.props.studentInfo.studentId },
+                    chargeInfo: {
+                        userEmail: this.state.cardEmail, chargeDescription: (this.props.adhoc === true ? "myLGCU Account Payment" : "Student Course Payment"),
+                        cardInfo:{
+                            cardNumber: this.state.cardNum, cardExp: cardExp, cvv: this.state.cvv,
+                            name: this.state.cardName, type: this.state.cardType, 
+                            zip: this.state.cardZip, country: this.state.cardCountry,
+                        },
+                        chargeItems:{}
+                    }
+                };
+                
+                if(this.props.adhoc === true){
+                    chargeForm.chargeInfo.chargeItems = {name:"Account Payment", description:"A payment made by the student via the myLGCU Account Portal", quantity:1, amount: parseFloat(this.state.chargeTotal).toFixed(2) };
+                }
+                else {
+                    // Calculate Course Charges
+                    this.props.queuedCourses.forEach(function(course){
+                        var courseCharge = self.props.creditRate * course.credits;
+                        courseCharge = parseInt(courseCharge,10);
+                        
+                        tmpCharge = tmpCharge + courseCharge;
+                        chargeForm.chargeInfo.chargeItems = {name:"Course Registration", description:"Course Id: "+ course.id +", Course: "+ course.name+", credit: "+course.credits, quantity:1, amount: courseCharge.toFixed(2) };
+                    });
+
+                    if(this.props.currentCourses.length === 0){                                                
+                        tmpCharge = tmpCharge + this.props.technologyFee;
+                        chargeForm.chargeInfo.chargeItems = {name:"Technology Fee", description:"Student Semester Technology Fee", quantity:1, amount: this.props.technologyFee.toFixed(2) };
+                    }
+                }
+
+                if(this.props.adhoc !== true && charge !== tmpCharge) {
+                    alert("Error with charge alignment please contact admin");
+                }
+                else {
+                    self.setState({ returnMessage: {"type":"processing", "message":""} }, () =>{
+                        axios.post(rootPath + "/api/accountCharge", chargeForm, {'Content-Type': 'application/json'})
+                        .then(function(resp) {
+                            try {
+                                var response = resp.data;
+                                if(response.errorMessage == null){
+                                    // Successful Charge
+                                    alert((self.props.adhoc === true ? "Charge was successful" : "Charge was successful your courses are now being added"));
+                                    bannerMessage.type = "success";
+                                    bannerMessage.message = "Succesful Charge";
+                                            
+                                    if(self.props.adhoc !== true ) { self.props.registerCourseList(); }
+                                    self.closeForm();
+                                }
+                                else {
+                                    alert("Error Processing Payment [E2]: " +  response.errorMessage);
+                                    console.log("[Error] Error Processing Payment: ", response.errorMessage);
+                                    bannerMessage.type = "error";
+                                    bannerMessage.message = (response.results.Error ? response.results.Error.messages[0].description : response.errorMessage);
+                                }
+                            }
+                            catch(ex){
+                                alert("Error Processing Payment Please Contact: lenkeson8@gmail.com");
+                                bannerMessage.type = "error";
+                                bannerMessage.message = "Error Processing Payment Please Contact: lenkeson8@gmail.com";
+                            }
+
+                            self.setState({ returnMessage: bannerMessage });
+                        });
+                    });
+                }
+            }
+        }
+        catch(ex){
+            console.log("Error with form validation: ",ex);
+        }
+    }
+
     render(){    
         return(
             <Modal dialogClassName="lgcuModal" show={this.props.show} backdrop="static" size="lg" onHide={this.closeForm}>
@@ -245,152 +390,6 @@ class StudentPayment extends Component{
                 </Modal.Footer>
             </Modal>
         );
-    }
-
-    cardFormValidation(){
-        var status = false;
-        var tmpErrorList = [];
-    
-        try {
-            // Check First & Last Name
-            if(this.state.cardName.length === 0){
-                tmpErrorList.push("cardName");
-            }
-
-            // Check Card Type
-            if(this.state.cardType.length === 0){
-                tmpErrorList.push("cardType");
-            }
-
-            // Check Card Number
-            if(this.state.cardNum.length !== 16){
-                tmpErrorList.push("cardNum");
-            }
-            
-            // Check Expiration Date
-            if(this.state.cardExpMth === "00"){
-                tmpErrorList.push("cardExpMth");
-            }
-            if(this.state.cardExpYr === "00"){
-                tmpErrorList.push("cardExpYr");
-            }
-            // Check CSV
-            if(this.state.cvv.length !== 3){
-                tmpErrorList.push("cvv");
-            }
-            // Check Email
-            var srtTst = this.state.cardEmail.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/i);
-            if(!srtTst || srtTst.length === 0){
-                tmpErrorList.push("cardEmail");
-            }
-            // Check Country Code
-            if(this.state.cardCountry.length === 0){
-                tmpErrorList.push("cardCountry");
-            }
-            // Check Postal code
-            if(this.state.cardZip.length === 0){
-                tmpErrorList.push("cardZip");
-            }
-
-            status = (tmpErrorList.length === 0);
-            this.setState({ errorList: tmpErrorList });
-        }
-        catch(ex){
-            console.log("Error with form validation: ",ex);
-        }
-
-        return status;
-    }
-
-    submitForm(){
-        var self = this;
-        try {
-            alert(`Payment temporarily disabled please contact lenkeson8@gmail.com to make any payments`);
-
-            /*
-            if(this.state.returnMessage.type !== "processing" && this.cardFormValidation()){
-                var cardExp = this.state.cardExpMth+this.state.cardExpYr;
-                var charge = parseInt(this.props.totalPrice);
-                var tmpCharge = 0;
-                var bannerMessage = {"type":"", "message":""};
-
-                var sessionInfo = localStorage.getItem(this.props.mySessKey);
-                var localUser = JSON.parse(sessionInfo);
-
-                
-                var chargeForm = {
-                    userInfo:{ _id: localUser._id, studentId: this.props.studentInfo.studentId },
-                    chargeInfo: {
-                        userEmail: this.state.cardEmail, chargeDescription: (this.props.adhoc === true ? "myLGCU Account Payment" : "Student Course Payment"),
-                        cardInfo:{
-                            cardNumber: this.state.cardNum, cardExp: cardExp, cvv: this.state.cvv,
-                            name: this.state.cardName, type: this.state.cardType, 
-                            zip: this.state.cardZip, country: this.state.cardCountry,
-                        },
-                        chargeItems:{}
-                    }
-                };
-                
-                if(this.props.adhoc === true){
-                    chargeForm.chargeInfo.chargeItems = {name:"Account Payment", description:"A payment made by the student via the myLGCU Account Portal", quantity:1, amount: parseFloat(this.state.chargeTotal).toFixed(2) };
-                }
-                else {
-                    // Calculate Course Charges
-                    this.props.queuedCourses.forEach(function(course){
-                        var courseCharge = self.props.creditRate * course.credits;
-                        courseCharge = parseInt(courseCharge,10);
-                        
-                        tmpCharge = tmpCharge + courseCharge;
-                        chargeForm.chargeInfo.chargeItems = {name:"Course Registration", description:"Course Id: "+ course.id +", Course: "+ course.name+", credit: "+course.credits, quantity:1, amount: courseCharge.toFixed(2) };
-                    });
-
-                    if(this.props.currentCourses.length === 0){                                                
-                        tmpCharge = tmpCharge + this.props.technologyFee;
-                        chargeForm.chargeInfo.chargeItems = {name:"Technology Fee", description:"Student Semester Technology Fee", quantity:1, amount: this.props.technologyFee.toFixed(2) };
-                    }
-                }
-
-                if(this.props.adhoc !== true && charge !== tmpCharge) {
-                    alert("Error with charge alignment please contact admin");
-                }
-                else {
-                    self.setState({ returnMessage: {"type":"processing", "message":""} }, () =>{
-                        axios.post(rootPath + "/api/accountCharge", chargeForm, {'Content-Type': 'application/json'})
-                        .then(function(resp) {
-                            try {
-                                var response = resp.data;
-                                if(response.errorMessage == null){
-                                    // Successful Charge
-                                    alert((self.props.adhoc === true ? "Charge was successful" : "Charge was successful your courses are now being added"));
-                                    bannerMessage.type = "success";
-                                    bannerMessage.message = "Succesful Charge";
-                                            
-                                    if(self.props.adhoc !== true ) { self.props.registerCourseList(); }
-                                    self.closeForm();
-                                }
-                                else {
-                                    alert("Error Processing Payment [E2]: " +  response.errorMessage);
-                                    console.log("[Error] Error Processing Payment: ", response.errorMessage);
-                                    bannerMessage.type = "error";
-                                    bannerMessage.message = (response.results.Error ? response.results.Error.messages[0].description : response.errorMessage);
-                                }
-                            }
-                            catch(ex){
-                                alert("Error Processing Payment Please Contact: lenkeson8@gmail.com");
-                                bannerMessage.type = "error";
-                                bannerMessage.message = "Error Processing Payment Please Contact: lenkeson8@gmail.com";
-                            }
-
-                            self.setState({ returnMessage: bannerMessage });
-                        });
-                    });
-                }
-            }
-            */
-        }
-        catch(ex){
-            console.log("Error with form validation: ",ex);
-        }
     }
 }
 

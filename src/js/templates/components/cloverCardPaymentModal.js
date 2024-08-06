@@ -19,9 +19,17 @@ class CardPaymentV2 extends Component{
             cardZip:"", cardCountry:"US",
 
             chargeTotal:0.00,
+            adhocTotal: 0,
 
             monthList:["01","02","03","04","05","06","07","08","09","10","11","12"],
-            cardTypeList:["Visa", "Mastercard", "American Express", "Discover", "JCB", "Diners Club"],
+            cardTypeList:[
+                { display:"Visa", value: "VISA"},
+                { display:"Mastercard", value: "MC"},
+                { display:"American Express", value: "AMEX"},
+                { display:"Discover", value: "DISCOVER"},
+                { display:"Diners Club", value: "DINERS_CLUB"},
+                { display:"JCB", value: "JCB"}
+            ],
             countryList:[], yearList:[], errorList:[], initRequestCode: false,
             returnMessage:{"type":"", "message":""}
         }   
@@ -75,14 +83,13 @@ class CardPaymentV2 extends Component{
 
     getYrList(){
         try {
-            var yrList = [];
-            var d = new Date();
-            var yr = d.getFullYear();
+            let yrList = [], d = new Date(), yr = d.getFullYear();
             
             for(var i =0; i < 8; i++){
                 yrList.push(yr);
                 yr = yr + 1;
             }
+
             this.setState({ yearList: yrList });
         }
         catch(ex){
@@ -120,7 +127,7 @@ class CardPaymentV2 extends Component{
                 cardName:"", cardType:"visa", cvv:"",
                 cardCountry:"US", cardZip:"", cardEmail:"",
                 cardAddress:"", cardCity:"", cardState:"",
-                chargeTotal:0, errorList:[],
+                chargeTotal:0, errorList:[], adhocTotal: 0,
                 returnMessage:{"type":"", "message":""}
             });
         }
@@ -233,7 +240,10 @@ class CardPaymentV2 extends Component{
                             state: this.state.cardState,
                             zip: this.state.cardZip
                         },
-                        chargeItems:this.props.chargeItems,
+                        chargeItems:(this.props?.adhoc ? 
+                            [{ name: `Student adhoc payment`, price: this.state.adhocTotal }] 
+                            : this.props.chargeItems
+                        ),
                         studentId: this.props?.studentId
                     };
                 
@@ -318,6 +328,7 @@ class CardPaymentV2 extends Component{
     componentWillUnmount(){
         this.resetForm();
     }
+
     render(){    
         return(
             <Modal dialogClassName="lgcuModal" show={this.props.show} backdrop="static" size="lg" onHide={this.closeForm}>
@@ -369,7 +380,7 @@ class CardPaymentV2 extends Component{
                                         <div className="form-element sz-3"><span>Card Type</span>
                                             <select name="cardType" className={(this.state.errorList.indexOf("cardType") > -1 ? "error":"")} value={this.state.cardType} onChange={(e) => this.onElementChange(e)}>
                                                 {this.state.cardTypeList.map((type,i) => 
-                                                    <option key={i} value={type}>{type}</option>
+                                                    <option key={i} value={type.value}>{type.display}</option>
                                                 )}
                                             </select>
                                         </div>
@@ -421,7 +432,11 @@ class CardPaymentV2 extends Component{
                             <div className="charge-total">
                                 <div className="chargeTitle">Total: </div>
                                 <div className="chargeAmount">
-                                    <span>${this.state.chargeTotal}</span>
+                                    <span>$</span>
+                                    {this.props?.adhoc ?
+                                        <input type="number" name="adhocTotal" step=".01" value={this.state.adhocTotal} onChange={(e) => this.onElementChange(e)} />
+                                        : <span>{this.state.chargeTotal}</span>
+                                    }
                                 </div>
                             </div>
                         </div>

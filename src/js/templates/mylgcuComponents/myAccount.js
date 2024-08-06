@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 import StudentPayment from '../components/studentPaymentModal';
+import CardPaymentV2 from '../components/cloverCardPaymentModal';
 
 /* Body */
 class MyAccount extends Component{
@@ -20,66 +21,6 @@ class MyAccount extends Component{
         this.modalShow = this.modalShow.bind(this);
         this.modalHide = this.modalHide.bind(this);
         this.convertItemData = this.convertItemData.bind(this);
-    }
-
-    componentDidMount(){ 
-        this.loadStudentInfo();
-        this.loadAccountInfo();
-    }
-
-    render(){  
-       
-        return(
-            <div className="mylgcu-account">
-               {/* Spinner */}
-               {this.state.spinner && <div className="spinner"><i className="fas fa-cog fa-spin"/><span>Loading</span></div> }
-
-               {/* Student Payment */}
-               <StudentPayment title="Student Account Payment" show={this.state.modalStatus} handleClose={this.modalHide} studentInfo={this.state.studentInfo} mySessKey={this.props.mySessKey} adhoc={true}/>
-
-               {/* Make A Payment Btn*/}
-               <div className="mylgcu-content-section addUser">
-                    <div className="btn-container">
-                        <div className="lBtn c2" onClick={this.modalShow}><span>Make Payment</span> <i className="far fa-credit-card"></i></div>
-                    </div> 
-                </div>
-
-                {/* Student Account Records */}
-                <div className="mylgcu-content-section inverse account-fitted-section">
-                    <div className="section-title">My Account</div>
-
-                    {/* this.state.accountTransactions.map((item, i) => (
-                        <div className="content-block sz10" key={i}>
-                            <div className="account-info">
-                                <div className="account-block">
-                                    <span className="account-icon success"><i className="fas fa-check"></i></span>
-                                </div>
-
-                                <div className="account-block">
-                                    <span className="subText">Transaction Date</span>
-                                    <span>{this.convertItemData(item.transaction_date, "date")}</span>
-                                </div>
-
-                                <div className="account-block">
-                                    <span className="subText">Transaction Id</span>
-                                    <span>{item.transaction_id}</span>
-                                </div>
-
-                                <div className="account-block">
-                                    <span className="subText">Transaction Status</span>
-                                    <span>{item.transaction_status}</span>
-                                </div>
-
-                                <div className="account-block">
-                                    <span className="subText">Total Charge</span>
-                                    <span>$ {this.convertItemData(item.amount,"amount")}</span>
-                                </div>
-                            </div>
-                        </div>
-                    )) */}
-                </div>
-            </div>
-        );
     }
 
     convertItemData(data,type){
@@ -184,6 +125,79 @@ class MyAccount extends Component{
             alert("[Error] Loading Student Info: ", ex);
             self.toggleSpinner(false);
         }
+    }
+
+    componentDidMount(){ 
+        this.loadStudentInfo();
+        this.loadAccountInfo();
+    }
+
+    render(){  
+        return(
+            <div className="mylgcu-account">
+               {/* Spinner */}
+               {this.state.spinner && <div className="spinner"><i className="fas fa-cog fa-spin"/><span>Loading</span></div> }
+
+               {/* Student Payment */}
+               {/*
+                <StudentPayment 
+                        title="Student Account Payment" show={this.state.modalStatus} 
+                        handleClose={this.modalHide} studentInfo={this.state.studentInfo} 
+                        mySessKey={this.props.mySessKey} adhoc={true}
+                    />
+                */}
+                <CardPaymentV2 
+                    title="Student Account Payment" 
+                    description='Account General Payment'
+                    formDescription="General Account Payment"
+                    show={this.state.modalStatus} handleClose={this.modalHide} 
+                    chargeItems={[]} studentId={this.state.studentInfo} 
+                    cbFunc={this.modalHide} adhoc={true}
+                />
+
+               {/* Make A Payment Btn*/}
+               <div className="mylgcu-content-section addUser">
+                    <div className="btn-container">
+                        <div className="lBtn c2" onClick={this.modalShow}><span>Make Payment</span> <i className="far fa-credit-card"></i></div>
+                    </div> 
+                </div>
+
+                {/* Student Account Records */}
+                <div className="mylgcu-content-section inverse account-fitted-section">
+                    <div className="section-title">My Account</div>
+
+                    {/* this.state.accountTransactions.map((item, i) => (
+                        <div className="content-block sz10" key={i}>
+                            <div className="account-info">
+                                <div className="account-block">
+                                    <span className="account-icon success"><i className="fas fa-check"></i></span>
+                                </div>
+
+                                <div className="account-block">
+                                    <span className="subText">Transaction Date</span>
+                                    <span>{this.convertItemData(item.transaction_date, "date")}</span>
+                                </div>
+
+                                <div className="account-block">
+                                    <span className="subText">Transaction Id</span>
+                                    <span>{item.transaction_id}</span>
+                                </div>
+
+                                <div className="account-block">
+                                    <span className="subText">Transaction Status</span>
+                                    <span>{item.transaction_status}</span>
+                                </div>
+
+                                <div className="account-block">
+                                    <span className="subText">Total Charge</span>
+                                    <span>$ {this.convertItemData(item.amount,"amount")}</span>
+                                </div>
+                            </div>
+                        </div>
+                    )) */}
+                </div>
+            </div>
+        );
     }
 }
 

@@ -7,6 +7,7 @@ import "react-table/react-table.css";
 import 'react-table-hoc-fixed-columns/lib/styles.css';
 
 import StudentPayment from '../components/studentPaymentModal';
+import CardPaymentV2 from '../components/cloverCardPaymentModal';
 
 const ReactTableFixedColumns = withFixedColumns(ReactTable);
 
@@ -40,155 +41,7 @@ class MyCourses extends Component{
         this.modalShow = this.modalShow.bind(this);
         this.modalHide = this.modalHide.bind(this);
         this.registerCourseList = this.registerCourseList.bind(this);
-    }
-
-    componentDidMount(){ 
-        this.loadStudentInfo();
-        this.loadCourses();
-    }
-
-    
-    render(){
-        var self = this;   
-        var filterData = this.state.courseSearch.filter(function(course){ 
-            var ret = false;
-            try {
-                
-                ret = ((self.state.searchQuery === "") ||
-                (  (course.name && course.name.toLowerCase().indexOf(self.state.searchQuery.toLowerCase()) >= 0)
-                || (course.courseCode && course.courseCode.toLowerCase().indexOf(self.state.searchQuery.toLowerCase()) >= 0)
-                || (course.courseId && course.courseId.toLowerCase().indexOf(self.state.searchQuery.toLowerCase()) >= 0)
-                ));
-            }
-            catch(ex){
-                console.log(course);
-                console.log("[Error] filtering search: ",ex);
-            }
-
-            return ret;
-        });
-
-        var courseColumns = [    
-            { Header: 'Course Code', accessor: 'courseCode', fixed: 'left' },
-            { Header: 'Course Id', id: 'courseId', fixed: 'left', accessor: d => Number(d.courseId) },
-            { Header: 'Course Name', accessor: 'name', fixed: 'left' },
-            { Header: 'Credits', id: 'credits', fixed: 'left', accessor: d => Number(d.credits) },
-            { Header: '', fixed: 'right', Cell: row => (
-                <div className="course-btn">
-                    <div className="lBtn c2" onClick={() => this.addCourse(row.original)}><span>Add Course</span><i className="btn-icon fas fa-plus-circle"></i></div>
-                </div>
-            ) }
-        ];
-
-        return(
-            <div className="mylgcu-course">
-               {/* Spinner */}
-               {this.state.spinner && <div className="spinner"><i className="fas fa-cog fa-spin"/><span>Loading</span></div> }
-
-               {/* Student Payment */}
-               <StudentPayment title="Student Course Registration Payment" show={this.state.modalStatus} handleClose={this.modalHide} registerCourseList={this.registerCourseList} totalPrice={this.state.totalPrice} creditRate={this.state.creditRate} studentInfo={this.state.studentInfo} queuedCourses={this.state.queuedCourses} currentCourses={this.state.currentCourses} technologyFee={this.state.technologyFee} mySessKey={this.props.mySessKey}/>
-
-                {/* Student Base Info */}
-                <div className="mylgcu-content-section inverse">
-                    <div className="content-block center sz4">
-                        <div className="block-label-title">Degree</div>
-                        <div className="block-text">{ this.state.studentInfo.degree }</div>
-                    </div>
-
-                    <div className="content-block center sz2">
-                        <div className="block-label-title">Class</div>
-                        <div className="block-text">{ this.state.studentInfo.class }</div>
-                    </div>
-
-                    <div className="content-block center sz2">
-                        <div className="block-label-title">GPA</div>
-                        <div className="block-text">{ this.state.studentInfo.gpa }</div>
-                    </div>
-
-                    <div className="content-block center sz2">
-                        <div className="block-label-title">Student Type</div>
-                        <div className="block-text">{ (this.state.studentInfo.fulltime === true ? 'full-time' : 'part-time')}</div>
-                    </div>
-                </div>
-
-                {/* Current Courses*/}
-                <div className="mylgcu-content-section">
-                    <div className="section-title">My Courses</div>
-
-                    <div className="content-block sz10">
-                        <div className="block-container overview">
-                            <table className="overview-table">
-                                <thead>
-                                    <tr className="header">
-                                        <th></th>
-                                        <th>Course Name</th>
-                                        <th>Course Code</th>
-                                        <th>Course Id</th>
-                                        <th>Credits</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {this.state.currentCourses.map((item, i) =>(
-                                        <tr key={i} className="dataRow">
-                                            <td><span className="courseNumber">{i+1}</span></td>
-                                            <td><span className="courseCode">{item.name}</span></td>
-                                            <td><span className="courseCode">{ this.getCourseInfo("courseCode", item.id) }</span></td>
-                                            <td><span className="courseId">{ this.getCourseInfo("courseId", item.id) }</span></td>
-                                            <td><span className="credits">{ this.getCourseInfo("credits", item.id) }</span></td>
-                                            <td>{/*<span className="courseEdit"><i className="fas fa-times"></i></span>*/}</td>
-                                        </tr>
-                                    ))}
-
-                                    {this.state.queuedCourses.map((item, i) =>(
-                                        <tr key={i} className="dataRow queued">
-                                            <td><span className="courseNumber">Q</span></td>
-                                            <td><span className="courseCode">{item.name}</span></td>
-                                            <td><span className="courseCode">{ item.courseCode }</span></td>
-                                            <td><span className="courseId">{ item.courseId }</span></td>
-                                            <td><span className="credits">{ item.credits }</span></td>
-                                            <td><span className="courseEdit"><i className="fas fa-times" onClick={()=>this.removeCourse(item.id)}></i></span></td>
-                                        </tr>
-                                    ))}
-
-                                    {(this.state.currentCourses.length === 0 && this.state.queuedCourses.length === 0) && 
-                                        <tr className="noDataRow">
-                                            <td colSpan="6">No Courses Added</td>
-                                        </tr>
-                                    }
-                                    {(this.state.currentCourses.length > 0 || this.state.queuedCourses.length > 0) && 
-                                        <tr className="noDataRow creditCount">
-                                            <td colSpan="4">
-                                                <span>Total Semester Credits: {this.getSemesterCredits()}</span>
-                                            </td>
-                                            <td colSpan="2">
-                                                {this.state.queuedCourses.length > 0 && <div className="lBtn clear" onClick={this.getPrice}><span>Register</span><i className="btn-icon fas fa-chalkboard"></i></div> }
-                                            </td>
-                                        </tr>
-                                    }
-                                </tbody>
-                            </table>
-                       </div>
-                    </div>
-                </div>
-                
-                {/* Search Courses*/}
-                <div className="mylgcu-content-section">
-                    <div className="section-title">Find Courses</div>
-
-                    <div className="content-block sz10">
-                        <div className="block-container search-block">                            
-                            <div className="content-info icon"><i className="fas fa-search"></i><input type="text" name="searchQuery" className="" placeholder="Search Course" value={this.state.searchQuery} onChange={(e) => this.onSearchChange(e)}/></div>
-                        </div>
-                    </div>
-
-
-                    <div className="content-block sz10">
-                        <ReactTableFixedColumns data={filterData} columns={courseColumns}></ReactTableFixedColumns>
-                    </div>
-                </div>
-            </div>
-        );
+        this.buildChargeItems = this.buildChargeItems.bbind(this);
     }
 
     toggleSpinner(status){
@@ -500,6 +353,191 @@ class MyCourses extends Component{
             alert("[Error] Loading Courses: ", ex);
             self.toggleSpinner(false);
         }
+    }
+
+    buildChargeItems(){
+        let ret = [];
+        try {
+            ret = this.state.queuedCourses.map((course)=>{
+                return { 
+                    name: `Course Id: ${course.id}, Course: ${course.name}, Credit: ${course.credits}`, 
+                    price: parseInt(this.state.creditRate * course.credits, 10)
+                };
+            });
+
+            if(this.state.currentCourses.length === 0){
+                ret.push({name: "Student Semester Technology Fee", price: this.state.technologyFee });
+            }
+        }
+        catch(ex){
+            console.log(`Error Building Charge List: ${ex}`);
+        }
+
+        return ret;
+    }
+
+    componentDidMount(){ 
+        this.loadStudentInfo();
+        this.loadCourses();
+    }
+    
+    render(){
+        var self = this;   
+        var filterData = this.state.courseSearch.filter(function(course){ 
+            var ret = false;
+            try {
+                
+                ret = ((self.state.searchQuery === "") ||
+                (  (course.name && course.name.toLowerCase().indexOf(self.state.searchQuery.toLowerCase()) >= 0)
+                || (course.courseCode && course.courseCode.toLowerCase().indexOf(self.state.searchQuery.toLowerCase()) >= 0)
+                || (course.courseId && course.courseId.toLowerCase().indexOf(self.state.searchQuery.toLowerCase()) >= 0)
+                ));
+            }
+            catch(ex){
+                console.log(course);
+                console.log("[Error] filtering search: ",ex);
+            }
+
+            return ret;
+        });
+
+        var courseColumns = [    
+            { Header: 'Course Code', accessor: 'courseCode', fixed: 'left' },
+            { Header: 'Course Id', id: 'courseId', fixed: 'left', accessor: d => Number(d.courseId) },
+            { Header: 'Course Name', accessor: 'name', fixed: 'left' },
+            { Header: 'Credits', id: 'credits', fixed: 'left', accessor: d => Number(d.credits) },
+            { Header: '', fixed: 'right', Cell: row => (
+                <div className="course-btn">
+                    <div className="lBtn c2" onClick={() => this.addCourse(row.original)}><span>Add Course</span><i className="btn-icon fas fa-plus-circle"></i></div>
+                </div>
+            ) }
+        ];
+
+        return(
+            <div className="mylgcu-course">
+               {/* Spinner */}
+               {this.state.spinner && <div className="spinner"><i className="fas fa-cog fa-spin"/><span>Loading</span></div> }
+
+                {/* Student Payment */}
+                {/*
+                <StudentPayment title="Student Course Registration Payment" 
+                    show={this.state.modalStatus} handleClose={this.modalHide} 
+                    registerCourseList={this.registerCourseList} totalPrice={this.state.totalPrice} 
+                    creditRate={this.state.creditRate} studentInfo={this.state.studentInfo} 
+                    queuedCourses={this.state.queuedCourses} currentCourses={this.state.currentCourses} 
+                    technologyFee={this.state.technologyFee} mySessKey={this.props.mySessKey}
+                />*/}
+
+                <CardPaymentV2 
+                    title="Student Course Registration Payment" 
+                    description='Course Registration'
+                    formDescription="Courses will be added to students account after payment has been processed.  Students will have a 2 weeks grace period after course registration to remove course (Please contact lenkeson8@gmail.com to unegister from any course)."
+                    show={this.state.modalStatus} handleClose={this.modalHide} 
+                    chargeItems={this.buildChargeItems()} studentId={this.state.studentInfo} 
+                    cbFunc={this.registerCourseList} 
+                />
+
+                {/* Student Base Info */}
+                <div className="mylgcu-content-section inverse">
+                    <div className="content-block center sz4">
+                        <div className="block-label-title">Degree</div>
+                        <div className="block-text">{ this.state.studentInfo.degree }</div>
+                    </div>
+
+                    <div className="content-block center sz2">
+                        <div className="block-label-title">Class</div>
+                        <div className="block-text">{ this.state.studentInfo.class }</div>
+                    </div>
+
+                    <div className="content-block center sz2">
+                        <div className="block-label-title">GPA</div>
+                        <div className="block-text">{ this.state.studentInfo.gpa }</div>
+                    </div>
+
+                    <div className="content-block center sz2">
+                        <div className="block-label-title">Student Type</div>
+                        <div className="block-text">{ (this.state.studentInfo.fulltime === true ? 'full-time' : 'part-time')}</div>
+                    </div>
+                </div>
+
+                {/* Current Courses*/}
+                <div className="mylgcu-content-section">
+                    <div className="section-title">My Courses</div>
+
+                    <div className="content-block sz10">
+                        <div className="block-container overview">
+                            <table className="overview-table">
+                                <thead>
+                                    <tr className="header">
+                                        <th></th>
+                                        <th>Course Name</th>
+                                        <th>Course Code</th>
+                                        <th>Course Id</th>
+                                        <th>Credits</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {this.state.currentCourses.map((item, i) =>(
+                                        <tr key={i} className="dataRow">
+                                            <td><span className="courseNumber">{i+1}</span></td>
+                                            <td><span className="courseCode">{item.name}</span></td>
+                                            <td><span className="courseCode">{ this.getCourseInfo("courseCode", item.id) }</span></td>
+                                            <td><span className="courseId">{ this.getCourseInfo("courseId", item.id) }</span></td>
+                                            <td><span className="credits">{ this.getCourseInfo("credits", item.id) }</span></td>
+                                            <td>{/*<span className="courseEdit"><i className="fas fa-times"></i></span>*/}</td>
+                                        </tr>
+                                    ))}
+
+                                    {this.state.queuedCourses.map((item, i) =>(
+                                        <tr key={i} className="dataRow queued">
+                                            <td><span className="courseNumber">Q</span></td>
+                                            <td><span className="courseCode">{item.name}</span></td>
+                                            <td><span className="courseCode">{ item.courseCode }</span></td>
+                                            <td><span className="courseId">{ item.courseId }</span></td>
+                                            <td><span className="credits">{ item.credits }</span></td>
+                                            <td><span className="courseEdit"><i className="fas fa-times" onClick={()=>this.removeCourse(item.id)}></i></span></td>
+                                        </tr>
+                                    ))}
+
+                                    {(this.state.currentCourses.length === 0 && this.state.queuedCourses.length === 0) && 
+                                        <tr className="noDataRow">
+                                            <td colSpan="6">No Courses Added</td>
+                                        </tr>
+                                    }
+                                    {(this.state.currentCourses.length > 0 || this.state.queuedCourses.length > 0) && 
+                                        <tr className="noDataRow creditCount">
+                                            <td colSpan="4">
+                                                <span>Total Semester Credits: {this.getSemesterCredits()}</span>
+                                            </td>
+                                            <td colSpan="2">
+                                                {this.state.queuedCourses.length > 0 && <div className="lBtn clear" onClick={this.getPrice}><span>Register</span><i className="btn-icon fas fa-chalkboard"></i></div> }
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                       </div>
+                    </div>
+                </div>
+                
+                {/* Search Courses*/}
+                <div className="mylgcu-content-section">
+                    <div className="section-title">Find Courses</div>
+
+                    <div className="content-block sz10">
+                        <div className="block-container search-block">                            
+                            <div className="content-info icon"><i className="fas fa-search"></i><input type="text" name="searchQuery" className="" placeholder="Search Course" value={this.state.searchQuery} onChange={(e) => this.onSearchChange(e)}/></div>
+                        </div>
+                    </div>
+
+
+                    <div className="content-block sz10">
+                        <ReactTableFixedColumns data={filterData} columns={courseColumns}></ReactTableFixedColumns>
+                    </div>
+                </div>
+            </div>
+        );
     }
 }
 
