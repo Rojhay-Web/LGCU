@@ -87,13 +87,28 @@ module.exports = function(store) {
         }
     }
 
+    async function mylgcu_account(req, res){
+        try {
+            // Validate Params
+            utils.validateParam(["request_code", "studentId"], req.body);
+
+            const ret = await charge.accountCharges(store, req.body.request_code, req.body.studentId, req.body?.limit, req.body?.offset);
+            res.status(200).json(ret);
+        }
+        catch(ex){
+            log.error(`Getting Student Account: ${ex}`);
+            res.status(response.SERVER_ERROR.UNAVAILABLE).json({"error":`Getting Student Account: ${ex}` });
+        }
+    }
+
     router.post('/sendEmail', sendEmail);
 
     /* Charges */
-    router.get('/oauth-start', oauth_start);
-
-    router.post('/lgcuCharge', lgcu_charge);
     // router.post('/lgcuCheckout', lgcu_checkout);
+
+    router.get('/oauth-start', oauth_start);
+    router.post('/lgcuCharge', lgcu_charge);
+    router.post('/mylgcuAccount', mylgcu_account);
     router.get('/lgcu-cart/:status', lgcu_cart);
 
     return router;

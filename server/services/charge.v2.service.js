@@ -153,6 +153,54 @@ module.exports = {
             log.error(`Charging Card: ${ex}`);
             return { error: `Charging Card: ${ex}` };
         }
+    },
+    accountCharges: async function(store, request_code, studentId, limit=20, offset=0) {
+        try {
+            if(request_code.length <= 0){
+                return { error: 'Invalid Request Code' };
+            }
+
+            // Get Oauth Token
+            let oauthToken = store.searchCacheStore('clover_access_token');
+            if(!oauthToken) {
+                const oauthTokenRes = await GetOAuthToken(request_code);
+                if(oauthTokenRes.error) { throw oauthTokenRes.error; }
+
+                // Store In Cache
+                oauthToken = oauthTokenRes.results.access_token;
+                let expire_dt = fns.addMilliseconds(new Date(), oauthTokenRes.results.access_token_expiration);
+                store.updateCacheStore('clover_access_token', oauthToken, expire_dt);
+            }
+
+            // Get Customer ID
+            const customerIdRes = await GetCustomerId(oauthToken, null, studentId);
+            let customerId = customerIdRes?.results ? customerIdRes.results : null;
+            if(!customerId) { return { results: []}; }
+
+            // Get Orders
+            let customerOrders = await GetCustomerOrders(oauthToken, customerId, limit, offset);
+            if(customerOrders.error){ return customerOrders; }
+
+            let tmpOrder = customerOrders.results.map((el)=> {
+                let tmpLI = el.lineItems.elements.map((li)=> {
+                    return { id: li.id, name: li.name, price: li.price};
+                });
+
+                return { 
+                    id: el.id, currency: el.currency, 
+                    total: el.total, title: el.title, 
+                    note: el.note, payType: el.payType, 
+                    createdTime: el.createdTime, 
+                    lineItems: tmpLI
+                };
+            });
+
+            return { results: tmpOrder };
+        }
+        catch(ex){
+            log.error(`Getting Account Charges: ${ex}`);
+            return { error: `Getting Account Charges: ${ex}` };
+        }
     }
 }
 
@@ -471,6 +519,37 @@ async function CreateCustomer(authToken, studentId, email=null){
         }
 
         return { results: dataRet?.id };
+    }
+    catch(ex){
+        log.error(`Creating Clover Customer: ${ex}`);
+        return { error: `Creating Clover Customer: ${ex}` };
+    }
+}
+
+async function GetCustomerOrders(authToken, accountId, limit=20, offset=0){
+    try {
+        if(!accountId) {
+            return { error: 'Getting Customer Orders: missing account id' };
+        }
+
+        let url = `${clover_paths[process.env.CLOVER_ENV].base}/v3/merchants/${process.env.CLOVER_MERCHANT_ID}/orders?expand=lineItems&filter=customer.id%20IN%20('${accountId}')&limit=${limit}&offset=${offset}`;
+
+        let res = await fetch(url, { 
+            method: 'GET',
+            headers: {
+                "accept":"application/json", 
+                "content-type":"application/json", 
+                "Authorization": `Bearer ${authToken}`
+            }
+        });
+        let dataRet = await res.json();
+
+        if(res.status != 200) {
+            log.error(`Getting Customer Orders: ${dataRet.message}`);
+            return { error: dataRet.message };
+        }
+
+        return { results: dataRet?.elements };
     }
     catch(ex){
         log.error(`Creating Clover Customer: ${ex}`);
