@@ -93,7 +93,7 @@ module.exports = function(store) {
     router.get('/oauth-start', oauth_start);
 
     router.post('/lgcuCharge', lgcu_charge);
-    router.post('/lgcuCheckout', lgcu_checkout);
+    // router.post('/lgcuCheckout', lgcu_checkout);
     router.get('/lgcu-cart/:status', lgcu_cart);
 
     return router;

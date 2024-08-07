@@ -184,19 +184,19 @@ var talentlms = {
             var formData = { user_id: userInfo.talentlmsId.id, course_id: courseInfo.id, role:"learner" };
 
             axios.post(url, formData, { auth: { username: talentlmsKey, password: '' }})
-                    .then(res => { 
-                        if(!Array.isArray(res.data)){
-                            response.errorMessage = res.data.error.message;
-                        }
-                        else {
-                            response.results = res.data[0];
-                        }
-                        callback(response);
-                    })
-                    .catch(error => { 
-                        response.errorMessage = "[Error] unable to registering student for course (E07): " + error.message; 
-                        callback(response);
-                    });
+                .then(res => { 
+                    if(!Array.isArray(res.data)){
+                        response.errorMessage = res.data.error.message;
+                    }
+                    else {
+                        response.results = res.data[0];
+                    }
+                    callback(response);
+                })
+                .catch(error => { 
+                    response.errorMessage = "[Error] unable to registering student for course (E07): " + error.message; 
+                    callback(response);
+                });
         }
         catch(ex){
             response.errorMessage = "[Error] registering student for course (E09): "+ ex;

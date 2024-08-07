@@ -41,7 +41,7 @@ class MyCourses extends Component{
         this.modalShow = this.modalShow.bind(this);
         this.modalHide = this.modalHide.bind(this);
         this.registerCourseList = this.registerCourseList.bind(this);
-        this.buildChargeItems = this.buildChargeItems.bbind(this);
+        this.buildChargeItems = this.buildChargeItems.bind(this);
     }
 
     toggleSpinner(status){
@@ -434,7 +434,8 @@ class MyCourses extends Component{
                     formDescription="Courses will be added to students account after payment has been processed.  Students will have a 2 weeks grace period after course registration to remove course (Please contact lenkeson8@gmail.com to unegister from any course)."
                     show={this.state.modalStatus} handleClose={this.modalHide} 
                     chargeItems={this.buildChargeItems()} studentId={this.state.studentInfo} 
-                    cbFunc={this.registerCourseList} 
+                    // cbFunc={this.registerCourseList} 
+                    cbFunc={()=> { alert("Register Courses"); this.modalHide(); }}
                 />
 
                 {/* Student Base Info */}

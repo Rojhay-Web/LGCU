@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Modal } from 'react-bootstrap';
 
 let rootPath = (window.location.href.indexOf("localhost") > -1 ? "http://localhost:2323" : "");
-let bc, clover_rcode_url = 'http://localhost:3000/payment-portal?code=fc18efcbde6c417ea20c3ea666160f22'; //`${rootPath}/v2/api/oauth-start`;
+let bc, clover_rcode_url = 'http://localhost:3000/payment-portal?code=1a838b3739e34355beb8c860a078d16e'; //`${rootPath}/v2/api/oauth-start`;
 
 /* Body */
 class CardPaymentV2 extends Component{
@@ -42,6 +42,7 @@ class CardPaymentV2 extends Component{
         this.submitForm = this.submitForm.bind(this);
         this.closeForm = this.closeForm.bind(this);
         this.setBroadcastChannel = this.setBroadcastChannel.bind(this);
+        this.calcDefaults = this.calcDefaults.bind();
     }
 
     onElementChange(event){
@@ -244,7 +245,7 @@ class CardPaymentV2 extends Component{
                             [{ name: `Student adhoc payment`, price: this.state.adhocTotal }] 
                             : this.props.chargeItems
                         ),
-                        studentId: this.props?.studentId
+                        studentId: this.props?.studentId?.studentId
                     };
                 
                 self.setState({ returnMessage: {"type":"processing", "message":""} }, () =>{
@@ -256,17 +257,18 @@ class CardPaymentV2 extends Component{
                     })
                     .then((response) => response.json())
                     .then((res)=> {
-                        if(res.errorMessage == null){
+                        if(res.error == null){
                             // Successful Charge
                             bannerMessage.type = "success";
                             bannerMessage.message = "Succesful Charge";
                             self.props.cbFunc();
+                            self.closeForm();
                         }
                         else {
-                            console.log("[Error] Processing Payment: ", response.errorMessage);
+                            console.log("[Error] Processing Payment: ", res.error);
                             // Error Banner
                             bannerMessage.type = "error";
-                            bannerMessage.message = (response.results.Error ? response.results.Error.messages[0].description : response.errorMessage);
+                            bannerMessage.message = (res.error ? res.error : "Error Processing Payment");
                         }
 
                         self.setState({ returnMessage: bannerMessage });
@@ -299,6 +301,25 @@ class CardPaymentV2 extends Component{
         }
     }
 
+    calcDefaults(self){
+        let tmpChargeTotal = 0;
+        try {
+            if(self.props?.chargeItems){
+                self.props.chargeItems.forEach((c)=>{
+                    tmpChargeTotal += c.price;
+                });
+            }
+
+            self.setState({ 
+                studentId: self.props?.studentId?.studentId, chargeItems: self.props.chargeItems,
+                chargeTotal: tmpChargeTotal, initRequestCode: true
+            });
+        }
+        catch(ex) {
+            console.log(`Calc Charge Total: ${ex}`);
+        }
+    }
+
     componentDidMount(){
         // Get Year List    
         this.getYrList();
@@ -306,27 +327,18 @@ class CardPaymentV2 extends Component{
         // Get Country List
         this.getCountryList();
 
-        // Calc Charge Total
-        let tmpChargeTotal = 0;
-        try {
-            if(this.props?.chargeItems){
-                this.props.chargeItems.forEach((c)=>{
-                    tmpChargeTotal += c.price;
-                });
-            }
-        }
-        catch(ex) {
-            console.log(`Calc Charge Total: ${ex}`);
-        }
         this.setBroadcastChannel();
-        this.setState({ 
-            studentId: this.props.studentId, chargeItems: this.props.chargeItems,
-            chargeTotal: tmpChargeTotal, initRequestCode: true
-        }); 
     }
 
     componentWillUnmount(){
         this.resetForm();
+    }
+
+    componentDidUpdate(_prevProps){
+        if(this.props.show && !_prevProps.show){
+            // Calc Charge Total
+            this.calcDefaults(this);
+        }
     }
 
     render(){    

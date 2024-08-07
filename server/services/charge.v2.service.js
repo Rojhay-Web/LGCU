@@ -99,7 +99,8 @@ module.exports = {
 
                 // Store In Cache
                 oauthToken = oauthTokenRes.results.access_token;
-                store.updateCacheStore('clover_access_token', oauthToken, oauthTokenRes.results.access_token_expiration);
+                let expire_dt = fns.addMilliseconds(new Date(), oauthTokenRes.results.access_token_expiration);
+                store.updateCacheStore('clover_access_token', oauthToken, expire_dt);
             }                    
 
             // Get Api Access Key (pakms)
@@ -131,11 +132,15 @@ module.exports = {
                 updatedCustomer = false;
 
             if(orderPayStatus?.results?.status == "paid"){
-                if(customerId){
-                    updatedCustomer = UpdateOrder(oauthToken, orderInfo.results?.id, customerId);
+                if(!customerId && studentId) {
+                    console.log('Create Customer')
+                    let newCustomer = await CreateCustomer(oauthToken, studentId, email);
+                    customerId = (newCustomer.results ? newCustomer.results : null);
                 }
-                else if(studentId) {
-                    updatedCustomer = CreateCustomer(oauthToken, orderInfo.results?.id, studentId, email);
+
+                if(customerId){
+                    console.log('Update Order')
+                    updatedCustomer = await UpdateOrder(oauthToken, orderInfo.results?.id, customerId);
                 }
             }
             
@@ -345,7 +350,7 @@ async function CreateCheckout(authToken, userEmail, chargeItems, studentId, cust
         const post_data = {
             customer: {
                 ...(customerId ? { id: customerId } : {}),
-                ...(studentId ? { lastName: studentId } : {}),
+                ...(studentId ? { lastName: `LGCU-${studentId}` } : {}),
                 email: userEmail
             },
             redirectUrls: clover_paths[process.env.CLOVER_ENV].redirectUrls,
@@ -381,7 +386,7 @@ async function CreateCheckout(authToken, userEmail, chargeItems, studentId, cust
 
 async function GetCustomerId(authToken, email, studentId){
     try {
-
+        studentId = (studentId ? `LGCU-${studentId}`: studentId);
         let query = (studentId ? `lastName%20LIKE%20${studentId}`:`emailAddress%20LIKE%20${email}`);
 
         let url = `${clover_paths[process.env.CLOVER_ENV].base}/v3/merchants/${process.env.CLOVER_MERCHANT_ID}/customers`;
@@ -414,12 +419,6 @@ async function GetCustomerId(authToken, email, studentId){
 
 async function UpdateOrder(authToken, orderId, customerId){
     try {
-        const line_items = validateCharges(chargeItems);
-        if(line_items.error) { throw 'Validating Charge(s)'; }
-
-        // TODO: GET Order Type
-        const order_type_id = process.env.CLOVER_ORDER_TYPE;
-
         let url = `${clover_paths[process.env.CLOVER_ENV].base}/v3/merchants/${process.env.CLOVER_MERCHANT_ID}/orders/${orderId}`;
         const post_data = {
             customers:[{ id: customerId }]
@@ -446,13 +445,12 @@ async function UpdateOrder(authToken, orderId, customerId){
     }
 }
 
-async function CreateCustomer(authToken, orderId, studentId, email=null){
+async function CreateCustomer(authToken, studentId, email=null){
     try {
 
         let url = `${clover_paths[process.env.CLOVER_ENV].base}/v3/merchants/${process.env.CLOVER_MERCHANT_ID}/customers`;
         const post_data = {
-            lastName: studentId,
-            orders:[{ id: orderId }],
+            lastName: `LGCU-${studentId}`,
             ...(email ? { emailAddresses: [{ emailAddress: email, primaryEmail: true }]} : {})
         };
 
@@ -472,7 +470,7 @@ async function CreateCustomer(authToken, orderId, studentId, email=null){
             return { error: dataRet.message };
         }
 
-        return { results: dataRet?.id ? true : false };
+        return { results: dataRet?.id };
     }
     catch(ex){
         log.error(`Creating Clover Customer: ${ex}`);

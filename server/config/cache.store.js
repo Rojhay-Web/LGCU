@@ -15,6 +15,7 @@ class CacheStore {
             let ret = this.store[key];
             
             if(!ret?.expireDate || fns.isPast(ret.expireDate) || !ret?.data){
+                log.debug(`[${key}] has expired`);
                 return null;
             }
 
