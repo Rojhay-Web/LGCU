@@ -159,7 +159,7 @@ module.exports = {
             if(request_code.length <= 0){
                 return { error: 'Invalid Request Code' };
             }
-
+            
             // Get Oauth Token
             let oauthToken = store.searchCacheStore('clover_access_token');
             if(!oauthToken) {

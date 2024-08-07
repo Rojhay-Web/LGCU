@@ -62,7 +62,8 @@ var talentlms = {
                                     response.results = ret;
                                     response.results._id = currentUser._id;      
                                     response.results.fullname = currentUser.fullname; 
-                                    response.results.admin = currentUser.admin;                               
+                                    response.results.admin = currentUser.admin;
+                                    response.results.studentId = currentUser?.studentId;                               
                                 }   
                                 callback(response);
                             })

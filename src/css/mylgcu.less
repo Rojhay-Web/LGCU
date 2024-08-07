@@ -654,8 +654,15 @@
     .lBtn { cursor: pointer; }
 }
 .account-fitted-section {
-    max-height: 700px;
-    overflow-y: auto;
+    max-height: 700px; overflow-y: auto;
+    position: relative;
+
+    .clover_req_code {
+        position: absolute; top: 50%; left: 50%;
+        transform: translate(-50%, -50%); z-index: 10;
+        width: 50px; height: 50px; background: rgba(0,0,0,0.5);
+        border-radius: 5px; overflow: hidden;
+    }
 }
 .account-info {
     display: flex;

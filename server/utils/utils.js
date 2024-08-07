@@ -1,3 +1,5 @@
+const log = require('../services/log.service');
+
 module.exports = {
     validateParam(params, obj, call_name=null) {
         if(!obj){ throw "param object is empty";  }

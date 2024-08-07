@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Modal } from 'react-bootstrap';
 
 let rootPath = (window.location.href.indexOf("localhost") > -1 ? "http://localhost:2323" : "");
-let bc, clover_rcode_url = 'http://localhost:3000/payment-portal?code=1a838b3739e34355beb8c860a078d16e'; //`${rootPath}/v2/api/oauth-start`;
+let bc, clover_rcode_url = 'http://localhost:3000/payment-portal?code=0bd0e7de792145fe823c42d67ef6433a'; //`${rootPath}/v2/api/oauth-start`;
 
 /* Body */
 class CardPaymentV2 extends Component{

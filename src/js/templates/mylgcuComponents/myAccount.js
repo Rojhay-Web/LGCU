@@ -1,26 +1,36 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-import StudentPayment from '../components/studentPaymentModal';
 import CardPaymentV2 from '../components/cloverCardPaymentModal';
+
+let rootPath = (window.location.href.indexOf("localhost") > -1 ? "http://localhost:2323" : "");
+let bc, clover_rcode_url = 'http://localhost:3000/payment-portal?code=0bd0e7de792145fe823c42d67ef6433a'; //`${rootPath}/v2/api/oauth-start`;
+let USDollar = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+});
 
 /* Body */
 class MyAccount extends Component{
     constructor(props) {
         super(props);
         this.state = {
+            request_code: null,
             spinner: false,
             modalStatus:false,
+            initRequestCode: false,
             studentInfo:{ studentId:0, talentlmsId:0, degree: "", class:"", gpa:0, fulltime:false },
             accountTransactions:[]
         }
 
         this.toggleSpinner = this.toggleSpinner.bind(this);
         this.loadAccountInfo = this.loadAccountInfo.bind(this);
+        this.loadAccountCharges = this.loadAccountCharges.bind(this);
         this.loadStudentInfo = this.loadStudentInfo.bind(this);
         this.modalShow = this.modalShow.bind(this);
         this.modalHide = this.modalHide.bind(this);
         this.convertItemData = this.convertItemData.bind(this);
+        this.setBroadcastChannel = this.setBroadcastChannel.bind(this);
     }
 
     convertItemData(data,type){
@@ -31,9 +41,8 @@ class MyAccount extends Component{
                 ret = (d.getMonth()+1) + "-" + d.getDate() + "-" + d.getFullYear() + " " + d.getHours() + ":" + (d.getMinutes() < 10 ? "0"+d.getMinutes() : d.getMinutes());
             }
             else if(type === "amount"){
-                ret = data.toString().split("");
-                ret.splice(-2,0, ".");
-                ret = ret.join("");
+                ret = (data / 100);
+                ret = USDollar.format(ret);
             }
         }
         catch(ex){
@@ -66,7 +75,7 @@ class MyAccount extends Component{
 
                 self.toggleSpinner(true);
 
-                axios.post(self.props.rootPath + "/api/searchUserTransactions", postData, {'Content-Type': 'application/json'})
+                axios.post(rootPath + "/api/searchUserTransactions", postData, {'Content-Type': 'application/json'})
                 .then(function(response) {
                     if(response.data.errorMessage){
                         alert("Error retreiving user transactions: ", response.errorMessage);
@@ -86,6 +95,44 @@ class MyAccount extends Component{
         }
         catch(ex){
             alert("[Error] Loading Student Account Info: ", ex);
+            self.toggleSpinner(false);
+        }
+    }
+
+    loadAccountCharges(){
+        let self = this;
+
+        try {
+            let sessionInfo = localStorage.getItem(this.props.mySessKey);
+            if(sessionInfo && self.state.request_code){
+                let localUser = JSON.parse(sessionInfo);
+                let postData = { 
+                    request_code: self.state.request_code,
+                    studentId: localUser.studentId
+                };
+
+                fetch(`${rootPath}/v2/api/mylgcuAccount`,{
+                    method: "POST", body: JSON.stringify(postData),
+                    headers: { "Accept": "application/json", "Content-Type":"application/json"}
+                })
+                .then((response) => response.json())
+                .then((res)=> {
+                    if(res.error){
+                        alert(`Error retreiving user transactions: ${res.error}`);
+                    }
+                    else {
+                        let accountTransactions = res.results.sort(function(a,b){
+                            return new Date(b.createdTime) - new Date(a.createdTime);
+                        });
+
+                        self.setState({ accountTransactions: accountTransactions }, ()=> { 
+                            self.toggleSpinner(false); 
+                        });
+                    }
+                });
+            }
+        }
+        catch(ex){
             self.toggleSpinner(false);
         }
     }
@@ -127,9 +174,32 @@ class MyAccount extends Component{
         }
     }
 
+    setBroadcastChannel(){
+        let self = this;
+        try {
+            bc = new BroadcastChannel("clover-payment");
+            bc.onmessage = (e) => {
+                switch(e?.data?.key){
+                    case "request-code":
+                        self.setState({ request_code: e?.data?.value, initRequestCode: false },()=>{
+                            self.loadAccountCharges();
+                        });
+                        break;
+                    default:
+                        break;
+                }
+            };
+        }
+        catch(ex){
+            console.log(`Setting Broadcast Channel: ${ex}`);
+        }
+    }
+
     componentDidMount(){ 
         this.loadStudentInfo();
-        this.loadAccountInfo();
+        this.setBroadcastChannel();
+        this.setState({ initRequestCode: true });
+        // this.loadAccountInfo();
     }
 
     render(){  
@@ -139,13 +209,6 @@ class MyAccount extends Component{
                {this.state.spinner && <div className="spinner"><i className="fas fa-cog fa-spin"/><span>Loading</span></div> }
 
                {/* Student Payment */}
-               {/*
-                <StudentPayment 
-                        title="Student Account Payment" show={this.state.modalStatus} 
-                        handleClose={this.modalHide} studentInfo={this.state.studentInfo} 
-                        mySessKey={this.props.mySessKey} adhoc={true}
-                    />
-                */}
                 <CardPaymentV2 
                     title="Student Account Payment" 
                     description='Account General Payment'
@@ -165,8 +228,14 @@ class MyAccount extends Component{
                 {/* Student Account Records */}
                 <div className="mylgcu-content-section inverse account-fitted-section">
                     <div className="section-title">My Account</div>
+                    
+                    {this.state.initRequestCode ? 
+                        <div className='clover_req_code'>
+                            <iframe src={clover_rcode_url} title="clover request code container" style={{ height:'50px', width:'50px' }}></iframe>
+                        </div> : <></>
+                    }
 
-                    {/* this.state.accountTransactions.map((item, i) => (
+                    {this.state.accountTransactions.map((item, i) => (
                         <div className="content-block sz10" key={i}>
                             <div className="account-info">
                                 <div className="account-block">
@@ -175,26 +244,26 @@ class MyAccount extends Component{
 
                                 <div className="account-block">
                                     <span className="subText">Transaction Date</span>
-                                    <span>{this.convertItemData(item.transaction_date, "date")}</span>
+                                    <span>{this.convertItemData(item.createdTime, "date")}</span>
                                 </div>
 
                                 <div className="account-block">
                                     <span className="subText">Transaction Id</span>
-                                    <span>{item.transaction_id}</span>
+                                    <span>{item.id}</span>
                                 </div>
 
                                 <div className="account-block">
                                     <span className="subText">Transaction Status</span>
-                                    <span>{item.transaction_status}</span>
+                                    <span>{item.payType}</span>
                                 </div>
 
                                 <div className="account-block">
                                     <span className="subText">Total Charge</span>
-                                    <span>$ {this.convertItemData(item.amount,"amount")}</span>
+                                    <span>{this.convertItemData(item.total,"amount")}</span>
                                 </div>
                             </div>
                         </div>
-                    )) */}
+                    ))}
                 </div>
             </div>
         );

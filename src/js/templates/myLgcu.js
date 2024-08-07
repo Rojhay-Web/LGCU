@@ -236,8 +236,13 @@ class SignInModal extends Component{
                     self.setState({ error: response.data.errorMessage });
                 }
                 else {
-                    var tmpUser = {email: self.state.email, fullname: response.data.results.fullname, lastLogin: Date.now(),
-                                    _id: response.data.results._id, admin: response.data.results.admin};
+                    var tmpUser = {
+                        email: self.state.email, 
+                        fullname: response.data.results.fullname, 
+                        lastLogin: Date.now(), _id: response.data.results._id, 
+                        admin: response.data.results.admin,
+                        studentId: response.data.results?.studentId
+                    };
                     localStorage.setItem(mySessKey, JSON.stringify(tmpUser));
                     self.props.userAccess(true);
                 }

@@ -6,7 +6,6 @@ import withFixedColumns from 'react-table-hoc-fixed-columns';
 import "react-table/react-table.css";
 import 'react-table-hoc-fixed-columns/lib/styles.css';
 
-import StudentPayment from '../components/studentPaymentModal';
 import CardPaymentV2 from '../components/cloverCardPaymentModal';
 
 const ReactTableFixedColumns = withFixedColumns(ReactTable);
@@ -419,15 +418,6 @@ class MyCourses extends Component{
                {this.state.spinner && <div className="spinner"><i className="fas fa-cog fa-spin"/><span>Loading</span></div> }
 
                 {/* Student Payment */}
-                {/*
-                <StudentPayment title="Student Course Registration Payment" 
-                    show={this.state.modalStatus} handleClose={this.modalHide} 
-                    registerCourseList={this.registerCourseList} totalPrice={this.state.totalPrice} 
-                    creditRate={this.state.creditRate} studentInfo={this.state.studentInfo} 
-                    queuedCourses={this.state.queuedCourses} currentCourses={this.state.currentCourses} 
-                    technologyFee={this.state.technologyFee} mySessKey={this.props.mySessKey}
-                />*/}
-
                 <CardPaymentV2 
                     title="Student Course Registration Payment" 
                     description='Course Registration'
