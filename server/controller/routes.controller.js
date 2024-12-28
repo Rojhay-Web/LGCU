@@ -1,10 +1,11 @@
 var express = require('express');
 var router = express.Router();
 /* Services */
-var mail = require('../services/mail.service');
-var charge = require('../services/charge.service');
-var auth = require('../services/auth.service');
-var talentlms = require('../services/talentlms.service');
+// var mail = require('../services/mail.service');
+let mail = require('../services/mail.v2.service'),
+    charge = require('../services/charge.service'),
+    auth = require('../services/auth.service'),
+    talentlms = require('../services/talentlms.service');
 
 /* site routes */
 function getCopyrightDate(req, res){
@@ -57,6 +58,7 @@ function sendEmail(req, res){
         res.status(200).json({"errorMessage":"Error Processing Request: " + ex, "results":null });
     }
 }
+
 function sendAppEmail(req, res){ mail.sendAppEmail(req, res); }
 
 
@@ -394,7 +396,7 @@ function courseRegister(req, res){
                         //Send error email
                         mail.sendEmail({ email: "lenkeson8@gmail.com", title:"Registration Error", formData:{}, additionalData:{},
                             subject:"Unable to Register student for course [ID]: "+courseInfo.id +" [student Id]:"+userInfo.studentId+" Error: "+ courseRet.errorMessage
-                            }, function(mailRet){});
+                        }, function(mailRet){});
                     }
             
                     res.status(200).json(courseRet);

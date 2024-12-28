@@ -176,14 +176,14 @@ class FormCpt extends Component{
                 }
                 else {
                     var postData = { 
-                            email: self.props.form.sendAddress, 
-                            subject:self.props.form.subject, 
-                            title: self.props.form.title, 
-                            formData: self.state.formData, 
-                            additionalData:self.props.form.additionalData
+                        email: self.props.form.sendAddress, 
+                        subject:self.props.form.subject, 
+                        title: self.props.form.title, 
+                        content: self.state.formData, 
+                        additionalData:self.props.form.additionalData
                     };
 
-                    axios.post(rootPath + "/api/sendEmail", postData, {'Content-Type': 'application/json'})
+                    axios.post(rootPath + "/v2/api/sendEmail", postData, {'Content-Type': 'application/json'})
                     .then(function(response) {
                         if(response.data.results === "Email Sent"){
                             self.setState({status: 1, loading: false }, () =>{

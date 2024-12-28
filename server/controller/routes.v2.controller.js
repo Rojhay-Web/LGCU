@@ -13,7 +13,7 @@ module.exports = function() {
             // Validate Params
             utils.validateParam(["subject", "content"], req.body);
 
-            const ret = await mail.sendEmail(req.body.subject, req.body.content, req.body?.toEmail);
+            const ret = await mail.sendEmail(req.body.subject, req.body.content, req.body?.additionalData, req.body?.toEmail);
             res.status(200).json(ret);
         }
         catch(ex){
